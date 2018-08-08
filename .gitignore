@@ -1,0 +1,5 @@
+/bin
+*.class
+*.sw*
+*.log
+node_modules
