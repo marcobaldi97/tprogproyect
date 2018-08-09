@@ -11,6 +11,8 @@ import java.awt.FlowLayout;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 
+import uytube.admin.videos.VideosMenu;
+
 public class adminPrincipal extends JFrame {
 
 	private JPanel contentPane;
@@ -35,27 +37,28 @@ public class adminPrincipal extends JFrame {
 	 * Create the frame.
 	 */
 	public adminPrincipal() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
-		
-		JMenuBar menuBar = new JMenuBar();
-		setJMenuBar(menuBar);
-		
-		JMenu mnUsuario = new JMenu("Usuario");
-		menuBar.add(mnUsuario);
-		
-		JMenu mnVideo = new JMenu("Video");
-		menuBar.add(mnVideo);
-		
-		JMenu mnListas = new JMenu("LIstas");
-		menuBar.add(mnListas);
-		
-		JMenu mnCategoria = new JMenu("Categoria");
-		menuBar.add(mnCategoria);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
+
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+
+		JMenu mnUsuario = new JMenu("Usuario");
+		menuBar.add(mnUsuario);
+
+		VideosMenu videosMenu = new VideosMenu(getContentPane());
+		menuBar.add(videosMenu.getMenu());
+
+		JMenu mnListas = new JMenu("LIstas");
+		menuBar.add(mnListas);
+
+		JMenu mnCategoria = new JMenu("Categoria");
+		menuBar.add(mnCategoria);
 	}
 
 }
