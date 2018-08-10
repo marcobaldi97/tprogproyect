@@ -26,12 +26,22 @@ import javax.swing.JTable;
 import javax.swing.border.BevelBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.ListSelectionModel;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JTextPane;
+import javax.swing.UIManager;
+import java.awt.Color;
+import com.toedter.calendar.JCalendar;
+import com.toedter.calendar.JDateChooser;
 
 public class modificarUsuario extends JInternalFrame {
 	private JTextField textFieldNombre;
 	private JTextField textFieldApellido;
 	private JTextField textFieldNomC;
-	private JTextField textFieldNombreV;
+	private JTextField textFieldEmail;
+	private JTable table;
+	private JTextField textField;
+	private JTable table_1;
+	private JTextField textField_1;
 
 	/**
 	 * Launch the application.
@@ -53,23 +63,17 @@ public class modificarUsuario extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public modificarUsuario() {
-		setBounds(100, 100, 450, 482);
-		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[] {1};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0};
-		gridBagLayout.columnWeights = new double[]{1.0, 1.0};
-		gridBagLayout.rowWeights = new double[]{1.0, 1.0, Double.MIN_VALUE};
-		getContentPane().setLayout(gridBagLayout);
+		setTitle("Modificar Usuario");
+		setResizable(true);
+		setMaximizable(true);
+		setClosable(true);
+		setBounds(100, 100, 254, 548);
+		getContentPane().setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		JPanel panelDatosUsuario = new JPanel();
 		panelDatosUsuario.setBorder(new TitledBorder(null, "Datos usuario", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		GridBagConstraints gbc_panelDatosUsuario = new GridBagConstraints();
-		gbc_panelDatosUsuario.insets = new Insets(0, 0, 5, 5);
-		gbc_panelDatosUsuario.fill = GridBagConstraints.BOTH;
-		gbc_panelDatosUsuario.gridx = 0;
-		gbc_panelDatosUsuario.gridy = 0;
-		getContentPane().add(panelDatosUsuario, gbc_panelDatosUsuario);
-		panelDatosUsuario.setLayout(new GridLayout(9, 1, 2, 1));
+		getContentPane().add(panelDatosUsuario);
+		panelDatosUsuario.setLayout(new GridLayout(0, 2, 2, 1));
 		
 		JLabel lblNickname = new JLabel("Nickname");
 		panelDatosUsuario.add(lblNickname);
@@ -79,6 +83,11 @@ public class modificarUsuario extends JInternalFrame {
 		
 		JLabel lblEmail = new JLabel("Email");
 		panelDatosUsuario.add(lblEmail);
+		
+		textFieldEmail = new JTextField();
+		textFieldEmail.setEditable(false);
+		panelDatosUsuario.add(textFieldEmail);
+		textFieldEmail.setColumns(10);
 		
 		JLabel lblNombre = new JLabel("Nombre");
 		panelDatosUsuario.add(lblNombre);
@@ -99,18 +108,19 @@ public class modificarUsuario extends JInternalFrame {
 		JLabel lblFechaNac = new JLabel("Fecha Nac.");
 		panelDatosUsuario.add(lblFechaNac);
 		
+		JDateChooser dateChooser = new JDateChooser();
+		panelDatosUsuario.add(dateChooser);
+		
+		JButton btnCancelar_1 = new JButton("Cancelar");
+		panelDatosUsuario.add(btnCancelar_1);
+		
 		JButton btnModificar = new JButton("Modificar");
 		panelDatosUsuario.add(btnModificar);
 		
 		JPanel panelDatosCanal = new JPanel();
 		panelDatosCanal.setBorder(new TitledBorder(null, "Datos canal", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		GridBagConstraints gbc_panelDatosCanal = new GridBagConstraints();
-		gbc_panelDatosCanal.insets = new Insets(0, 0, 5, 0);
-		gbc_panelDatosCanal.fill = GridBagConstraints.BOTH;
-		gbc_panelDatosCanal.gridx = 1;
-		gbc_panelDatosCanal.gridy = 0;
-		getContentPane().add(panelDatosCanal, gbc_panelDatosCanal);
-		panelDatosCanal.setLayout(new GridLayout(10, 1, 0, 0));
+		getContentPane().add(panelDatosCanal);
+		panelDatosCanal.setLayout(new GridLayout(0, 2, 0, 0));
 		
 		JLabel lblNombre_1 = new JLabel("Nombre");
 		panelDatosCanal.add(lblNombre_1);
@@ -123,32 +133,68 @@ public class modificarUsuario extends JInternalFrame {
 		JLabel lblPrivacidad = new JLabel("Privacidad");
 		panelDatosCanal.add(lblPrivacidad);
 		
+		JComboBox comboBox_1 = new JComboBox();
+		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"Privado", "Publico"}));
+		panelDatosCanal.add(comboBox_1);
+		
 		JLabel lblDescripicin = new JLabel("Descripici\u00F3n");
 		panelDatosCanal.add(lblDescripicin);
 		
-		JEditorPane editorPane = new JEditorPane();
-		editorPane.setEditable(false);
-		panelDatosCanal.add(editorPane);
+		JTextPane textPaneDesc = new JTextPane();
+		textPaneDesc.setEditable(false);
+		panelDatosCanal.add(textPaneDesc);
 		
-		JList list = new JList();
-		list.setBorder(new TitledBorder(null, "Videos", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		panelDatosCanal.add(list);
+		JButton btnModificar_3 = new JButton("Modificar");
+		panelDatosCanal.add(btnModificar_3);
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "Datos video", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panelDatosCanal.add(panel);
-		panel.setLayout(new GridLayout(0, 2, 0, 0));
+		getContentPane().add(panel);
+		panel.setLayout(new GridLayout(0, 2, 2, 1));
 		
-		JLabel lblNombre_2 = new JLabel("Nombre");
-		panel.add(lblNombre_2);
+		JLabel label = new JLabel("Nombre");
+		panel.add(label);
 		
-		textFieldNombreV = new JTextField();
-		panel.add(textFieldNombreV);
-		textFieldNombreV.setColumns(10);
+		table = new JTable();
+		table.setColumnSelectionAllowed(true);
+		table.setCellSelectionEnabled(true);
+		panel.add(table);
 		
-		JLabel lblCategoria = new JLabel("Categoria");
-		panel.add(lblCategoria);
+		JLabel label_1 = new JLabel("Categoria");
+		panel.add(label_1);
+		
+		textField = new JTextField();
+		textField.setEditable(false);
+		textField.setColumns(10);
+		panel.add(textField);
+		
+		JButton button = new JButton("Modificar");
+		panel.add(button);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Datos listas de reproduccion", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		getContentPane().add(panel_1);
+		panel_1.setLayout(new GridLayout(0, 2, 2, 1));
+		
+		JLabel label_2 = new JLabel("Nombre Lista");
+		panel_1.add(label_2);
+		
+		table_1 = new JTable();
+		panel_1.add(table_1);
+		
+		JLabel label_3 = new JLabel("Categoria");
+		panel_1.add(label_3);
+		
+		textField_1 = new JTextField();
+		textField_1.setEditable(false);
+		textField_1.setColumns(10);
+		panel_1.add(textField_1);
+		
+		JButton button_1 = new JButton("Modificar");
+		panel_1.add(button_1);
+		
+		JButton btnCancelar = new JButton("Cancelar");
+		getContentPane().add(btnCancelar);
 
 	}
 

@@ -19,6 +19,7 @@ public class adminPrincipal extends JFrame {
 
 	private JPanel contentPane;
 	private AltaUsuarioInternalFrame aUsrIFrame;
+	private modificarUsuario modUsrIFrame;
 
 	/**
 	 * Launch the application.
@@ -65,6 +66,17 @@ public class adminPrincipal extends JFrame {
 			}
 		});
 		mnUsuario.add(mntmAlta);
+		
+		JMenuItem mntmModificar = new JMenuItem("Modificar");
+		mntmModificar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				 modUsrIFrame = new modificarUsuario();
+			     contentPane.setLayout(null);
+			     contentPane.add(modUsrIFrame);
+			     modUsrIFrame.setVisible(true);
+			}
+		});
+		mnUsuario.add(mntmModificar);
 
 		//VideosMenu videosMenu = new VideosMenu(getContentPane());
 		//menuBar.add(videosMenu.getMenu());
