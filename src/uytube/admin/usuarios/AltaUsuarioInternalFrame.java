@@ -127,9 +127,8 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 		rdbtnPrivado.setSelected(true);
 		datosCanalPanel.add(rdbtnPrivado);
 		
-		JTextPane textPane = new JTextPane();
-		textPane.setEnabled(false);
-		datosCanalPanel.add(textPane);
+		JLabel lblNewLabel = new JLabel("");
+		datosCanalPanel.add(lblNewLabel);
 		
 		JRadioButton rdbtnPblico = new JRadioButton("P\u00FAblico");
 		datosCanalPanel.add(rdbtnPblico);
