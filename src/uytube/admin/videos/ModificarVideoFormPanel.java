@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.GroupLayout.Group;
 
-public final class AltaVideoFormPanel {
+public final class ModificarVideoFormPanel {
 	private final JPanel panel = new JPanel();
 	private final GroupLayout panelLayout = new GroupLayout(panel);
 	private final JTextField userNicknameTextField = new JTextField();
@@ -23,7 +23,7 @@ public final class AltaVideoFormPanel {
 
 	private final JInternalFrame internalFrameContainer;
 
-	public AltaVideoFormPanel(final JInternalFrame internalFrameContainer) {
+	public ModificarVideoFormPanel(final JInternalFrame internalFrameContainer) {
 		this.internalFrameContainer = internalFrameContainer;
 
 		initializePanel();

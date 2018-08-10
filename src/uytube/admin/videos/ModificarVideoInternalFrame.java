@@ -27,7 +27,7 @@ public final class ModificarVideoInternalFrame {
 	}
 
 	private void addContentToInternalFrame() {
-		AltaVideoFormPanel altaVideoFormPanel = new AltaVideoFormPanel();
+		AltaVideoFormPanel altaVideoFormPanel = new AltaVideoFormPanel(internalFrame);
 
 		internalFrame.add(altaVideoFormPanel.getPanel());
 	}
