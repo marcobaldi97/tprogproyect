@@ -29,6 +29,10 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
+import com.toedter.calendar.JDateChooser;
+import com.toedter.components.JSpinField;
+import com.toedter.calendar.JDayChooser;
+import com.toedter.calendar.JCalendar;
 
 public class AltaUsuarioInternalFrame extends JInternalFrame {
 	private JTextField textFieldNombreC;
@@ -91,6 +95,9 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 		JLabel lblFechaNac = new JLabel("Fecha Nac.");
 		datosUsuario.add(lblFechaNac);
 		
+		JDateChooser dateChooser = new JDateChooser();
+		datosUsuario.add(dateChooser);
+		
 		JPanel datosCanalPanel = new JPanel();
 		datosCanalPanel.setBorder(new TitledBorder(null, "Datos Canal", TitledBorder.CENTER, TitledBorder.TOP, null, null));
 		getContentPane().add(datosCanalPanel);
@@ -103,8 +110,8 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 		datosCanalPanel.add(textFieldNombreC);
 		textFieldNombreC.setColumns(10);
 		
-		JLabel lblDescripcin = new JLabel("Descripci\u00F3n");
-		datosCanalPanel.add(lblDescripcin);
+		JLabel lblDescripcion = new JLabel("Descripcion");
+		datosCanalPanel.add(lblDescripcion);
 		
 		JEditorPane editorPane = new JEditorPane();
 		datosCanalPanel.add(editorPane);

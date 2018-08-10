@@ -120,6 +120,9 @@ public class modificarUsuario extends JInternalFrame {
 		panelDatosCanal.add(textFieldNomC);
 		textFieldNomC.setColumns(10);
 		
+		JLabel lblPrivacidad = new JLabel("Privacidad");
+		panelDatosCanal.add(lblPrivacidad);
+		
 		JLabel lblDescripicin = new JLabel("Descripici\u00F3n");
 		panelDatosCanal.add(lblDescripicin);
 		
