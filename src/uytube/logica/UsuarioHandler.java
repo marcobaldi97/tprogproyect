@@ -7,7 +7,7 @@ public class UsuarioHandler {
 	private Map<String,Usuario> usuarios;
 	private static UsuarioHandler instancia = null;
 	
-	public UsuarioHandler() {
+	private UsuarioHandler() {
 		usuarios = new HashMap<String, Usuario>();
 	}
 	
@@ -31,7 +31,16 @@ public class UsuarioHandler {
 		return usuarios.containsKey(n);
 	}
 	
-    public Usuario[] getUsuarios() {
+	public boolean memberEmail(String e) {
+		Boolean existe = false;
+		for(Map.Entry<String, Usuario> entry : usuarios.entrySet()) {
+			if(e == entry.getValue().getEmail())
+				existe = true;
+		}
+		return existe;
+	}
+	
+    public Usuario[] listarNicknamesUsuarios() {
         if (usuarios.isEmpty())
             return null;
         else {
@@ -41,7 +50,6 @@ public class UsuarioHandler {
             for (int i = 0; i < o.length; i++) {
                 usuariosA[i] = (Usuario) o[i];
             }
-
             return usuariosA;
         }
     }

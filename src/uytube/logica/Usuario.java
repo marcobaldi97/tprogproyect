@@ -34,6 +34,10 @@ public class Usuario {
 		return nickname;
 	}
 	
+	public String getEmail() {
+		return email;
+	}
+	
 	public void editarDatosUsuario(String nom, String ape, Fecha fn, String fo) {
 		nombre = nom;
 		apellido = ape;;
