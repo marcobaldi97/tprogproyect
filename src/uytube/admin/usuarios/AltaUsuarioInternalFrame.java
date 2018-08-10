@@ -38,22 +38,6 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 	private JTextField txtApellido;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AltaUsuarioInternalFrame frame = new AltaUsuarioInternalFrame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 */
 	public AltaUsuarioInternalFrame() {
