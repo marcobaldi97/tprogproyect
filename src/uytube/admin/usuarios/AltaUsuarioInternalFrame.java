@@ -22,9 +22,16 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import javax.swing.JComboBox;
+import com.jgoodies.forms.factories.DefaultComponentFactory;
+import javax.swing.DefaultComboBoxModel;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.FormSpecs;
+import com.jgoodies.forms.layout.RowSpec;
 
 public class AltaUsuarioInternalFrame extends JInternalFrame {
-	private JTextField textFieldNombreCanal;
+	private JTextField textFieldNombreC;
 	private JTextField textFieldNick;
 	private JTextField textFieldEmail;
 	private JTextField textFieldNombre;
@@ -53,7 +60,7 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 		setTitle("Alta Usuario");
 		setMaximizable(true);
 		setClosable(true);
-		setBounds(100, 100, 319, 399);
+		setBounds(100, 100, 319, 373);
 		FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER, 5, 5);
 		getContentPane().setLayout(flowLayout);
 		
@@ -103,41 +110,28 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 		JPanel datosCanalPanel = new JPanel();
 		datosCanalPanel.setBorder(new TitledBorder(null, "Datos Canal", TitledBorder.CENTER, TitledBorder.TOP, null, null));
 		getContentPane().add(datosCanalPanel);
-		datosCanalPanel.setLayout(new GridLayout(4, 2, 1, 2));
+		datosCanalPanel.setLayout(new GridLayout(0, 2, 0, 0));
 		
 		JLabel lblNombre = new JLabel("Nombre");
 		datosCanalPanel.add(lblNombre);
 		
-		textFieldNombreCanal = new JTextField();
-		datosCanalPanel.add(textFieldNombreCanal);
-		textFieldNombreCanal.setColumns(10);
+		textFieldNombreC = new JTextField();
+		datosCanalPanel.add(textFieldNombreC);
+		textFieldNombreC.setColumns(10);
 		
 		JLabel lblDescripcin = new JLabel("Descripci\u00F3n");
 		datosCanalPanel.add(lblDescripcin);
 		
-		JTextArea textAreaDesc = new JTextArea();
-		textAreaDesc.setColumns(6);
-		textAreaDesc.setRows(2);
-		datosCanalPanel.add(textAreaDesc);
+		JEditorPane editorPane = new JEditorPane();
+		datosCanalPanel.add(editorPane);
 		
 		JLabel lblPrivacidad = new JLabel("Privacidad");
 		datosCanalPanel.add(lblPrivacidad);
 		
-		JRadioButton rdbtnPrivado = new JRadioButton("Privado");
-		rdbtnPrivado.setSelected(true);
-		datosCanalPanel.add(rdbtnPrivado);
+		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Privado", "Publico"}));
+		datosCanalPanel.add(comboBox);
 		
-		JLabel lblNewLabel = new JLabel("");
-		datosCanalPanel.add(lblNewLabel);
-		
-		JRadioButton rdbtnPblico = new JRadioButton("P\u00FAblico");
-		datosCanalPanel.add(rdbtnPblico);
-		
-	    //grupo de radio buttons
-		//de esta forma solo se puede seleccionar uno a la vez
-	    ButtonGroup group = new ButtonGroup();
-	    group.add(rdbtnPrivado);
-	    group.add(rdbtnPblico);
 	    
 	    
 		JPanel panel = new JPanel();
