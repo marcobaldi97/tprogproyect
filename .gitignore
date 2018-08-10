@@ -3,3 +3,4 @@
 *.sw*
 *.log
 node_modules
+*.zip
