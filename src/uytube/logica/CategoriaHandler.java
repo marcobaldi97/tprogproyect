@@ -11,7 +11,7 @@ public class CategoriaHandler {
 		categorias = new HashMap<String,Categoria>();
 	}
 	
-	public CategoriaHandler getInstance() {
+	public static CategoriaHandler getInstance() {
 		if (instancia == null)
 			instancia = new CategoriaHandler();
 		return instancia;
@@ -23,6 +23,10 @@ public class CategoriaHandler {
 	
 	public void removerCategoria(Categoria c) {
 		categorias.remove(c.getNombre());
+	}
+	
+	public Categoria find(String s) {
+		return categorias.get(s);
 	}
 	
 	public DtCategoria[] listarCategorias() {

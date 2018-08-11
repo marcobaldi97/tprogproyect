@@ -80,6 +80,18 @@ public class Usuario {
 		usuariosQueLeSiguen.remove(u.getNickname());
 	}
 	
+	public void añadirVideo(String nom, String desc, Integer dur, Fecha fp, String url, DtCategoria catE, boolean p) {
+		canalPropio.añadirVideo(nom, desc, dur, fp, url, catE, p);
+	}
+	
+	public void ingresarNuevosDatosVideo(String nom, String d, int dur, Fecha fp, String url, DtCategoria catE, boolean p) {
+		canalPropio.ingresarNuevosDatosVideo(nom, d, dur, fp, url, catE, p);
+	}
+	
+	public String[] listarVideosCanal() {
+		return canalPropio.listarVideosCanal();
+	}
+	
 	public String[] listarUsuarioQueLeSigue() {
 		String[] nicknames = new String[usuariosQueLeSiguen.size()];
 		Integer contador = 0;
@@ -89,8 +101,5 @@ public class Usuario {
 		}
 		return nicknames;
 	}
-	
-	 
-	
-	
+
 }

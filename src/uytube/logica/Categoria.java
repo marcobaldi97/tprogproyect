@@ -23,6 +23,10 @@ public class Categoria {
 		videos.remove(v.getNombre());
 	}
 	
+	public Video find(String s) {
+		return videos.get(s);
+	}
+	
 	public DtCategoria getInfoCategoria() { 
 		DtCategoria dt = new DtCategoria(nombre);
 		return dt;
