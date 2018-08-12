@@ -49,6 +49,13 @@ public class Canal {
 		v.ingresarNuevosDatosVideo(d, dur, fp, url, catE, p);
 	}
 	
+	public DtVideo verDetallesVideo(String nombreVideo) {
+		VideoHandler vidH = VideoHandler.getInstance();
+		Video v = vidH.find(nombreVideo);
+		DtVideo dt = v.verDetallesVideo();
+		return dt;
+	}
+	
 	public String[] listarVideosCanal() {
 		String[] nombresVideos = new String[videos.size()];
 		Integer contador = 0;

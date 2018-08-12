@@ -92,6 +92,10 @@ public class Usuario {
 		return canalPropio.listarVideosCanal();
 	}
 	
+	public DtVideo verDetallesVideo(String nombreVideo) {
+		return canalPropio.verDetallesVideo(nombreVideo);
+	}
+	
 	public String[] listarUsuarioQueLeSigue() {
 		String[] nicknames = new String[usuariosQueLeSiguen.size()];
 		Integer contador = 0;

@@ -9,13 +9,13 @@ public class DtVideo {
 	private Categoria cat;
 	private boolean privacidad;
 	
-	public DtVideo(String n, String d, int dur, Fecha fp, String url, DtCategoria c, boolean p) {
+	public DtVideo(String n, String d, int dur, Fecha fp, String url, Categoria c, boolean p) {
 		nombre = n;
 		descripcion = d;
 		duracionSS = dur;
 		fecha_publicacion = fp;
 		URL = url;
-		cat = new Categoria(c.getNombre());
+		cat = c;
 		privacidad = p;
 	}
 	
@@ -45,5 +45,9 @@ public class DtVideo {
 	
 	public boolean getPrivacidad() {
 		return privacidad;
+	}
+	
+	public boolean equals(DtVideo dt) {
+		return (nombre == dt.getNombre())&&(descripcion == dt.getDescripcion())&&(duracionSS == dt.getDuracion())&&(fecha_publicacion == dt.getFechaPublicacion())&&(URL == dt.getUrl())&&(cat == dt.getCategoria())&&(privacidad == dt.getPrivacidad());
 	}
 }
