@@ -28,8 +28,13 @@ public class Video {
 		privacidad = p;
 	}
 	
-	 public String getNombre() {
-		 return nombre;
-	 }
+	public DtVideo verDetallesVideo() {
+		DtVideo dt = new DtVideo(nombre,descripcion,duracionSS,fecha_publicacion,URL,cat,privacidad);
+		return dt;
+	}
+	
+	public String getNombre() {
+		return nombre;
+	}
 
 }

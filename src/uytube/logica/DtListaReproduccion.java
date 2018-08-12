@@ -1,11 +1,9 @@
 package uytube.logica;
 
-import java.util.Map;
-
-public class DtCategoria {
+public class DtListaReproduccion {
 	private String nombre;
 	
-	public DtCategoria(String n) {
+	public DtListaReproduccion(String n) {
 		nombre = n;
 	}
 	
@@ -13,7 +11,7 @@ public class DtCategoria {
 		return nombre;
 	}
 	
-	public boolean equals(DtCategoria dt) {
+	public boolean equals(DtListaReproduccion dt) {
 		return nombre == dt.getNombre();
 	}
 
