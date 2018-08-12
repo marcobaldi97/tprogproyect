@@ -28,8 +28,10 @@ public class Video {
 		privacidad = p;
 	}
 	
-	 public String getNombre() {
-		 return nombre;
-	 }
+	
+	
+	public String getNombre() {
+		return nombre;
+	}
 
 }
