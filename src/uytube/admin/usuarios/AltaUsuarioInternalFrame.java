@@ -75,7 +75,7 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 		textFieldEmail = new JTextField();
 		textFieldEmail.addFocusListener(new FocusAdapter() {
 			@Override
-			//evento para cuando se pierde el foco de email (el usuario se va a escribir a otro sitio o pulsar algún botón)
+			//evento para cuando se pierde el foco de email (el usuario se va a escribir a otro sitio o pulsar algï¿½n botï¿½n)
 			public void focusLost(FocusEvent e) {
 				//VERIFICAR DISPONIBILIDAD DE NICK Y EMAIL
 			}
