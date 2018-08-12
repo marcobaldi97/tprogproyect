@@ -8,6 +8,36 @@ public class Canal {
 	private String descripcion;
 	private Boolean privado;
 	private Map<String,Video> videos;
+	private Map<String,ListaReproduccion> listasReproduccion;
+	
+	public void addListaReproduccion(ListaReproduccion lr) {
+		listasReproduccion.put(lr.getNombre(), lr);
+	}
+	
+	public void removeListaReproduccion(ListaReproduccion lr) {
+		listasReproduccion.remove(lr.getNombre());
+	}
+	
+	public ListaReproduccion findLista(String s) {
+		return listasReproduccion.get(s);
+	}
+	
+	public String[] listarListasReproduccion() {
+		String[] nombresListas = new String[listasReproduccion.size()];
+		Integer contador = 0;
+		for(Map.Entry<String, ListaReproduccion> entry : listasReproduccion.entrySet()) {
+			String nom = entry.getValue().getNombre();
+			nombresListas[contador] = nom;
+			contador++;
+		}
+		return nombresListas;
+	}
+	
+	public DtListaReproduccion verDetallesListareproduccion(String nombreLista) {
+		ListaReproduccion lr = findLista(nombreLista);
+		DtListaReproduccion dt = lr.verDetallesListareproduccion();
+		return dt;
+	}
 	
 	public Canal(String nom, String desc, Boolean privacidadE) {
 		nombre = nom;
@@ -29,7 +59,7 @@ public class Canal {
 		videos.remove(v.getNombre());
 	}
 	
-	public Video find(String s) {
+	public Video findVideo(String s) {
 		return videos.get(s);
 	}
 	

@@ -96,6 +96,14 @@ public class Usuario {
 		return canalPropio.verDetallesVideo(nombreVideo);
 	}
 	
+	public DtListaReproduccion verDetallesListareproduccion(String nombreLista) {
+		return canalPropio.verDetallesListareproduccion(nombreLista);
+	}
+	
+	public String[] listarListasReproduccion() {
+		return canalPropio.listarListasReproduccion();
+	}
+	
 	public String[] listarUsuarioQueLeSigue() {
 		String[] nicknames = new String[usuariosQueLeSiguen.size()];
 		Integer contador = 0;

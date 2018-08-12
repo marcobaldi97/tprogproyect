@@ -6,5 +6,14 @@ public abstract class ListaReproduccion {
 	public ListaReproduccion() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	public String getNombre() {
+		return nombre;
+	}
+	
+	public DtListaReproduccion verDetallesListareproduccion() {
+		DtListaReproduccion dt = new DtListaReproduccion(nombre);
+		return dt;
+	}
 
 }

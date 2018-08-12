@@ -7,5 +7,9 @@ public class Particular extends ListaReproduccion{
 		nombre = n;
 		privado = p;
 	}
+	
+	public boolean getPrivado() {
+		return privado;
+	}
 
 }
