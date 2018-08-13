@@ -96,7 +96,8 @@ public class Video {
 	}
 	
 	public DtVideo verDetallesVideo() {
-		DtVideo dt = new DtVideo(nombre,descripcion,duracion,fecha_publicacion,URL,cat,privacidad);
+		DtCategoria cate=this.getCategoria();
+		DtVideo dt = new DtVideo(nombre,descripcion,duracion,fecha_publicacion,URL,cate,privacidad);
 		return dt;
 	}
 	
@@ -114,5 +115,18 @@ public class Video {
 		
 	}
 	
+	public DtUsuario[] getUsuariosPuntuadores(boolean v){
+		ArrayList<DtUsuario> usu=new ArrayList<DtUsuario>();
+		for(Puntuacion p :puntuaciones){
+			if(p.getValoracion()==v)
+				usu.add(new DtUsuario(p.getUsuario()));
+		}
+		return (DtUsuario[]) usu.toArray();
+	}
+	
+	public DtInfoVideo getInfoVideoExt(){
+		DtInfoVideo res=new DtInfoVideo(this);
+		return res;
+	}
 
 }

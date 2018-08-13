@@ -6,10 +6,10 @@ public class DtVideo {
 	private int duracionSS;
 	private DtFecha fecha_publicacion;
 	private String URL;
-	private Categoria cat;
+	private DtCategoria cat;
 	private boolean privacidad;
 	
-	public DtVideo(String n, String d, int dur, DtFecha fp, String url, Categoria c, boolean p) {
+	public DtVideo(String n, String d, int dur, DtFecha fp, String url, DtCategoria c, boolean p) {
 		nombre = n;
 		descripcion = d;
 		duracionSS = dur;
@@ -19,6 +19,16 @@ public class DtVideo {
 		privacidad = p;
 	}
 	
+	public DtVideo(Video v) {
+		nombre = v.getNombre();
+		descripcion = v.getDescripcion();
+		duracionSS = v.getDuracion();
+		fecha_publicacion = v.getFechaPublicacion();
+		URL = v.getURL();
+		cat = v.getCategoria();
+		privacidad = v.getPrivacidad();
+	}
+
 	public String getNombre() {
 		return nombre;
 	}
@@ -39,7 +49,7 @@ public class DtVideo {
 		return URL;
 	}
 	
-	public Categoria getCategoria() {
+	public DtCategoria getCategoria() {
 		return cat;
 	}
 	

@@ -8,13 +8,13 @@ public class Usuario {
 	private String nombre;
     private String apellido;
     private String email;
-    private Fecha fecha_nacimiento;
+    private DtFecha fecha_nacimiento;
     private String foto;
     private Canal canalPropio;
     private Map<String,Usuario> usuariosQueSigue;
     private Map<String,Usuario> usuariosQueLeSiguen;
 	
-	public Usuario(String nick,String nom, String ape, String e, Fecha fn, String fo) {
+	public Usuario(String nick,String nom, String ape, String e, DtFecha fn, String fo) {
 		// TODO Auto-generated constructor stub
 		nickname = nick;
 		nombre = nom;
@@ -33,12 +33,21 @@ public class Usuario {
 	public String getNickname() {
 		return nickname;
 	}
+	public String getNombre(){
+		return nombre;
+	}
+	public String getApellido(){
+		return apellido;
+	}
+	public DtFecha getFechaNac(){
+		return fecha_nacimiento;
+	}
 	
 	public String getEmail() {
 		return email;
 	}
 	
-	public void editarDatosUsuario(String nom, String ape, Fecha fn, String fo) {
+	public void editarDatosUsuario(String nom, String ape, DtFecha fn, String fo) {
 		nombre = nom;
 		apellido = ape;;
 		fecha_nacimiento = fn;
@@ -52,6 +61,9 @@ public class Usuario {
 	public DtUsuario listarDatosUsuario() {
 		DtUsuario dt = new DtUsuario(nickname,nombre,apellido,email,fecha_nacimiento,foto);
 		return dt;
+	}
+	public String getFoto(){
+		return foto;
 	}
 	
 	public void aniadirUsuarioASeguir(Usuario u) {
