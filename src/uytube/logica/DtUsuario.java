@@ -5,10 +5,10 @@ public class DtUsuario {
 	private String nombre;
     private String apellido;
     private String email;
-    private Fecha fecha_nacimiento;
+    private DtFecha fecha_nacimiento;
     private String foto;
 	
-	public DtUsuario(String nick,String nom, String ape, String e, Fecha fn, String fo) {
+	public DtUsuario(String nick,String nom, String ape, String e, DtFecha fn, String fo) {
 		nickname = nick;
 		nombre = nom;
 		apellido = ape;
@@ -18,6 +18,15 @@ public class DtUsuario {
 		// TODO Auto-generated constructor stub
 	}
 	
+	public DtUsuario(Usuario u) {
+		nickname = u.getNickname();
+		nombre = u.getNombre();
+		apellido = u.getApellido();
+		email = u.getEmail();
+		fecha_nacimiento = u.getFechaNac();
+		foto = u.getFoto();
+	}
+
 	public boolean equals(DtUsuario u) {
 		return (nickname == u.getNickname()) && (nombre == u.getNombre()) && (apellido == u.getApellido()) && (email == u.getEmail()) && (fecha_nacimiento == u.getFecha_nacimiento()) && (foto == u.getFoto());
 	}
@@ -38,7 +47,7 @@ public class DtUsuario {
 		return email;
 	}
 	
-	public Fecha getFecha_nacimiento() {
+	public DtFecha getFecha_nacimiento() {
 		return fecha_nacimiento;
 	}
 	
