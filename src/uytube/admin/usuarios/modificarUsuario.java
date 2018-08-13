@@ -38,9 +38,7 @@ public class modificarUsuario extends JInternalFrame {
 	private JTextField textFieldApellido;
 	private JTextField textFieldNomC;
 	private JTextField textFieldEmail;
-	private JTable table;
 	private JTextField textField;
-	private JTable table_1;
 	private JTextField textField_1;
 
 	/**
@@ -155,10 +153,8 @@ public class modificarUsuario extends JInternalFrame {
 		JLabel label = new JLabel("Nombre");
 		panel.add(label);
 		
-		table = new JTable();
-		table.setColumnSelectionAllowed(true);
-		table.setCellSelectionEnabled(true);
-		panel.add(table);
+		JComboBox comboBox_NomVideo = new JComboBox();
+		panel.add(comboBox_NomVideo);
 		
 		JLabel label_1 = new JLabel("Categoria");
 		panel.add(label_1);
@@ -179,8 +175,8 @@ public class modificarUsuario extends JInternalFrame {
 		JLabel label_2 = new JLabel("Nombre Lista");
 		panel_1.add(label_2);
 		
-		table_1 = new JTable();
-		panel_1.add(table_1);
+		JComboBox comboBoxListasR = new JComboBox();
+		panel_1.add(comboBoxListasR);
 		
 		JLabel label_3 = new JLabel("Categoria");
 		panel_1.add(label_3);

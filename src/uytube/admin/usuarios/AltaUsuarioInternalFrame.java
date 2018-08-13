@@ -73,6 +73,11 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 			//evento para cuando se pierde el foco de email (el usuario se va a escribir a otro sitio o pulsar algún botón)
 			public void focusLost(FocusEvent e) {
 				//VERIFICAR DISPONIBILIDAD DE NICK Y EMAIL
+				String nick = textFieldNick.getText();
+				String email = textFieldNick.getText();
+				//falta controlar si un campo es vacio
+				//Boolean disponible = verificarDisponibilidad(nick, email);
+				
 			}
 		});
 		datosUsuario.add(textFieldEmail);
@@ -82,6 +87,7 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 		datosUsuario.add(lblNombre_1);
 		
 		textFieldNombre = new JTextField();
+		textFieldNombre.setEditable(false);
 		datosUsuario.add(textFieldNombre);
 		textFieldNombre.setColumns(10);
 		
@@ -89,6 +95,7 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 		datosUsuario.add(lblApellido);
 		
 		txtApellido = new JTextField();
+		txtApellido.setEditable(false);
 		datosUsuario.add(txtApellido);
 		txtApellido.setColumns(10);
 		
@@ -107,6 +114,7 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 		datosCanalPanel.add(lblNombre);
 		
 		textFieldNombreC = new JTextField();
+		textFieldNombreC.setEditable(false);
 		datosCanalPanel.add(textFieldNombreC);
 		textFieldNombreC.setColumns(10);
 		
@@ -114,12 +122,14 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 		datosCanalPanel.add(lblDescripcion);
 		
 		JEditorPane editorPane = new JEditorPane();
+		editorPane.setEditable(false);
 		datosCanalPanel.add(editorPane);
 		
 		JLabel lblPrivacidad = new JLabel("Privacidad");
 		datosCanalPanel.add(lblPrivacidad);
 		
 		JComboBox comboBox = new JComboBox();
+		comboBox.setEditable(true);
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Privado", "Publico"}));
 		datosCanalPanel.add(comboBox);
 		
