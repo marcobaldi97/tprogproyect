@@ -81,7 +81,7 @@ public class Video {
 	}
 	
 	public DtVideo verDetallesVideo() {
-		DtVideo dt = new DtVideo(nombre,descripcion,duracionSS,fecha_publicacion,URL,cat,privacidad);
+		DtVideo dt = new DtVideo(nombre,descripcion,duracion,fecha_publicacion,URL,cat,privacidad);
 		return dt;
 	}
 	

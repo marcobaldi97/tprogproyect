@@ -4,12 +4,12 @@ public class DtVideo {
 	private String nombre;
 	private String descripcion;
 	private int duracionSS;
-	private Fecha fecha_publicacion;
+	private DtFecha fecha_publicacion;
 	private String URL;
 	private Categoria cat;
 	private boolean privacidad;
 	
-	public DtVideo(String n, String d, int dur, Fecha fp, String url, Categoria c, boolean p) {
+	public DtVideo(String n, String d, int dur, DtFecha fp, String url, Categoria c, boolean p) {
 		nombre = n;
 		descripcion = d;
 		duracionSS = dur;
@@ -31,7 +31,7 @@ public class DtVideo {
 		return duracionSS;
 	}
 	
-	public Fecha getFechaPublicacion() {
+	public DtFecha getFechaPublicacion() {
 		return fecha_publicacion;
 	}
 	
