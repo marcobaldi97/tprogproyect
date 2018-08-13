@@ -23,4 +23,8 @@ public class Fecha {
 		return anio;
 	}
 	
+	public boolean equals(Fecha f) {
+		return (dia==f.getDia())&&(mes==f.getMes())&&(anio==f.getAnio());
+	}
+	
 }

@@ -15,5 +15,9 @@ public class DtCategoria {
 	public String getNombre() {
 		return nombre;
 	}
+	
+	public boolean equals(DtCategoria dt) {
+		return nombre == dt.getNombre();
+	}
 
 }
