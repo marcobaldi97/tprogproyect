@@ -1,14 +1,18 @@
 package uytube.logica;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Categoria {
 	private String nombre;
 	private Map<String,Video> videos;
+	private List <ListaReproduccion> LDR;
 	
 	public Categoria(String n) {
 		nombre = n;
 		videos = new HashMap<String,Video>();
+		LDR = new ArrayList<ListaReproduccion>();
 	}
 	
 	public String getNombre() {
