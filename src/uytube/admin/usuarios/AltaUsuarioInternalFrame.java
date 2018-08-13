@@ -22,29 +22,24 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import javax.swing.JComboBox;
+import com.jgoodies.forms.factories.DefaultComponentFactory;
+import javax.swing.DefaultComboBoxModel;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.FormSpecs;
+import com.jgoodies.forms.layout.RowSpec;
+import com.toedter.calendar.JDateChooser;
+import com.toedter.components.JSpinField;
+import com.toedter.calendar.JDayChooser;
+import com.toedter.calendar.JCalendar;
 
 public class AltaUsuarioInternalFrame extends JInternalFrame {
-	private JTextField textFieldNombreCanal;
+	private JTextField textFieldNombreC;
 	private JTextField textFieldNick;
 	private JTextField textFieldEmail;
 	private JTextField textFieldNombre;
 	private JTextField txtApellido;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AltaUsuarioInternalFrame frame = new AltaUsuarioInternalFrame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
@@ -53,7 +48,7 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 		setTitle("Alta Usuario");
 		setMaximizable(true);
 		setClosable(true);
-		setBounds(100, 100, 319, 399);
+		setBounds(100, 100, 319, 373);
 		FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER, 5, 5);
 		getContentPane().setLayout(flowLayout);
 		
@@ -78,6 +73,11 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 			//evento para cuando se pierde el foco de email (el usuario se va a escribir a otro sitio o pulsar algún botón)
 			public void focusLost(FocusEvent e) {
 				//VERIFICAR DISPONIBILIDAD DE NICK Y EMAIL
+				String nick = textFieldNick.getText();
+				String email = textFieldNick.getText();
+				//falta controlar si un campo es vacio
+				//Boolean disponible = verificarDisponibilidad(nick, email);
+				
 			}
 		});
 		datosUsuario.add(textFieldEmail);
@@ -87,6 +87,7 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 		datosUsuario.add(lblNombre_1);
 		
 		textFieldNombre = new JTextField();
+		textFieldNombre.setEditable(false);
 		datosUsuario.add(textFieldNombre);
 		textFieldNombre.setColumns(10);
 		
@@ -94,51 +95,44 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 		datosUsuario.add(lblApellido);
 		
 		txtApellido = new JTextField();
+		txtApellido.setEditable(false);
 		datosUsuario.add(txtApellido);
 		txtApellido.setColumns(10);
 		
 		JLabel lblFechaNac = new JLabel("Fecha Nac.");
 		datosUsuario.add(lblFechaNac);
 		
+		JDateChooser dateChooser = new JDateChooser();
+		datosUsuario.add(dateChooser);
+		
 		JPanel datosCanalPanel = new JPanel();
 		datosCanalPanel.setBorder(new TitledBorder(null, "Datos Canal", TitledBorder.CENTER, TitledBorder.TOP, null, null));
 		getContentPane().add(datosCanalPanel);
-		datosCanalPanel.setLayout(new GridLayout(4, 2, 1, 2));
+		datosCanalPanel.setLayout(new GridLayout(0, 2, 0, 0));
 		
 		JLabel lblNombre = new JLabel("Nombre");
 		datosCanalPanel.add(lblNombre);
 		
-		textFieldNombreCanal = new JTextField();
-		datosCanalPanel.add(textFieldNombreCanal);
-		textFieldNombreCanal.setColumns(10);
+		textFieldNombreC = new JTextField();
+		textFieldNombreC.setEditable(false);
+		datosCanalPanel.add(textFieldNombreC);
+		textFieldNombreC.setColumns(10);
 		
-		JLabel lblDescripcin = new JLabel("Descripci\u00F3n");
-		datosCanalPanel.add(lblDescripcin);
+		JLabel lblDescripcion = new JLabel("Descripcion");
+		datosCanalPanel.add(lblDescripcion);
 		
-		JTextArea textAreaDesc = new JTextArea();
-		textAreaDesc.setColumns(6);
-		textAreaDesc.setRows(2);
-		datosCanalPanel.add(textAreaDesc);
+		JEditorPane editorPane = new JEditorPane();
+		editorPane.setEditable(false);
+		datosCanalPanel.add(editorPane);
 		
 		JLabel lblPrivacidad = new JLabel("Privacidad");
 		datosCanalPanel.add(lblPrivacidad);
 		
-		JRadioButton rdbtnPrivado = new JRadioButton("Privado");
-		rdbtnPrivado.setSelected(true);
-		datosCanalPanel.add(rdbtnPrivado);
+		JComboBox comboBox = new JComboBox();
+		comboBox.setEditable(true);
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Privado", "Publico"}));
+		datosCanalPanel.add(comboBox);
 		
-		JTextPane textPane = new JTextPane();
-		textPane.setEnabled(false);
-		datosCanalPanel.add(textPane);
-		
-		JRadioButton rdbtnPblico = new JRadioButton("P\u00FAblico");
-		datosCanalPanel.add(rdbtnPblico);
-		
-	    //grupo de radio buttons
-		//de esta forma solo se puede seleccionar uno a la vez
-	    ButtonGroup group = new ButtonGroup();
-	    group.add(rdbtnPrivado);
-	    group.add(rdbtnPblico);
 	    
 	    
 		JPanel panel = new JPanel();
