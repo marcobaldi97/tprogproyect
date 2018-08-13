@@ -1,6 +1,7 @@
 package uytube.admin;
 
 import java.awt.BorderLayout;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -15,12 +16,15 @@ import javax.swing.JMenuItem;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import uytube.admin.usuarios.*;
+import uytube.admin.listas.*;
 public class adminPrincipal extends JFrame {
 
 	private JPanel contentPane;
 	private AltaUsuarioInternalFrame aUsrIFrame;
 	private modificarUsuario modUsrIFrame;
 	private ConsultaUsuarioInternalFrame conUsrIFrame;
+	private ListarUsuariosInternalFrame listarUsrIFrame;
+	private AgregarVideoListaInternalFrame addVideoListIFrame;
 
 	/**
 	 * Launch the application.
@@ -89,12 +93,34 @@ public class adminPrincipal extends JFrame {
 			}
 		});
 		mnUsuario.add(mntmConsulta);
+		
+		JMenuItem mntmListar = new JMenuItem("Listar");
+		mntmListar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				 listarUsrIFrame = new ListarUsuariosInternalFrame();
+			     contentPane.setLayout(null);
+			     contentPane.add(listarUsrIFrame);
+			     listarUsrIFrame.setVisible(true);
+			}
+		});
+		mnUsuario.add(mntmListar);
 
 		//VideosMenu videosMenu = new VideosMenu(getContentPane());
 		//menuBar.add(videosMenu.getMenu());
 
-		JMenu mnListas = new JMenu("LIstas");
+		JMenu mnListas = new JMenu("Listas");
 		menuBar.add(mnListas);
+		
+		JMenuItem mntmAgregarVideo = new JMenuItem("Agregar video");
+		mntmAgregarVideo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				 addVideoListIFrame = new AgregarVideoListaInternalFrame();
+			     contentPane.setLayout(null);
+			     contentPane.add(addVideoListIFrame);
+			     addVideoListIFrame.setVisible(true);	
+			}
+		});
+		mnListas.add(mntmAgregarVideo);
 
 		JMenu mnCategoria = new JMenu("Categoria");
 		menuBar.add(mnCategoria);

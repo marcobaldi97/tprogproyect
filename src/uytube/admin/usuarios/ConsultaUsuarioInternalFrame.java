@@ -55,8 +55,8 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 		setResizable(true);
 		setMaximizable(true);
 		setIconifiable(true);
-		setBounds(100, 100, 422, 403);
-		getContentPane().setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		setBounds(100, 100, 347, 411);
+		getContentPane().setLayout(new GridLayout(0, 2, 5, 5));
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "Datos usuario", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -102,7 +102,7 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder(null, "Datos canal", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		getContentPane().add(panel_1);
-		panel_1.setLayout(new GridLayout(0, 2, 0, 0));
+		panel_1.setLayout(new GridLayout(3, 2, 0, 0));
 		
 		JLabel label_5 = new JLabel("Nombre");
 		panel_1.add(label_5);
@@ -128,7 +128,7 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new TitledBorder(null, "Datos video", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		getContentPane().add(panel_2);
-		panel_2.setLayout(new GridLayout(0, 2, 2, 1));
+		panel_2.setLayout(new GridLayout(5, 2, 2, 1));
 		
 		JLabel label_8 = new JLabel("Nombre");
 		panel_2.add(label_8);
@@ -145,9 +145,9 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 		panel_2.add(textField_4);
 		
 		JPanel panel_3 = new JPanel();
-		panel_3.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Datos listas de reproduccion", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel_3.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Datos Listas", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		getContentPane().add(panel_3);
-		panel_3.setLayout(new GridLayout(0, 2, 2, 1));
+		panel_3.setLayout(new GridLayout(5, 2, 2, 1));
 		
 		JLabel label_10 = new JLabel("Nombre Lista");
 		panel_3.add(label_10);
