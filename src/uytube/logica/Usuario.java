@@ -54,7 +54,7 @@ public class Usuario {
 		return dt;
 	}
 	
-	public void añadirUsuarioASeguir(Usuario u) {
+	public void aniadirUsuarioASeguir(Usuario u) {
 		usuariosQueSigue.put(u.getNickname(),u);
 	}
 	
@@ -72,7 +72,7 @@ public class Usuario {
 		return nicknames;
 	}
 	
-	public void añadirUsuarioQueLeSigue(Usuario u) {
+	public void aniadirUsuarioQueLeSigue(Usuario u) {
 		usuariosQueLeSiguen.put(u.getNickname(),u);
 	}
 	
@@ -80,11 +80,11 @@ public class Usuario {
 		usuariosQueLeSiguen.remove(u.getNickname());
 	}
 	
-	public void añadirVideo(String nom, String desc, Integer dur, Fecha fp, String url, DtCategoria catE, boolean p) {
-		canalPropio.añadirVideo(nom, desc, dur, fp, url, catE, p);
+	public void aniadirVideo(String nom, String desc, Integer dur, DtFecha fp, String url, DtCategoria catE, boolean p) {
+		canalPropio.aniadirVideo(nom, desc, dur, fp, url, catE, p);
 	}
 	
-	public void ingresarNuevosDatosVideo(String nom, String d, int dur, Fecha fp, String url, DtCategoria catE, boolean p) {
+	public void ingresarNuevosDatosVideo(String nom, String d, int dur, DtFecha fp, String url, DtCategoria catE, boolean p) {
 		canalPropio.ingresarNuevosDatosVideo(nom, d, dur, fp, url, catE, p);
 	}
 	

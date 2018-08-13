@@ -63,7 +63,7 @@ public class Canal {
 		return videos.get(s);
 	}
 	
-	public void añadirVideo(String nom, String desc, Integer dur, Fecha fp, String url, DtCategoria catE, boolean p) {
+	public void aniadirVideo(String nom, String desc, Integer dur, DtFecha fp, String url, DtCategoria catE, boolean p) {
 		Video v = new Video(nom, desc, dur, fp, url, catE, p);
 		CategoriaHandler catH = CategoriaHandler.getInstance();
 		Categoria c = catH.find(catE.getNombre());
@@ -73,7 +73,7 @@ public class Canal {
 		vidH.addVideo(v);
 	}
 	
-	public void ingresarNuevosDatosVideo(String nom, String d, int dur, Fecha fp, String url, DtCategoria catE, boolean p) {
+	public void ingresarNuevosDatosVideo(String nom, String d, int dur, DtFecha fp, String url, DtCategoria catE, boolean p) {
 		VideoHandler vidH = VideoHandler.getInstance();
 		Video v = vidH.find(nom);
 		v.ingresarNuevosDatosVideo(d, dur, fp, url, catE, p);
