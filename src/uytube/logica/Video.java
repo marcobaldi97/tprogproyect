@@ -1,4 +1,5 @@
 package uytube.logica;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,6 +12,7 @@ public class Video {
 	private Categoria cat;
 	private boolean privacidad;
 	private Map<Integer,Comentario> comentarios;
+	private ArrayList<Puntuacion> puntuaciones;
 	
 	public Video(String n, String d, int dur, DtFecha fp, String url, DtCategoria c, boolean p) {
 		nombre = n;
@@ -21,6 +23,7 @@ public class Video {
 		cat = new Categoria(c.getNombre());
 		privacidad = p;
 		comentarios=new HashMap<Integer,Comentario>();
+		puntuaciones=new ArrayList<Puntuacion>();
 	}
 	public String getNombre(){
 		return nombre;
@@ -79,10 +82,36 @@ public class Video {
 			comentarios.put(cn.getIDComentario(), cn);
 		}
 	}
+	public DtPuntuacion[] getPuntuaciones(){
+		DtPuntuacion[] puntajes=new DtPuntuacion[puntuaciones.size()];
+		for(int i=0;i<puntuaciones.size();i++){
+			Puntuacion p= puntuaciones.get(i);
+			puntajes[i]=new DtPuntuacion(p);
+		}
+		return puntajes;
+		
+	}
+	public void addPuntuacion(Puntuacion p){
+		puntuaciones.add(p);
+	}
 	
 	public DtVideo verDetallesVideo() {
 		DtVideo dt = new DtVideo(nombre,descripcion,duracion,fecha_publicacion,URL,cat,privacidad);
 		return dt;
+	}
+	
+	public void valorarVideo(String nickU,boolean valoracion){
+		int i=0;
+		while(i<puntuaciones.size()&&puntuaciones.get(i).getNickPuntuador()!=nickU){
+			i++;
+		}
+		if(i<puntuaciones.size()){
+			puntuaciones.get(i).setValoracion(valoracion);
+		}else{
+			Puntuacion p=new Puntuacion(nickU,valoracion);
+			puntuaciones.add(p);
+		}
+		
 	}
 	
 
