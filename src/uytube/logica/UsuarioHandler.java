@@ -11,7 +11,7 @@ public class UsuarioHandler {
 		usuarios = new HashMap<String, Usuario>();
 	}
 	
-	public void añadirUsuario(Usuario u) {
+	public void aniadirUsuario(Usuario u) {
 		usuarios.put(u.getNickname(), u);
 	}
 	

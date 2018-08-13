@@ -8,6 +8,9 @@ public class DtCategoria {
 	public DtCategoria(String n) {
 		nombre = n;
 	}
+	public DtCategoria(Categoria c){
+		nombre=c.getNombre();
+	}
 	
 	public String getNombre() {
 		return nombre;
