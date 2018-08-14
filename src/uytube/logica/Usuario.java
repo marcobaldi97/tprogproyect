@@ -1,5 +1,4 @@
 package uytube.logica;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -124,6 +123,16 @@ public class Usuario {
 			contador++;
 		}
 		return nicknames;
+	}
+	
+	public String[] listarVideosPorLDR(String nombreLDR)
+	{
+		return canalPropio.listarVideosPorLDR(nombreLDR);
+	}
+	
+	public void agregarVideoLDR(String nombreVideo, String nombreLDR)
+	{
+			canalPropio.agregarVideoLDR(nombreVideo,nombreLDR);
 	}
 
 }
