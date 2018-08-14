@@ -6,6 +6,9 @@ import java.awt.event.KeyEvent;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
+import uytube.admin.videos.alta.AltaVideoMenuItem;
+import uytube.admin.videos.modificar.ModificarVideoMenuItem;;
+
 public final class VideosMenu {
 	private final JMenu menu = new JMenu("Videos");
 	private final ArrayList<JMenuItem> menuItems = new ArrayList<JMenuItem>();

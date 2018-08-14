@@ -1,4 +1,4 @@
-package uytube.admin.videos;
+package uytube.admin.videos.alta;
 
 import java.awt.Container;
 import java.awt.event.ActionEvent;
@@ -6,15 +6,15 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JMenuItem;
 
-public final class ModificarVideoMenuItem {
-	private final JMenuItem menuItem = new JMenuItem("Modificar Video...");
-	private final ModificarVideoInternalFrame modificarVideoInternalFrame;
+public final class AltaVideoMenuItem {
+	private final JMenuItem menuItem = new JMenuItem("Alta Video...");
+	private final AltaVideoInternalFrame altaVideoInternalFrame;
 
 	private final Container container;
 
-	public ModificarVideoMenuItem(final Container container) {
+	public AltaVideoMenuItem(final Container container) {
 		this.container = container;
-		this.modificarVideoInternalFrame = new ModificarVideoInternalFrame(this.container);
+		this.altaVideoInternalFrame = new AltaVideoInternalFrame(this.container);
 
 		initializeMenuItem();
 	}
@@ -37,6 +37,6 @@ public final class ModificarVideoMenuItem {
 	}
 
 	private void showAltaVideoInternalFrame() {
-		modificarVideoInternalFrame.show();
+		altaVideoInternalFrame.show();
 	}
 }

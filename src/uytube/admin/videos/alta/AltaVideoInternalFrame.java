@@ -1,4 +1,4 @@
-package uytube.admin.videos;
+package uytube.admin.videos.alta;
 
 import java.awt.Container;
 
