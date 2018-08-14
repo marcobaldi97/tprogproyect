@@ -7,12 +7,12 @@ import java.util.ArrayList;
 public class Categoria {
 	private String nombre;
 	private Map<String,Video> videos;
-	private List <ListaReproduccion> LDR;
+	private Map<String,ListaReproduccion> LDR;
 	
 	public Categoria(String n) {
 		nombre = n;
 		videos = new HashMap<String,Video>();
-		LDR = new ArrayList<ListaReproduccion>();
+		LDR=new HashMap<String,ListaReproduccion>();
 	}
 	
 	public String getNombre() {
@@ -35,5 +35,6 @@ public class Categoria {
 		DtCategoria dt = new DtCategoria(nombre);
 		return dt;
 	}
+
 	
 }

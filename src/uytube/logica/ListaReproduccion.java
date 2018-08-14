@@ -1,10 +1,14 @@
 package uytube.logica;
+import java.util.HashMap;
+import java.util.Map;
 
 public abstract class ListaReproduccion {
 	protected String nombre;//Esto puede ser un error.
+	protected Map<String,Video> videos;
 	
 	public ListaReproduccion() {
-		// TODO Auto-generated constructor stub
+		
+		videos = new HashMap<String,Video>();
 	}
 	
 	public String getNombre() {
@@ -12,8 +16,24 @@ public abstract class ListaReproduccion {
 	}
 	
 	public DtListaReproduccion verDetallesListareproduccion() {
-		DtListaReproduccion dt = new DtListaReproduccion(nombre);
+		DtListaReproduccion dt = new DtListaReproduccion(nombre); // aca es con this
 		return dt;
 	}
+	
+	public String[] listarVideos() 
+	{
+		String[] nombreVideos = new String[videos.size()];
+		Integer contador = 0;
+		for(Map.Entry<String, Video> entry : videos.entrySet()) {
+			nombreVideos[contador] = entry.getKey();
+			contador++;
+		}
+		return nombreVideos;
+	}
+
+	public void agregarVideo(String nombreVideo) {
+		
+		
+	};
 
 }

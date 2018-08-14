@@ -96,6 +96,16 @@ public class Canal {
 		}
 		return nombresVideos;
 	}
+
+	public String[] listarVideosPorLDR(String nombreLDR) {
+		
+		return listasReproduccion.get(nombreLDR).listarVideos();
+	}
+
+	public void agregarVideoLDR(String nombreVideo, String nombreLDR) {
+		listasReproduccion.get(nombreLDR).agregarVideo(nombreVideo);
+		
+	}
 	
 
 }
