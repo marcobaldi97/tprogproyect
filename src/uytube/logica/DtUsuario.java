@@ -8,16 +8,6 @@ public class DtUsuario {
     private DtFecha fecha_nacimiento;
     private String foto;
 	
-	public DtUsuario(String nick,String nom, String ape, String e, DtFecha fn, String fo) {
-		nickname = nick;
-		nombre = nom;
-		apellido = ape;
-		email = e;
-		fecha_nacimiento = fn;
-		foto = fo;
-		// TODO Auto-generated constructor stub
-	}
-	
 	public DtUsuario(Usuario u) {
 		nickname = u.getNickname();
 		nombre = u.getNombre();

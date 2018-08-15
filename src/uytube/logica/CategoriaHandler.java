@@ -33,11 +33,14 @@ public class CategoriaHandler {
 		DtCategoria[] dtCategorias = new DtCategoria[categorias.size()];
 		Integer contador = 0;
 		for(Map.Entry<String, Categoria> entry : categorias.entrySet()) {
-			String nom = entry.getValue().getNombre();
-			dtCategorias[contador] = new DtCategoria(nom);
+			dtCategorias[contador] = new DtCategoria(entry.getValue());
 			contador++;
 		}
 		return dtCategorias;
+	}
+	
+	public boolean isMember(String nomCat){
+		return categorias.containsKey(nomCat);
 	}
 
 }

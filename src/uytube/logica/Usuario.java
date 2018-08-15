@@ -58,7 +58,7 @@ public class Usuario {
 	}
 	
 	public DtUsuario listarDatosUsuario() {
-		DtUsuario dt = new DtUsuario(nickname,nombre,apellido,email,fecha_nacimiento,foto);
+		DtUsuario dt = new DtUsuario(this);
 		return dt;
 	}
 	public String getFoto(){
