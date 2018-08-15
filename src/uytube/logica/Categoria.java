@@ -1,8 +1,6 @@
 package uytube.logica;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.List;
-import java.util.ArrayList;
 
 public class Categoria {
 	private String nombre;
@@ -32,7 +30,7 @@ public class Categoria {
 	}
 	
 	public DtCategoria getInfoCategoria() { 
-		DtCategoria dt = new DtCategoria(nombre);
+		DtCategoria dt = new DtCategoria(this);
 		return dt;
 	}
 

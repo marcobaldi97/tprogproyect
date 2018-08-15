@@ -16,7 +16,7 @@ public abstract class ListaReproduccion {
 	}
 	
 	public DtListaReproduccion verDetallesListareproduccion() {
-		DtListaReproduccion dt = new DtListaReproduccion(nombre); // aca es con this
+		DtListaReproduccion dt = new DtListaReproduccion(this); 
 		return dt;
 	}
 	

@@ -10,6 +10,16 @@ public class Canal {
 	private Map<String,Video> videos;
 	private Map<String,ListaReproduccion> listasReproduccion;
 	
+	public String getNombre(){
+		return nombre;
+	}
+	public String getDescripcion(){
+		return descripcion;
+	}
+	public Boolean getPrivacidad(){
+		return privado;
+	}
+	
 	public void addListaReproduccion(ListaReproduccion lr) {
 		listasReproduccion.put(lr.getNombre(), lr);
 	}
@@ -47,7 +57,7 @@ public class Canal {
 	}
 	
 	public DtCanal mostrarInfoCanal() {
-		DtCanal dt = new DtCanal(nombre,descripcion,privado);
+		DtCanal dt = new DtCanal(this);
 		return dt;
 	}
 	
@@ -74,14 +84,12 @@ public class Canal {
 	}
 	
 	public void ingresarNuevosDatosVideo(String nom, String d, int dur, DtFecha fp, String url, DtCategoria catE, boolean p) {
-		VideoHandler vidH = VideoHandler.getInstance();
-		Video v = vidH.find(nom);
+		Video v = videos.get(nom);
 		v.ingresarNuevosDatosVideo(d, dur, fp, url, catE, p);
 	}
 	
 	public DtVideo verDetallesVideo(String nombreVideo) {
-		VideoHandler vidH = VideoHandler.getInstance();
-		Video v = vidH.find(nombreVideo);
+		Video v = videos.get(nombreVideo);
 		DtVideo dt = v.verDetallesVideo();
 		return dt;
 	}

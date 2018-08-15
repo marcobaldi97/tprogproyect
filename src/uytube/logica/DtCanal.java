@@ -5,10 +5,10 @@ public class DtCanal {
 	private String descripcion;
 	private Boolean privado;
 
-	public DtCanal(String nom, String desc, Boolean privacidadE) {
-		nombre = nom;
-		descripcion = desc;
-		privado = privacidadE;
+	public DtCanal(Canal c){
+		nombre=c.getNombre();
+		descripcion=c.getDescripcion();
+		privado=c.getPrivacidad();
 	}
 	
 	public String getNombre() {

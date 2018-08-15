@@ -1,6 +1,5 @@
 package uytube.logica;
-import java.util.HashMap;
-import java.util.Map;
+
 public class DtComentario {
 	private Integer IDComentario;
 	private String texto;
@@ -18,12 +17,6 @@ public class DtComentario {
 	}
 	public boolean getEsPadre(){
 		return esPadre;
-	}
-	public DtComentario(Integer ID, String t,DtFecha f,boolean p){
-		IDComentario=ID;
-		texto=t;
-		fecha=f;
-		esPadre=p;
 	}
 	public DtComentario(Comentario c){
 		IDComentario=c.getIDComentario();
