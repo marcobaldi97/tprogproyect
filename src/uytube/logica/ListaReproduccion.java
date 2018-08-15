@@ -4,12 +4,12 @@ import java.util.Map;
 
 public abstract class ListaReproduccion {
 	protected String nombre;//Esto puede ser un error.
-	protected Map<String,Video> videos;
+	protected Map<Integer,Video> videos;
 	protected Map<String,Categoria> categorias;
 	
 	
 	public ListaReproduccion() {
-		videos = new HashMap<String,Video>();
+		videos = new HashMap<Integer,Video>();
 		categorias = new HashMap<String,Categoria>();
 	}
 	
@@ -25,21 +25,27 @@ public abstract class ListaReproduccion {
 	public String[] listarVideos(){
 		String[] nombreVideos = new String[videos.size()];
 		Integer contador = 0;
-		for(Map.Entry<String, Video> entry : videos.entrySet()) {
-			nombreVideos[contador] = entry.getKey();
+		for(Map.Entry<Integer, Video> entry : videos.entrySet()) {
+			nombreVideos[contador] = entry.getValue().getNombre();
 			contador++;
 		}
 		return nombreVideos;
 	}
 	
 	private void refresacarCategorias(){
-		for(Map.Entry<String, Video> entry : videos.entrySet()) {
-			categorias.put(entry.getKey(), entry.getValue().getObjetoCategoria());
+		for(Map.Entry<Integer, Video> entry : videos.entrySet()) {
+			categorias.put(entry.getValue().getObjetoCategoria().getNombre(), entry.getValue().getObjetoCategoria());
 		}		
 	}
+	
+	public void removerVideo(Integer id) {
+		videos.remove(id);
+		refresacarCategorias();
+	}
 
-	public void agregarVideo(String nombreVideo) {
-		
+	public void agregarVideo(Video v) {
+		videos.put(v.getIDVideo(), v);
+		refresacarCategorias();
 	};
 
 }
