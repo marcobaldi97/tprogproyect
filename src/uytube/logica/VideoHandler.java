@@ -3,11 +3,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class VideoHandler {
-	private Map<String,Video> videos;
+	private Map<Integer,Video> videos;
 	private static VideoHandler instancia = null;
+	private Integer IDActual;
 	
 	private VideoHandler() {
-		videos = new HashMap<String,Video>();
+		videos = new HashMap<Integer,Video>();
+		IDActual=0;
+	}
+	public Integer getNewID(){
+		return IDActual++;
 	}
 	
 	public static VideoHandler getInstance() {
@@ -17,26 +22,27 @@ public class VideoHandler {
 	}
 	
 	public void addVideo(Video v) {
-		videos.put(v.getNombre(), v);
+		videos.put(IDActual, v);
+		IDActual++;
 	}
 	
 	public void removerVideo(Video v) {
 		videos.remove(v.getNombre());
 	}
 	
-	public Video find(String s) {
-		return videos.get(s);
+	public Video find(Integer i) {
+		return videos.get(i);
 	}
 	
-	public String[] listarVideos() {
-		String[] nombresVideos = new String[videos.size()];
+	public DtVideo[] listarVideos() {
+		DtVideo[] infoVideos = new DtVideo[videos.size()];
 		Integer contador = 0;
-		for(Map.Entry<String, Video> entry : videos.entrySet()) {
-			String nom = entry.getValue().getNombre();
-			nombresVideos[contador] = nom;
+		for(Map.Entry<Integer, Video> entry : videos.entrySet()) {
+			DtVideo infoV=new DtVideo(entry.getValue());
+			infoVideos[contador] = infoV;
 			contador++;
 		}
-		return nombresVideos;
+		return infoVideos;
 	}
 	
 	

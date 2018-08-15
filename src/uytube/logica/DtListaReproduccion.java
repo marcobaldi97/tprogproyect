@@ -3,8 +3,8 @@ package uytube.logica;
 public class DtListaReproduccion {
 	private String nombre;
 	
-	public DtListaReproduccion(String n) {
-		nombre = n;
+	public DtListaReproduccion(ListaReproduccion ldr){
+		nombre=ldr.getNombre();
 	}
 	
 	public String getNombre() {

@@ -10,6 +10,16 @@ public class Canal {
 	private Map<String,Video> videos;
 	private Map<String,ListaReproduccion> listasReproduccion;
 	
+	public String getNombre(){
+		return nombre;
+	}
+	public String getDescripcion(){
+		return descripcion;
+	}
+	public Boolean getPrivacidad(){
+		return privado;
+	}
+	
 	public void addListaReproduccion(ListaReproduccion lr) {
 		listasReproduccion.put(lr.getNombre(), lr);
 	}
@@ -44,10 +54,16 @@ public class Canal {
 		descripcion = desc;
 		privado = privacidadE;
 		videos = new HashMap<String,Video>();
+		SystemHandler sh = SystemHandler.getInstance();
+		DtListaReproduccion[] listasDefault = sh.obtenerListasReproduccion();
+		for(int index = 0;index<=listasDefault.length;index++){
+			ListaReproduccion lr = new PorDefecto(listasDefault[index].getNombre());
+			addListaReproduccion(lr);
+		}
 	}
 	
 	public DtCanal mostrarInfoCanal() {
-		DtCanal dt = new DtCanal(nombre,descripcion,privado);
+		DtCanal dt = new DtCanal(this);
 		return dt;
 	}
 	
@@ -74,14 +90,12 @@ public class Canal {
 	}
 	
 	public void ingresarNuevosDatosVideo(String nom, String d, int dur, DtFecha fp, String url, DtCategoria catE, boolean p) {
-		VideoHandler vidH = VideoHandler.getInstance();
-		Video v = vidH.find(nom);
+		Video v = videos.get(nom);
 		v.ingresarNuevosDatosVideo(d, dur, fp, url, catE, p);
 	}
 	
 	public DtVideo verDetallesVideo(String nombreVideo) {
-		VideoHandler vidH = VideoHandler.getInstance();
-		Video v = vidH.find(nombreVideo);
+		Video v = videos.get(nombreVideo);
 		DtVideo dt = v.verDetallesVideo();
 		return dt;
 	}
@@ -96,6 +110,16 @@ public class Canal {
 		}
 		return nombresVideos;
 	}
-	
+
+	public String[] listarVideosPorLDR(String nombreLDR) {
+		
+		return listasReproduccion.get(nombreLDR).listarVideos();
+	}
+
+	public void agregarVideoLDR(Integer id, String nombreLDR) {
+		VideoHandler vh = VideoHandler.getInstance();
+		Video v = vh.find(id);
+		listasReproduccion.get(nombreLDR).agregarVideo(v);
+	}
 
 }

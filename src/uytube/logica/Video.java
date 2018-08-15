@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Video {
+	private Integer IDVideo;
 	private String nombre;
 	private String descripcion;
 	private int duracion;
@@ -15,15 +16,24 @@ public class Video {
 	private ArrayList<Puntuacion> puntuaciones;
 	
 	public Video(String n, String d, int dur, DtFecha fp, String url, DtCategoria c, boolean p) {
+		VideoHandler vh=VideoHandler.getInstance();
+		IDVideo=vh.getNewID();
 		nombre = n;
 		descripcion = d;
 		duracion = dur;
 		fecha_publicacion = fp;
 		URL = url;
-		cat = new Categoria(c.getNombre());
+		CategoriaHandler ch=CategoriaHandler.getInstance();
+		if(ch.isMember(c.getNombre()))
+			cat=ch.find(c.getNombre());//si la categoria existe la asigno, si no?
 		privacidad = p;
 		comentarios=new HashMap<Integer,Comentario>();
 		puntuaciones=new ArrayList<Puntuacion>();
+		vh.addVideo(this);
+		
+	}
+	public Integer getIDVideo(){
+		return IDVideo;
 	}
 	public String getNombre(){
 		return nombre;
@@ -48,12 +58,18 @@ public class Video {
 		return privacidad;
 	}
 	
+	public Categoria getObjetoCategoria(){
+		return cat;
+	}
+	
 	public void ingresarNuevosDatosVideo(String d, int dur, DtFecha fp, String url, DtCategoria c, boolean p) {
 		descripcion = d;
 		duracion = dur;
 		fecha_publicacion = fp;
 		URL = url;
-		cat = new Categoria(c.getNombre()); //esto esta mal, hay que buscar en el handler y asignarle esa
+		CategoriaHandler ch=CategoriaHandler.getInstance();
+		if(ch.isMember(c.getNombre()))
+			cat=ch.find(c.getNombre());
 		privacidad = p;
 	}
 	
@@ -96,8 +112,7 @@ public class Video {
 	}
 	
 	public DtVideo verDetallesVideo() {
-		DtCategoria cate=this.getCategoria();
-		DtVideo dt = new DtVideo(nombre,descripcion,duracion,fecha_publicacion,URL,cate,privacidad);
+		DtVideo dt = new DtVideo(this);
 		return dt;
 	}
 	
