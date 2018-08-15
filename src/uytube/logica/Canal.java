@@ -54,6 +54,12 @@ public class Canal {
 		descripcion = desc;
 		privado = privacidadE;
 		videos = new HashMap<String,Video>();
+		SystemHandler sh = SystemHandler.getInstance();
+		DtListaReproduccion[] listasDefault = sh.obtenerListasReproduccion();
+		for(int index = 0;index<=listasDefault.length;index++){
+			ListaReproduccion lr = new PorDefecto(listasDefault[index].getNombre());
+			addListaReproduccion(lr);
+		}
 	}
 	
 	public DtCanal mostrarInfoCanal() {

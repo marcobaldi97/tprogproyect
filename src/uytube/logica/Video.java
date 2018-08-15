@@ -58,6 +58,10 @@ public class Video {
 		return privacidad;
 	}
 	
+	public Categoria getObjetoCategoria(){
+		return cat;
+	}
+	
 	public void ingresarNuevosDatosVideo(String d, int dur, DtFecha fp, String url, DtCategoria c, boolean p) {
 		descripcion = d;
 		duracion = dur;
