@@ -116,10 +116,10 @@ public class Canal {
 		return listasReproduccion.get(nombreLDR).listarVideos();
 	}
 
-	public void agregarVideoLDR(String nombreVideo, String nombreLDR) {
-		listasReproduccion.get(nombreLDR).agregarVideo(nombreVideo);
-		
+	public void agregarVideoLDR(Integer id, String nombreLDR) {
+		VideoHandler vh = VideoHandler.getInstance();
+		Video v = vh.find(id);
+		listasReproduccion.get(nombreLDR).agregarVideo(v);
 	}
-	
 
 }
