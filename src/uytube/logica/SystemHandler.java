@@ -11,7 +11,7 @@ public class SystemHandler {
 		listasDefault = new HashMap<String,DtListaReproduccion>();
 	}
 	
-	public SystemHandler getInstance(){
+	public static SystemHandler getInstance(){
 		if(instance == null) instance = new SystemHandler();
 		return instance;
 	}
@@ -22,7 +22,7 @@ public class SystemHandler {
 		return aux;
 	}//devuelve una key 
 
-	public void añadirListaDefault(DtListaReproduccion dt) {
+	public void aniadirListaDefault(DtListaReproduccion dt) {
 		listasDefault.put(dt.getNombre(), dt);
 	}
 	
