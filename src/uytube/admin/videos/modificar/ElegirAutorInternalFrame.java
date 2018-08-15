@@ -47,6 +47,7 @@ public final class ElegirAutorInternalFrame {
 		final String selectedVideoId = elegirAutorPanel.getSelectedVideoId();
 
 		modificarVideoInternalFrame.setVideo(selectedVideoId);
+		modificarVideoInternalFrame.show();
 	}
 
 	public void show() {

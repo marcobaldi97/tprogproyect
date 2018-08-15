@@ -11,6 +11,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import uytube.logica.DtVideo;
+
 public final class ElegirAutorPanel {
 	private final JPanel mainPanel = new JPanel();
 	private final BoxLayout panelLayout = new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS);
@@ -18,7 +20,7 @@ public final class ElegirAutorPanel {
 
 	private String selectedVideoName;
 
-	private String[] videoNames;
+	private DtVideo[] videos = {};
 	private final JButton searchAuthorVideosButton = new JButton("Buscar");
 
 	private final JButton editButton = new JButton("Aceptar");
@@ -44,6 +46,9 @@ public final class ElegirAutorPanel {
 		searchAuthorVideosButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				final String authorNickname = authorNicknameTextField.getText();
+				// final DtVideo[] videos = controller.getVideos()
+				// this.videos = videos;
 			}
 		});
 	}

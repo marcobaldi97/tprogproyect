@@ -42,7 +42,7 @@ public class adminPrincipal extends JFrame {
 	 * Create the frame.
 	 */
 	public adminPrincipal() {
-		
+
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -56,7 +56,7 @@ public class adminPrincipal extends JFrame {
 
 		JMenu mnUsuario = new JMenu("Usuario");
 		menuBar.add(mnUsuario);
-		
+
 		JMenuItem mntmAlta = new JMenuItem("Alta");
 		mntmAlta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -67,7 +67,7 @@ public class adminPrincipal extends JFrame {
 			}
 		});
 		mnUsuario.add(mntmAlta);
-		
+
 		JMenuItem mntmModificar = new JMenuItem("Modificar");
 		mntmModificar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -78,7 +78,7 @@ public class adminPrincipal extends JFrame {
 			}
 		});
 		mnUsuario.add(mntmModificar);
-		
+
 		JMenuItem mntmConsulta = new JMenuItem("Consulta");
 		mntmConsulta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -90,8 +90,8 @@ public class adminPrincipal extends JFrame {
 		});
 		mnUsuario.add(mntmConsulta);
 
-		//VideosMenu videosMenu = new VideosMenu(getContentPane());
-		//menuBar.add(videosMenu.getMenu());
+		VideosMenu videosMenu = new VideosMenu(getContentPane());
+		menuBar.add(videosMenu.getMenu());
 
 		JMenu mnListas = new JMenu("LIstas");
 		menuBar.add(mnListas);
