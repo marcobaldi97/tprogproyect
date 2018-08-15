@@ -130,9 +130,8 @@ public class Usuario {
 		return canalPropio.listarVideosPorLDR(nombreLDR);
 	}
 	
-	public void agregarVideoLDR(String nombreVideo, String nombreLDR)
-	{
-			canalPropio.agregarVideoLDR(nombreVideo,nombreLDR);
+	public void agregarVideoLDR(Integer id, String nombreLDR){
+			canalPropio.agregarVideoLDR(id,nombreLDR);
 	}
 
 }
