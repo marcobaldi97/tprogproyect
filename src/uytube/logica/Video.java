@@ -83,17 +83,17 @@ public class Video {
 		return res;
 	}
 	public void nuevoComentario(String nickU,DtFecha fecha, String cont){
-		//por ahora no se de donde sacar el IDComentario asi que les pongo 1
-		Comentario c=new Comentario(1, cont, fecha,true, nickU);
+		VideoHandler vh=VideoHandler.getInstance();
+		Comentario c=new Comentario(vh.getNewID(), cont, fecha,true, nickU);
 		comentarios.put(c.getIDComentario(), c);
 	}
 	
 	public void responderComentario(Integer IDCR,String nickU,DtFecha fecha,String cont){
 		//esto cambia del DCC porque tengo un map, asi que no tengo que iterar todo para buscar
-		//por ahora no se de donde sacar el IDComentario asi que les pongo 2
+		VideoHandler vh=VideoHandler.getInstance();
 		if(comentarios.containsKey(IDCR)){
 			Comentario c=comentarios.get(IDCR);
-			Comentario cn=new Comentario(2, cont, fecha,false, nickU);
+			Comentario cn=new Comentario(vh.getNewID(), cont, fecha,false, nickU);
 			c.addComentario(cn);
 			comentarios.put(cn.getIDComentario(), cn);
 		}
