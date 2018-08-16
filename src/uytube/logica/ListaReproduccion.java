@@ -3,13 +3,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public abstract class ListaReproduccion {
-	protected String nombre;//Esto puede ser un error.
-	protected Map<Integer,Video> videos;
-	protected Map<String,Categoria> categorias;
+	private String nombre;
+	private Map<String,Video> videos;
+	private Map<String,Categoria> categorias;
 	
-	
-	public ListaReproduccion() {
-		videos = new HashMap<Integer,Video>();
+	public ListaReproduccion(String nombLDR) {
+		nombre=nombLDR;
+		videos = new HashMap<String,Video>();
 		categorias = new HashMap<String,Categoria>();
 	}
 	

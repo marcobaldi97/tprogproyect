@@ -4,7 +4,7 @@ public class Particular extends ListaReproduccion{
 	private boolean privado;
 	
 	public Particular(String n, boolean p) {
-		nombre = n;
+		super(n);
 		privado = p;
 	}
 	
