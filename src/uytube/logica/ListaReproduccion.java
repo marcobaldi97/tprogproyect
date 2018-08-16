@@ -4,12 +4,12 @@ import java.util.Map;
 
 public abstract class ListaReproduccion {
 	private String nombre;
-	private Map<String,Video> videos;
+	private Map<Integer,Video> videos;
 	private Map<String,Categoria> categorias;
 	
 	public ListaReproduccion(String nombLDR) {
 		nombre=nombLDR;
-		videos = new HashMap<String,Video>();
+		videos = new HashMap<Integer,Video>();
 		categorias = new HashMap<String,Categoria>();
 	}
 	
