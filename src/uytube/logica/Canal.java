@@ -7,6 +7,7 @@ public class Canal {
 	private String nombre;
 	private String descripcion;
 	private Boolean privado;
+	private Categoria cate;
 	private Map<String,Video> videos;
 	private Map<String,ListaReproduccion> listasReproduccion;
 	
@@ -49,10 +50,12 @@ public class Canal {
 		return dt;
 	}
 	
-	public Canal(String nom, String desc, Boolean privacidadE) {
+	public Canal(String nom, String desc, Boolean privacidadE,String catE) {
 		nombre = nom;
 		descripcion = desc;
 		privado = privacidadE;
+		CategoriaHandler ch = CategoriaHandler.getInstance();
+		cate = ch.find(catE);
 		videos = new HashMap<String,Video>();
 		SystemHandler sh = SystemHandler.getInstance();
 		DtListaReproduccion[] listasDefault = sh.obtenerListasReproduccion();

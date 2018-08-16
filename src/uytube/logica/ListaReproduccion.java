@@ -32,20 +32,22 @@ public abstract class ListaReproduccion {
 		return nombreVideos;
 	}
 	
-	private void refresacarCategorias(){
+	private void refrescarCategorias(){
 		for(Map.Entry<Integer, Video> entry : videos.entrySet()) {
 			categorias.put(entry.getValue().getObjetoCategoria().getNombre(), entry.getValue().getObjetoCategoria());
 		}		
 	}
 	
 	public void removerVideo(Integer id) {
+		String categoriaNombre = videos.get(id).getCategoria().getNombre();
+		categorias.remove(categoriaNombre);		
 		videos.remove(id);
-		refresacarCategorias();
+		refrescarCategorias();
 	}
 
 	public void agregarVideo(Video v) {
 		videos.put(v.getIDVideo(), v);
-		refresacarCategorias();
+		refrescarCategorias();
 	};
 
 }
