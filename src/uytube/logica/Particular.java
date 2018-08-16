@@ -11,5 +11,9 @@ public class Particular extends ListaReproduccion{
 	public boolean getPrivado() {
 		return privado;
 	}
+	
+	public void cambiarPrivLDR(Boolean privE) {
+		privado = privE;
+	}
 
 }

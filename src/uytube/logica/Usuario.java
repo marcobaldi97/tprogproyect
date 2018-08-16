@@ -13,7 +13,7 @@ public class Usuario {
     private Map<String,Usuario> usuariosQueSigue;
     private Map<String,Usuario> usuariosQueLeSiguen;
 	
-	public Usuario(String nick,String nom, String ape, String e, DtFecha fn, String fo) {
+	public Usuario(String nick,String nom, String ape, String e, DtFecha fn, String fo,String nombreCanal,Boolean privacidadE, String catE) {
 		// TODO Auto-generated constructor stub
 		nickname = nick;
 		nombre = nom;
@@ -23,6 +23,8 @@ public class Usuario {
 		foto = fo;
 		usuariosQueSigue = new HashMap<String, Usuario>();
 		usuariosQueLeSiguen = new HashMap<String, Usuario>();
+		this.createCanal(nombreCanal, "", privacidadE, catE);;
+		
 	}
 	
 	public void createCanal(String nom, String desc, Boolean privacidadE,String catE) {
@@ -136,6 +138,10 @@ public class Usuario {
 	public void nuevaListaParticular(String nombreL, Boolean privada) {
 		ListaReproduccion lr = new Particular(nombreL,privada);
 		canalPropio.addListaReproduccion(lr);
+	}
+	
+	public void cambiarPrivLDR(String nombreL, Boolean privE){
+		canalPropio.cambiarPrivLDR(nombreL,privE);
 	}
 
 }

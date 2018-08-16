@@ -124,5 +124,10 @@ public class Canal {
 		Video v = vh.find(id);
 		listasReproduccion.get(nombreLDR).agregarVideo(v);
 	}
+	
+	public void cambiarPrivLDR(String nombreL, Boolean privE) {
+		ListaReproduccion lr = listasReproduccion.get(nombreL);
+		((Particular) lr).cambiarPrivLDR(privE);//creo que esto es un dynamic cast
+	}
 
 }
