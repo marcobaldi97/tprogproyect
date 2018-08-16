@@ -1,6 +1,6 @@
 package uytube.logica;
 
-public class VideoCtrl {
+public class VideoCtrl implements IVideoCtrl{
 	private static VideoCtrl instance = null; 
 	
 	private VideoCtrl() {
