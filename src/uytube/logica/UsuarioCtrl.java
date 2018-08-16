@@ -1,6 +1,6 @@
 package uytube.logica;
 
-public class UsuarioCtrl {
+public class UsuarioCtrl implements IUsuarioCtrl {
 	private static UsuarioCtrl instance = null; 
 	private UsuarioHandler usuarioh;
 	private SystemHandler systemh;
