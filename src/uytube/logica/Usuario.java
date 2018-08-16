@@ -25,8 +25,8 @@ public class Usuario {
 		usuariosQueLeSiguen = new HashMap<String, Usuario>();
 	}
 	
-	public void createCanal(String nom, String desc, Boolean privacidadE) {
-		canalPropio = new Canal(nom,desc,privacidadE);
+	public void createCanal(String nom, String desc, Boolean privacidadE,String catE) {
+		canalPropio = new Canal(nom,desc,privacidadE,catE);
 	}
 	
 	public String getNickname() {
