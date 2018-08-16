@@ -34,5 +34,15 @@ public class Categoria {
 		return dt;
 	}
 
+	public DtVideo[] listarVideos() {
+		DtVideo[] res=new DtVideo[videos.size()];
+		Integer contador=0;
+		for(Map.Entry<String, Video> entry : videos.entrySet()) {
+			res[contador] = new DtVideo(entry.getValue());
+			contador++;
+		}
+		return null;
+	}
+
 	
 }
