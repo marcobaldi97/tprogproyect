@@ -8,5 +8,9 @@ public class VideoCtrl {
 		
 		return resultado;
 	}
-
+	public DtComentario[] listarComentarios(Integer IDVideo){
+		VideoHandler vh=VideoHandler.getInstance();
+		Video v=vh.find(IDVideo);
+		return v.getComentarios();
+	}
 }
