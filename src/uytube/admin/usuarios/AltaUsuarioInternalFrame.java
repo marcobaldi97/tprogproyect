@@ -35,7 +35,7 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 	private JTextField textFieldEmail;
 	private JTextField textFieldNombre;
 	private JTextField txtApellido;
-
+	private JEditorPane editorPaneDesc = new JEditorPane();
 	
 	/**
 	 * Create the frame.
@@ -106,7 +106,7 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 		JLabel lblDescripcion = new JLabel("Descripcion");
 		datosCanalPanel.add(lblDescripcion);
 		
-		JEditorPane editorPaneDesc = new JEditorPane();
+		editorPaneDesc = new JEditorPane();
 		datosCanalPanel.add(editorPaneDesc);
 		
 		JLabel lblPrivacidad = new JLabel("Privacidad");
@@ -131,6 +131,11 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
 		
 		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				 setVisible(false);
+			}
+		});
 		panel.add(btnCancelar);
 		
 		JLabel label = new JLabel("             ");
@@ -147,7 +152,7 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 				nick = textFieldNick.getText();
 				email = textFieldEmail.getText(); 
 				
-						nom = textFieldNombre.getText();
+				nom = textFieldNombre.getText();
 				ape = txtApellido.getText();
 				nac = pasarFechaDT(dateChooser.getDate());
 				
@@ -165,8 +170,11 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 				if(disponible==true){
 					controlUsr.nuevoUsuario(nick,nom, ape, email, nac,"foto",nomCanal,privacidad, catE) ;
 					System.out.println("OK");
+					limpiar();
 				}else{
 					//avisar que no se pudo crear
+					System.out.println("Ya existe el usuario");
+					limpiar();
 				}
 			}
 		});
@@ -176,7 +184,14 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 	private DtFecha pasarFechaDT(Date fecha){
 		DtFecha fechaDt = new DtFecha(fecha.getDay(), fecha.getMonth(), fecha.getYear());
 		return fechaDt;
-		
+	}
+	private void limpiar(){
+		textFieldNick.setText("");
+		textFieldEmail.setText("");
+		textFieldNombre.setText("");
+		txtApellido.setText("");
+		editorPaneDesc.setText("");
+		textFieldNombreC.setText("");
 	}
 	
 }

@@ -108,7 +108,7 @@ public class adminPrincipal extends JFrame {
 		JMenuItem mntmListar = new JMenuItem("Listar");
 		mntmListar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				 listarUsrIFrame = new ListarUsuariosInternalFrame();
+				 listarUsrIFrame = new ListarUsuariosInternalFrame(ICU);
 			     contentPane.setLayout(null);
 			     contentPane.add(listarUsrIFrame);
 			     listarUsrIFrame.setVisible(true);
