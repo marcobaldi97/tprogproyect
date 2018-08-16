@@ -46,7 +46,17 @@ public class Categoria {
 			res[contador] = new DtVideo(entry.getValue());
 			contador++;
 		}
-		return null;
+		return res;
+	}
+	public DtListaReproduccion[] listarLDR() {
+		DtListaReproduccion [] res = new DtListaReproduccion[LDR.size()];
+		Integer contador=0;
+		for(Map.Entry<String, ListaReproduccion> iterator : LDR.entrySet()) 
+		{
+			res[contador]= new DtListaReproduccion(iterator.getValue());
+			contador++;
+		}
+		return res;
 	}
 
 	

@@ -44,6 +44,12 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 		u.agregarVideoLDR(id_video, nombreLDR);
 	}//comentarle a Carmona sobre el cambio con la id.
 	
+	public void eliminarVideoLista(String nickU, Integer id_video, String nombreLDR){
+		Usuario u=usuarioh.find(nickU);
+		u.eliminarVideoLista(id_video, nombreLDR);
+		
+	}
+	
 	public void cambiarPrivLDR(String nickU, String nombreL, Boolean privE) {
 		Usuario u = usuarioh.find(nickU);
 		u.cambiarPrivLDR(nombreL, privE);
