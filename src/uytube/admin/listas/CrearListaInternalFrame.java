@@ -12,6 +12,8 @@ import javax.swing.DefaultComboBoxModel;
 import java.awt.GridLayout;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class CrearListaInternalFrame extends JInternalFrame {
 	private JTextField textFieldNombre;
@@ -36,7 +38,12 @@ public class CrearListaInternalFrame extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public CrearListaInternalFrame() {
-		setBounds(100, 100, 450, 300);
+		setTitle("Crear Lista");
+		setResizable(true);
+		setClosable(true);
+		setMaximizable(true);
+		setIconifiable(true);
+		setBounds(100, 100, 304, 263);
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel = new JPanel();
@@ -45,22 +52,42 @@ public class CrearListaInternalFrame extends JInternalFrame {
 		JLabel lblTipoDeLista = new JLabel("Tipo de lista de reproduccion");
 		panel.add(lblTipoDeLista);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Defecto", "Particular"}));
-		panel.add(comboBox);
-		
 		JPanel lista = new JPanel();
 		getContentPane().add(lista, BorderLayout.CENTER);
-		lista.setLayout(new GridLayout(0, 2, 0, 0));
+		lista.setLayout(new GridLayout(4, 2, 5, 5));
 		
 		JLabel lblNick = new JLabel("Nick");
 		lista.add(lblNick);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		lista.add(comboBox_1);
 		
-		JLabel lblNombre = new JLabel("Nombre lista");
-		lista.add(lblNombre);
+		JComboBox comboBoxNick = new JComboBox();
+		lista.add(comboBoxNick);
+		
+		comboBoxNick.setVisible(false);
+		lblNick.setVisible(false);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if( comboBox.getSelectedItem()=="Particular"){
+					comboBoxNick.setVisible(true);
+					lblNick.setVisible(true);
+				}else {
+					comboBoxNick.setVisible(false);
+					lblNick.setVisible(false);
+				}
+			}
+		});
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Defecto", "Particular"}));
+		panel.add(comboBox);
+		
+		JLabel lblNombreLista = new JLabel("Nombre lista");
+		lista.add(lblNombreLista);
+		
+		
+
+		
+		
 		
 		textFieldNombre = new JTextField();
 		lista.add(textFieldNombre);

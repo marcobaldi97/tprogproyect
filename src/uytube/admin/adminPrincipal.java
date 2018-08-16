@@ -25,6 +25,7 @@ public class adminPrincipal extends JFrame {
 	private ConsultaUsuarioInternalFrame conUsrIFrame;
 	private ListarUsuariosInternalFrame listarUsrIFrame;
 	private AgregarVideoListaInternalFrame addVideoListIFrame;
+	private CrearListaInternalFrame crearListIFrame;
 
 	/**
 	 * Launch the application.
@@ -120,6 +121,17 @@ public class adminPrincipal extends JFrame {
 			     addVideoListIFrame.setVisible(true);	
 			}
 		});
+		
+		JMenuItem mntmCrear = new JMenuItem("Crear ");
+		mntmCrear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				crearListIFrame = new CrearListaInternalFrame();
+				contentPane.setLayout(null);
+			    contentPane.add(crearListIFrame);
+			    crearListIFrame.setVisible(true);	
+			}
+		});
+		mnListas.add(mntmCrear);
 		mnListas.add(mntmAgregarVideo);
 
 		JMenu mnCategoria = new JMenu("Categoria");
