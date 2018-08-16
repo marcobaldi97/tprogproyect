@@ -125,13 +125,17 @@ public class Usuario {
 		return nicknames;
 	}
 	
-	public String[] listarVideosPorLDR(String nombreLDR)
-	{
+	public String[] listarVideosPorLDR(String nombreLDR) {
 		return canalPropio.listarVideosPorLDR(nombreLDR);
 	}
 	
-	public void agregarVideoLDR(Integer id, String nombreLDR){
+	public void agregarVideoLDR(Integer id, String nombreLDR) {
 			canalPropio.agregarVideoLDR(id,nombreLDR);
+	}
+	
+	public void nuevaListaParticular(String nombreL, Boolean privada) {
+		ListaReproduccion lr = new Particular(nombreL,privada);
+		canalPropio.addListaReproduccion(lr);
 	}
 
 }

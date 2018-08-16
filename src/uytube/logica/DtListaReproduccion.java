@@ -7,6 +7,10 @@ public class DtListaReproduccion {
 		nombre=ldr.getNombre();
 	}
 	
+	public DtListaReproduccion(String nombreL) {
+		nombre = nombreL;
+	}
+	
 	public String getNombre() {
 		return nombre;
 	}
