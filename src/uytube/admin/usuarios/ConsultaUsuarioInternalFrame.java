@@ -11,6 +11,9 @@ import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
+
+import uytube.logica.IUsuarioCtrl;
+
 import javax.swing.JButton;
 import javax.swing.JTextPane;
 import javax.swing.UIManager;
@@ -30,26 +33,15 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 	private JTable tableSeguidos;
 	private JTable tableSeguidores;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ConsultaUsuarioInternalFrame frame = new ConsultaUsuarioInternalFrame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
+	private IUsuarioCtrl controlUsr;
+	
 	/**
 	 * Create the frame.
+	 * @param iCU 
 	 */
-	public ConsultaUsuarioInternalFrame() {
+	public ConsultaUsuarioInternalFrame(IUsuarioCtrl iCU) {
+		controlUsr = iCU;
+		
 		setTitle("Consulta Usuario");
 		setClosable(true);
 		setResizable(true);
@@ -66,9 +58,11 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 		JLabel label = new JLabel("Nickname");
 		panel.add(label);
 		
-		JComboBox comboBox = new JComboBox();
-		panel.add(comboBox);
+		JComboBox comboBoxNick = new JComboBox();
+		panel.add(comboBoxNick);
 		
+		//CARGAR NICK
+		//combo
 		JLabel label_1 = new JLabel("Email");
 		panel.add(label_1);
 		
