@@ -97,7 +97,7 @@ public class adminPrincipal extends JFrame {
 		JMenuItem mntmConsulta = new JMenuItem("Consulta");
 		mntmConsulta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				 conUsrIFrame = new ConsultaUsuarioInternalFrame();
+				 conUsrIFrame = new ConsultaUsuarioInternalFrame(ICU);
 			     contentPane.setLayout(null);
 			     contentPane.add(conUsrIFrame);
 			     conUsrIFrame.setVisible(true);
