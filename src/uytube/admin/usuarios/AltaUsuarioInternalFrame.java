@@ -4,47 +4,46 @@ import java.awt.EventQueue;
 
 import javax.swing.JInternalFrame;
 import javax.swing.BoxLayout;
-import javax.swing.ButtonGroup;
 
-import java.awt.BorderLayout;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 import java.awt.FlowLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JEditorPane;
-import javax.swing.JTextPane;
-import javax.swing.JTextArea;
 import java.awt.GridLayout;
 import javax.swing.JButton;
-import javax.swing.JRadioButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.util.Date;
+
 import javax.swing.JComboBox;
-import com.jgoodies.forms.factories.DefaultComponentFactory;
 import javax.swing.DefaultComboBoxModel;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.FormSpecs;
-import com.jgoodies.forms.layout.RowSpec;
 import com.toedter.calendar.JDateChooser;
-import com.toedter.components.JSpinField;
-import com.toedter.calendar.JDayChooser;
-import com.toedter.calendar.JCalendar;
+
+import uytube.logica.DtFecha;
+import uytube.logica.IUsuarioCtrl;
+
 
 public class AltaUsuarioInternalFrame extends JInternalFrame {
+	private IUsuarioCtrl controlUsr;
+	
 	private JTextField textFieldNombreC;
 	private JTextField textFieldNick;
 	private JTextField textFieldEmail;
 	private JTextField textFieldNombre;
 	private JTextField txtApellido;
-
+	private JEditorPane editorPaneDesc = new JEditorPane();
+	
 	/**
 	 * Create the frame.
+	 * @param iCU 
 	 */
-	public AltaUsuarioInternalFrame() {
+	public AltaUsuarioInternalFrame(IUsuarioCtrl iCU) {
+		controlUsr = iCU;
+		
 		setTitle("Alta Usuario");
 		setMaximizable(true);
 		setClosable(true);
@@ -68,18 +67,7 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 		datosUsuario.add(lblEmail);
 		
 		textFieldEmail = new JTextField();
-		textFieldEmail.addFocusListener(new FocusAdapter() {
-			@Override
-			//evento para cuando se pierde el foco de email (el usuario se va a escribir a otro sitio o pulsar alg�n bot�n)
-			public void focusLost(FocusEvent e) {
-				//VERIFICAR DISPONIBILIDAD DE NICK Y EMAIL
-				String nick = textFieldNick.getText();
-				String email = textFieldNick.getText();
-				//falta controlar si un campo es vacio
-				//Boolean disponible = verificarDisponibilidad(nick, email);
-				
-			}
-		});
+
 		datosUsuario.add(textFieldEmail);
 		textFieldEmail.setColumns(10);
 		
@@ -87,7 +75,6 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 		datosUsuario.add(lblNombre_1);
 		
 		textFieldNombre = new JTextField();
-		textFieldNombre.setEditable(false);
 		datosUsuario.add(textFieldNombre);
 		textFieldNombre.setColumns(10);
 		
@@ -95,7 +82,6 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 		datosUsuario.add(lblApellido);
 		
 		txtApellido = new JTextField();
-		txtApellido.setEditable(false);
 		datosUsuario.add(txtApellido);
 		txtApellido.setColumns(10);
 		
@@ -114,24 +100,29 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 		datosCanalPanel.add(lblNombre);
 		
 		textFieldNombreC = new JTextField();
-		textFieldNombreC.setEditable(false);
 		datosCanalPanel.add(textFieldNombreC);
 		textFieldNombreC.setColumns(10);
 		
 		JLabel lblDescripcion = new JLabel("Descripcion");
 		datosCanalPanel.add(lblDescripcion);
 		
-		JEditorPane editorPane = new JEditorPane();
-		editorPane.setEditable(false);
-		datosCanalPanel.add(editorPane);
+		editorPaneDesc = new JEditorPane();
+		datosCanalPanel.add(editorPaneDesc);
 		
 		JLabel lblPrivacidad = new JLabel("Privacidad");
 		datosCanalPanel.add(lblPrivacidad);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setEditable(true);
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Privado", "Publico"}));
-		datosCanalPanel.add(comboBox);
+		JComboBox comboBoxPrivacidad = new JComboBox();
+		comboBoxPrivacidad.setModel(new DefaultComboBoxModel(new String[] {"Privado", "Publico"}));
+		datosCanalPanel.add(comboBoxPrivacidad);
+		
+		JLabel lblCategoria = new JLabel("Categoria");
+		datosCanalPanel.add(lblCategoria);
+		
+		JComboBox comboBoxCat = new JComboBox();
+		comboBoxCat.setModel(new DefaultComboBoxModel(new String[] {"prueba"}));
+		comboBoxCat.setEditable(true);
+		datosCanalPanel.add(comboBoxCat);
 		
 	    
 	    
@@ -140,6 +131,11 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
 		
 		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				 setVisible(false);
+			}
+		});
 		panel.add(btnCancelar);
 		
 		JLabel label = new JLabel("             ");
@@ -149,14 +145,53 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 		btnCrear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//CREAR USUARIO
-				crearUsuario();
+				//obtener datos
+				String  nick, nom, ape, email, nomCanal,descCanal, catE;
+				boolean privacidad;
+				DtFecha nac;
+				nick = textFieldNick.getText();
+				email = textFieldEmail.getText(); 
+				
+				nom = textFieldNombre.getText();
+				ape = txtApellido.getText();
+				nac = pasarFechaDT(dateChooser.getDate());
+				
+				nomCanal = textFieldNombreC.getText();
+				descCanal = editorPaneDesc.getText();
+				if (comboBoxPrivacidad.getSelectedIndex()==0){ privacidad=true;}
+				else{privacidad = false;}
+			
+				catE = (String) comboBoxCat.getSelectedItem();
+				
+				//verificar si esta todo correcto
+				//VERIFICAR DISPONIBILIDAD DE NICK Y EMAIL
+				boolean disponible = controlUsr.verificarDispUsuario(nick, email);
+				//crear
+				if(disponible==true){
+					controlUsr.nuevoUsuario(nick,nom, ape, email, nac,"foto",nomCanal,privacidad, catE) ;
+					System.out.println("OK");
+					limpiar();
+				}else{
+					//avisar que no se pudo crear
+					System.out.println("Ya existe el usuario");
+					limpiar();
+				}
 			}
 		});
 		panel.add(btnCrear);
 
 	}
-	private void crearUsuario() {
-		
+	private DtFecha pasarFechaDT(Date fecha){
+		DtFecha fechaDt = new DtFecha(fecha.getDay(), fecha.getMonth(), fecha.getYear());
+		return fechaDt;
 	}
-
+	private void limpiar(){
+		textFieldNick.setText("");
+		textFieldEmail.setText("");
+		textFieldNombre.setText("");
+		txtApellido.setText("");
+		editorPaneDesc.setText("");
+		textFieldNombreC.setText("");
+	}
+	
 }
