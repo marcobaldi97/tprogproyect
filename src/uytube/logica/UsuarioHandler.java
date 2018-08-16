@@ -40,18 +40,16 @@ public class UsuarioHandler {
 		return existe;
 	}
 	
-    public Usuario[] listarNicknamesUsuarios() {
-        if (usuarios.isEmpty())
-            return null;
-        else {
-            Collection<Usuario> usrs = usuarios.values();
-            Object[] o = usrs.toArray();
-            Usuario[] usuariosA = new Usuario[o.length];
-            for (int i = 0; i < o.length; i++) {
-                usuariosA[i] = (Usuario) o[i];
-            }
-            return usuariosA;
-        }
+    public String[] listarNicknamesUsuarios() {
+    		String[] nickUsuarios = new String[usuarios.size()];
+    		Integer contador = 0;
+    		for(Map.Entry<String,Usuario> entry : usuarios.entrySet()) {
+    			String nickU=entry.getKey();
+    			nickUsuarios[contador] = nickU;
+    			contador++;
+    		}
+    		return nickUsuarios;
+        
     }
 	
 	public static UsuarioHandler getInstance() {
