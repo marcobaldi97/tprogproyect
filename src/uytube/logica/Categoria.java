@@ -12,7 +12,12 @@ public class Categoria {
 		videos = new HashMap<String,Video>();
 		LDR=new HashMap<String,ListaReproduccion>();
 	}
-	
+	public void aniadirLDR(ListaReproduccion lr){
+		LDR.put(lr.getNombre(), lr);
+	}
+	public void removerLDR(ListaReproduccion lr){
+		LDR.remove(lr.getNombre());
+	}
 	public String getNombre() {
 		return nombre;
 	}

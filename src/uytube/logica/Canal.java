@@ -20,6 +20,10 @@ public class Canal {
 	public Boolean getPrivacidad(){
 		return privado;
 	}
+	public DtCategoria getCategoria(){
+		DtCategoria dt=new DtCategoria(cate);
+		return dt;
+	}
 	
 	public void addListaReproduccion(ListaReproduccion lr) {
 		listasReproduccion.put(lr.getNombre(), lr);
