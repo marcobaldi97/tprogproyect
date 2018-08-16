@@ -60,8 +60,8 @@ public class Canal {
 		SystemHandler sh = SystemHandler.getInstance();
 		DtListaReproduccion[] listasDefault = sh.obtenerListasReproduccion();
 		for(int index = 0;index<=listasDefault.length;index++){
-			ListaReproduccion lr = new PorDefecto(listasDefault[index].getNombre());
-			addListaReproduccion(lr);
+			//ListaReproduccion lr = new PorDefecto(listasDefault[index].getNombre());
+			//addListaReproduccion(lr);
 		}
 	}
 	

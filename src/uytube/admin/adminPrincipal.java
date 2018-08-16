@@ -8,6 +8,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import uytube.logica.Factory;
+import uytube.logica.IUsuarioCtrl;
+//import presentacion.CrearUsuario;
+
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 
@@ -20,6 +24,7 @@ import uytube.admin.listas.*;
 public class adminPrincipal extends JFrame {
 
 	private JPanel contentPane;
+	
 	private AltaUsuarioInternalFrame aUsrIFrame;
 	private modificarUsuario modUsrIFrame;
 	private ConsultaUsuarioInternalFrame conUsrIFrame;
@@ -27,6 +32,8 @@ public class adminPrincipal extends JFrame {
 	private AgregarVideoListaInternalFrame addVideoListIFrame;
 	private QuitarVideoListaInternalFrame quitarVideoListIFrame;
 	private CrearListaInternalFrame crearListIFrame;
+
+	private IUsuarioCtrl ICU;
 
 	/**
 	 * Launch the application.
@@ -48,7 +55,9 @@ public class adminPrincipal extends JFrame {
 	 * Create the frame.
 	 */
 	public adminPrincipal() {
-
+		 Factory fabrica = Factory.getInstance();
+	     ICU = fabrica.getIUsuarioCtrl();
+	        
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -66,7 +75,7 @@ public class adminPrincipal extends JFrame {
 		JMenuItem mntmAlta = new JMenuItem("Alta");
 		mntmAlta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-		        aUsrIFrame = new AltaUsuarioInternalFrame();
+		        aUsrIFrame = new AltaUsuarioInternalFrame(ICU);
 		        contentPane.setLayout(null);
 		        contentPane.add(aUsrIFrame);
 		        aUsrIFrame.setVisible(true);
