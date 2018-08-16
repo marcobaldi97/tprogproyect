@@ -144,4 +144,8 @@ public class Usuario {
 		canalPropio.cambiarPrivLDR(nombreL,privE);
 	}
 
+	public void eliminarVideoLista(Integer id_video, String nombreLDR) {
+		canalPropio.eliminarVideoLista(id_video,nombreLDR);
+	}
+
 }

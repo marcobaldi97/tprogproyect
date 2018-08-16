@@ -12,9 +12,9 @@ public class VideoCtrl implements IVideoCtrl{
 	}
 	public DtListaReproduccion [] listarLDRPorCategoria(String cat) 
 	{
-		DtListaReproduccion [] resultado=null;
-		
-		return resultado;
+		CategoriaHandler ch=CategoriaHandler.getInstance();
+		Categoria cate=ch.find(cat);
+		return cate.listarLDR();
 	}
 	public DtVideo[] listarVideosPorCategoria(String cat){
 		CategoriaHandler ch=CategoriaHandler.getInstance();
