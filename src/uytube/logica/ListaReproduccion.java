@@ -3,12 +3,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public abstract class ListaReproduccion {
-	private String nombre;//Esto puede ser un error.
+	private String nombre;
 	private Map<String,Video> videos;
+	private Map<String,Categoria> categorias;
 	
 	public ListaReproduccion(String nombLDR) {
 		nombre=nombLDR;
 		videos = new HashMap<String,Video>();
+		categorias = new HashMap<String,Categoria>();
 	}
 	
 	public String getNombre() {
@@ -20,20 +22,32 @@ public abstract class ListaReproduccion {
 		return dt;
 	}
 	
-	public String[] listarVideos() 
-	{
+	public String[] listarVideos(){
 		String[] nombreVideos = new String[videos.size()];
 		Integer contador = 0;
-		for(Map.Entry<String, Video> entry : videos.entrySet()) {
-			nombreVideos[contador] = entry.getKey();
+		for(Map.Entry<Integer, Video> entry : videos.entrySet()) {
+			nombreVideos[contador] = entry.getValue().getNombre();
 			contador++;
 		}
 		return nombreVideos;
 	}
+	
+	private void refrescarCategorias(){
+		for(Map.Entry<Integer, Video> entry : videos.entrySet()) {
+			categorias.put(entry.getValue().getObjetoCategoria().getNombre(), entry.getValue().getObjetoCategoria());
+		}		
+	}
+	
+	public void removerVideo(Integer id) {
+		String categoriaNombre = videos.get(id).getCategoria().getNombre();
+		categorias.remove(categoriaNombre);		
+		videos.remove(id);
+		refrescarCategorias();
+	}
 
-	public void agregarVideo(String nombreVideo) {
-		
-		
+	public void agregarVideo(Video v) {
+		videos.put(v.getIDVideo(), v);
+		refrescarCategorias();
 	};
 
 }

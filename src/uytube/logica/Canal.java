@@ -7,6 +7,7 @@ public class Canal {
 	private String nombre;
 	private String descripcion;
 	private Boolean privado;
+	private Categoria cate;
 	private Map<String,Video> videos;
 	private Map<String,ListaReproduccion> listasReproduccion;
 	
@@ -49,11 +50,19 @@ public class Canal {
 		return dt;
 	}
 	
-	public Canal(String nom, String desc, Boolean privacidadE) {
+	public Canal(String nom, String desc, Boolean privacidadE,String catE) {
 		nombre = nom;
 		descripcion = desc;
 		privado = privacidadE;
+		CategoriaHandler ch = CategoriaHandler.getInstance();
+		cate = ch.find(catE);
 		videos = new HashMap<String,Video>();
+		SystemHandler sh = SystemHandler.getInstance();
+		DtListaReproduccion[] listasDefault = sh.obtenerListasReproduccion();
+		for(int index = 0;index<=listasDefault.length;index++){
+			ListaReproduccion lr = new PorDefecto(listasDefault[index].getNombre());
+			addListaReproduccion(lr);
+		}
 	}
 	
 	public DtCanal mostrarInfoCanal() {
@@ -110,10 +119,10 @@ public class Canal {
 		return listasReproduccion.get(nombreLDR).listarVideos();
 	}
 
-	public void agregarVideoLDR(String nombreVideo, String nombreLDR) {
-		listasReproduccion.get(nombreLDR).agregarVideo(nombreVideo);
-		
+	public void agregarVideoLDR(Integer id, String nombreLDR) {
+		VideoHandler vh = VideoHandler.getInstance();
+		Video v = vh.find(id);
+		listasReproduccion.get(nombreLDR).agregarVideo(v);
 	}
-	
 
 }

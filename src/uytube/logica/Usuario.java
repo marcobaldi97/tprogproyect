@@ -25,8 +25,8 @@ public class Usuario {
 		usuariosQueLeSiguen = new HashMap<String, Usuario>();
 	}
 	
-	public void createCanal(String nom, String desc, Boolean privacidadE) {
-		canalPropio = new Canal(nom,desc,privacidadE);
+	public void createCanal(String nom, String desc, Boolean privacidadE,String catE) {
+		canalPropio = new Canal(nom,desc,privacidadE,catE);
 	}
 	
 	public String getNickname() {
@@ -130,9 +130,8 @@ public class Usuario {
 		return canalPropio.listarVideosPorLDR(nombreLDR);
 	}
 	
-	public void agregarVideoLDR(String nombreVideo, String nombreLDR)
-	{
-			canalPropio.agregarVideoLDR(nombreVideo,nombreLDR);
+	public void agregarVideoLDR(Integer id, String nombreLDR){
+			canalPropio.agregarVideoLDR(id,nombreLDR);
 	}
 
 }

@@ -1,4 +1,4 @@
-package uytube.admin.videos;
+package uytube.admin.videos.alta;
 
 import java.awt.Container;
 
@@ -9,7 +9,7 @@ public final class AltaVideoInternalFrame {
 
 	private final Container container;
 
-	public AltaVideoInternalFrame(Container container) {
+	public AltaVideoInternalFrame(final Container container) {
 		this.container = container;
 		this.container.add(internalFrame);
 
@@ -21,13 +21,13 @@ public final class AltaVideoInternalFrame {
 		internalFrame.setTitle("Alta Video");
 		internalFrame.setClosable(true);
 		internalFrame.setResizable(true);
-		internalFrame.pack();
+		internalFrame.setSize(330, 300);
 
 		addContentToInternalFrame();
 	}
 
 	private void addContentToInternalFrame() {
-		AltaVideoFormPanel altaVideoFormPanel = new AltaVideoFormPanel();
+		final AltaVideoFormPanel altaVideoFormPanel = new AltaVideoFormPanel(internalFrame);
 
 		internalFrame.add(altaVideoFormPanel.getPanel());
 	}

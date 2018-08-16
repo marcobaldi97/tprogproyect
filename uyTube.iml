@@ -2,6 +2,9 @@
 <module type="JAVA_MODULE" version="4">
   <component name="EclipseModuleManager">
     <libelement value="jar://$MODULE_DIR$/miglayout15-swing.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/jgoodies-common-1.8.0.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/jgoodies-forms-1.8.0.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/jcalendar-1.4.jar!/" />
     <src_description expected_position="0">
       <src_folder value="file://$MODULE_DIR$/src" expected_position="0" />
     </src_description>
@@ -13,7 +16,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="JavaSE-1.8" jdkType="JavaSDK" />
     <orderEntry type="module-library">
       <library name="miglayout15-swing.jar">
         <CLASSES>
@@ -23,6 +26,37 @@
         <SOURCES>
           <root url="jar://$MODULE_DIR$/miglayout-src.zip!/" />
         </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jgoodies-common-1.8.0.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/jgoodies-common-1.8.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$MODULE_DIR$/jgoodies-common-1.8.0-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jgoodies-forms-1.8.0.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/jgoodies-forms-1.8.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$MODULE_DIR$/jgoodies-forms-1.8.0-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jcalendar-1.4.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/jcalendar-1.4.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
       </library>
     </orderEntry>
   </component>
