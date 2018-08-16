@@ -34,14 +34,17 @@ public class ListarUsuariosInternalFrame extends JInternalFrame {
 		listUsuarios.setBorder(new EmptyBorder(0, 0, 0, 0));
 		listUsuarios.setToolTipText("Usuarios");
 		listUsuarios.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
+		//CARGAR USUARIOS
 		String[] usr = controlUsr.listarNicknamesUsuarios();
 		
-	    DefaultListModel model=new DefaultListModel();
+		DefaultListModel model=new DefaultListModel();
 	    listUsuarios.setModel(model);
 	  
 	    for(int i=0; i<usr.length;i++){
 	    	  model.addElement(usr[i]);
 	     }
+	    
 		getContentPane().add(listUsuarios, BorderLayout.CENTER);
 		
 		JPanel panel = new JPanel();
