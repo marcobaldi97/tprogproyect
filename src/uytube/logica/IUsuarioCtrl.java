@@ -2,7 +2,7 @@ package uytube.logica;
 
 public interface IUsuarioCtrl {
 	
-	public abstract Usuario[] listarNicknamesUsuarios();
+	public abstract String[] listarNicknamesUsuarios();
 	
 	public abstract String[] listarVideosCanal(String nickU) ;
 	

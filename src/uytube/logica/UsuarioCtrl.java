@@ -15,7 +15,7 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 		return instance;
 	}
 	
-	public Usuario[] listarNicknamesUsuarios() {
+	public String[] listarNicknamesUsuarios() {
 		return usuarioh.listarNicknamesUsuarios();
 	}
 	
