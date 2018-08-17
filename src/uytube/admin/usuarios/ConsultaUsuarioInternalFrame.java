@@ -12,6 +12,7 @@ import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
 
+import uytube.logica.DtUsuario;
 import uytube.logica.IUsuarioCtrl;
 
 import javax.swing.JButton;
@@ -22,19 +23,21 @@ import javax.swing.JList;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import javax.swing.JTable;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ConsultaUsuarioInternalFrame extends JInternalFrame {
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTextField textFieldEmail;
+	private JTextField textFieldNombre;
+	private JTextField textFieldApellido;
+	private JTextField textFieldNomCanal;
 	private JTextField textField_4;
 	private JTextField textField_5;
 	private JTable tableSeguidos;
 	private JTable tableSeguidores;
 
 	private IUsuarioCtrl controlUsr;
-	
+	JDateChooser dateChooser;
 	/**
 	 * Create the frame.
 	 * @param iCU 
@@ -58,53 +61,66 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 		JLabel label = new JLabel("Nickname");
 		panel.add(label);
 		
+		
 		JComboBox comboBoxNick = new JComboBox();
+		comboBoxNick.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//pedir Dt
+				DtUsuario usr= controlUsr.listarDatosUsuario((String)comboBoxNick.getSelectedItem());
+				//cargar datos
+				textFieldEmail.setText(usr.getEmail());
+				textFieldNombre.setText(usr.getNombre());
+				textFieldApellido.setText(usr.getApellido());
+				dateChooser.setDate(usr.getFecha_nacimiento().pasarDTaDate());
+				
+			}
+		});
 		panel.add(comboBoxNick);
 		
-		//CARGAR NICK
-		//combo
+		
+		
 		JLabel label_1 = new JLabel("Email");
 		panel.add(label_1);
 		
-		textField = new JTextField();
-		textField.setEditable(false);
-		textField.setColumns(10);
-		panel.add(textField);
+		textFieldEmail = new JTextField();
+		textFieldEmail.setEditable(false);
+		textFieldEmail.setColumns(10);
+		panel.add(textFieldEmail);
 		
 		JLabel label_2 = new JLabel("Nombre");
 		panel.add(label_2);
 		
-		textField_1 = new JTextField();
-		textField_1.setEditable(false);
-		textField_1.setColumns(10);
-		panel.add(textField_1);
+		textFieldNombre = new JTextField();
+		textFieldNombre.setEditable(false);
+		textFieldNombre.setColumns(10);
+		panel.add(textFieldNombre);
 		
 		JLabel label_3 = new JLabel("Apellido");
 		panel.add(label_3);
 		
-		textField_2 = new JTextField();
-		textField_2.setEditable(false);
-		textField_2.setColumns(10);
-		panel.add(textField_2);
+		textFieldApellido = new JTextField();
+		textFieldApellido.setEditable(false);
+		textFieldApellido.setColumns(10);
+		panel.add(textFieldApellido);
 		
 		JLabel label_4 = new JLabel("Fecha Nac.");
 		panel.add(label_4);
 		
-		JDateChooser dateChooser = new JDateChooser();
+		dateChooser = new JDateChooser();
 		panel.add(dateChooser);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder(null, "Datos canal", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		getContentPane().add(panel_1);
-		panel_1.setLayout(new GridLayout(3, 2, 0, 0));
+		panel_1.setLayout(new GridLayout(3, 2, 2, 5));
 		
 		JLabel label_5 = new JLabel("Nombre");
 		panel_1.add(label_5);
 		
-		textField_3 = new JTextField();
-		textField_3.setEditable(false);
-		textField_3.setColumns(10);
-		panel_1.add(textField_3);
+		textFieldNomCanal = new JTextField();
+		textFieldNomCanal.setEditable(false);
+		textFieldNomCanal.setColumns(10);
+		panel_1.add(textFieldNomCanal);
 		
 		JLabel label_6 = new JLabel("Privacidad");
 		panel_1.add(label_6);
@@ -173,6 +189,14 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 		tableSeguidores = new JTable();
 		panel_5.add(tableSeguidores);
 		
+		//CARGAR NICK
+		String[] nickUsuario = controlUsr.listarNicknamesUsuarios();
+		 for(int i=0; i<nickUsuario.length;i++){
+			 comboBoxNick.addItem(nickUsuario[i]);
+	     }
+		 //.....//
+		
 	}
+	
 
 }

@@ -42,6 +42,7 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 	 * @param iCU 
 	 */
 	public AltaUsuarioInternalFrame(IUsuarioCtrl iCU) {
+		setIconifiable(true);
 		controlUsr = iCU;
 		
 		setTitle("Alta Usuario");
@@ -94,7 +95,7 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 		JPanel datosCanalPanel = new JPanel();
 		datosCanalPanel.setBorder(new TitledBorder(null, "Datos Canal", TitledBorder.CENTER, TitledBorder.TOP, null, null));
 		getContentPane().add(datosCanalPanel);
-		datosCanalPanel.setLayout(new GridLayout(0, 2, 0, 0));
+		datosCanalPanel.setLayout(new GridLayout(0, 2, 2, 5));
 		
 		JLabel lblNombre = new JLabel("Nombre");
 		datosCanalPanel.add(lblNombre);
@@ -154,7 +155,7 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 				
 				nom = textFieldNombre.getText();
 				ape = txtApellido.getText();
-				nac = pasarFechaDT(dateChooser.getDate());
+				nac = new DtFecha(dateChooser.getDate());
 				
 				nomCanal = textFieldNombreC.getText();
 				descCanal = editorPaneDesc.getText();
@@ -181,10 +182,7 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 		panel.add(btnCrear);
 
 	}
-	private DtFecha pasarFechaDT(Date fecha){
-		DtFecha fechaDt = new DtFecha(fecha.getDay(), fecha.getMonth(), fecha.getYear());
-		return fechaDt;
-	}
+	
 	private void limpiar(){
 		textFieldNick.setText("");
 		textFieldEmail.setText("");
