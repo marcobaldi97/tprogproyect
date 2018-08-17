@@ -40,7 +40,7 @@ public class DtUsuario {
 	public DtFecha getFecha_nacimiento() {
 		return fecha_nacimiento;
 	}
-	
+
 	public String getFoto() {
 		return foto;
 	}
