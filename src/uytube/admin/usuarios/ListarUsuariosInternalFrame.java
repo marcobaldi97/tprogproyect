@@ -13,6 +13,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JScrollPane;
 
 public class ListarUsuariosInternalFrame extends JInternalFrame {
 	/**
@@ -30,10 +31,13 @@ public class ListarUsuariosInternalFrame extends JInternalFrame {
 		setResizable(true);
 		setBounds(100, 100, 286, 292);
 		
+	
+		
+		JScrollPane scrollPane = new JScrollPane();
+		getContentPane().add(scrollPane);
+		
 		JList listUsuarios = new JList();
-		listUsuarios.setBorder(new EmptyBorder(0, 0, 0, 0));
-		listUsuarios.setToolTipText("Usuarios");
-		listUsuarios.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		scrollPane.setViewportView(listUsuarios);
 		
 		//CARGAR USUARIOS
 		String[] usr = controlUsr.listarNicknamesUsuarios();
@@ -45,8 +49,6 @@ public class ListarUsuariosInternalFrame extends JInternalFrame {
 	    	  model.addElement(usr[i]);
 	     }
 	    
-		getContentPane().add(listUsuarios, BorderLayout.CENTER);
-		
 		JPanel panel = new JPanel();
 		getContentPane().add(panel, BorderLayout.NORTH);
 		
