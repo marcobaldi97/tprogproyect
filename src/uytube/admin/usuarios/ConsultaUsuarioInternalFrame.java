@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
+import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
@@ -28,6 +29,8 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import com.toedter.components.JLocaleChooser;
+import javax.swing.JList;
+import javax.swing.ListSelectionModel;
 
 
 public class ConsultaUsuarioInternalFrame extends JInternalFrame {
@@ -37,14 +40,13 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 	private JTextField textFieldNomCanal;
 	private JTextField textField_4;
 	private JTextField textField_5;
-	private JTable tableSeguidos;
-	private JTable tableSeguidores;
 	private JTextPane textPaneDesc;
 	private JComboBox comboBoxVideos;
 	private JComboBox comboBoxListas;
 	private IUsuarioCtrl controlUsr;
 	JDateChooser dateChooser;
 	private JTextField textFieldPrivacidad;
+	private JTextField textFieldCat;
 	/**
 	 * Create the frame.
 	 * @param iCU 
@@ -122,7 +124,7 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 		JPanel panelDCanal = new JPanel();
 		panelDCanal.setBorder(new TitledBorder(null, "Datos canal", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		getContentPane().add(panelDCanal);
-		panelDCanal.setLayout(new GridLayout(3, 2, 2, 5));
+		panelDCanal.setLayout(new GridLayout(0, 2, 2, 5));
 		
 		JLabel label_5 = new JLabel("Nombre");
 		panelDCanal.add(label_5);
@@ -150,6 +152,14 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 		textPaneDesc = new JTextPane();
 		scrollPane.setViewportView(textPaneDesc);
 		textPaneDesc.setEditable(false);
+		
+		JLabel lblCategoria = new JLabel("Categoria");
+		panelDCanal.add(lblCategoria);
+		
+		textFieldCat = new JTextField();
+		textFieldCat.setEditable(false);
+		panelDCanal.add(textFieldCat);
+		textFieldCat.setColumns(10);
 		
 		JPanel panelDVideo = new JPanel();
 		panelDVideo.setBorder(new TitledBorder(null, "Datos video", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -205,16 +215,24 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 		getContentPane().add(panelSeguidos);
 		panelSeguidos.setLayout(new GridLayout(1, 0, 0, 0));
 		
-		tableSeguidos = new JTable();
-		panelSeguidos.add(tableSeguidos);
+		JScrollPane scrollPane_1 = new JScrollPane();
+		panelSeguidos.add(scrollPane_1);
+		
+		JList listSeguidos = new JList();
+		listSeguidos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		scrollPane_1.setViewportView(listSeguidos);
 		
 		JPanel panelSeguidores = new JPanel();
 		panelSeguidores.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Seguidores", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		getContentPane().add(panelSeguidores);
 		panelSeguidores.setLayout(new GridLayout(1, 0, 0, 0));
 		
-		tableSeguidores = new JTable();
-		panelSeguidores.add(tableSeguidores);
+		JScrollPane scrollPane_2 = new JScrollPane();
+		panelSeguidores.add(scrollPane_2);
+		
+		JList listSeguidores = new JList();
+		listSeguidores.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		scrollPane_2.setViewportView(listSeguidores);
 		
 		//CARGAR NICK
 		String[] nickUsuario = controlUsr.listarNicknamesUsuarios();
@@ -252,6 +270,16 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 		for(int e=0; e<nomListas.length;e++){
 			 comboBoxListas.addItem(nomListas[e]);
 		}*/
+		//CARGAR SEGUIDOS
+	/*	String[] usr = controlUsr.listarUsuarios;
+				
+		DefaultListModel model=new DefaultListModel();
+		listUsuarios.setModel(model);
+			  
+		for(int i=0; i<usr.length;i++){
+			model.addElement(usr[i]);
+		}
+		*/
 	}
 	 private void limpiar(){
 		 textFieldEmail.setText("");
@@ -263,5 +291,6 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 			textFieldPrivacidad.setText("");
 			
 			textPaneDesc.setText("");
+			textFieldCat.setText("");
 	 }
 }
