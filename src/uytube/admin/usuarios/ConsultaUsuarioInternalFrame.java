@@ -15,6 +15,7 @@ import com.toedter.calendar.JDateChooser;
 
 import uytube.logica.DtCanal;
 import uytube.logica.DtUsuario;
+import uytube.logica.DtVideo;
 import uytube.logica.IUsuarioCtrl;
 
 
@@ -174,7 +175,8 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				String video = (String)comboBoxVideos.getSelectedItem();
 				if(video != " "){
-					//pedir Dt
+					//crear dtVideo
+					//DtVideo dtVideo = new DtVideo();
 					
 					//DtVideo dtVideo = 
 					//cargar datos video

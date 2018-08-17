@@ -11,6 +11,7 @@ import javax.swing.border.EmptyBorder;
 import uytube.logica.Factory;
 import uytube.logica.IUsuarioCtrl;
 //import presentacion.CrearUsuario;
+import uytube.logica.IVideoCtrl;
 
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
@@ -34,6 +35,7 @@ public class adminPrincipal extends JFrame {
 	private CrearListaInternalFrame crearListIFrame;
 
 	private IUsuarioCtrl ICU;
+	private IVideoCtrl ICV;
 
 	/**
 	 * Launch the application.
@@ -57,7 +59,8 @@ public class adminPrincipal extends JFrame {
 	public adminPrincipal() {
 		 Factory fabrica = Factory.getInstance();
 	     ICU = fabrica.getIUsuarioCtrl();
-	        
+	       
+	     
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
