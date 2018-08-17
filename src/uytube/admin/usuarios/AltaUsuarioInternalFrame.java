@@ -23,8 +23,11 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import com.toedter.calendar.JDateChooser;
 
+import uytube.logica.DtCategoria;
 import uytube.logica.DtFecha;
 import uytube.logica.IUsuarioCtrl;
+import uytube.logica.IVideoCtrl;
+
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
@@ -44,7 +47,7 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 	 * Create the frame.
 	 * @param iCU 
 	 */
-	public AltaUsuarioInternalFrame(IUsuarioCtrl iCU) {
+	public AltaUsuarioInternalFrame(IUsuarioCtrl iCU,IVideoCtrl iCV) {
 		setResizable(true);
 		setIconifiable(true);
 		controlUsr = iCU;
@@ -129,7 +132,7 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 		datosCanalPanel.add(lblCategoria);
 		
 		JComboBox comboBoxCat = new JComboBox();
-		comboBoxCat.setModel(new DefaultComboBoxModel(new String[] {"prueba"}));
+		comboBoxCat.setModel(new DefaultComboBoxModel(new String[] {""}));
 		comboBoxCat.setEditable(true);
 		datosCanalPanel.add(comboBoxCat);
 		
@@ -187,6 +190,14 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 			}
 		});
 		panel.add(btnCrear);
+		
+		//CARGAR CATEGORIAS
+        DtCategoria[] set_cat=iCV.listarCategorias();
+        
+        
+        for(int i=0; i<set_cat.length;i++){
+             comboBoxCat.addItem(set_cat[i].getNombre());
+        }
 
 	}
 	
