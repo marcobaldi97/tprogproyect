@@ -64,8 +64,8 @@ public class adminPrincipal extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
-
+		setExtendedState(JFrame.MAXIMIZED_BOTH);
+		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 
@@ -135,7 +135,7 @@ public class adminPrincipal extends JFrame {
 		JMenuItem mntmCrear = new JMenuItem("Crear ");
 		mntmCrear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				crearListIFrame = new CrearListaInternalFrame();
+				crearListIFrame = new CrearListaInternalFrame(ICU);
 				contentPane.setLayout(null);
 			    contentPane.add(crearListIFrame);
 			    crearListIFrame.setVisible(true);	
