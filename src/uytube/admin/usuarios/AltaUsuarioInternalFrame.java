@@ -25,6 +25,8 @@ import com.toedter.calendar.JDateChooser;
 
 import uytube.logica.DtFecha;
 import uytube.logica.IUsuarioCtrl;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 
 
 public class AltaUsuarioInternalFrame extends JInternalFrame {
@@ -36,12 +38,14 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 	private JTextField textFieldNombre;
 	private JTextField txtApellido;
 	private JEditorPane editorPaneDesc = new JEditorPane();
+	private JDateChooser dateChooser;
 	
 	/**
 	 * Create the frame.
 	 * @param iCU 
 	 */
 	public AltaUsuarioInternalFrame(IUsuarioCtrl iCU) {
+		setResizable(true);
 		setIconifiable(true);
 		controlUsr = iCU;
 		
@@ -89,7 +93,7 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 		JLabel lblFechaNac = new JLabel("Fecha Nac.");
 		datosUsuario.add(lblFechaNac);
 		
-		JDateChooser dateChooser = new JDateChooser();
+		dateChooser = new JDateChooser();
 		datosUsuario.add(dateChooser);
 		
 		JPanel datosCanalPanel = new JPanel();
@@ -107,8 +111,12 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 		JLabel lblDescripcion = new JLabel("Descripcion");
 		datosCanalPanel.add(lblDescripcion);
 		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		datosCanalPanel.add(scrollPane);
+		
 		editorPaneDesc = new JEditorPane();
-		datosCanalPanel.add(editorPaneDesc);
+		scrollPane.setViewportView(editorPaneDesc);
 		
 		JLabel lblPrivacidad = new JLabel("Privacidad");
 		datosCanalPanel.add(lblPrivacidad);
@@ -156,7 +164,6 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 				nom = textFieldNombre.getText();
 				ape = txtApellido.getText();
 				nac = new DtFecha(dateChooser.getDate());
-				
 				nomCanal = textFieldNombreC.getText();
 				descCanal = editorPaneDesc.getText();
 				if (comboBoxPrivacidad.getSelectedIndex()==0){ privacidad=true;}
@@ -190,6 +197,8 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 		txtApellido.setText("");
 		editorPaneDesc.setText("");
 		textFieldNombreC.setText("");
+		dateChooser.setDate(null);
+
 	}
 	
 }

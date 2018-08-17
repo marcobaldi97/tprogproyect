@@ -13,8 +13,8 @@ public class DtFecha {
 		mes = m;
 		anio = a;
 	}
-	public DtFecha(Date fecha){
-		DtFecha fechaDt = new DtFecha(fecha.getDay(), fecha.getMonth(), fecha.getYear());
+	public DtFecha(Date f){
+		fecha = f;
 	}
 	
 	public int getDia() {
@@ -27,6 +27,9 @@ public class DtFecha {
 	
 	public int getAnio() {
 		return anio;
+	}
+	public Date getFechaNac(){
+		return fecha;
 	}
 	
 	public Date pasarDTaDate(){
