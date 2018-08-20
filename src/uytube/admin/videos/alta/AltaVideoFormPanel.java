@@ -15,7 +15,7 @@ import javax.swing.JTextField;
 
 public final class AltaVideoFormPanel {
 	private final JPanel mainPanel = new JPanel();
-	private final BoxLayout panelLayout = new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS);
+	private final BoxLayout panelLayout = new BoxLayout(mainPanel, BoxLayout.Y_AXIS);
 	private final JTextField userNicknameTextField = new JTextField();
 	private final JTextField videoNameTextField = new JTextField();
 	private final JTextField videoURLTextField = new JTextField();

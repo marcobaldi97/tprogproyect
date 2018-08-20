@@ -7,6 +7,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
 import uytube.admin.videos.alta.AltaVideoMenuItem;
+import uytube.admin.videos.consultar.ConsultarVideoMenuItem;
 import uytube.admin.videos.modificar.ModificarVideoMenuItem;;
 
 public final class VideosMenu {
@@ -34,9 +35,11 @@ public final class VideosMenu {
 
 	private void initializeMenuItems() {
 		AltaVideoMenuItem altaVideoMenuItem = new AltaVideoMenuItem(container);
+		ConsultarVideoMenuItem consultarVideoMenuItem = new ConsultarVideoMenuItem(container);
 		ModificarVideoMenuItem modificarVideoMenuItem = new ModificarVideoMenuItem(container);
 
 		menuItems.add(altaVideoMenuItem.getMenuItem());
+		menuItems.add(consultarVideoMenuItem.getMenuItem());
 		menuItems.add(modificarVideoMenuItem.getMenuItem());
 	}
 

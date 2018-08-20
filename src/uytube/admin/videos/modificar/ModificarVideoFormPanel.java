@@ -1,8 +1,10 @@
 package uytube.admin.videos.modificar;
 
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BoxLayout;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
@@ -13,36 +15,35 @@ import javax.swing.GroupLayout.Group;
 
 public final class ModificarVideoFormPanel {
 	private final JPanel panel = new JPanel();
-	private final GroupLayout panelLayout = new GroupLayout(panel);
-	private final String videoName;
-	private final JTextField userNicknameTextField = new JTextField();
+	private final BoxLayout panelLayout = new BoxLayout(panel, BoxLayout.Y_AXIS);
+	private final Integer videoId;
 	private final JTextField videoNameTextField = new JTextField();
 	private final JTextField videoURLTextField = new JTextField();
+	private final JTextField videoDescriptionTextField = new JTextField();
+	private final JTextField videoDuracionTextField = new JTextField();
 
-	private final JButton acceptButton = new JButton("Aceptar");
+	private final JButton editButton = new JButton("Editar");
 	private final JButton cancelButton = new JButton("Cancelar");
 
 	private final JInternalFrame internalFrameContainer;
 
-	public ModificarVideoFormPanel(final JInternalFrame internalFrameContainer, final String videoName) {
+	public ModificarVideoFormPanel(final JInternalFrame internalFrameContainer, final Integer videoId) {
 		this.internalFrameContainer = internalFrameContainer;
-		this.videoName = videoName;
+		this.videoId = videoId;
 
 		initializePanel();
-
-		panel.add(userNicknameTextField);
 	}
 
 	private void initializePanel() {
-		initializeAcceptButton();
+		initializeEditButton();
 		initializeCancelButton();
 		initializePanelLayout();
 
 		panel.setLayout(panelLayout);
 	}
 
-	private void initializeAcceptButton() {
-		acceptButton.addActionListener(new ActionListener() {
+	private void initializeEditButton() {
+		editButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				editVideo();
@@ -51,10 +52,11 @@ public final class ModificarVideoFormPanel {
 	}
 
 	private void editVideo() {
-		final String userNickname = userNicknameTextField.getText();
+		final String videoName = videoNameTextField.getText();
 		final String videoURL = videoURLTextField.getText();
+		final String videoDescription = videoDescriptionTextField.getText();
 
-		// videoCtrl.createVideo(userNickname, videoName, videoUrl);
+		// videoCtrl.editVideo(videoId, videoName, videoURL, videoDescription);
 	}
 
 	private void initializeCancelButton() {
@@ -71,25 +73,29 @@ public final class ModificarVideoFormPanel {
 	}
 
 	private void initializePanelLayout() {
-		panelLayout.setAutoCreateContainerGaps(true);
-		panelLayout.setAutoCreateGaps(true);
-
-		final JLabel userNicknameLabel = new JLabel("Nickname del autor");
 		final JLabel videoNameLabel = new JLabel("Nombre del video");
+		panel.add(videoNameLabel);
+		panel.add(videoNameTextField);
+
 		final JLabel videoURLLabel = new JLabel("URL del video");
+		panel.add(videoURLLabel);
+		panel.add(videoURLTextField);
 
-		final Group horizontalGroup = panelLayout.createParallelGroup().addComponent(userNicknameLabel)
-				.addComponent(userNicknameTextField).addComponent(videoNameLabel).addComponent(videoNameTextField)
-				.addComponent(videoURLLabel).addComponent(videoURLTextField)
-				.addGroup(panelLayout.createSequentialGroup().addComponent(acceptButton).addComponent(cancelButton));
+		final JLabel videoDescriptionLabel = new JLabel("Descripcion del video");
+		panel.add(videoDescriptionLabel);
+		panel.add(videoDescriptionTextField);
 
-		final Group verticalGroup = panelLayout.createSequentialGroup().addComponent(userNicknameLabel)
-				.addComponent(userNicknameTextField).addComponent(videoNameLabel).addComponent(videoNameTextField)
-				.addComponent(videoURLLabel).addComponent(videoURLTextField)
-				.addGroup(panelLayout.createParallelGroup().addComponent(acceptButton).addComponent(cancelButton));
+		final JLabel videoDurationLabel = new JLabel("Duracion del video");
+		panel.add(videoDurationLabel);
+		panel.add(videoDuracionTextField);
 
-		panelLayout.setHorizontalGroup(horizontalGroup);
-		panelLayout.setVerticalGroup(verticalGroup);
+		final JPanel buttonsPanel = new JPanel();
+		buttonsPanel.setLayout(new FlowLayout());
+
+		buttonsPanel.add(editButton);
+		buttonsPanel.add(cancelButton);
+
+		panel.add(buttonsPanel);
 	}
 
 	public JPanel getPanel() {

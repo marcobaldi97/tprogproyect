@@ -11,13 +11,13 @@ public final class ElegirAutorInternalFrame {
 
 	final ElegirAutorPanel elegirAutorPanel = new ElegirAutorPanel(internalFrame);
 
-	final ModificarVideoInternalFrame modificarVideoInternalFrame = new ModificarVideoInternalFrame(internalFrame);
-
 	private final Container container;
+	private final ModificarVideoInternalFrame modificarVideoInternalFrame;
 
 	public ElegirAutorInternalFrame(final Container container) {
 		this.container = container;
 		this.container.add(internalFrame);
+		this.modificarVideoInternalFrame = new ModificarVideoInternalFrame(this.container);
 
 		initializeInternalFrame();
 	}
@@ -44,7 +44,7 @@ public final class ElegirAutorInternalFrame {
 	}
 
 	private void openModificarVideoInternalFrame() {
-		final String selectedVideoId = elegirAutorPanel.getSelectedVideoId();
+		final Integer selectedVideoId = elegirAutorPanel.getSelectedVideoId();
 
 		modificarVideoInternalFrame.setVideo(selectedVideoId);
 		modificarVideoInternalFrame.show();

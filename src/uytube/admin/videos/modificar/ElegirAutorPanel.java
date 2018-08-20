@@ -5,22 +5,26 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import uytube.logica.DtVideo;
 
 public final class ElegirAutorPanel {
 	private final JPanel mainPanel = new JPanel();
-	private final BoxLayout panelLayout = new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS);
+	private final BoxLayout panelLayout = new BoxLayout(mainPanel, BoxLayout.Y_AXIS);
 	private final JTextField authorNicknameTextField = new JTextField();
 
-	private String selectedVideoName;
+	private Integer selectedVideoId;
 
 	private DtVideo[] videos = {};
+	private DefaultListModel<DtVideo> videoListModel = new DefaultListModel<DtVideo>();
 	private final JButton searchAuthorVideosButton = new JButton("Buscar");
 
 	private final JButton editButton = new JButton("Aceptar");
@@ -49,8 +53,17 @@ public final class ElegirAutorPanel {
 				final String authorNickname = authorNicknameTextField.getText();
 				// final DtVideo[] videos = controller.getVideos()
 				// this.videos = videos;
+				updateVideoList();
 			}
 		});
+	}
+
+	private void updateVideoList() {
+		videoListModel.clear();
+
+		for (DtVideo video : videos) {
+			videoListModel.addElement(video);
+		}
 	}
 
 	private void initializeCancelButton() {
@@ -66,12 +79,8 @@ public final class ElegirAutorPanel {
 		internalFrameContainer.dispose();
 	}
 
-	public void addVideoSelectedListener(VideoSelectedCallback callback) {
-		callback.perform();
-	}
-
-	public String getSelectedVideoId() {
-		return selectedVideoName;
+	public Integer getSelectedVideoId() {
+		return selectedVideoId;
 	}
 
 	private void initializePanelLayout() {
@@ -79,11 +88,10 @@ public final class ElegirAutorPanel {
 
 		mainPanel.add(autorNicknameLabel);
 		mainPanel.add(authorNicknameTextField);
+		mainPanel.add(searchAuthorVideosButton);
 
-		final JPanel autorButtonsPanel = new JPanel();
-		autorButtonsPanel.setLayout(new FlowLayout());
-
-		autorButtonsPanel.add(searchAuthorVideosButton);
+		final JList<DtVideo> videoList = new JList<DtVideo>(videoListModel);
+		mainPanel.add(new JScrollPane(videoList));
 
 		final JPanel buttonsPanel = new JPanel();
 		buttonsPanel.setLayout(new FlowLayout());

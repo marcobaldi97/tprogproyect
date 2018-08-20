@@ -1,13 +1,18 @@
 package uytube.admin.usuarios.listar;
 
 import java.awt.Container;
+import java.awt.ScrollPane;
 
 import javax.swing.JInternalFrame;
+import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+
+import uytube.logica.DtUsuario;
 
 public final class ListarUsuariosInternalFrame {
 	private final JInternalFrame internalFrame = new JInternalFrame();
-	private final JPanel listarUsuariosPanel = new JPanel();
+	private final JPanel mainPanel = new JPanel();
 
 	private final Container container;
 
@@ -25,17 +30,26 @@ public final class ListarUsuariosInternalFrame {
 		internalFrame.setResizable(true);
 		internalFrame.setSize(330, 300);
 
+		initializeMainPanel();
 		addContentToInternalFrame();
 	}
 
-	private void addContentToInternalFrame() {
-		final JPanel listarUsuariosPanel = getListarUsuariosPanel();
+	private void initializeMainPanel() {
+		final JList<DtUsuario> userList = new JList<DtUsuario>(getUsers());
 
-		internalFrame.add(listarUsuariosPanel);
+		final JScrollPane scrollPane = new JScrollPane(userList);
+
+		mainPanel.add(scrollPane);
 	}
 
-	private JPanel getListarUsuariosPanel() {
-		return listarUsuariosPanel;
+	private DtUsuario[] getUsers() {
+		final DtUsuario[] users = {};
+
+		return users;
+	}
+
+	private void addContentToInternalFrame() {
+		internalFrame.add(mainPanel);
 	}
 
 	public void show() {

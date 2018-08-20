@@ -6,7 +6,7 @@ import javax.swing.JInternalFrame;
 
 public final class ModificarVideoInternalFrame {
 	private final JInternalFrame internalFrame = new JInternalFrame();
-	private String videoName;
+	private Integer videoId;
 
 	private final Container container;
 
@@ -22,19 +22,19 @@ public final class ModificarVideoInternalFrame {
 		internalFrame.setTitle("Alta Video");
 		internalFrame.setClosable(true);
 		internalFrame.setResizable(true);
-		internalFrame.pack();
+		internalFrame.setSize(330, 500);
 
 		addContentToInternalFrame();
 	}
 
 	private void addContentToInternalFrame() {
-		ModificarVideoFormPanel altaVideoFormPanel = new ModificarVideoFormPanel(internalFrame, videoName);
+		ModificarVideoFormPanel altaVideoFormPanel = new ModificarVideoFormPanel(internalFrame, videoId);
 
 		internalFrame.add(altaVideoFormPanel.getPanel());
 	}
 
-	public void setVideo(final String videoName) {
-		this.videoName = videoName;
+	public void setVideo(final Integer videoId) {
+		this.videoId = videoId;
 	}
 
 	public void show() {
