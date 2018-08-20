@@ -6,4 +6,10 @@ public class PorDefecto extends ListaReproduccion{
 		super(n);
 	}
 
+	@Override
+	public DtListaReproduccion verDetallesListareproduccion() {
+		DtListaReproduccion dt = new DtListaReproduccion(this); 
+		return dt;
+	}
+
 }

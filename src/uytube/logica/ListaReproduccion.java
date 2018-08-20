@@ -17,10 +17,7 @@ public abstract class ListaReproduccion {
 		return nombre;
 	}
 	
-	public DtListaReproduccion verDetallesListareproduccion() {
-		DtListaReproduccion dt = new DtListaReproduccion(this); 
-		return dt;
-	}
+	public abstract DtListaReproduccion verDetallesListareproduccion();
 	
 	public String[] listarVideos(){
 		String[] nombreVideos = new String[videos.size()];
