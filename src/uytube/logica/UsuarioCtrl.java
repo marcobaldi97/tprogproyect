@@ -5,6 +5,15 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 	private UsuarioHandler usuarioh;
 	private SystemHandler systemh;
 	
+	public Boolean memberListaReproduccionDefecto(String nombreLista) {
+		return systemh.memberListaReproduccionDefecto(nombreLista);
+	}
+	
+	public Boolean memberListaReproduccionPropia(String nickname,String nombreLista) {
+		Boolean flag = false;
+		return flag;
+	}
+	
 	private UsuarioCtrl() {
 		usuarioh = UsuarioHandler.getInstance();
 		systemh = SystemHandler.getInstance();
