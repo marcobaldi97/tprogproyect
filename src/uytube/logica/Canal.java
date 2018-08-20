@@ -41,9 +41,11 @@ public class Canal {
 		String[] nombresListas = new String[listasReproduccion.size()];
 		Integer contador = 0;
 		for(Map.Entry<String, ListaReproduccion> entry : listasReproduccion.entrySet()) {
-			String nom = entry.getValue().getNombre();
-			nombresListas[contador] = nom;
-			contador++;
+			if(entry.getValue() != null) {
+				String nom = entry.getValue().getNombre();
+				nombresListas[contador] = nom;
+				contador++;
+			}//Se agregó esta linea para tratar de evitar los punteros nulos.
 		}
 		return nombresListas;
 	}
@@ -61,6 +63,7 @@ public class Canal {
 		CategoriaHandler ch = CategoriaHandler.getInstance();
 		cate = ch.find(catE);
 		videos = new HashMap<String,Video>();
+		listasReproduccion = new HashMap<String,ListaReproduccion>();
 		SystemHandler sh = SystemHandler.getInstance();
 		DtListaReproduccion[] listasDefault = sh.obtenerListasReproduccion();
 		for(int index = 0;index<listasDefault.length;index++){
