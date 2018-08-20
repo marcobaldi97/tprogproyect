@@ -26,12 +26,18 @@ public class SystemHandler {
 		listasDefault.put(dt.getNombre(), dt);
 	}
 	
+	
+	
 	public void removerListaDefault(String n) {
 		listasDefault.remove(n);
 	}
 	
 	public void memberListaDefault(DtListaReproduccion dt) {
 		listasDefault.containsKey(dt.getNombre());
+	}
+	
+	public Boolean memberListaReproduccionDefecto(String nombreLista) {
+		return listasDefault.containsKey(nombreLista);
 	}
 	
 	public DtListaReproduccion getLista(String n) {
