@@ -41,6 +41,7 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 			if (usu.memberListaReproduccionPropia(nombreL)){
 				foundName=true;
 			}
+			i++;
 		}
 		if(!foundName){
 			DtListaReproduccion listaNueva = new DtListaReproduccion(nombreL);
