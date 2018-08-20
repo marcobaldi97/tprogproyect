@@ -53,7 +53,7 @@ public class Categoria {
 		Integer contador=0;
 		for(Map.Entry<String, ListaReproduccion> iterator : LDR.entrySet()) 
 		{
-			res[contador]= new DtListaReproduccion(iterator.getValue());
+			res[contador]= iterator.getValue().verDetallesListareproduccion();
 			contador++;
 		}
 		return res;
