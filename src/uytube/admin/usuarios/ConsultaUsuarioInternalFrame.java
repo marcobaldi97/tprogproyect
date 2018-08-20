@@ -47,7 +47,7 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 	private IUsuarioCtrl controlUsr;
 	JDateChooser dateChooser;
 	private JTextField textFieldPrivacidad;
-	private JTextField textFieldCat;
+	private JTextField textFieldCatCanal;
 	/**
 	 * Create the frame.
 	 * @param iCU 
@@ -157,10 +157,10 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 		JLabel lblCategoria = new JLabel("Categoria");
 		panelDCanal.add(lblCategoria);
 		
-		textFieldCat = new JTextField();
-		textFieldCat.setEditable(false);
-		panelDCanal.add(textFieldCat);
-		textFieldCat.setColumns(10);
+		textFieldCatCanal = new JTextField();
+		textFieldCatCanal.setEditable(false);
+		panelDCanal.add(textFieldCatCanal);
+		textFieldCatCanal.setColumns(10);
 		
 		JPanel panelDVideo = new JPanel();
 		panelDVideo.setBorder(new TitledBorder(null, "Datos video", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -258,6 +258,7 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 			textFieldPrivacidad.setText("Publico");
 		}
 		textPaneDesc.setText(usrCanal.getDescripcion());
+		textFieldCatCanal.setText(usrCanal.getCategoria().getNombre());
 		
 		//CARGAR VIDEOS
 		String[] nomVideos = controlUsr.listarVideosCanal(nickU);
@@ -267,11 +268,11 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 		}
 		//CARGAR LISTAS
 		//si esta vacio da error!!!!
-		//String[] nomListas = controlUsr.listarLDRdeUsuario(nickU);
-	/*	comboBoxListas.addItem(" ");
+		String[] nomListas = controlUsr.listarLDRdeUsuario(nickU);
+		comboBoxListas.addItem(" ");
 		for(int e=0; e<nomListas.length;e++){
 			 comboBoxListas.addItem(nomListas[e]);
-		}*/
+		}
 		//CARGAR SEGUIDOS
 	/*	String[] usr = controlUsr.listarUsuarios;
 				
@@ -293,6 +294,6 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 			textFieldPrivacidad.setText("");
 			
 			textPaneDesc.setText("");
-			textFieldCat.setText("");
+			textFieldCatCanal.setText("");
 	 }
 }
