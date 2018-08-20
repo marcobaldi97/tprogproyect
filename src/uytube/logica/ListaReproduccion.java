@@ -49,5 +49,15 @@ public abstract class ListaReproduccion {
 		videos.put(v.getIDVideo(), v);
 		refrescarCategorias();
 	};
+	
+	public DtCategoria[] getInfoCategorias(){
+		DtCategoria[] res=new DtCategoria[categorias.size()];
+		int i=0;
+		for(Map.Entry<String,Categoria> entry:categorias.entrySet()){
+			res[i]=new DtCategoria(entry.getValue());
+			i++;
+		}
+		return res;
+	}
 
 }
