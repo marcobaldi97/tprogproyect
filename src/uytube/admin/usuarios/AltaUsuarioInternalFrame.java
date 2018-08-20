@@ -43,6 +43,7 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 	private JEditorPane editorPaneDesc = new JEditorPane();
 	private JDateChooser dateChooser;
 	private JComboBox comboBoxCat;
+	private JLabel aviso;
 	
 	/**
 	 * Create the frame.
@@ -56,7 +57,7 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 		setTitle("Alta Usuario");
 		setMaximizable(true);
 		setClosable(true);
-		setBounds(100, 100, 319, 373);
+		setBounds(100, 100, 319, 406);
 		FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER, 5, 5);
 		getContentPane().setLayout(flowLayout);
 		
@@ -134,7 +135,6 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 		
 		comboBoxCat = new JComboBox();
 		comboBoxCat.setModel(new DefaultComboBoxModel(new String[] {""}));
-		comboBoxCat.setEditable(true);
 		datosCanalPanel.add(comboBoxCat);
 		
 	    
@@ -142,17 +142,6 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 		JPanel panel = new JPanel();
 		getContentPane().add(panel);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
-		
-		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				 setVisible(false);
-			}
-		});
-		panel.add(btnCancelar);
-		
-		JLabel label = new JLabel("             ");
-		panel.add(label);
 		
 		JButton btnCrear = new JButton("Crear");
 		btnCrear.addActionListener(new ActionListener() {
@@ -175,22 +164,44 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 			
 				catE = (String) comboBoxCat.getSelectedItem();
 				
-				//verificar si esta todo correcto
+				
 				//VERIFICAR DISPONIBILIDAD DE NICK Y EMAIL
 				boolean disponible = controlUsr.verificarDispUsuario(nick, email);
 				//crear
-				if(disponible==true){
+				if(disponible && verificarCampos()){
 					controlUsr.nuevoUsuario(nick,nom, ape, email, nac,"foto",nomCanal,descCanal,privacidad, catE) ;
-					System.out.println("OK");
+					aviso.setText("Usuario creado con exito");
 					limpiar();
-				}else{
+				}else if(!disponible){
 					//avisar que no se pudo crear
-					System.out.println("Ya existe el usuario");
-					limpiar();
+					aviso.setText("Ya existe el usuario");
+					//limpiar();
 				}
 			}
 		});
 		panel.add(btnCrear);
+		
+		JLabel label = new JLabel("             ");
+		panel.add(label);
+		
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				dispose();
+			}
+		});
+		panel.add(btnCancelar);
+		
+		JPanel panel_1 = new JPanel();
+		getContentPane().add(panel_1);
+		panel_1.setLayout(new GridLayout(0, 1, 0, 0));
+		
+		JLabel label_1 = new JLabel("                                                     ");
+		panel_1.add(label_1);
+		
+		aviso = new JLabel("");
+		panel_1.add(aviso);
 		
 		//CARGAR CATEGORIAS
         DtCategoria[] set_cat=iCV.listarCategorias();
@@ -202,6 +213,14 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 
 	}
 	
+	private Boolean verificarCampos(){
+		if(textFieldNick.getText().isEmpty() || textFieldEmail.getText().isEmpty()|| textFieldNombre.getText().isEmpty()
+				|| txtApellido.getText().isEmpty() || dateChooser.getDate()==null || textFieldNombreC.getText().isEmpty()){
+			aviso.setText("Campos sin completar");
+			return false;
+		}else{return true;}
+		
+	}
 	private void limpiar(){
 		textFieldNick.setText("");
 		textFieldEmail.setText("");

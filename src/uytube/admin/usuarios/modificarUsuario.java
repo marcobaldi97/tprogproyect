@@ -1,6 +1,7 @@
 package uytube.admin.usuarios;
 
 import java.awt.EventQueue;
+import uytube.admin.videos.modificar.*;
 
 import javax.swing.JInternalFrame;
 import javax.swing.BoxLayout;
@@ -32,14 +33,18 @@ import javax.swing.UIManager;
 import java.awt.Color;
 import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDateChooser;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JRadioButton;
+import javax.swing.ButtonGroup;
 
 public class modificarUsuario extends JInternalFrame {
 	private JTextField textFieldNombre;
 	private JTextField textFieldApellido;
 	private JTextField textFieldNomC;
 	private JTextField textFieldEmail;
-	private JTextField textField;
 	private JTextField textField_1;
+	private final ButtonGroup buttonGroup = new ButtonGroup();
 
 	/**
 	 * Launch the application.
@@ -109,11 +114,30 @@ public class modificarUsuario extends JInternalFrame {
 		JDateChooser dateChooser = new JDateChooser();
 		panelDatosUsuario.add(dateChooser);
 		
-		JButton btnCancelar_1 = new JButton("Cancelar");
-		panelDatosUsuario.add(btnCancelar_1);
-		
 		JButton btnModificar = new JButton("Modificar");
+		btnModificar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				textFieldNombre.setEditable(true);
+				textFieldApellido.setEditable(true);
+				dateChooser.enable(true);
+				btnModificar.setText("Guardar");
+				if(btnModificar.getText()=="Guardar"){
+					
+				}
+			}
+		});
 		panelDatosUsuario.add(btnModificar);
+		
+		JButton btnCancelar_1 = new JButton("Cancelar");
+		btnCancelar_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				textFieldNombre.setEditable(false);
+				textFieldApellido.setEditable(false);
+				dateChooser.enable(false);
+				btnModificar.setText("Modificar");
+			}
+		});
+		panelDatosUsuario.add(btnCancelar_1);
 		
 		JPanel panelDatosCanal = new JPanel();
 		panelDatosCanal.setBorder(new TitledBorder(null, "Datos canal", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -131,9 +155,17 @@ public class modificarUsuario extends JInternalFrame {
 		JLabel lblPrivacidad = new JLabel("Privacidad");
 		panelDatosCanal.add(lblPrivacidad);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"Privado", "Publico"}));
-		panelDatosCanal.add(comboBox_1);
+		JRadioButton rdbtnPrivado = new JRadioButton("Privado");
+		rdbtnPrivado.setSelected(true);
+		buttonGroup.add(rdbtnPrivado);
+		panelDatosCanal.add(rdbtnPrivado);
+		
+		JLabel label_1 = new JLabel("");
+		panelDatosCanal.add(label_1);
+		
+		JRadioButton rdbtnPublico = new JRadioButton("Publico");
+		buttonGroup.add(rdbtnPublico);
+		panelDatosCanal.add(rdbtnPublico);
 		
 		JLabel lblDescripicin = new JLabel("Descripici\u00F3n");
 		panelDatosCanal.add(lblDescripicin);
@@ -156,15 +188,13 @@ public class modificarUsuario extends JInternalFrame {
 		JComboBox comboBox_NomVideo = new JComboBox();
 		panel.add(comboBox_NomVideo);
 		
-		JLabel label_1 = new JLabel("Categoria");
-		panel.add(label_1);
-		
-		textField = new JTextField();
-		textField.setEditable(false);
-		textField.setColumns(10);
-		panel.add(textField);
-		
 		JButton button = new JButton("Modificar");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//abrir videos.modificar
+				
+			}
+		});
 		panel.add(button);
 		
 		JPanel panel_1 = new JPanel();
