@@ -26,7 +26,7 @@ public interface IUsuarioCtrl {
 	
 	public abstract Boolean verificarDispUsuario(String nickU, String email);
 	
-	public abstract void nuevoUsuario(String nick,String nom, String ape, String e, DtFecha fn, String fo,String nombreCanal,Boolean privacidadE, String catE) ;
+	public abstract void nuevoUsuario(String nick,String nom, String ape, String e, DtFecha fn, String fo, String nombreCanal, String desc,Boolean privacidadE, String catE) ;
 	
 	public abstract DtListaReproduccion infoAdicLDR(String nickU, String nombreL) ;
 	

@@ -84,8 +84,8 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 		return !flag;
 	}//true si está disponible, false si ya está ocupado
 	
-	public void nuevoUsuario(String nick,String nom, String ape, String e, DtFecha fn, String fo,String nombreCanal,Boolean privacidadE, String catE) {
-		Usuario u = new Usuario(nick,nom,ape,e,fn,fo,nombreCanal,privacidadE,catE);
+	public void nuevoUsuario(String nick,String nom, String ape, String e, DtFecha fn, String fo,String nombreCanal,String desc,Boolean privacidadE, String catE) {
+		Usuario u = new Usuario(nick,nom,ape,e,fn,fo,nombreCanal,desc,privacidadE,catE);
 		usuarioh.aniadirUsuario(u);
 	}
 	
