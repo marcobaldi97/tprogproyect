@@ -18,7 +18,11 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 		usuarioh = UsuarioHandler.getInstance();
 		systemh = SystemHandler.getInstance();
 	}
-	
+	public Boolean memberListaReproduccionPropia(String nickU, String nombreLista){
+		UsuarioHandler uh=UsuarioHandler.getInstance();
+		Usuario u=uh.find(nickU);
+		return u.memberListaReproduccionPropia(nombreLista);
+	}
 	public static UsuarioCtrl getInstance() {
 		if (instance == null) instance = new UsuarioCtrl();
 		return instance;
@@ -112,5 +116,6 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 		Usuario u = usuarioh.find(nickU);
 		return u.mostrarInfoCanal();
 	}
+	
 	
 }

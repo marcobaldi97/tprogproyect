@@ -34,6 +34,10 @@ public interface IUsuarioCtrl {
 	
 	public abstract DtCanal mostrarInfoCanal(String nickU);
 	
-	public Boolean memberListaReproduccionDefecto(String nombreLista);
+
+	public abstract Boolean memberListaReproduccionDefecto(String nombreLista);
+
+	public abstract Boolean memberListaReproduccionPropia(String nickU, String nombreLista);
+
 
 }

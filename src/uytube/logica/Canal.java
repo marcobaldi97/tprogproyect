@@ -141,5 +141,8 @@ public class Canal {
 		ListaReproduccion lr=listasReproduccion.get(nombreLDR);
 		lr.removerVideo(id_video);
 	}
+	public Boolean memberListaReproduccionPropia(String nombreLista) {
+		return listasReproduccion.containsKey(nombreLista);
+	}
 
 }
