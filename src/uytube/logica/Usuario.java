@@ -13,7 +13,7 @@ public class Usuario {
     private Map<String,Usuario> usuariosQueSigue;
     private Map<String,Usuario> usuariosQueLeSiguen;
 	
-	public Usuario(String nick,String nom, String ape, String e, DtFecha fn, String fo,String nombreCanal,Boolean privacidadE, String catE) {
+	public Usuario(String nick,String nom, String ape, String e, DtFecha fn, String fo,String nombreCanal,String desc,Boolean privacidadE, String catE) {
 		// TODO Auto-generated constructor stub
 		nickname = nick;
 		nombre = nom;
@@ -23,7 +23,7 @@ public class Usuario {
 		foto = fo;
 		usuariosQueSigue = new HashMap<String, Usuario>();
 		usuariosQueLeSiguen = new HashMap<String, Usuario>();
-		this.createCanal(nombreCanal, "", privacidadE, catE);;
+		this.createCanal(nombreCanal, desc, privacidadE, catE);;
 		
 	}
 	
