@@ -5,6 +5,9 @@ import java.awt.EventQueue;
 import javax.swing.JInternalFrame;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
+
+import uytube.logica.IUsuarioCtrl;
+
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -30,6 +33,7 @@ public class AgregarVideoListaInternalFrame extends JInternalFrame {
 
 	/**
 	 * Create the frame.
+	 * @param iCU 
 	 */
 	public AgregarVideoListaInternalFrame() {
 		setTitle("Agregar video a lista de reproduccion");
