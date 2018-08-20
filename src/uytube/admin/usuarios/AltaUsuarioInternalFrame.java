@@ -179,7 +179,7 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 				boolean disponible = controlUsr.verificarDispUsuario(nick, email);
 				//crear
 				if(disponible==true){
-					controlUsr.nuevoUsuario(nick,nom, ape, email, nac,"foto",nomCanal,privacidad, catE) ;
+					controlUsr.nuevoUsuario(nick,nom, ape, email, nac,"foto",nomCanal,descCanal,privacidad, catE) ;
 					System.out.println("OK");
 					limpiar();
 				}else{

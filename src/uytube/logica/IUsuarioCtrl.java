@@ -33,7 +33,7 @@ public interface IUsuarioCtrl {
 	public abstract DtUsuario listarDatosUsuario(String nickU);
 	
 	public abstract DtCanal mostrarInfoCanal(String nickU);
-	
+
 	public abstract Boolean memberListaReproduccionDefecto(String nombreLista);
 
 	public abstract Boolean memberListaReproduccionPropia(String nickU, String nombreLista);
