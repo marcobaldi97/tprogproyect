@@ -6,7 +6,7 @@ public interface IUsuarioCtrl {
 	
 	public abstract String[] listarVideosCanal(String nickU) ;
 	
-	public abstract void nuevaListaPorDefecto(String nombreL) ;
+	public abstract boolean nuevaListaPorDefecto(String nombreL) ;
 	
 	public abstract void nuevaListaParticular(String nickU, String nombreL, Boolean privada) ;
 	

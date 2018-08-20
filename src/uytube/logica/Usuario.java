@@ -153,4 +153,9 @@ public class Usuario {
 		return canalPropio.memberListaReproduccionPropia(nombreLista);
 	}
 
+	public void nuevaListaPorDefecto(String nombreL) {
+		canalPropio.nuevaListaPorDefecto(nombreL);
+		
+	}
+
 }
