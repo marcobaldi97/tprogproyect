@@ -148,4 +148,9 @@ public class Usuario {
 		canalPropio.eliminarVideoLista(id_video,nombreLDR);
 	}
 
+	public Boolean memberListaReproduccionPropia(String nombreLista) {
+		
+		return canalPropio.memberListaReproduccionPropia(nombreLista);
+	}
+
 }
