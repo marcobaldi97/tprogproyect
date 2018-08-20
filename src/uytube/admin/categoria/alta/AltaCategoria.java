@@ -20,6 +20,7 @@ import org.eclipse.wb.swing.FocusTraversalOnArray;
 import java.awt.Component;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.SwingConstants;
 
 public class AltaCategoria extends JInternalFrame {
 	private JTextField textField;
@@ -52,15 +53,17 @@ public class AltaCategoria extends JInternalFrame {
 		setMaximizable(true);	
 		
 		JLabel aviso = new JLabel("");
+		aviso.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new GridLayout(0, 1, 0, 0));
 		
 		JPanel panel_1 = new JPanel();
 		getContentPane().add(panel_1);
-		panel_1.setLayout(new GridLayout(2, 2, 5, 5));
+		panel_1.setLayout(new GridLayout(0, 2, 5, 5));
 		
 		JLabel lblNombre = new JLabel("Nombre:");
+		lblNombre.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_1.add(lblNombre);
 		
 		textField_1 = new JTextField();
@@ -107,6 +110,7 @@ public class AltaCategoria extends JInternalFrame {
 			}
 		});
 		panel_1.add(btnCancelar);
+		panel_1.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{textField_1, btnAceptar, btnCancelar, lblNombre}));
 		
 		JPanel panel = new JPanel();
 		getContentPane().add(panel);
