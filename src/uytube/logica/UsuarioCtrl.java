@@ -32,9 +32,26 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 		return u.listarVideosCanal();
 	}
 	
-	public void nuevaListaPorDefecto(String nombreL) {
-		DtListaReproduccion listaNueva = new DtListaReproduccion(nombreL);
-		systemh.aniadirListaDefault(listaNueva);
+	public boolean nuevaListaPorDefecto(String nombreL) {
+		boolean foundName=false;
+		String[] nicks=usuarioh.listarNicknamesUsuarios();
+		int i=0;
+		while(!foundName && i<nicks.length){
+			Usuario usu=usuarioh.find(nicks[i]);
+			if (usu.memberListaReproduccionPropia(nombreL)){
+				foundName=true;
+			}
+		}
+		if(!foundName){
+			DtListaReproduccion listaNueva = new DtListaReproduccion(nombreL);
+			systemh.aniadirListaDefault(listaNueva);
+			for(String nick:nicks){
+				Usuario u=usuarioh.find(nick);
+				u.nuevaListaPorDefecto(nombreL);
+			}
+		}
+		return foundName;
+		
 	}
 	
 	public void nuevaListaParticular(String nickU, String nombreL, Boolean privada) {

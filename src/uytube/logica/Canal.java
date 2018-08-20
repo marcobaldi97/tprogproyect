@@ -144,5 +144,9 @@ public class Canal {
 	public Boolean memberListaReproduccionPropia(String nombreLista) {
 		return listasReproduccion.containsKey(nombreLista);
 	}
+	public void nuevaListaPorDefecto(String nombreL) {
+		PorDefecto ldr=new PorDefecto(nombreL);
+		listasReproduccion.put(nombreL, ldr);
+	}
 
 }
