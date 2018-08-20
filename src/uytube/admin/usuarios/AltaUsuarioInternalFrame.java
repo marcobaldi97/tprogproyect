@@ -42,6 +42,7 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 	private JTextField txtApellido;
 	private JEditorPane editorPaneDesc = new JEditorPane();
 	private JDateChooser dateChooser;
+	private JComboBox comboBoxCat;
 	
 	/**
 	 * Create the frame.
@@ -131,7 +132,7 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 		JLabel lblCategoria = new JLabel("Categoria");
 		datosCanalPanel.add(lblCategoria);
 		
-		JComboBox comboBoxCat = new JComboBox();
+		comboBoxCat = new JComboBox();
 		comboBoxCat.setModel(new DefaultComboBoxModel(new String[] {""}));
 		comboBoxCat.setEditable(true);
 		datosCanalPanel.add(comboBoxCat);
@@ -209,7 +210,7 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 		editorPaneDesc.setText("");
 		textFieldNombreC.setText("");
 		dateChooser.setDate(null);
-
+		comboBoxCat.setSelectedIndex(-1);;
 	}
 	
 }
