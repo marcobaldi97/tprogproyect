@@ -9,11 +9,6 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 		return systemh.memberListaReproduccionDefecto(nombreLista);
 	}
 	
-	public Boolean memberListaReproduccionPropia(String nickname,String nombreLista) {
-		Boolean flag = false;
-		return flag;
-	}
-	
 	private UsuarioCtrl() {
 		usuarioh = UsuarioHandler.getInstance();
 		systemh = SystemHandler.getInstance();
