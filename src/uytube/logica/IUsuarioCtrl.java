@@ -38,5 +38,6 @@ public interface IUsuarioCtrl {
 
 	public abstract Boolean memberListaReproduccionPropia(String nickU, String nombreLista);
 
+	public abstract DtVideo obtenerInfoAdicVideo(String nickname, String nombreVideo);
 
 }

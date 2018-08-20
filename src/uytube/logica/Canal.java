@@ -136,17 +136,25 @@ public class Canal {
 		ListaReproduccion lr = listasReproduccion.get(nombreL);
 		((Particular) lr).cambiarPrivLDR(privE);//creo que esto es un dynamic cast
 	}
+	
 	public void eliminarVideoLista(Integer id_video, String nombreLDR) {
 		// TODO Auto-generated method stub
 		ListaReproduccion lr=listasReproduccion.get(nombreLDR);
 		lr.removerVideo(id_video);
 	}
+	
 	public Boolean memberListaReproduccionPropia(String nombreLista) {
 		return listasReproduccion.containsKey(nombreLista);
 	}
+	
 	public void nuevaListaPorDefecto(String nombreL) {
 		PorDefecto ldr=new PorDefecto(nombreL);
 		listasReproduccion.put(nombreL, ldr);
+	}
+	
+	public DtVideo obtenerInfoAdicVideo(String nombreVideo) {
+		DtVideo dt = new DtVideo(videos.get(nombreVideo));
+		return dt;
 	}
 
 }
