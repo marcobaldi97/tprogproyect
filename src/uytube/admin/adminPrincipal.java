@@ -16,6 +16,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import uytube.admin.usuarios.*;
 import uytube.admin.listas.*;
+import uytube.admin.categoria.alta.*;
 
 public class adminPrincipal extends JFrame {
 
@@ -158,6 +159,17 @@ public class adminPrincipal extends JFrame {
 
 		JMenu mnCategoria = new JMenu("Categoria");
 		menuBar.add(mnCategoria);
+		
+		JMenuItem mntmAlta_1 = new JMenuItem("Alta");
+		mntmAlta_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				 AltaCategoria ac = new AltaCategoria(ICV);
+			     contentPane.setLayout(null);
+			     contentPane.add(ac);
+			     ac.setVisible(true);
+			}
+		});
+		mnCategoria.add(mntmAlta_1);
 	}
 
 }

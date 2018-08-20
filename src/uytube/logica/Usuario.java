@@ -157,5 +157,9 @@ public class Usuario {
 		canalPropio.nuevaListaPorDefecto(nombreL);
 		
 	}
+	
+	public DtVideo obtenerInfoAdicVideo(String nombreVideo) {
+		return canalPropio.obtenerInfoAdicVideo(nombreVideo);
+	}
 
 }

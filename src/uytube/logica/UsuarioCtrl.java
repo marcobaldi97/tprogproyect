@@ -128,6 +128,11 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 		Usuario u = usuarioh.find(nickU);
 		return u.mostrarInfoCanal();
 	}
+
+	public DtVideo obtenerInfoAdicVideo(String nickname, String nombreVideo) {
+		Usuario u = usuarioh.find(nickname);
+		return u.obtenerInfoAdicVideo(nombreVideo);
+	}
 	
 	
 }
