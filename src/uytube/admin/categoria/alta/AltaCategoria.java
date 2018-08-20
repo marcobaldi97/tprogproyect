@@ -69,8 +69,14 @@ public class AltaCategoria extends JInternalFrame {
 			public void keyPressed(KeyEvent arg0) {
 				if(iCV.existeCategoria(textField_1.getText()) == true) {
 					aviso.setText("Categoria ya existente en el sistema.");
-					Border rojo = new Border();
-					textField_1.setBorder(border);
+				}else {
+					aviso.setText("");
+				}
+			}
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				if(iCV.existeCategoria(textField_1.getText()) == true) {
+					aviso.setText("Categoria ya existente en el sistema.");
 				}else {
 					aviso.setText("");
 				}
@@ -83,14 +89,23 @@ public class AltaCategoria extends JInternalFrame {
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(iCV.existeCategoria(textField_1.getText()) == true) {
-					aviso.setText("Categoria ya existente en el sistema.");
+					aviso.setText("¡Categoria ya existente en el sistema.!");
+				}else {
+					iCV.crearCategoria(textField_1.getText());
+					aviso.setText("Categoria creada con exito");
+					textField_1.setText("");
 				}
-				
 			}
 		});
 		panel_1.add(btnAceptar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				dispose();
+			}
+		});
 		panel_1.add(btnCancelar);
 		
 		JPanel panel = new JPanel();
