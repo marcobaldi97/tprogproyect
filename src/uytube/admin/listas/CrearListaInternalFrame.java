@@ -7,6 +7,7 @@ import java.awt.FlowLayout;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.GridLayout;
@@ -139,20 +140,36 @@ public class CrearListaInternalFrame extends JInternalFrame {
 				String nombreLista = textFieldNombre.getText();
 				String nickU = (String) comboBoxNick.getSelectedItem();
 				boolean priv=true;
+				
 				//verificar si los datos ingresados estanb bien
 				if(rdbtnPorDefecto.isSelected()){
-					controlUsr.nuevaListaPorDefecto(nombreLista) ;
+					 if( controlUsr.memberListaReproduccionDefecto(nombreLista)){
+						 mensajeError();
+					 }else{
+						 controlUsr.nuevaListaPorDefecto(nombreLista) ;
+					 }
 				}else{
 					if(rdbtnPublica.isSelected()){priv = false;}
-					controlUsr.nuevaListaParticular(nickU, nombreLista, priv) ;
+					if( controlUsr.memberListaReproduccionPropia(nickU, nombreLista)){
+						 mensajeError();
+					}else{
+						controlUsr.nuevaListaParticular(nickU, nombreLista, priv) ;
+					}
 				}
 				//mensaje de que se creo
+				//limpiar
+				textFieldNombre.setText("");
+				comboBoxNick.setSelectedIndex(-1);
 			}
 		});
 		
 		JLabel label_2 = new JLabel("");
 		lista.add(label_2);
 		lista.add(btnCrear);
+	}
+	private void mensajeError(){
+		JOptionPane.showMessageDialog(this, "Ya existe la lista", "Lista repetida",
+                JOptionPane.ERROR_MESSAGE);
 	}
 
 }

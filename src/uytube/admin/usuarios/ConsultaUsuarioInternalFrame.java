@@ -14,6 +14,8 @@ import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
 
 import uytube.logica.DtCanal;
+import uytube.logica.DtCategoria;
+import uytube.logica.DtListaReproduccion;
 import uytube.logica.DtUsuario;
 import uytube.logica.DtVideo;
 import uytube.logica.IUsuarioCtrl;
@@ -40,7 +42,6 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 	private JTextField textFieldApellido;
 	private JTextField textFieldNomCanal;
 	private JTextField textField_4;
-	private JTextField textField_5;
 	private JTextPane textPaneDesc;
 	private JComboBox comboBoxVideos;
 	private JComboBox comboBoxListas;
@@ -48,6 +49,7 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 	JDateChooser dateChooser;
 	private JTextField textFieldPrivacidad;
 	private JTextField textFieldCatCanal;
+	private JList listCat;
 	/**
 	 * Create the frame.
 	 * @param iCU 
@@ -200,17 +202,49 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 		
 		JLabel label_10 = new JLabel("Nombre Lista");
 		panelDLista.add(label_10);
-		
 		comboBoxListas = new JComboBox();
+		comboBoxListas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//cargar datos lista
+				String lista = (String)comboBoxListas.getSelectedItem();
+				if((String)comboBoxNick.getSelectedItem() != " "){
+					//pedir Dt
+					DtListaReproduccion lr = controlUsr.infoAdicLDR((String)comboBoxNick.getSelectedItem(),lista );
+					//cargarDatos
+					DefaultListModel modelCat =new DefaultListModel();
+					listCat.setModel(modelCat);
+				   
+				    DtCategoria[] categorias = lr.getCategoriasLDR();
+				    for(int i=0; i<categorias.length;i++){
+				    	  modelCat.addElement(categorias[i].getNombre());
+				     }
+				    
+					if (lr.getPrivado()){
+						textFieldPrivacidad.setText("Privado");
+					}else{
+						textFieldPrivacidad.setText("Publico");
+					}
+					
+					//
+						
+				}
+				
+			}
+		});
 		panelDLista.add(comboBoxListas);
+		
+	
+		
 		
 		JLabel label_11 = new JLabel("Categoria");
 		panelDLista.add(label_11);
 		
-		textField_5 = new JTextField();
-		textField_5.setEditable(false);
-		textField_5.setColumns(10);
-		panelDLista.add(textField_5);
+		JScrollPane scrollPane_3 = new JScrollPane();
+		panelDLista.add(scrollPane_3);
+		
+		listCat = new JList();
+		listCat.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		scrollPane_3.setViewportView(listCat);
 		
 		JPanel panelSeguidos = new JPanel();
 		panelSeguidos.setBorder(new TitledBorder(null, "Seguidos", TitledBorder.LEADING, TitledBorder.TOP, null, null));
