@@ -50,7 +50,7 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 				u.nuevaListaPorDefecto(nombreL);
 			}
 		}
-		return foundName;
+		return !foundName;
 		
 	}
 	
