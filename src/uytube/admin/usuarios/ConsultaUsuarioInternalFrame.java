@@ -14,6 +14,7 @@ import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
 
 import uytube.admin.adminPrincipalBienHecho;
+import uytube.admin.videos.consultar.ConsultarVideoInternalFrame;
 import uytube.logica.DtCanal;
 import uytube.logica.DtCategoria;
 import uytube.logica.DtListaReproduccion;
@@ -344,11 +345,13 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 		*/
 	}
 	private void openConsultarVideo(){
-	   modificarUsuario modUsrIFrame = new modificarUsuario();
+	   //modificarUsuario modUsrIFrame = new modificarUsuario();
+	   ConsultarVideoInternalFrame consVideoIFrame = new ConsultarVideoInternalFrame();
 	   adminPrincipalBienHecho.getFrames()[0].setLayout(null);
-	   adminPrincipalBienHecho.getFrames()[0].add(modUsrIFrame);
-	   modUsrIFrame.moveToFront(); 
-	   modUsrIFrame.setVisible(true);
+	   adminPrincipalBienHecho.getFrames()[0].add(consVideoIFrame);
+	   consVideoIFrame.show();
+	   consVideoIFrame.moveToFront(); 
+	//   modUsrIFrame.setVisible(true);
 	 }
 	 private void limpiar(){
 		 textFieldEmail.setText("");
