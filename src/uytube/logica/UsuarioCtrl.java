@@ -135,5 +135,10 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 		return u.obtenerInfoAdicVideo(nombreVideo);
 	}
 	
+	public Boolean memberVideoEnUsuario(String nickname, String nombreVideo) {
+		Usuario u = usuarioh.find(nickname);
+		return u.memberVideoEnUsuario(nombreVideo);
+	}
+	
 	
 }

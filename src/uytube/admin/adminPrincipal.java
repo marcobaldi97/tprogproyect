@@ -17,6 +17,8 @@ import java.awt.event.ActionEvent;
 import uytube.admin.usuarios.*;
 import uytube.admin.listas.*;
 import uytube.admin.categoria.alta.*;
+import uytube.admin.videos.alta.*;
+import uytube.admin.videos.*;
 
 public class adminPrincipal extends JFrame {
 
@@ -29,6 +31,7 @@ public class adminPrincipal extends JFrame {
 	private AgregarVideoListaInternalFrame addVideoListIFrame;
 	private QuitarVideoListaInternalFrame quitarVideoListIFrame;
 	private CrearListaInternalFrame crearListIFrame;
+	private AltaVideo altaVideoFrame;
 
 	private IUsuarioCtrl ICU;
 	private IVideoCtrl ICV;
@@ -117,6 +120,14 @@ public class adminPrincipal extends JFrame {
 		menuBar.add(mnVideos);
 		
 		JMenuItem mntmAlta_1 = new JMenuItem("Alta");
+		mntmAlta_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				 altaVideoFrame = new AltaVideo(ICU,ICV);
+			     contentPane.setLayout(null);
+			     contentPane.add(altaVideoFrame);
+			     altaVideoFrame.setVisible(true);
+			}
+		});
 		mnVideos.add(mntmAlta_1);
 		
 		JMenuItem mntmNewMenuItem = new JMenuItem("Modificar");

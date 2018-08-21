@@ -161,5 +161,9 @@ public class Usuario {
 	public DtVideo obtenerInfoAdicVideo(String nombreVideo) {
 		return canalPropio.obtenerInfoAdicVideo(nombreVideo);
 	}
+	
+	public Boolean memberVideoEnUsuario(String nombreVideo) {
+		return canalPropio.memberVideoEnUsuario(nombreVideo);
+	}
 
 }

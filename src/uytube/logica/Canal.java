@@ -156,5 +156,9 @@ public class Canal {
 		DtVideo dt = new DtVideo(videos.get(nombreVideo));
 		return dt;
 	}
+	
+	public Boolean memberVideoEnUsuario(String nombreVideo) {
+		return videos.containsKey(nombreVideo);
+	}
 
 }
