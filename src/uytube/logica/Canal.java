@@ -45,14 +45,17 @@ public class Canal {
 				String nom = entry.getValue().getNombre();
 				nombresListas[contador] = nom;
 				contador++;
-			}//Se agregó esta linea para tratar de evitar los punteros nulos.
+			}//Se agregï¿½ esta linea para tratar de evitar los punteros nulos.
 		}
 		return nombresListas;
 	}
 	
 	public DtListaReproduccion verDetallesListareproduccion(String nombreLista) {
-		ListaReproduccion lr = findLista(nombreLista);
-		DtListaReproduccion dt = lr.verDetallesListareproduccion();
+		DtListaReproduccion dt=null;
+		if(memberListaReproduccionPropia(nombreLista)){
+			ListaReproduccion lr = findLista(nombreLista);
+			dt = lr.verDetallesListareproduccion();
+		}
 		return dt;
 	}
 	
