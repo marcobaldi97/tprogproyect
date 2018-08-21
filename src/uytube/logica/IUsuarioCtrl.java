@@ -37,6 +37,8 @@ public interface IUsuarioCtrl {
 	public abstract Boolean memberListaReproduccionDefecto(String nombreLista);
 
 	public abstract Boolean memberListaReproduccionPropia(String nickU, String nombreLista);
+	
+	public abstract Boolean memberUsuario(String nickU);
 
 	public abstract DtVideo obtenerInfoAdicVideo(String nickname, String nombreVideo);
 

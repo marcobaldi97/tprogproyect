@@ -8,7 +8,9 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 	public Boolean memberListaReproduccionDefecto(String nombreLista) {
 		return systemh.memberListaReproduccionDefecto(nombreLista);
 	}
-	
+	public Boolean memberUsuario(String nickU){
+		return usuarioh.memberNickname(nickU);
+	}
 	private UsuarioCtrl() {
 		usuarioh = UsuarioHandler.getInstance();
 		systemh = SystemHandler.getInstance();

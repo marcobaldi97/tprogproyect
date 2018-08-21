@@ -12,7 +12,7 @@ public class VideoHandler {
 		IDActual=0;
 	}
 	public Integer getNewID(){
-		return IDActual++;
+		return ++IDActual;
 	}
 	
 	public static VideoHandler getInstance() {
@@ -23,7 +23,6 @@ public class VideoHandler {
 	
 	public void addVideo(Video v) {
 		videos.put(IDActual, v);
-		IDActual++;
 	}
 	
 	public void removerVideo(Video v) {
