@@ -131,12 +131,21 @@ public class Video {
 	}
 	
 	public DtUsuario[] getUsuariosPuntuadores(boolean v){
-		ArrayList<DtUsuario> usu=new ArrayList<DtUsuario>();
-		for(Puntuacion p :puntuaciones){
+		int puntSize=0;
+		for(Puntuacion p:puntuaciones){
 			if(p.getValoracion()==v)
-				usu.add(new DtUsuario(p.getUsuario()));
+				puntSize++;
 		}
-		return (DtUsuario[]) usu.toArray();
+		DtUsuario[] usu=new DtUsuario[puntSize];
+		int i=0;
+		for(Puntuacion p :puntuaciones){
+			if(p.getValoracion()==v){
+				usu[i]=(new DtUsuario(p.getUsuario()));
+				i++;
+			}
+			
+		}
+		return usu;
 	}
 	
 	public DtInfoVideo getInfoVideoExt(){
