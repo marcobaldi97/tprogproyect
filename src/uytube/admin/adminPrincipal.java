@@ -69,41 +69,40 @@ public class adminPrincipal extends JFrame {
 	 * Create the frame.
 	 */
 	public adminPrincipal() {
-		 Factory fabrica = Factory.getInstance();
-	     ICU = fabrica.getIUsuarioCtrl();
-	     ICV = fabrica.getIVideoCtrl();
-	     ICV.crearCategoria("deportes");
-	     ICV.crearCategoria("Anime OwO");
-	     ICV.crearCategoria("n.n");
+		Factory fabrica = Factory.getInstance();
+	    ICU = fabrica.getIUsuarioCtrl();
+	    ICV = fabrica.getIVideoCtrl();
+	    //Datos de prueba
+	    ICV.crearCategoria("deportes");
+	    ICV.crearCategoria("Anime OwO");
+	    ICV.crearCategoria("n.n");
 	     
-	     Date fecha1=new Date();
-	     fecha1.setTime(666666666);
+	    Date fecha1=new Date();
+	    fecha1.setTime(666666666);
 
-	     Date fecha2=new Date();
-	     fecha2.setTime(777777777);
+	    Date fecha2=new Date();
+	    fecha2.setTime(777777777);
 	     
-	     Date fecha3=new Date();
-	     fecha1.setTime(333333333);
+	    Date fecha3=new Date();
+	    fecha1.setTime(333333333);
+	    
+	    Date fecha4=new Date();
+	    fecha1.setTime(454545);
 	     
-	     Date fecha4=new Date();
-	     fecha1.setTime(454545);
-	     
-	     DtFecha fechaNacPepe= new DtFecha(fecha1);
-	     DtFecha fechaVideo=new DtFecha(fecha2);
-	     DtFecha fechaNacEmilio=new DtFecha(fecha3);
-	     DtFecha fechaNacRoberto=new DtFecha(fecha4);
-	     
-	     Integer duracion=7315;
-	     ICU.nuevoUsuario("pepeDeportes", "Jose", "Rodriguez", "elpepepatuconsumo@adinet.org", fechaNacPepe, "", "pepeDeportista777", "descripcion", false, "deportes");
-	     ICU.nuevoUsuario("RobertoDeportista", "Roberto", "Perez", "robertitocampeon@yahoo.es", fechaNacRoberto, "", "xXrobertoCampeonXx", "mejor descripcion", false, "deportes");
-	     ICU.nuevoUsuario("BokuNoNaruto", "Emilio", "Tilio", "megustaelanime@hotmail.com", fechaNacEmilio, "", "AnimeParaTodos", "descripcion otaku", false, "Anime OwO");
-	     DtCategoria[]cates=ICV.listarCategorias();
-	     ICU.aniadirVideo("pepeDeportes", "hago flexiones por dos horas", "segui mi patreon", duracion, fechaVideo, "www.cosopum", cates[0], false);
-	     ICV.valorarVideo(1, "RobertoDeportista", false);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(new BorderLayout(0, 0));
+	    DtFecha fechaNacPepe= new DtFecha(fecha1);
+	    DtFecha fechaVideo=new DtFecha(fecha2);
+	    DtFecha fechaNacEmilio=new DtFecha(fecha3);
+	    DtFecha fechaNacRoberto=new DtFecha(fecha4);
+	    
+	    Integer duracion=7315;
+	    ICU.nuevoUsuario("pepeDeportes", "Jose", "Rodriguez", "elpepepatuconsumo@adinet.org", fechaNacPepe, "", "pepeDeportista777", "descripcion", false, "deportes");
+	    ICU.nuevoUsuario("RobertoDeportista", "Roberto", "Perez", "robertitocampeon@yahoo.es", fechaNacRoberto, "", "xXrobertoCampeonXx", "mejor descripcion", false, "deportes");
+	    ICU.nuevoUsuario("BokuNoNaruto", "Emilio", "Tilio", "megustaelanime@hotmail.com", fechaNacEmilio, "", "AnimeParaTodos", "descripcion otaku", false, "Anime OwO");
+	    DtCategoria[]cates=ICV.listarCategorias();
+	    ICU.aniadirVideo("pepeDeportes", "hago flexiones por dos horas", "segui mi patreon", duracion, fechaVideo, "www.cosopum", cates[0], false);
+	    ICV.valorarVideo(1, "RobertoDeportista", false);
+	    //fin datos de prueba
+	    
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
