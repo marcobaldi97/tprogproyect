@@ -17,9 +17,16 @@ import java.awt.Insets;
 import javax.swing.BoxLayout;
 import java.awt.GridLayout;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
+
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
+
+import uytube.logica.DtCategoria;
+import uytube.logica.Factory;
+import uytube.logica.IVideoCtrl;
+
 import com.jgoodies.forms.layout.FormSpecs;
 import java.awt.FlowLayout;
 import javax.swing.JTable;
@@ -27,31 +34,51 @@ import javax.swing.JSeparator;
 import java.awt.Color;
 import java.awt.Component;
 import javax.swing.Box;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.InputMethodListener;
+import java.awt.event.InputMethodEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 public class ConsultaCategoriaJInternalFrame extends JInternalFrame {
 	private JTable table;
 	private JTable table_1;
 
 	/**
-	 * Launch the application.
+	 * Launch the application. COMENTADO FUNCIONA IGUAL
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
+		Factory fabrica = Factory.getInstance();
+	    
+	    IVideoCtrl ICV = fabrica.getIVideoCtrl();
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ConsultaCategoriaJInternalFrame frame = new ConsultaCategoriaJInternalFrame();
+					ConsultaCategoriaJInternalFrame frame = new ConsultaCategoriaJInternalFrame(ICV);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
-	}
+	}*/
 
 	/**
 	 * Create the frame.
+	 * @param iCV 
 	 */
-	public ConsultaCategoriaJInternalFrame() {
+	
+	public static void infoBox(String infoMessage, String titleBar){
+        JOptionPane.showMessageDialog(null, infoMessage, "" + titleBar, JOptionPane.INFORMATION_MESSAGE);
+    }
+	
+	public ConsultaCategoriaJInternalFrame(IVideoCtrl iCV) {
+		setIconifiable(true);
+		setMaximizable(true);
+		setClosable(true);
 		setTitle("Listar por categorias");
 		setBounds(100, 100, 473, 300);
 		getContentPane().setLayout(new BorderLayout(0, 0));
@@ -64,7 +91,21 @@ public class ConsultaCategoriaJInternalFrame extends JInternalFrame {
 		panel.add(lblSeleccioneUnaCategoria);
 		
 		JComboBox comboBox = new JComboBox();
+		DtCategoria[] set_cat=iCV.listarCategorias();
+		for(int i=0; i<set_cat.length;i++){comboBox.addItem(set_cat[i].getNombre());}
+		comboBox.setSelectedIndex(-1);
+		
+			comboBox.addActionListener(new ActionListener() 
+			{
+				public void actionPerformed(ActionEvent e) 
+				{
+				infoBox(comboBox.getSelectedItem().toString(),"");
+				}
+			});
+		
 		panel.add(comboBox);
+	
+		
 		
 		JPanel panel_1 = new JPanel();
 		getContentPane().add(panel_1, BorderLayout.WEST);
