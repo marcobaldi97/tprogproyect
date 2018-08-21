@@ -23,12 +23,12 @@ public class Usuario {
 		foto = fo;
 		usuariosQueSigue = new HashMap<String, Usuario>();
 		usuariosQueLeSiguen = new HashMap<String, Usuario>();
-		this.createCanal(nombreCanal, desc, privacidadE, catE);;
+		this.createCanal(nombreCanal,nick, desc, privacidadE, catE);;
 		
 	}
 	
-	public void createCanal(String nom, String desc, Boolean privacidadE,String catE) {
-		canalPropio = new Canal(nom,desc,privacidadE,catE);
+	public void createCanal(String nom,String pro,String desc, Boolean privacidadE,String catE) {
+		canalPropio = new Canal(nom,pro,desc,privacidadE,catE);
 	}
 	
 	public String getNickname() {
@@ -93,8 +93,8 @@ public class Usuario {
 		usuariosQueLeSiguen.remove(u.getNickname());
 	}
 	
-	public void aniadirVideo(String nom, String desc, Integer dur, DtFecha fp, String url, DtCategoria catE, boolean p) {
-		canalPropio.aniadirVideo(nom, desc, dur, fp, url, catE, p);
+	public void aniadirVideo(String nom,String pro, String desc, Integer dur, DtFecha fp, String url, DtCategoria catE, boolean p) {
+		canalPropio.aniadirVideo(nom,pro, desc, dur, fp, url, catE, p);
 	}
 	
 	public void ingresarNuevosDatosVideo(String nom, String d, int dur, DtFecha fp, String url, DtCategoria catE, boolean p) {
@@ -135,8 +135,8 @@ public class Usuario {
 			canalPropio.agregarVideoLDR(id,nombreLDR);
 	}
 	
-	public void nuevaListaParticular(String nombreL, Boolean privada) {
-		ListaReproduccion lr = new Particular(nombreL,privada);
+	public void nuevaListaParticular(String nombreL,String pro, Boolean privada) {
+		ListaReproduccion lr = new Particular(nombreL,pro,privada);
 		canalPropio.addListaReproduccion(lr);
 	}
 	
@@ -154,7 +154,7 @@ public class Usuario {
 	}
 
 	public void nuevaListaPorDefecto(String nombreL) {
-		canalPropio.nuevaListaPorDefecto(nombreL);
+		canalPropio.nuevaListaPorDefecto(nombreL,getNombre());
 		
 	}
 	

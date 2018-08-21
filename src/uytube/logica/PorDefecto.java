@@ -2,8 +2,8 @@ package uytube.logica;
 
 public class PorDefecto extends ListaReproduccion{
 
-	public PorDefecto(String n) {
-		super(n);
+	public PorDefecto(String n, String pro) {
+		super(n,pro);
 	}
 
 	@Override

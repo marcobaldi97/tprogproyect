@@ -6,6 +6,7 @@ import java.util.Map;
 public class Video {
 	private Integer IDVideo;
 	private String nombre;
+	private String propietario;
 	private String descripcion;
 	private int duracion;
 	private DtFecha fecha_publicacion;
@@ -15,10 +16,11 @@ public class Video {
 	private Map<Integer,Comentario> comentarios;
 	private ArrayList<Puntuacion> puntuaciones;
 	
-	public Video(String n, String d, int dur, DtFecha fp, String url, DtCategoria c, boolean p) {
+	public Video(String n,String pro, String d, int dur, DtFecha fp, String url, DtCategoria c, boolean p) {
 		VideoHandler vh=VideoHandler.getInstance();
 		IDVideo=vh.getNewID();
 		nombre = n;
+		setPropietario(pro);
 		descripcion = d;
 		duracion = dur;
 		fecha_publicacion = fp;
@@ -151,6 +153,12 @@ public class Video {
 	public DtInfoVideo getInfoVideoExt(){
 		DtInfoVideo res=new DtInfoVideo(this);
 		return res;
+	}
+	public String getPropietario() {
+		return propietario;
+	}
+	public void setPropietario(String propietario) {
+		this.propietario = propietario;
 	}
 
 }

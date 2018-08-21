@@ -59,7 +59,7 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 	
 	public void nuevaListaParticular(String nickU, String nombreL, Boolean privada) {
 		Usuario u = usuarioh.find(nickU);
-		u.nuevaListaParticular(nombreL, privada);
+		u.nuevaListaParticular(nombreL,nickU, privada);
 	}
 	
 	public String[] listarLDRdeUsuario(String nickU) {
@@ -99,7 +99,7 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 	
 	public void aniadirVideo(String nickU, String nom, String desc, Integer dur, DtFecha fp, String url, DtCategoria catE, boolean p) {
 		Usuario u = usuarioh.find(nickU);
-		u.aniadirVideo(nom, desc, dur, fp, url, catE, p);
+		u.aniadirVideo(nom,nickU, desc, dur, fp, url, catE, p);
 	}
 	
 	public void ingresarNuevosDatosVideo(String nickU, String nom, String d, int dur, DtFecha fp, String url, DtCategoria catE, boolean p) {
