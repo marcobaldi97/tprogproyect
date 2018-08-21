@@ -2,6 +2,9 @@ package uytube.admin.usuarios;
 
 import java.awt.EventQueue;
 import uytube.admin.videos.modificar.*;
+import uytube.logica.DtCanal;
+import uytube.logica.DtUsuario;
+import uytube.logica.IUsuarioCtrl;
 
 import javax.swing.JInternalFrame;
 import javax.swing.BoxLayout;
@@ -41,36 +44,30 @@ import javax.swing.ButtonGroup;
 public class modificarUsuario extends JInternalFrame {
 	private JTextField textFieldNombre;
 	private JTextField textFieldApellido;
-	private JTextField textFieldNomC;
+	private JTextField textFieldNomCanal;
 	private JTextField textFieldEmail;
-	private JTextField textField_1;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					modificarUsuario frame = new modificarUsuario();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
+	private JDateChooser dateChooser;
+	private JRadioButton rdbtnPrivado;
+	private JRadioButton rdbtnPublico;
+	private JTextPane textPaneDesc;
+	private JComboBox comboBoxVideos;
+	private IUsuarioCtrl controlUsr;
+	private JTextField textFieldCatCanal;
+	private JComboBox comboBoxListas;
+	private final ButtonGroup buttonGroup_1 = new ButtonGroup();
 	/**
 	 * Create the frame.
+	 * @param iCU 
 	 */
-	public modificarUsuario() {
+	public modificarUsuario(IUsuarioCtrl iCU) {
+		controlUsr = iCU;
+		
 		setTitle("Modificar Usuario");
 		setResizable(true);
 		setMaximizable(true);
 		setClosable(true);
-		setBounds(100, 100, 254, 548);
+		setBounds(100, 100, 509, 394);
 		getContentPane().setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		JPanel panelDatosUsuario = new JPanel();
@@ -81,8 +78,22 @@ public class modificarUsuario extends JInternalFrame {
 		JLabel lblNickname = new JLabel("Nickname");
 		panelDatosUsuario.add(lblNickname);
 		
-		JComboBox comboBox = new JComboBox();
-		panelDatosUsuario.add(comboBox);
+		JComboBox comboBoxNick = new JComboBox();
+		comboBoxNick.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String nickU = (String)comboBoxNick.getSelectedItem();
+				limpiar();
+				if((String)comboBoxNick.getSelectedItem() != " " && comboBoxNick.getSelectedIndex()!=-1){
+					//pedir Dt
+					DtUsuario usr= controlUsr.listarDatosUsuario(nickU);
+					DtCanal usrCanal = controlUsr.mostrarInfoCanal(nickU);
+				
+					cargarDatos(usr, usrCanal, nickU);
+			}
+		}
+		});
+		comboBoxNick.setSelectedIndex(-1);
+		panelDatosUsuario.add(comboBoxNick);
 		
 		JLabel lblEmail = new JLabel("Email");
 		panelDatosUsuario.add(lblEmail);
@@ -111,7 +122,7 @@ public class modificarUsuario extends JInternalFrame {
 		JLabel lblFechaNac = new JLabel("Fecha Nac.");
 		panelDatosUsuario.add(lblFechaNac);
 		
-		JDateChooser dateChooser = new JDateChooser();
+		dateChooser = new JDateChooser();
 		panelDatosUsuario.add(dateChooser);
 		
 		JButton btnModificar = new JButton("Modificar");
@@ -142,20 +153,20 @@ public class modificarUsuario extends JInternalFrame {
 		JPanel panelDatosCanal = new JPanel();
 		panelDatosCanal.setBorder(new TitledBorder(null, "Datos canal", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		getContentPane().add(panelDatosCanal);
-		panelDatosCanal.setLayout(new GridLayout(0, 2, 0, 0));
+		panelDatosCanal.setLayout(new GridLayout(0, 2, 2, 1));
 		
 		JLabel lblNombre_1 = new JLabel("Nombre");
 		panelDatosCanal.add(lblNombre_1);
 		
-		textFieldNomC = new JTextField();
-		textFieldNomC.setEditable(false);
-		panelDatosCanal.add(textFieldNomC);
-		textFieldNomC.setColumns(10);
+		textFieldNomCanal = new JTextField();
+		textFieldNomCanal.setEditable(false);
+		panelDatosCanal.add(textFieldNomCanal);
+		textFieldNomCanal.setColumns(10);
 		
 		JLabel lblPrivacidad = new JLabel("Privacidad");
 		panelDatosCanal.add(lblPrivacidad);
 		
-		JRadioButton rdbtnPrivado = new JRadioButton("Privado");
+		rdbtnPrivado = new JRadioButton("Privado");
 		rdbtnPrivado.setSelected(true);
 		buttonGroup.add(rdbtnPrivado);
 		panelDatosCanal.add(rdbtnPrivado);
@@ -163,16 +174,25 @@ public class modificarUsuario extends JInternalFrame {
 		JLabel label_1 = new JLabel("");
 		panelDatosCanal.add(label_1);
 		
-		JRadioButton rdbtnPublico = new JRadioButton("Publico");
+		rdbtnPublico = new JRadioButton("Publico");
 		buttonGroup.add(rdbtnPublico);
 		panelDatosCanal.add(rdbtnPublico);
 		
 		JLabel lblDescripicin = new JLabel("Descripici\u00F3n");
 		panelDatosCanal.add(lblDescripicin);
 		
-		JTextPane textPaneDesc = new JTextPane();
+		textPaneDesc = new JTextPane();
 		textPaneDesc.setEditable(false);
 		panelDatosCanal.add(textPaneDesc);
+		
+		JLabel label_5 = new JLabel("Categoria");
+		panelDatosCanal.add(label_5);
+		
+		textFieldCatCanal = new JTextField();
+		textFieldCatCanal.setText("");
+		textFieldCatCanal.setEditable(false);
+		textFieldCatCanal.setColumns(10);
+		panelDatosCanal.add(textFieldCatCanal);
 		
 		JButton btnModificar_3 = new JButton("Modificar");
 		panelDatosCanal.add(btnModificar_3);
@@ -180,13 +200,13 @@ public class modificarUsuario extends JInternalFrame {
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "Datos video", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		getContentPane().add(panel);
-		panel.setLayout(new GridLayout(0, 2, 2, 1));
+		panel.setLayout(new GridLayout(0, 2, 5, 5));
 		
 		JLabel label = new JLabel("Nombre");
 		panel.add(label);
 		
-		JComboBox comboBox_NomVideo = new JComboBox();
-		panel.add(comboBox_NomVideo);
+		comboBoxVideos = new JComboBox();
+		panel.add(comboBoxVideos);
 		
 		JButton button = new JButton("Modificar");
 		button.addActionListener(new ActionListener() {
@@ -205,23 +225,90 @@ public class modificarUsuario extends JInternalFrame {
 		JLabel label_2 = new JLabel("Nombre Lista");
 		panel_1.add(label_2);
 		
-		JComboBox comboBoxListasR = new JComboBox();
-		panel_1.add(comboBoxListasR);
+		comboBoxListas = new JComboBox();
+		panel_1.add(comboBoxListas);
 		
-		JLabel label_3 = new JLabel("Categoria");
+		JLabel lblPrivacidad_1 = new JLabel("Privacidad");
+		panel_1.add(lblPrivacidad_1);
+		
+		JRadioButton rdbtnPrivado_1 = new JRadioButton("Privado");
+		rdbtnPrivado_1.setSelected(true);
+		buttonGroup_1.add(rdbtnPrivado_1);
+		panel_1.add(rdbtnPrivado_1);
+		
+		JLabel label_3 = new JLabel("");
 		panel_1.add(label_3);
 		
-		textField_1 = new JTextField();
-		textField_1.setEditable(false);
-		textField_1.setColumns(10);
-		panel_1.add(textField_1);
+		JRadioButton rdbtnPublico_1 = new JRadioButton("Publico");
+		buttonGroup_1.add(rdbtnPublico_1);
+		panel_1.add(rdbtnPublico_1);
 		
 		JButton button_1 = new JButton("Modificar");
 		panel_1.add(button_1);
 		
+		JLabel label_8 = new JLabel("");
+		getContentPane().add(label_8);
+		
+		JLabel label_4 = new JLabel("                               ");
+		getContentPane().add(label_4);
+		
 		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//setVisible(false);
+				dispose();
+			}
+		});
 		getContentPane().add(btnCancelar);
+		
+		JLabel label_9 = new JLabel("");
+		getContentPane().add(label_9);
+		
+		JLabel label_10 = new JLabel("");
+		getContentPane().add(label_10);
+		
+		JLabel label_11 = new JLabel("");
+		getContentPane().add(label_11);
+		//CARGAR NICK
+		String[] nickUsuario = controlUsr.listarNicknamesUsuarios();
+		for(int i=0; i<nickUsuario.length;i++){
+			 comboBoxNick.addItem(nickUsuario[i]);
+		}
+		limpiar();
 
 	}
+	private void limpiar(){
+		
+	}
+	private void cargarDatos(DtUsuario usr, DtCanal usrCanal, String nickU){
+		textFieldEmail.setText(usr.getEmail());
+		textFieldNombre.setText(usr.getNombre());
+		textFieldApellido.setText(usr.getApellido());
+		dateChooser.setDate(usr.getFecha_nacimiento().getFechaNac());
+		
+		textFieldNomCanal.setText(usrCanal.getNombre());
+		if (usrCanal.getPrivacidad()){
+			rdbtnPrivado.setSelected(true);
+		}else{
+			rdbtnPublico.setSelected(true);
+		}
+		textPaneDesc.setText(usrCanal.getDescripcion());
+		textFieldCatCanal.setText(usrCanal.getCategoria().getNombre());
+		
+		//CARGAR VIDEOS
+		String[] nomVideos = controlUsr.listarVideosCanal(nickU);
+		for(int i=0; i<nomVideos.length;i++){
+			 comboBoxVideos.addItem(nomVideos[i]);
+		}
+		comboBoxVideos.setSelectedIndex(-1);
+		
+		//CARGAR LISTAS
+		String[] nomListas = controlUsr.listarLDRdeUsuario(nickU);
 
+		for(int e=0; e<nomListas.length;e++){
+			 comboBoxListas.addItem(nomListas[e]);
+		}
+		comboBoxListas.setSelectedIndex(-1);
+		
+	}
 }
