@@ -28,6 +28,7 @@ import uytube.admin.usuarios.*;
 import uytube.admin.listas.*;
 import uytube.admin.categoria.alta.*;
 import uytube.admin.videos.alta.*;
+import uytube.admin.videos.consultar.ConsultarVideoInternalFrame;
 import uytube.admin.videos.*;
 
 public class adminPrincipal extends JFrame {
@@ -42,6 +43,7 @@ public class adminPrincipal extends JFrame {
 	private QuitarVideoListaInternalFrame quitarVideoListIFrame;
 	private CrearListaInternalFrame crearListIFrame;
 	private AltaVideo altaVideoFrame;
+	ConsultarVideoInternalFrame consultarVideoFrame;
 
 	private IUsuarioCtrl ICU;
 	private IVideoCtrl ICV;
@@ -174,6 +176,14 @@ public class adminPrincipal extends JFrame {
 		mnVideos.add(mntmNewMenuItem);
 		
 		JMenuItem mntmConsulta_1 = new JMenuItem("Consulta");
+		mntmConsulta_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				consultarVideoFrame = new ConsultarVideoInternalFrame();
+			    contentPane.setLayout(null);
+			    contentPane.add(consultarVideoFrame);
+			    consultarVideoFrame.setVisible(true);
+			}
+		});
 		mnVideos.add(mntmConsulta_1);
 		
 		JMenu mnNewMenu_1 = new JMenu("Listas");
