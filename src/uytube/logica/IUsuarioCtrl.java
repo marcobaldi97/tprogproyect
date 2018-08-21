@@ -41,5 +41,7 @@ public interface IUsuarioCtrl {
 	public abstract Boolean memberUsuario(String nickU);
 
 	public abstract DtVideo obtenerInfoAdicVideo(String nickname, String nombreVideo);
+	
+	public abstract Boolean memberVideoEnUsuario(String nickname, String nombreVideo);
 
 }

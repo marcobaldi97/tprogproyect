@@ -27,6 +27,8 @@ import java.util.Date;
 import uytube.admin.usuarios.*;
 import uytube.admin.listas.*;
 import uytube.admin.categoria.alta.*;
+import uytube.admin.videos.alta.*;
+import uytube.admin.videos.*;
 
 public class adminPrincipal extends JFrame {
 
@@ -39,6 +41,7 @@ public class adminPrincipal extends JFrame {
 	private AgregarVideoListaInternalFrame addVideoListIFrame;
 	private QuitarVideoListaInternalFrame quitarVideoListIFrame;
 	private CrearListaInternalFrame crearListIFrame;
+	private AltaVideo altaVideoFrame;
 
 	private IUsuarioCtrl ICU;
 	private IVideoCtrl ICV;
@@ -101,14 +104,14 @@ public class adminPrincipal extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setExtendedState(JFrame.MAXIMIZED_BOTH);
+		setBounds(100, 100, 450, 300);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
-
-		JMenu mnUsuario = new JMenu("Usuario");
-		menuBar.add(mnUsuario);
-
+		
+		JMenu mnNewMenu = new JMenu("Usuario");
+		menuBar.add(mnNewMenu);
+		
 		JMenuItem mntmAlta = new JMenuItem("Alta");
 		mntmAlta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -118,19 +121,19 @@ public class adminPrincipal extends JFrame {
 		        aUsrIFrame.setVisible(true);
 			}
 		});
-		mnUsuario.add(mntmAlta);
-
+		mnNewMenu.add(mntmAlta);
+		
 		JMenuItem mntmModificar = new JMenuItem("Modificar");
 		mntmModificar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				 modUsrIFrame = new modificarUsuario();
-			     contentPane.setLayout(null);
-			     contentPane.add(modUsrIFrame);
-			     modUsrIFrame.setVisible(true);
+			public void actionPerformed(ActionEvent e) {
+				modUsrIFrame = new modificarUsuario();
+			    contentPane.setLayout(null);
+			    contentPane.add(modUsrIFrame);
+			    modUsrIFrame.setVisible(true);
 			}
 		});
-		mnUsuario.add(mntmModificar);
-
+		mnNewMenu.add(mntmModificar);
+		
 		JMenuItem mntmConsulta = new JMenuItem("Consulta");
 		mntmConsulta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -140,7 +143,7 @@ public class adminPrincipal extends JFrame {
 			     conUsrIFrame.setVisible(true);
 			}
 		});
-		mnUsuario.add(mntmConsulta);
+		mnNewMenu.add(mntmConsulta);
 		
 		JMenuItem mntmListar = new JMenuItem("Listar");
 		mntmListar.addActionListener(new ActionListener() {
@@ -151,25 +154,32 @@ public class adminPrincipal extends JFrame {
 			     listarUsrIFrame.setVisible(true);
 			}
 		});
-		mnUsuario.add(mntmListar);
-
-		VideosMenu videosMenu = new VideosMenu(getContentPane());
-		menuBar.add(videosMenu.getMenu());
-
-		JMenu mnListas = new JMenu("Listas");
-		menuBar.add(mnListas);
+		mnNewMenu.add(mntmListar);
 		
-		JMenuItem mntmAgregarVideo = new JMenuItem("Agregar video");
-		mntmAgregarVideo.addActionListener(new ActionListener() {
+		JMenu mnVideos = new JMenu("Videos");
+		menuBar.add(mnVideos);
+		
+		JMenuItem mntmAlta_1 = new JMenuItem("Alta");
+		mntmAlta_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				 addVideoListIFrame = new AgregarVideoListaInternalFrame();
+				 altaVideoFrame = new AltaVideo(ICU,ICV);
 			     contentPane.setLayout(null);
-			     contentPane.add(addVideoListIFrame);
-			     addVideoListIFrame.setVisible(true);	
+			     contentPane.add(altaVideoFrame);
+			     altaVideoFrame.setVisible(true);
 			}
 		});
+		mnVideos.add(mntmAlta_1);
 		
-		JMenuItem mntmCrear = new JMenuItem("Crear ");
+		JMenuItem mntmNewMenuItem = new JMenuItem("Modificar");
+		mnVideos.add(mntmNewMenuItem);
+		
+		JMenuItem mntmConsulta_1 = new JMenuItem("Consulta");
+		mnVideos.add(mntmConsulta_1);
+		
+		JMenu mnNewMenu_1 = new JMenu("Listas");
+		menuBar.add(mnNewMenu_1);
+		
+		JMenuItem mntmCrear = new JMenuItem("Crear");
 		mntmCrear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				crearListIFrame = new CrearListaInternalFrame(ICU);
@@ -178,10 +188,20 @@ public class adminPrincipal extends JFrame {
 			    crearListIFrame.setVisible(true);	
 			}
 		});
-		mnListas.add(mntmCrear);
-		mnListas.add(mntmAgregarVideo);
+		mnNewMenu_1.add(mntmCrear);
 		
-		JMenuItem mntmQuitarVideo = new JMenuItem("Quitar video");
+		JMenuItem mntmAgregarVideo = new JMenuItem("Agregar Video");
+		mntmAgregarVideo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				 addVideoListIFrame = new AgregarVideoListaInternalFrame();
+			     contentPane.setLayout(null);
+			     contentPane.add(addVideoListIFrame);
+			     addVideoListIFrame.setVisible(true);	
+			}
+		});
+		mnNewMenu_1.add(mntmAgregarVideo);
+		
+		JMenuItem mntmQuitarVideo = new JMenuItem("Quitar Video");
 		mntmQuitarVideo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				 quitarVideoListIFrame = new QuitarVideoListaInternalFrame();
@@ -190,13 +210,13 @@ public class adminPrincipal extends JFrame {
 			     quitarVideoListIFrame.setVisible(true);	
 			}
 		});
-		mnListas.add(mntmQuitarVideo);
-
-		JMenu mnCategoria = new JMenu("Categoria");
-		menuBar.add(mnCategoria);
+		mnNewMenu_1.add(mntmQuitarVideo);
 		
-		JMenuItem mntmAlta_1 = new JMenuItem("Alta");
-		mntmAlta_1.addActionListener(new ActionListener() {
+		JMenu mnCategorias = new JMenu("Categorias");
+		menuBar.add(mnCategorias);
+		
+		JMenuItem mntmAlta_2 = new JMenuItem("Alta");
+		mntmAlta_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				 AltaCategoria ac = new AltaCategoria(ICV);
 			     contentPane.setLayout(null);
@@ -204,7 +224,12 @@ public class adminPrincipal extends JFrame {
 			     ac.setVisible(true);
 			}
 		});
-		mnCategoria.add(mntmAlta_1);
+		mnCategorias.add(mntmAlta_2);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(new BorderLayout(0, 0));
+		setContentPane(contentPane);
 	}
 
 }
+
