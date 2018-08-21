@@ -71,6 +71,7 @@ public class AltaVideo extends JInternalFrame {
 		getContentPane().add(lblNicknameAutor);
 		
 		JComboBox comboBoxNicknames = new JComboBox();
+		comboBoxNicknames.setEditable(true);
 		String[] nicknamesArray = iCU.listarNicknamesUsuarios();
 		comboBoxNicknames.setModel(new DefaultComboBoxModel(nicknamesArray));
 		getContentPane().add(comboBoxNicknames);
@@ -151,31 +152,35 @@ public class AltaVideo extends JInternalFrame {
 			public void actionPerformed(ActionEvent e) {
 				String nickU = (String) comboBoxNicknames.getSelectedItem();
 				String nom = textFieldNombreVideo.getText();
-				if(iCU.memberVideoEnUsuario(nickU, nom) != true) {
-					String desc = textAreaDesc.getText();
-					Integer dur = (Integer) spinnerDuracion.getValue();
-					DtFecha fp = new DtFecha(dateChooserFecha.getDate());
-					String url = textFieldURL.getText();
-					//asigno categoria.
-					DtCategoria catE = null;
-					Boolean flag = false;
-					int i = 0;
-					while (( i < categoriasDts.length) && (flag == false)){
-						if(comboBoxCategoria.getSelectedItem() == categoriasDts[i].getNombre()) {
-							catE = categoriasDts[i];
-							flag = true;
-						}
-						i++;
-					}
-					//termino de asignar categoria
-					//Asigno privado
-					boolean p = false;
-					if(comboBoxPrivacidad.getSelectedItem() == "privado") p = true;
-					else p = false;
-					//termino de asignar privado.
-					iCU.aniadirVideo(nickU, nom, desc, dur, fp, url, catE, p);
-					infoBox("Video creado exitosamente","Exito");
-				}else infoBox("Ya existe el nombre del video en el canal del usuario seleccionado.","Error");
+				if(iCU.memberUsuario(nickU) == true) {
+					if(iCU.memberVideoEnUsuario(nickU, nom) != true) {
+						if(!textFieldNombreVideo.getText().equals("")) {
+							String desc = textAreaDesc.getText();
+							Integer dur = (Integer) spinnerDuracion.getValue();
+							DtFecha fp = new DtFecha(dateChooserFecha.getDate());
+							String url = textFieldURL.getText();
+							//asigno categoria.
+							DtCategoria catE = null;
+							Boolean flag = false;
+							int i = 0;
+							while (( i < categoriasDts.length) && (flag == false)){
+								if(comboBoxCategoria.getSelectedItem() == categoriasDts[i].getNombre()) {
+									catE = categoriasDts[i];
+									flag = true;
+								}
+								i++;
+							}
+							//termino de asignar categoria
+							//Asigno privado
+							boolean p = false;
+							if(comboBoxPrivacidad.getSelectedItem() == "privado") p = true;
+							else p = false;
+							//termino de asignar privado.
+							iCU.aniadirVideo(nickU, nom, desc, dur, fp, url, catE, p);
+							infoBox("Video creado exitosamente","Exito");
+						}else infoBox("El titulo no puede estar vacio.","Error");
+					}else infoBox("Ya existe el nombre del video en el canal del usuario seleccionado.","Error");
+				}else infoBox("No existe el usuario en el sistema.","Error");
 			}
 		});
 		getContentPane().add(btnNewButtonAceptar);
