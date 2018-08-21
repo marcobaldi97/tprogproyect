@@ -13,6 +13,8 @@ import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
 
+import uytube.admin.adminPrincipalBienHecho;
+import uytube.admin.videos.consultar.ConsultarVideoInternalFrame;
 import uytube.logica.DtCanal;
 import uytube.logica.DtCategoria;
 import uytube.logica.DtListaReproduccion;
@@ -34,6 +36,10 @@ import javax.swing.ScrollPaneConstants;
 import com.toedter.components.JLocaleChooser;
 import javax.swing.JList;
 import javax.swing.ListSelectionModel;
+import javax.swing.JTextArea;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
+import javax.swing.JButton;
 
 
 public class ConsultaUsuarioInternalFrame extends JInternalFrame {
@@ -41,15 +47,16 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 	private JTextField textFieldNombre;
 	private JTextField textFieldApellido;
 	private JTextField textFieldNomCanal;
-	private JTextField textField_4;
 	private JTextPane textPaneDesc;
 	private JComboBox comboBoxVideos;
-	private JComboBox comboBoxListas;
+	private JComboBox<String> comboBoxListas;
 	private IUsuarioCtrl controlUsr;
 	JDateChooser dateChooser;
 	private JTextField textFieldPrivacidad;
 	private JTextField textFieldCatCanal;
 	private JList listCat;
+	private JTextField textFieldPriv;
+	private JTextArea textAreaDescVideo;
 	/**
 	 * Create the frame.
 	 * @param iCU 
@@ -62,7 +69,7 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 		setResizable(true);
 		setMaximizable(true);
 		setIconifiable(true);
-		setBounds(100, 100, 384, 411);
+		setBounds(100, 100, 420, 411);
 		getContentPane().setLayout(new GridLayout(0, 2, 5, 5));
 		
 		JPanel panelDUsuario = new JPanel();
@@ -79,7 +86,7 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 			public void actionPerformed(ActionEvent e) {
 				String nickU = (String)comboBoxNick.getSelectedItem();
 				limpiar();
-				if((String)comboBoxNick.getSelectedItem() != " "){
+				if((String)comboBoxNick.getSelectedItem() != " " && comboBoxNick.getSelectedIndex()!=-1){
 					//pedir Dt
 					DtUsuario usr= controlUsr.listarDatosUsuario(nickU);
 					DtCanal usrCanal = controlUsr.mostrarInfoCanal(nickU);
@@ -167,7 +174,7 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 		JPanel panelDVideo = new JPanel();
 		panelDVideo.setBorder(new TitledBorder(null, "Datos video", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		getContentPane().add(panelDVideo);
-		panelDVideo.setLayout(new GridLayout(5, 2, 2, 1));
+		panelDVideo.setLayout(new GridLayout(4, 2, 2, 5));
 		
 		JLabel label_8 = new JLabel("Nombre");
 		panelDVideo.add(label_8);
@@ -176,57 +183,64 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 		comboBoxVideos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String video = (String)comboBoxVideos.getSelectedItem();
-				if(video != " "){
+				if( comboBoxVideos.getSelectedIndex()!=-1){
 					//crear dtVideo
-					//DtVideo dtVideo = new DtVideo();
-					
-					//DtVideo dtVideo = 
+					DtVideo dtVideo = controlUsr.obtenerInfoAdicVideo((String)comboBoxNick.getSelectedItem(), video);
 					//cargar datos video
+					textAreaDescVideo.setText(dtVideo.getDescripcion());
 				}
 			}
 		});
 		panelDVideo.add(comboBoxVideos);
 		
-		JLabel label_9 = new JLabel("Categoria");
-		panelDVideo.add(label_9);
+		JLabel lblDescripcion = new JLabel("Descripcion");
+		panelDVideo.add(lblDescripcion);
 		
-		textField_4 = new JTextField();
-		textField_4.setEditable(false);
-		textField_4.setColumns(10);
-		panelDVideo.add(textField_4);
+		JScrollPane scrollPane_4 = new JScrollPane();
+		scrollPane_4.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		panelDVideo.add(scrollPane_4);
+		
+		textAreaDescVideo = new JTextArea();
+		textAreaDescVideo.setEditable(false);
+		scrollPane_4.setViewportView(textAreaDescVideo);
+		
+		JButton btnMasInformacion = new JButton("Mas informacion");
+		btnMasInformacion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//abrir consulta video
+				openConsultarVideo();
+			}
+		});
+		panelDVideo.add(btnMasInformacion);
 		
 		JPanel panelDLista = new JPanel();
 		panelDLista.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Datos Listas", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		getContentPane().add(panelDLista);
-		panelDLista.setLayout(new GridLayout(5, 2, 2, 1));
+		panelDLista.setLayout(new GridLayout(4, 2, 2, 5));
 		
 		JLabel label_10 = new JLabel("Nombre Lista");
 		panelDLista.add(label_10);
 		comboBoxListas = new JComboBox();
-		comboBoxListas.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		comboBoxListas.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
 				//cargar datos lista
 				String lista = (String)comboBoxListas.getSelectedItem();
-				if((String)comboBoxNick.getSelectedItem() != " "){
+				System.out.println();
+				if(comboBoxListas.getSelectedIndex()!=-1){
 					//pedir Dt
 					DtListaReproduccion lr = controlUsr.infoAdicLDR((String)comboBoxNick.getSelectedItem(),lista );
 					//cargarDatos
 					DefaultListModel modelCat =new DefaultListModel();
 					listCat.setModel(modelCat);
-				   
+					if (lr!=null){
 				    DtCategoria[] categorias = lr.getCategoriasLDR();
 				    for(int i=0; i<categorias.length;i++){
 				    	  modelCat.addElement(categorias[i].getNombre());
-				     }
+				    }
 				    
-					if (lr.getPrivado()){
-						textFieldPrivacidad.setText("Privado");
-					}else{
-						textFieldPrivacidad.setText("Publico");
-					}
-					
-					//
-						
+					if (lr.getPrivado()){ textFieldPriv.setText("Privado");}
+					else{textFieldPriv.setText("Publico"); }
+				   }				//
 				}
 				
 			}
@@ -245,6 +259,14 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 		listCat = new JList();
 		listCat.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane_3.setViewportView(listCat);
+		
+		JLabel lblPrivacidad = new JLabel("Privacidad");
+		panelDLista.add(lblPrivacidad);
+		
+		textFieldPriv = new JTextField();
+		textFieldPriv.setEditable(false);
+		panelDLista.add(textFieldPriv);
+		textFieldPriv.setColumns(10);
 		
 		JPanel panelSeguidos = new JPanel();
 		panelSeguidos.setBorder(new TitledBorder(null, "Seguidos", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -272,10 +294,11 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 		
 		//CARGAR NICK
 		String[] nickUsuario = controlUsr.listarNicknamesUsuarios();
-		comboBoxNick.addItem(" ");
-		 for(int i=0; i<nickUsuario.length;i++){
+		for(int i=0; i<nickUsuario.length;i++){
 			 comboBoxNick.addItem(nickUsuario[i]);
 	     }
+		comboBoxNick.setSelectedIndex(-1);
+		limpiar();
 		 //.....//
 		
 	}
@@ -296,17 +319,20 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 		
 		//CARGAR VIDEOS
 		String[] nomVideos = controlUsr.listarVideosCanal(nickU);
-		comboBoxVideos.addItem(" ");
 		for(int i=0; i<nomVideos.length;i++){
 			 comboBoxVideos.addItem(nomVideos[i]);
 		}
+		comboBoxVideos.setSelectedIndex(-1);
+		textAreaDescVideo.setText(null);
 		//CARGAR LISTAS
-		//si esta vacio da error!!!!
 		String[] nomListas = controlUsr.listarLDRdeUsuario(nickU);
-		comboBoxListas.addItem(" ");
+
 		for(int e=0; e<nomListas.length;e++){
 			 comboBoxListas.addItem(nomListas[e]);
 		}
+		comboBoxListas.setSelectedIndex(-1);
+		textFieldPriv.setText(null);
+		
 		//CARGAR SEGUIDOS
 	/*	String[] usr = controlUsr.listarUsuarios;
 				
@@ -318,6 +344,15 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 		}
 		*/
 	}
+	private void openConsultarVideo(){
+	   //modificarUsuario modUsrIFrame = new modificarUsuario();
+	   ConsultarVideoInternalFrame consVideoIFrame = new ConsultarVideoInternalFrame();
+	   adminPrincipalBienHecho.getFrames()[0].setLayout(null);
+	   adminPrincipalBienHecho.getFrames()[0].add(consVideoIFrame);
+	   consVideoIFrame.show();
+	   consVideoIFrame.moveToFront(); 
+	//   modUsrIFrame.setVisible(true);
+	 }
 	 private void limpiar(){
 		 textFieldEmail.setText("");
 			textFieldNombre.setText("");
@@ -329,5 +364,15 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 			
 			textPaneDesc.setText("");
 			textFieldCatCanal.setText("");
+			
+			textFieldPriv.setText("");
+			
+			comboBoxVideos.setSelectedIndex(-1);
+			comboBoxVideos.removeAllItems();
+			
+			comboBoxListas.setSelectedIndex(-1);
+			comboBoxVideos.removeAllItems();
+			
+			textAreaDescVideo.setText(null);
 	 }
 }

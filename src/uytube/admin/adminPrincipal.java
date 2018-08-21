@@ -131,7 +131,7 @@ public class adminPrincipal extends JFrame {
 		JMenuItem mntmModificar = new JMenuItem("Modificar");
 		mntmModificar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				modUsrIFrame = new modificarUsuario();
+				modUsrIFrame = new modificarUsuario(ICU);
 			    contentPane.setLayout(null);
 			    contentPane.add(modUsrIFrame);
 			    modUsrIFrame.setVisible(true);

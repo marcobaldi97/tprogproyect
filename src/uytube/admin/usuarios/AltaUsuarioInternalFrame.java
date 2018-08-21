@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 import java.awt.FlowLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JEditorPane;
 import java.awt.GridLayout;
@@ -43,8 +44,10 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 	private JEditorPane editorPaneDesc = new JEditorPane();
 	private JDateChooser dateChooser;
 	private JComboBox comboBoxCat;
-	private JLabel aviso;
 	
+	 public static void infoBox(String infoMessage, String titleBar){
+	        JOptionPane.showMessageDialog(null, infoMessage, "" + titleBar, JOptionPane.INFORMATION_MESSAGE);
+	 }
 	/**
 	 * Create the frame.
 	 * @param iCU 
@@ -57,7 +60,7 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 		setTitle("Alta Usuario");
 		setMaximizable(true);
 		setClosable(true);
-		setBounds(100, 100, 319, 406);
+		setBounds(100, 100, 319, 365);
 		FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER, 5, 5);
 		getContentPane().setLayout(flowLayout);
 		
@@ -170,11 +173,11 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 				//crear
 				if(disponible && verificarCampos()){
 					controlUsr.nuevoUsuario(nick,nom, ape, email, nac,"foto",nomCanal,descCanal,privacidad, catE) ;
-					aviso.setText("Usuario creado con exito");
+					infoBox("Usuario creado con exito", "Alta Usuario");
 					limpiar();
 				}else if(!disponible){
 					//avisar que no se pudo crear
-					aviso.setText("Ya existe el usuario");
+					infoBox("Ya existe el usuario", "Error");
 					//limpiar();
 				}
 			}
@@ -193,16 +196,6 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 		});
 		panel.add(btnCancelar);
 		
-		JPanel panel_1 = new JPanel();
-		getContentPane().add(panel_1);
-		panel_1.setLayout(new GridLayout(0, 1, 0, 0));
-		
-		JLabel label_1 = new JLabel("                                                     ");
-		panel_1.add(label_1);
-		
-		aviso = new JLabel("");
-		panel_1.add(aviso);
-		
 		//CARGAR CATEGORIAS
         DtCategoria[] set_cat=iCV.listarCategorias();
         
@@ -216,7 +209,7 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 	private Boolean verificarCampos(){
 		if(textFieldNick.getText().isEmpty() || textFieldEmail.getText().isEmpty()|| textFieldNombre.getText().isEmpty()
 				|| txtApellido.getText().isEmpty() || dateChooser.getDate()==null || textFieldNombreC.getText().isEmpty()){
-			aviso.setText("Campos sin completar");
+			infoBox("Campos sin completar", "Aviso");
 			return false;
 		}else{return true;}
 		

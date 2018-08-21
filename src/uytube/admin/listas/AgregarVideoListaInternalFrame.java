@@ -16,22 +16,6 @@ import java.awt.event.ActionEvent;
 public class AgregarVideoListaInternalFrame extends JInternalFrame {
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AgregarVideoListaInternalFrame frame = new AgregarVideoListaInternalFrame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 * @param iCU 
 	 */
