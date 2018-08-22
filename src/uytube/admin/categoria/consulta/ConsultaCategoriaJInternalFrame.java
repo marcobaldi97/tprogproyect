@@ -127,10 +127,8 @@ public class ConsultaCategoriaJInternalFrame extends JInternalFrame {
 		
 		JComboBox comboBox = new JComboBox();
 		panel.add(comboBox);
+		
 		table_LDR = new JTable(ModeloNombrePropietario());
-		
-	
-		
 		table_Video = new JTable(ModeloNombrePropietario());
 		
 		panel_Video.add(table_Video);
@@ -148,30 +146,40 @@ public class ConsultaCategoriaJInternalFrame extends JInternalFrame {
 					DefaultTableModel modelo_video= (DefaultTableModel) table_Video.getModel();
 					DefaultTableModel modelo_ldr= (DefaultTableModel) table_LDR.getModel();
 					
-					modelo_video.getDataVector().removeAllElements();
-					revalidate();
-					modelo_ldr.getDataVector().removeAllElements();
-					revalidate();
-					
-					modelo_video.addRow(new Object[]{"NOMBRE","PROPIETARIO"});
-					modelo_ldr.addRow(new Object[]{"NOMBRE","PROPIETARIO"});
-					
+					modelo_video.setRowCount(0);
+					modelo_ldr.setRowCount(0);
+
 					DtVideo [] listarvideos= iCV.listarVideosPorCategoria(comboBox.getSelectedItem().toString());
-					for(int i=0;i<listarvideos.length;i++) 
-					{
-						modelo_video.addRow(new Object[]{listarvideos[i].getNombre(),listarvideos[i].getPropietario()});
-					}
-					
 					DtListaReproduccion [] listarLDR= iCV.listarLDRPorCategoria(comboBox.getSelectedItem().toString());
-					for(int i=0; i<listarLDR.length;i++) 
+					
+					if(listarvideos.length>0) 
 					{
-						modelo_ldr.addRow(new Object[] {listarLDR[i].getNombre(),listarLDR[i].getPropietario()});
+						modelo_video.addRow(new Object[]{"NOMBRE","PROPIETARIO"});
+						for(int i=0;i<listarvideos.length;i++) 
+						{
+							modelo_video.addRow(new Object[]{listarvideos[i].getNombre(),listarvideos[i].getPropietario()});
+						}
 					}
-					
+					else
+					{
+						modelo_video.addRow(new Object[]{"NO HAY","VIDEOS"});
 
-
+					}	
 					
-				//infoBox(comboBox.getSelectedItem().toString(),"");
+					if(listarLDR.length>0) 
+					{
+						for(int i=0; i<listarLDR.length;i++) 
+						{
+							modelo_ldr.addRow(new Object[] {listarLDR[i].getNombre(),listarLDR[i].getPropietario()});
+						}
+					}
+					else
+					{
+						modelo_ldr.addRow(new Object[]{"NO HAY","LISTAS"});
+
+					}	
+
+				
 				}
 		});
 		
