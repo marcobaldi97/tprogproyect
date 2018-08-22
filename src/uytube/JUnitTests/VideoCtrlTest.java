@@ -12,11 +12,14 @@ import uytube.logica.Categoria;
 import uytube.logica.CategoriaHandler;
 import uytube.logica.DtCategoria;
 import uytube.logica.DtFecha;
+import uytube.logica.DtInfoVideo;
 import uytube.logica.DtListaReproduccion;
 import uytube.logica.DtVideo;
 import uytube.logica.ListaReproduccion;
 import uytube.logica.Particular;
 import uytube.logica.PorDefecto;
+import uytube.logica.Usuario;
+import uytube.logica.UsuarioCtrl;
 import uytube.logica.Video;
 import uytube.logica.VideoCtrl;
 import uytube.logica.VideoHandler;
@@ -123,13 +126,43 @@ public class VideoCtrlTest {
 	@Test
 	public void testVerDetallesVideoExt() {
 		VideoCtrl VCU=VideoCtrl.getInstance();
+		UsuarioCtrl UCU=UsuarioCtrl.getInstance();
+		VCU.crearCategoria("nombreCategoria");
+		DtCategoria[] cates=VCU.listarCategorias();
+		DtCategoria cate=cates[0];
+		DtFecha fecha=new DtFecha(new Date(0));
+		UCU.nuevoUsuario("duenio","Jose","Perez","email", fecha,"foto","duenioCanal","descripcion",true,"nombreCategoria");
+		UCU.aniadirVideo("nombre","duenio","descr",20,fecha,"hola.com",cate,true);
+		
+		DtInfoVideo infoActual=VCU.verDetallesVideoExt(1);
+		//assert campo por campo
 		fail("Not yet implemented");
 	}
 
 	@Test
 	public void testInfoAddVideo() {
 		VideoCtrl VCU=VideoCtrl.getInstance();
-		fail("Not yet implemented");
+		CategoriaHandler CHU=CategoriaHandler.getInstance();
+		
+		Categoria categoriaE=new Categoria("nombreCategoria");
+		CHU.addCategoria(categoriaE);
+		DtFecha fecha=new DtFecha(new Date(0));
+		DtCategoria cate1=null;
+		DtCategoria cate2=new DtCategoria(categoriaE);
+		
+		Video video=new Video("nombre","duenio","descr",20,fecha,"hola.com",cate1,true);
+		Video video2=new Video("nombre2","duenio2","descr2",20,fecha,"hola2.com",cate2,true);
+		
+		categoriaE.addVideo(video2);
+		DtVideo videoActual1=VCU.infoAddVideo(video.getIDVideo());
+		DtVideo videoActual2=VCU.infoAddVideo(video2.getIDVideo());
+		DtVideo video1Dt= new DtVideo(video);
+		DtVideo video2Dt= new DtVideo(video2);
+		
+		assertEquals(true, videoActual1.equals(video1Dt));
+		assertEquals(true, videoActual2.equals(video2Dt));
+		
+		
 	}
 
 	@Test
@@ -137,10 +170,9 @@ public class VideoCtrlTest {
 		VideoCtrl VCU=VideoCtrl.getInstance();
 		VideoHandler VHU=VideoHandler.getInstance();
 				
-		Categoria categoriaE=new Categoria("nombreCategoria");
 		
 		DtFecha fecha=new DtFecha(new Date(0));
-		DtCategoria cate=new DtCategoria(categoriaE);
+		DtCategoria cate=null;
 		
 		Video video=new Video("nombre","duenio","descr",20,fecha,"hola.com",cate,true);
 		Video video2=new Video("nombre2","duenio2","descr2",20,fecha,"hola2.com",cate,true);
@@ -155,14 +187,6 @@ public class VideoCtrlTest {
 		assertEquals(true,video2Dt.equals(videoActual2));
 		assertEquals(true,video1Dt.equals(videoActual1));
 		
-	}
-	@Test
-	public void testListarVideosNoExisten() {
-		VideoCtrl VCU=VideoCtrl.getInstance();
-		
-		
-		
-		fail("Not yet implemented");
 	}
 
 	@Test
