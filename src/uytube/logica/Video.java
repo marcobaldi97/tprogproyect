@@ -31,9 +31,12 @@ public class Video {
 		fecha_publicacion = fp;
 		URL = url;
 		CategoriaHandler ch=CategoriaHandler.getInstance();
-		if(ch.isMember(c.getNombre()))
-			cat=ch.find(c.getNombre());//si la categoria existe la asigno, si no?
-		else
+		if(c!=null){
+			if(ch.isMember(c.getNombre())){
+				cat=ch.find(c.getNombre());//si la categoria existe la asigno, si no?
+			}
+			
+		}else
 			cat=sh.getSinCat();
 		privacidad = p;
 		comentarios=new HashMap<Integer,Comentario>();
