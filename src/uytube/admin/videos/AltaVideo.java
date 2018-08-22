@@ -176,18 +176,19 @@ public class AltaVideo extends JInternalFrame {
 							String url = textFieldURL.getText();
 							//asigno categoria.
 							DtCategoria catE = null;
-							if(comboBoxCategoria.getSelectedIndex() != -1) {
-								Boolean flag = false;
-								int i = 0;
-								while (( i < categoriasDts.length) && (flag == false)){
-									if(comboBoxCategoria.getSelectedItem() == categoriasDts[i].getNombre()) {
-										catE = categoriasDts[i];
-										flag = true;
-									}
-									i++;
-								}
+							String nombreCategoria =(String) comboBoxCategoria.getSelectedItem(); //Puede haber un problema aca
+							if(comboBoxCategoria.getSelectedIndex() == -1) {
+								nombreCategoria = "Sin Categoria";
 							}
-
+							Boolean flag = false;
+							int i = 0;
+							while (( i < categoriasDts.length) && (flag == false)){
+								if(nombreCategoria == categoriasDts[i].getNombre()) {
+									catE = categoriasDts[i];
+									flag = true;
+								}
+								i++;
+							}
 							//termino de asignar categoria
 							//Asigno privado
 							boolean p = false;
