@@ -10,7 +10,7 @@ public abstract class ListaReproduccion {
 	
 	public ListaReproduccion(String nombLDR, String pro) {
 		nombre=nombLDR;
-		propietario=pro;
+		setPropietario(pro);
 		videos = new HashMap<Integer,Video>();
 		categorias = new HashMap<String,Categoria>();
 	}
@@ -57,6 +57,14 @@ public abstract class ListaReproduccion {
 			i++;
 		}
 		return res;
+	}
+
+	public String getPropietario() {
+		return propietario;
+	}
+
+	public void setPropietario(String propietario) {
+		this.propietario = propietario;
 	}
 
 }

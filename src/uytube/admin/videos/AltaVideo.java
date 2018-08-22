@@ -30,12 +30,24 @@ import java.awt.event.KeyEvent;
 public class AltaVideo extends JInternalFrame {
 	private JTextField textFieldNombreVideo;
 	private JTextField textFieldURL;
-	private JTextField textField;
 	private JDateChooser dateChooserFecha;
+	private JTextArea textAreaDesc;
+	private JSpinner spinnerDuracion;
+	private JComboBox comboBoxNicknames;
+	private JComboBox comboBoxCategoria;
 
-    public static void infoBox(String infoMessage, String titleBar){
+    private static void infoBox(String infoMessage, String titleBar){
         JOptionPane.showMessageDialog(null, infoMessage, "" + titleBar, JOptionPane.INFORMATION_MESSAGE);
     }
+    
+    private void clear() {
+    	comboBoxNicknames.setSelectedIndex(-1);
+    	textFieldNombreVideo.setText("");
+    	textFieldURL.setText("");
+    	textAreaDesc.setText("");
+    	comboBoxCategoria.setSelectedItem(-1);
+    }
+    
 	/**
 	 * Launch the application.
 	 */
@@ -70,7 +82,7 @@ public class AltaVideo extends JInternalFrame {
 		lblNicknameAutor.setVerticalAlignment(SwingConstants.CENTER);
 		getContentPane().add(lblNicknameAutor);
 		
-		JComboBox comboBoxNicknames = new JComboBox();
+		comboBoxNicknames = new JComboBox();
 		comboBoxNicknames.setEditable(true);
 		String[] nicknamesArray = iCU.listarNicknamesUsuarios();
 		comboBoxNicknames.setModel(new DefaultComboBoxModel(nicknamesArray));
@@ -96,7 +108,8 @@ public class AltaVideo extends JInternalFrame {
 		lblDescripcion.setHorizontalAlignment(SwingConstants.CENTER);
 		getContentPane().add(lblDescripcion);
 		
-		JTextArea textAreaDesc = new JTextArea();
+		textAreaDesc = new JTextArea();
+		textAreaDesc.setEditable(false);
 		getContentPane().add(textAreaDesc);
 		
 		JLabel lblDuracion = new JLabel("Duracion:");
@@ -119,7 +132,7 @@ public class AltaVideo extends JInternalFrame {
 		getContentPane().add(lblCategoria);
 		
 		
-		JComboBox comboBoxCategoria = new JComboBox();
+		comboBoxCategoria = new JComboBox();
 		//empiezo a cargar las categorias.
 		DtCategoria[] categoriasDts = iCV.listarCategorias();
 		String[] nombresCategoriasArray = new String[categoriasDts.length];
@@ -128,6 +141,7 @@ public class AltaVideo extends JInternalFrame {
 		}
 		comboBoxCategoria.setModel(new DefaultComboBoxModel(nombresCategoriasArray));
 		//termino de cargar las categorias
+		comboBoxCategoria.setSelectedIndex(-1);
 		getContentPane().add(comboBoxCategoria);
 		
 		JLabel lblPrivacidad = new JLabel("Privacidad:");
@@ -135,6 +149,7 @@ public class AltaVideo extends JInternalFrame {
 		getContentPane().add(lblPrivacidad);
 		
 		JComboBox comboBoxPrivacidad = new JComboBox();
+		comboBoxPrivacidad.setEnabled(false);
 		comboBoxPrivacidad.setModel(new DefaultComboBoxModel(new String[] {"Privado", "Publico"}));
 		getContentPane().add(comboBoxPrivacidad);
 		
@@ -161,15 +176,18 @@ public class AltaVideo extends JInternalFrame {
 							String url = textFieldURL.getText();
 							//asigno categoria.
 							DtCategoria catE = null;
-							Boolean flag = false;
-							int i = 0;
-							while (( i < categoriasDts.length) && (flag == false)){
-								if(comboBoxCategoria.getSelectedItem() == categoriasDts[i].getNombre()) {
-									catE = categoriasDts[i];
-									flag = true;
+							if(comboBoxCategoria.getSelectedIndex() != -1) {
+								Boolean flag = false;
+								int i = 0;
+								while (( i < categoriasDts.length) && (flag == false)){
+									if(comboBoxCategoria.getSelectedItem() == categoriasDts[i].getNombre()) {
+										catE = categoriasDts[i];
+										flag = true;
+									}
+									i++;
 								}
-								i++;
 							}
+
 							//termino de asignar categoria
 							//Asigno privado
 							boolean p = false;
@@ -178,6 +196,9 @@ public class AltaVideo extends JInternalFrame {
 							//termino de asignar privado.
 							iCU.aniadirVideo(nickU, nom, desc, dur, fp, url, catE, p);
 							infoBox("Video creado exitosamente","Exito");
+							clear();
+					    	int freshIndex = 0;
+					    	spinnerDuracion.setValue(Integer.valueOf(freshIndex));
 						}else infoBox("El titulo no puede estar vacio.","Error");
 					}else infoBox("Ya existe el nombre del video en el canal del usuario seleccionado.","Error");
 				}else infoBox("No existe el usuario en el sistema.","Error");

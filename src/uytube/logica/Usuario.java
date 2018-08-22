@@ -50,7 +50,7 @@ public class Usuario {
 	
 	public void editarDatosUsuario(String nom, String ape, DtFecha fn, String fo) {
 		nombre = nom;
-		apellido = ape;;
+		apellido = ape;
 		fecha_nacimiento = fn;
 		foto = fo;
 	}
@@ -117,7 +117,7 @@ public class Usuario {
 		return canalPropio.listarListasReproduccion();
 	}
 	
-	public String[] listarUsuarioQueLeSigue() {
+	public String[] listarUsuariosQueLeSigue() {
 		String[] nicknames = new String[usuariosQueLeSiguen.size()];
 		Integer contador = 0;
 		for(Map.Entry<String, Usuario> entry : usuariosQueLeSiguen.entrySet()) {

@@ -57,6 +57,8 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 	private JList listCat;
 	private JTextField textFieldPriv;
 	private JTextArea textAreaDescVideo;
+	private JList listSeguidos;
+	private JList listSeguidores;
 	/**
 	 * Create the frame.
 	 * @param iCU 
@@ -276,7 +278,7 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 		JScrollPane scrollPane_1 = new JScrollPane();
 		panelSeguidos.add(scrollPane_1);
 		
-		JList listSeguidos = new JList();
+		listSeguidos = new JList();
 		listSeguidos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane_1.setViewportView(listSeguidos);
 		
@@ -288,7 +290,7 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 		JScrollPane scrollPane_2 = new JScrollPane();
 		panelSeguidores.add(scrollPane_2);
 		
-		JList listSeguidores = new JList();
+		listSeguidores = new JList();
 		listSeguidores.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane_2.setViewportView(listSeguidores);
 		
@@ -332,17 +334,23 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 		}
 		comboBoxListas.setSelectedIndex(-1);
 		textFieldPriv.setText(null);
-		
-		//CARGAR SEGUIDOS
-	/*	String[] usr = controlUsr.listarUsuarios;
 				
+		//CARGAR SEGUIDOS
+		String[] usrSigue = controlUsr.listarUsuariosQueSigue(nickU);
 		DefaultListModel model=new DefaultListModel();
-		listUsuarios.setModel(model);
-			  
-		for(int i=0; i<usr.length;i++){
-			model.addElement(usr[i]);
+		listSeguidos.setModel(model);
+	  
+		for(int i=0; i<usrSigue.length;i++){
+			model.addElement(usrSigue[i]);
 		}
-		*/
+		//CARRGAR SEGUIDORES 
+		String[] usrSiguedores = controlUsr.listarUsuariosQueLeSigue(nickU);
+		DefaultListModel model2=new DefaultListModel();
+		listSeguidores.setModel(model2);
+		for(int i=0; i<usrSiguedores.length;i++){
+			model2.addElement(usrSiguedores[i]);
+		}
+		
 	}
 	private void openConsultarVideo(){
 	   //modificarUsuario modUsrIFrame = new modificarUsuario();
@@ -371,8 +379,12 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 			comboBoxVideos.removeAllItems();
 			
 			comboBoxListas.setSelectedIndex(-1);
-			comboBoxVideos.removeAllItems();
+			comboBoxListas.removeAllItems();
 			
 			textAreaDescVideo.setText(null);
+			DefaultListModel model2=new DefaultListModel();
+			listSeguidores.setModel(model2);
+			listSeguidos.setModel(model2);
+			
 	 }
 }

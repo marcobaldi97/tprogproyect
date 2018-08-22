@@ -1,8 +1,12 @@
 package uytube.admin.usuarios;
 
 import java.awt.EventQueue;
+
+import uytube.admin.adminPrincipalBienHecho;
+import uytube.admin.videos.consultar.ConsultarVideoInternalFrame;
 import uytube.admin.videos.modificar.*;
 import uytube.logica.DtCanal;
+import uytube.logica.DtFecha;
 import uytube.logica.DtUsuario;
 import uytube.logica.IUsuarioCtrl;
 
@@ -26,6 +30,7 @@ import java.awt.Insets;
 import javax.swing.JTextField;
 import javax.swing.JEditorPane;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.border.BevelBorder;
 import javax.swing.table.DefaultTableModel;
@@ -40,6 +45,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 public class modificarUsuario extends JInternalFrame {
 	private JTextField textFieldNombre;
@@ -50,24 +57,36 @@ public class modificarUsuario extends JInternalFrame {
 	private JDateChooser dateChooser;
 	private JRadioButton rdbtnPrivado;
 	private JRadioButton rdbtnPublico;
-	private JTextPane textPaneDesc;
 	private JComboBox comboBoxVideos;
 	private IUsuarioCtrl controlUsr;
 	private JTextField textFieldCatCanal;
 	private JComboBox comboBoxListas;
 	private final ButtonGroup buttonGroup_1 = new ButtonGroup();
+	private JButton btnModificar ;
+	private JButton btnCancelar_2;
+	private JTextArea textAreaDesc;
+	
+	private DtUsuario usr;
+	private DtCanal usrCanal;
+	
+	 public static void infoBox(String infoMessage, String titleBar){
+	        JOptionPane.showMessageDialog(null, infoMessage, "" + titleBar, JOptionPane.INFORMATION_MESSAGE);
+	 }
 	/**
 	 * Create the frame.
 	 * @param iCU 
 	 */
+	
 	public modificarUsuario(IUsuarioCtrl iCU) {
+		
+		
 		controlUsr = iCU;
 		
 		setTitle("Modificar Usuario");
 		setResizable(true);
 		setMaximizable(true);
 		setClosable(true);
-		setBounds(100, 100, 509, 394);
+		setBounds(100, 100, 404, 434);
 		getContentPane().setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		JPanel panelDatosUsuario = new JPanel();
@@ -82,11 +101,10 @@ public class modificarUsuario extends JInternalFrame {
 		comboBoxNick.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String nickU = (String)comboBoxNick.getSelectedItem();
-				limpiar();
 				if((String)comboBoxNick.getSelectedItem() != " " && comboBoxNick.getSelectedIndex()!=-1){
 					//pedir Dt
-					DtUsuario usr= controlUsr.listarDatosUsuario(nickU);
-					DtCanal usrCanal = controlUsr.mostrarInfoCanal(nickU);
+					usr= controlUsr.listarDatosUsuario(nickU);
+					usrCanal = controlUsr.mostrarInfoCanal(nickU);
 				
 					cargarDatos(usr, usrCanal, nickU);
 			}
@@ -123,32 +141,89 @@ public class modificarUsuario extends JInternalFrame {
 		panelDatosUsuario.add(lblFechaNac);
 		
 		dateChooser = new JDateChooser();
+		dateChooser.setEnabled(false);
 		panelDatosUsuario.add(dateChooser);
 		
-		JButton btnModificar = new JButton("Modificar");
-		btnModificar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				textFieldNombre.setEditable(true);
-				textFieldApellido.setEditable(true);
-				dateChooser.enable(true);
-				btnModificar.setText("Guardar");
-				if(btnModificar.getText()=="Guardar"){
-					
-				}
-			}
-		});
-		panelDatosUsuario.add(btnModificar);
-		
 		JButton btnCancelar_1 = new JButton("Cancelar");
+		btnCancelar_1.setEnabled(false);
 		btnCancelar_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				textFieldNombre.setEditable(false);
 				textFieldApellido.setEditable(false);
-				dateChooser.enable(false);
+				dateChooser.setEnabled(false);
 				btnModificar.setText("Modificar");
+				String nickU = (String)comboBoxNick.getSelectedItem();
+				if((String)comboBoxNick.getSelectedItem() != " " && comboBoxNick.getSelectedIndex()!=-1){
+					//pedir Dt
+					usr= controlUsr.listarDatosUsuario(nickU);
+					usrCanal = controlUsr.mostrarInfoCanal(nickU);
+					
+					limpiar();
+					cargarDatos(usr, usrCanal, nickU);
+				}
+				btnCancelar_1.setEnabled(false);
 			}
 		});
+		
+		btnModificar = new JButton("Modificar");
+		btnModificar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String  nickU, nom, ape;
+				DtFecha nac;
+				nickU = (String) comboBoxNick.getSelectedItem();
+							
+				nom = textFieldNombre.getText();
+				ape = textFieldApellido.getText();
+				nac = new DtFecha(dateChooser.getDate());
+			
+				//verificar campos!!
+				
+				if(btnModificar.getText()=="Guardar"){
+					if(verificarCamposDatosUsu()){
+						controlUsr.editarDatosUsuario(nickU,nom,ape, nac,"Foto");						
+						infoBox("Usuario modificado","Modificar usuario");
+						
+						textFieldNombre.setEditable(false);
+						textFieldApellido.setEditable(false);
+						dateChooser.setEnabled(false);
+						btnModificar.setText("Modificar");
+					}
+					btnCancelar_1.setEnabled(false);
+				}else if(btnModificar.getText()=="Modificar"){
+					textFieldNombre.setEditable(true);
+					textFieldApellido.setEditable(true);
+					dateChooser.setEnabled(true);
+					btnCancelar_1.setEnabled(true);
+					//((JTextField) dateChooser.getDateEditor()).setEditable(true);  
+					btnModificar.setText("Guardar");
+				}
+			}
+		});
+		panelDatosUsuario.add(btnModificar);
 		panelDatosUsuario.add(btnCancelar_1);
+		
+		
+		
+		JPanel panel = new JPanel();
+		panel.setBorder(new TitledBorder(null, "Datos video", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		getContentPane().add(panel);
+		panel.setLayout(new GridLayout(0, 1, 5, 5));
+		
+		JLabel label = new JLabel("Nombre");
+		panel.add(label);
+		
+		comboBoxVideos = new JComboBox();
+		panel.add(comboBoxVideos);
+		
+		JButton button = new JButton("Modificar");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//abrir videos.modificar
+				openModificarVideo();
+				
+			}
+		});
+		panel.add(button);
 		
 		JPanel panelDatosCanal = new JPanel();
 		panelDatosCanal.setBorder(new TitledBorder(null, "Datos canal", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -167,6 +242,7 @@ public class modificarUsuario extends JInternalFrame {
 		panelDatosCanal.add(lblPrivacidad);
 		
 		rdbtnPrivado = new JRadioButton("Privado");
+		rdbtnPrivado.setEnabled(false);
 		rdbtnPrivado.setSelected(true);
 		buttonGroup.add(rdbtnPrivado);
 		panelDatosCanal.add(rdbtnPrivado);
@@ -175,15 +251,19 @@ public class modificarUsuario extends JInternalFrame {
 		panelDatosCanal.add(label_1);
 		
 		rdbtnPublico = new JRadioButton("Publico");
+		rdbtnPublico.setEnabled(false);
 		buttonGroup.add(rdbtnPublico);
 		panelDatosCanal.add(rdbtnPublico);
 		
 		JLabel lblDescripicin = new JLabel("Descripici\u00F3n");
 		panelDatosCanal.add(lblDescripicin);
 		
-		textPaneDesc = new JTextPane();
-		textPaneDesc.setEditable(false);
-		panelDatosCanal.add(textPaneDesc);
+		JScrollPane scrollPane = new JScrollPane();
+		panelDatosCanal.add(scrollPane);
+		
+		textAreaDesc = new JTextArea();
+		textAreaDesc.setEditable(false);
+		scrollPane.setViewportView(textAreaDesc);
 		
 		JLabel label_5 = new JLabel("Categoria");
 		panelDatosCanal.add(label_5);
@@ -195,27 +275,71 @@ public class modificarUsuario extends JInternalFrame {
 		panelDatosCanal.add(textFieldCatCanal);
 		
 		JButton btnModificar_3 = new JButton("Modificar");
+		btnModificar_3.setEnabled(false);
+		btnModificar_3.setVisible(false);
+		btnModificar_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String  nickU, nom, ape;
+				DtFecha nac;
+				nickU = (String) comboBoxNick.getSelectedItem();
+							
+				nom = textFieldNombre.getText();
+				ape = textFieldApellido.getText();
+				nac = new DtFecha(dateChooser.getDate());
+			
+				//verificar campos!!
+				
+				if(btnModificar_3.getText()=="Guardar"){
+					if(verificarCamposDatosUsu()){
+						//controlUsr.editarDatosUsuario(nickU,nom,ape, nac,"Foto");						
+						infoBox("Canal modificado","Modificar usuario");
+						
+						rdbtnPrivado.setEnabled(false);
+						rdbtnPublico.setEnabled(false);
+						
+						textAreaDesc.setEditable(false);
+						btnModificar_3.setText("Modificar");
+					}
+					btnCancelar_1.setEnabled(false);
+				}else if(btnModificar.getText()=="Modificar"){
+					rdbtnPrivado.setEnabled(true);
+					rdbtnPublico.setEnabled(true);
+					
+					textAreaDesc.setEditable(true);
+					btnModificar_3.setText("Guardar");
+					
+					btnCancelar_2.setEnabled(true);
+				}
+			}
+		});
 		panelDatosCanal.add(btnModificar_3);
 		
-		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(null, "Datos video", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		getContentPane().add(panel);
-		panel.setLayout(new GridLayout(0, 2, 5, 5));
-		
-		JLabel label = new JLabel("Nombre");
-		panel.add(label);
-		
-		comboBoxVideos = new JComboBox();
-		panel.add(comboBoxVideos);
-		
-		JButton button = new JButton("Modificar");
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				//abrir videos.modificar
+		btnCancelar_2 = new JButton("Cancelar");
+		btnCancelar_2.setVisible(false);
+		btnCancelar_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				rdbtnPrivado.setEnabled(false);
+				rdbtnPublico.setEnabled(false);
+				
+				textAreaDesc.setEditable(false);
+				btnModificar_3.setText("Modificar");
+				
+				String nickU = (String)comboBoxNick.getSelectedItem();
+				if((String)comboBoxNick.getSelectedItem() != " " && comboBoxNick.getSelectedIndex()!=-1){
+					//pedir Dt
+					usr= controlUsr.listarDatosUsuario(nickU);
+					usrCanal = controlUsr.mostrarInfoCanal(nickU);
+					
+					limpiar();
+					cargarDatos(usr, usrCanal, nickU);
+				}
+			
+				btnCancelar_2.setEnabled(false);
 				
 			}
 		});
-		panel.add(button);
+		btnCancelar_2.setEnabled(false);
+		panelDatosCanal.add(btnCancelar_2);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Datos listas de reproduccion", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -232,6 +356,7 @@ public class modificarUsuario extends JInternalFrame {
 		panel_1.add(lblPrivacidad_1);
 		
 		JRadioButton rdbtnPrivado_1 = new JRadioButton("Privado");
+		rdbtnPrivado_1.setEnabled(false);
 		rdbtnPrivado_1.setSelected(true);
 		buttonGroup_1.add(rdbtnPrivado_1);
 		panel_1.add(rdbtnPrivado_1);
@@ -240,10 +365,25 @@ public class modificarUsuario extends JInternalFrame {
 		panel_1.add(label_3);
 		
 		JRadioButton rdbtnPublico_1 = new JRadioButton("Publico");
+		rdbtnPublico_1.setEnabled(false);
 		buttonGroup_1.add(rdbtnPublico_1);
 		panel_1.add(rdbtnPublico_1);
 		
 		JButton button_1 = new JButton("Modificar");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				button_1.setText("Guardar");
+				rdbtnPrivado_1.setEnabled(true);
+				rdbtnPublico_1.setEnabled(true);
+				if(button_1.getText()=="Guardar"){
+					String nickU = (String)comboBoxNick.getSelectedItem();
+					String nombreL = (String)comboBoxListas.getSelectedItem();
+					boolean privE=false;
+					if(rdbtnPrivado.isSelected()){privE=true;}
+					controlUsr.cambiarPrivLDR(nickU,nombreL,privE);
+				}						
+			}
+		});
 		panel_1.add(button_1);
 		
 		JLabel label_8 = new JLabel("");
@@ -274,12 +414,37 @@ public class modificarUsuario extends JInternalFrame {
 		for(int i=0; i<nickUsuario.length;i++){
 			 comboBoxNick.addItem(nickUsuario[i]);
 		}
+		comboBoxNick.setSelectedIndex(-1);
 		limpiar();
 
 	}
-	private void limpiar(){
-		
+	private void openModificarVideo(){
+		   int idVideo; //como obtengo el idVideo??
+		   
+		   ModificarVideoInternalFrame modVideoIFrame = new ModificarVideoInternalFrame(adminPrincipalBienHecho.getFrames()[0]);
+		   adminPrincipalBienHecho.getFrames()[0].setLayout(null);
+		  // adminPrincipalBienHecho.getFrames()[0].add(modVideoIFrame);
+		   modVideoIFrame.show();
 	}
+	private void limpiar(){
+		 textFieldEmail.setText("");
+			textFieldNombre.setText("");
+			textFieldApellido.setText("");
+			dateChooser.setDate(null);
+			
+			textFieldNomCanal.setText("");
+			textFieldCatCanal.setText("");
+			
+			//textFieldPriv.setText("");
+			
+			comboBoxVideos.setSelectedIndex(-1);
+			comboBoxVideos.removeAllItems();
+			
+			comboBoxListas.setSelectedIndex(-1);
+			comboBoxListas.removeAllItems();
+	 }
+
+
 	private void cargarDatos(DtUsuario usr, DtCanal usrCanal, String nickU){
 		textFieldEmail.setText(usr.getEmail());
 		textFieldNombre.setText(usr.getNombre());
@@ -292,7 +457,7 @@ public class modificarUsuario extends JInternalFrame {
 		}else{
 			rdbtnPublico.setSelected(true);
 		}
-		textPaneDesc.setText(usrCanal.getDescripcion());
+		textAreaDesc.setText(usrCanal.getDescripcion());
 		textFieldCatCanal.setText(usrCanal.getCategoria().getNombre());
 		
 		//CARGAR VIDEOS
@@ -304,11 +469,17 @@ public class modificarUsuario extends JInternalFrame {
 		
 		//CARGAR LISTAS
 		String[] nomListas = controlUsr.listarLDRdeUsuario(nickU);
-
 		for(int e=0; e<nomListas.length;e++){
 			 comboBoxListas.addItem(nomListas[e]);
 		}
-		comboBoxListas.setSelectedIndex(-1);
+		comboBoxListas.setSelectedIndex(-1);		
+	}
+	private Boolean verificarCamposDatosUsu(){
+		if( textFieldEmail.getText().isEmpty()|| textFieldNombre.getText().isEmpty()
+				|| textFieldApellido.getText().isEmpty() || dateChooser.getDate()==null){
+			infoBox("Campos sin completar", "Aviso");
+			return false;
+		}else{return true;}
 		
 	}
 }

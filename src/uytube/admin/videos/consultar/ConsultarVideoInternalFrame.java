@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.nio.charset.MalformedInputException;
 
 import javax.swing.BoxLayout;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
@@ -28,6 +29,8 @@ import java.awt.Component;
 import javax.swing.JTabbedPane;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
+import javax.swing.JComboBox;
+import java.awt.BorderLayout;
 
 public class ConsultarVideoInternalFrame extends JInternalFrame {
 	static final long serialVersionUID = 113423;
@@ -35,7 +38,7 @@ public class ConsultarVideoInternalFrame extends JInternalFrame {
 	Factory fabrica = Factory.getInstance();
     IUsuarioCtrl ICU = fabrica.getIUsuarioCtrl();
     IVideoCtrl VCU = fabrica.getIVideoCtrl();
-	private JTextField authorNicknameTextField = new JTextField();
+	private JComboBox authorNicknameComboBox = new JComboBox();
 	private final JButton searchVideosButton = new JButton("Buscar");
 
 	private final JPanel mainPanel = new JPanel();
@@ -64,8 +67,12 @@ public class ConsultarVideoInternalFrame extends JInternalFrame {
 	private final JPanel UsuNoGusta = new JPanel();
 	private final JList<String> listNoGusta = new JList<>(UsuariosNoGListModel);
 	private final JPanel Comentarios = new JPanel();
+	private final JLabel lblVideosDelAutor = new JLabel("Videos del autor:");
 
 	public ConsultarVideoInternalFrame() {
+		BorderLayout borderLayout = (BorderLayout) getContentPane().getLayout();
+		borderLayout.setVgap(2);
+		borderLayout.setHgap(2);
 		setResizable(true);
 		setMaximizable(true);
 
@@ -78,12 +85,24 @@ public class ConsultarVideoInternalFrame extends JInternalFrame {
 		final BoxLayout mainPanelLayout = new BoxLayout(mainPanel, BoxLayout.Y_AXIS);
 		mainPanel.setLayout(mainPanelLayout);
 
-		final JLabel authorNicknameLabel = new JLabel("Nickname del autor");
+		final JLabel authorNicknameLabel = new JLabel("Nickname del autor:");
 		mainPanel.add(authorNicknameLabel);
-		mainPanel.add(authorNicknameTextField);
+		String[] nicknamesArray = ICU.listarNicknamesUsuarios();
+		authorNicknameComboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				handleVideoSearch();
+				videoNameTextField.setText("");
+				videoDescriptionTextField.setText("");
+				videoURLTextField.setText("");
+				videoDuracionTextField.setText("");
+			}
+		});
+		authorNicknameComboBox.setModel(new DefaultComboBoxModel(nicknamesArray));
+		mainPanel.add(authorNicknameComboBox);
 
 		initializeSearchVideosButton();
 		mainPanel.add(searchVideosButton);
+		searchVideosButton.setVisible(false);//poner true si se quiere el boton.
 
 		final JList<String> videoList = new JList<>(videoListModel);
 		
@@ -102,6 +121,8 @@ public class ConsultarVideoInternalFrame extends JInternalFrame {
 				}
 			}
 		});
+		
+		mainPanel.add(lblVideosDelAutor);
 		mainPanel.add(new JScrollPane(videoList));
 
 		initializeVideoDetailsPane();
@@ -109,22 +130,22 @@ public class ConsultarVideoInternalFrame extends JInternalFrame {
 				videoDetailsPanel.add(panel);
 				panel.setLayout(new GridLayout(0, 1, 0, 0));
 		
-				final JLabel videoNameLabel = new JLabel("Nombre");
+				final JLabel videoNameLabel = new JLabel("Nombre:");
 				panel.add(videoNameLabel);
 				videoNameTextField.setEditable(false);
 				panel.add(videoNameTextField);
 				
-						final JLabel videoDescriptionLabel = new JLabel("Descripcion");
+						final JLabel videoDescriptionLabel = new JLabel("Descripcion:");
 						panel.add(videoDescriptionLabel);
 						videoDescriptionTextField.setEditable(false);
 						panel.add(videoDescriptionTextField);
 						
-								final JLabel videoURLLabel = new JLabel("URL");
+								final JLabel videoURLLabel = new JLabel("URL:");
 								panel.add(videoURLLabel);
 								videoURLTextField.setEditable(false);
 								panel.add(videoURLTextField);
 								
-										final JLabel videoDuracionLabel = new JLabel("Duracion");
+										final JLabel videoDuracionLabel = new JLabel("Duracion:");
 										panel.add(videoDuracionLabel);
 										videoDuracionTextField.setEditable(false);
 										panel.add(videoDuracionTextField);
@@ -157,7 +178,7 @@ public class ConsultarVideoInternalFrame extends JInternalFrame {
 	}
 
 	private void handleVideoSearch() {
-		authorNickname = authorNicknameTextField.getText();
+		authorNickname = (String) authorNicknameComboBox.getSelectedItem();
 		
 		videoListModel.clear();
 		UsuariosGListModel.clear();
