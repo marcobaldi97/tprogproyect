@@ -26,6 +26,8 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import org.eclipse.wb.swing.FocusTraversalOnArray;
+import java.awt.Component;
 
 public class AltaVideo extends JInternalFrame {
 	private JTextField textFieldNombreVideo;
@@ -109,7 +111,7 @@ public class AltaVideo extends JInternalFrame {
 		getContentPane().add(lblDescripcion);
 		
 		textAreaDesc = new JTextArea();
-		textAreaDesc.setEditable(false);
+		textAreaDesc.setEditable(true);
 		getContentPane().add(textAreaDesc);
 		
 		JLabel lblDuracion = new JLabel("Duracion:");
@@ -178,16 +180,17 @@ public class AltaVideo extends JInternalFrame {
 							DtCategoria catE = null;
 							String nombreCategoria =(String) comboBoxCategoria.getSelectedItem(); //Puede haber un problema aca
 							if(comboBoxCategoria.getSelectedIndex() == -1) {
-								nombreCategoria = "Sin Categoria";
-							}
-							Boolean flag = false;
-							int i = 0;
-							while (( i < categoriasDts.length) && (flag == false)){
-								if(nombreCategoria == categoriasDts[i].getNombre()) {
-									catE = categoriasDts[i];
-									flag = true;
+								catE = null;
+							}else {
+								Boolean flag = false;
+								int i = 0;
+								while (( i < categoriasDts.length) && (flag == false)){
+									if(nombreCategoria == categoriasDts[i].getNombre()) {
+										catE = categoriasDts[i];
+										flag = true;
+									}
+									i++;
 								}
-								i++;
 							}
 							//termino de asignar categoria
 							//Asigno privado
@@ -206,6 +209,7 @@ public class AltaVideo extends JInternalFrame {
 			}
 		});
 		getContentPane().add(btnNewButtonAceptar);
+		getContentPane().setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{lblNicknameAutor, comboBoxPrivacidad, lblNombreVideo, lblNewLabel, lblDescripcion, lblDuracion, lblFecha, dateChooserFecha.getCalendarButton(), lblCategoria, lblPrivacidad, comboBoxNicknames, textFieldNombreVideo, textFieldURL, textAreaDesc, spinnerDuracion, dateChooserFecha, comboBoxCategoria, btnNewButtonAceptar, btnNewButtonCancelar}));
 
 	}
 
