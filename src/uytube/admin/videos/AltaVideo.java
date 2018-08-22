@@ -141,6 +141,7 @@ public class AltaVideo extends JInternalFrame {
 		}
 		comboBoxCategoria.setModel(new DefaultComboBoxModel(nombresCategoriasArray));
 		//termino de cargar las categorias
+		comboBoxCategoria.setSelectedIndex(-1);
 		getContentPane().add(comboBoxCategoria);
 		
 		JLabel lblPrivacidad = new JLabel("Privacidad:");
@@ -175,15 +176,18 @@ public class AltaVideo extends JInternalFrame {
 							String url = textFieldURL.getText();
 							//asigno categoria.
 							DtCategoria catE = null;
-							Boolean flag = false;
-							int i = 0;
-							while (( i < categoriasDts.length) && (flag == false)){
-								if(comboBoxCategoria.getSelectedItem() == categoriasDts[i].getNombre()) {
-									catE = categoriasDts[i];
-									flag = true;
+							if(comboBoxCategoria.getSelectedIndex() != -1) {
+								Boolean flag = false;
+								int i = 0;
+								while (( i < categoriasDts.length) && (flag == false)){
+									if(comboBoxCategoria.getSelectedItem() == categoriasDts[i].getNombre()) {
+										catE = categoriasDts[i];
+										flag = true;
+									}
+									i++;
 								}
-								i++;
 							}
+
 							//termino de asignar categoria
 							//Asigno privado
 							boolean p = false;
