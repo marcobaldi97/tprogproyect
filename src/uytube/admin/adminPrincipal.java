@@ -106,6 +106,9 @@ public class adminPrincipal extends JFrame {
 	    DtCategoria[]cates=ICV.listarCategorias();
 	    ICU.aniadirVideo("pepeDeportes", "hago flexiones por dos horas", "segui mi patreon", duracion, fechaVideo, "www.cosopum", cates[0], false);
 	    ICV.valorarVideo(1, "RobertoDeportista", false);
+	 
+	    ICU.seguirUsuario("pepeDeportes","RobertoDeportista");
+	    ICU.seguirUsuario("BokuNoNaruto","RobertoDeportista");
 	    //fin datos de prueba
 	    
 
