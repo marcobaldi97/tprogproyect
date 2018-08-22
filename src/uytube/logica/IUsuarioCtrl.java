@@ -28,6 +28,8 @@ public interface IUsuarioCtrl {
 	
 	public abstract void nuevoUsuario(String nick,String nom, String ape, String e, DtFecha fn, String fo, String nombreCanal, String desc,Boolean privacidadE, String catE) ;
 	
+	public abstract void editarDatosUsuario(String nickU,String nom, String ape, DtFecha fn, String fo);
+	
 	public abstract DtListaReproduccion infoAdicLDR(String nickU, String nombreL) ;
 	
 	public abstract DtUsuario listarDatosUsuario(String nickU);

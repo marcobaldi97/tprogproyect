@@ -18,8 +18,10 @@ public final class ModificarVideoInternalFrame {
 	}
 
 	private void initializeInternalFrame() {
+		internalFrame.setIconifiable(true);
+		internalFrame.setMaximizable(true);
 		internalFrame.setVisible(false);
-		internalFrame.setTitle("Alta Video");
+		internalFrame.setTitle("Modificar Video");
 		internalFrame.setClosable(true);
 		internalFrame.setResizable(true);
 		internalFrame.setSize(330, 500);
@@ -30,7 +32,7 @@ public final class ModificarVideoInternalFrame {
 	private void addContentToInternalFrame() {
 		ModificarVideoFormPanel altaVideoFormPanel = new ModificarVideoFormPanel(internalFrame, videoId);
 
-		internalFrame.add(altaVideoFormPanel.getPanel());
+		internalFrame.getContentPane().add(altaVideoFormPanel.getPanel());
 	}
 
 	public void setVideo(final Integer videoId) {

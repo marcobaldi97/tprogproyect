@@ -50,7 +50,7 @@ public class Usuario {
 	
 	public void editarDatosUsuario(String nom, String ape, DtFecha fn, String fo) {
 		nombre = nom;
-		apellido = ape;;
+		apellido = ape;
 		fecha_nacimiento = fn;
 		foto = fo;
 	}

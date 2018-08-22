@@ -82,7 +82,10 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 		Usuario u = usuarioh.find(nickU);
 		u.cambiarPrivLDR(nombreL, privE);
 	}
-	
+	public void editarDatosUsuario(String nickU,String nom, String ape, DtFecha fn, String fo){
+		Usuario u = usuarioh.find(nickU);
+		u.editarDatosUsuario(nom, ape,fn,fo);
+	}	
 	public void seguirUsuario(String Usu1, String Usu2) {
 		Usuario uraiz = usuarioh.find(Usu1);
 		Usuario udestino = usuarioh.find(Usu2);

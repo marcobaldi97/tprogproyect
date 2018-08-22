@@ -371,7 +371,7 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 			comboBoxVideos.removeAllItems();
 			
 			comboBoxListas.setSelectedIndex(-1);
-			comboBoxVideos.removeAllItems();
+			comboBoxListas.removeAllItems();
 			
 			textAreaDescVideo.setText(null);
 	 }
