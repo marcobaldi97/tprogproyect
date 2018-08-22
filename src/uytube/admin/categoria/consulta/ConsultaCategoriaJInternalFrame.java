@@ -45,6 +45,8 @@ import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import javax.swing.JScrollPane;
+import javax.swing.border.TitledBorder;
 
 public class ConsultaCategoriaJInternalFrame extends JInternalFrame {
 	private JTable table_LDR;
@@ -87,48 +89,49 @@ public class ConsultaCategoriaJInternalFrame extends JInternalFrame {
 	};
 	
 	public ConsultaCategoriaJInternalFrame(IVideoCtrl iCV) {
+		setResizable(true);
 		setIconifiable(true);
 		setMaximizable(true);
 		setClosable(true);
 		setTitle("Listar por categorias");
-		setBounds(100, 100, 473, 300);
-		getContentPane().setLayout(new BorderLayout(0, 0));
+		setBounds(100, 100, 526, 322);
 		
 		JPanel panel_Video = new JPanel();
 		JPanel panel = new JPanel();
 		JPanel panel_LDR = new JPanel();
+		getContentPane().setLayout(new GridLayout(0, 1, 0, 0));
 		
-		getContentPane().add(panel, BorderLayout.NORTH);
-		panel.setLayout(new GridLayout(1, 0, 0, 0));
+		getContentPane().add(panel);
+		panel.setLayout(new GridLayout(3, 1, 5, 5));
 		
-		getContentPane().add(panel_LDR, BorderLayout.WEST);
-		panel_LDR.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		getContentPane().add(panel_LDR);
 		
-		getContentPane().add(panel_Video, BorderLayout.EAST);
-		panel_Video.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		getContentPane().add(panel_Video);
 		
 		JLabel lblSeleccioneUnaCategoria = new JLabel("Seleccione una categoria");
 		panel.add(lblSeleccioneUnaCategoria);
+		panel_LDR.setLayout(new GridLayout(0, 1, 0, 0));
 		
 		JLabel lblListas = new JLabel("Listas");
 		panel_LDR.add(lblListas);
 		
 		JSeparator separator_1 = new JSeparator();
 		panel_LDR.add(separator_1);
-		
-		JSeparator separator = new JSeparator();
-		panel_Video.add(separator);
+		panel_Video.setLayout(new GridLayout(0, 1, 0, 0));
 		
 		JLabel lblVideos = new JLabel("Videos");
 		panel_Video.add(lblVideos);
 		
+		JSeparator separator = new JSeparator();
+		panel_Video.add(separator);
+		
 		JComboBox comboBox = new JComboBox();
 		panel.add(comboBox);
+		table_LDR = new JTable(ModeloNombrePropietario());
 		
 	
 		
 		table_Video = new JTable(ModeloNombrePropietario());
-		table_LDR = new JTable(ModeloNombrePropietario());
 		
 		panel_Video.add(table_Video);
 		panel_LDR.add(table_LDR);
