@@ -27,6 +27,7 @@ import java.util.Date;
 import uytube.admin.usuarios.*;
 import uytube.admin.listas.*;
 import uytube.admin.categoria.alta.*;
+import uytube.admin.categoria.consulta.*;
 import uytube.admin.videos.alta.*;
 import uytube.admin.videos.consultar.ConsultarVideoInternalFrame;
 import uytube.admin.videos.*;
@@ -42,9 +43,13 @@ public class adminPrincipal extends JFrame {
 	private AgregarVideoListaInternalFrame addVideoListIFrame;
 	private QuitarVideoListaInternalFrame quitarVideoListIFrame;
 	private CrearListaInternalFrame crearListIFrame;
+	private ConsultaCategoriaJInternalFrame consultacategoria;
 	private AltaVideo altaVideoFrame;
 	private ConsultarVideoInternalFrame consultarVideoFrame;
 	private ModificarVideo modificarVideoFrame;
+	private ValorarVideo valorarVideoFrame;
+	private ConsultarVideoInternalFrame consultarVideoFrame;
+
 
 	private IUsuarioCtrl ICU;
 	private IVideoCtrl ICV;
@@ -128,7 +133,7 @@ public class adminPrincipal extends JFrame {
 		JMenuItem mntmModificar = new JMenuItem("Modificar");
 		mntmModificar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				modUsrIFrame = new modificarUsuario();
+				modUsrIFrame = new modificarUsuario(ICU);
 			    contentPane.setLayout(null);
 			    contentPane.add(modUsrIFrame);
 			    modUsrIFrame.setVisible(true);
@@ -194,6 +199,17 @@ public class adminPrincipal extends JFrame {
 		});
 		mnVideos.add(mntmConsulta_1);
 		
+		JMenuItem mntmValorar = new JMenuItem("Valorar");
+		mntmValorar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				valorarVideoFrame = new ValorarVideo();
+				contentPane.setLayout(null);
+				contentPane.add(valorarVideoFrame);
+				valorarVideoFrame.setVisible(true);
+			}
+		});
+		mnVideos.add(mntmValorar);
+		
 		JMenu mnNewMenu_1 = new JMenu("Listas");
 		menuBar.add(mnNewMenu_1);
 		
@@ -243,6 +259,17 @@ public class adminPrincipal extends JFrame {
 			}
 		});
 		mnCategorias.add(mntmAlta_2);
+		
+		JMenuItem mntmConsulta_2 = new JMenuItem("Consulta");
+		mntmConsulta_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				consultacategoria = new ConsultaCategoriaJInternalFrame(ICV);
+				contentPane.setLayout(null);
+				contentPane.add(consultacategoria);
+				consultacategoria.setVisible(true);
+			}
+		});
+		mnCategorias.add(mntmConsulta_2);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));

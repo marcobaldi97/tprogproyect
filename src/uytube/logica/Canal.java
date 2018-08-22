@@ -45,18 +45,21 @@ public class Canal {
 				String nom = entry.getValue().getNombre();
 				nombresListas[contador] = nom;
 				contador++;
-			}//Se agregó esta linea para tratar de evitar los punteros nulos.
+			}//Se agregï¿½ esta linea para tratar de evitar los punteros nulos.
 		}
 		return nombresListas;
 	}
 	
 	public DtListaReproduccion verDetallesListareproduccion(String nombreLista) {
-		ListaReproduccion lr = findLista(nombreLista);
-		DtListaReproduccion dt = lr.verDetallesListareproduccion();
+		DtListaReproduccion dt=null;
+		if(memberListaReproduccionPropia(nombreLista)){
+			ListaReproduccion lr = findLista(nombreLista);
+			dt = lr.verDetallesListareproduccion();
+		}
 		return dt;
 	}
 	
-	public Canal(String nom, String desc, Boolean privacidadE,String catE) {
+	public Canal(String nom,String pro, String desc, Boolean privacidadE,String catE) {
 		nombre = nom;
 		descripcion = desc;
 		privado = privacidadE;
@@ -67,7 +70,7 @@ public class Canal {
 		SystemHandler sh = SystemHandler.getInstance();
 		DtListaReproduccion[] listasDefault = sh.obtenerListasReproduccion();
 		for(int index = 0;index<listasDefault.length;index++){
-			ListaReproduccion lr = new PorDefecto(listasDefault[index].getNombre());
+			ListaReproduccion lr = new PorDefecto(listasDefault[index].getNombre(),pro);
 			addListaReproduccion(lr);
 		}
 	}
@@ -89,8 +92,8 @@ public class Canal {
 		return videos.get(s);
 	}
 	
-	public void aniadirVideo(String nom, String desc, Integer dur, DtFecha fp, String url, DtCategoria catE, boolean p) {
-		Video v = new Video(nom, desc, dur, fp, url, catE, p);
+	public void aniadirVideo(String nom, String pro, String desc, Integer dur, DtFecha fp, String url, DtCategoria catE, boolean p) {
+		Video v = new Video(nom, pro, desc, dur, fp, url, catE, p);
 		CategoriaHandler catH = CategoriaHandler.getInstance();
 		Categoria c = catH.find(catE.getNombre());
 		c.addVideo(v);
@@ -147,8 +150,8 @@ public class Canal {
 		return listasReproduccion.containsKey(nombreLista);
 	}
 	
-	public void nuevaListaPorDefecto(String nombreL) {
-		PorDefecto ldr=new PorDefecto(nombreL);
+	public void nuevaListaPorDefecto(String nombreL,String pro) {
+		PorDefecto ldr=new PorDefecto(nombreL, pro);
 		listasReproduccion.put(nombreL, ldr);
 	}
 	

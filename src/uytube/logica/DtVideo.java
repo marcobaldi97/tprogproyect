@@ -3,6 +3,7 @@ package uytube.logica;
 public class DtVideo {
 	private Integer IDVideo;
 	private String nombre;
+	private String propietario;
 	private String descripcion;
 	private int duracionSS;
 	private DtFecha fecha_publicacion;
@@ -13,6 +14,7 @@ public class DtVideo {
 	public DtVideo(Video v) {
 		IDVideo=v.getIDVideo();
 		nombre = v.getNombre();
+		propietario=v.getPropietario();
 		descripcion = v.getDescripcion();
 		duracionSS = v.getDuracion();
 		fecha_publicacion = v.getFechaPublicacion();

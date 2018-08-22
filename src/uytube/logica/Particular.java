@@ -3,8 +3,8 @@ package uytube.logica;
 public class Particular extends ListaReproduccion{
 	private boolean privado;
 	
-	public Particular(String n, boolean p) {
-		super(n);
+	public Particular(String n,String pro, boolean p) {
+		super(n,pro);
 		privado = p;
 	}
 	

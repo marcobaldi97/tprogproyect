@@ -31,6 +31,8 @@ public class CrearListaInternalFrame extends JInternalFrame {
 	 * Create the frame.
 	 * @param iCU 
 	 */
+	
+	 
 	public CrearListaInternalFrame(IUsuarioCtrl iCU) {
 		controlUsr = iCU;
 		setTitle("Crear Lista");
@@ -59,10 +61,10 @@ public class CrearListaInternalFrame extends JInternalFrame {
 		JComboBox comboBoxNick = new JComboBox();
 		lista.add(comboBoxNick);
 		String[] nickUsuario = controlUsr.listarNicknamesUsuarios();
-		comboBoxNick.addItem(" ");
-		 for(int i=0; i<nickUsuario.length;i++){
+		for(int i=0; i<nickUsuario.length;i++){
 			 comboBoxNick.addItem(nickUsuario[i]);
 		 }
+		 comboBoxNick.setSelectedIndex(-1);
 		comboBoxNick.setVisible(false);
 		lblNick.setVisible(false);
 	
@@ -147,6 +149,7 @@ public class CrearListaInternalFrame extends JInternalFrame {
 						 mensajeError();
 					 }else{
 						 controlUsr.nuevaListaPorDefecto(nombreLista) ;
+						 infoBox("Lista creada","Crear Lista");
 					 }
 				}else{
 					if(rdbtnPublica.isSelected()){priv = false;}
@@ -154,6 +157,7 @@ public class CrearListaInternalFrame extends JInternalFrame {
 						 mensajeError();
 					}else{
 						controlUsr.nuevaListaParticular(nickU, nombreLista, priv) ;
+						infoBox("Lista creada","Crear Lista");
 					}
 				}
 				//mensaje de que se creo
@@ -171,5 +175,7 @@ public class CrearListaInternalFrame extends JInternalFrame {
 		JOptionPane.showMessageDialog(this, "Ya existe la lista", "Lista repetida",
                 JOptionPane.ERROR_MESSAGE);
 	}
-
+	 public static void infoBox(String infoMessage, String titleBar){
+	        JOptionPane.showMessageDialog(null, infoMessage, "" + titleBar, JOptionPane.INFORMATION_MESSAGE);
+	 }
 }
