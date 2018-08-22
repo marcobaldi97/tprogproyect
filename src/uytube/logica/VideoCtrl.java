@@ -13,13 +13,19 @@ public class VideoCtrl implements IVideoCtrl{
 	public DtListaReproduccion [] listarLDRPorCategoria(String cat) 
 	{
 		CategoriaHandler ch=CategoriaHandler.getInstance();
-		Categoria cate=ch.find(cat);
-		return cate.listarLDR();
+		if(ch.isMember(cat)){
+			Categoria cate=ch.find(cat);
+			return cate.listarLDR();
+		}
+		else return null;
 	}
 	public DtVideo[] listarVideosPorCategoria(String cat){
 		CategoriaHandler ch=CategoriaHandler.getInstance();
-		Categoria cate=ch.find(cat);
-		return cate.listarVideos();
+		if(ch.isMember(cat)){
+			Categoria cate=ch.find(cat);
+			return cate.listarVideos();
+		}
+		else return null;
 	}
 	public DtComentario[] listarComentarios(Integer IDVideo){
 		VideoHandler vh=VideoHandler.getInstance();

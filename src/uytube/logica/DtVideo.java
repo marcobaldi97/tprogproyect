@@ -55,7 +55,7 @@ public class DtVideo {
 	}
 	
 	public boolean equals(DtVideo dt) {
-		return (nombre == dt.getNombre())&&(descripcion == dt.getDescripcion())&&(duracionSS == dt.getDuracion())&&(fecha_publicacion == dt.getFechaPublicacion())&&(URL == dt.getUrl())&&(cat == dt.getCategoria())&&(privacidad == dt.getPrivacidad());
+		return (nombre == dt.getNombre())&&(descripcion == dt.getDescripcion())&&(duracionSS == dt.getDuracion())&&(fecha_publicacion == dt.getFechaPublicacion())&&(URL == dt.getUrl())&&(cat.equals(getCategoria()))&&(privacidad == dt.getPrivacidad());
 	}
 
 	public String getPropietario() {
