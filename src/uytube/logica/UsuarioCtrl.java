@@ -145,5 +145,14 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 		return u.memberVideoEnUsuario(nombreVideo);
 	}
 	
+	public String[] listarUsuariosQueSigue(String nickname) {
+		Usuario u = usuarioh.find(nickname);
+		return u.listarUsuariosQueSigue();
+	}
+	
+	public String[] listarUsuariosQueLeSigue(String nickname) {
+		Usuario u = usuarioh.find(nickname);
+		return u.listarUsuariosQueLeSigue();
+	}
 	
 }
