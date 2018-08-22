@@ -63,6 +63,7 @@ public class Comentario {
 	public DtComentario[] getDtRespuestas(){
 		DtComentario[] res=new DtComentario[respuestas.size()];
 		int contador =0;
+		
 		for(Map.Entry<Integer, Comentario> entry : respuestas.entrySet()) {
 			res[contador] = new DtComentario(entry.getValue());
 			contador++;

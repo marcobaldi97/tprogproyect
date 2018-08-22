@@ -7,6 +7,7 @@ public class DtComentario {
 	private boolean esPadre;
 	private DtComentario[] respuestas;
 	
+	
 	public Integer getIDComentario(){
 		return IDComentario;
 	}

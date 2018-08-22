@@ -17,7 +17,6 @@ public class Video {
 	private ArrayList<Puntuacion> puntuaciones;
 	
 	
-	
 	public Video(String n,String pro, String d, int dur, DtFecha fp, String url, DtCategoria c, boolean p) {
 		VideoHandler vh=VideoHandler.getInstance();
 		SystemHandler sh=SystemHandler.getInstance();
