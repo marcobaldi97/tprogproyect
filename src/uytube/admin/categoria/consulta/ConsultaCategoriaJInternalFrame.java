@@ -24,12 +24,15 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 
 import uytube.logica.DtCategoria;
+import uytube.logica.DtListaReproduccion;
+import uytube.logica.DtVideo;
 import uytube.logica.Factory;
 import uytube.logica.IVideoCtrl;
 
 import com.jgoodies.forms.layout.FormSpecs;
 import java.awt.FlowLayout;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.JSeparator;
 import java.awt.Color;
 import java.awt.Component;
@@ -44,8 +47,8 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
 public class ConsultaCategoriaJInternalFrame extends JInternalFrame {
-	private JTable table;
-	private JTable table_1;
+	private JTable table_LDR;
+	private JTable table_Video;
 
 	/**
 	 * Launch the application. COMENTADO FUNCIONA IGUAL
@@ -75,6 +78,14 @@ public class ConsultaCategoriaJInternalFrame extends JInternalFrame {
         JOptionPane.showMessageDialog(null, infoMessage, "" + titleBar, JOptionPane.INFORMATION_MESSAGE);
     }
 	
+	DefaultTableModel ModeloNombrePropietario() 
+	{
+		DefaultTableModel model = new DefaultTableModel(); 
+		model.addColumn("Nombre"); 
+		model.addColumn("Propietario");
+		return model;
+	};
+	
 	public ConsultaCategoriaJInternalFrame(IVideoCtrl iCV) {
 		setIconifiable(true);
 		setMaximizable(true);
@@ -83,56 +94,104 @@ public class ConsultaCategoriaJInternalFrame extends JInternalFrame {
 		setBounds(100, 100, 473, 300);
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		
+		JPanel panel_Video = new JPanel();
 		JPanel panel = new JPanel();
+		JPanel panel_LDR = new JPanel();
+		
 		getContentPane().add(panel, BorderLayout.NORTH);
 		panel.setLayout(new GridLayout(1, 0, 0, 0));
+		
+		getContentPane().add(panel_LDR, BorderLayout.WEST);
+		panel_LDR.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		
+		getContentPane().add(panel_Video, BorderLayout.EAST);
+		panel_Video.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		JLabel lblSeleccioneUnaCategoria = new JLabel("Seleccione una categoria");
 		panel.add(lblSeleccioneUnaCategoria);
 		
+		JLabel lblListas = new JLabel("Listas");
+		panel_LDR.add(lblListas);
+		
+		JSeparator separator_1 = new JSeparator();
+		panel_LDR.add(separator_1);
+		
+		JSeparator separator = new JSeparator();
+		panel_Video.add(separator);
+		
+		JLabel lblVideos = new JLabel("Videos");
+		panel_Video.add(lblVideos);
+		
 		JComboBox comboBox = new JComboBox();
+		panel.add(comboBox);
+		
+	
+		
+		table_Video = new JTable(ModeloNombrePropietario());
+		table_LDR = new JTable(ModeloNombrePropietario());
+		
+		panel_Video.add(table_Video);
+		panel_LDR.add(table_LDR);
+		
+		
 		DtCategoria[] set_cat=iCV.listarCategorias();
-		for(int i=0; i<set_cat.length;i++){comboBox.addItem(set_cat[i].getNombre());}
+		for(int i=0; i<set_cat.length;i++) {comboBox.addItem(set_cat[i].getNombre());}
 		comboBox.setSelectedIndex(-1);
 		
-			comboBox.addActionListener(new ActionListener() 
-			{
+		comboBox.addActionListener(new ActionListener() 
+		{
 				public void actionPerformed(ActionEvent e) 
 				{
-				infoBox(comboBox.getSelectedItem().toString(),"");
+					DefaultTableModel modelo_video= (DefaultTableModel) table_Video.getModel();
+					DefaultTableModel modelo_ldr= (DefaultTableModel) table_LDR.getModel();
+					
+					modelo_video.getDataVector().removeAllElements();
+					revalidate();
+					modelo_ldr.getDataVector().removeAllElements();
+					revalidate();
+					
+					modelo_video.addRow(new Object[]{"NOMBRE","PROPIETARIO"});
+					modelo_ldr.addRow(new Object[]{"NOMBRE","PROPIETARIO"});
+					
+					DtVideo [] listarvideos= iCV.listarVideosPorCategoria(comboBox.getSelectedItem().toString());
+					for(int i=0;i<listarvideos.length;i++) 
+					{
+						modelo_video.addRow(new Object[]{listarvideos[i].getNombre(),listarvideos[i].getPropietario()});
+					}
+					
+					DtListaReproduccion [] listarLDR= iCV.listarLDRPorCategoria(comboBox.getSelectedItem().toString());
+					for(int i=0; i<listarLDR.length;i++) 
+					{
+						modelo_ldr.addRow(new Object[] {listarLDR[i].getNombre(),listarLDR[i].getPropietario()});
+					}
+					
+
+
+					
+				//infoBox(comboBox.getSelectedItem().toString(),"");
 				}
-			});
+		});
 		
-		panel.add(comboBox);
+			
+
+		
 	
 		
 		
-		JPanel panel_1 = new JPanel();
-		getContentPane().add(panel_1, BorderLayout.WEST);
-		panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		JLabel lblListas = new JLabel("Listas");
-		panel_1.add(lblListas);
 		
-		JSeparator separator_1 = new JSeparator();
-		separator_1.setBackground(Color.PINK);
-		panel_1.add(separator_1);
 		
-		table = new JTable();
-		panel_1.add(table);
 		
-		JPanel panel_2 = new JPanel();
-		getContentPane().add(panel_2, BorderLayout.EAST);
-		panel_2.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		JLabel lblVideos = new JLabel("Videos");
-		panel_2.add(lblVideos);
 		
-		JSeparator separator = new JSeparator();
-		panel_2.add(separator);
 		
-		table_1 = new JTable();
-		panel_2.add(table_1);
+		
+		
+		
+		
+		
+		
+		
 
 	}
 }
