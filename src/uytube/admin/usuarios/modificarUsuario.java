@@ -275,6 +275,8 @@ public class modificarUsuario extends JInternalFrame {
 		panelDatosCanal.add(textFieldCatCanal);
 		
 		JButton btnModificar_3 = new JButton("Modificar");
+		btnModificar_3.setEnabled(false);
+		btnModificar_3.setVisible(false);
 		btnModificar_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String  nickU, nom, ape;
@@ -289,7 +291,7 @@ public class modificarUsuario extends JInternalFrame {
 				
 				if(btnModificar_3.getText()=="Guardar"){
 					if(verificarCamposDatosUsu()){
-						controlUsr.editarDatosUsuario(nickU,nom,ape, nac,"Foto");						
+						//controlUsr.editarDatosUsuario(nickU,nom,ape, nac,"Foto");						
 						infoBox("Canal modificado","Modificar usuario");
 						
 						rdbtnPrivado.setEnabled(false);
@@ -313,12 +315,15 @@ public class modificarUsuario extends JInternalFrame {
 		panelDatosCanal.add(btnModificar_3);
 		
 		btnCancelar_2 = new JButton("Cancelar");
+		btnCancelar_2.setVisible(false);
 		btnCancelar_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				/*textFieldNombre.setEditable(false);
-				textFieldApellido.setEditable(false);
-				dateChooser.setEnabled(false);
-				btnModificar.setText("Modificar");
+				rdbtnPrivado.setEnabled(false);
+				rdbtnPublico.setEnabled(false);
+				
+				textAreaDesc.setEditable(false);
+				btnModificar_3.setText("Modificar");
+				
 				String nickU = (String)comboBoxNick.getSelectedItem();
 				if((String)comboBoxNick.getSelectedItem() != " " && comboBoxNick.getSelectedIndex()!=-1){
 					//pedir Dt
@@ -328,7 +333,7 @@ public class modificarUsuario extends JInternalFrame {
 					limpiar();
 					cargarDatos(usr, usrCanal, nickU);
 				}
-				*/
+			
 				btnCancelar_2.setEnabled(false);
 				
 			}
