@@ -16,8 +16,13 @@ public class Video {
 	private Map<Integer,Comentario> comentarios;
 	private ArrayList<Puntuacion> puntuaciones;
 	
+	class NoExisteCategoriaException extends Exception {
+	}
+	
+	
 	public Video(String n,String pro, String d, int dur, DtFecha fp, String url, DtCategoria c, boolean p) {
 		VideoHandler vh=VideoHandler.getInstance();
+		SystemHandler sh=SystemHandler.getInstance();
 		IDVideo=vh.getNewID();
 		nombre = n;
 		setPropietario(pro);
@@ -28,6 +33,8 @@ public class Video {
 		CategoriaHandler ch=CategoriaHandler.getInstance();
 		if(ch.isMember(c.getNombre()))
 			cat=ch.find(c.getNombre());//si la categoria existe la asigno, si no?
+		else
+			cat=sh.getSinCat();
 		privacidad = p;
 		comentarios=new HashMap<Integer,Comentario>();
 		puntuaciones=new ArrayList<Puntuacion>();

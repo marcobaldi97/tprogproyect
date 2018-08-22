@@ -26,7 +26,7 @@ public class VideoHandler {
 	}
 	
 	public void removerVideo(Video v) {
-		videos.remove(v.getNombre());
+		videos.remove(v.getIDVideo());
 	}
 	
 	public Video find(Integer i) {

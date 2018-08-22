@@ -48,7 +48,6 @@ public class adminPrincipal extends JFrame {
 	private ConsultarVideoInternalFrame consultarVideoFrame;
 	private ModificarVideo modificarVideoFrame;
 	private ValorarVideo valorarVideoFrame;
-	private ConsultarVideoInternalFrame consultarVideoFrame;
 
 
 	private IUsuarioCtrl ICU;

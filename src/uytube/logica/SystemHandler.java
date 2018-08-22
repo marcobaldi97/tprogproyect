@@ -6,11 +6,14 @@ public class SystemHandler {
 	private static SystemHandler instance = null;
 	private Map<String,DtListaReproduccion> listasDefault;
 	private int id_comentario = 0;
+	private Categoria sinCat=new Categoria("Sin Categoria");
 	
 	private SystemHandler() {
 		listasDefault = new HashMap<String,DtListaReproduccion>();
 	}
-	
+	public Categoria getSinCat(){
+		return sinCat;
+	}
 	public static SystemHandler getInstance(){
 		if(instance == null) instance = new SystemHandler();
 		return instance;
