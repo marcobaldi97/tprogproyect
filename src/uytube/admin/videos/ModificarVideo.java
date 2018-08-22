@@ -1,49 +1,88 @@
 package uytube.admin.videos;
 
 import java.awt.EventQueue;
-
-import javax.swing.JInternalFrame;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Date;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JSpinner;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 
 import com.toedter.calendar.JDateChooser;
 
 import uytube.logica.DtCategoria;
 import uytube.logica.DtFecha;
+import uytube.logica.DtVideo;
 import uytube.logica.IUsuarioCtrl;
 import uytube.logica.IVideoCtrl;
 
-import javax.swing.JComboBox;
-import javax.swing.JTextField;
-import javax.swing.JTextArea;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JSpinner;
-import javax.swing.SpinnerNumberModel;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-
-public class AltaVideo extends JInternalFrame {
-	private JTextField textFieldNombreVideo;
+public class ModificarVideo extends JInternalFrame {
+	private JComboBox comboBoxNombreVideo;
 	private JTextField textFieldURL;
-	private JTextField textField;
 	private JDateChooser dateChooserFecha;
-
-    public static void infoBox(String infoMessage, String titleBar){
+	private JTextArea textAreaDesc;
+	private JComboBox comboBoxCategoria;
+	private JSpinner spinnerDuracion;
+	private JComboBox comboBoxPrivacidad;
+	
+    private static void infoBox(String infoMessage, String titleBar){
         JOptionPane.showMessageDialog(null, infoMessage, "" + titleBar, JOptionPane.INFORMATION_MESSAGE);
     }
+    
+    private void cargarDatos(DtVideo datosVideo) {
+		textFieldURL.setText(datosVideo.getUrl());
+		textAreaDesc.setText(datosVideo.getDescripcion());
+		comboBoxCategoria.setSelectedItem(datosVideo.getCategoria().getNombre());
+		spinnerDuracion.setValue(datosVideo.getDuracion());
+		if(datosVideo.getPrivacidad() == true) comboBoxPrivacidad.setSelectedItem("Privado");
+		else comboBoxPrivacidad.setSelectedItem("Publico");
+		dateChooserFecha.setDate(datosVideo.getFechaPublicacion().pasarDTaDate());
+    }
+    
+    private void limpiarDatos() {
+    	textFieldURL.setText("");
+    	Date dateRespawn = new Date();
+    	dateChooserFecha.setDate(dateRespawn);
+    	textAreaDesc.setText("");
+    	comboBoxCategoria.setSelectedItem("");
+    	spinnerDuracion.setValue(0);
+    	comboBoxPrivacidad.setSelectedItem("Privado");
+    }
+    
+    private void bloquearDatos() {
+    	textFieldURL.setEnabled(false);
+    	textAreaDesc.setEnabled(false);
+    	comboBoxCategoria.setEnabled(false);
+    	spinnerDuracion.setEnabled(false);
+    	comboBoxPrivacidad.setEnabled(false);
+    }
+    
+    private void habilitarDatos() {
+    	textFieldURL.setEnabled(true);
+    	textAreaDesc.setEnabled(true);
+    	comboBoxCategoria.setEnabled(true);
+    	spinnerDuracion.setEnabled(true);
+    	comboBoxPrivacidad.setEnabled(true);
+    }
+	
 	/**
 	 * Launch the application.
-	 */
+	 */	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AltaVideo frame = new AltaVideo(null,null);
+					ModificarVideo frame = new ModificarVideo(null,null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -54,11 +93,9 @@ public class AltaVideo extends JInternalFrame {
 
 	/**
 	 * Create the frame.
-	 * @param iCU 
-	 * @param iCV 
 	 */
-	public AltaVideo(IUsuarioCtrl iCU, IVideoCtrl iCV) {
-		setTitle("Alta Video");
+	public ModificarVideo(IUsuarioCtrl iCU, IVideoCtrl iCV) {
+		setTitle("Modificar Video");
 		setMaximizable(true);
 		setIconifiable(true);
 		setClosable(true);
@@ -69,8 +106,20 @@ public class AltaVideo extends JInternalFrame {
 		lblNicknameAutor.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNicknameAutor.setVerticalAlignment(SwingConstants.CENTER);
 		getContentPane().add(lblNicknameAutor);
-		
 		JComboBox comboBoxNicknames = new JComboBox();
+		comboBoxNicknames.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(comboBoxNicknames.getSelectedIndex() != -1) {
+					if(comboBoxNicknames.getSelectedItem().equals("") != true) {
+						comboBoxNombreVideo.setEnabled(true);
+						String[] nombresVideos = iCU.listarVideosCanal(comboBoxNicknames.getSelectedItem().toString());
+						comboBoxNombreVideo.setModel(new DefaultComboBoxModel(nombresVideos));
+					}else {
+						comboBoxNombreVideo.setEnabled(false);
+					}
+				}
+			}
+		});
 		comboBoxNicknames.setEditable(true);
 		String[] nicknamesArray = iCU.listarNicknamesUsuarios();
 		comboBoxNicknames.setModel(new DefaultComboBoxModel(nicknamesArray));
@@ -80,9 +129,30 @@ public class AltaVideo extends JInternalFrame {
 		lblNombreVideo.setHorizontalAlignment(SwingConstants.CENTER);
 		getContentPane().add(lblNombreVideo);
 		
-		textFieldNombreVideo = new JTextField();
-		getContentPane().add(textFieldNombreVideo);
-		textFieldNombreVideo.setColumns(10);
+		comboBoxNombreVideo = new JComboBox();
+		comboBoxNombreVideo.setEnabled(false);
+		comboBoxNombreVideo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(comboBoxNicknames.getSelectedIndex() != -1) {
+					if(comboBoxNombreVideo.getSelectedItem().equals("") != true) {
+						String nickname = comboBoxNicknames.getSelectedItem().toString();
+						String nombreVideo = comboBoxNombreVideo.getSelectedItem().toString();
+						DtVideo datosVideo = iCU.obtenerInfoAdicVideo(nickname, nombreVideo);
+						textFieldURL.setText(datosVideo.getUrl());
+						String textAreaPopulator = datosVideo.getDescripcion();
+						textAreaDesc.setText(textAreaPopulator);
+						comboBoxCategoria.setSelectedItem(datosVideo.getCategoria().getNombre());
+						spinnerDuracion.setValue(datosVideo.getDuracion());
+						if(datosVideo.getPrivacidad() == true) comboBoxPrivacidad.setSelectedItem("Privado");
+						else comboBoxPrivacidad.setSelectedItem("Publico");
+						dateChooserFecha.setDate(datosVideo.getFechaPublicacion().pasarDTaDate());
+					}else {
+						limpiarDatos();
+					}
+				}
+			}
+		});
+		getContentPane().add(comboBoxNombreVideo);
 		
 		JLabel lblNewLabel = new JLabel("URL Video:");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -103,7 +173,7 @@ public class AltaVideo extends JInternalFrame {
 		lblDuracion.setHorizontalAlignment(SwingConstants.CENTER);
 		getContentPane().add(lblDuracion);
 		
-		JSpinner spinnerDuracion = new JSpinner();
+		spinnerDuracion = new JSpinner();
 		spinnerDuracion.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
 		getContentPane().add(spinnerDuracion);
 		
@@ -119,7 +189,7 @@ public class AltaVideo extends JInternalFrame {
 		getContentPane().add(lblCategoria);
 		
 		
-		JComboBox comboBoxCategoria = new JComboBox();
+		comboBoxCategoria = new JComboBox();
 		//empiezo a cargar las categorias.
 		DtCategoria[] categoriasDts = iCV.listarCategorias();
 		String[] nombresCategoriasArray = new String[categoriasDts.length];
@@ -134,7 +204,7 @@ public class AltaVideo extends JInternalFrame {
 		lblPrivacidad.setHorizontalAlignment(SwingConstants.CENTER);
 		getContentPane().add(lblPrivacidad);
 		
-		JComboBox comboBoxPrivacidad = new JComboBox();
+		comboBoxPrivacidad = new JComboBox();
 		comboBoxPrivacidad.setModel(new DefaultComboBoxModel(new String[] {"Privado", "Publico"}));
 		getContentPane().add(comboBoxPrivacidad);
 		
@@ -150,37 +220,7 @@ public class AltaVideo extends JInternalFrame {
 		JButton btnNewButtonAceptar = new JButton("Aceptar");
 		btnNewButtonAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String nickU = (String) comboBoxNicknames.getSelectedItem();
-				String nom = textFieldNombreVideo.getText();
-				if(iCU.memberUsuario(nickU) == true) {
-					if(iCU.memberVideoEnUsuario(nickU, nom) != true) {
-						if(!textFieldNombreVideo.getText().equals("")) {
-							String desc = textAreaDesc.getText();
-							Integer dur = (Integer) spinnerDuracion.getValue();
-							DtFecha fp = new DtFecha(dateChooserFecha.getDate());
-							String url = textFieldURL.getText();
-							//asigno categoria.
-							DtCategoria catE = null;
-							Boolean flag = false;
-							int i = 0;
-							while (( i < categoriasDts.length) && (flag == false)){
-								if(comboBoxCategoria.getSelectedItem() == categoriasDts[i].getNombre()) {
-									catE = categoriasDts[i];
-									flag = true;
-								}
-								i++;
-							}
-							//termino de asignar categoria
-							//Asigno privado
-							boolean p = false;
-							if(comboBoxPrivacidad.getSelectedItem() == "privado") p = true;
-							else p = false;
-							//termino de asignar privado.
-							iCU.aniadirVideo(nickU, nom, desc, dur, fp, url, catE, p);
-							infoBox("Video creado exitosamente","Exito");
-						}else infoBox("El titulo no puede estar vacio.","Error");
-					}else infoBox("Ya existe el nombre del video en el canal del usuario seleccionado.","Error");
-				}else infoBox("No existe el usuario en el sistema.","Error");
+
 			}
 		});
 		getContentPane().add(btnNewButtonAceptar);
