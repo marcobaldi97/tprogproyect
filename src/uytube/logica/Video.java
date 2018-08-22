@@ -16,8 +16,6 @@ public class Video {
 	private Map<Integer,Comentario> comentarios;
 	private ArrayList<Puntuacion> puntuaciones;
 	
-	class NoExisteCategoriaException extends Exception {
-	}
 	
 	
 	public Video(String n,String pro, String d, int dur, DtFecha fp, String url, DtCategoria c, boolean p) {
@@ -87,10 +85,19 @@ public class Video {
 	
 	public DtComentario[] getComentarios(){
 		Integer contador = 0;
-		DtComentario[] res=new DtComentario[comentarios.size()];
+		Integer tamanio=0;
+		
 		for(Map.Entry<Integer, Comentario> entry : comentarios.entrySet()) {
-			res[contador] = new DtComentario(entry.getValue());
-			contador++;
+			if(entry.getValue().getEsPadre()){
+				tamanio++;
+			}
+		}
+		DtComentario[] res=new DtComentario[tamanio];
+		for(Map.Entry<Integer, Comentario> entry : comentarios.entrySet()) {
+			if(entry.getValue().getEsPadre()){
+				res[contador]=new DtComentario(entry.getValue());
+				contador++;
+			}
 		}
 		return res;
 	}

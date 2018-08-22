@@ -5,6 +5,7 @@ public class DtComentario {
 	private String texto;
 	private DtFecha fecha;
 	private boolean esPadre;
+	private DtComentario[] respuestas;
 	
 	public Integer getIDComentario(){
 		return IDComentario;
@@ -18,11 +19,15 @@ public class DtComentario {
 	public boolean getEsPadre(){
 		return esPadre;
 	}
+	public DtComentario[] getRespuestas(){
+		return respuestas;
+	}
 	public DtComentario(Comentario c){
 		IDComentario=c.getIDComentario();
 		texto=c.getTexto();
 		fecha=c.getFecha();
 		esPadre=c.getEsPadre();
+		respuestas=c.getDtRespuestas();
 	}
 }
 
