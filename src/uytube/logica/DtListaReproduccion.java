@@ -2,11 +2,13 @@ package uytube.logica;
 
 public class DtListaReproduccion {
 	private String nombre;
+	private String propietario;
 	private boolean privado;
 	private DtCategoria[] categoriasLDR;
 	
 	public DtListaReproduccion(PorDefecto ldr){
 		nombre=ldr.getNombre();
+		setPropietario(ldr.getPropietario());
 		privado=false;
 		categoriasLDR=ldr.getInfoCategorias();
 	}
@@ -34,6 +36,12 @@ public class DtListaReproduccion {
 	
 	public boolean equals(DtListaReproduccion dt) {
 		return nombre == dt.getNombre();
+	}
+	public String getPropietario() {
+		return propietario;
+	}
+	public void setPropietario(String propietario) {
+		this.propietario = propietario;
 	}
 
 }

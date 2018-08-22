@@ -14,7 +14,7 @@ public class DtVideo {
 	public DtVideo(Video v) {
 		IDVideo=v.getIDVideo();
 		nombre = v.getNombre();
-		propietario=v.getPropietario();
+		setPropietario(v.getPropietario());
 		descripcion = v.getDescripcion();
 		duracionSS = v.getDuracion();
 		fecha_publicacion = v.getFechaPublicacion();
@@ -56,5 +56,13 @@ public class DtVideo {
 	
 	public boolean equals(DtVideo dt) {
 		return (nombre == dt.getNombre())&&(descripcion == dt.getDescripcion())&&(duracionSS == dt.getDuracion())&&(fecha_publicacion == dt.getFechaPublicacion())&&(URL == dt.getUrl())&&(cat == dt.getCategoria())&&(privacidad == dt.getPrivacidad());
+	}
+
+	public String getPropietario() {
+		return propietario;
+	}
+
+	public void setPropietario(String propietario) {
+		this.propietario = propietario;
 	}
 }
