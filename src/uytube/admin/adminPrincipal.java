@@ -234,7 +234,7 @@ public class adminPrincipal extends JFrame {
 		JMenuItem mntmAgregarVideo = new JMenuItem("Agregar Video");
 		mntmAgregarVideo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				 addVideoListIFrame = new AgregarVideoListaInternalFrame();
+				 addVideoListIFrame = new AgregarVideoListaInternalFrame(ICU);
 			     contentPane.setLayout(null);
 			     contentPane.add(addVideoListIFrame);
 			     addVideoListIFrame.setVisible(true);	
