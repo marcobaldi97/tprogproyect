@@ -1,3 +1,4 @@
+
 package uytube.admin.listas;
 
 import java.awt.EventQueue;
@@ -5,8 +6,10 @@ import java.awt.EventQueue;
 import javax.swing.JInternalFrame;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import uytube.logica.DtCategoria;
+import uytube.logica.DtVideo;
 import uytube.logica.IUsuarioCtrl;
 
 import javax.swing.JComboBox;
@@ -29,7 +32,13 @@ public class AgregarVideoListaInternalFrame extends JInternalFrame {
 	 * Create the frame.
 	 * @param iCU 
 	 */
-	public AgregarVideoListaInternalFrame(IUsuarioCtrl iCU) {
+	public static void infoBox(String infoMessage, String titleBar)
+	{
+        JOptionPane.showMessageDialog(null, infoMessage, "" + titleBar, JOptionPane.INFORMATION_MESSAGE);
+	}
+	
+	public AgregarVideoListaInternalFrame(IUsuarioCtrl iCU) 
+	{
 		setTitle("Agregar video a lista de reproduccion");
 		setResizable(true);
 		setMaximizable(true);
@@ -77,7 +86,6 @@ public class AgregarVideoListaInternalFrame extends JInternalFrame {
 		getContentPane().add(comboBoxVideos, gbc_comboBoxVideos);
 		
 		JLabel lblUsuario = new JLabel("Usuario");
-		lblUsuario.setEnabled(false);
 		GridBagConstraints gbc_lblUsuario = new GridBagConstraints();
 		gbc_lblUsuario.anchor = GridBagConstraints.WEST;
 		gbc_lblUsuario.insets = new Insets(0, 0, 5, 0);
@@ -86,7 +94,6 @@ public class AgregarVideoListaInternalFrame extends JInternalFrame {
 		getContentPane().add(lblUsuario, gbc_lblUsuario);
 		
 		JComboBox comboBoxUsuario = new JComboBox();
-		comboBoxUsuario.setEnabled(false);
 		GridBagConstraints gbc_comboBoxUsuario = new GridBagConstraints();
 		gbc_comboBoxUsuario.insets = new Insets(0, 0, 5, 0);
 		gbc_comboBoxUsuario.fill = GridBagConstraints.HORIZONTAL;
@@ -113,6 +120,7 @@ public class AgregarVideoListaInternalFrame extends JInternalFrame {
 		getContentPane().add(comboBoxListas, gbc_comboBoxListas);
 		
 		JButton btnAceptar = new JButton("Aceptar");
+		btnAceptar.setEnabled(false);
 		GridBagConstraints gbc_btnAceptar = new GridBagConstraints();
 		gbc_btnAceptar.insets = new Insets(0, 0, 5, 0);
 		gbc_btnAceptar.gridx = 0;
@@ -121,8 +129,74 @@ public class AgregarVideoListaInternalFrame extends JInternalFrame {
 		
 		
 		String[] set_nicknames=iCU.listarNicknamesUsuarios();
-		for(int i=0; i<set_nicknames.length;i++) {comboBoxAutor.addItem(set_nicknames[i]);}
+		for(int i=0; i<set_nicknames.length;i++) {comboBoxAutor.addItem(set_nicknames[i]);comboBoxUsuario.addItem(set_nicknames[i]);}
 		comboBoxAutor.setSelectedIndex(-1);
+		comboBoxUsuario.setSelectedIndex(-1);
+
+		
+		comboBoxAutor.addActionListener(new ActionListener() //evento combobox AUTOR
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				
+				String[] videos_canal=iCU.listarVideosCanal(comboBoxAutor.getSelectedItem().toString());
+				comboBoxVideos.removeAllItems();
+				
+				if(videos_canal.length>0) 
+				{
+					lblVideos.setEnabled(true);
+					comboBoxVideos.setEnabled(true);
+					for(int i=0;i<videos_canal.length;i++) {comboBoxVideos.addItem(videos_canal[i]);}
+					//comboBoxVideos.setSelectedIndex(-1);
+					comboBoxVideos.setToolTipText("Videos de "+comboBoxAutor.getSelectedItem().toString());
+
+				}
+				else
+				{
+					lblVideos.setEnabled(false);
+					comboBoxVideos.setEnabled(false);
+					comboBoxVideos.setToolTipText("No hay videos de "+comboBoxAutor.getSelectedItem().toString());
+				}
+				btnAceptar.setEnabled(comboBoxListas.isEnabled()&&comboBoxVideos.isEnabled());
+			}
+		});
+		
+		comboBoxUsuario.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				String[] listas_canal=iCU.listarLDRdeUsuario(comboBoxUsuario.getSelectedItem().toString());
+				comboBoxListas.removeAllItems();
+				
+				if(listas_canal.length>0) 
+				{
+					lblListas.setEnabled(true);
+					comboBoxListas.setEnabled(true);
+					for(int i=0;i<listas_canal.length;i++) {comboBoxListas.addItem(listas_canal[i]);}
+					//comboBoxVideos.setSelectedIndex(-1);
+					comboBoxListas.setToolTipText("Listas de "+comboBoxUsuario.getSelectedItem().toString());
+
+				}
+				else
+				{
+					lblListas.setEnabled(false);
+					comboBoxListas.setEnabled(false);
+					comboBoxListas.setToolTipText("No hay listas de "+comboBoxUsuario.getSelectedItem().toString());
+				}
+				btnAceptar.setEnabled(comboBoxListas.isEnabled()&&comboBoxVideos.isEnabled());
+			}
+		});
+		
+		btnAceptar.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				DtVideo video=iCU.obtenerInfoAdicVideo(comboBoxAutor.getSelectedItem().toString(), comboBoxVideos.getSelectedItem().toString());
+				iCU.agregarVideoLista(comboBoxUsuario.getSelectedItem().toString(), video.getIDVideo(), comboBoxListas.getSelectedItem().toString());
+				infoBox("Video añadidio correctamente","Agergar Video a Lista");
+			}
+		});
+		
 
 	}
 
