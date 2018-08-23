@@ -23,7 +23,7 @@ import uytube.logica.UsuarioCtrl;
 import uytube.logica.Video;
 import uytube.logica.VideoCtrl;
 import uytube.logica.VideoHandler;
-
+//SECO
 public class VideoCtrlTest {
 
 	@Test
