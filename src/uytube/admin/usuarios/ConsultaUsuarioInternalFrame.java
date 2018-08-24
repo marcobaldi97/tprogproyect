@@ -7,12 +7,16 @@ import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 import java.awt.GridLayout;
+import java.awt.Image;
+
 import javax.swing.JLabel;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
 
+import uytube.admin.Imagen;
 import uytube.admin.adminPrincipalBienHecho;
 import uytube.admin.videos.consultar.ConsultarVideoInternalFrame;
 import uytube.logica.DtCanal;
@@ -38,6 +42,7 @@ import javax.swing.JList;
 import javax.swing.ListSelectionModel;
 import javax.swing.JTextArea;
 import java.awt.event.ItemListener;
+import java.awt.image.BufferedImage;
 import java.awt.event.ItemEvent;
 import javax.swing.JButton;
 
@@ -59,6 +64,7 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 	private JTextArea textAreaDescVideo;
 	private JList listSeguidos;
 	private JList listSeguidores;
+	private JLabel lblFoto;
 	/**
 	 * Create the frame.
 	 * @param iCU 
@@ -71,8 +77,15 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 		setResizable(true);
 		setMaximizable(true);
 		setIconifiable(true);
-		setBounds(100, 100, 420, 411);
-		getContentPane().setLayout(new GridLayout(0, 2, 5, 5));
+		setBounds(100, 100, 618, 460);
+		getContentPane().setLayout(new GridLayout(0, 3, 5, 5));
+		
+		JPanel panel = new JPanel();
+		panel.setBorder(new TitledBorder(null, "Foto", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		getContentPane().add(panel);
+		
+		lblFoto = new JLabel("");
+		panel.add(lblFoto);
 		
 		JPanel panelDUsuario = new JPanel();
 		panelDUsuario.setBorder(new TitledBorder(null, "Datos usuario", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -87,7 +100,7 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 		comboBoxNick.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String nickU = (String)comboBoxNick.getSelectedItem();
-				limpiar();
+				//limpiar();
 				if((String)comboBoxNick.getSelectedItem() != " " && comboBoxNick.getSelectedIndex()!=-1){
 					//pedir Dt
 					DtUsuario usr= controlUsr.listarDatosUsuario(nickU);
@@ -132,6 +145,10 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 		dateChooser = new JDateChooser();
 		dateChooser.getCalendarButton().setEnabled(false);
 		panelDUsuario.add(dateChooser);
+		comboBoxNick.setSelectedIndex(-1);
+		
+		JPanel panel_1 = new JPanel();
+		getContentPane().add(panel_1);
 		
 		JPanel panelDCanal = new JPanel();
 		panelDCanal.setBorder(new TitledBorder(null, "Datos canal", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -299,7 +316,6 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 		for(int i=0; i<nickUsuario.length;i++){
 			 comboBoxNick.addItem(nickUsuario[i]);
 	     }
-		comboBoxNick.setSelectedIndex(-1);
 		limpiar();
 		 //.....//
 		
@@ -319,6 +335,14 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 		textPaneDesc.setText(usrCanal.getDescripcion());
 		textFieldCatCanal.setText(usrCanal.getCategoria().getNombre());
 		
+		byte[] fotoUsr=usr.getFoto();
+		if(fotoUsr!=null){
+			lblFoto.setVisible(true);
+			BufferedImage image = Imagen.byteToImagen(fotoUsr);
+			lblFoto.setSize(140,140);
+		 	ImageIcon icono = new ImageIcon(image.getScaledInstance(lblFoto.getWidth(), lblFoto.getHeight(), Image.SCALE_DEFAULT));
+		 	lblFoto.setIcon(icono);
+		}
 		//CARGAR VIDEOS
 		String[] nomVideos = controlUsr.listarVideosCanal(nickU);
 		for(int i=0; i<nomVideos.length;i++){
@@ -367,8 +391,13 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 			textFieldApellido.setText("");
 			dateChooser.setDate(null);
 			
+
+			lblFoto.setIcon(null);
+			lblFoto.setVisible(false);
+			
+
 			textFieldNomCanal.setText("");
-			textFieldPrivacidad.setText("");
+			textFieldPrivacidad.setText(null);
 			
 			textPaneDesc.setText("");
 			textFieldCatCanal.setText("");

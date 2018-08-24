@@ -174,8 +174,10 @@ public class ConsultarVideoInternalFrame extends JInternalFrame {
 										btnCargar.addActionListener(new ActionListener() {
 											public void actionPerformed(ActionEvent arg0) {
 												 ListarComentariosInternalFrame comentariosIFrame = new ListarComentariosInternalFrame((String) authorNicknameComboBox.getSelectedItem(),videoList.getSelectedValue());
+												
 												 adminPrincipal.getFrames()[0].setLayout(null);
 												 adminPrincipal.getFrames()[0].add(comentariosIFrame);
+												
 												 comentariosIFrame.show();
 											}
 										});

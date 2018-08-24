@@ -82,7 +82,7 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 		Usuario u = usuarioh.find(nickU);
 		u.cambiarPrivLDR(nombreL, privE);
 	}
-	public void editarDatosUsuario(String nickU,String nom, String ape, DtFecha fn, String fo){
+	public void editarDatosUsuario(String nickU,String nom, String ape, DtFecha fn, byte[] fo){
 		Usuario u = usuarioh.find(nickU);
 		u.editarDatosUsuario(nom, ape,fn,fo);
 	}	
@@ -115,7 +115,7 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 		return !flag;
 	}//true si está disponible, false si ya está ocupado
 	
-	public void nuevoUsuario(String nick,String nom, String ape, String e, DtFecha fn, String fo,String nombreCanal,String desc,Boolean privacidadE, String catE) {
+	public void nuevoUsuario(String nick,String nom, String ape, String e, DtFecha fn, byte[] fo,String nombreCanal,String desc,Boolean privacidadE, String catE) {
 		Usuario u = new Usuario(nick,nom,ape,e,fn,fo,nombreCanal,desc,privacidadE,catE);
 		usuarioh.aniadirUsuario(u);
 	}
