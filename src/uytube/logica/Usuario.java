@@ -154,7 +154,7 @@ public class Usuario {
 	}
 
 	public void nuevaListaPorDefecto(String nombreL) {
-		canalPropio.nuevaListaPorDefecto(nombreL,getNombre());
+		canalPropio.nuevaListaPorDefecto(nombreL,nickname);
 		
 	}
 	

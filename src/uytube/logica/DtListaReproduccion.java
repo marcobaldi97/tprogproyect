@@ -8,12 +8,13 @@ public class DtListaReproduccion {
 	
 	public DtListaReproduccion(PorDefecto ldr){
 		nombre=ldr.getNombre();
-		setPropietario(ldr.getPropietario());
+		propietario= ldr.getPropietario();
 		privado=false;
 		categoriasLDR=ldr.getInfoCategorias();
 	}
 	public DtListaReproduccion(Particular ldr){
 		nombre=ldr.getNombre();
+		propietario=ldr.getPropietario();
 		privado=ldr.getPrivado();
 		categoriasLDR=ldr.getInfoCategorias();
 	}
