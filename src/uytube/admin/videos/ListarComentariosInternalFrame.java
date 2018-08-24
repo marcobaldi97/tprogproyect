@@ -89,7 +89,7 @@ public class ListarComentariosInternalFrame extends JInternalFrame {
 		
 
 	}
-	private void cargarComentarios(DtComentario[] coments ){
+	private void cargarComentarios(DtComentario[] coments){
 		
 		DefaultMutableTreeNode raiz = new DefaultMutableTreeNode("Comentarios");
 		DefaultTreeModel modelo = new DefaultTreeModel(raiz);
@@ -97,7 +97,7 @@ public class ListarComentariosInternalFrame extends JInternalFrame {
 		panel_1.add(treeComentarios);
 		
 		 for(int i=0; i<coments.length; i++){ 
-			DefaultMutableTreeNode comentario = new DefaultMutableTreeNode(coments[i].getIDComentario()+"Usuario:  "+coments[i].getTexto());
+			DefaultMutableTreeNode comentario = new DefaultMutableTreeNode(coments[i].getNickUsuario()+": "+coments[i].getTexto());
 			modelo.insertNodeInto(comentario,raiz,i);
 			cargarRespuesta(coments[i].getRespuestas(), comentario,raiz, modelo);
 		}	
@@ -106,7 +106,7 @@ public class ListarComentariosInternalFrame extends JInternalFrame {
 	
 	private void cargarRespuesta(DtComentario[] dtRespuestas, DefaultMutableTreeNode comentarioPadre, DefaultMutableTreeNode raiz, DefaultTreeModel modelo){
 		for(int i=0; i<dtRespuestas.length; i++){ 
-			DefaultMutableTreeNode comentario = new DefaultMutableTreeNode(dtRespuestas[i].getIDComentario()+"Usuario:  "+ dtRespuestas[i].getTexto());
+			DefaultMutableTreeNode comentario = new DefaultMutableTreeNode(dtRespuestas[i].getNickUsuario()+": "+ dtRespuestas[i].getTexto());
 			modelo.insertNodeInto(comentario,comentarioPadre,i);
 			cargarRespuesta(dtRespuestas[i].getRespuestas(), comentario,comentarioPadre, modelo);
 		}
