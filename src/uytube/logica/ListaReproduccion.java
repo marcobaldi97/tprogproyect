@@ -10,7 +10,7 @@ public abstract class ListaReproduccion {
 	
 	public ListaReproduccion(String nombLDR, String pro) {
 		nombre=nombLDR;
-		setPropietario(pro);
+		propietario=pro;
 		videos = new HashMap<Integer,Video>();
 		categorias = new HashMap<String,Categoria>();
 	}
@@ -34,7 +34,8 @@ public abstract class ListaReproduccion {
 	private void refrescarCategorias(){
 		for(Map.Entry<Integer, Video> entry : videos.entrySet()) {
 			categorias.put(entry.getValue().getObjetoCategoria().getNombre(), entry.getValue().getObjetoCategoria());
-		}		
+		}
+		
 	}
 	
 	public void removerVideo(Integer id) {
@@ -45,8 +46,15 @@ public abstract class ListaReproduccion {
 	}
 
 	public void agregarVideo(Video v) {
-		videos.put(v.getIDVideo(), v);
-		refrescarCategorias();
+		
+			videos.put(v.getIDVideo(), v);
+			refrescarCategorias();
+			
+			CategoriaHandler catH = CategoriaHandler.getInstance();
+			Categoria c = catH.find(v.getCategoria().getNombre());
+			
+			c.aniadirLDR(this);
+		
 	};
 	
 	public DtCategoria[] getInfoCategorias(){

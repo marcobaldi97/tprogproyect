@@ -193,7 +193,8 @@ public class AgregarVideoListaInternalFrame extends JInternalFrame {
 			{
 				DtVideo video=iCU.obtenerInfoAdicVideo(comboBoxAutor.getSelectedItem().toString(), comboBoxVideos.getSelectedItem().toString());
 				iCU.agregarVideoLista(comboBoxUsuario.getSelectedItem().toString(), video.getIDVideo(), comboBoxListas.getSelectedItem().toString());
-				infoBox("Video añadidio correctamente","Agergar Video a Lista");
+				infoBox("Video agregado correctamente","Agergar Video a Lista");
+				dispose();
 			}
 		});
 		

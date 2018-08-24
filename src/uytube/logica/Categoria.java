@@ -1,19 +1,22 @@
 package uytube.logica;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 public class Categoria {
 	private String nombre;
-	private Map<String,Video> videos;
-	private Map<String,ListaReproduccion> LDR;
+	private List <Video> videos;
+	private List<ListaReproduccion> LDR;
 	
 	public Categoria(String n) {
 		nombre = n;
-		videos = new HashMap<String,Video>();
-		LDR=new HashMap<String,ListaReproduccion>();
+		videos = new LinkedList<Video>();
+		LDR=new LinkedList<ListaReproduccion>();
 	}
 	public void aniadirLDR(ListaReproduccion lr){
-		LDR.put(lr.getNombre(), lr);
+		if(!LDR.contains(lr)) {LDR.add(lr);}
+		
 	}
 	public void removerLDR(ListaReproduccion lr){
 		LDR.remove(lr.getNombre());
@@ -23,16 +26,17 @@ public class Categoria {
 	}
 	
 	public void addVideo(Video v) {
-		videos.put(v.getNombre(), v);
+		if(!videos.contains(v)) {videos.add(v);}
+		
 	}
 	
 	public void removerVideo(Video v) {
 		videos.remove(v.getNombre());
 	}
 	
-	public Video find(String s) {
+	/*public Video find(String s) {
 		return videos.get(s);
-	}
+	}*/
 	
 	public DtCategoria getInfoCategoria() { 
 		DtCategoria dt = new DtCategoria(this);
@@ -42,8 +46,8 @@ public class Categoria {
 	public DtVideo[] listarVideos() {
 		DtVideo[] res=new DtVideo[videos.size()];
 		Integer contador=0;
-		for(Map.Entry<String, Video> entry : videos.entrySet()) {
-			res[contador] = new DtVideo(entry.getValue());
+		for(Video v: videos) {
+			res[contador] = new DtVideo(v);
 			contador++;
 		}
 		return res;
@@ -51,9 +55,9 @@ public class Categoria {
 	public DtListaReproduccion[] listarLDR() {
 		DtListaReproduccion [] res = new DtListaReproduccion[LDR.size()];
 		Integer contador=0;
-		for(Map.Entry<String, ListaReproduccion> iterator : LDR.entrySet()) 
+		for(ListaReproduccion ldr: LDR) 
 		{
-			res[contador]= iterator.getValue().verDetallesListareproduccion();
+			res[contador]= ldr.verDetallesListareproduccion();
 			contador++;
 		}
 		return res;
