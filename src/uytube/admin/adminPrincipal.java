@@ -48,6 +48,7 @@ public class adminPrincipal extends JFrame {
 	private ConsultarVideoInternalFrame consultarVideoFrame;
 	private ModificarVideo modificarVideoFrame;
 	private ValorarVideo valorarVideoFrame;
+	private ConsultaListaInternalFrame consultaListaFrame;
 
 
 	private IUsuarioCtrl ICU;
@@ -257,6 +258,17 @@ public class adminPrincipal extends JFrame {
 			}
 		});
 		mnNewMenu_1.add(mntmQuitarVideo);
+		
+		JMenuItem mntmConsulta_3 = new JMenuItem("Consulta");
+		mntmConsulta_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				consultaListaFrame = new ConsultaListaInternalFrame(ICU,ICV);
+			    contentPane.setLayout(null);
+			    contentPane.add(consultaListaFrame);
+			    consultaListaFrame.setVisible(true);
+			}
+		});
+		mnNewMenu_1.add(mntmConsulta_3);
 		
 		JMenu mnCategorias = new JMenu("Categorias");
 		menuBar.add(mnCategorias);

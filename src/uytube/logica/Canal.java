@@ -163,5 +163,9 @@ public class Canal {
 	public Boolean memberVideoEnUsuario(String nombreVideo) {
 		return videos.containsKey(nombreVideo);
 	}
+	public String[] listarVideosListaReproduccionUsuario(String nombreLista) {
+		ListaReproduccion lr = listasReproduccion.get(nombreLista);
+		return lr.listarVideos();
+	}
 
 }
