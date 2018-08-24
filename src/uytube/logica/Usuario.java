@@ -136,7 +136,7 @@ public class Usuario {
 	}
 	
 	public void nuevaListaParticular(String nombreL,String pro, Boolean privada) {
-		ListaReproduccion lr = new Particular(nombreL,pro,privada);
+		Particular lr = new Particular(nombreL,pro,privada);
 		canalPropio.addListaReproduccion(lr);
 	}
 	

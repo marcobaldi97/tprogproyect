@@ -25,7 +25,10 @@ public class Canal {
 		return dt;
 	}
 	
-	public void addListaReproduccion(ListaReproduccion lr) {
+	public void addListaReproduccion(Particular lr) {
+		listasReproduccion.put(lr.getNombre(), lr);
+	}
+	public void addListaReproduccion(PorDefecto lr){
 		listasReproduccion.put(lr.getNombre(), lr);
 	}
 	
@@ -70,7 +73,7 @@ public class Canal {
 		SystemHandler sh = SystemHandler.getInstance();
 		DtListaReproduccion[] listasDefault = sh.obtenerListasReproduccion();
 		for(int index = 0;index<listasDefault.length;index++){
-			ListaReproduccion lr = new PorDefecto(listasDefault[index].getNombre(),pro);
+			PorDefecto lr = new PorDefecto(listasDefault[index].getNombre(),pro);
 			addListaReproduccion(lr);
 		}
 	}
@@ -133,8 +136,8 @@ public class Canal {
 	}
 	
 	public void cambiarPrivLDR(String nombreL, Boolean privE) {
-		ListaReproduccion lr = listasReproduccion.get(nombreL);
-		((Particular) lr).cambiarPrivLDR(privE);//creo que esto es un dynamic cast
+		Particular lr =  (Particular) listasReproduccion.get(nombreL);
+		lr.cambiarPrivLDR(privE);
 	}
 	
 	public void eliminarVideoLista(Integer id_video, String nombreLDR) {
