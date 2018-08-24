@@ -12,6 +12,7 @@ public class VideoHandler {
 		IDActual=0;
 	}
 	public Integer getNewID(){
+		System.out.println("cree un video");
 		return ++IDActual;
 	}
 	

@@ -28,11 +28,9 @@ public class Video {
 		fecha_publicacion = fp;
 		URL = url;
 		CategoriaHandler ch=CategoriaHandler.getInstance();
-		if(c!=null){
-			if(ch.isMember(c.getNombre())){
+		if(c!=null && ch.isMember(c.getNombre())){
 				cat=ch.find(c.getNombre());//si la categoria existe la asigno, si no?
-			}
-			
+				cat.addVideo(this);
 		}else
 			cat=sh.getSinCat();
 		privacidad = p;
@@ -72,13 +70,19 @@ public class Video {
 	}
 	
 	public void ingresarNuevosDatosVideo(String d, int dur, DtFecha fp, String url, DtCategoria c, boolean p) {
+		SystemHandler sh=SystemHandler.getInstance();
 		descripcion = d;
 		duracion = dur;
 		fecha_publicacion = fp;
 		URL = url;
 		CategoriaHandler ch=CategoriaHandler.getInstance();
-		if(ch.isMember(c.getNombre()))
-			cat=ch.find(c.getNombre());
+		if(c!=null){
+			if(ch.isMember(c.getNombre())){
+				cat=ch.find(c.getNombre());//si la categoria existe la asigno, si no?
+			}
+			
+		}else
+			cat=sh.getSinCat();
 		privacidad = p;
 	}
 	
@@ -101,17 +105,17 @@ public class Video {
 		return res;
 	}
 	public void nuevoComentario(String nickU,DtFecha fecha, String cont){
-		VideoHandler vh=VideoHandler.getInstance();
-		Comentario c=new Comentario(vh.getNewID(), cont, fecha,true, nickU);
+		SystemHandler sh=SystemHandler.getInstance();
+		Comentario c=new Comentario(sh.recibirId_Comentario(), cont, fecha,true, nickU);
 		comentarios.put(c.getIDComentario(), c);
 	}
 	
 	public void responderComentario(Integer IDCR,String nickU,DtFecha fecha,String cont){
 		//esto cambia del DCC porque tengo un map, asi que no tengo que iterar todo para buscar
-		VideoHandler vh=VideoHandler.getInstance();
+		SystemHandler sh=SystemHandler.getInstance();
 		if(comentarios.containsKey(IDCR)){
 			Comentario c=comentarios.get(IDCR);
-			Comentario cn=new Comentario(vh.getNewID(), cont, fecha,false, nickU);
+			Comentario cn=new Comentario(sh.recibirId_Comentario(), cont, fecha,false, nickU);
 			c.addComentario(cn);
 			comentarios.put(cn.getIDComentario(), cn);
 		}
