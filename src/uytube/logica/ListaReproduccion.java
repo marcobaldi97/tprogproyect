@@ -52,8 +52,8 @@ public abstract class ListaReproduccion {
 			
 			CategoriaHandler catH = CategoriaHandler.getInstance();
 			Categoria c = catH.find(v.getCategoria().getNombre());
-			
-			c.aniadirLDR(this);
+			if(c!=null)
+				c.aniadirLDR(this);
 		
 	};
 	
