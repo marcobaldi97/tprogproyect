@@ -8,6 +8,10 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+import uytube.admin.adminPrincipal;
+import uytube.admin.adminPrincipalBienHecho;
+import uytube.admin.videos.consultar.ConsultarVideoInternalFrame;
+import uytube.admin.videos.modificar.ModificarVideoInternalFrame;
 import uytube.logica.DtListaReproduccion;
 import uytube.logica.IUsuarioCtrl;
 import uytube.logica.IVideoCtrl;
@@ -36,21 +40,6 @@ public class ConsultaListaInternalFrame extends JInternalFrame {
 	private boolean ready = false;
 	private boolean ready2 = false;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ConsultaListaInternalFrame frame = new ConsultaListaInternalFrame(null,null);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
@@ -170,8 +159,19 @@ public class ConsultaListaInternalFrame extends JInternalFrame {
 		getContentPane().add(panel_3);
 		panel_3.setLayout(new GridLayout(1, 1, 0, 0));
 		
+		JPanel panel_4 = new JPanel();
+		panel_3.add(panel_4);
+		
 		JButton btnVerInfoVideo = new JButton("Ver Info Video");
-		panel_3.add(btnVerInfoVideo);
+		panel_4.add(btnVerInfoVideo);
+		btnVerInfoVideo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				  ConsultarVideoInternalFrame consVideoIFrame = new ConsultarVideoInternalFrame();
+				   adminPrincipal.getFrames()[0].setLayout(null);
+				   adminPrincipal.getFrames()[0].add(consVideoIFrame);
+				   consVideoIFrame.show();
+			}
+		});
 
 	}
 
