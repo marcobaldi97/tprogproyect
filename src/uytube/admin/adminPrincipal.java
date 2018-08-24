@@ -109,7 +109,12 @@ public class adminPrincipal extends JFrame {
 	    
 	    
 	    ICV.nuevoComentario(1,"pepeDeportes",fechaVideo,"Muy bueno el video, baje 5 kilos");
-	    
+	    ICV.nuevoComentario(1,"pepeDeportes",fechaVideo,"Es genial!!");
+	    ICV.nuevoComentario(1,"BokuNoNaruto",fechaVideo,"A mi me aburriooo :c");
+	    ICV.responderComentario(1,4,"RobertoDeportista", fechaNacRoberto,"Anda al gym gordito");
+	    ICV.responderComentario(1,5,"BokuNoNaruto", fechaNacRoberto,"Noo");
+	    ICV.responderComentario(1,5,"BokuNoNaruto", fechaNacRoberto,"PASEN POR MI CANAL");
+	    ICV.nuevoComentario(1,"BokuNoNaruto",fechaVideo,"Comenten si alguien lo esta viendo en el 2050");
 		//public abstract void responderComentario(Integer IDVideo, Integer IDCR, String nickU, DtFecha fecha, String contenido);
 	    
 	    ICU.seguirUsuario("pepeDeportes","RobertoDeportista");

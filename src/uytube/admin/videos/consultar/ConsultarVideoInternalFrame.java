@@ -15,6 +15,10 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
+import uytube.admin.adminPrincipal;
+import uytube.admin.adminPrincipalBienHecho;
+import uytube.admin.videos.ListarComentariosInternalFrame;
+import uytube.admin.videos.modificar.ModificarVideoInternalFrame;
 import uytube.logica.DtInfoVideo;
 import uytube.logica.DtUsuario;
 import uytube.logica.DtVideo;
@@ -68,6 +72,7 @@ public class ConsultarVideoInternalFrame extends JInternalFrame {
 	private final JList<String> listNoGusta = new JList<>(UsuariosNoGListModel);
 	private final JPanel Comentarios = new JPanel();
 	private final JLabel lblVideosDelAutor = new JLabel("Videos del autor:");
+	private final JButton btnCargar = new JButton("Cargar");
 
 	public ConsultarVideoInternalFrame() {
 		BorderLayout borderLayout = (BorderLayout) getContentPane().getLayout();
@@ -166,6 +171,16 @@ public class ConsultarVideoInternalFrame extends JInternalFrame {
 										UsuNoGusta.add(listNoGusta);
 										
 										TabComunidad.addTab("Comentarios", null, Comentarios, null);
+										btnCargar.addActionListener(new ActionListener() {
+											public void actionPerformed(ActionEvent arg0) {
+												 ListarComentariosInternalFrame comentariosIFrame = new ListarComentariosInternalFrame((String) authorNicknameComboBox.getSelectedItem(),videoList.getSelectedValue());
+												 adminPrincipal.getFrames()[0].setLayout(null);
+												 adminPrincipal.getFrames()[0].add(comentariosIFrame);
+												 comentariosIFrame.show();
+											}
+										});
+										
+										Comentarios.add(btnCargar);
 	}
 
 	private void initializeSearchVideosButton() {
