@@ -3,6 +3,7 @@ package uytube.admin.usuarios;
 import java.awt.EventQueue;
 
 import uytube.admin.Imagen;
+import uytube.admin.adminPrincipal;
 import uytube.admin.adminPrincipalBienHecho;
 import uytube.admin.videos.consultar.ConsultarVideoInternalFrame;
 import uytube.admin.videos.modificar.*;
@@ -449,9 +450,8 @@ public class modificarUsuario extends JInternalFrame {
 	}
 	private void openModificarVideo(){
 		   int idVideo; //como obtengo el idVideo??
-		   
 		   ModificarVideoInternalFrame modVideoIFrame = new ModificarVideoInternalFrame(adminPrincipalBienHecho.getFrames()[0]);
-		   adminPrincipalBienHecho.getFrames()[0].setLayout(null);
+		   adminPrincipal.getFrames()[0].setLayout(null);
 		  // adminPrincipalBienHecho.getFrames()[0].add(modVideoIFrame);
 		   modVideoIFrame.show();
 	}
