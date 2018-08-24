@@ -75,16 +75,19 @@ public class ConsultaListaInternalFrame extends JInternalFrame {
 		comboBoxNicknames = new JComboBox();
 		String[] nicknamesArray = iCU.listarNicknamesUsuarios();
 		comboBoxNicknames.setModel(new DefaultComboBoxModel(nicknamesArray));
+		comboBoxNicknames.setSelectedIndex(-1);
 		comboBoxNicknames.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				listListas.setSelectedIndex(-1);
 				modelListListas.removeAllElements();
+				listVideos.setSelectedIndex(-1);
+				modelListVideos.removeAllElements();
 				textFieldNombreLista.setText("");
 				textFieldPrivacidadLista.setText("");
 				String nombreSeleccionado = (String) comboBoxNicknames.getSelectedItem();
 				String[] listasNombresListas = iCU.listarLDRdeUsuario(nombreSeleccionado);
 				for (int i = 0; i < listasNombresListas.length; i++) {
-					modelListListas.addElement(listasNombresListas[i]);;
+					modelListListas.addElement(listasNombresListas[i]);
 				}//cargo la lista		
 				ready = true;
 				ready2 = false;
@@ -111,7 +114,7 @@ public class ConsultaListaInternalFrame extends JInternalFrame {
 						listVideos.setSelectedIndex(-1);
 						modelListVideos.removeAllElements();
 						String[] nombreVideos = iCU.listarVideosListaReproduccionUsuario(nombreSeleccionado, nombreLista);
-						for(int i = 0; i < nombreVideos.length ; i++) {
+						for (int i = 0; i < nombreVideos.length; i++) {
 							modelListVideos.addElement(nombreVideos[i]);
 						}
 						//fin de carga de videos.
@@ -120,7 +123,6 @@ public class ConsultaListaInternalFrame extends JInternalFrame {
 						if(dtLista.getPrivado() == true) {
 							textFieldPrivacidadLista.setText("Privada");
 						}else textFieldPrivacidadLista.setText("Publica");
-						
 						ready2=true;
 					}
 				}
@@ -151,9 +153,7 @@ public class ConsultaListaInternalFrame extends JInternalFrame {
 		
 		JLabel lblVideo = new JLabel("Videos:");
 		lblVideo.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_2.add(lblVideo);
-		
-		listVideos = new JList();
+		panel_2.add(lblVideo);	
 		listVideos.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
 				if(!e.getValueIsAdjusting() && ready && ready2) {
