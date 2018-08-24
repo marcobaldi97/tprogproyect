@@ -11,6 +11,8 @@ import java.awt.BorderLayout;
 import javax.swing.JPanel;
 import javax.swing.JComboBox;
 import javax.swing.JTree;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 
 import uytube.logica.DtComentario;
 import uytube.logica.DtVideo;
@@ -25,12 +27,15 @@ import java.awt.event.ActionEvent;
 public class ListarComentariosInternalFrame extends JInternalFrame {
 	private JTextField textFieldNick;
 	private JTextField textFieldVideo;
-	private JLabel lblComentario;
+	private JPanel panel_1;
+	//private JTree treeComentarios;
 
 	/**
 	 * Create the frame.
+	 * @param nomLista 
+	 * @param nickU 
 	 */
-	public ListarComentariosInternalFrame() {
+	public ListarComentariosInternalFrame(String nickU, String nomLista) {
 		setTitle("Comentarios");
 		setResizable(true);
 		setClosable(true);
@@ -47,6 +52,8 @@ public class ListarComentariosInternalFrame extends JInternalFrame {
 		panel.add(lblNick);
 		
 		textFieldNick = new JTextField();
+		textFieldNick.setEditable(false);
+		textFieldNick.setText(nickU);
 		panel.add(textFieldNick);
 		textFieldNick.setColumns(10);
 		
@@ -54,15 +61,16 @@ public class ListarComentariosInternalFrame extends JInternalFrame {
 		panel.add(lblVideo);
 		
 		textFieldVideo = new JTextField();
+		textFieldVideo.setEditable(false);
+		textFieldVideo.setText(nomLista);
 		panel.add(textFieldVideo);
 		textFieldVideo.setColumns(10);
 		
-		JButton btnBuscar = new JButton("Buscar");
-		btnBuscar.addActionListener(new ActionListener() {
+		JButton btnCargar = new JButton("Cargar");
+		btnCargar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				int idVideo = buscarIdVideo(textFieldNick.getText(),textFieldVideo.getText());
+				int idVideo = buscarIdVideo(nickU, nomLista);
 				//temporalmente crae la fabrica, deberia recibirla por parametro
-				//el nick y video deberia recibirlo por parametro
 				Factory fabrica = Factory.getInstance();
 			    IVideoCtrl ICV = fabrica.getIVideoCtrl();
 				DtComentario[] dtComentarios = ICV.listarComentarios(idVideo);
@@ -70,26 +78,42 @@ public class ListarComentariosInternalFrame extends JInternalFrame {
 				cargarComentarios(dtComentarios);
 			}
 		});
-		panel.add(btnBuscar);
+		panel.add(btnCargar);
 		
-		JPanel panel_1 = new JPanel();
+		panel_1 = new JPanel();
 		getContentPane().add(panel_1, BorderLayout.CENTER);
 		
-		lblComentario = new JLabel("COMENTARIO");
-		panel_1.add(lblComentario);
-		
-		JTree treeComentarios = new JTree();
-		panel_1.add(treeComentarios);
+	//	treeComentarios = new JTree();
+	//	panel_1.add(treeComentarios);
 		
 		
 
 	}
-	private void cargarComentarios(DtComentario[] coments){
-		lblComentario.setText(coments[0].getTexto());
+	private void cargarComentarios(DtComentario[] coments ){
+		
+		DefaultMutableTreeNode raiz = new DefaultMutableTreeNode("Comentarios");
+		DefaultTreeModel modelo = new DefaultTreeModel(raiz);
+		JTree treeComentarios = new JTree(modelo);
+		panel_1.add(treeComentarios);
+		
+		 for(int i=0; i<coments.length; i++){ 
+			DefaultMutableTreeNode comentario = new DefaultMutableTreeNode(coments[i].getIDComentario()+"Usuario:  "+coments[i].getTexto());
+			modelo.insertNodeInto(comentario,raiz,i);
+			cargarRespuesta(coments[i].getRespuestas(), comentario,raiz, modelo);
+		}	
 		
 	}
 	
+	private void cargarRespuesta(DtComentario[] dtRespuestas, DefaultMutableTreeNode comentarioPadre, DefaultMutableTreeNode raiz, DefaultTreeModel modelo){
+		for(int i=0; i<dtRespuestas.length; i++){ 
+			DefaultMutableTreeNode comentario = new DefaultMutableTreeNode(dtRespuestas[i].getIDComentario()+"Usuario:  "+ dtRespuestas[i].getTexto());
+			modelo.insertNodeInto(comentario,comentarioPadre,i);
+			cargarRespuesta(dtRespuestas[i].getRespuestas(), comentario,comentarioPadre, modelo);
+		}
+	}
+	
 	private int buscarIdVideo(String nickU, String nomVideo){
+		//verificar que los param recibidos sean correctos
 		Factory fabrica = Factory.getInstance();
 	    IUsuarioCtrl ICU = fabrica.getIUsuarioCtrl();
 		DtVideo dtVideo = ICU.obtenerInfoAdicVideo(nickU,nomVideo);
