@@ -4,12 +4,16 @@ public class DtComentario {
 	private Integer IDComentario;
 	private String texto;
 	private DtFecha fecha;
+	private String nickUsuario;
 	private boolean esPadre;
 	private DtComentario[] respuestas;
 	
 	
 	public Integer getIDComentario(){
 		return IDComentario;
+	}
+	public String getNickUsuario(){
+		return nickUsuario;
 	}
 	public String getTexto(){
 		return texto;
@@ -29,6 +33,7 @@ public class DtComentario {
 		fecha=c.getFecha();
 		esPadre=c.getEsPadre();
 		respuestas=c.getDtRespuestas();
+		nickUsuario=c.getUsuario().getNickname();
 	}
 }
 
