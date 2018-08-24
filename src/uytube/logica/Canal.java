@@ -94,9 +94,6 @@ public class Canal {
 	
 	public void aniadirVideo(String nom, String pro, String desc, Integer dur, DtFecha fp, String url, DtCategoria catE, boolean p) {
 		Video v = new Video(nom, pro, desc, dur, fp, url, catE, p);
-		CategoriaHandler catH = CategoriaHandler.getInstance();
-		Categoria c = catH.find(catE.getNombre());
-		c.addVideo(v);
 		this.addVideo(v);
 		VideoHandler vidH = VideoHandler.getInstance();
 		vidH.addVideo(v);

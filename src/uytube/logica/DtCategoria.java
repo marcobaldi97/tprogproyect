@@ -13,7 +13,10 @@ public class DtCategoria {
 	}
 	
 	public boolean equals(DtCategoria dt) {
-		return nombre == dt.getNombre();
+		if(dt!=null){
+			return nombre == dt.getNombre();
+		}else
+			return false;
 	}
 
 }

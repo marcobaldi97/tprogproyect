@@ -35,5 +35,8 @@ public class DtComentario {
 		respuestas=c.getDtRespuestas();
 		nickUsuario=c.getUsuario().getNickname();
 	}
+	public boolean equals(DtComentario dt) {
+		return (IDComentario == dt.IDComentario)&&(texto == dt.getTexto())&&(fecha.equals(dt.getFecha())&&(esPadre == dt.getEsPadre())&&(nickUsuario == dt.getNickUsuario()));
+	}
 }
 
