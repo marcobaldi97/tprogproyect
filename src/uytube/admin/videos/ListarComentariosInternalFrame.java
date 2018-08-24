@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import javax.swing.JInternalFrame;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.GridLayout;
 import java.awt.BorderLayout;
@@ -30,6 +31,9 @@ public class ListarComentariosInternalFrame extends JInternalFrame {
 	private JPanel panel_1;
 	//private JTree treeComentarios;
 
+	 public static void infoBox(String infoMessage, String titleBar){
+	        JOptionPane.showMessageDialog(null, infoMessage, "" + titleBar, JOptionPane.INFORMATION_MESSAGE);
+	 }
 	/**
 	 * Create the frame.
 	 * @param nomLista 
@@ -69,13 +73,19 @@ public class ListarComentariosInternalFrame extends JInternalFrame {
 		JButton btnCargar = new JButton("Cargar");
 		btnCargar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				int idVideo = buscarIdVideo(nickU, nomLista);
-				//temporalmente crae la fabrica, deberia recibirla por parametro
-				Factory fabrica = Factory.getInstance();
-			    IVideoCtrl ICV = fabrica.getIVideoCtrl();
-				DtComentario[] dtComentarios = ICV.listarComentarios(idVideo);
+				try{
+					int idVideo = buscarIdVideo(nickU, nomLista);
+					//temporalmente crae la fabrica, deberia recibirla por parametro
+					Factory fabrica = Factory.getInstance();
+				    IVideoCtrl ICV = fabrica.getIVideoCtrl();
+				    DtComentario[] dtComentarios = ICV.listarComentarios(idVideo);
+					
+					cargarComentarios(dtComentarios);
+				}catch (java.lang.NullPointerException e){
+					infoBox("El usuario o video no existen, no hay nada que mostrar","Listar Comentarios");
+				}
 				
-				cargarComentarios(dtComentarios);
+				
 			}
 		});
 		panel.add(btnCargar);

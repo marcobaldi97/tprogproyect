@@ -13,17 +13,23 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JEditorPane;
 import java.awt.GridLayout;
+import java.awt.Image;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.io.File;
 import java.util.Date;
 
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
+
 import com.toedter.calendar.JDateChooser;
 
+import uytube.admin.Imagen;
 import uytube.logica.DtCategoria;
 import uytube.logica.DtFecha;
 import uytube.logica.IUsuarioCtrl;
@@ -44,6 +50,7 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 	private JEditorPane editorPaneDesc = new JEditorPane();
 	private JDateChooser dateChooser;
 	private JComboBox comboBoxCat;
+	private File archivo;
 	
 	 public static void infoBox(String infoMessage, String titleBar){
 	        JOptionPane.showMessageDialog(null, infoMessage, "" + titleBar, JOptionPane.INFORMATION_MESSAGE);
@@ -60,9 +67,8 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 		setTitle("Alta Usuario");
 		setMaximizable(true);
 		setClosable(true);
-		setBounds(100, 100, 319, 365);
-		FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER, 5, 5);
-		getContentPane().setLayout(flowLayout);
+		setBounds(100, 100, 312, 456);
+		getContentPane().setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		JPanel datosUsuario = new JPanel();
 		datosUsuario.setBorder(new TitledBorder(null, "Datos Usuario", TitledBorder.CENTER, TitledBorder.TOP, null, null));
@@ -104,6 +110,31 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 		dateChooser = new JDateChooser();
 		datosUsuario.add(dateChooser);
 		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBorder(new TitledBorder(null, "Foto", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		getContentPane().add(panel_1);
+		
+		JLabel lblFotoU = new JLabel("");
+		panel_1.add(lblFotoU);
+		
+		JButton btnElegir = new JButton("Elegir Foto");
+		panel_1.add(btnElegir);
+		btnElegir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				archivo = Imagen.elegirImagen();
+				Image imagen = new ImageIcon(archivo.getAbsolutePath()).getImage();
+				lblFotoU.setSize(50,50);
+				ImageIcon icono = new ImageIcon(imagen.getScaledInstance(lblFotoU.getWidth(), lblFotoU.getHeight(), Image.SCALE_DEFAULT));
+		    	lblFotoU.setIcon(icono);
+		    	
+			}
+		});
+		
+		
+		
+		
+		
+				
 		JPanel datosCanalPanel = new JPanel();
 		datosCanalPanel.setBorder(new TitledBorder(null, "Datos Canal", TitledBorder.CENTER, TitledBorder.TOP, null, null));
 		getContentPane().add(datosCanalPanel);
@@ -120,7 +151,6 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 		datosCanalPanel.add(lblDescripcion);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		datosCanalPanel.add(scrollPane);
 		
 		editorPaneDesc = new JEditorPane();
@@ -172,7 +202,7 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 				boolean disponible = controlUsr.verificarDispUsuario(nick, email);
 				//crear
 				if(disponible && verificarCampos()){
-					controlUsr.nuevoUsuario(nick,nom, ape, email, nac,"foto",nomCanal,descCanal,privacidad, catE) ;
+					controlUsr.nuevoUsuario(nick,nom, ape, email, nac, Imagen.imagenToByte(archivo),nomCanal,descCanal,privacidad, catE) ;
 					infoBox("Usuario creado con exito", "Alta Usuario");
 					limpiar();
 				}else if(!disponible){

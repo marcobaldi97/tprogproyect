@@ -8,12 +8,12 @@ public class Usuario {
     private String apellido;
     private String email;
     private DtFecha fecha_nacimiento;
-    private String foto;
+    private byte[] foto;
     private Canal canalPropio;
     private Map<String,Usuario> usuariosQueSigue;
     private Map<String,Usuario> usuariosQueLeSiguen;
 	
-	public Usuario(String nick,String nom, String ape, String e, DtFecha fn, String fo,String nombreCanal,String desc,Boolean privacidadE, String catE) {
+	public Usuario(String nick,String nom, String ape, String e, DtFecha fn, byte[] fo,String nombreCanal,String desc,Boolean privacidadE, String catE) {
 		// TODO Auto-generated constructor stub
 		nickname = nick;
 		nombre = nom;
@@ -48,7 +48,7 @@ public class Usuario {
 		return email;
 	}
 	
-	public void editarDatosUsuario(String nom, String ape, DtFecha fn, String fo) {
+	public void editarDatosUsuario(String nom, String ape, DtFecha fn, byte[] fo) {
 		nombre = nom;
 		apellido = ape;
 		fecha_nacimiento = fn;
@@ -63,7 +63,7 @@ public class Usuario {
 		DtUsuario dt = new DtUsuario(this);
 		return dt;
 	}
-	public String getFoto(){
+	public byte[] getFoto(){
 		return foto;
 	}
 	

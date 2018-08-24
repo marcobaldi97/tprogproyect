@@ -6,7 +6,7 @@ public class DtUsuario {
     private String apellido;
     private String email;
     private DtFecha fecha_nacimiento;
-    private String foto;
+    private byte[] foto;
 	
 	public DtUsuario(Usuario u) {
 		nickname = u.getNickname();
@@ -17,8 +17,9 @@ public class DtUsuario {
 		foto = u.getFoto();
 	}
 
+	//OBS: no compara fotos
 	public boolean equals(DtUsuario u) {
-		return (nickname == u.getNickname()) && (nombre == u.getNombre()) && (apellido == u.getApellido()) && (email == u.getEmail()) && (fecha_nacimiento == u.getFecha_nacimiento()) && (foto == u.getFoto());
+		return (nickname == u.getNickname()) && (nombre == u.getNombre()) && (apellido == u.getApellido()) && (email == u.getEmail()) && (fecha_nacimiento == u.getFecha_nacimiento());
 	}
 	
 	public String getNickname() {
@@ -41,7 +42,7 @@ public class DtUsuario {
 		return fecha_nacimiento;
 	}
 
-	public String getFoto() {
+	public byte[] getFoto() {
 		return foto;
 	}
 	

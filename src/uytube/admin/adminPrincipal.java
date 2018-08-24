@@ -100,9 +100,9 @@ public class adminPrincipal extends JFrame {
 	    DtFecha fechaNacRoberto=new DtFecha(fecha4);
 	    
 	    Integer duracion=7315;
-	    ICU.nuevoUsuario("pepeDeportes", "Jose", "Rodriguez", "elpepepatuconsumo@adinet.org", fechaNacPepe, "", "pepeDeportista777", "descripcion", false, "deportes");
-	    ICU.nuevoUsuario("RobertoDeportista", "Roberto", "Perez", "robertitocampeon@yahoo.es", fechaNacRoberto, "", "xXrobertoCampeonXx", "mejor descripcion", false, "deportes");
-	    ICU.nuevoUsuario("BokuNoNaruto", "Emilio", "Tilio", "megustaelanime@hotmail.com", fechaNacEmilio, "", "AnimeParaTodos", "descripcion otaku", false, "Anime OwO");
+	    ICU.nuevoUsuario("pepeDeportes", "Jose", "Rodriguez", "elpepepatuconsumo@adinet.org", fechaNacPepe, null, "pepeDeportista777", "descripcion", false, "deportes");
+	    ICU.nuevoUsuario("RobertoDeportista", "Roberto", "Perez", "robertitocampeon@yahoo.es", fechaNacRoberto, null, "xXrobertoCampeonXx", "mejor descripcion", false, "deportes");
+	    ICU.nuevoUsuario("BokuNoNaruto", "Emilio", "Tilio", "megustaelanime@hotmail.com", fechaNacEmilio, null, "AnimeParaTodos", "descripcion otaku", false, "Anime OwO");
 	    DtCategoria[]cates=ICV.listarCategorias();
 	    ICU.aniadirVideo("pepeDeportes", "hago flexiones por dos horas", "segui mi patreon", duracion, fechaVideo, "www.cosopum", cates[0], false);
 	    ICV.valorarVideo(1, "RobertoDeportista", false);

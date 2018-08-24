@@ -2,6 +2,7 @@ package uytube.admin.usuarios;
 
 import java.awt.EventQueue;
 
+import uytube.admin.Imagen;
 import uytube.admin.adminPrincipalBienHecho;
 import uytube.admin.videos.consultar.ConsultarVideoInternalFrame;
 import uytube.admin.videos.modificar.*;
@@ -22,6 +23,8 @@ import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import javax.swing.JPanel;
 import java.awt.GridLayout;
+import java.awt.Image;
+
 import javax.swing.JComboBox;
 import javax.swing.border.TitledBorder;
 import com.jgoodies.forms.layout.FormSpecs;
@@ -36,12 +39,15 @@ import javax.swing.border.BevelBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.ListSelectionModel;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JTextPane;
 import javax.swing.UIManager;
 import java.awt.Color;
 import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDateChooser;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.awt.event.ActionEvent;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
@@ -68,6 +74,10 @@ public class modificarUsuario extends JInternalFrame {
 	
 	private DtUsuario usr;
 	private DtCanal usrCanal;
+	private File archivo;
+	private JLabel lblFoto;
+	private byte[] fotoUsr;
+	private JButton btnElegir;
 	
 	 public static void infoBox(String infoMessage, String titleBar){
 	        JOptionPane.showMessageDialog(null, infoMessage, "" + titleBar, JOptionPane.INFORMATION_MESSAGE);
@@ -78,6 +88,7 @@ public class modificarUsuario extends JInternalFrame {
 	 */
 	
 	public modificarUsuario(IUsuarioCtrl iCU) {
+		setIconifiable(true);
 		
 		
 		controlUsr = iCU;
@@ -86,7 +97,7 @@ public class modificarUsuario extends JInternalFrame {
 		setResizable(true);
 		setMaximizable(true);
 		setClosable(true);
-		setBounds(100, 100, 404, 434);
+		setBounds(100, 100, 495, 410);
 		getContentPane().setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		JPanel panelDatosUsuario = new JPanel();
@@ -162,6 +173,7 @@ public class modificarUsuario extends JInternalFrame {
 					cargarDatos(usr, usrCanal, nickU);
 				}
 				btnCancelar_1.setEnabled(false);
+				btnElegir.setEnabled(false);
 			}
 		});
 		
@@ -180,7 +192,7 @@ public class modificarUsuario extends JInternalFrame {
 				
 				if(btnModificar.getText()=="Guardar"){
 					if(verificarCamposDatosUsu()){
-						controlUsr.editarDatosUsuario(nickU,nom,ape, nac,"Foto");						
+						controlUsr.editarDatosUsuario(nickU,nom,ape, nac, fotoUsr);						
 						infoBox("Usuario modificado","Modificar usuario");
 						
 						textFieldNombre.setEditable(false);
@@ -189,41 +201,37 @@ public class modificarUsuario extends JInternalFrame {
 						btnModificar.setText("Modificar");
 					}
 					btnCancelar_1.setEnabled(false);
+					btnElegir.setEnabled(false);
 				}else if(btnModificar.getText()=="Modificar"){
 					textFieldNombre.setEditable(true);
 					textFieldApellido.setEditable(true);
 					dateChooser.setEnabled(true);
 					btnCancelar_1.setEnabled(true);
+					btnElegir.setEnabled(true);
 					//((JTextField) dateChooser.getDateEditor()).setEditable(true);  
 					btnModificar.setText("Guardar");
 				}
 			}
 		});
-		panelDatosUsuario.add(btnModificar);
-		panelDatosUsuario.add(btnCancelar_1);
 		
+		lblFoto = new JLabel("Foto");
+		panelDatosUsuario.add(lblFoto);
 		
-		
-		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(null, "Datos video", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		getContentPane().add(panel);
-		panel.setLayout(new GridLayout(0, 1, 5, 5));
-		
-		JLabel label = new JLabel("Nombre");
-		panel.add(label);
-		
-		comboBoxVideos = new JComboBox();
-		panel.add(comboBoxVideos);
-		
-		JButton button = new JButton("Modificar");
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				//abrir videos.modificar
-				openModificarVideo();
-				
+		btnElegir = new JButton("Elegir");
+		btnElegir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				archivo = Imagen.elegirImagen();
+				Image imagen = new ImageIcon(archivo.getAbsolutePath()).getImage();
+				lblFoto.setSize(30,30);
+				ImageIcon icono = new ImageIcon(imagen.getScaledInstance(lblFoto.getWidth(), lblFoto.getHeight(), Image.SCALE_DEFAULT));
+		    	lblFoto.setIcon(icono);
+		    	fotoUsr= Imagen.imagenToByte(archivo);
 			}
 		});
-		panel.add(button);
+		btnElegir.setEnabled(false);
+		panelDatosUsuario.add(btnElegir);
+		panelDatosUsuario.add(btnModificar);
+		panelDatosUsuario.add(btnCancelar_1);
 		
 		JPanel panelDatosCanal = new JPanel();
 		panelDatosCanal.setBorder(new TitledBorder(null, "Datos canal", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -341,6 +349,29 @@ public class modificarUsuario extends JInternalFrame {
 		btnCancelar_2.setEnabled(false);
 		panelDatosCanal.add(btnCancelar_2);
 		
+		
+		
+		JPanel panel = new JPanel();
+		panel.setBorder(new TitledBorder(null, "Datos video", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		getContentPane().add(panel);
+		panel.setLayout(new GridLayout(0, 1, 5, 5));
+		
+		JLabel label = new JLabel("Nombre");
+		panel.add(label);
+		
+		comboBoxVideos = new JComboBox();
+		panel.add(comboBoxVideos);
+		
+		JButton button = new JButton("Modificar");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//abrir videos.modificar
+				openModificarVideo();
+				
+			}
+		});
+		panel.add(button);
+		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Datos listas de reproduccion", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		getContentPane().add(panel_1);
@@ -386,29 +417,27 @@ public class modificarUsuario extends JInternalFrame {
 		});
 		panel_1.add(button_1);
 		
-		JLabel label_8 = new JLabel("");
-		getContentPane().add(label_8);
-		
-		JLabel label_4 = new JLabel("                               ");
-		getContentPane().add(label_4);
+		JPanel panel_3 = new JPanel();
+		getContentPane().add(panel_3);
+		GridBagLayout gbl_panel_3 = new GridBagLayout();
+		gbl_panel_3.columnWidths = new int[]{74, 75, 0};
+		gbl_panel_3.rowHeights = new int[]{23, 0, 0, 0, 0, 0};
+		gbl_panel_3.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_3.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		panel_3.setLayout(gbl_panel_3);
 		
 		JButton btnCancelar = new JButton("Cancelar");
+		GridBagConstraints gbc_btnCancelar = new GridBagConstraints();
+		gbc_btnCancelar.anchor = GridBagConstraints.NORTHWEST;
+		gbc_btnCancelar.gridx = 1;
+		gbc_btnCancelar.gridy = 4;
+		panel_3.add(btnCancelar, gbc_btnCancelar);
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//setVisible(false);
 				dispose();
 			}
 		});
-		getContentPane().add(btnCancelar);
-		
-		JLabel label_9 = new JLabel("");
-		getContentPane().add(label_9);
-		
-		JLabel label_10 = new JLabel("");
-		getContentPane().add(label_10);
-		
-		JLabel label_11 = new JLabel("");
-		getContentPane().add(label_11);
 		//CARGAR NICK
 		String[] nickUsuario = controlUsr.listarNicknamesUsuarios();
 		for(int i=0; i<nickUsuario.length;i++){
@@ -442,6 +471,8 @@ public class modificarUsuario extends JInternalFrame {
 			
 			comboBoxListas.setSelectedIndex(-1);
 			comboBoxListas.removeAllItems();
+			
+			lblFoto.setIcon(null);
 	 }
 
 
@@ -473,6 +504,15 @@ public class modificarUsuario extends JInternalFrame {
 			 comboBoxListas.addItem(nomListas[e]);
 		}
 		comboBoxListas.setSelectedIndex(-1);		
+		
+		//Cargar Imagen		
+		 fotoUsr=usr.getFoto();
+		 if(fotoUsr!=null){
+			BufferedImage image = Imagen.byteToImagen(fotoUsr);
+			lblFoto.setSize(30,30);
+		 	ImageIcon icono = new ImageIcon(image.getScaledInstance(lblFoto.getWidth(), lblFoto.getHeight(), Image.SCALE_DEFAULT));
+	     	lblFoto.setIcon(icono);
+		 }
 	}
 	private Boolean verificarCamposDatosUsu(){
 		if( textFieldEmail.getText().isEmpty()|| textFieldNombre.getText().isEmpty()
