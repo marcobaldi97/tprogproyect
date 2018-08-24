@@ -166,4 +166,8 @@ public class Usuario {
 		return canalPropio.memberVideoEnUsuario(nombreVideo);
 	}
 
+	public String[] listarVideosListaReproduccionUsuario(String nombreLista) {
+		return canalPropio.listarVideosListaReproduccionUsuario(nombreLista);
+	}
+
 }

@@ -1,0 +1,178 @@
+package uytube.admin.listas;
+
+import java.awt.EventQueue;
+
+import javax.swing.JInternalFrame;
+import java.awt.GridLayout;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+
+import uytube.logica.DtListaReproduccion;
+import uytube.logica.IUsuarioCtrl;
+import uytube.logica.IVideoCtrl;
+
+import javax.swing.JComboBox;
+import javax.swing.JList;
+import javax.swing.JTextField;
+import javax.swing.ListModel;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.JScrollPane;
+
+public class ConsultaListaInternalFrame extends JInternalFrame {
+	private JLabel textFieldNombreLista;
+	private JLabel textFieldPrivacidadLista;
+	private JComboBox comboBoxNicknames;
+	private DefaultListModel<String> modelListVideos = new DefaultListModel<>();
+	private JList<String> listVideos = new JList<>(modelListVideos);
+	private DefaultListModel<String> modelListListas = new DefaultListModel<>();
+	private JList<String> listListas = new JList<>( modelListListas );
+	private boolean ready = false;
+	private boolean ready2 = false;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					ConsultaListaInternalFrame frame = new ConsultaListaInternalFrame(null,null);
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 * @param iCV 
+	 */
+	public ConsultaListaInternalFrame(IUsuarioCtrl iCU, IVideoCtrl iCV) {
+		setTitle("Consulta Lista Reproduccion");
+		setMaximizable(true);
+		setIconifiable(true);
+		setClosable(true);
+		setBounds(100, 100, 450, 300);
+		getContentPane().setLayout(new GridLayout(4, 0, 0, 0));
+		
+		JPanel panel = new JPanel();
+		getContentPane().add(panel);
+		panel.setLayout(new GridLayout(2, 2, 4, 4));
+		
+		JLabel lblNickname = new JLabel("Nickname:");
+		lblNickname.setHorizontalAlignment(SwingConstants.CENTER);
+		panel.add(lblNickname);
+		
+		comboBoxNicknames = new JComboBox();
+		String[] nicknamesArray = iCU.listarNicknamesUsuarios();
+		comboBoxNicknames.setModel(new DefaultComboBoxModel(nicknamesArray));
+		comboBoxNicknames.setSelectedIndex(-1);
+		comboBoxNicknames.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				listListas.setSelectedIndex(-1);
+				modelListListas.removeAllElements();
+				listVideos.setSelectedIndex(-1);
+				modelListVideos.removeAllElements();
+				textFieldNombreLista.setText("");
+				textFieldPrivacidadLista.setText("");
+				String nombreSeleccionado = (String) comboBoxNicknames.getSelectedItem();
+				String[] listasNombresListas = iCU.listarLDRdeUsuario(nombreSeleccionado);
+				for (int i = 0; i < listasNombresListas.length; i++) {
+					modelListListas.addElement(listasNombresListas[i]);
+				}//cargo la lista		
+				ready = true;
+				ready2 = false;
+			}
+		});
+		panel.add(comboBoxNicknames);
+		
+		JLabel lblListas = new JLabel("Listas:");
+		lblListas.setHorizontalAlignment(SwingConstants.CENTER);
+		panel.add(lblListas);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		panel.add(scrollPane);
+		scrollPane.setViewportView(listListas);
+		listListas.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent arg0) {
+				if (!arg0.getValueIsAdjusting() && ready) {
+					ready = false;
+					ready2 = false;
+					if(!listListas.isSelectionEmpty()){
+						String nombreLista = listListas.getSelectedValue();
+						String nombreSeleccionado = (String) comboBoxNicknames.getSelectedItem();
+						//carga de video.
+						listVideos.setSelectedIndex(-1);
+						modelListVideos.removeAllElements();
+						String[] nombreVideos = iCU.listarVideosListaReproduccionUsuario(nombreSeleccionado, nombreLista);
+						for (int i = 0; i < nombreVideos.length; i++) {
+							modelListVideos.addElement(nombreVideos[i]);
+						}
+						//fin de carga de videos.
+						DtListaReproduccion dtLista = iCU.infoAdicLDR(nombreSeleccionado, nombreLista);
+						textFieldNombreLista.setText(dtLista.getNombre());
+						if(dtLista.getPrivado() == true) {
+							textFieldPrivacidadLista.setText("Privada");
+						}else textFieldPrivacidadLista.setText("Publica");
+						ready2=true;
+					}
+				}
+			}
+		});
+		
+		JPanel panel_1 = new JPanel();
+		getContentPane().add(panel_1);
+		panel_1.setLayout(new GridLayout(1, 4, 2, 2));
+		
+		JLabel lblNombre = new JLabel("Nombre:");
+		lblNombre.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_1.add(lblNombre);
+		
+		textFieldNombreLista = new JLabel();
+		panel_1.add(textFieldNombreLista);
+		
+		JLabel lblPrivacidad = new JLabel("Privacidad:");
+		lblPrivacidad.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_1.add(lblPrivacidad);
+		
+		textFieldPrivacidadLista = new JLabel();
+		panel_1.add(textFieldPrivacidadLista);
+		
+		JPanel panel_2 = new JPanel();
+		getContentPane().add(panel_2);
+		panel_2.setLayout(new GridLayout(0, 2, 0, 0));
+		
+		JLabel lblVideo = new JLabel("Videos:");
+		lblVideo.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_2.add(lblVideo);	
+		listVideos.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e) {
+				if(!e.getValueIsAdjusting() && ready && ready2) {
+					ready2 = false;
+					if(!listVideos.isSelectionEmpty()) {
+						
+					}
+				}
+			}
+		});
+		panel_2.add(listVideos);
+		
+		JPanel panel_3 = new JPanel();
+		getContentPane().add(panel_3);
+		panel_3.setLayout(new GridLayout(1, 1, 0, 0));
+		
+		JButton btnVerInfoVideo = new JButton("Ver Info Video");
+		panel_3.add(btnVerInfoVideo);
+
+	}
+
+}
