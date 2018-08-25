@@ -203,6 +203,8 @@ public class AltaVideo extends JInternalFrame {
 							clear();
 					    	int freshIndex = 0;
 					    	spinnerDuracion.setValue(Integer.valueOf(freshIndex));
+							setVisible(false);
+							dispose();
 						}else infoBox("El titulo no puede estar vacio.","Error");
 					}else infoBox("Ya existe el nombre del video en el canal del usuario seleccionado.","Error");
 				}else infoBox("No existe el usuario en el sistema.","Error");

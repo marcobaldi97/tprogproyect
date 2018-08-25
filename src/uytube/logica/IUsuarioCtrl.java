@@ -51,5 +51,7 @@ public interface IUsuarioCtrl {
 	public abstract String[] listarUsuariosQueLeSigue(String nickname);
 	
 	public abstract String[] listarVideosListaReproduccionUsuario(String nickname, String nombreLista);
-
+	
+	public abstract DtVideo[] obtenerDtsVideosListaReproduccionUsuario(String nickname, String nombreLista);
+	
 }

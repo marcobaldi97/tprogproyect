@@ -13,6 +13,7 @@ import uytube.admin.adminPrincipalBienHecho;
 import uytube.admin.videos.consultar.ConsultarVideoInternalFrame;
 import uytube.admin.videos.modificar.ModificarVideoInternalFrame;
 import uytube.logica.DtListaReproduccion;
+import uytube.logica.DtVideo;
 import uytube.logica.IUsuarioCtrl;
 import uytube.logica.IVideoCtrl;
 
@@ -169,6 +170,19 @@ public class ConsultaListaInternalFrame extends JInternalFrame {
 				  ConsultarVideoInternalFrame consVideoIFrame = new ConsultarVideoInternalFrame();
 				   adminPrincipal.getFrames()[0].setLayout(null);
 				   adminPrincipal.getFrames()[0].add(consVideoIFrame);
+				   //Veo si puedo llamar la ventana condicionada para eso.
+				   String nombreLista = listListas.getSelectedValue();
+				   String nombreSeleccionado = (String) comboBoxNicknames.getSelectedItem();
+				   String nombreVideo = listVideos.getSelectedValue();
+				   DtVideo[] dtvideos = iCU.obtenerDtsVideosListaReproduccionUsuario(nombreSeleccionado, nombreLista);
+				   String nicknameAutor = "";
+				   for(int i = 0; i < dtvideos.length; i++) {
+					   if(nombreVideo == dtvideos[i].getNombre()) {
+						   nicknameAutor = dtvideos[i].getPropietario();
+					   }
+				   }
+				   //
+				   consVideoIFrame.llamadaParticular(nicknameAutor, nombreVideo);
 				   consVideoIFrame.show();
 			}
 		});
