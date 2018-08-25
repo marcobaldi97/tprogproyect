@@ -160,4 +160,8 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 		return u.listarVideosListaReproduccionUsuario(nombreLista);
 	}
 	
+	public DtVideo[] obtenerDtsVideosListaReproduccionUsuario(String nickname, String nombreLista) {
+		Usuario u = usuarioh.find(nickname);
+		return u.obtenerDtsVideosListaReproduccionUsuario(nombreLista);
+	}
 }

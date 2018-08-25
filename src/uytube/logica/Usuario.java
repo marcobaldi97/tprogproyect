@@ -170,4 +170,9 @@ public class Usuario {
 		return canalPropio.listarVideosListaReproduccionUsuario(nombreLista);
 	}
 
+	public DtVideo[] obtenerDtsVideosListaReproduccionUsuario(String nombreLista) {
+		// TODO Auto-generated method stub
+		return canalPropio.obtenerDtsVideosListaReproduccionUsuario(nombreLista);
+	}
+
 }

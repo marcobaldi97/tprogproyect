@@ -167,5 +167,10 @@ public class Canal {
 		ListaReproduccion lr = listasReproduccion.get(nombreLista);
 		return lr.listarVideos();
 	}
+	public DtVideo[] obtenerDtsVideosListaReproduccionUsuario(String nombreLista) {
+		// TODO Auto-generated method stub
+		ListaReproduccion lr = listasReproduccion.get(nombreLista);
+		return lr.obtenerDtsVideosListaReproduccionUsuario(nombreLista);
+	}
 
 }

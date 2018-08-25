@@ -75,4 +75,15 @@ public abstract class ListaReproduccion {
 		this.propietario = propietario;
 	}
 
+	public DtVideo[] obtenerDtsVideosListaReproduccionUsuario(String nombreLista) {
+		DtVideo[] dtvideos = new DtVideo[videos.size()];
+		int contador = 0;
+		for(Map.Entry<Integer, Video> entry : videos.entrySet()) {
+			DtVideo dt = new DtVideo(entry.getValue());
+			dtvideos[contador] = dt;
+			contador++;
+		}
+		return dtvideos;
+	}
+
 }
