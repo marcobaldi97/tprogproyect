@@ -53,6 +53,7 @@ public class ConsultarVideoInternalFrame extends JInternalFrame {
 	private DefaultListModel<String> videoListModel = new DefaultListModel<String>();
 	private DefaultListModel<String> UsuariosGListModel = new DefaultListModel<String>();
 	private DefaultListModel<String> UsuariosNoGListModel = new DefaultListModel<String>();
+	private	final JList<String> videoList;
 
 	private DtVideo selectedVideo;
 	private DtInfoVideo infoVideo;
@@ -73,8 +74,19 @@ public class ConsultarVideoInternalFrame extends JInternalFrame {
 	private final JPanel Comentarios = new JPanel();
 	private final JLabel lblVideosDelAutor = new JLabel("Videos del autor:");
 	private final JButton btnCargar = new JButton("Cargar");
+	
+	//funcion para cuando es llamada con un video.
+	public void llamadaParticular(String nicknameAutor, String nombreVideo) {
+		authorNicknameComboBox.setSelectedItem(nicknameAutor);
+		authorNickname = nicknameAutor;
+		authorNicknameComboBox.setEnabled(false);
+		videoListModel.clear();
+		videoListModel.addElement(nombreVideo);
+		videoListModel.setElementAt(videoListModel.getElementAt(0), 0);
+	}
 
 	public ConsultarVideoInternalFrame() {
+		setTitle("Consultar Video");
 		BorderLayout borderLayout = (BorderLayout) getContentPane().getLayout();
 		borderLayout.setVgap(2);
 		borderLayout.setHgap(2);
@@ -109,7 +121,8 @@ public class ConsultarVideoInternalFrame extends JInternalFrame {
 		mainPanel.add(searchVideosButton);
 		searchVideosButton.setVisible(false);//poner true si se quiere el boton.
 
-		final JList<String> videoList = new JList<>(videoListModel);
+		//restaurar el final, si no funciona .
+		videoList = new JList<>(videoListModel);
 		
 		
 		videoList.addListSelectionListener(new ListSelectionListener() {

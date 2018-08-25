@@ -57,4 +57,6 @@ public interface IUsuarioCtrl {
 
 	public abstract void quitarVideoDeLista(String nickname, Integer videoId, String nombreLista);
 
+	public abstract DtVideo[] obtenerDtsVideosListaReproduccionUsuario(String nickname, String nombreLista);
+
 }
