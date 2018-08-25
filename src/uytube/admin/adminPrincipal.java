@@ -30,6 +30,7 @@ import uytube.admin.categoria.alta.*;
 import uytube.admin.categoria.consulta.*;
 import uytube.admin.videos.alta.*;
 import uytube.admin.videos.consultar.ConsultarVideoInternalFrame;
+import uytube.admin.videos.consultar.ListarCategoriasInternalFrame;
 import uytube.admin.videos.*;
 
 public class adminPrincipal extends JFrame {
@@ -49,6 +50,7 @@ public class adminPrincipal extends JFrame {
 	private ModificarVideo modificarVideoFrame;
 	private ValorarVideo valorarVideoFrame;
 	private ConsultaListaInternalFrame consultaListaFrame;
+	private ListarCategoriasInternalFrame listarCategoriasFrame;
 
 
 	private IUsuarioCtrl ICU;
@@ -294,6 +296,18 @@ public class adminPrincipal extends JFrame {
 			}
 		});
 		mnCategorias.add(mntmConsulta_2);
+		
+		JMenuItem mntmListar_1 = new JMenuItem("Listar");
+		mntmListar_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				listarCategoriasFrame = new ListarCategoriasInternalFrame(ICV);
+				contentPane.setLayout(null);
+				contentPane.add(listarCategoriasFrame);
+				listarCategoriasFrame.setVisible(true);
+				
+			}
+		});
+		mnCategorias.add(mntmListar_1);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
