@@ -15,8 +15,7 @@ public class Categoria {
 		LDR=new LinkedList<ListaReproduccion>();
 	}
 	public void aniadirLDR(ListaReproduccion lr){
-		if(!LDR.contains(lr)) {LDR.add(lr);}
-		
+		if(!LDR.contains(lr)) {LDR.add(lr);}	
 	}
 	public void removerLDR(ListaReproduccion lr){
 		LDR.remove(lr.getNombre());
