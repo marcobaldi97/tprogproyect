@@ -94,7 +94,7 @@ public class ConsultaCategoriaJInternalFrame extends JInternalFrame {
 		setMaximizable(true);
 		setClosable(true);
 		setTitle("Listar por categorias");
-		setBounds(100, 100, 526, 322);
+		setBounds(100, 100, 550, 400);
 		
 		JPanel panel_Video = new JPanel();
 		JPanel panel = new JPanel();
@@ -114,30 +114,32 @@ public class ConsultaCategoriaJInternalFrame extends JInternalFrame {
 		
 		JLabel lblListas = new JLabel("Listas");
 		panel_LDR.add(lblListas);
-		
-		JSeparator separator_1 = new JSeparator();
-		panel_LDR.add(separator_1);
 		panel_Video.setLayout(new GridLayout(0, 1, 0, 0));
 		
 		JLabel lblVideos = new JLabel("Videos");
 		panel_Video.add(lblVideos);
 		
-		JSeparator separator = new JSeparator();
-		panel_Video.add(separator);
-		
 		JComboBox comboBox = new JComboBox();
 		panel.add(comboBox);
 		
-		table_LDR = new JTable(ModeloNombrePropietario());
+		JScrollPane scrollPaneVideos = new JScrollPane();
+		panel_Video.add(scrollPaneVideos);
 		table_Video = new JTable(ModeloNombrePropietario());
+		scrollPaneVideos.setViewportView(table_Video);
 		
-		panel_Video.add(table_Video);
-		panel_LDR.add(table_LDR);
+		JScrollPane scrollPaneLDR = new JScrollPane();
+		panel_LDR.add(scrollPaneLDR);
+		
+		table_LDR = new JTable(ModeloNombrePropietario());
+		scrollPaneLDR.setViewportView(table_LDR);
 		
 		
 		DtCategoria[] set_cat=iCV.listarCategorias();
 		for(int i=0; i<set_cat.length;i++) {comboBox.addItem(set_cat[i].getNombre());}
 		comboBox.setSelectedIndex(-1);
+		
+		JSeparator separator = new JSeparator();
+		panel.add(separator);
 		
 		comboBox.addActionListener(new ActionListener() 
 		{
@@ -154,7 +156,7 @@ public class ConsultaCategoriaJInternalFrame extends JInternalFrame {
 					
 					if(listarvideos.length>0) 
 					{
-						modelo_video.addRow(new Object[]{"NOMBRE","PROPIETARIO"});
+						
 						for(int i=0;i<listarvideos.length;i++) 
 						{
 							modelo_video.addRow(new Object[]{listarvideos[i].getNombre(),listarvideos[i].getPropietario()});
@@ -168,6 +170,7 @@ public class ConsultaCategoriaJInternalFrame extends JInternalFrame {
 					
 					if(listarLDR.length>0) 
 					{
+						
 						for(int i=0; i<listarLDR.length;i++) 
 						{
 							modelo_ldr.addRow(new Object[] {listarLDR[i].getNombre(),listarLDR[i].getPropietario()});
