@@ -105,9 +105,6 @@ public class Usuario {
 		return canalPropio.listarVideosCanal();
 	}
 	
-	public DtVideo verDetallesVideo(String nombreVideo) {
-		return canalPropio.obtenerInfoAdicVideo(nombreVideo);
-	}
 	
 	public DtListaReproduccion verDetallesListareproduccion(String nombreLista) {
 		return canalPropio.verDetallesListareproduccion(nombreLista);

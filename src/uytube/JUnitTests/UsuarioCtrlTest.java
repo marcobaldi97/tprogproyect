@@ -499,8 +499,55 @@ public class UsuarioCtrlTest {
 	}
 	
 	@Test
-	public void testListarObtenerYQuitarVideosdeLDR() {
+	public void testListarYObtenerVideosdeLDR() {
 		UsuarioCtrl UCU=UsuarioCtrl.getInstance();
+		DtFecha fecha=new DtFecha(new Date(0));
+		String nombreU="nombreLYOVLDR";
+		String nombreV1="nombreVLYOVLDR1";
+		String nombreV2="nombreVLYOVLDR2";
+		String nombreL="nombreLYOVLDR";
+		UCU.nuevoUsuario(nombreU, "Jose", "Ramirez", "www.cosoarroba3",fecha , null, "canal", "descripcion", false, null);
+		UCU.nuevaListaParticular(nombreU, nombreL, true);
+		UCU.aniadirVideo(nombreU, nombreV1, "descrito", 30, fecha, "url", null, true);
+		UCU.aniadirVideo(nombreU, nombreV2, "descrito2", 40, fecha, "url2", null, false);
+		DtVideo video1=UCU.obtenerInfoAdicVideo(nombreU, nombreV1);
+		DtVideo video2=UCU.obtenerInfoAdicVideo(nombreU, nombreV2);
+		String[] listadoVideosLDR=UCU.listarVideosListaReproduccionUsuario(nombreU, nombreL);
+		DtVideo[] infoVideosLDR=UCU.obtenerDtsVideosListaReproduccionUsuario(nombreU, nombreL);
+		assertEquals(true,listadoVideosLDR.length==0);
+		assertEquals(true,infoVideosLDR.length==0);
+		UCU.agregarVideoLista(nombreU, video1.getIDVideo(), nombreL);
+		UCU.agregarVideoLista(nombreU, video2.getIDVideo(), nombreL);
+		listadoVideosLDR=UCU.listarVideosListaReproduccionUsuario(nombreU, nombreL);
+		infoVideosLDR=UCU.obtenerDtsVideosListaReproduccionUsuario(nombreU, nombreL);
+		assertEquals(true,listadoVideosLDR.length==2);
+		assertEquals(true,infoVideosLDR.length==2);
+		boolean existe1enListado=false;
+		boolean existe2enListado=false;
+		boolean existe1enData=false;
+		boolean existe2enData=false;
+		
+		for(String nomVideo:listadoVideosLDR){
+			if(nomVideo==nombreV1){
+				existe1enListado=true;
+			}
+			if(nomVideo==nombreV2){
+				existe2enListado=true;
+			}
+			
+		}
+		for(DtVideo dtActual:infoVideosLDR){
+			if(dtActual.equals(video1)){
+				existe1enData=true;
+			}
+			if(dtActual.equals(video2)){
+				existe2enData=true;
+			}
+		}
+		assertEquals(true,existe1enListado);
+		assertEquals(true,existe2enListado);
+		assertEquals(true,existe1enData);
+		assertEquals(true,existe2enData);
 		
 	}
 }
