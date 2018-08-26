@@ -1,4 +1,5 @@
 package uytube.admin;
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
@@ -21,7 +22,7 @@ import uytube.admin.categoria.alta.*;
 public class adminPrincipalBienHecho extends JFrame {
 
 	private JPanel contentPane;
-	
+
 	private AltaUsuarioInternalFrame aUsrIFrame;
 	private modificarUsuario modUsrIFrame;
 	private ConsultaUsuarioInternalFrame conUsrIFrame;
@@ -37,7 +38,7 @@ public class adminPrincipalBienHecho extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		
+
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -54,123 +55,123 @@ public class adminPrincipalBienHecho extends JFrame {
 	 * Create the frame.
 	 */
 	public adminPrincipalBienHecho() {
-		 Factory fabrica = Factory.getInstance();
-	     ICU = fabrica.getIUsuarioCtrl();
-	     ICV = fabrica.getIVideoCtrl();
-	     ICV.crearCategoria("deportes");
-	     ICV.crearCategoria("Anime OwO");
-	     ICV.crearCategoria("n.n");
+		Factory fabrica = Factory.getInstance();
+		ICU = fabrica.getIUsuarioCtrl();
+		ICV = fabrica.getIVideoCtrl();
+		ICV.crearCategoria("deportes");
+		ICV.crearCategoria("Anime OwO");
+		ICV.crearCategoria("n.n");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
-		
+
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
-		
+
 		JMenu mnNewMenu = new JMenu("Usuario");
 		menuBar.add(mnNewMenu);
-		
+
 		JMenuItem mntmAlta = new JMenuItem("Alta");
 		mntmAlta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-		        aUsrIFrame = new AltaUsuarioInternalFrame(ICU,ICV);
-		        contentPane.setLayout(null);
-		        contentPane.add(aUsrIFrame);
-		        aUsrIFrame.setVisible(true);
+				aUsrIFrame = new AltaUsuarioInternalFrame(ICU, ICV);
+				contentPane.setLayout(null);
+				contentPane.add(aUsrIFrame);
+				aUsrIFrame.setVisible(true);
 			}
 		});
 		mnNewMenu.add(mntmAlta);
-		
+
 		JMenuItem mntmModificar = new JMenuItem("Modificar");
 		mntmModificar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				modUsrIFrame = new modificarUsuario(ICU);
-			    contentPane.setLayout(null);
-			    contentPane.add(modUsrIFrame);
-			    modUsrIFrame.setVisible(true);
+				contentPane.setLayout(null);
+				contentPane.add(modUsrIFrame);
+				modUsrIFrame.setVisible(true);
 			}
 		});
 		mnNewMenu.add(mntmModificar);
-		
+
 		JMenuItem mntmConsulta = new JMenuItem("Consulta");
 		mntmConsulta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				 conUsrIFrame = new ConsultaUsuarioInternalFrame(ICU);
-			     contentPane.setLayout(null);
-			     contentPane.add(conUsrIFrame);
-			     conUsrIFrame.setVisible(true);
+				conUsrIFrame = new ConsultaUsuarioInternalFrame(ICU);
+				contentPane.setLayout(null);
+				contentPane.add(conUsrIFrame);
+				conUsrIFrame.setVisible(true);
 			}
 		});
 		mnNewMenu.add(mntmConsulta);
-		
+
 		JMenuItem mntmListar = new JMenuItem("Listar");
 		mntmListar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				 listarUsrIFrame = new ListarUsuariosInternalFrame(ICU);
-			     contentPane.setLayout(null);
-			     contentPane.add(listarUsrIFrame);
-			     listarUsrIFrame.setVisible(true);
+				listarUsrIFrame = new ListarUsuariosInternalFrame(ICU);
+				contentPane.setLayout(null);
+				contentPane.add(listarUsrIFrame);
+				listarUsrIFrame.setVisible(true);
 			}
 		});
 		mnNewMenu.add(mntmListar);
-		
+
 		JMenu mnVideos = new JMenu("Videos");
 		menuBar.add(mnVideos);
-		
+
 		JMenuItem mntmAlta_1 = new JMenuItem("Alta");
 		mnVideos.add(mntmAlta_1);
-		
+
 		JMenuItem mntmNewMenuItem = new JMenuItem("Modificar");
 		mnVideos.add(mntmNewMenuItem);
-		
+
 		JMenuItem mntmConsulta_1 = new JMenuItem("Consulta");
 		mnVideos.add(mntmConsulta_1);
-		
+
 		JMenu mnNewMenu_1 = new JMenu("Listas");
 		menuBar.add(mnNewMenu_1);
-		
+
 		JMenuItem mntmCrear = new JMenuItem("Crear");
 		mntmCrear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				crearListIFrame = new CrearListaInternalFrame(ICU);
 				contentPane.setLayout(null);
-			    contentPane.add(crearListIFrame);
-			    crearListIFrame.setVisible(true);	
+				contentPane.add(crearListIFrame);
+				crearListIFrame.setVisible(true);
 			}
 		});
 		mnNewMenu_1.add(mntmCrear);
-		
+
 		JMenuItem mntmAgregarVideo = new JMenuItem("Agregar Video");
 		mntmAgregarVideo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				 addVideoListIFrame = new AgregarVideoListaInternalFrame(ICU);
-			     contentPane.setLayout(null);
-			     contentPane.add(addVideoListIFrame);
-			     addVideoListIFrame.setVisible(true);	
+				addVideoListIFrame = new AgregarVideoListaInternalFrame(ICU);
+				contentPane.setLayout(null);
+				contentPane.add(addVideoListIFrame);
+				addVideoListIFrame.setVisible(true);
 			}
 		});
 		mnNewMenu_1.add(mntmAgregarVideo);
-		
+
 		JMenuItem mntmQuitarVideo = new JMenuItem("Quitar Video");
 		mntmQuitarVideo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				 quitarVideoListIFrame = new QuitarVideoListaInternalFrame();
-			     contentPane.setLayout(null);
-			     contentPane.add(quitarVideoListIFrame);
-			     quitarVideoListIFrame.setVisible(true);	
+				quitarVideoListIFrame = new QuitarVideoListaInternalFrame(ICU);
+				contentPane.setLayout(null);
+				contentPane.add(quitarVideoListIFrame);
+				quitarVideoListIFrame.setVisible(true);
 			}
 		});
 		mnNewMenu_1.add(mntmQuitarVideo);
-		
+
 		JMenu mnCategorias = new JMenu("Categorias");
 		menuBar.add(mnCategorias);
-		
+
 		JMenuItem mntmAlta_2 = new JMenuItem("Alta");
 		mntmAlta_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				 AltaCategoria ac = new AltaCategoria(ICV);
-			     contentPane.setLayout(null);
-			     contentPane.add(ac);
-			     ac.setVisible(true);
+				AltaCategoria ac = new AltaCategoria(ICV);
+				contentPane.setLayout(null);
+				contentPane.add(ac);
+				ac.setVisible(true);
 			}
 		});
 		mnCategorias.add(mntmAlta_2);
