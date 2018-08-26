@@ -109,7 +109,7 @@ public class QuitarVideoListaInternalFrame extends JInternalFrame {
 
 				final DtVideo video = controlUsr.obtenerInfoAdicVideo(nickname, nombreVideo);
 
-				controlUsr.quitarVideoDeLista(nickname, video.getIDVideo(), nombreLista);
+				controlUsr.eliminarVideoLista(nickname, video.getIDVideo(), nombreLista);
 				infoBox("Video quitado correctamente", "Quitar video de lista");
 				dispose();
 			}

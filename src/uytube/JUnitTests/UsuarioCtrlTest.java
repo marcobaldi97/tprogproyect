@@ -6,15 +6,19 @@ import java.util.Date;
 
 import org.junit.Test;
 
+import uytube.logica.DtCanal;
+import uytube.logica.DtCategoria;
 import uytube.logica.DtFecha;
 import uytube.logica.DtListaReproduccion;
 import uytube.logica.DtUsuario;
 import uytube.logica.DtVideo;
 import uytube.logica.ListaReproduccion;
+import uytube.logica.SystemHandler;
 import uytube.logica.Usuario;
 import uytube.logica.UsuarioCtrl;
 import uytube.logica.UsuarioHandler;
 import uytube.logica.Video;
+import uytube.logica.VideoCtrl;
 import uytube.logica.VideoHandler;
 
 public class UsuarioCtrlTest {
@@ -33,7 +37,7 @@ public class UsuarioCtrlTest {
 		UsuarioCtrl UCU=UsuarioCtrl.getInstance();
 		DtFecha fecha=new DtFecha(new Date(0));
 		String nombreU="nombreUsuarioMember";
-		UCU.nuevoUsuario(nombreU, "Jose", "Ramirez", "www.cosoarroba3",fecha , "foto", "canal", "descripcion", false, null);
+		UCU.nuevoUsuario(nombreU, "Jose", "Ramirez", "www.cosoarroba3",fecha , null, "canal", "descripcion", false, null);
 		assertEquals(true, UCU.memberUsuario(nombreU));
 	}
 
@@ -43,7 +47,7 @@ public class UsuarioCtrlTest {
 		DtFecha fecha=new DtFecha(new Date(0));
 		String nombreU="nombreLDRMember";
 		String nombreL="nombreListaLDRMember";
-		UCU.nuevoUsuario(nombreU, "Jose", "Ramirez", "www.cosoarroba3",fecha , "foto", "canal", "descripcion", false, null);
+		UCU.nuevoUsuario(nombreU, "Jose", "Ramirez", "www.cosoarroba3",fecha , null, "canal", "descripcion", false, null);
 		assertEquals(false, UCU.memberListaReproduccionPropia(nombreU, nombreL));
 		UCU.nuevaListaParticular(nombreU, nombreL, false);
 		assertEquals(true, UCU.memberListaReproduccionPropia(nombreU, nombreL));
@@ -61,9 +65,9 @@ public class UsuarioCtrlTest {
 		UsuarioCtrl UCU=UsuarioCtrl.getInstance();
 		DtFecha fecha=new DtFecha(new Date(0));
 		String nombreU="nombreListarNickU";
-		UCU.nuevoUsuario(nombreU, "Jose", "Ramirez", "www.cosoarroba3",fecha , "foto", "canal", "descripcion", false, null);
+		UCU.nuevoUsuario(nombreU, "Jose", "Ramirez", "www.cosoarroba3",fecha , null, "canal", "descripcion", false, null);
 		String nombreU2="nombreListarNickU2";
-		UCU.nuevoUsuario(nombreU2, "Pedro", "Peres", "www.cosoarroba6",fecha , "foto2", "canal2", "descripcion2", true, null);
+		UCU.nuevoUsuario(nombreU2, "Pedro", "Peres", "www.cosoarroba6",fecha , null, "canal2", "descripcion2", true, null);
 		String[] usuarios=UCU.listarNicknamesUsuarios();
 		boolean existe=false;
 		boolean existe2=false;
@@ -84,7 +88,7 @@ public class UsuarioCtrlTest {
 		String nombreU="nombreListarVideosCanal";
 		String nombreV="nombreVideoListarVideosCanal";
 		String nombreV2="nombreVideoListarVideosCanal";
-		UCU.nuevoUsuario(nombreU, "Jose", "Ramirez", "www.cosoarroba3",fecha , "foto", "canal", "descripcion", false, null);
+		UCU.nuevoUsuario(nombreU, "Jose", "Ramirez", "www.cosoarroba3",fecha , null, "canal", "descripcion", false, null);
 		UCU.aniadirVideo(nombreU, nombreV, "descr", 20, fecha, "hola.com", null, false);
 		UCU.aniadirVideo(nombreU, nombreV2, "descr", 20, fecha, "hola.com", null, false);
 		String[] videos=UCU.listarVideosCanal(nombreU);
@@ -106,7 +110,10 @@ public class UsuarioCtrlTest {
 		DtFecha fecha=new DtFecha(new Date(0));
 		String nombreU="nombreNuevaLDR por defecto";
 		String nombreL="nombreLNuevaLDR por defecto";
-		UCU.nuevoUsuario(nombreU, "Jose", "Ramirez", "www.cosoarroba3",fecha , "foto", "canal", "descripcion", false, null);
+		UCU.nuevoUsuario(nombreU, "Jose", "Ramirez", "www.cosoarroba3",fecha , null, "canal", "descripcion", false, null);
+		UCU.nuevaListaPorDefecto(nombreL);
+		assertEquals(true,UCU.memberListaReproduccionDefecto(nombreL));
+		assertEquals(true, UCU.memberListaReproduccionPropia(nombreU, nombreL));
 		UCU.nuevaListaPorDefecto(nombreL);
 		assertEquals(true,UCU.memberListaReproduccionDefecto(nombreL));
 		assertEquals(true, UCU.memberListaReproduccionPropia(nombreU, nombreL));
@@ -118,7 +125,7 @@ public class UsuarioCtrlTest {
 		DtFecha fecha=new DtFecha(new Date(0));
 		String nombreU="nombreNuevaLDR particular";
 		String nombreL="nombreLNuevaLDR particular";
-		UCU.nuevoUsuario(nombreU, "Jose", "Ramirez", "www.cosoarroba3",fecha , "foto", "canal", "descripcion", false, null);
+		UCU.nuevoUsuario(nombreU, "Jose", "Ramirez", "www.cosoarroba3",fecha , null, "canal", "descripcion", false, null);
 		assertEquals(false, UCU.memberListaReproduccionPropia(nombreU, nombreL));
 		UCU.nuevaListaParticular(nombreU, nombreL, false);
 		assertEquals(true, UCU.memberListaReproduccionPropia(nombreU, nombreL));
@@ -130,7 +137,7 @@ public class UsuarioCtrlTest {
 		DtFecha fecha=new DtFecha(new Date(0));
 		String nombreU="nombrelistarLDRUsuario";
 		String nombreL="nombreLNuevaLDRUsuario";
-		UCU.nuevoUsuario(nombreU, "Jose", "Ramirez", "www.cosoarroba3",fecha , "foto", "canal", "descripcion", false, null);
+		UCU.nuevoUsuario(nombreU, "Jose", "Ramirez", "www.cosoarroba3",fecha , null, "canal", "descripcion", false, null);
 		boolean existe=false;
 		boolean existe2=false;
 		String[] listas=UCU.listarLDRdeUsuario(nombreU);
@@ -159,7 +166,7 @@ public class UsuarioCtrlTest {
 		String nombreU="nombreagregarVideolista";
 		String nombreL="nombreLagregVidLista";
 		String nombreV="nombreVagregVidLista";
-		UCU.nuevoUsuario(nombreU, "Jose", "Ramirez", "www.cosoarroba3",fecha , "foto", "canal", "descripcion", false, null);
+		UCU.nuevoUsuario(nombreU, "Jose", "Ramirez", "www.cosoarroba3",fecha , null, "canal", "descripcion", false, null);
 		UCU.aniadirVideo(nombreU, nombreV, "descripcion", 20, fecha, "www.hola.tv", null, false);
 		UCU.nuevaListaParticular(nombreU, nombreL, false);
 		DtVideo dt=UCU.obtenerInfoAdicVideo(nombreU, nombreV);
@@ -191,7 +198,7 @@ public class UsuarioCtrlTest {
 		String nombreU="nombreagregarVideolista";
 		String nombreL="nombreLagregVidLista";
 		String nombreL2="nombreL2";
-		UCU.nuevoUsuario(nombreU, "Jose", "Ramirez", "www.cosoarroba3",fecha , "foto", "canal", "descripcion", false, null);
+		UCU.nuevoUsuario(nombreU, "Jose", "Ramirez", "www.cosoarroba3",fecha , null, "canal", "descripcion", false, null);
 		UCU.nuevaListaParticular(nombreU, nombreL, false);
 		DtListaReproduccion dtLDR=UCU.infoAdicLDR(nombreU, nombreL);
 		UCU.nuevaListaPorDefecto(nombreL2);
@@ -212,87 +219,288 @@ public class UsuarioCtrlTest {
 		DtFecha fecha2=new DtFecha(new Date(1));
 		String nombreU="nombreEditarDatosUsuario";
 		
-		UCU.nuevoUsuario(nombreU, "Jose", "Ramirez", "www.cosoarroba3",fecha , "foto", "canal", "descripcion", false, null);
+		UCU.nuevoUsuario(nombreU, "Jose", "Ramirez", "www.cosoarroba3",fecha , null, "canal", "descripcion", false, null);
 		DtUsuario dtUsuario=UCU.listarDatosUsuario(nombreU);
 		assertEquals(true,dtUsuario.getNickname()==nombreU);
 		assertEquals(true,dtUsuario.getNombre()=="Jose");
 		assertEquals(true,dtUsuario.getApellido()=="Ramirez");
 		assertEquals(true,dtUsuario.getEmail()=="www.cosoarroba3");
 		assertEquals(true,dtUsuario.getFecha_nacimiento().equals(fecha));
-		assertEquals(true,dtUsuario.getFoto()=="foto");
-		UCU.editarDatosUsuario(nombreU, "Josefina", "Ramireza", fecha2, "foto2");
+		assertEquals(true,dtUsuario.getFoto()==null);
+		UCU.editarDatosUsuario(nombreU, "Josefina", "Ramireza", fecha2, null);
 		dtUsuario=UCU.listarDatosUsuario(nombreU);
 		assertEquals(true,dtUsuario.getNickname()==nombreU);
 		assertEquals(true,dtUsuario.getNombre()=="Josefina");
 		assertEquals(true,dtUsuario.getApellido()=="Ramireza");
 		assertEquals(true,dtUsuario.getEmail()=="www.cosoarroba3");
 		assertEquals(true,dtUsuario.getFecha_nacimiento().equals(fecha2));
-		assertEquals(true,dtUsuario.getFoto()=="foto2");
+		assertEquals(true,dtUsuario.getFoto()==null);
 	}
 
 	@Test
-	public void testSeguirUsuario() {
-		fail("Not yet implemented");
+	public void testSeguiryDejardeSeguirUsuario() {
+		UsuarioCtrl UCU=UsuarioCtrl.getInstance();
+		
+		DtFecha fecha=new DtFecha(new Date(0));
+		DtFecha fecha2=new DtFecha(new Date(1));
+		String nombreU="nombreSeguirUsuario";
+		String nombreU2="nombreSeguirUsuario2";
+		UCU.nuevoUsuario(nombreU, "Jose", "Ramirez", "www.cosoarroba3",fecha , null, "canal", "descripcion", false, null);
+		UCU.nuevoUsuario(nombreU2, "Luis", "Rosas", "www.arrobe", fecha2, null, "canal2", "descr2", true, null);
+		UCU.seguirUsuario(nombreU, nombreU2);
+		
+		String seguidos1[]=UCU.listarUsuariosQueSigue(nombreU);
+		String seguidores1[]=UCU.listarUsuariosQueLeSigue(nombreU);
+		String seguidos2[]=UCU.listarUsuariosQueSigue(nombreU2);
+		String seguidores2[]=UCU.listarUsuariosQueLeSigue(nombreU2);
+		boolean seguidos1Ok=false;
+		boolean seguidores1Ok=true;
+		boolean seguidos2Ok=true;
+		boolean seguidores2Ok=false;
+		
+		for(String nick:seguidos1){
+			if(nick==nombreU2)
+				seguidos1Ok=true;
+		}
+		for(String nick:seguidos2){
+			if(nick==nombreU){
+				seguidos2Ok=false;
+			}
+		}
+		for(String nick:seguidores1){
+			if(nick==nombreU2){
+				seguidores1Ok=false;
+			}
+		}
+		for(String nick:seguidores2){
+			if(nick==nombreU){
+				seguidores2Ok=true;
+			}
+		}
+		assertEquals(true,seguidos1Ok);
+		assertEquals(true,seguidos2Ok);
+		assertEquals(true,seguidores1Ok);
+		assertEquals(true,seguidores2Ok);
+		UCU.dejarUsuario(nombreU2, nombreU);
+		seguidos1=UCU.listarUsuariosQueSigue(nombreU);
+		seguidores1=UCU.listarUsuariosQueLeSigue(nombreU);
+		seguidos2=UCU.listarUsuariosQueSigue(nombreU2);
+		seguidores2=UCU.listarUsuariosQueLeSigue(nombreU2);
+		for(String nick:seguidos1){
+			if(nick==nombreU2)
+				seguidos1Ok=true;
+		}
+		for(String nick:seguidos2){
+			if(nick==nombreU){
+				seguidos2Ok=false;
+			}
+		}
+		for(String nick:seguidores1){
+			if(nick==nombreU2){
+				seguidores1Ok=false;
+			}
+		}
+		for(String nick:seguidores2){
+			if(nick==nombreU){
+				seguidores2Ok=true;
+			}
+		}
+		assertEquals(true,seguidos1Ok);
+		assertEquals(true,seguidos2Ok);
+		assertEquals(true,seguidores1Ok);
+		assertEquals(true,seguidores2Ok);
+		UCU.dejarUsuario(nombreU, nombreU2);
+		seguidos1=UCU.listarUsuariosQueSigue(nombreU);
+		seguidores1=UCU.listarUsuariosQueLeSigue(nombreU);
+		seguidos2=UCU.listarUsuariosQueSigue(nombreU2);
+		seguidores2=UCU.listarUsuariosQueLeSigue(nombreU2);
+		seguidos1Ok=true;
+		seguidores1Ok=true;
+		seguidos2Ok=true;
+		seguidores2Ok=true;
+		for(String nick:seguidos1){
+			if(nick==nombreU2)
+				seguidos1Ok=false;
+		}
+		for(String nick:seguidos2){
+			if(nick==nombreU){
+				seguidos2Ok=false;
+			}
+		}
+		for(String nick:seguidores1){
+			if(nick==nombreU2){
+				seguidores1Ok=false;
+			}
+		}
+		for(String nick:seguidores2){
+			if(nick==nombreU){
+				seguidores2Ok=false;
+			}
+		}
+		assertEquals(true,seguidos1Ok);
+		assertEquals(true,seguidos2Ok);
+		assertEquals(true,seguidores1Ok);
+		assertEquals(true,seguidores2Ok);
 	}
 
-	@Test
-	public void testDejarUsuario() {
-		fail("Not yet implemented");
-	}
 
 	@Test
 	public void testAniadirVideo() {
-		fail("Not yet implemented");
+		UsuarioCtrl UCU=UsuarioCtrl.getInstance();
+		UsuarioHandler uh=UsuarioHandler.getInstance();
+		DtFecha fecha=new DtFecha(new Date(0));
+		String nombreU="nombreaniadirvideo";
+		String nombreV="nombreVaniadirVideo";
+		UCU.nuevoUsuario(nombreU, "Jose", "Ramirez", "www.cosoarroba3",fecha , null, "canal", "descripcion", false, null);
+		UCU.aniadirVideo(nombreU, nombreV, "descripcion", 20, fecha, "www.hola.tv", null, false);
+		String[] videos=UCU.listarVideosCanal(nombreU);
+		boolean existe=false;
+		for (String vid:videos){
+			if(vid==nombreV)
+				existe=true;
+		}
+		assertEquals(true, existe);
 	}
 
 	@Test
 	public void testIngresarNuevosDatosVideo() {
-		fail("Not yet implemented");
+		UsuarioCtrl UCU=UsuarioCtrl.getInstance();
+		VideoCtrl VCU=VideoCtrl.getInstance();
+		SystemHandler sh=SystemHandler.getInstance();
+		VCU.crearCategoria("catego");
+		DtCategoria[] categoriasEnSistema=VCU.listarCategorias();
+		DtCategoria cate=null;
+		for(DtCategoria categoria:categoriasEnSistema){
+			if(categoria.getNombre()=="catego")
+				cate=categoria;
+		}
+		UsuarioHandler uh=UsuarioHandler.getInstance();
+		DtFecha fecha=new DtFecha(new Date(0));
+		DtFecha fecha2=new DtFecha(new Date(3));
+		String nombreU="nombreingresarNuevosDatosVideo";
+		String nombreV="nombreVingresarNuevosDatosVideo";
+		UCU.nuevoUsuario(nombreU, "Jose", "Ramirez", "www.cosoarroba3",fecha , null, "canal", "descripcionU", false, null);
+		UCU.aniadirVideo(nombreU, nombreV, "descripcion", 20, fecha, "www.hola.tv", null, false);
+		DtVideo dtVid=UCU.obtenerInfoAdicVideo(nombreU, nombreV);
+		assertEquals(true,dtVid.getNombre()==nombreV);
+		assertEquals(true,dtVid.getDescripcion()=="descripcion");
+		assertEquals(true,dtVid.getDuracion()==20);
+		assertEquals(true,dtVid.getFechaPublicacion()==fecha);
+		assertEquals(true,dtVid.getUrl()=="www.hola.tv");
+		assertEquals(true,dtVid.getCategoria().equals(new DtCategoria(sh.getSinCat())));
+		assertEquals(true,dtVid.getPrivacidad()==false);
+		
+		UCU.ingresarNuevosDatosVideo(nombreU, nombreV, "nuevaDescr", 30, fecha2, "holanuevo.tv", cate, true);
+		dtVid=UCU.obtenerInfoAdicVideo(nombreU, nombreV);
+		assertEquals(true,dtVid.getNombre()==nombreV);
+		assertEquals(true,dtVid.getDescripcion()=="nuevaDescr");
+		assertEquals(true,dtVid.getDuracion()==30);
+		assertEquals(true,dtVid.getFechaPublicacion()==fecha2);
+		assertEquals(true,dtVid.getUrl()=="holanuevo.tv");
+		assertEquals(true,dtVid.getCategoria().equals(cate));
+		assertEquals(true,dtVid.getPrivacidad()==true);
 	}
 
 	@Test
 	public void testVerificarDispUsuario() {
-		fail("Not yet implemented");
+		DtFecha fecha=new DtFecha(new Date(0));
+		UsuarioCtrl UCU=UsuarioCtrl.getInstance();
+		String nombreU="nombreVerifDispUsuario";
+		String nombreU2="nombreVerifDispUsuario2";
+		String emailU="emailVerifDispUsuario";
+		String emailU2="emailVerfDispUsuario2";
+		assertEquals(true,UCU.verificarDispUsuario(nombreU, emailU));
+		UCU.nuevoUsuario(nombreU, "Jose", "Gimenez", emailU, fecha, null, "elnombredelpepe", "describido", true, null);
+		assertEquals(false,UCU.verificarDispUsuario(nombreU, emailU));
+		assertEquals(false,UCU.verificarDispUsuario(nombreU, emailU2));
+		assertEquals(false,UCU.verificarDispUsuario(nombreU2, emailU));
+		assertEquals(false,UCU.verificarDispUsuario(nombreU, emailU2));
+		assertEquals(true,UCU.verificarDispUsuario(nombreU2, emailU2));
+		UCU.nuevoUsuario(nombreU2, "Pedro", "Rodriguez", emailU2, fecha, null, "elnombredelpedro", "describidisimo", true, null);
+		assertEquals(false,UCU.verificarDispUsuario(nombreU2, emailU2));
 	}
 
-	@Test
-	public void testNuevoUsuario() {
-		fail("Not yet implemented");
-	}
 
 	@Test
 	public void testInfoAdicLDR() {
-		fail("Not yet implemented");
+		UsuarioCtrl UCU=UsuarioCtrl.getInstance();
+		DtFecha fecha=new DtFecha(new Date(0));
+		String nombreU="nombreagregarInfoAdicLDR";
+		String nombreL="nombreLagregInfoAdicLDR";
+		UCU.nuevoUsuario(nombreU, "Jose", "Ramirez", "www.cosoarroba3",fecha , null, "canal", "descripcion", false, null);
+		UCU.nuevaListaParticular(nombreU, nombreL, false);
+		DtListaReproduccion dtLDR=UCU.infoAdicLDR(nombreU, nombreL);
+		assertEquals(true,dtLDR.getNombre()==nombreL);
+		assertEquals(true,dtLDR.getPropietario()==nombreU);
+		assertEquals(true,dtLDR.getCategoriasLDR().length==0);
+		
 	}
 
 	@Test
 	public void testListarDatosUsuario() {
-		fail("Not yet implemented");
+		UsuarioCtrl UCU=UsuarioCtrl.getInstance();
+		DtFecha fecha=new DtFecha(new Date(0));
+		String nombreU="nombreagregarInfoAdicLDR";
+		UCU.nuevoUsuario(nombreU, "Jose", "Ramirez", "www.cosoarroba3",fecha , null, "canal", "descripcion", false, null);
+		DtUsuario usuarioActual=UCU.listarDatosUsuario(nombreU);
+		assertEquals(true,usuarioActual.getNickname()==nombreU);
+		assertEquals(true,usuarioActual.getNombre()=="Jose");
+		assertEquals(true,usuarioActual.getApellido()=="Ramirez");
+		assertEquals(true,usuarioActual.getEmail()=="www.cosoarroba3");
+		assertEquals(true,usuarioActual.getFecha_nacimiento().equals(fecha));
+		assertEquals(true,usuarioActual.getFoto()==null);
+		
 	}
 
 	@Test
 	public void testMostrarInfoCanal() {
-		fail("Not yet implemented");
+		UsuarioCtrl UCU=UsuarioCtrl.getInstance();
+		SystemHandler sh=SystemHandler.getInstance();
+		DtFecha fecha=new DtFecha(new Date(0));
+		String nombreU="nombreMostrarInfoCanal";
+		UCU.nuevoUsuario(nombreU, "Jose", "Ramirez", "www.cosoarroba3",fecha , null, "canal", "descripcion", false, null);
+		DtCanal dtActual=UCU.mostrarInfoCanal(nombreU);
+		assertEquals(true,dtActual.getNombre()=="canal");
+		assertEquals(true,dtActual.getDescripcion()=="descripcion");
+		assertEquals(true,dtActual.getPrivacidad()==false);
+		assertEquals(true,dtActual.getCategoria().equals(new DtCategoria(sh.getSinCat())));
 	}
 
 	@Test
 	public void testObtenerInfoAdicVideo() {
-		fail("Not yet implemented");
+		UsuarioCtrl UCU=UsuarioCtrl.getInstance();
+		SystemHandler sh=SystemHandler.getInstance();
+		DtFecha fecha=new DtFecha(new Date(0));
+		String nombreU="nombreInfoAdicVideo";
+		String nombreV="nombreVInfoAdicVideo";
+		UCU.nuevoUsuario(nombreU, "Jose", "Ramirez", "www.cosoarroba3",fecha , null, "canal", "descripcion", false, null);
+		UCU.aniadirVideo(nombreU, nombreV, "descrito", 40, fecha, "url", null, false);
+		DtVideo video=UCU.obtenerInfoAdicVideo(nombreU, nombreV);
+		assertEquals(true,video.getNombre()==nombreV);
+		assertEquals(true,video.getCategoria().equals(new DtCategoria(sh.getSinCat())));
+		assertEquals(true,video.getDescripcion()=="descrito");
+		assertEquals(true,video.getDuracion()==40);
+		assertEquals(true,video.getFechaPublicacion().equals(fecha));
+		assertEquals(true,video.getPrivacidad()==false);
+		
+		
 	}
 
 	@Test
 	public void testMemberVideoEnUsuario() {
-		fail("Not yet implemented");
+		UsuarioCtrl UCU=UsuarioCtrl.getInstance();
+		DtFecha fecha=new DtFecha(new Date(0));
+		String nombreU="nombreMemberVideoEnUsuario";
+		String nombreV="nombreVMemberVideoEnUsuario";
+		UCU.nuevoUsuario(nombreU, "Jose", "Ramirez", "www.cosoarroba3",fecha , null, "canal", "descripcion", false, null);
+		assertEquals(false,UCU.memberVideoEnUsuario(nombreU, nombreV));
+		UCU.aniadirVideo(nombreU, nombreV, "descrito", 40, fecha, "url", null, false);
+		assertEquals(true,UCU.memberVideoEnUsuario(nombreU, nombreV));
 	}
-
+	
 	@Test
-	public void testListarUsuariosQueSigue() {
-		fail("Not yet implemented");
+	public void testListarObtenerYQuitarVideosdeLDR() {
+		UsuarioCtrl UCU=UsuarioCtrl.getInstance();
+		
 	}
-
-	@Test
-	public void testListarUsuariosQueLeSigue() {
-		fail("Not yet implemented");
-	}
-
 }

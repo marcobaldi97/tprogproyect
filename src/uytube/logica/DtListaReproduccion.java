@@ -41,8 +41,5 @@ public class DtListaReproduccion {
 	public String getPropietario() {
 		return propietario;
 	}
-	public void setPropietario(String propietario) {
-		this.propietario = propietario;
-	}
 
 }

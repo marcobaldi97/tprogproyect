@@ -14,9 +14,6 @@ public class Puntuacion {
 	public Usuario getUsuario(){
 		return usuarioPuntuador;
 	}
-	public void setUsuario(Usuario u){
-		usuarioPuntuador=u;
-	}
 	
 	public Puntuacion(String nickU, boolean gusta){
 		valoracion=gusta;

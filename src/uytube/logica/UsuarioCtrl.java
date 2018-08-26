@@ -170,10 +170,6 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 		return u.listarVideosListaReproduccionUsuario(nombreLista);
 	}
 
-	public void quitarVideoDeLista(String nickname, Integer videoId, String nombreLista) {
-		Usuario u = usuarioh.find(nickname);
-		u.eliminarVideoLista(videoId, nombreLista);
-	}
 
 	public DtVideo[] obtenerDtsVideosListaReproduccionUsuario(String nickname, String nombreLista) {
 		Usuario u = usuarioh.find(nickname);
