@@ -147,7 +147,7 @@ public class Video {
 			puntuaciones.get(i).setValoracion(valoracion);
 		}else{
 			Puntuacion p=new Puntuacion(nickU,valoracion);
-			puntuaciones.add(p);
+			addPuntuacion(p);
 		}
 		
 	}

@@ -66,8 +66,13 @@ public class Canal {
 		nombre = nom;
 		descripcion = desc;
 		privado = privacidadE;
-		CategoriaHandler ch = CategoriaHandler.getInstance();
-		cate = ch.find(catE);
+		if(catE!=null){
+			CategoriaHandler ch = CategoriaHandler.getInstance();
+			cate = ch.find(catE);
+		}else{
+			SystemHandler sh=SystemHandler.getInstance();
+			cate = sh.getSinCat();
+		}
 		videos = new HashMap<String,Video>();
 		listasReproduccion = new HashMap<String,ListaReproduccion>();
 		SystemHandler sh = SystemHandler.getInstance();
@@ -107,11 +112,7 @@ public class Canal {
 		v.ingresarNuevosDatosVideo(d, dur, fp, url, catE, p);
 	}
 	
-	public DtVideo verDetallesVideo(String nombreVideo) {
-		Video v = videos.get(nombreVideo);
-		DtVideo dt = v.verDetallesVideo();
-		return dt;
-	}
+	
 	
 	public String[] listarVideosCanal() {
 		String[] nombresVideos = new String[videos.size()];
