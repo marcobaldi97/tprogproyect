@@ -10,6 +10,7 @@ import uytube.admin.videos.consultar.ConsultarVideoInternalFrame;
 import uytube.admin.videos.modificar.*;
 import uytube.logica.DtCanal;
 import uytube.logica.DtFecha;
+import uytube.logica.DtListaReproduccion;
 import uytube.logica.DtUsuario;
 import uytube.logica.Factory;
 import uytube.logica.IUsuarioCtrl;
@@ -75,7 +76,8 @@ public class modificarUsuario extends JInternalFrame {
 	private JButton btnModificar ;
 	private JButton btnCancelar_2;
 	private JTextArea textAreaDesc;
-	
+	private JRadioButton rdbtnPrivado_1;
+	private JRadioButton rdbtnPublico_1;
 	private DtUsuario usr;
 	private DtCanal usrCanal;
 	private File archivo;
@@ -385,15 +387,18 @@ public class modificarUsuario extends JInternalFrame {
 		JLabel label_2 = new JLabel("Nombre Lista");
 		panel_1.add(label_2);
 		
+		
 		comboBoxListas = new JComboBox();
 		comboBoxListas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if (usrCanal.getPrivacidad()){
-					rdbtnPrivado.setSelected(true);
-				//	System.out.println("Privado");
-				}else{
-					rdbtnPublico.setSelected(true);
-				//	System.out.println("publico");
+				if(comboBoxNick.getSelectedIndex()!=-1 && comboBoxListas.getSelectedIndex()!=-1){
+					DtListaReproduccion dtLista = controlUsr.infoAdicLDR((String)comboBoxNick.getSelectedItem(), (String)comboBoxListas.getSelectedItem());
+					if (dtLista.getPrivado()){
+						rdbtnPrivado_1.setSelected(true);
+					}else{
+						rdbtnPublico_1.setSelected(true);
+						//	System.out.println("publico");
+					}
 				}
 			}
 		});
@@ -402,7 +407,7 @@ public class modificarUsuario extends JInternalFrame {
 		JLabel lblPrivacidad_1 = new JLabel("Privacidad");
 		panel_1.add(lblPrivacidad_1);
 		
-		JRadioButton rdbtnPrivado_1 = new JRadioButton("Privado");
+		rdbtnPrivado_1 = new JRadioButton("Privado");
 		rdbtnPrivado_1.setEnabled(false);
 		rdbtnPrivado_1.setSelected(true);
 		buttonGroup_1.add(rdbtnPrivado_1);
@@ -411,10 +416,14 @@ public class modificarUsuario extends JInternalFrame {
 		JLabel label_3 = new JLabel("");
 		panel_1.add(label_3);
 		
-		JRadioButton rdbtnPublico_1 = new JRadioButton("Publico");
+		rdbtnPublico_1 = new JRadioButton("Publico");
 		rdbtnPublico_1.setEnabled(false);
 		buttonGroup_1.add(rdbtnPublico_1);
 		panel_1.add(rdbtnPublico_1);
+		
+		
+		
+		
 		
 		JButton button_1 = new JButton("Modificar");
 		button_1.addActionListener(new ActionListener() {
@@ -424,10 +433,10 @@ public class modificarUsuario extends JInternalFrame {
 					String nickU = (String)comboBoxNick.getSelectedItem();
 					String nombreL = (String)comboBoxListas.getSelectedItem();
 					boolean privE=false;
-					if(rdbtnPrivado.isSelected()){privE=true;}
+					if(rdbtnPrivado_1.isSelected()){privE=true;}
 					controlUsr.cambiarPrivLDR(nickU,nombreL,privE);
 					infoBox("Lista de reproducion modificada","Modificar usuario");
-					button_1.setText("Modificarr");
+					button_1.setText("Modificar");
 					rdbtnPrivado_1.setEnabled(false);
 					rdbtnPublico_1.setEnabled(false);
 				}else if(button_1.getText()=="Modificar"){
