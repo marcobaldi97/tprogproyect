@@ -70,31 +70,22 @@ public class ListarComentariosInternalFrame extends JInternalFrame {
 		panel.add(textFieldVideo);
 		textFieldVideo.setColumns(10);
 		
-		JButton btnCargar = new JButton("Cargar");
-		btnCargar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				try{
-					int idVideo = buscarIdVideo(nickU, nomLista);
-					//temporalmente crae la fabrica, deberia recibirla por parametro
-					Factory fabrica = Factory.getInstance();
-				    IVideoCtrl ICV = fabrica.getIVideoCtrl();
-				    DtComentario[] dtComentarios = ICV.listarComentarios(idVideo);
-					
-					cargarComentarios(dtComentarios);
-				}catch (java.lang.NullPointerException e){
-					infoBox("El usuario o video no existen, no hay nada que mostrar","Listar Comentarios");
-				}
-				
-				
-			}
-		});
-		panel.add(btnCargar);
-		
 		panel_1 = new JPanel();
 		getContentPane().add(panel_1, BorderLayout.CENTER);
 		
 	//	treeComentarios = new JTree();
 	//	panel_1.add(treeComentarios);
+		try{
+			int idVideo = buscarIdVideo(nickU, nomLista);
+			//temporalmente crae la fabrica, deberia recibirla por parametro
+			Factory fabrica = Factory.getInstance();
+		    IVideoCtrl ICV = fabrica.getIVideoCtrl();
+		    DtComentario[] dtComentarios = ICV.listarComentarios(idVideo);
+			
+			cargarComentarios(dtComentarios);
+		}catch (java.lang.NullPointerException e){
+			infoBox("El usuario o video no existen, no hay nada que mostrar","Listar Comentarios");
+		}
 		
 		
 
@@ -121,7 +112,7 @@ public class ListarComentariosInternalFrame extends JInternalFrame {
 			cargarRespuesta(dtRespuestas[i].getRespuestas(), comentario,comentarioPadre, modelo);
 		}
 	}
-	
+
 	private int buscarIdVideo(String nickU, String nomVideo){
 		//verificar que los param recibidos sean correctos
 		Factory fabrica = Factory.getInstance();
