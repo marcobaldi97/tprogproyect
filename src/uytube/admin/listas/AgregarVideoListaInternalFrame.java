@@ -197,12 +197,15 @@ public class AgregarVideoListaInternalFrame extends JInternalFrame {
 				String nombreListaReproduccion = (String) comboBoxListas.getSelectedItem();
 				DtVideo video = iCU.obtenerInfoAdicVideo(nicknameAutor, nombreVideo);
 				int idVideo = video.getIDVideo();
-				iCU.agregarVideoLista(nicknameUsuario, idVideo, nombreListaReproduccion);
-				/* creo que esto está mal
-				DtVideo video=iCU.obtenerInfoAdicVideo(comboBoxAutor.getSelectedItem().toString(), comboBoxVideos.getSelectedItem().toString());
-				iCU.agregarVideoLista(comboBoxUsuario.getSelectedItem().toString(), video.getIDVideo(), comboBoxListas.getSelectedItem().toString());
-				*/
-				infoBox("Video agregado correctamente","Agergar Video a Lista");
+				if(!iCU.memberVideoLista(nicknameUsuario,idVideo,nombreListaReproduccion)) 
+				{
+					iCU.agregarVideoLista(nicknameUsuario, idVideo, nombreListaReproduccion);
+					infoBox("Video agregado correctamente","Agregar Video a Lista");
+				}
+				else
+				{
+					infoBox("El video ya esta agregado","Agregar Video a Lista");
+				}
 				dispose();
 			}
 		});

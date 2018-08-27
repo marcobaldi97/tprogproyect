@@ -59,4 +59,6 @@ public interface IUsuarioCtrl {
 
 	public abstract DtVideo[] obtenerDtsVideosListaReproduccionUsuario(String nickname, String nombreLista);
 
+	public abstract boolean memberVideoLista(String nicknameUsuario, int idVideo, String nombreListaReproduccion);
+
 }
