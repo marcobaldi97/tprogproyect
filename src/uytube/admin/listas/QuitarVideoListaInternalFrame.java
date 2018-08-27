@@ -1,5 +1,6 @@
 package uytube.admin.listas;
 
+import java.awt.Component;
 import java.awt.EventQueue;
 
 import javax.swing.JInternalFrame;
@@ -12,9 +13,11 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.ListCellRenderer;
 import javax.swing.ListModel;
 
 import uytube.logica.DtVideo;
@@ -45,7 +48,7 @@ public class QuitarVideoListaInternalFrame extends JInternalFrame {
 		// DefaultComboBoxModel<String> nicknamesModel = new
 		// DefaultComboBoxModel<String>();
 		DefaultComboBoxModel<String> listasModel = new DefaultComboBoxModel<String>();
-		DefaultComboBoxModel<String> videosModel = new DefaultComboBoxModel<String>();
+		DefaultComboBoxModel<DtVideo> videosModel = new DefaultComboBoxModel<DtVideo>();
 
 		JComboBox comboBoxNick = new JComboBox();
 		getContentPane().add(comboBoxNick);
@@ -65,6 +68,18 @@ public class QuitarVideoListaInternalFrame extends JInternalFrame {
 		getContentPane().add(lblVideo);
 
 		JComboBox comboBoxVideo = new JComboBox(videosModel);
+		comboBoxVideo.setRenderer(new DefaultListCellRenderer() {
+			@Override
+			public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected,
+					boolean cellHasFocus) {
+				super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+				if (value instanceof DtVideo) {
+					DtVideo video = (DtVideo) value;
+					setText(video.getNombre());
+				}
+				return this;
+			}
+		});
 		getContentPane().add(comboBoxVideo);
 
 		comboBoxNick.addActionListener(new ActionListener() {
@@ -88,9 +103,10 @@ public class QuitarVideoListaInternalFrame extends JInternalFrame {
 				if (listaNombre == null) {
 					return;
 				}
-				final String[] videosDeLista = controlUsr.listarVideosListaReproduccionUsuario(nickname, listaNombre);
+				final DtVideo[] videosDeLista = controlUsr.obtenerDtsVideosListaReproduccionUsuario(nickname,
+						listaNombre);
 				videosModel.removeAllElements();
-				for (final String video : videosDeLista) {
+				for (final DtVideo video : videosDeLista) {
 					videosModel.addElement(video);
 				}
 				comboBoxVideo.setModel(videosModel);
@@ -104,10 +120,8 @@ public class QuitarVideoListaInternalFrame extends JInternalFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				final String nickname = (String) comboBoxNick.getSelectedItem();
-				final String nombreVideo = (String) comboBoxVideo.getSelectedItem();
+				final DtVideo video = (DtVideo) comboBoxVideo.getSelectedItem();
 				final String nombreLista = (String) comboBoxLista.getSelectedItem();
-
-				final DtVideo video = controlUsr.obtenerInfoAdicVideo(nickname, nombreVideo);
 
 				controlUsr.eliminarVideoLista(nickname, video.getIDVideo(), nombreLista);
 				infoBox("Video quitado correctamente", "Quitar video de lista");
