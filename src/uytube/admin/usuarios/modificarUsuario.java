@@ -120,7 +120,7 @@ public class modificarUsuario extends JInternalFrame {
 					//pedir Dt
 					usr= controlUsr.listarDatosUsuario(nickU);
 					usrCanal = controlUsr.mostrarInfoCanal(nickU);
-				
+					limpiar();
 					cargarDatos(usr, usrCanal, nickU);
 			}
 		}
@@ -196,7 +196,7 @@ public class modificarUsuario extends JInternalFrame {
 				
 				if(btnModificar.getText()=="Guardar"){
 					if(verificarCamposDatosUsu()){
-						controlUsr.editarDatosUsuario(nickU,nom,ape, nac, fotoUsr);						
+						controlUsr.editarDatosUsuario(nickU,nom,ape, nac, Imagen.imagenToByte(archivo));						
 						infoBox("Usuario modificado","Modificar usuario");
 						
 						textFieldNombre.setEditable(false);
@@ -227,9 +227,10 @@ public class modificarUsuario extends JInternalFrame {
 				archivo = Imagen.elegirImagen();
 				if(archivo!=null){
 					Image imagen = new ImageIcon(archivo.getAbsolutePath()).getImage();
-					lblFoto.setSize(50,50);
+					lblFoto.setSize(30,30);
 					ImageIcon icono = new ImageIcon(imagen.getScaledInstance(lblFoto.getWidth(), lblFoto.getHeight(), Image.SCALE_DEFAULT));
 					lblFoto.setIcon(icono);
+					
 				}				
 			}
 		});
@@ -289,7 +290,6 @@ public class modificarUsuario extends JInternalFrame {
 		
 		JButton btnModificar_3 = new JButton("Modificar");
 		btnModificar_3.setEnabled(false);
-		btnModificar_3.setVisible(false);
 		btnModificar_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String  nickU, nom, ape;
@@ -328,7 +328,7 @@ public class modificarUsuario extends JInternalFrame {
 		panelDatosCanal.add(btnModificar_3);
 		
 		btnCancelar_2 = new JButton("Cancelar");
-		btnCancelar_2.setVisible(false);
+		btnCancelar_2.setEnabled(true);
 		btnCancelar_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				rdbtnPrivado.setEnabled(false);
@@ -386,6 +386,17 @@ public class modificarUsuario extends JInternalFrame {
 		panel_1.add(label_2);
 		
 		comboBoxListas = new JComboBox();
+		comboBoxListas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (usrCanal.getPrivacidad()){
+					rdbtnPrivado.setSelected(true);
+				//	System.out.println("Privado");
+				}else{
+					rdbtnPublico.setSelected(true);
+				//	System.out.println("publico");
+				}
+			}
+		});
 		panel_1.add(comboBoxListas);
 		
 		JLabel lblPrivacidad_1 = new JLabel("Privacidad");
@@ -408,16 +419,23 @@ public class modificarUsuario extends JInternalFrame {
 		JButton button_1 = new JButton("Modificar");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				button_1.setText("Guardar");
-				rdbtnPrivado_1.setEnabled(true);
-				rdbtnPublico_1.setEnabled(true);
+				
 				if(button_1.getText()=="Guardar"){
 					String nickU = (String)comboBoxNick.getSelectedItem();
 					String nombreL = (String)comboBoxListas.getSelectedItem();
 					boolean privE=false;
 					if(rdbtnPrivado.isSelected()){privE=true;}
 					controlUsr.cambiarPrivLDR(nickU,nombreL,privE);
-				}						
+					infoBox("Lista de reproducion modificada","Modificar usuario");
+					button_1.setText("Modificarr");
+					rdbtnPrivado_1.setEnabled(false);
+					rdbtnPublico_1.setEnabled(false);
+				}else if(button_1.getText()=="Modificar"){
+					button_1.setText("Guardar");
+					rdbtnPrivado_1.setEnabled(true);
+					rdbtnPublico_1.setEnabled(true);
+				}
+				
 			}
 		});
 		panel_1.add(button_1);
@@ -477,6 +495,7 @@ public class modificarUsuario extends JInternalFrame {
 			
 			comboBoxListas.setSelectedIndex(-1);
 			comboBoxListas.removeAllItems();
+			lblFoto.setIcon(null);
 			
 	 }
 
@@ -485,7 +504,7 @@ public class modificarUsuario extends JInternalFrame {
 		textFieldEmail.setText(usr.getEmail());
 		textFieldNombre.setText(usr.getNombre());
 		textFieldApellido.setText(usr.getApellido());
-		dateChooser.setDate(usr.getFecha_nacimiento().getFechaNac());
+		dateChooser.setDate(usr.getFecha_nacimiento().getFecha());
 		
 		textFieldNomCanal.setText(usrCanal.getNombre());
 		if (usrCanal.getPrivacidad()){

@@ -46,7 +46,7 @@ public class ModificarVideo extends JInternalFrame {
 		spinnerDuracion.setValue(datosVideo.getDuracion());
 		if(datosVideo.getPrivacidad() == true) comboBoxPrivacidad.setSelectedItem("Privado");
 		else comboBoxPrivacidad.setSelectedItem("Publico");
-		dateChooserFecha.setDate(datosVideo.getFechaPublicacion().pasarDTaDate());
+		dateChooserFecha.setDate(datosVideo.getFechaPublicacion().getFecha());
     }
     
     private void limpiarDatos() {
@@ -75,22 +75,6 @@ public class ModificarVideo extends JInternalFrame {
     	comboBoxPrivacidad.setEnabled(true);
     }
 	
-	/**
-	 * Launch the application.
-	 */	
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ModificarVideo frame = new ModificarVideo(null,null);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
 	/**
 	 * Create the frame.
 	 */
@@ -145,7 +129,7 @@ public class ModificarVideo extends JInternalFrame {
 						spinnerDuracion.setValue(datosVideo.getDuracion());
 						if(datosVideo.getPrivacidad() == true) comboBoxPrivacidad.setSelectedItem("Privado");
 						else comboBoxPrivacidad.setSelectedItem("Publico");
-						dateChooserFecha.setDate(datosVideo.getFechaPublicacion().pasarDTaDate());
+						dateChooserFecha.setDate(datosVideo.getFechaPublicacion().getFecha());
 					}else {
 						limpiarDatos();
 					}
