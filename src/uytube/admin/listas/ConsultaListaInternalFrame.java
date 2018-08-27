@@ -19,6 +19,7 @@ import uytube.logica.IVideoCtrl;
 
 import javax.swing.JComboBox;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.ListModel;
 import javax.swing.DefaultComboBoxModel;
@@ -40,7 +41,10 @@ public class ConsultaListaInternalFrame extends JInternalFrame {
 	private JList<String> listListas = new JList<>( modelListListas );
 	private boolean ready = false;
 	private boolean ready2 = false;
-
+	
+    private static void infoBox(String infoMessage, String titleBar){
+        JOptionPane.showMessageDialog(null, infoMessage, "" + titleBar, JOptionPane.INFORMATION_MESSAGE);
+    }
 
 	/**
 	 * Create the frame.
@@ -113,6 +117,7 @@ public class ConsultaListaInternalFrame extends JInternalFrame {
 						if(dtLista.getPrivado() == true) {
 							textFieldPrivacidadLista.setText("Privada");
 						}else textFieldPrivacidadLista.setText("Publica");
+						ready = true;
 						ready2=true;
 					}
 				}
@@ -167,23 +172,25 @@ public class ConsultaListaInternalFrame extends JInternalFrame {
 		panel_4.add(btnVerInfoVideo);
 		btnVerInfoVideo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				  ConsultarVideoInternalFrame consVideoIFrame = new ConsultarVideoInternalFrame();
-				   adminPrincipal.getFrames()[0].setLayout(null);
-				   adminPrincipal.getFrames()[0].add(consVideoIFrame);
-				   //Veo si puedo llamar la ventana condicionada para eso.
-				   String nombreLista = listListas.getSelectedValue();
-				   String nombreSeleccionado = (String) comboBoxNicknames.getSelectedItem();
-				   String nombreVideo = listVideos.getSelectedValue();
-				   DtVideo[] dtvideos = iCU.obtenerDtsVideosListaReproduccionUsuario(nombreSeleccionado, nombreLista);
-				   String nicknameAutor = "";
-				   for(int i = 0; i < dtvideos.length; i++) {
-					   if(nombreVideo == dtvideos[i].getNombre()) {
-						   nicknameAutor = dtvideos[i].getPropietario();
-					   }
-				   }
-				   //
-				   consVideoIFrame.llamadaParticular(nicknameAutor, nombreVideo);
-				   consVideoIFrame.show();
+				if(listVideos.isSelectionEmpty() == false) {
+					ConsultarVideoInternalFrame consVideoIFrame = new ConsultarVideoInternalFrame();
+					adminPrincipal.getFrames()[0].setLayout(null);
+					adminPrincipal.getFrames()[0].add(consVideoIFrame);
+					//Veo si puedo llamar la ventana condicionada para eso.
+					String nombreLista = listListas.getSelectedValue();
+					String nombreSeleccionado = (String) comboBoxNicknames.getSelectedItem();
+					String nombreVideo = listVideos.getSelectedValue();
+					DtVideo[] dtvideos = iCU.obtenerDtsVideosListaReproduccionUsuario(nombreSeleccionado, nombreLista);
+					String nicknameAutor = "";
+					for(int i = 0; i < dtvideos.length; i++) {
+						if(nombreVideo == dtvideos[i].getNombre()) {
+							nicknameAutor = dtvideos[i].getPropietario();
+						}
+					}
+					//
+					consVideoIFrame.llamadaParticular(nicknameAutor, nombreVideo);
+					consVideoIFrame.show();
+				}else infoBox("No hay ningun video seleccionado","Aviso");
 			}
 		});
 
