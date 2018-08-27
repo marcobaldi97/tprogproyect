@@ -343,7 +343,10 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 			lblFoto.setSize(140,140);
 		 	ImageIcon icono = new ImageIcon(image.getScaledInstance(lblFoto.getWidth(), lblFoto.getHeight(), Image.SCALE_DEFAULT));
 		 	lblFoto.setIcon(icono);
-		}
+		}else{
+			 ImageIcon icono = new ImageIcon();
+			 lblFoto.setIcon(icono);
+		 }
 		//CARGAR VIDEOS
 		String[] nomVideos = controlUsr.listarVideosCanal(nickU);
 		for(int i=0; i<nomVideos.length;i++){

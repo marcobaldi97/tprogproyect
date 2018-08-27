@@ -478,7 +478,6 @@ public class modificarUsuario extends JInternalFrame {
 			comboBoxListas.setSelectedIndex(-1);
 			comboBoxListas.removeAllItems();
 			
-			lblFoto.setIcon(null);
 	 }
 
 
@@ -518,6 +517,9 @@ public class modificarUsuario extends JInternalFrame {
 			lblFoto.setSize(30,30);
 		 	ImageIcon icono = new ImageIcon(image.getScaledInstance(lblFoto.getWidth(), lblFoto.getHeight(), Image.SCALE_DEFAULT));
 	     	lblFoto.setIcon(icono);
+		 }else{
+			 ImageIcon icono = new ImageIcon();
+			 lblFoto.setIcon(icono);
 		 }
 	}
 	private Boolean verificarCamposDatosUsu(){
