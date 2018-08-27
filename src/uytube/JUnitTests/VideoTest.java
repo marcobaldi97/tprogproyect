@@ -8,9 +8,13 @@ import org.junit.Test;
 
 import uytube.logica.Categoria;
 import uytube.logica.DtCategoria;
+import uytube.logica.DtComentario;
 import uytube.logica.DtFecha;
+import uytube.logica.DtPuntuacion;
 import uytube.logica.DtVideo;
+import uytube.logica.Puntuacion;
 import uytube.logica.SystemHandler;
+import uytube.logica.UsuarioCtrl;
 import uytube.logica.Video;
 import uytube.logica.VideoCtrl;
 
@@ -49,32 +53,88 @@ public class VideoTest {
 
 	@Test
 	public void testNuevoComentario() {
-		fail("Not yet implemented");
+		String nombreVideo="nombreNC";
+		String nombreU="nombreUNC";
+		UsuarioCtrl UCU=UsuarioCtrl.getInstance();
+		DtFecha fecha=new DtFecha(new Date(2));
+		UCU.nuevoUsuario(nombreU, "pedrito", "gimenez", "email.com", fecha, null, "nombrecito", "descripcion", true, null);
+		Video video=new Video(nombreVideo,"pepito","descrito",20,fecha,"url.com",null,true);
+		video.nuevoComentario(nombreU, fecha, "contenidoComentario");
+		video.nuevoComentario(nombreU, fecha, "contenidoComentario2");
+		DtComentario[] comentarios=video.getComentarios();
+		assertEquals(2,comentarios.length);
+		boolean existe1=false;
+		boolean existe2=false;
+		for(DtComentario comentarioParticular:comentarios){
+			if(comentarioParticular.getEsPadre()==true&&comentarioParticular.getNickUsuario()==nombreU&&comentarioParticular.getRespuestas().length==0&&comentarioParticular.getTexto()=="contenidoComentario"){
+				existe1=true;
+			}
+			if(comentarioParticular.getEsPadre()==true&&comentarioParticular.getNickUsuario()==nombreU&&comentarioParticular.getRespuestas().length==0&&comentarioParticular.getTexto()=="contenidoComentario2"){
+				existe2=true;
+			}
+		}
+		assertTrue(existe1);
+		assertTrue(existe2);
+		
 	}
 
 	@Test
 	public void testResponderComentario() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testAddPuntuacion() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testVerDetallesVideo() {
-		fail("Not yet implemented");
+		String nombreVideo="nombreRC";
+		String nombreU="nombreURC";
+		UsuarioCtrl UCU=UsuarioCtrl.getInstance();
+		DtFecha fecha=new DtFecha(new Date(2));
+		UCU.nuevoUsuario(nombreU, "pedrito", "gimenez", "email.com", fecha, null, "nombrecito", "descripcion", true, null);
+		Video video=new Video(nombreVideo,"pepito","descrito",20,fecha,"url.com",null,true);
+		video.nuevoComentario(nombreU, fecha, "contenidoComentario");
+		DtComentario[] comentarios=video.getComentarios();
+		
+		video.responderComentario(comentarios[0].getIDComentario(), nombreU, fecha, "contenidoComentario2");
+		comentarios=video.getComentarios();
+		assertEquals(1,comentarios.length);
+		boolean existe1=false;
+		boolean existe2=false;
+		for(DtComentario comentarioParticular:comentarios){
+			if(comentarioParticular.getEsPadre()==true && comentarioParticular.getNickUsuario()==nombreU&&comentarioParticular.getRespuestas().length==1&&comentarioParticular.getTexto()=="contenidoComentario"){
+				existe1=true;
+			}
+			DtComentario[] respuestas=comentarioParticular.getRespuestas();
+			if(respuestas.length>0){
+				DtComentario respuestaParticular=respuestas[0];
+				if(respuestaParticular.getEsPadre()==false&&respuestaParticular.getNickUsuario()==nombreU&&respuestaParticular.getRespuestas().length==0&&respuestaParticular.getTexto()=="contenidoComentario2"){
+					existe2=true;
+				}
+			}
+		}
+		assertTrue(existe1);
+		assertTrue(existe2);
 	}
 
 	@Test
 	public void testValorarVideo() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetInfoVideoExt() {
-		fail("Not yet implemented");
+		String nombreVideo="nombreAP";
+		String nombreU="nombreUAP";
+		String nombreU2="nombreUAP2";
+		UsuarioCtrl UCU=UsuarioCtrl.getInstance();
+		DtFecha fecha=new DtFecha(new Date(2));
+		UCU.nuevoUsuario(nombreU, "pedrito", "gimenez", "email.com", fecha, null, "nombrecito", "descripcion", true, null);
+		UCU.nuevoUsuario(nombreU2, "pedrito", "gimenez", "email.com", fecha, null, "nombrecito", "descripcion", true, null);
+		Video video=new Video(nombreVideo,"pepito","descrito",20,fecha,"url.com",null,true);
+		video.valorarVideo(nombreU, true);
+		video.valorarVideo(nombreU2,false);
+		DtPuntuacion[] puntuaciones=video.getPuntuaciones();
+		boolean existe1=false;
+		boolean existe2=false;
+		for(DtPuntuacion puntActual:puntuaciones){
+			if(puntActual.getNickname()==nombreU && puntActual.getValoracion()==true){
+				existe1=true;
+			}
+			if(puntActual.getNickname()==nombreU2 && puntActual.getValoracion()==false){
+				existe2=true;
+			}
+		}
+		assertTrue(existe1);
+		assertTrue(existe2);
 	}
 
 }
