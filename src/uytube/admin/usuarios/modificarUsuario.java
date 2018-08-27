@@ -5,12 +5,15 @@ import java.awt.EventQueue;
 import uytube.admin.Imagen;
 import uytube.admin.adminPrincipal;
 import uytube.admin.adminPrincipalBienHecho;
+import uytube.admin.videos.ModificarVideo;
 import uytube.admin.videos.consultar.ConsultarVideoInternalFrame;
 import uytube.admin.videos.modificar.*;
 import uytube.logica.DtCanal;
 import uytube.logica.DtFecha;
 import uytube.logica.DtUsuario;
+import uytube.logica.Factory;
 import uytube.logica.IUsuarioCtrl;
+import uytube.logica.IVideoCtrl;
 
 import javax.swing.JInternalFrame;
 import javax.swing.BoxLayout;
@@ -449,10 +452,12 @@ public class modificarUsuario extends JInternalFrame {
 
 	}
 	private void openModificarVideo(){
-		   int idVideo; //como obtengo el idVideo??
-		   ModificarVideoInternalFrame modVideoIFrame = new ModificarVideoInternalFrame(adminPrincipalBienHecho.getFrames()[0]);
+		 // int idVideo; 
+		  Factory fabrica = Factory.getInstance();
+		  IVideoCtrl ICV = fabrica.getIVideoCtrl();
+		   ModificarVideo modVideoIFrame = new ModificarVideo(controlUsr, ICV); //como pasar datos del video? 
 		   adminPrincipal.getFrames()[0].setLayout(null);
-		  // adminPrincipalBienHecho.getFrames()[0].add(modVideoIFrame);
+		  adminPrincipal.getFrames()[0].add(modVideoIFrame);
 		   modVideoIFrame.show();
 	}
 	private void limpiar(){
