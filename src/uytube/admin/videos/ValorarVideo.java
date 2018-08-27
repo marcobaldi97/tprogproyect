@@ -3,11 +3,15 @@ package uytube.admin.videos;
 import java.awt.EventQueue;
 
 import javax.swing.JInternalFrame;
+
 import java.awt.GridLayout;
+
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
 import java.awt.BorderLayout;
+
 import javax.swing.JComboBox;
 import javax.swing.SwingConstants;
 
@@ -22,13 +26,20 @@ import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
+
 import java.awt.FlowLayout;
+
 import javax.swing.JButton;
+
 import java.awt.Component;
+
 import javax.swing.JRadioButton;
 import javax.swing.JSplitPane;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
 
@@ -44,6 +55,9 @@ public class ValorarVideo extends JInternalFrame {
 	private final ButtonGroup MeGustaBtnGroup = new ButtonGroup();
 	private JComboBox<String> comboBoxN2;
 	
+	private static void infoBox(String infoMessage, String titleBar){
+        JOptionPane.showMessageDialog(null, infoMessage, "" + titleBar, JOptionPane.INFORMATION_MESSAGE);
+    }
 	Factory fabrica=Factory.getInstance();
 	IUsuarioCtrl ICU=fabrica.getIUsuarioCtrl();
 	IVideoCtrl VCU=fabrica.getIVideoCtrl();
@@ -89,7 +103,12 @@ public class ValorarVideo extends JInternalFrame {
 		
 		//Cargar Nick
 		String[] nickUsuarios = ICU.listarNicknamesUsuarios();
-		comboBoxNickname.addItem(" ");
+		
+		for(int i=0; i<nickUsuarios.length;i++){
+			 comboBoxNickname.addItem(nickUsuarios[i]);
+	    }
+		comboBoxNickname.setSelectedIndex(-1);
+		
 		
 		JList<String> listVideos = new JList<>(videoListModel);
 		listVideos.addListSelectionListener(new ListSelectionListener() {
@@ -103,9 +122,8 @@ public class ValorarVideo extends JInternalFrame {
 			}
 		});
 		panel.add(listVideos, BorderLayout.CENTER);
-		 for(int i=0; i<nickUsuarios.length;i++){
-			 comboBoxNickname.addItem(nickUsuarios[i]);
-	     }
+		 
+		 
 		JPanel panel_1 = new JPanel();
 		getContentPane().add(panel_1);
 		panel_1.setLayout(new BorderLayout(0, 0));
@@ -146,26 +164,27 @@ public class ValorarVideo extends JInternalFrame {
 		comboBoxN2.setEnabled(false);
 		comboBoxN2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String nickU = (String) comboBoxNickname.getSelectedItem();
-				if((String)comboBoxNickname.getSelectedItem() != " "){
+				if(comboBoxN2.getSelectedIndex()!=-1 && comboBoxNickname.getSelectedIndex()!=-1){
+					String nickU = (String) comboBoxNickname.getSelectedItem();
 					nickValorador=comboBoxNickname.getSelectedItem().toString();
 				}
 			}
 		});
 		panel_4.add(comboBoxN2);
-		comboBoxN2.addItem(" ");
+		comboBoxN2.setSelectedIndex(-1);
 		for(int i=0; i<nickUsuarios.length;i++){
 			 comboBoxN2.addItem(nickUsuarios[i]);
 	     }
+		comboBoxN2.setSelectedIndex(-1);
 		
 		comboBoxNickname.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String nickU = (String) comboBoxNickname.getSelectedItem();
-				limpiar();
-				if((String)comboBoxNickname.getSelectedItem() != " "){
+				if(comboBoxNickname.getSelectedIndex()!=-1){
+					String nickU = (String) comboBoxNickname.getSelectedItem();
+					limpiar();
 					//pedir Dt
 					nickUsuario=comboBoxNickname.getSelectedItem().toString();
-					cargarVideos(nickUsuario);
+					cargarVideos(nickUsuario);		
 					
 				}
 			}
@@ -191,9 +210,12 @@ public class ValorarVideo extends JInternalFrame {
 					valoracion=true;
 				else
 					valoracion=false;
-				if(IDVideo!=-1&&nickUsuario!=null&&nickValorador!=null){
+				if(IDVideo!=-1&&nickUsuario!=null&&nickValorador!=null&&comboBoxNickname.getSelectedIndex()!=-1&&comboBoxN2.getSelectedIndex()!=-1){
 					VCU.valorarVideo(IDVideo, nickValorador, valoracion);
 					System.out.println("Ya ta");
+					infoBox("Se valoró con exito", "Valoracion exitosa");
+					setVisible(false);
+					dispose();
 				}
 			}
 		});
