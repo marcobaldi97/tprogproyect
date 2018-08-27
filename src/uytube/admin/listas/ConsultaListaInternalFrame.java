@@ -196,4 +196,13 @@ public class ConsultaListaInternalFrame extends JInternalFrame {
 
 	}
 
+	public void llamadaParticular(String nickU, String lista) {
+		comboBoxNicknames.setSelectedItem(nickU);
+		comboBoxNicknames.setEnabled(false);
+		 modelListListas.clear();
+		 modelListListas.addElement(lista);
+		 modelListListas.setElementAt( modelListListas.getElementAt(0), 0);
+		 listListas.setSelectedIndex(0);
+	}
+
 }

@@ -8,13 +8,8 @@ public class DtFecha {
 	public DtFecha(Date f){
 		fecha = f;
 	}
-	public Date getFechaNac(){
+	public Date getFecha(){
 		return fecha;
 	}
 	
-	public Date pasarDTaDate(){
-		Date fecha = new Date();
-		return fecha;
-	}
-		
 }
