@@ -174,10 +174,8 @@ public class Usuario {
 
 	public boolean memberVideoLista(int idVideo, String nombreListaReproduccion) {
 		
-		VideoHandler videoH=VideoHandler.getInstance();
-		Video video=videoH.find(idVideo);
-		ListaReproduccion lista= canalPropio.findLista(nombreListaReproduccion);
-		return lista.existeVideo(video);
+		return canalPropio.memberVideoLista(idVideo, nombreListaReproduccion);
+		
 	}
 
 }

@@ -176,7 +176,6 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 		return u.obtenerDtsVideosListaReproduccionUsuario(nombreLista);
 	}
 
-	@Override
 	public boolean memberVideoLista(String nicknameUsuario, int idVideo, String nombreListaReproduccion) {
 		Usuario u = usuarioh.find(nicknameUsuario);
 		return u.memberVideoLista(idVideo,nombreListaReproduccion);

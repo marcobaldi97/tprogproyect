@@ -514,12 +514,15 @@ public class UsuarioCtrlTest {
 		DtVideo video2=UCU.obtenerInfoAdicVideo(nombreU, nombreV2);
 		String[] listadoVideosLDR=UCU.listarVideosListaReproduccionUsuario(nombreU, nombreL);
 		DtVideo[] infoVideosLDR=UCU.obtenerDtsVideosListaReproduccionUsuario(nombreU, nombreL);
+		assertEquals(false,UCU.memberVideoLista(nombreU, 1, nombreL));
 		assertEquals(true,listadoVideosLDR.length==0);
 		assertEquals(true,infoVideosLDR.length==0);
 		UCU.agregarVideoLista(nombreU, video1.getIDVideo(), nombreL);
 		UCU.agregarVideoLista(nombreU, video2.getIDVideo(), nombreL);
 		listadoVideosLDR=UCU.listarVideosListaReproduccionUsuario(nombreU, nombreL);
 		infoVideosLDR=UCU.obtenerDtsVideosListaReproduccionUsuario(nombreU, nombreL);
+		assertEquals(true,UCU.memberVideoLista(nombreU, infoVideosLDR[0].getIDVideo(), nombreL));
+		assertEquals(true,UCU.memberVideoLista(nombreU, infoVideosLDR[1].getIDVideo(), nombreL));
 		assertEquals(true,listadoVideosLDR.length==2);
 		assertEquals(true,infoVideosLDR.length==2);
 		boolean existe1enListado=false;

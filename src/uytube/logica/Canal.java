@@ -180,5 +180,11 @@ public class Canal {
 		ListaReproduccion lr = listasReproduccion.get(nombreLista);
 		return lr.obtenerDtsVideosListaReproduccionUsuario(nombreLista);
 	}
+	public boolean memberVideoLista(int idVideo, String nombreListaReproduccion) {
+		VideoHandler videoH=VideoHandler.getInstance();
+		Video video=videoH.find(idVideo);
+		ListaReproduccion lista= this.findLista(nombreListaReproduccion);
+		return lista.existeVideo(video);
+	}
 
 }
