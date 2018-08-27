@@ -17,19 +17,19 @@ public class Video {
 	private ArrayList<Puntuacion> puntuaciones;
 	
 	
-	public Video(String n,String pro, String d, int dur, DtFecha fp, String url, DtCategoria c, boolean p) {
+	public Video(String nombreVideo,String propietario, String descripcionV, int duracionV, DtFecha fechapubli, String url, DtCategoria categ, boolean p) {
 		VideoHandler vh=VideoHandler.getInstance();
 		SystemHandler sh=SystemHandler.getInstance();
 		IDVideo=vh.getNewID();
-		nombre = n;
-		setPropietario(pro);
-		descripcion = d;
-		duracion = dur;
-		fecha_publicacion = fp;
+		nombre = nombreVideo;
+		setPropietario(propietario);
+		descripcion = descripcionV;
+		duracion = duracionV;
+		fecha_publicacion = fechapubli;
 		URL = url;
 		CategoriaHandler ch=CategoriaHandler.getInstance();
-		if(c!=null && ch.isMember(c.getNombre())){
-				cat=ch.find(c.getNombre());//si la categoria existe la asigno, si no?
+		if(categ!=null && ch.isMember(categ.getNombre())){
+				cat=ch.find(categ.getNombre());//si la categoria existe la asigno, si no?
 				cat.addVideo(this);
 		}else
 			cat=sh.getSinCat();

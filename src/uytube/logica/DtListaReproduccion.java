@@ -9,7 +9,7 @@ public class DtListaReproduccion {
 	public DtListaReproduccion(PorDefecto ldr){
 		nombre=ldr.getNombre();
 		propietario= ldr.getPropietario();
-		privado=false;
+		privado=true;
 		categoriasLDR=ldr.getInfoCategorias();
 	}
 	public DtListaReproduccion(Particular ldr){
