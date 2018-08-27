@@ -132,9 +132,12 @@ public class CrearListaInternalFrame extends JInternalFrame {
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
+				dispose();
 			}
 		});
-		lista.add(btnCancelar);
+		
+		JLabel label_2 = new JLabel("");
+		lista.add(label_2);
 		
 		JButton btnCrear = new JButton("Crear");
 		btnCrear.addActionListener(new ActionListener() {
@@ -144,32 +147,36 @@ public class CrearListaInternalFrame extends JInternalFrame {
 				boolean priv=true;
 				
 				//verificar si los datos ingresados estanb bien
-				if(rdbtnPorDefecto.isSelected()){
-					 if( controlUsr.memberListaReproduccionDefecto(nombreLista)){
-						 mensajeError();
-					 }else{
-						 controlUsr.nuevaListaPorDefecto(nombreLista) ;
-						 infoBox("Lista creada","Crear Lista");
-					 }
-				}else{
-					if(rdbtnPublica.isSelected()){priv = false;}
-					if( controlUsr.memberListaReproduccionPropia(nickU, nombreLista)){
-						 mensajeError();
+				if(!nombreLista.isEmpty()){
+					if(rdbtnPorDefecto.isSelected()){
+						if( controlUsr.memberListaReproduccionDefecto(nombreLista)){
+							mensajeError();
+						}else{
+							controlUsr.nuevaListaPorDefecto(nombreLista) ;
+							infoBox("Lista creada","Crear Lista");
+							setVisible(false);
+							dispose();
+						}
 					}else{
-						controlUsr.nuevaListaParticular(nickU, nombreLista, priv) ;
-						infoBox("Lista creada","Crear Lista");
+						if(rdbtnPublica.isSelected()){priv = false;}
+						if(comboBoxNick.getSelectedIndex()==-1){
+							infoBox("Campos sin completar","Crear Lista");
+						}else if( controlUsr.memberListaReproduccionPropia(nickU, nombreLista)){
+							mensajeError();
+						}else{
+							controlUsr.nuevaListaParticular(nickU, nombreLista, priv) ;
+							infoBox("Lista creada","Crear Lista");
+							setVisible(false);
+							dispose();
+						}				
 					}
-				}
-				//mensaje de que se creo
-				//limpiar
-				textFieldNombre.setText("");
-				comboBoxNick.setSelectedIndex(-1);
+				}else{infoBox("Campos sin completar","Crear Lista"); }
+				//textFieldNombre.setText("");
+				//comboBoxNick.setSelectedIndex(-1);
 			}
 		});
-		
-		JLabel label_2 = new JLabel("");
-		lista.add(label_2);
 		lista.add(btnCrear);
+		lista.add(btnCancelar);
 	}
 	private void mensajeError(){
 		JOptionPane.showMessageDialog(this, "Ya existe la lista", "Lista repetida",

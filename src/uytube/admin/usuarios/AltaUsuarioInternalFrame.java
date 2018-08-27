@@ -122,11 +122,12 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 		btnElegir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				archivo = Imagen.elegirImagen();
-				Image imagen = new ImageIcon(archivo.getAbsolutePath()).getImage();
-				lblFotoU.setSize(50,50);
-				ImageIcon icono = new ImageIcon(imagen.getScaledInstance(lblFotoU.getWidth(), lblFotoU.getHeight(), Image.SCALE_DEFAULT));
-		    	lblFotoU.setIcon(icono);
-		    	
+				if(archivo!=null){
+					Image imagen = new ImageIcon(archivo.getAbsolutePath()).getImage();
+					lblFotoU.setSize(50,50);
+					ImageIcon icono = new ImageIcon(imagen.getScaledInstance(lblFotoU.getWidth(), lblFotoU.getHeight(), Image.SCALE_DEFAULT));
+					lblFotoU.setIcon(icono);
+				}
 			}
 		});
 		
@@ -204,6 +205,8 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 				if(disponible && verificarCampos()){
 					controlUsr.nuevoUsuario(nick,nom, ape, email, nac, Imagen.imagenToByte(archivo),nomCanal,descCanal,privacidad, catE) ;
 					infoBox("Usuario creado con exito", "Alta Usuario");
+					setVisible(false);
+					dispose();
 					limpiar();
 				}else if(!disponible){
 					//avisar que no se pudo crear
@@ -252,7 +255,7 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 		editorPaneDesc.setText("");
 		textFieldNombreC.setText("");
 		dateChooser.setDate(null);
-		comboBoxCat.setSelectedIndex(-1);;
+		comboBoxCat.setSelectedIndex(-1);
 	}
 	
 }

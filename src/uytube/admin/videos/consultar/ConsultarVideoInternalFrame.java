@@ -115,6 +115,7 @@ public class ConsultarVideoInternalFrame extends JInternalFrame {
 			}
 		});
 		authorNicknameComboBox.setModel(new DefaultComboBoxModel(nicknamesArray));
+		authorNicknameComboBox.setSelectedIndex(-1);
 		mainPanel.add(authorNicknameComboBox);
 
 		initializeSearchVideosButton();

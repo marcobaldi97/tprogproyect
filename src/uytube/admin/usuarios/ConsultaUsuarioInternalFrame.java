@@ -316,6 +316,7 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 		for(int i=0; i<nickUsuario.length;i++){
 			 comboBoxNick.addItem(nickUsuario[i]);
 	     }
+		comboBoxNick.setSelectedIndex(-1);
 		limpiar();
 		 //.....//
 		
