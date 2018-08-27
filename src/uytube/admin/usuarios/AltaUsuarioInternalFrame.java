@@ -204,6 +204,7 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 				//crear
 				if(disponible && verificarCampos()){
 					if(textFieldNombreC.getText().isEmpty()){nomCanal=nick; }
+					if(comboBoxCat.getSelectedItem()==""){catE=null;}
 					controlUsr.nuevoUsuario(nick,nom, ape, email, nac, Imagen.imagenToByte(archivo),nomCanal,descCanal,privacidad, catE) ;
 					infoBox("Usuario creado con exito", "Alta Usuario");
 					setVisible(false);
@@ -242,7 +243,7 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 	
 	private Boolean verificarCampos(){
 		if(textFieldNick.getText().isEmpty() || textFieldEmail.getText().isEmpty()|| textFieldNombre.getText().isEmpty()
-				|| txtApellido.getText().isEmpty() || dateChooser.getDate()==null || comboBoxCat.getSelectedIndex()==-1){
+				|| txtApellido.getText().isEmpty() || dateChooser.getDate()==null){
 			infoBox("Campos sin completar", "Aviso");
 			return false;
 		}else{return true;}

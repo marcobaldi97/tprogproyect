@@ -225,11 +225,12 @@ public class modificarUsuario extends JInternalFrame {
 		btnElegir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				archivo = Imagen.elegirImagen();
-				Image imagen = new ImageIcon(archivo.getAbsolutePath()).getImage();
-				lblFoto.setSize(30,30);
-				ImageIcon icono = new ImageIcon(imagen.getScaledInstance(lblFoto.getWidth(), lblFoto.getHeight(), Image.SCALE_DEFAULT));
-		    	lblFoto.setIcon(icono);
-		    	fotoUsr= Imagen.imagenToByte(archivo);
+				if(archivo!=null){
+					Image imagen = new ImageIcon(archivo.getAbsolutePath()).getImage();
+					lblFoto.setSize(50,50);
+					ImageIcon icono = new ImageIcon(imagen.getScaledInstance(lblFoto.getWidth(), lblFoto.getHeight(), Image.SCALE_DEFAULT));
+					lblFoto.setIcon(icono);
+				}				
 			}
 		});
 		btnElegir.setEnabled(false);
