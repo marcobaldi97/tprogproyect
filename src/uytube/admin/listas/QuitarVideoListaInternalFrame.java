@@ -100,12 +100,12 @@ public class QuitarVideoListaInternalFrame extends JInternalFrame {
 			public void actionPerformed(ActionEvent e) {
 				final String nickname = (String) comboBoxNick.getSelectedItem();
 				final String listaNombre = (String) comboBoxLista.getSelectedItem();
+				videosModel.removeAllElements();
 				if (listaNombre == null) {
 					return;
 				}
 				final DtVideo[] videosDeLista = controlUsr.obtenerDtsVideosListaReproduccionUsuario(nickname,
 						listaNombre);
-				videosModel.removeAllElements();
 				for (final DtVideo video : videosDeLista) {
 					videosModel.addElement(video);
 				}
@@ -114,6 +114,7 @@ public class QuitarVideoListaInternalFrame extends JInternalFrame {
 		});
 
 		JButton btnEliminar = new JButton("Eliminar");
+		btnEliminar.setEnabled(false);
 		getContentPane().add(btnEliminar);
 
 		btnEliminar.addActionListener(new ActionListener() {
@@ -126,6 +127,16 @@ public class QuitarVideoListaInternalFrame extends JInternalFrame {
 				controlUsr.eliminarVideoLista(nickname, video.getIDVideo(), nombreLista);
 				infoBox("Video quitado correctamente", "Quitar video de lista");
 				dispose();
+			}
+		});
+
+		comboBoxVideo.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				final DtVideo video = (DtVideo) comboBoxVideo.getSelectedItem();
+
+				final boolean btnEliminarEnabled = video != null;
+				btnEliminar.setEnabled(btnEliminarEnabled);
 			}
 		});
 
