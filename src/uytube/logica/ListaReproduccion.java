@@ -86,4 +86,8 @@ public abstract class ListaReproduccion {
 		return dtvideos;
 	}
 
+	public boolean existeVideo(Video video) {
+		return videos.containsKey(video.getIDVideo());
+	}
+
 }
