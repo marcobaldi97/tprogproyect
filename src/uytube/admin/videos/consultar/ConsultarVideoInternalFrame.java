@@ -11,12 +11,12 @@ import javax.swing.JButton;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import uytube.admin.adminPrincipal;
-import uytube.admin.adminPrincipalBienHecho;
 import uytube.admin.videos.ListarComentariosInternalFrame;
 import uytube.admin.videos.modificar.ModificarVideoInternalFrame;
 import uytube.logica.DtInfoVideo;
@@ -75,6 +75,10 @@ public class ConsultarVideoInternalFrame extends JInternalFrame {
 	private final JLabel lblVideosDelAutor = new JLabel("Videos del autor:");
 	private final JButton btnCargar = new JButton("Cargar");
 	
+	 public static void infoBox(String infoMessage, String titleBar){
+	        JOptionPane.showMessageDialog(null, infoMessage, "" + titleBar, JOptionPane.INFORMATION_MESSAGE);
+	 }
+	 
 	//funcion para cuando es llamada con un video.
 	public void llamadaParticular(String nicknameAutor, String nombreVideo) {
 		authorNicknameComboBox.setSelectedItem(nicknameAutor);
@@ -187,12 +191,20 @@ public class ConsultarVideoInternalFrame extends JInternalFrame {
 										TabComunidad.addTab("Comentarios", null, Comentarios, null);
 										btnCargar.addActionListener(new ActionListener() {
 											public void actionPerformed(ActionEvent arg0) {
-												 ListarComentariosInternalFrame comentariosIFrame = new ListarComentariosInternalFrame((String) authorNicknameComboBox.getSelectedItem(),videoList.getSelectedValue());
-												
-												 adminPrincipal.getFrames()[0].setLayout(null);
-												 adminPrincipal.getFrames()[0].add(comentariosIFrame);
-												
-												 comentariosIFrame.show();
+												if(!videoList.isSelectionEmpty()&&authorNicknameComboBox.getSelectedIndex()!=-1){
+													String nick = (String) authorNicknameComboBox.getSelectedItem();
+													String video = videoList.getSelectedValue();
+													if(!nick.isEmpty() && !video.isEmpty()){
+														 ListarComentariosInternalFrame comentariosIFrame = new ListarComentariosInternalFrame((String) authorNicknameComboBox.getSelectedItem(),videoList.getSelectedValue());
+														 adminPrincipal.getFrames()[0].setLayout(null);
+														 adminPrincipal.getFrames()[0].add(comentariosIFrame);
+														 comentariosIFrame.show();
+													}else{
+														infoBox("No hay usuario y/o video seleccionado","Consulta Video");
+													}
+												}else{
+													infoBox("No hay usuario y/o video seleccionado","Consulta Video");
+												}
 											}
 										});
 										

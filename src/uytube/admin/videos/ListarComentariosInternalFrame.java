@@ -101,7 +101,11 @@ public class ListarComentariosInternalFrame extends JInternalFrame {
 			DefaultMutableTreeNode comentario = new DefaultMutableTreeNode(coments[i].getNickUsuario()+": "+coments[i].getTexto());
 			modelo.insertNodeInto(comentario,raiz,i);
 			cargarRespuesta(coments[i].getRespuestas(), comentario,raiz, modelo);
-		}	
+		}
+		 
+		for(int i=0; i<treeComentarios.getRowCount(); i++){
+			treeComentarios.expandRow(i);
+		}
 		
 	}
 	

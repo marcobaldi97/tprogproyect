@@ -117,9 +117,9 @@ public class adminPrincipal extends JFrame {
 		ICV.nuevoComentario(1, "pepeDeportes", fechaVideo, "Muy bueno el video, baje 5 kilos");
 		ICV.nuevoComentario(1, "pepeDeportes", fechaVideo, "Es genial!!");
 		ICV.nuevoComentario(1, "BokuNoNaruto", fechaVideo, "A mi me aburriooo :c");
-		ICV.responderComentario(1, 4, "RobertoDeportista", fechaNacRoberto, "Anda al gym gordito");
-		ICV.responderComentario(1, 5, "BokuNoNaruto", fechaNacRoberto, "Noo");
-		ICV.responderComentario(1, 5, "BokuNoNaruto", fechaNacRoberto, "PASEN POR MI CANAL");
+		ICV.responderComentario(1,2, "RobertoDeportista", fechaNacRoberto, "Anda al gym gordito");
+		ICV.responderComentario(1, 2, "BokuNoNaruto", fechaNacRoberto, "Noo");
+		ICV.responderComentario(1, 3, "BokuNoNaruto", fechaNacRoberto, "PASEN POR MI CANAL");
 		ICV.nuevoComentario(1, "pepeDeportes", fechaVideo, "Comenten si alguien lo esta viendo en el 2050");
 		// public abstract void responderComentario(Integer IDVideo, Integer IDCR,
 		// String nickU, DtFecha fecha, String contenido);
@@ -130,6 +130,7 @@ public class adminPrincipal extends JFrame {
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
+		setExtendedState(MAXIMIZED_BOTH);
 
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);

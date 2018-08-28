@@ -82,6 +82,11 @@ public class ValorarVideo extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public ValorarVideo() {
+		setTitle("Valorar Video");
+		setResizable(true);
+		setMaximizable(true);
+		setIconifiable(true);
+		setClosable(true);
 		setBounds(100, 100, 597, 300);
 		getContentPane().setLayout(new GridLayout(1, 0, 0, 0));
 		
@@ -213,7 +218,7 @@ public class ValorarVideo extends JInternalFrame {
 				if(IDVideo!=-1&&nickUsuario!=null&&nickValorador!=null&&comboBoxNickname.getSelectedIndex()!=-1&&comboBoxN2.getSelectedIndex()!=-1){
 					VCU.valorarVideo(IDVideo, nickValorador, valoracion);
 					System.out.println("Ya ta");
-					infoBox("Se valoró con exito", "Valoracion exitosa");
+					infoBox("Se valorï¿½ con exito", "Valoracion exitosa");
 					setVisible(false);
 					dispose();
 				}

@@ -18,7 +18,6 @@ import com.toedter.calendar.JDateChooser;
 
 import uytube.admin.Imagen;
 import uytube.admin.adminPrincipal;
-import uytube.admin.adminPrincipalBienHecho;
 import uytube.admin.listas.ConsultaListaInternalFrame;
 import uytube.admin.videos.ModificarVideo;
 import uytube.admin.videos.consultar.ConsultarVideoInternalFrame;
@@ -373,8 +372,8 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 	private void openConsultarVideo(){
 	   //modificarUsuario modUsrIFrame = new modificarUsuario();
 	   ConsultarVideoInternalFrame consVideoIFrame = new ConsultarVideoInternalFrame();
-	   adminPrincipalBienHecho.getFrames()[0].setLayout(null);
-	   adminPrincipalBienHecho.getFrames()[0].add(consVideoIFrame);
+	   adminPrincipal.getFrames()[0].setLayout(null);
+	   adminPrincipal.getFrames()[0].add(consVideoIFrame);
 	   consVideoIFrame.show();
 	   consVideoIFrame.moveToFront(); 
 	//   modUsrIFrame.setVisible(true);
