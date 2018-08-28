@@ -9,7 +9,6 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import uytube.admin.adminPrincipal;
-import uytube.admin.adminPrincipalBienHecho;
 import uytube.admin.videos.consultar.ConsultarVideoInternalFrame;
 import uytube.admin.videos.modificar.ModificarVideoInternalFrame;
 import uytube.logica.DtListaReproduccion;

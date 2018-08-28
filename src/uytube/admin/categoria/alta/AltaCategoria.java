@@ -6,6 +6,7 @@ import java.awt.EventQueue;
 import javax.swing.JInternalFrame;
 import java.awt.FlowLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import uytube.logica.IUsuarioCtrl;
@@ -21,104 +22,80 @@ import java.awt.Component;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.SwingConstants;
+import javax.swing.BoxLayout;
+import java.awt.BorderLayout;
+import com.toedter.calendar.JCalendarBeanInfo;
+import com.jgoodies.forms.factories.DefaultComponentFactory;
+import com.toedter.components.JSpinField;
+import com.toedter.components.JLocaleChooser;
 
 public class AltaCategoria extends JInternalFrame {
 	private JTextField textField;
 	private JTextField textField_1;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AltaCategoria frame = new AltaCategoria(null);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
+	 public static void infoBox(String infoMessage, String titleBar){
+	        JOptionPane.showMessageDialog(null, infoMessage, "" + titleBar, JOptionPane.INFORMATION_MESSAGE);
+	 }
 	/**
 	 * Create the frame.
 	 * @param iCV 
 	 */
 	public AltaCategoria(IVideoCtrl iCV) {
+		setResizable(true);
 		setIconifiable(true);
 		setClosable(true);
 		setTitle("Alta Categoria");
-		setMaximizable(true);	
+		setMaximizable(true);
 		
-		JLabel aviso = new JLabel("");
-		aviso.setHorizontalAlignment(SwingConstants.CENTER);
-		
-		setBounds(100, 100, 450, 300);
-		getContentPane().setLayout(new GridLayout(0, 1, 0, 0));
+		setBounds(100, 100, 326, 159);
+		getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
 		
 		JPanel panel_1 = new JPanel();
 		getContentPane().add(panel_1);
-		panel_1.setLayout(new GridLayout(0, 2, 5, 5));
+		panel_1.setLayout(new GridLayout(2, 0, 0, 0));
+		
+		JPanel panel = new JPanel();
+		panel_1.add(panel);
+		FlowLayout flowLayout = (FlowLayout) panel.getLayout();
 		
 		JLabel lblNombre = new JLabel("Nombre:");
+		panel.add(lblNombre);
 		lblNombre.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_1.add(lblNombre);
 		
 		textField_1 = new JTextField();
-		textField_1.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent arg0) {
-				if(iCV.existeCategoria(textField_1.getText()) == true) {
-					aviso.setText("Categoria ya existente en el sistema.");
-				}else {
-					aviso.setText("");
-				}
-			}
-			@Override
-			public void keyReleased(KeyEvent arg0) {
-				if(iCV.existeCategoria(textField_1.getText()) == true) {
-					aviso.setText("Categoria ya existente en el sistema.");
-				}else {
-					aviso.setText("");
-				}
-			}
-		});
-		panel_1.add(textField_1);
+		panel.add(textField_1);
+		
 		textField_1.setColumns(10);
 		
+		JPanel panel_2 = new JPanel();
+		panel_1.add(panel_2);
+		
 		JButton btnAceptar = new JButton("Aceptar");
-		btnAceptar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(iCV.existeCategoria(textField_1.getText()) == true) {
-					aviso.setText("¡Categoria ya existente en el sistema.!");
-				}else {
-					iCV.crearCategoria(textField_1.getText());
-					aviso.setText("Categoria creada con exito");
-					textField_1.setText("");
-				}
-			}
-		});
-		panel_1.add(btnAceptar);
+		panel_2.add(btnAceptar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
+		panel_2.add(btnCancelar);
+		panel_1.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{textField_1, btnAceptar, btnCancelar, lblNombre}));
+		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{textField_1, btnAceptar, btnCancelar, getContentPane(), panel_1, lblNombre}));
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 				dispose();
 			}
 		});
-		panel_1.add(btnCancelar);
-		panel_1.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{textField_1, btnAceptar, btnCancelar, lblNombre}));
-		
-		JPanel panel = new JPanel();
-		getContentPane().add(panel);
-		panel.setLayout(new GridLayout(0, 1, 0, 0));
-		
-
-		panel.add(aviso);
-		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{textField_1, btnAceptar, btnCancelar, aviso, getContentPane(), panel_1, lblNombre, panel}));
+		btnAceptar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(iCV.existeCategoria(textField_1.getText()) == true) {
+					infoBox("Categoria ya existente en el sistema","Alta Categoria");
+				}else if(textField_1.getText().isEmpty()) {
+					infoBox("Categoria no valida", "Alta Categoria");
+				}else{
+					iCV.crearCategoria(textField_1.getText());
+					infoBox("Categoria creada con exito","Alta Categoria");
+					dispose();
+				}
+			}
+		});
 		
 
 	}
