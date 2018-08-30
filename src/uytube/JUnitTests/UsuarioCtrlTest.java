@@ -460,10 +460,42 @@ public class UsuarioCtrlTest {
 		String nombreU="nombreMostrarInfoCanal";
 		UCU.nuevoUsuario(nombreU, "Jose", "Ramirez", "www.cosoarroba3",fecha , null, "canal", "descripcion", false, null);
 		DtCanal dtActual=UCU.mostrarInfoCanal(nombreU);
+		DtCanal dtActual2=UCU.mostrarInfoCanal(nombreU);
+		assertEquals(true,dtActual.equals(dtActual2));
 		assertEquals(true,dtActual.getNombre()=="canal");
 		assertEquals(true,dtActual.getDescripcion()=="descripcion");
 		assertEquals(true,dtActual.getPrivacidad()==false);
 		assertEquals(true,dtActual.getCategoria().equals(new DtCategoria(sh.getSinCat())));
+	}
+	@Test
+	public void testModificarDatosCanal(){
+		UsuarioCtrl UCU=UsuarioCtrl.getInstance();
+		VideoCtrl VCU=VideoCtrl.getInstance();
+		DtFecha fecha=new DtFecha(new Date(0));
+		SystemHandler sh=SystemHandler.getInstance();
+		String nombreU="nombreModificarDatosCanal";
+		UCU.nuevoUsuario(nombreU, "Jose", "Ramirez", "www.cosoarroba3",fecha , null, "canal", "descripcion", false, null);
+		DtCanal dtActual=UCU.mostrarInfoCanal(nombreU);
+		assertEquals("canal",dtActual.getNombre());
+		assertEquals("descripcion",dtActual.getDescripcion());
+		assertEquals(false,dtActual.getPrivacidad());
+		assertEquals(true,dtActual.getCategoria().equals(new DtCategoria(sh.getSinCat())));
+		String nombreCat="nuevaCat";
+		VCU.crearCategoria(nombreCat);
+		UCU.modificarDatosCanal(nombreU, "nomCanal", "nuevaDesc", true, nombreCat);
+		dtActual=UCU.mostrarInfoCanal(nombreU);
+		assertEquals("nomCanal",dtActual.getNombre());
+		assertEquals("nuevaDesc",dtActual.getDescripcion());
+		assertEquals(true,dtActual.getPrivacidad());
+		assertEquals(nombreCat,dtActual.getCategoria().getNombre());
+		UCU.modificarDatosCanal(nombreU, "nomCanal2", "nuevaDesc2", false, null);
+		dtActual=UCU.mostrarInfoCanal(nombreU);
+		assertEquals("nomCanal2",dtActual.getNombre());
+		assertEquals("nuevaDesc2",dtActual.getDescripcion());
+		assertEquals(false,dtActual.getPrivacidad());
+		assertEquals(true,dtActual.getCategoria().equals(new DtCategoria(sh.getSinCat())));
+		DtCanal dtActual2=UCU.mostrarInfoCanal(nombreU);
+		assertEquals(true,dtActual.equals(dtActual2));
 	}
 
 	@Test
