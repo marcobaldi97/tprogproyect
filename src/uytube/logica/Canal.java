@@ -187,4 +187,17 @@ public class Canal {
 		return lista.existeVideo(video);
 	}
 
+	public void modificarDatosCanal(String nombreCanal, String descripcion2, Boolean privacidad, String catE2) {
+		nombre = nombreCanal;
+		descripcion = descripcion2;
+		privado = privacidad;
+		if (catE2 != null) {
+			CategoriaHandler ch = CategoriaHandler.getInstance();
+			cate = ch.find(catE2);
+		} else {
+			SystemHandler sh = SystemHandler.getInstance();
+			cate = sh.getSinCat();
+		}	
+	}
+
 }
