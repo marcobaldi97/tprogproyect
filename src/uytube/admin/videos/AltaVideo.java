@@ -26,6 +26,8 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.Date;
+
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 import java.awt.Component;
 
@@ -127,6 +129,8 @@ public class AltaVideo extends JInternalFrame {
 		getContentPane().add(lblFecha);
 		
 		dateChooserFecha = new JDateChooser();
+		Date fechaHoy = new Date();
+		dateChooserFecha.setDate(fechaHoy);
 		getContentPane().add(dateChooserFecha);
 		
 		JLabel lblCategoria = new JLabel("Categoria:");
@@ -172,39 +176,41 @@ public class AltaVideo extends JInternalFrame {
 				if(iCU.memberUsuario(nickU) == true) {
 					if(iCU.memberVideoEnUsuario(nickU, nom) != true) {
 						if(!textFieldNombreVideo.getText().equals("")) {
-							String desc = textAreaDesc.getText();
-							Integer dur = (Integer) spinnerDuracion.getValue();
-							DtFecha fp = new DtFecha(dateChooserFecha.getDate());
-							String url = textFieldURL.getText();
-							//asigno categoria.
-							DtCategoria catE = null;
-							String nombreCategoria =(String) comboBoxCategoria.getSelectedItem(); //Puede haber un problema aca
-							if(comboBoxCategoria.getSelectedIndex() == -1) {
-								catE = null;
-							}else {
-								Boolean flag = false;
-								int i = 0;
-								while (( i < categoriasDts.length) && (flag == false)){
-									if(nombreCategoria == categoriasDts[i].getNombre()) {
-										catE = categoriasDts[i];
-										flag = true;
+							if(!textFieldURL.getText().equals("")) {
+								String desc = textAreaDesc.getText();
+								Integer dur = (Integer) spinnerDuracion.getValue();
+								DtFecha fp = new DtFecha(dateChooserFecha.getDate());
+								String url = textFieldURL.getText();
+								//asigno categoria.
+								DtCategoria catE = null;
+								String nombreCategoria =(String) comboBoxCategoria.getSelectedItem(); //Puede haber un problema aca
+								if(comboBoxCategoria.getSelectedIndex() == -1) {
+									catE = null;
+								}else {
+									Boolean flag = false;
+									int i = 0;
+									while (( i < categoriasDts.length) && (flag == false)){
+										if(nombreCategoria == categoriasDts[i].getNombre()) {
+											catE = categoriasDts[i];
+											flag = true;
+										}
+										i++;
 									}
-									i++;
 								}
-							}
-							//termino de asignar categoria
-							//Asigno privado
-							boolean p = false;
-							if(comboBoxPrivacidad.getSelectedItem() == "privado") p = true;
-							else p = false;
-							//termino de asignar privado.
-							iCU.aniadirVideo(nickU, nom, desc, dur, fp, url, catE, p);
-							infoBox("Video creado exitosamente","Exito");
-							clear();
-					    	int freshIndex = 0;
-					    	spinnerDuracion.setValue(Integer.valueOf(freshIndex));
-							setVisible(false);
-							dispose();
+								//termino de asignar categoria
+								//Asigno privado
+								boolean p = false;
+								if(comboBoxPrivacidad.getSelectedItem() == "privado") p = true;
+								else p = false;
+								//termino de asignar privado.
+								iCU.aniadirVideo(nickU, nom, desc, dur, fp, url, catE, p);
+								infoBox("Video creado exitosamente","Exito");
+								clear();
+						    	int freshIndex = 0;
+						    	spinnerDuracion.setValue(Integer.valueOf(freshIndex));
+								setVisible(false);
+								dispose();
+							}else infoBox("La URL no puede estar vacia","Error");
 						}else infoBox("El titulo no puede estar vacio.","Error");
 					}else infoBox("Ya existe el nombre del video en el canal del usuario seleccionado.","Error");
 				}else infoBox("No existe el usuario en el sistema.","Error");
