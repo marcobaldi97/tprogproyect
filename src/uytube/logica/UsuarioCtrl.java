@@ -180,4 +180,9 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 		Usuario u = usuarioh.find(nicknameUsuario);
 		return u.memberVideoLista(idVideo,nombreListaReproduccion);
 	}
+	
+	public void modificarDatosCanal(String nickname, String nombreCanal, String descripcion, Boolean privacidad, String catE) {
+		Usuario u = usuarioh.find(nickname);
+		u.modificarDatosCanal(nombreCanal,descripcion,privacidad,catE);
+	}
 }

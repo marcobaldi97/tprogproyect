@@ -173,9 +173,11 @@ public class Usuario {
 	}
 
 	public boolean memberVideoLista(int idVideo, String nombreListaReproduccion) {
-		
-		return canalPropio.memberVideoLista(idVideo, nombreListaReproduccion);
-		
+		return canalPropio.memberVideoLista(idVideo, nombreListaReproduccion);	
+	}
+
+	public void modificarDatosCanal(String nombreCanal, String descripcion, Boolean privacidad, String catE) {
+		canalPropio.modificarDatosCanal(nombreCanal,descripcion,privacidad,catE);
 	}
 
 }
