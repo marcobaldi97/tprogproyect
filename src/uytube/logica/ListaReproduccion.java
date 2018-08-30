@@ -32,7 +32,7 @@ public abstract class ListaReproduccion {
 		return nombreVideos;
 	}
 
-	private void refrescarCategorias() {
+	public void refrescarCategorias() {
 		for (Map.Entry<Integer, Video> entry : videos.entrySet()) {
 			Categoria categoria = entry.getValue().getObjetoCategoria();
 			categoria.aniadirLDR(this);
@@ -54,11 +54,11 @@ public abstract class ListaReproduccion {
 
 		videos.put(v.getIDVideo(), v);
 		refrescarCategorias();
-
 		CategoriaHandler catH = CategoriaHandler.getInstance();
 		Categoria c = catH.find(v.getCategoria().getNombre());
 		if (c != null)
 			c.aniadirLDR(this);
+		v.aniadirListaReproduccion(this);
 
 	};
 
@@ -93,6 +93,11 @@ public abstract class ListaReproduccion {
 
 	public boolean existeVideo(Video video) {
 		return videos.containsKey(video.getIDVideo());
+	}
+
+	public void removerCategoria(Categoria cat) {
+		// TODO Auto-generated method stub
+		categorias.remove(cat.getNombre());
 	}
 
 }

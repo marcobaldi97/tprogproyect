@@ -7,12 +7,12 @@ import java.util.Map;
 
 public class Categoria {
 	private String nombre;
-	private List<Video> videos;
+	private Map<Integer,Video> videos;
 	private List<ListaReproduccion> LDR;
 
 	public Categoria(String n) {
 		nombre = n;
-		videos = new LinkedList<Video>();
+		videos = new HashMap<Integer,Video>();
 		LDR = new LinkedList<ListaReproduccion>();
 	}
 
@@ -23,7 +23,7 @@ public class Categoria {
 	}
 
 	public void removerLDR(ListaReproduccion lr) {
-		LDR.remove(lr.getNombre());
+		LDR.remove(lr);
 	}
 
 	public String getNombre() {
@@ -31,13 +31,11 @@ public class Categoria {
 	}
 
 	public void addVideo(Video v) {
-		if (!videos.contains(v)) {
-			videos.add(v);
-		}
+		videos.put(v.getIDVideo(), v);
 	}
 
 	public void removerVideo(Video v) {
-		videos.remove(v.getNombre());
+		videos.remove(v.getIDVideo());
 	}
 
 	/*
@@ -52,8 +50,8 @@ public class Categoria {
 	public DtVideo[] listarVideos() {
 		DtVideo[] res = new DtVideo[videos.size()];
 		Integer contador = 0;
-		for (Video v : videos) {
-			res[contador] = new DtVideo(v);
+		for(Map.Entry<Integer, Video> entry :videos.entrySet()) {
+			res[contador] = new DtVideo(entry.getValue());
 			contador++;
 		}
 		return res;

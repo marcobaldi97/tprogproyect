@@ -1,6 +1,8 @@
 package uytube.logica;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 public class Video {
@@ -14,6 +16,7 @@ public class Video {
 	private Categoria cat;
 	private boolean privacidad;
 	private Map<Integer,Comentario> comentarios;
+	private List<ListaReproduccion> listas;
 	private ArrayList<Puntuacion> puntuaciones;
 	
 	
@@ -27,6 +30,7 @@ public class Video {
 		duracion = duracionV;
 		fecha_publicacion = fechapubli;
 		URL = url;
+		listas=new LinkedList<ListaReproduccion>();
 		CategoriaHandler ch=CategoriaHandler.getInstance();
 		if(categ!=null && ch.isMember(categ.getNombre())){
 				cat=ch.find(categ.getNombre());//si la categoria existe la asigno, si no?
@@ -69,22 +73,43 @@ public class Video {
 		return cat;
 	}
 	
-	public void ingresarNuevosDatosVideo(String d, int dur, DtFecha fp, String url, DtCategoria c, boolean p) {
-		SystemHandler sh=SystemHandler.getInstance();
-		descripcion = d;
-		duracion = dur;
-		fecha_publicacion = fp;
-		URL = url;
-		CategoriaHandler ch=CategoriaHandler.getInstance();
-		if(c!=null){
-			if(ch.isMember(c.getNombre())){
-				cat=ch.find(c.getNombre());//si la categoria existe la asigno, si no?
-			}
-			
-		}else
-			cat=sh.getSinCat();
-		privacidad = p;
+	public void aniadirListaReproduccion(ListaReproduccion ldr) {
+		if (!listas.contains(ldr)) {
+			listas.add(ldr);
+		}
 	}
+	
+	public void removerListaReproduccion(ListaReproduccion ldr){
+		listas.remove(ldr);
+	}
+	
+	public void ingresarNuevosDatosVideo(String d, int dur, DtFecha fp, String url, DtCategoria c, boolean p) {
+		for (ListaReproduccion ldr : listas) {
+			ldr.removerCategoria(cat);
+			cat.removerLDR(ldr);
+		}
+        SystemHandler sh=SystemHandler.getInstance();
+        descripcion = d;
+        duracion = dur;
+        fecha_publicacion = fp;
+        URL = url;
+        CategoriaHandler ch=CategoriaHandler.getInstance();
+        cat.removerVideo(this);
+      
+        if(c!=null){
+            if(ch.isMember(c.getNombre())){
+                Categoria categoriaNueva=ch.find(c.getNombre());
+                cat=categoriaNueva;
+                categoriaNueva.addVideo(this);
+            }
+        }else
+            cat=sh.getSinCat();
+        privacidad = p;
+        for (ListaReproduccion ldr : listas) {
+			ldr.refrescarCategorias();
+			cat.aniadirLDR(ldr);
+		}
+    }
 	
 	public DtComentario[] getComentarios(){
 		Integer contador = 0;
