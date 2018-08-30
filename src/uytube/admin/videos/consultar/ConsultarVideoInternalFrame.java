@@ -138,7 +138,7 @@ public class ConsultarVideoInternalFrame extends JInternalFrame {
 		videoList.addListSelectionListener(new ListSelectionListener() {
 			@Override
 			public void valueChanged(ListSelectionEvent arg0) {
-				if (!arg0.getValueIsAdjusting()&&ready) {
+				if (!arg0.getValueIsAdjusting()) {
 					ready=false;
 					if(!videoList.isSelectionEmpty()){
 						String nomVideo=videoList.getSelectedValue();
