@@ -74,6 +74,8 @@ public class ConsultarVideoInternalFrame extends JInternalFrame {
 	private final JPanel Comentarios = new JPanel();
 	private final JLabel lblVideosDelAutor = new JLabel("Videos del autor:");
 	private final JButton btnCargar = new JButton("Cargar");
+	private final JLabel lblCategoria = new JLabel("Categoria");
+	private final JTextField txtCategoria = new JTextField();
 	
 	 public static void infoBox(String infoMessage, String titleBar){
 	        JOptionPane.showMessageDialog(null, infoMessage, "" + titleBar, JOptionPane.INFORMATION_MESSAGE);
@@ -90,6 +92,8 @@ public class ConsultarVideoInternalFrame extends JInternalFrame {
 	}
 
 	public ConsultarVideoInternalFrame() {
+		txtCategoria.setEditable(false);
+		txtCategoria.setColumns(10);
 		setTitle("Consultar Video");
 		BorderLayout borderLayout = (BorderLayout) getContentPane().getLayout();
 		borderLayout.setVgap(2);
@@ -99,7 +103,7 @@ public class ConsultarVideoInternalFrame extends JInternalFrame {
 
 		setIconifiable(true);
 		setClosable(true);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 450, 330);
 
 		getContentPane().add(mainPanel);
 
@@ -116,6 +120,7 @@ public class ConsultarVideoInternalFrame extends JInternalFrame {
 				videoDescriptionTextField.setText("");
 				videoURLTextField.setText("");
 				videoDuracionTextField.setText("");
+				txtCategoria.setText("");
 			}
 		});
 		authorNicknameComboBox.setModel(new DefaultComboBoxModel(nicknamesArray));
@@ -172,6 +177,10 @@ public class ConsultarVideoInternalFrame extends JInternalFrame {
 										panel.add(videoDuracionLabel);
 										videoDuracionTextField.setEditable(false);
 										panel.add(videoDuracionTextField);
+										
+										panel.add(lblCategoria);
+										
+										panel.add(txtCategoria);
 										videoDetailsPanel.add(panel_1);
 										panel_1.setLayout(new GridLayout(0, 1, 0, 0));
 										TabComunidad.setToolTipText("");
@@ -244,6 +253,7 @@ public class ConsultarVideoInternalFrame extends JInternalFrame {
 		videoNameTextField.setText(this.selectedVideo.getNombre());
 		videoDescriptionTextField.setText(this.selectedVideo.getDescripcion());
 		videoURLTextField.setText(this.selectedVideo.getUrl());
+		txtCategoria.setText(this.selectedVideo.getCategoria().getNombre());
 		Integer duracionMM=this.selectedVideo.getDuracion()/60;
 		Integer duracionSS=this.selectedVideo.getDuracion()%60;
 		videoDuracionTextField.setText(Integer.toString(duracionMM)+":"+Integer.toString(duracionSS));//arreglar la duracion para que la muestre en minutos
