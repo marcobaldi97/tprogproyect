@@ -35,6 +35,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.JComboBox;
 import java.awt.BorderLayout;
+import javax.swing.SwingConstants;
 
 public class ConsultarVideoInternalFrame extends JInternalFrame {
 	static final long serialVersionUID = 113423;
@@ -111,6 +112,8 @@ public class ConsultarVideoInternalFrame extends JInternalFrame {
 		mainPanel.setLayout(mainPanelLayout);
 
 		final JLabel authorNicknameLabel = new JLabel("Nickname del autor:");
+		authorNicknameLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		authorNicknameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		mainPanel.add(authorNicknameLabel);
 		String[] nicknamesArray = ICU.listarNicknamesUsuarios();
 		authorNicknameComboBox.addActionListener(new ActionListener() {
@@ -149,6 +152,8 @@ public class ConsultarVideoInternalFrame extends JInternalFrame {
 				}
 			}
 		});
+		lblVideosDelAutor.setHorizontalAlignment(SwingConstants.CENTER);
+		lblVideosDelAutor.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
 		mainPanel.add(lblVideosDelAutor);
 		mainPanel.add(new JScrollPane(videoList));
