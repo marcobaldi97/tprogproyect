@@ -1,6 +1,7 @@
 package uytube.logica;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 public class VideoHandler {
 	private Map<Integer,Video> videos;
@@ -43,7 +44,14 @@ public class VideoHandler {
 		}
 		return infoVideos;
 	}
-	
+	public DtVideo member(String nomVideo) {
+		DtVideo v = null;
+		for(Entry<Integer, Video> entry : videos.entrySet()) {
+			if(nomVideo == entry.getValue().getNombre())
+				v=new DtVideo(entry.getValue());
+		}
+		return v;
+	}
 	
 	
 
