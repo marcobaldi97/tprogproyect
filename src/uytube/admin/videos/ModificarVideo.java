@@ -28,6 +28,7 @@ import uytube.logica.IVideoCtrl;
 
 public class ModificarVideo extends JInternalFrame {
 	private JComboBox comboBoxNombreVideo = new JComboBox();
+	private JTextField textFieldNombreVideo = new JTextField();
 	private JTextField textFieldURL = new JTextField();
 	private JDateChooser dateChooserFecha = new JDateChooser();
 	private JTextArea textAreaDesc = new JTextArea();
@@ -40,6 +41,7 @@ public class ModificarVideo extends JInternalFrame {
 	}
 
 	private void cargarDatos(DtVideo datosVideo) {
+		textFieldNombreVideo.setText(datosVideo.getNombre());
 		textFieldURL.setText(datosVideo.getUrl());
 		textAreaDesc.setText(datosVideo.getDescripcion());
 		comboBoxCategoria.setSelectedItem(datosVideo.getCategoria().getNombre());
@@ -52,28 +54,35 @@ public class ModificarVideo extends JInternalFrame {
 	}
 
 	private void limpiarDatos() {
+		textFieldNombreVideo.setText("");
 		textFieldURL.setText("");
 		Date dateRespawn = new Date();
 		dateChooserFecha.setDate(dateRespawn);
 		textAreaDesc.setText("");
-		comboBoxCategoria.setSelectedItem("");
+		comboBoxCategoria.setSelectedIndex(-1);
 		spinnerDuracion.setValue(0);
-		comboBoxPrivacidad.setSelectedItem("Privado");
+		comboBoxPrivacidad.setSelectedIndex(-1);
 	}
 
 	private void bloquearDatos() {
+		textFieldNombreVideo.setEnabled(false);
+		comboBoxNombreVideo.setEnabled(false);
 		textFieldURL.setEnabled(false);
 		textAreaDesc.setEnabled(false);
 		comboBoxCategoria.setEnabled(false);
 		spinnerDuracion.setEnabled(false);
+		dateChooserFecha.setEnabled(false);
 		comboBoxPrivacidad.setEnabled(false);
 	}
 
 	private void habilitarDatos() {
+		textFieldNombreVideo.setEnabled(true);
+		comboBoxNombreVideo.setEnabled(true);
 		textFieldURL.setEnabled(true);
 		textAreaDesc.setEnabled(true);
 		comboBoxCategoria.setEnabled(true);
 		spinnerDuracion.setEnabled(true);
+		dateChooserFecha.setEnabled(true);
 		comboBoxPrivacidad.setEnabled(true);
 	}
 
@@ -87,12 +96,14 @@ public class ModificarVideo extends JInternalFrame {
 		setIconifiable(true);
 		setClosable(true);
 		setBounds(100, 100, 450, 300);
-		getContentPane().setLayout(new GridLayout(9, 2, 5, 5));
+		getContentPane().setLayout(new GridLayout(10, 2, 5, 5));
+		JButton btnNewButtonAceptar = new JButton("Aceptar");
 
 		JLabel lblNicknameAutor = new JLabel("Nickname Autor:");
 		lblNicknameAutor.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNicknameAutor.setVerticalAlignment(SwingConstants.CENTER);
 		getContentPane().add(lblNicknameAutor);
+		bloquearDatos();
 		JComboBox comboBoxNicknames = new JComboBox();
 		comboBoxNicknames.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -103,6 +114,15 @@ public class ModificarVideo extends JInternalFrame {
 					for (final String nombreVideo : nombresVideos) {
 						comboBoxNombreVideo.addItem(nombreVideo);
 					}
+					if (nombresVideos.length > 0) {
+						habilitarDatos();
+						btnNewButtonAceptar.setEnabled(true);
+					} else {
+						btnNewButtonAceptar.setEnabled(false);
+					}
+				} else {
+					bloquearDatos();
+					btnNewButtonAceptar.setEnabled(false);
 				}
 			}
 		});
@@ -113,14 +133,20 @@ public class ModificarVideo extends JInternalFrame {
 		comboBoxNicknames.setSelectedIndex(-1);
 		getContentPane().add(comboBoxNicknames);
 
-		JLabel lblNombreVideo = new JLabel("Nombre Video:");
-		lblNombreVideo.setHorizontalAlignment(SwingConstants.CENTER);
-		getContentPane().add(lblNombreVideo);
+		JLabel lblVideo = new JLabel("Video:");
+		lblVideo.setHorizontalAlignment(SwingConstants.CENTER);
+		getContentPane().add(lblVideo);
 
 		comboBoxNombreVideo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (comboBoxNicknames.getSelectedIndex() != -1) {
 					String nickname = comboBoxNicknames.getSelectedItem().toString();
+
+					if (comboBoxNombreVideo.getSelectedItem() == null) {
+						limpiarDatos();
+						return;
+					}
+
 					String nombreVideo = comboBoxNombreVideo.getSelectedItem().toString();
 					DtVideo datosVideo = iCU.obtenerInfoAdicVideo(nickname, nombreVideo);
 					cargarDatos(datosVideo);
@@ -128,6 +154,13 @@ public class ModificarVideo extends JInternalFrame {
 			}
 		});
 		getContentPane().add(comboBoxNombreVideo);
+
+		JLabel lblNombreVideo = new JLabel("Nombre Video:");
+		lblNombreVideo.setHorizontalAlignment(SwingConstants.CENTER);
+		getContentPane().add(lblNombreVideo);
+
+		getContentPane().add(textFieldNombreVideo);
+		textFieldNombreVideo.setColumns(10);
 
 		JLabel lblNewLabel = new JLabel("URL Video:");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -184,11 +217,10 @@ public class ModificarVideo extends JInternalFrame {
 		});
 		getContentPane().add(btnNewButtonCancelar);
 
-		JButton btnNewButtonAceptar = new JButton("Aceptar");
 		btnNewButtonAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				final String nickname = (String) comboBoxNicknames.getSelectedItem();
-				final String nombreVideo = (String) comboBoxNombreVideo.getSelectedItem();
+				final String nombreVideo = textFieldNombreVideo.getText();
 				final String descripcion = textAreaDesc.getText();
 				final int duracion = (int) spinnerDuracion.getValue();
 				final DtFecha fecha = new DtFecha(dateChooserFecha.getDate());
