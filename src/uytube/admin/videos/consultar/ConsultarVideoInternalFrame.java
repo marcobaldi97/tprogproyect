@@ -36,6 +36,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.JComboBox;
 import java.awt.BorderLayout;
 import javax.swing.SwingConstants;
+import javax.swing.JRadioButton;
 
 public class ConsultarVideoInternalFrame extends JInternalFrame {
 	static final long serialVersionUID = 113423;
@@ -44,7 +45,6 @@ public class ConsultarVideoInternalFrame extends JInternalFrame {
     IUsuarioCtrl ICU = fabrica.getIUsuarioCtrl();
     IVideoCtrl VCU = fabrica.getIVideoCtrl();
 	private JComboBox authorNicknameComboBox = new JComboBox();
-	private final JButton searchVideosButton = new JButton("Buscar");
 
 	private final JPanel mainPanel = new JPanel();
 	private final JPanel videoDetailsPanel = new JPanel();
@@ -77,6 +77,8 @@ public class ConsultarVideoInternalFrame extends JInternalFrame {
 	private final JButton btnCargar = new JButton("Cargar");
 	private final JLabel lblCategoria = new JLabel("Categoria");
 	private final JTextField txtCategoria = new JTextField();
+	private final JLabel lblPrivacidad = new JLabel("Privacidad");
+	private final JTextField privacidadTextField = new JTextField();
 	
 	 public static void infoBox(String infoMessage, String titleBar){
 	        JOptionPane.showMessageDialog(null, infoMessage, "" + titleBar, JOptionPane.INFORMATION_MESSAGE);
@@ -93,6 +95,8 @@ public class ConsultarVideoInternalFrame extends JInternalFrame {
 	}
 
 	public ConsultarVideoInternalFrame() {
+		privacidadTextField.setEditable(false);
+		privacidadTextField.setColumns(10);
 		txtCategoria.setEditable(false);
 		txtCategoria.setColumns(10);
 		setTitle("Consultar Video");
@@ -104,7 +108,7 @@ public class ConsultarVideoInternalFrame extends JInternalFrame {
 
 		setIconifiable(true);
 		setClosable(true);
-		setBounds(100, 100, 450, 330);
+		setBounds(100, 100, 450, 448);
 
 		getContentPane().add(mainPanel);
 
@@ -123,6 +127,7 @@ public class ConsultarVideoInternalFrame extends JInternalFrame {
 				videoDescriptionTextField.setText("");
 				videoURLTextField.setText("");
 				videoDuracionTextField.setText("");
+				privacidadTextField.setText("");
 				txtCategoria.setText("");
 			}
 		});
@@ -131,8 +136,6 @@ public class ConsultarVideoInternalFrame extends JInternalFrame {
 		mainPanel.add(authorNicknameComboBox);
 
 		initializeSearchVideosButton();
-		mainPanel.add(searchVideosButton);
-		searchVideosButton.setVisible(false);//poner true si se quiere el boton.
 
 		//restaurar el final, si no funciona .
 		videoList = new JList<>(videoListModel);
@@ -148,6 +151,7 @@ public class ConsultarVideoInternalFrame extends JInternalFrame {
 						selectedVideo=ICU.obtenerInfoAdicVideo(authorNickname, nomVideo);
 						infoVideo=VCU.verDetallesVideoExt(selectedVideo.getIDVideo());
 						handleVideoSelect(infoVideo);
+						
 					}
 				}
 			}
@@ -182,6 +186,10 @@ public class ConsultarVideoInternalFrame extends JInternalFrame {
 										panel.add(videoDuracionLabel);
 										videoDuracionTextField.setEditable(false);
 										panel.add(videoDuracionTextField);
+										
+										panel.add(lblPrivacidad);
+										
+										panel.add(privacidadTextField);
 										
 										panel.add(lblCategoria);
 										
@@ -226,12 +234,6 @@ public class ConsultarVideoInternalFrame extends JInternalFrame {
 	}
 
 	private void initializeSearchVideosButton() {
-		searchVideosButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				handleVideoSearch();
-			}
-		});
 	}
 
 	private void handleVideoSearch() {
@@ -252,8 +254,8 @@ public class ConsultarVideoInternalFrame extends JInternalFrame {
 	    }
 	}
 
-	private void handleVideoSelect(final DtInfoVideo selectedVideo) {
-		this.infoVideo = selectedVideo;
+	private void handleVideoSelect(final DtInfoVideo infoVideo) {
+		this.infoVideo = infoVideo;
 
 		videoNameTextField.setText(this.selectedVideo.getNombre());
 		videoDescriptionTextField.setText(this.selectedVideo.getDescripcion());
@@ -262,13 +264,20 @@ public class ConsultarVideoInternalFrame extends JInternalFrame {
 		Integer duracionMM=this.selectedVideo.getDuracion()/60;
 		Integer duracionSS=this.selectedVideo.getDuracion()%60;
 		videoDuracionTextField.setText(Integer.toString(duracionMM)+":"+Integer.toString(duracionSS));//arreglar la duracion para que la muestre en minutos
+		if(this.selectedVideo.getPrivacidad()) {
+		privacidadTextField.setText("Privado");
+		}
+		else{
+		privacidadTextField.setText("Publico");
+		}	
 		
-		
-		DtUsuario[] usuGustan=selectedVideo.getUsuariosGusta();
-		DtUsuario[] usuNoGustan=selectedVideo.getUsuariosNoGusta();
+		DtUsuario[] usuGustan=infoVideo.getUsuariosGusta();
+		DtUsuario[] usuNoGustan=infoVideo.getUsuariosNoGusta();
 		
 		String[]nickUsuGustan=new String[usuGustan.length];
 		String[]nickUsuNoGustan=new String[usuNoGustan.length];
+		
+		
 		
 		int i=0;
 		UsuariosGListModel.clear();
