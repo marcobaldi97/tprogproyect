@@ -204,7 +204,7 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 				//crear
 				if(disponible && verificarCampos()){
 					if(textFieldNombreC.getText().isEmpty()){nomCanal=nick; }
-					if(comboBoxCat.getSelectedItem()==""){catE=null;}
+					if(comboBoxCat.getSelectedItem()=="" || comboBoxCat.getSelectedIndex()==-1){catE=null;}
 					controlUsr.nuevoUsuario(nick,nom, ape, email, nac, Imagen.imagenToByte(archivo),nomCanal,descCanal,privacidad, catE) ;
 					infoBox("Usuario creado con exito", "Alta Usuario");
 					setVisible(false);

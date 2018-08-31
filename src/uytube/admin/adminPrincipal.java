@@ -22,6 +22,8 @@ import uytube.admin.videos.VideosMenu;
 import javax.swing.JMenuItem;
 
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
 import java.util.Date;
 
@@ -80,55 +82,8 @@ public class adminPrincipal extends JFrame {
 		Factory fabrica = Factory.getInstance();
 		ICU = fabrica.getIUsuarioCtrl();
 		ICV = fabrica.getIVideoCtrl();
-		// Datos de prueba
-		ICV.crearCategoria("deportes");
-		ICV.crearCategoria("Anime OwO");
-		ICV.crearCategoria("n.n");
-
-		Date fecha1 = new Date();
-	//	fecha1.setTime(666666666);
-		fecha1.setDate(5);fecha1.setMonth(12);fecha1.setYear(17);fecha1.setTime(1435);
-
-		Date fecha2 = new Date();
-		fecha2.setTime(777777777);
-
-		Date fecha3 = new Date();
-		fecha1.setTime(333333333);
-
-		Date fecha4 = new Date();
-		fecha1.setTime(454545);
-
-		DtFecha fechaNacPepe = new DtFecha(fecha1);
-		DtFecha fechaVideo = new DtFecha(fecha2);
-		DtFecha fechaNacEmilio = new DtFecha(fecha3);
-		DtFecha fechaNacRoberto = new DtFecha(fecha4);
-
-		Integer duracion = 7315;
-		ICU.nuevoUsuario("pepeDeportes", "Jose", "Rodriguez", "elpepepatuconsumo@adinet.org", fechaNacPepe, null,
-				"pepeDeportista777", "descripcion", false, "deportes");
-		ICU.nuevoUsuario("RobertoDeportista", "Roberto", "Perez", "robertitocampeon@yahoo.es", fechaNacRoberto, null,
-				"xXrobertoCampeonXx", "mejor descripcion", false, "deportes");
-		ICU.nuevoUsuario("BokuNoNaruto", "Emilio", "Tilio", "megustaelanime@hotmail.com", fechaNacEmilio, null,
-				"AnimeParaTodos", "descripcion otaku", false, "Anime OwO");
-		DtCategoria[] cates = ICV.listarCategorias();
-		ICU.aniadirVideo("pepeDeportes", "hago flexiones por dos horas", "segui mi patreon", duracion, fechaVideo,
-				"www.cosopum", cates[1], false);
-		ICV.valorarVideo(1, "RobertoDeportista", false);
-
-		ICV.nuevoComentario(1, "pepeDeportes", fechaVideo, "Muy bueno el video, baje 5 kilos");
-		ICV.nuevoComentario(1, "pepeDeportes", fechaVideo, "Es genial!!");
-		ICV.nuevoComentario(1, "BokuNoNaruto", fechaVideo, "A mi me aburriooo :c");
-		ICV.responderComentario(1,2, "RobertoDeportista", fechaNacRoberto, "Anda al gym gordito");
-		ICV.responderComentario(1, 2, "BokuNoNaruto", fechaNacRoberto, "Noo");
-		ICV.responderComentario(1, 3, "BokuNoNaruto", fechaNacRoberto, "PASEN POR MI CANAL");
-		ICV.nuevoComentario(1, "pepeDeportes", fechaVideo, "Comenten si alguien lo esta viendo en el 2050");
-		// public abstract void responderComentario(Integer IDVideo, Integer IDCR,
-		// String nickU, DtFecha fecha, String contenido);
-
-		ICU.seguirUsuario("pepeDeportes", "RobertoDeportista");
-		ICU.seguirUsuario("BokuNoNaruto", "RobertoDeportista");
-		// fin datos de prueba
-
+		DatosDePrueba dP = new DatosDePrueba();
+		dP.cargarDatosDePrueba();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		setExtendedState(MAXIMIZED_BOTH);
