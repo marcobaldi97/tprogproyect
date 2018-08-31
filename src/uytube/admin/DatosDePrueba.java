@@ -1,5 +1,6 @@
 package uytube.admin;
 
+import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -40,19 +41,21 @@ public class DatosDePrueba {
 		String sFecha;
 		DtFecha fechaNac;
 		Integer duracion = 1;
-		
+		File archivo;
 		//public void nuevoUsuario(String nick, String nom, String ape, String e, DtFecha fn, byte[] fo, String nomCanal,
 //		String desc, Boolean privacidadE, String catE)
 		fecha = asignarFecha("25,02,1962 00:00");
 		fechaNac = new DtFecha(fecha);
 		String HR="hrubio";
-		ICU.nuevoUsuario(HR, "Horacio", "Rubino", "horacio.rubino@guambia.com.uy", fechaNac, null,
+		archivo = new File("src\\fotosDatosDePrueba\\hr.jpg");
+		ICU.nuevoUsuario(HR, "Horacio", "Rubino", "horacio.rubino@guambia.com.uy", fechaNac, Imagen.imagenToByte(archivo),
 				"Canal Horacio", "El canal Horacio es para publicar contenido divertido",true, "Entretenimiento");
 		
 		fecha = asignarFecha("14,06,1972 00:00");
 		fechaNac = new DtFecha(fecha);
 		String MB ="mbusca";
-		ICU.nuevoUsuario(MB, "Martin", "Buscaglia", "Martin.bus@agadu.org.uy", fechaNac, null,
+		archivo = new File("src\\fotosDatosDePrueba\\mb.jpg");
+		ICU.nuevoUsuario(MB, "Martin", "Buscaglia", "Martin.bus@agadu.org.uy", fechaNac, Imagen.imagenToByte(archivo),
 				"El bocha", "Mi canal para colgar cosas", true, null);
 		
 		fecha = asignarFecha("07,01,1954 00:00");
@@ -64,13 +67,15 @@ public class DatosDePrueba {
 		fecha=asignarFecha("24,07,1971 00:00");
 		fechaNac = new DtFecha(fecha);
 		String TC ="tabarec";
-		ICU.nuevoUsuario(TC, "Tabare", "Cardozo", "tabare.car@agadu.otg.uy", fechaNac, null,
+		archivo = new File("src\\fotosDatosDePrueba\\tc.jpg");
+		ICU.nuevoUsuario(TC, "Tabare", "Cardozo", "tabare.car@agadu.otg.uy", fechaNac, Imagen.imagenToByte(archivo),
 				"Tabare", "Mi musica e ainda mais", true, MUS);
 		
 		fecha = asignarFecha("01,01,1947 00:00");
 		fechaNac = new DtFecha(fecha);
 		String CS="cachilas";
-		ICU.nuevoUsuario(CS, "Walder 'Cachila'", "Silva", "Cachila.sil@c1080.org.uy", fechaNac, null,
+		archivo = new File("src\\fotosDatosDePrueba\\cs.jpg");
+		ICU.nuevoUsuario(CS, "Walder 'Cachila'", "Silva", "Cachila.sil@c1080.org.uy", fechaNac, Imagen.imagenToByte(archivo),
 				"El Cachila", "Para juntar cosas", false, null);
 		
 		fecha =asignarFecha("16,03,1927 00:00");
@@ -88,7 +93,8 @@ public class DatosDePrueba {
 		fecha=asignarFecha("25,04,1840 00:00");
 		fechaNac = new DtFecha(fecha);
 		String KH="kahiroh";
-		ICU.nuevoUsuario(KH, "Kairo", "Herrera", "kairoher@pilsenrock.com.uy", fechaNac, null,
+		archivo = new File("src\\fotosDatosDePrueba\\kh.jpg");
+		ICU.nuevoUsuario(KH, "Kairo", "Herrera", "kairoher@pilsenrock.com.uy", fechaNac, Imagen.imagenToByte(archivo),
 				"Kairo Musica", "Videos de grandes canciones de hoy y siempre", true, MUS);
 		
 		fecha=asignarFecha("03,08,1940 00:00");
@@ -118,13 +124,15 @@ public class DatosDePrueba {
 		fecha=asignarFecha("17,03,1976 00:00");
 		fechaNac = new DtFecha(fecha);
 		String AR="chino";
-		ICU.nuevoUsuario(AR, "Alvaro", "Recoba", "chino@trico.org.uy", fechaNac, null,
+		archivo = new File("src\\fotosDatosDePrueba\\ar.jpg");
+		ICU.nuevoUsuario(AR, "Alvaro", "Recoba", "chino@trico.org.uy", fechaNac, Imagen.imagenToByte(archivo),
 				"Chino Recoba", "Canal de goles con Nacional", false, DEP);
 		
 		fecha=asignarFecha("14,02,1955 00:00");
 		fechaNac = new DtFecha(fecha);
 		String AP="tonyp";
-		ICU.nuevoUsuario(AP, "Antonio", "Pacheco", "eltony@manya.org.uy", fechaNac, null,
+		archivo = new File("src\\fotosDatosDePrueba\\ap.jpg");
+        ICU.nuevoUsuario(AP, "Antonio", "Pacheco", "eltony@manya.org.uy", fechaNac, Imagen.imagenToByte(archivo),
 				"Tony Pacheco", "Todos los goles con Peñarol", false, DEP);
 		
 		fecha=asignarFecha("09,08,1960 00:00");
