@@ -86,7 +86,8 @@ public class adminPrincipal extends JFrame {
 		ICV.crearCategoria("n.n");
 
 		Date fecha1 = new Date();
-		fecha1.setTime(666666666);
+	//	fecha1.setTime(666666666);
+		fecha1.setDate(5);fecha1.setMonth(12);fecha1.setYear(17);fecha1.setTime(1435);
 
 		Date fecha2 = new Date();
 		fecha2.setTime(777777777);
