@@ -8,6 +8,7 @@ import uytube.admin.videos.ModificarVideo;
 import uytube.admin.videos.consultar.ConsultarVideoInternalFrame;
 import uytube.admin.videos.modificar.*;
 import uytube.logica.DtCanal;
+import uytube.logica.DtCategoria;
 import uytube.logica.DtFecha;
 import uytube.logica.DtListaReproduccion;
 import uytube.logica.DtUsuario;
@@ -69,7 +70,6 @@ public class modificarUsuario extends JInternalFrame {
 	private JRadioButton rdbtnPublico;
 	private JComboBox comboBoxVideos;
 	private IUsuarioCtrl controlUsr;
-	private JTextField textFieldCatCanal;
 	private JComboBox comboBoxListas;
 	private final ButtonGroup buttonGroup_1 = new ButtonGroup();
 	private JButton btnModificar ;
@@ -83,6 +83,7 @@ public class modificarUsuario extends JInternalFrame {
 	private JLabel lblFoto;
 	private byte[] fotoUsr;
 	private JButton btnElegir;
+	private JComboBox comboBoxCatCanal;
 	
 	 public static void infoBox(String infoMessage, String titleBar){
 	        JOptionPane.showMessageDialog(null, infoMessage, "" + titleBar, JOptionPane.INFORMATION_MESSAGE);
@@ -283,45 +284,45 @@ public class modificarUsuario extends JInternalFrame {
 		JLabel label_5 = new JLabel("Categoria");
 		panelDatosCanal.add(label_5);
 		
-		textFieldCatCanal = new JTextField();
-		textFieldCatCanal.setText("");
-		textFieldCatCanal.setEditable(false);
-		textFieldCatCanal.setColumns(10);
-		panelDatosCanal.add(textFieldCatCanal);
+		comboBoxCatCanal = new JComboBox();
+		panelDatosCanal.add(comboBoxCatCanal);
 		
 		JButton btnModificar_3 = new JButton("Modificar");
-		btnModificar_3.setEnabled(false);
 		btnModificar_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String  nickU, nom, ape;
-				DtFecha nac;
+				String  nickU, nomC,des,catE;
+				Boolean priv;
 				nickU = (String) comboBoxNick.getSelectedItem();
-							
-				nom = textFieldNombre.getText();
-				ape = textFieldApellido.getText();
-				nac = new DtFecha(dateChooser.getDate());
-			
-				//verificar campos!!
+				nomC = textFieldNomCanal.getText();
+				des=textAreaDesc.getText();
+				catE= (String)comboBoxCatCanal.getSelectedItem();
+				if(rdbtnPrivado.isSelected()){
+					priv=true;
+				}else{
+					priv=false;
+				}
 				
 				if(btnModificar_3.getText()=="Guardar"){
-					if(verificarCamposDatosUsu()){
-						//controlUsr.editarDatosUsuario(nickU,nom,ape, nac,"Foto");						
+					if(comboBoxNick.getSelectedIndex()!=-1 && !nomC.isEmpty() && comboBoxCatCanal.getSelectedIndex()!=-1){
+						controlUsr.modificarDatosCanal(nickU,nomC,des,priv,catE);
 						infoBox("Canal modificado","Modificar usuario");
-						
+						textFieldNomCanal.setEditable(false);
 						rdbtnPrivado.setEnabled(false);
 						rdbtnPublico.setEnabled(false);
-						
+						comboBoxCatCanal.setEnabled(false);
 						textAreaDesc.setEditable(false);
 						btnModificar_3.setText("Modificar");
+					}else{
+						infoBox("Faltan datos completar","Modificar Canal de Usuario");
 					}
-					btnCancelar_1.setEnabled(false);
+					btnCancelar_2.setEnabled(false);
 				}else if(btnModificar.getText()=="Modificar"){
 					rdbtnPrivado.setEnabled(true);
 					rdbtnPublico.setEnabled(true);
-					
+					comboBoxCatCanal.setEnabled(true);
 					textAreaDesc.setEditable(true);
-					btnModificar_3.setText("Guardar");
-					
+					textFieldNomCanal.setEditable(true);
+					btnModificar_3.setText("Guardar");					
 					btnCancelar_2.setEnabled(true);
 				}
 			}
@@ -334,8 +335,9 @@ public class modificarUsuario extends JInternalFrame {
 			public void actionPerformed(ActionEvent e) {
 				rdbtnPrivado.setEnabled(false);
 				rdbtnPublico.setEnabled(false);
-				
+				textFieldNomCanal.setEditable(false);
 				textAreaDesc.setEditable(false);
+				comboBoxCatCanal.setEnabled(false);
 				btnModificar_3.setText("Modificar");
 				
 				String nickU = (String)comboBoxNick.getSelectedItem();
@@ -492,18 +494,15 @@ public class modificarUsuario extends JInternalFrame {
 			textFieldNombre.setText("");
 			textFieldApellido.setText("");
 			dateChooser.setDate(null);
-			
 			textFieldNomCanal.setText("");
-			textFieldCatCanal.setText("");
-			
-			//textFieldPriv.setText("");
-			
 			comboBoxVideos.setSelectedIndex(-1);
 			comboBoxVideos.removeAllItems();
-			
+			comboBoxCatCanal.setSelectedIndex(-1);
+			comboBoxCatCanal.removeAllItems();
 			comboBoxListas.setSelectedIndex(-1);
 			comboBoxListas.removeAllItems();
 			lblFoto.setIcon(null);
+			textAreaDesc.setText(null);
 			
 	 }
 
@@ -521,8 +520,17 @@ public class modificarUsuario extends JInternalFrame {
 			rdbtnPublico.setSelected(true);
 		}
 		textAreaDesc.setText(usrCanal.getDescripcion());
-		textFieldCatCanal.setText(usrCanal.getCategoria().getNombre());
-		
+				
+		//CARGAR CATEGORIAS
+		Factory fabrica = Factory.getInstance();
+		IVideoCtrl iCV = fabrica.getIVideoCtrl();
+        DtCategoria[] set_cat=iCV.listarCategorias();
+           
+        for(int i=0; i<set_cat.length;i++){
+             comboBoxCatCanal.addItem(set_cat[i].getNombre());
+        }
+        comboBoxCatCanal.setSelectedItem(usrCanal.getCategoria().getNombre());
+				
 		//CARGAR VIDEOS
 		String[] nomVideos = controlUsr.listarVideosCanal(nickU);
 		for(int i=0; i<nomVideos.length;i++){
