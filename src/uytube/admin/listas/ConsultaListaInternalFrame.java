@@ -50,6 +50,7 @@ public class ConsultaListaInternalFrame extends JInternalFrame {
 	 * @param iCV 
 	 */
 	public ConsultaListaInternalFrame(IUsuarioCtrl iCU, IVideoCtrl iCV) {
+		setResizable(true);
 		setTitle("Consulta Lista Reproduccion");
 		setMaximizable(true);
 		setIconifiable(true);

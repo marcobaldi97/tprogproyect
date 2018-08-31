@@ -44,10 +44,10 @@ public class VideoHandler {
 		}
 		return infoVideos;
 	}
-	public DtVideo member(String nomVideo) {
+	public DtVideo member(String nomVideo,String nick) {
 		DtVideo v = null;
 		for(Entry<Integer, Video> entry : videos.entrySet()) {
-			if(nomVideo == entry.getValue().getNombre())
+			if(nomVideo == entry.getValue().getNombre() && nick== entry.getValue().getPropietario())
 				v=new DtVideo(entry.getValue());
 		}
 		return v;

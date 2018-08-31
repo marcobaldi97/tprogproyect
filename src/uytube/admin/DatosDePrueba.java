@@ -1,9 +1,12 @@
 package uytube.admin;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import uytube.logica.CategoriaHandler;
 import uytube.logica.DtCategoria;
+import uytube.logica.DtComentario;
 import uytube.logica.DtFecha;
 import uytube.logica.DtVideo;
 import uytube.logica.Factory;
@@ -12,11 +15,11 @@ import uytube.logica.IVideoCtrl;
 import uytube.logica.VideoHandler;
 
 public class DatosDePrueba {
+	private Factory fabrica = Factory.getInstance();
+	private IUsuarioCtrl ICU = fabrica.getIUsuarioCtrl();
+	private IVideoCtrl ICV = fabrica.getIVideoCtrl();
 	public void cargarDatosDePrueba(){
-		Factory fabrica = Factory.getInstance();
-		IUsuarioCtrl ICU = fabrica.getIUsuarioCtrl();
-		IVideoCtrl ICV = fabrica.getIVideoCtrl();
-		
+			
 		//CATEGORIAS
 		String MUS="Musica";ICV.crearCategoria(MUS);
 		String DEP="Deporte";ICV.crearCategoria(DEP);
@@ -33,102 +36,102 @@ public class DatosDePrueba {
 
 		//USUARIOS
 		//las categorias de los canales se las puse para completar datos
-		Date fecha = new Date();
-		//fecha.setTime(666666);
+		Date fecha;
+		String sFecha;
 		DtFecha fechaNac;
-	
-		Integer duracion = 7315;
+		Integer duracion = 1;
+		
 		//public void nuevoUsuario(String nick, String nom, String ape, String e, DtFecha fn, byte[] fo, String nomCanal,
 //		String desc, Boolean privacidadE, String catE)
-		fecha.setTime(25021962);
+		fecha = asignarFecha("25,02,1962 00:00");
 		fechaNac = new DtFecha(fecha);
 		String HR="hrubio";
 		ICU.nuevoUsuario(HR, "Horacio", "Rubino", "horacio.rubino@guambia.com.uy", fechaNac, null,
 				"Canal Horacio", "El canal Horacio es para publicar contenido divertido",true, "Entretenimiento");
 		
-		fecha.setTime(14061972);
+		fecha = asignarFecha("14,06,1972 00:00");
 		fechaNac = new DtFecha(fecha);
 		String MB ="mbusca";
 		ICU.nuevoUsuario(MB, "Martin", "Buscaglia", "Martin.bus@agadu.org.uy", fechaNac, null,
 				"El bocha", "Mi canal para colgar cosas", true, null);
 		
-		fecha.setTime(7011954);
+		fecha = asignarFecha("07,01,1954 00:00");
 		fechaNac = new DtFecha(fecha);
 		String HG="hectorg";
 		ICU.nuevoUsuario(HG, "Hector", "Guido", "hector.gui@elgalpon.org.uy", fechaNac, null,
-				null, "Canal HG", true, null);
+				HG, "Canal HG", true, null);
 		
-		fecha.setTime(24071971);
+		fecha=asignarFecha("24,07,1971 00:00");
 		fechaNac = new DtFecha(fecha);
 		String TC ="tabarec";
 		ICU.nuevoUsuario(TC, "Tabare", "Cardozo", "tabare.car@agadu.otg.uy", fechaNac, null,
-				"Tabare", "Mi musica e ainda mais", true, "Musica");
+				"Tabare", "Mi musica e ainda mais", true, MUS);
 		
-		fecha.setTime(111947);
+		fecha = asignarFecha("01,01,1947 00:00");
 		fechaNac = new DtFecha(fecha);
 		String CS="cachilas";
 		ICU.nuevoUsuario(CS, "Walder 'Cachila'", "Silva", "Cachila.sil@c1080.org.uy", fechaNac, null,
 				"El Cachila", "Para juntar cosas", false, null);
 		
-		fecha.setTime(1631927);
+		fecha =asignarFecha("16,03,1927 00:00");
 		fechaNac = new DtFecha(fecha);
 		String JB="juliob";
 		ICU.nuevoUsuario(JB, "Julio", "Bocca", "juliobocca@sodre.com.uy", fechaNac, null,
-				null, "Canal de JB", true,null);
+				JB, "Canal de JB", true,null);
 		
-		fecha.setTime(111975);
+		fecha=asignarFecha("01,01,1975 00:00");
 		fechaNac = new DtFecha(fecha);
 		String DP="diegop";
 		ICU.nuevoUsuario(DP, "Diego", "Parodi", "diego@efectocine", fechaNac, null,
-				null, "El Canal de DP", true , null);
+				DP, "El Canal de DP", true , null);
 	
-		fecha.setTime(2541840);
+		fecha=asignarFecha("25,04,1840 00:00");
 		fechaNac = new DtFecha(fecha);
 		String KH="kahiroh";
 		ICU.nuevoUsuario(KH, "Kairo", "Herrera", "kairoher@pilsenrock.com.uy", fechaNac, null,
-				"Kairo Musica", "Videos de grandes canciones de hoy y siempre", true, "Musica");
+				"Kairo Musica", "Videos de grandes canciones de hoy y siempre", true, MUS);
 		
-		fecha.setTime(381940);
+		fecha=asignarFecha("03,08,1940 00:00");
 		fechaNac = new DtFecha(fecha);
 		String RH="robinh";
 		ICU.nuevoUsuario(RH, "Robin", "Henderson", "robin.h@tinglesa.com.uy", fechaNac, null,
-				null, "Henderson", true, null);
+				RH, "Henderson", true, null);
 		
-		fecha.setTime(141960);
+		fecha=asignarFecha("01,04,1960 00:00");
 		fechaNac = new DtFecha(fecha);
 		String MT="marcelot";
 		ICU.nuevoUsuario(MT, "Marcelo", "Tinelli", "marcelot@ideasdelsur.com.ar", fechaNac, null,
-				"Tinelli total", "Todo lo que querias y mas!", true , "Entretenimiento");
+				"Tinelli total", "Todo lo que querias y mas!", true , ENT);
 		
-		fecha.setTime(1771952);
+		fecha=asignarFecha("17,07,1952 00:00");
 		fechaNac = new DtFecha(fecha);
 		String EN="novick";
 		ICU.nuevoUsuario(EN, "Edgardo", "Novick", "edgardo@novick.com.uy", fechaNac, null,
 				"Con la gente", "Preparando las elecciones", true, null);
 		
-		fecha.setTime(2811950);
+		fecha=asignarFecha("28,01,1950 00:00");
 		fechaNac = new DtFecha(fecha);
 		String SP="sergiop";
 		ICU.nuevoUsuario(SP, "Sergio", "Puglia", "puglia@alpanpan.com.uy", fechaNac, null,
-				"Sergio invita", "Programas del ciclo y videos de cocina mastercheef", true, "Cocina");
+				"Sergio invita", "Programas del ciclo y videos de cocina mastercheef", true, COM);
 		
-		fecha.setTime(1731976);
+		fecha=asignarFecha("17,03,1976 00:00");
 		fechaNac = new DtFecha(fecha);
 		String AR="chino";
 		ICU.nuevoUsuario(AR, "Alvaro", "Recoba", "chino@trico.org.uy", fechaNac, null,
-				"Chino Recoba", "Canal de goles con Nacional", false, "Deportes");
+				"Chino Recoba", "Canal de goles con Nacional", false, DEP);
 		
-		fecha.setTime(1421955);
+		fecha=asignarFecha("14,02,1955 00:00");
 		fechaNac = new DtFecha(fecha);
 		String AP="tonyp";
 		ICU.nuevoUsuario(AP, "Antonio", "Pacheco", "eltony@manya.org.uy", fechaNac, null,
-				"Tony Pacheco", "Todos los goles con Peñarol", false, "Deportes");
+				"Tony Pacheco", "Todos los goles con Peñarol", false, DEP);
 		
-		fecha.setTime(981960);
+		fecha=asignarFecha("09,08,1960 00:00");
 		fechaNac = new DtFecha(fecha);
 		String NJ="nicoJ";
 		ICU.nuevoUsuario(NJ, "Nicolas", "Jodal", "jodal@artech.com.uy", fechaNac, null,
-				"Desde Genexus", "Canal informacion C y T", false, "Ciencia y Tecnologia");
+				"Desde Genexus", "Canal informacion C y T", false, CYT);
 		
 		
 		//SEGUIDORES seguido/seguidor
@@ -143,8 +146,6 @@ public class DatosDePrueba {
 		
 		
 		//VIDEOS
-		//public void aniadirVideo(String nickU, String nom, String desc, Integer dur, DtFecha fp, String url,
-			//	DtCategoria catE, boolean p) {
 		DtCategoria catMUS = new DtCategoria(MUS);
 		DtCategoria catNOT = new DtCategoria(NOT);
 		DtCategoria catCAR = new DtCategoria(CAR);
@@ -277,49 +278,61 @@ public class DatosDePrueba {
 		ICU.nuevaListaPorDefecto("Escuchar mas tarde"); //LD1
 		ICU.nuevaListaPorDefecto("Deporte total"); //LD2
 		ICU.nuevaListaPorDefecto("Novedades generales");//LD3
-
+		
+		//COMENTARIOS
+		int comentarioPadre;
+		//video V7
 		VideoHandler vh=VideoHandler.getInstance();
-		DtVideo dtVideo =vh.member(V7);
-	
-		fecha.setDate(5);fecha.setMonth(12);fecha.setYear(17);fecha.setTime(1435);
-		DtFecha fechaVideo = new DtFecha(fecha); //5,12,2017,14:35
+		DtVideo dtVideo =vh.member(V7,HG); //propietario del video HG	
+		
+		fecha=asignarFecha("5,12,2017 14:35"); DtFecha fechaVideo = new DtFecha(fecha); 
 		ICV.nuevoComentario(dtVideo.getIDVideo(),NJ, fechaVideo,"Fue un gran evento" );
+			
+		comentarioPadre=obtenerIdComentario(dtVideo.getIDVideo(),NJ, fechaVideo);
+		fecha = asignarFecha("8,12,2017 01:47");fechaVideo = new DtFecha(fecha); 
+		ICV.responderComentario(dtVideo.getIDVideo(),comentarioPadre, HR, fechaVideo, "Para el proximo aniversario ofrezco vamo con Los Momo");
 		
-		//mal!!
-		dtVideo =vh.member(V7);
-	   fechaVideo = new DtFecha(fecha); //8,12,2017,01:47
-	  // 	ICV.responderComentario(dtVideo.getIDVideo(), 2, "RobertoDeportista", fechaNacRoberto, "Anda al gym gordito"); ???
-		ICV.nuevoComentario(1, HR, fechaVideo, "Para el proximo aniversario ofresco vamo con Los Momo");
+		comentarioPadre=obtenerIdComentario(dtVideo.getIDVideo(),HR, fechaVideo);
+		fecha = asignarFecha("10,12,2017 17:09");fechaVideo = new DtFecha(fecha); 
+		ICV.responderComentario(dtVideo.getIDVideo(),comentarioPadre, HR, fechaVideo, "Yo ofrezco a la banda tb");
 		
-		dtVideo =vh.member(V6);
-		fechaVideo = new DtFecha(fecha); //07,09,17, 04:56 am
+		//otros videos
+		dtVideo =vh.member(V6,HG);
+		fecha=asignarFecha("07,09,2017 04:56");fechaVideo = new DtFecha(fecha); 
 		ICV.nuevoComentario(dtVideo.getIDVideo(), NJ, fechaVideo, "Felicitaciones FING");
 		
-		dtVideo =vh.member(V7);
-		fechaVideo = new DtFecha(fecha);
-		ICV.nuevoComentario(dtVideo.getIDVideo(), , fechaVideo, "");
+		dtVideo =vh.member(V8,HG);
+		fecha=asignarFecha("23,10,2017 12:58");fechaVideo = new DtFecha(fecha);
+		ICV.nuevoComentario(dtVideo.getIDVideo(),KH , fechaVideo, "Un gusto cubrir eventos como este.");
 		
-		dtVideo =vh.member(V7);
-		fechaVideo = new DtFecha(fecha);
-		ICV.nuevoComentario(dtVideo.getIDVideo(), , fechaVideo, "");
-		dtVideo =vh.member(V7);
-		fechaVideo = new DtFecha(fecha);
-		ICV.nuevoComentario(dtVideo.getIDVideo(), , fechaVideo, "");
-		dtVideo =vh.member(V7);
-		fechaVideo = new DtFecha(fecha);
-		ICV.nuevoComentario(dtVideo.getIDVideo(), , fechaVideo, "");
-		dtVideo =vh.member(V7);
-		fechaVideo = new DtFecha(fecha);
-		ICV.nuevoComentario(dtVideo.getIDVideo(), , fechaVideo, "");
-		dtVideo =vh.member(V7);
-		fechaVideo = new DtFecha(fecha);
-		ICV.nuevoComentario(dtVideo.getIDVideo(), , fechaVideo, "");
-		dtVideo =vh.member(V7);
-		fechaVideo = new DtFecha(fecha);
-		ICV.nuevoComentario(dtVideo.getIDVideo(), , fechaVideo, "");
-		dtVideo =vh.member(V7);
-		fechaVideo = new DtFecha(fecha);
-		ICV.nuevoComentario(dtVideo.getIDVideo(), , fechaVideo, "");
+		dtVideo =vh.member(V13,JB);
+		fecha=asignarFecha("14,11,2016 05:34");fechaVideo = new DtFecha(fecha);
+		ICV.nuevoComentario(dtVideo.getIDVideo(),KH,fechaVideo,"Peñarol peñarol!!!");
+		
+		dtVideo =vh.member(V3,KH);
+		fecha=asignarFecha("30,10,2017 02:17");fechaVideo = new DtFecha(fecha);
+		ICV.nuevoComentario(dtVideo.getIDVideo(),MT,fechaVideo,"Rock and Rollll");
+		dtVideo =vh.member(V3,JB);
+		fecha=asignarFecha("30,10,2017 02:17");fechaVideo = new DtFecha(fecha);
+		ICV.nuevoComentario(dtVideo.getIDVideo(),MT,fechaVideo,"Rock and Rollll");
+		
+		dtVideo =vh.member(V4,KH);
+		fecha=asignarFecha("25,08,2018 18:00");fechaVideo = new DtFecha(fecha);
+		ICV.nuevoComentario(dtVideo.getIDVideo(),MT,fechaVideo,"Anoche explotó!!!");
+		
+		dtVideo =vh.member(V1,CS);
+		fecha=asignarFecha("11,09,2017 03:45");fechaVideo = new DtFecha(fecha);
+		ICV.nuevoComentario(dtVideo.getIDVideo(),MT,fechaVideo,"Me encanta este tema");
+		comentarioPadre=obtenerIdComentario(dtVideo.getIDVideo(),MT, fechaVideo);
+		fecha = asignarFecha("15,09,2017 12:29");fechaVideo = new DtFecha(fecha); 
+		ICV.responderComentario(dtVideo.getIDVideo(),comentarioPadre,TC,fechaVideo, "Gracias Marce ;)");
+		
+		dtVideo =vh.member(V1,TC);
+		fecha=asignarFecha("11,09,2017 03:45");fechaVideo = new DtFecha(fecha);
+		ICV.nuevoComentario(dtVideo.getIDVideo(),MT,fechaVideo,"Me encanta este tema");
+		comentarioPadre=obtenerIdComentario(dtVideo.getIDVideo(),MT, fechaVideo);
+		fecha = asignarFecha("15,09,2017 12:29");fechaVideo = new DtFecha(fecha); 
+		ICV.responderComentario(dtVideo.getIDVideo(),comentarioPadre,TC,fechaVideo, "Gracias Marce ;)");
 		
 		//ME GUSTA
 		video = ICU.obtenerInfoAdicVideo(HG,V7);
@@ -349,11 +362,28 @@ public class DatosDePrueba {
 		video = ICU.obtenerInfoAdicVideo(KH,V4);
 		ICV.valorarVideo(video.getIDVideo(),MT, true);
 		
-		
-		ICV.responderComentario(1, 2, "BokuNoNaruto", fechaNacRoberto, "Noo");
-		ICV.responderComentario(1, 3, "BokuNoNaruto", fechaNacRoberto, "PASEN POR MI CANAL");
-		ICV.nuevoComentario(1, "pepeDeportes", fechaVideo, "Comenten si alguien lo esta viendo en el 2050");
-		// public abstract void responderComentario(Integer IDVideo, Integer IDCR,
-		// String nickU, DtFecha fecha, String contenido);
+	}
+	private Date asignarFecha(String fechaConHora){
+		SimpleDateFormat sdf = new SimpleDateFormat("dd,MM,yyyy HH:mm");
+		Date fecha = null;
+		try {
+			fecha = sdf.parse(fechaConHora);
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		return fecha;
+	}
+	private int obtenerIdComentario(int idVideo,String nick, DtFecha fechaComen){
+		DtComentario[] coments= ICV.listarComentarios(idVideo);
+		int i=0;
+		Boolean encontro=false;
+		while(i<coments.length && !encontro){
+			if(coments[i].getFecha()==fechaComen && coments[i].getNickUsuario()==nick){
+				encontro=true;
+			}
+			i++;
+		}
+		return coments[i-1].getIDComentario();
 	}
 }
