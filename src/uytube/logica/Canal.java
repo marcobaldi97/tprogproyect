@@ -180,10 +180,11 @@ public class Canal {
 		ListaReproduccion lr = listasReproduccion.get(nombreLista);
 		return lr.obtenerDtsVideosListaReproduccionUsuario(nombreLista);
 	}
+
 	public boolean memberVideoLista(int idVideo, String nombreListaReproduccion) {
-		VideoHandler videoH=VideoHandler.getInstance();
-		Video video=videoH.find(idVideo);
-		ListaReproduccion lista= this.findLista(nombreListaReproduccion);
+		VideoHandler videoH = VideoHandler.getInstance();
+		Video video = videoH.find(idVideo);
+		ListaReproduccion lista = this.findLista(nombreListaReproduccion);
 		return lista.existeVideo(video);
 	}
 
@@ -197,7 +198,29 @@ public class Canal {
 		} else {
 			SystemHandler sh = SystemHandler.getInstance();
 			cate = sh.getSinCat();
-		}	
+		}
+
+		if (privacidad) {
+			cambiarPrivacidadVideosAPrivado();
+			cambiarPrivacidadListasParticularesAPrivado();
+		}
 	}
 
+	private void cambiarPrivacidadVideosAPrivado() {
+		for (final Map.Entry<String, Video> entry : videos.entrySet()) {
+			final Video video = entry.getValue();
+			video.setPrivacidad(true);
+		}
+	}
+
+	private void cambiarPrivacidadListasParticularesAPrivado() {
+		for (final Map.Entry<String, ListaReproduccion> entry : listasReproduccion.entrySet()) {
+			final ListaReproduccion listaReproduccion = entry.getValue();
+
+			if (listaReproduccion instanceof Particular) {
+				final Particular listaParticular = (Particular) listaReproduccion;
+				listaParticular.cambiarPrivLDR(true);
+			}
+		}
+	}
 }
