@@ -84,6 +84,7 @@ public class modificarUsuario extends JInternalFrame {
 	private byte[] fotoUsr;
 	private JButton btnElegir;
 	private JComboBox comboBoxCatCanal;
+	private JComboBox comboBoxNick;
 	
 	 public static void infoBox(String infoMessage, String titleBar){
 	        JOptionPane.showMessageDialog(null, infoMessage, "" + titleBar, JOptionPane.INFORMATION_MESSAGE);
@@ -114,7 +115,7 @@ public class modificarUsuario extends JInternalFrame {
 		JLabel lblNickname = new JLabel("Nickname");
 		panelDatosUsuario.add(lblNickname);
 		
-		JComboBox comboBoxNick = new JComboBox();
+		comboBoxNick = new JComboBox();
 		comboBoxNick.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String nickU = (String)comboBoxNick.getSelectedItem();
@@ -484,10 +485,17 @@ public class modificarUsuario extends JInternalFrame {
 		 // int idVideo; 
 		  Factory fabrica = Factory.getInstance();
 		  IVideoCtrl ICV = fabrica.getIVideoCtrl();
-		   ModificarVideo modVideoIFrame = new ModificarVideo(controlUsr, ICV); //como pasar datos del video? 
-		   adminPrincipal.getFrames()[0].setLayout(null);
-		  adminPrincipal.getFrames()[0].add(modVideoIFrame);
-		   modVideoIFrame.show();
+		  ModificarVideo modVideoIFrame = new ModificarVideo(controlUsr, ICV); 
+		  String nick = (String)comboBoxNick.getSelectedItem();
+		  String nomVideo = (String)comboBoxVideos.getSelectedItem();
+		  if(comboBoxVideos.getSelectedIndex()!=-1 && (String)comboBoxNick.getSelectedItem() != " " && comboBoxNick.getSelectedIndex()!=-1 ){
+			  modVideoIFrame.llamadaParticular(nick, nomVideo);
+			  adminPrincipal.getFrames()[0].setLayout(null);
+			  adminPrincipal.getFrames()[0].add(modVideoIFrame);
+			  modVideoIFrame.show();
+		  }else{
+			  infoBox("Falta seleccionar usuario y/o video","Modificar Usuario");
+		  }
 	}
 	private void limpiar(){
 		 textFieldEmail.setText("");
