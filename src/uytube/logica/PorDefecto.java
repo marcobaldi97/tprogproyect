@@ -21,4 +21,9 @@ public class PorDefecto extends ListaReproduccion{
 
 	}
 
+	@Override
+	public void removerVideo(Integer id) {
+		removeVideoFromMap(id);
+	}
+
 }

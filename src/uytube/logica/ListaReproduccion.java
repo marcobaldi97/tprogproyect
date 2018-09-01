@@ -15,6 +15,9 @@ public abstract class ListaReproduccion {
 		videos = new HashMap<Integer, Video>();
 		categorias = new HashMap<String, Categoria>();
 	}
+	public Video getVideo(Integer id){
+		return videos.get(id);
+	}
 	public enum TipoLista{
 		PORDEFECTO,
 		PARTICULAR;
@@ -51,13 +54,7 @@ public abstract class ListaReproduccion {
 
 	}
 
-	public void removerVideo(Integer id) {
-		Categoria categoria = videos.get(id).getObjetoCategoria();
-		categorias.remove(categoria.getNombre());
-		categoria.removerLDR(this);
-		removeVideoFromMap(id);
-		refrescarCategorias();
-	}
+	public abstract void removerVideo(Integer id);
 
 	public abstract void agregarVideo(Video v);
 
