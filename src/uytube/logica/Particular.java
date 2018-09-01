@@ -38,4 +38,16 @@ public class Particular extends ListaReproduccion{
 
 	}
 
+
+	@Override
+	public void removerVideo(Integer id) {
+		if(existeVideo(getVideo(id))){
+			Categoria categoria = getVideo(id).getObjetoCategoria();
+			removerCategoria(categoria);
+			categoria.removerLDR(this);
+			removeVideoFromMap(id);
+			refrescarCategorias();
+		}
+	}
+
 }
