@@ -21,6 +21,8 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import org.eclipse.wb.swing.FocusTraversalOnArray;
+import java.awt.Component;
 
 public class ModificarListaFrame extends JInternalFrame {
 	private JComboBox comboBoxNicknames;
@@ -130,6 +132,12 @@ public class ModificarListaFrame extends JInternalFrame {
 	    group.add(rdbtnPublica);
 		
 		btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				dispose();
+			}
+		});
 		getContentPane().add(btnCancelar);
 		
 		btnModificar = new JButton("Modificar");
@@ -150,6 +158,8 @@ public class ModificarListaFrame extends JInternalFrame {
 			}
 		});
 		getContentPane().add(btnModificar);
+		getContentPane().setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{comboBoxNicknames, comboBoxListas, rdbtnPrivada, btnCancelar, btnModificar, rdbtnPublica, panelPrivacidad, lblPrivacidad, lblNickname, lblListas}));
+		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{comboBoxNicknames, comboBoxListas, rdbtnPrivada, rdbtnPublica, btnCancelar, btnModificar, getContentPane(), lblNickname, lblListas, lblPrivacidad, panelPrivacidad}));
 
 	}
 
