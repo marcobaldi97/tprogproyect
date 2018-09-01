@@ -67,6 +67,7 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 	private JList listSeguidos;
 	private JList listSeguidores;
 	private JLabel lblFoto;
+	private JComboBox<String> comboBoxNick ;
 	
 	
 	public static void infoBox(String infoMessage, String titleBar){
@@ -103,7 +104,7 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 		panelDUsuario.add(label);
 		
 		
-		JComboBox<String> comboBoxNick = new JComboBox();
+		comboBoxNick = new JComboBox();
 		comboBoxNick.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String nickU = (String)comboBoxNick.getSelectedItem();
@@ -371,11 +372,22 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 	}
 	private void openConsultarVideo(){
 	   //modificarUsuario modUsrIFrame = new modificarUsuario();
-	   ConsultarVideoInternalFrame consVideoIFrame = new ConsultarVideoInternalFrame();
-	   adminPrincipal.getFrames()[0].setLayout(null);
-	   adminPrincipal.getFrames()[0].add(consVideoIFrame);
-	   consVideoIFrame.show();
-	   consVideoIFrame.moveToFront(); 
+		Factory fabrica = Factory.getInstance();
+		IVideoCtrl ICV = fabrica.getIVideoCtrl();
+		
+		String nomVideo = (String)comboBoxVideos.getSelectedItem();
+		String nickU = (String)comboBoxNick.getSelectedItem();
+
+		if(comboBoxVideos.getSelectedIndex()!=-1 && (String)comboBoxNick.getSelectedItem() != " " && comboBoxNick.getSelectedIndex()!=-1 ){
+			ConsultarVideoInternalFrame consVideoIFrame = new ConsultarVideoInternalFrame();
+			consVideoIFrame.llamadaParticular(nickU, nomVideo);
+			adminPrincipal.getFrames()[0].setLayout(null);
+			adminPrincipal.getFrames()[0].add(consVideoIFrame);
+			consVideoIFrame.show();
+			consVideoIFrame.moveToFront();
+		}else{
+			infoBox("Faltan seleccionar el usuario y/o video","Consulta Usuario");
+		}
 	//   modUsrIFrame.setVisible(true);
 	 }
 	 private void limpiar(){

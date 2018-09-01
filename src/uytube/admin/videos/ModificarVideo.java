@@ -35,11 +35,19 @@ public class ModificarVideo extends JInternalFrame {
 	private JComboBox comboBoxCategoria = new JComboBox();
 	private JSpinner spinnerDuracion = new JSpinner();
 	private JComboBox comboBoxPrivacidad = new JComboBox();
+	private JComboBox comboBoxNicknames;
 
 	private static void infoBox(String infoMessage, String titleBar) {
 		JOptionPane.showMessageDialog(null, infoMessage, "" + titleBar, JOptionPane.INFORMATION_MESSAGE);
 	}
-
+	
+	public void llamadaParticular(String nick, String nomVideo){
+		comboBoxNombreVideo.setEnabled(false);
+		comboBoxNicknames.setEnabled(false);
+		comboBoxNicknames.setSelectedItem(nick);
+		comboBoxNombreVideo.setSelectedItem(nomVideo);
+		
+	}
 	private void cargarDatos(DtVideo datosVideo) {
 		textFieldNombreVideo.setText(datosVideo.getNombre());
 		textFieldURL.setText(datosVideo.getUrl());
@@ -104,7 +112,7 @@ public class ModificarVideo extends JInternalFrame {
 		lblNicknameAutor.setVerticalAlignment(SwingConstants.CENTER);
 		getContentPane().add(lblNicknameAutor);
 		bloquearDatos();
-		JComboBox comboBoxNicknames = new JComboBox();
+		comboBoxNicknames = new JComboBox();
 		comboBoxNicknames.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				comboBoxNombreVideo.removeAllItems();
