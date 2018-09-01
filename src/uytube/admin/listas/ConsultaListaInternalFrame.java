@@ -3,7 +3,9 @@ package uytube.admin.listas;
 import java.awt.EventQueue;
 
 import javax.swing.JInternalFrame;
+
 import java.awt.GridLayout;
+
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -15,6 +17,7 @@ import uytube.logica.DtListaReproduccion;
 import uytube.logica.DtVideo;
 import uytube.logica.IUsuarioCtrl;
 import uytube.logica.IVideoCtrl;
+import uytube.logica.ListaReproduccion.TipoLista;
 
 import javax.swing.JComboBox;
 import javax.swing.JList;
@@ -24,8 +27,10 @@ import javax.swing.ListModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.JScrollPane;
@@ -96,37 +101,11 @@ public class ConsultaListaInternalFrame extends JInternalFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		panel.add(scrollPane);
 		scrollPane.setViewportView(listListas);
-		listListas.addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent arg0) {
-				if (!arg0.getValueIsAdjusting() && ready) {
-					ready = false;
-					ready2 = false;
-					if(!listListas.isSelectionEmpty()){
-						String nombreLista = listListas.getSelectedValue();
-						String nombreSeleccionado = (String) comboBoxNicknames.getSelectedItem();
-						//carga de video.
-						listVideos.setSelectedIndex(-1);
-						modelListVideos.removeAllElements();
-						String[] nombreVideos = iCU.listarVideosListaReproduccionUsuario(nombreSeleccionado, nombreLista);
-						for (int i = 0; i < nombreVideos.length; i++) {
-							modelListVideos.addElement(nombreVideos[i]);
-						}
-						//fin de carga de videos.
-						DtListaReproduccion dtLista = iCU.infoAdicLDR(nombreSeleccionado, nombreLista);
-						textFieldNombreLista.setText(dtLista.getNombre());
-						if(dtLista.getPrivado() == true) {
-							textFieldPrivacidadLista.setText("Privada");
-						}else textFieldPrivacidadLista.setText("Publica");
-						ready = true;
-						ready2=true;
-					}
-				}
-			}
-		});
+		
 		
 		JPanel panel_1 = new JPanel();
 		getContentPane().add(panel_1);
-		panel_1.setLayout(new GridLayout(1, 4, 2, 2));
+		panel_1.setLayout(new GridLayout(3, 4, 2, 2));
 		
 		JLabel lblNombre = new JLabel("Nombre:");
 		lblNombre.setHorizontalAlignment(SwingConstants.CENTER);
@@ -141,6 +120,13 @@ public class ConsultaListaInternalFrame extends JInternalFrame {
 		
 		textFieldPrivacidadLista = new JLabel();
 		panel_1.add(textFieldPrivacidadLista);
+		
+		JLabel lblTipoDeLista = new JLabel("Tipo de Lista:");
+		lblTipoDeLista.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_1.add(lblTipoDeLista);
+		
+		JLabel lblTextfieldtipolista = new JLabel("");
+		panel_1.add(lblTextfieldtipolista);
 		
 		JPanel panel_2 = new JPanel();
 		getContentPane().add(panel_2);
@@ -193,8 +179,40 @@ public class ConsultaListaInternalFrame extends JInternalFrame {
 				}else infoBox("No hay ningun video seleccionado","Aviso");
 			}
 		});
-
+		listListas.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent arg0) {
+				if (!arg0.getValueIsAdjusting() && ready) {
+					ready = false;
+					ready2 = false;
+					if(!listListas.isSelectionEmpty()){
+						String nombreLista = listListas.getSelectedValue();
+						String nombreSeleccionado = (String) comboBoxNicknames.getSelectedItem();
+						//carga de video.
+						listVideos.setSelectedIndex(-1);
+						modelListVideos.removeAllElements();
+						String[] nombreVideos = iCU.listarVideosListaReproduccionUsuario(nombreSeleccionado, nombreLista);
+						for (int i = 0; i < nombreVideos.length; i++) {
+							modelListVideos.addElement(nombreVideos[i]);
+						}
+						//fin de carga de videos.
+						DtListaReproduccion dtLista = iCU.infoAdicLDR(nombreSeleccionado, nombreLista);
+						textFieldNombreLista.setText(dtLista.getNombre());
+						if(dtLista.getPrivado() == true) {
+							textFieldPrivacidadLista.setText("Privada");
+						}else textFieldPrivacidadLista.setText("Publica");
+						if(dtLista.getTipoLista() ==TipoLista.PARTICULAR){
+							lblTextfieldtipolista.setText("Particular");
+						}else{
+							lblTextfieldtipolista.setText("Por Defecto");
+						}
+						ready = true;
+						ready2=true;
+					}
+				}
+			}
+		});
 	}
+	
 
 	public void llamadaParticular(String nickU, String lista) {
 		comboBoxNicknames.setSelectedItem(nickU);

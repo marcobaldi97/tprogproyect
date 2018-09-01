@@ -23,4 +23,19 @@ public class Particular extends ListaReproduccion{
 		return dt;
 	}
 
+
+	@Override
+	public void agregarVideo(Video v) {
+
+		//videos.put(v.getIDVideo(), v);
+		addVideoToMap(v);
+		refrescarCategorias();
+		CategoriaHandler catH = CategoriaHandler.getInstance();
+		Categoria c = catH.find(v.getCategoria().getNombre());
+		if (c != null)
+			c.aniadirLDR(this);
+		v.aniadirListaReproduccion(this);
+
+	}
+
 }

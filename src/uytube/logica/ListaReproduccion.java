@@ -15,9 +15,18 @@ public abstract class ListaReproduccion {
 		videos = new HashMap<Integer, Video>();
 		categorias = new HashMap<String, Categoria>();
 	}
-
+	public enum TipoLista{
+		PORDEFECTO,
+		PARTICULAR;
+	}
 	public String getNombre() {
 		return nombre;
+	}
+	public void addVideoToMap(Video v){
+		videos.put(v.getIDVideo(), v);
+	}
+	public void removeVideoFromMap(Integer id){
+		videos.remove(id);
 	}
 
 	public abstract DtListaReproduccion verDetallesListareproduccion();
@@ -46,21 +55,11 @@ public abstract class ListaReproduccion {
 		Categoria categoria = videos.get(id).getObjetoCategoria();
 		categorias.remove(categoria.getNombre());
 		categoria.removerLDR(this);
-		videos.remove(id);
+		removeVideoFromMap(id);
 		refrescarCategorias();
 	}
 
-	public void agregarVideo(Video v) {
-
-		videos.put(v.getIDVideo(), v);
-		refrescarCategorias();
-		CategoriaHandler catH = CategoriaHandler.getInstance();
-		Categoria c = catH.find(v.getCategoria().getNombre());
-		if (c != null)
-			c.aniadirLDR(this);
-		v.aniadirListaReproduccion(this);
-
-	};
+	public abstract void agregarVideo(Video v);
 
 	public DtCategoria[] getInfoCategorias() {
 		DtCategoria[] res = new DtCategoria[categorias.size()];

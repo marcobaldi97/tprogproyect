@@ -159,6 +159,32 @@ public class UsuarioCtrlTest {
 	}
 
 	@Test
+	public void testlistarLDRParticularesdeUsuario() {
+		UsuarioCtrl UCU=UsuarioCtrl.getInstance();
+		DtFecha fecha=new DtFecha(new Date(0));
+		String nombreU="nombrelistarLDRPUsuario";
+		String nombreL="nombreLNuevaLDRPUsuario";
+		String nombreL2="nombreLNuevaLDRPUsuario2";
+		UCU.nuevoUsuario(nombreU, "Jose", "Ramirez", "www.cosoarroba3",fecha , null, "canal", "descripcion", false, null);
+		UCU.nuevaListaParticular(nombreU, nombreL, true);
+		UCU.nuevaListaPorDefecto(nombreL2);
+		String[] listasP=UCU.listarLDRParticularesdeUsuario(nombreU);
+		boolean existe=false;
+		boolean existe2=false;
+		for(String lista:listasP){
+			if(lista==nombreL){
+				existe=true;
+			}
+			if(lista==nombreL2){
+				existe2=true;
+			}
+		}
+		assertEquals(true,existe);
+		assertEquals(false,existe2);
+	}
+	
+	
+	@Test
 	public void testAgregarYEliminarVideoLista() {
 		UsuarioCtrl UCU=UsuarioCtrl.getInstance();
 		UsuarioHandler uh=UsuarioHandler.getInstance();
