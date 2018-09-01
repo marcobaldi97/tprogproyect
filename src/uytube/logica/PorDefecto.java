@@ -12,4 +12,13 @@ public class PorDefecto extends ListaReproduccion{
 		return dt;
 	}
 
+	@Override
+	public void agregarVideo(Video v) {
+
+		//videos.put(v.getIDVideo(), v);
+		addVideoToMap(v);
+		v.aniadirListaReproduccion(this);
+
+	}
+
 }
