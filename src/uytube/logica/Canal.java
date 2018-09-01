@@ -223,4 +223,23 @@ public class Canal {
 			}
 		}
 	}
+
+	public String[] listarLDRParticularesdeUsuario() {
+		String[] nombresListas = new String[listasReproduccion.size()];
+		Integer contador = 0;
+		for (Map.Entry<String, ListaReproduccion> entry : listasReproduccion.entrySet()) {
+			if (entry.getValue() != null) {
+				if(entry.getValue() instanceof Particular) {
+					String nom = entry.getValue().getNombre();
+					nombresListas[contador] = nom;
+					contador++;
+				}
+			} // Se agreg� esta linea para tratar de evitar los punteros nulos.
+		}
+		String[] nombresListasAjustado = new String[contador];
+		for(int i = 0; i < contador;i++){
+			nombresListasAjustado[i] = nombresListas[i];
+		}
+		return nombresListasAjustado;
+	}
 }

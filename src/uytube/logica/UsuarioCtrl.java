@@ -185,4 +185,9 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 		Usuario u = usuarioh.find(nickname);
 		u.modificarDatosCanal(nombreCanal,descripcion,privacidad,catE);
 	}
+	
+	public String[] listarLDRParticularesdeUsuario(String nickname) {
+		Usuario u = usuarioh.find(nickname);
+		return u.listarLDRParticularesdeUsuario();
+	}
 }
