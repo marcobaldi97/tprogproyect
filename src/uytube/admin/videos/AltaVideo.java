@@ -87,7 +87,7 @@ public class AltaVideo extends JInternalFrame {
 		getContentPane().add(lblNicknameAutor);
 		
 		comboBoxNicknames = new JComboBox();
-		comboBoxNicknames.setEditable(true);
+		comboBoxNicknames.setEditable(false);
 		String[] nicknamesArray = iCU.listarNicknamesUsuarios();
 		comboBoxNicknames.setModel(new DefaultComboBoxModel(nicknamesArray));
 		getContentPane().add(comboBoxNicknames);

@@ -180,4 +180,8 @@ public class Usuario {
 		canalPropio.modificarDatosCanal(nombreCanal,descripcion,privacidad,catE);
 	}
 
+	public String[] listarLDRParticularesdeUsuario() {
+		return canalPropio.listarLDRParticularesdeUsuario();
+	}
+
 }

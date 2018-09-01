@@ -63,4 +63,6 @@ public interface IUsuarioCtrl {
 	
 	public abstract void modificarDatosCanal(String nickname, String nombreCanal, String descripcion, Boolean privacidad, String catE);
 
+	public abstract String[] listarLDRParticularesdeUsuario(String nickname);
+
 }
