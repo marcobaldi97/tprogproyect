@@ -28,7 +28,6 @@ import uytube.logica.IVideoCtrl;
 
 public class ModificarVideo extends JInternalFrame {
 	private JComboBox comboBoxNombreVideo = new JComboBox();
-	private JTextField textFieldNombreVideo = new JTextField();
 	private JTextField textFieldURL = new JTextField();
 	private JDateChooser dateChooserFecha = new JDateChooser();
 	private JTextArea textAreaDesc = new JTextArea();
@@ -40,16 +39,16 @@ public class ModificarVideo extends JInternalFrame {
 	private static void infoBox(String infoMessage, String titleBar) {
 		JOptionPane.showMessageDialog(null, infoMessage, "" + titleBar, JOptionPane.INFORMATION_MESSAGE);
 	}
-	
-	public void llamadaParticular(String nick, String nomVideo){
+
+	public void llamadaParticular(String nick, String nomVideo) {
 		comboBoxNombreVideo.setEnabled(false);
 		comboBoxNicknames.setEnabled(false);
 		comboBoxNicknames.setSelectedItem(nick);
 		comboBoxNombreVideo.setSelectedItem(nomVideo);
-		
+
 	}
+
 	private void cargarDatos(DtVideo datosVideo) {
-		textFieldNombreVideo.setText(datosVideo.getNombre());
 		textFieldURL.setText(datosVideo.getUrl());
 		textAreaDesc.setText(datosVideo.getDescripcion());
 		comboBoxCategoria.setSelectedItem(datosVideo.getCategoria().getNombre());
@@ -62,7 +61,6 @@ public class ModificarVideo extends JInternalFrame {
 	}
 
 	private void limpiarDatos() {
-		textFieldNombreVideo.setText("");
 		textFieldURL.setText("");
 		Date dateRespawn = new Date();
 		dateChooserFecha.setDate(dateRespawn);
@@ -73,7 +71,6 @@ public class ModificarVideo extends JInternalFrame {
 	}
 
 	private void bloquearDatos() {
-		textFieldNombreVideo.setEnabled(false);
 		comboBoxNombreVideo.setEnabled(false);
 		textFieldURL.setEnabled(false);
 		textAreaDesc.setEnabled(false);
@@ -84,7 +81,6 @@ public class ModificarVideo extends JInternalFrame {
 	}
 
 	private void habilitarDatos() {
-		textFieldNombreVideo.setEnabled(true);
 		comboBoxNombreVideo.setEnabled(true);
 		textFieldURL.setEnabled(true);
 		textAreaDesc.setEnabled(true);
@@ -104,7 +100,7 @@ public class ModificarVideo extends JInternalFrame {
 		setIconifiable(true);
 		setClosable(true);
 		setBounds(100, 100, 450, 300);
-		getContentPane().setLayout(new GridLayout(10, 2, 5, 5));
+		getContentPane().setLayout(new GridLayout(9, 2, 5, 5));
 		JButton btnNewButtonAceptar = new JButton("Aceptar");
 
 		JLabel lblNicknameAutor = new JLabel("Nickname Autor:");
@@ -162,13 +158,6 @@ public class ModificarVideo extends JInternalFrame {
 			}
 		});
 		getContentPane().add(comboBoxNombreVideo);
-
-		JLabel lblNombreVideo = new JLabel("Nombre Video:");
-		lblNombreVideo.setHorizontalAlignment(SwingConstants.CENTER);
-		getContentPane().add(lblNombreVideo);
-
-		getContentPane().add(textFieldNombreVideo);
-		textFieldNombreVideo.setColumns(10);
 
 		JLabel lblNewLabel = new JLabel("URL Video:");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -228,7 +217,7 @@ public class ModificarVideo extends JInternalFrame {
 		btnNewButtonAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				final String nickname = (String) comboBoxNicknames.getSelectedItem();
-				final String nombreVideo = textFieldNombreVideo.getText();
+				final String nombreVideo = (String) comboBoxNombreVideo.getSelectedItem();
 				final String descripcion = textAreaDesc.getText();
 				final int duracion = (int) spinnerDuracion.getValue();
 				final DtFecha fecha = new DtFecha(dateChooserFecha.getDate());
