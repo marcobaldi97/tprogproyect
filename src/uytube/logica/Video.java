@@ -6,6 +6,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import uytube.logica.SystemHandler.Privacidad;
+
 public class Video {
 	private Integer IDVideo;
 	private String nombre;
@@ -15,13 +17,13 @@ public class Video {
 	private DtFecha fecha_publicacion;
 	private String URL;
 	private Categoria cat;
-	private boolean privacidad;
+	private Privacidad privacidad;
 	private Map<Integer, Comentario> comentarios;
 	private List<ListaReproduccion> listas;
 	private ArrayList<Puntuacion> puntuaciones;
 
 	public Video(String nombreVideo, String propietario, String descripcionV, int duracionV, DtFecha fechapubli,
-			String url, DtCategoria categ, boolean p) {
+			String url, DtCategoria categ, Privacidad p) {
 		VideoHandler vh = VideoHandler.getInstance();
 		SystemHandler sh = SystemHandler.getInstance();
 		IDVideo = vh.getNewID();
@@ -74,7 +76,7 @@ public class Video {
 		return res;
 	}
 
-	public boolean getPrivacidad() {
+	public Privacidad getPrivacidad() {
 		return privacidad;
 	}
 
@@ -82,7 +84,7 @@ public class Video {
 		return cat;
 	}
 
-	public void setPrivacidad(Boolean privacidad) {
+	public void setPrivacidad(Privacidad privacidad) {
 		this.privacidad = privacidad;
 	}
 
@@ -96,7 +98,7 @@ public class Video {
 		listas.remove(ldr);
 	}
 
-	public void ingresarNuevosDatosVideo(String d, int dur, DtFecha fp, String url, DtCategoria c, boolean p) {
+	public void ingresarNuevosDatosVideo(String d, int dur, DtFecha fp, String url, DtCategoria c, Privacidad p) {
 		for (ListaReproduccion ldr : listas) {
 			ldr.removerCategoria(cat);
 			cat.removerLDR(ldr);

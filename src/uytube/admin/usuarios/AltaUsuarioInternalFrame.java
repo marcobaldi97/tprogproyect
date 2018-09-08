@@ -4,18 +4,21 @@ import java.awt.EventQueue;
 
 import javax.swing.JInternalFrame;
 import javax.swing.BoxLayout;
-
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
+
 import java.awt.FlowLayout;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JEditorPane;
+
 import java.awt.GridLayout;
 import java.awt.Image;
 
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.FocusAdapter;
@@ -34,6 +37,7 @@ import uytube.logica.DtCategoria;
 import uytube.logica.DtFecha;
 import uytube.logica.IUsuarioCtrl;
 import uytube.logica.IVideoCtrl;
+import uytube.logica.SystemHandler.Privacidad;
 
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
@@ -183,7 +187,7 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 				//CREAR USUARIO
 				//obtener datos
 				String  nick, nom, ape, email, nomCanal,descCanal, catE;
-				boolean privacidad;
+				Privacidad privacidad;
 				DtFecha nac;
 				nick = textFieldNick.getText();
 				email = textFieldEmail.getText(); 
@@ -193,8 +197,8 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 				nac = new DtFecha(dateChooser.getDate());
 				nomCanal = textFieldNombreC.getText();
 				descCanal = editorPaneDesc.getText();
-				if (comboBoxPrivacidad.getSelectedIndex()==0){ privacidad=true;}
-				else{privacidad = false;}
+				if (comboBoxPrivacidad.getSelectedIndex()==0){ privacidad=Privacidad.PRIVADO;}
+				else{privacidad = Privacidad.PUBLICO;}
 			
 				catE = (String) comboBoxCat.getSelectedItem();
 				

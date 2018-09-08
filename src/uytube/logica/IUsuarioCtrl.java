@@ -1,5 +1,8 @@
 package uytube.logica;
 
+import uytube.logica.SystemHandler.Privacidad;
+
+
 public interface IUsuarioCtrl {
 
 	public abstract String[] listarNicknamesUsuarios();
@@ -21,15 +24,15 @@ public interface IUsuarioCtrl {
 	public abstract void dejarUsuario(String Usu1, String Usu2);
 
 	public abstract void aniadirVideo(String nickU, String nom, String desc, Integer dur, DtFecha fp, String url,
-			DtCategoria catE, boolean p);
+			DtCategoria catE, Privacidad p);
 
 	public abstract void ingresarNuevosDatosVideo(String nickU, String nom, String d, int dur, DtFecha fp, String url,
-			DtCategoria catE, boolean p);
+			DtCategoria catE, Privacidad p);
 
 	public abstract Boolean verificarDispUsuario(String nickU, String email);
 
 	public abstract void nuevoUsuario(String nick, String nom, String ape, String e, DtFecha fn, byte[] fo,
-			String nombreCanal, String desc, Boolean privacidadE, String catE);
+			String nombreCanal, String desc, Privacidad privacidadE, String catE);
 
 	public abstract void editarDatosUsuario(String nickU, String nom, String ape, DtFecha fn, byte[] fo);
 
@@ -61,7 +64,7 @@ public interface IUsuarioCtrl {
 
 	public abstract boolean memberVideoLista(String nicknameUsuario, int idVideo, String nombreListaReproduccion);
 	
-	public abstract void modificarDatosCanal(String nickname, String nombreCanal, String descripcion, Boolean privacidad, String catE);
+	public abstract void modificarDatosCanal(String nickname, String nombreCanal, String descripcion, Privacidad privacidad, String catE);
 
 	public abstract String[] listarLDRParticularesdeUsuario(String nickname);
 

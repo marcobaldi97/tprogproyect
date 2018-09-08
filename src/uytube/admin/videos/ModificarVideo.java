@@ -25,6 +25,7 @@ import uytube.logica.DtFecha;
 import uytube.logica.DtVideo;
 import uytube.logica.IUsuarioCtrl;
 import uytube.logica.IVideoCtrl;
+import uytube.logica.SystemHandler.Privacidad;
 
 public class ModificarVideo extends JInternalFrame {
 	private JComboBox comboBoxNombreVideo = new JComboBox();
@@ -53,7 +54,7 @@ public class ModificarVideo extends JInternalFrame {
 		textAreaDesc.setText(datosVideo.getDescripcion());
 		comboBoxCategoria.setSelectedItem(datosVideo.getCategoria().getNombre());
 		spinnerDuracion.setValue(datosVideo.getDuracion());
-		if (datosVideo.getPrivacidad() == true)
+		if (datosVideo.getPrivacidad() == Privacidad.PRIVADO)
 			comboBoxPrivacidad.setSelectedItem("Privado");
 		else
 			comboBoxPrivacidad.setSelectedItem("Publico");
@@ -223,7 +224,13 @@ public class ModificarVideo extends JInternalFrame {
 				final DtFecha fecha = new DtFecha(dateChooserFecha.getDate());
 				final String url = textFieldURL.getText();
 				final DtCategoria categoria = new DtCategoria((String) comboBoxCategoria.getSelectedItem());
-				final boolean privado = ((String) comboBoxPrivacidad.getSelectedItem()).equals("Privado");
+				final Privacidad privado;
+						if(((String) comboBoxPrivacidad.getSelectedItem()).equals("Privado")){
+							privado=Privacidad.PRIVADO;
+						}
+						else{
+							privado=Privacidad.PUBLICO;
+						}
 
 				iCU.ingresarNuevosDatosVideo(nickname, nombreVideo, descripcion, duracion, fecha, url, categoria,
 						privado);

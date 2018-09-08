@@ -1,5 +1,9 @@
 package uytube.logica;
 
+import uytube.logica.SystemHandler.Privacidad;
+
+
+
 public class UsuarioCtrl implements IUsuarioCtrl {
 	private static UsuarioCtrl instance = null;
 	private UsuarioHandler usuarioh;
@@ -108,13 +112,13 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 	}
 
 	public void aniadirVideo(String nickU, String nom, String desc, Integer dur, DtFecha fp, String url,
-			DtCategoria catE, boolean p) {
+			DtCategoria catE, Privacidad p) {
 		Usuario u = usuarioh.find(nickU);
 		u.aniadirVideo(nom, nickU, desc, dur, fp, url, catE, p);
 	}
 
 	public void ingresarNuevosDatosVideo(String nickU, String nom, String d, int dur, DtFecha fp, String url,
-			DtCategoria catE, boolean p) {
+			DtCategoria catE, Privacidad p) {
 		Usuario u = usuarioh.find(nickU);
 		u.ingresarNuevosDatosVideo(nom, d, dur, fp, url, catE, p);
 	}
@@ -125,7 +129,7 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 	}// true si está disponible, false si ya está ocupado
 
 	public void nuevoUsuario(String nick, String nom, String ape, String e, DtFecha fn, byte[] fo, String nombreCanal,
-			String desc, Boolean privacidadE, String catE) {
+			String desc, Privacidad privacidadE, String catE) {
 		Usuario u = new Usuario(nick, nom, ape, e, fn, fo, nombreCanal, desc, privacidadE, catE);
 		usuarioh.aniadirUsuario(u);
 	}
@@ -181,7 +185,7 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 		return u.memberVideoLista(idVideo,nombreListaReproduccion);
 	}
 	
-	public void modificarDatosCanal(String nickname, String nombreCanal, String descripcion, Boolean privacidad, String catE) {
+	public void modificarDatosCanal(String nickname, String nombreCanal, String descripcion, Privacidad privacidad, String catE) {
 		Usuario u = usuarioh.find(nickname);
 		u.modificarDatosCanal(nombreCanal,descripcion,privacidad,catE);
 	}

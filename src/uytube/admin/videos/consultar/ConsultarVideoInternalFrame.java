@@ -25,6 +25,7 @@ import uytube.logica.DtVideo;
 import uytube.logica.Factory;
 import uytube.logica.IUsuarioCtrl;
 import uytube.logica.IVideoCtrl;
+import uytube.logica.SystemHandler.Privacidad;
 
 import java.awt.GridLayout;
 import java.awt.FlowLayout;
@@ -34,7 +35,9 @@ import javax.swing.JTabbedPane;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.JComboBox;
+
 import java.awt.BorderLayout;
+
 import javax.swing.SwingConstants;
 import javax.swing.JRadioButton;
 
@@ -264,7 +267,7 @@ public class ConsultarVideoInternalFrame extends JInternalFrame {
 		Integer duracionMM=this.selectedVideo.getDuracion()/60;
 		Integer duracionSS=this.selectedVideo.getDuracion()%60;
 		videoDuracionTextField.setText(Integer.toString(duracionMM)+":"+Integer.toString(duracionSS));//arreglar la duracion para que la muestre en minutos
-		if(this.selectedVideo.getPrivacidad()) {
+		if(this.selectedVideo.getPrivacidad()==Privacidad.PRIVADO) {
 		privacidadTextField.setText("Privado");
 		}
 		else{

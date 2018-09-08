@@ -217,7 +217,7 @@ public class ValorarVideo extends JInternalFrame {
 					valoracion=false;
 				if(IDVideo!=-1&&nickUsuario!=null&&nickValorador!=null&&comboBoxNickname.getSelectedIndex()!=-1&&comboBoxN2.getSelectedIndex()!=-1){
 					VCU.valorarVideo(IDVideo, nickValorador, valoracion);
-					System.out.println("Ya ta");
+					
 					infoBox("Se valor� con exito", "Valoracion exitosa");
 					setVisible(false);
 					dispose();

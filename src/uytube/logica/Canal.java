@@ -4,10 +4,13 @@ package uytube.logica;
 import java.util.HashMap;
 import java.util.Map;
 
+import uytube.logica.SystemHandler.Privacidad;
+
 public class Canal {
+	
 	private String nombre;
 	private String descripcion;
-	private Boolean privado;
+	private Privacidad privacidadCanal;
 	private Categoria cate;
 	private Map<String, Video> videos;
 	private Map<String, ListaReproduccion> listasReproduccion;
@@ -20,8 +23,8 @@ public class Canal {
 		return descripcion;
 	}
 
-	public Boolean getPrivacidad() {
-		return privado;
+	public Privacidad getPrivacidad() {
+		return privacidadCanal;
 	}
 
 	public DtCategoria getCategoria() {
@@ -67,10 +70,10 @@ public class Canal {
 		return dt;
 	}
 
-	public Canal(String nom, String pro, String desc, Boolean privacidadE, String catE) {
+	public Canal(String nom, String pro, String desc, Privacidad privacidadE, String catE) {
 		nombre = nom;
 		descripcion = desc;
-		privado = privacidadE;
+		privacidadCanal = privacidadE;
 		if (catE != null) {
 			CategoriaHandler ch = CategoriaHandler.getInstance();
 			cate = ch.find(catE);
@@ -106,7 +109,7 @@ public class Canal {
 	}
 
 	public void aniadirVideo(String nom, String pro, String desc, Integer dur, DtFecha fp, String url, DtCategoria catE,
-			boolean p) {
+			Privacidad p) {
 		Video v = new Video(nom, pro, desc, dur, fp, url, catE, p);
 		this.addVideo(v);
 		VideoHandler vidH = VideoHandler.getInstance();
@@ -114,7 +117,7 @@ public class Canal {
 	}
 
 	public void ingresarNuevosDatosVideo(String nom, String d, int dur, DtFecha fp, String url, DtCategoria catE,
-			boolean p) {
+			Privacidad p) {
 		Video v = videos.get(nom);
 		v.ingresarNuevosDatosVideo(d, dur, fp, url, catE, p);
 	}
@@ -188,10 +191,10 @@ public class Canal {
 		return lista.existeVideo(video);
 	}
 
-	public void modificarDatosCanal(String nombreCanal, String descripcion2, Boolean privacidad, String catE2) {
+	public void modificarDatosCanal(String nombreCanal, String descripcion2, Privacidad privacidad, String catE2) {
 		nombre = nombreCanal;
 		descripcion = descripcion2;
-		privado = privacidad;
+		privacidadCanal = privacidad;
 		if (catE2 != null) {
 			CategoriaHandler ch = CategoriaHandler.getInstance();
 			cate = ch.find(catE2);
@@ -200,7 +203,7 @@ public class Canal {
 			cate = sh.getSinCat();
 		}
 
-		if (privacidad) {
+		if (privacidad.equals(Privacidad.PRIVADO)) {
 			cambiarPrivacidadVideosAPrivado();
 			cambiarPrivacidadListasParticularesAPrivado();
 		}
@@ -209,7 +212,7 @@ public class Canal {
 	private void cambiarPrivacidadVideosAPrivado() {
 		for (final Map.Entry<String, Video> entry : videos.entrySet()) {
 			final Video video = entry.getValue();
-			video.setPrivacidad(true);
+			video.setPrivacidad(Privacidad.PRIVADO);
 		}
 	}
 

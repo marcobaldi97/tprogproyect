@@ -3,6 +3,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SystemHandler {
+	public enum Privacidad{
+		PRIVADO,
+		PUBLICO;
+	}
 	private static SystemHandler instance = null;
 	private Map<String,DtListaReproduccion> listasDefault;
 	private int id_comentario = 0;
