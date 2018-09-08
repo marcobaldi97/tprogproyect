@@ -1,9 +1,13 @@
 package uytube.logica;
 
+import uytube.logica.SystemHandler.Privacidad;
+
+
+
 public class DtCanal {
 	private String nombre;
 	private String descripcion;
-	private Boolean privado;
+	private Privacidad privado;
 	private DtCategoria categoria;
 
 	public DtCanal(Canal c){
@@ -21,7 +25,7 @@ public class DtCanal {
 		return descripcion;
 	}
 	
-	public Boolean getPrivacidad() {
+	public Privacidad getPrivacidad() {
 		return privado;
 	}
 	

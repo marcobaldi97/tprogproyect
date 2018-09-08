@@ -6,9 +6,12 @@ import java.util.Date;
 
 import org.junit.Test;
 
+
+
 import uytube.logica.Comentario;
 import uytube.logica.DtComentario;
 import uytube.logica.DtFecha;
+import uytube.logica.SystemHandler.Privacidad;
 import uytube.logica.UsuarioCtrl;
 
 public class ComentarioTest {
@@ -18,7 +21,7 @@ public class ComentarioTest {
 		String nombreU="nombreComentario";
 		UsuarioCtrl UCU=UsuarioCtrl.getInstance();
 		DtFecha fecha=new DtFecha(new Date(2));
-		UCU.nuevoUsuario(nombreU, "pedrito", "gimenez", "email.com", fecha, null, "nombrecito", "descripcion", true, null);
+		UCU.nuevoUsuario(nombreU, "pedrito", "gimenez", "email.com", fecha, null, "nombrecito", "descripcion", Privacidad.PUBLICO, null);
 		Comentario coment=new Comentario(1, "texto", fecha, true, nombreU);
 		assertEquals(nombreU,coment.getUsuario().getNickname());
 		assertEquals(true,coment.getEsPadre());

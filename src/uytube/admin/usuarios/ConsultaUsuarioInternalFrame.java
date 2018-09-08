@@ -3,9 +3,9 @@ package uytube.admin.usuarios;
 import java.awt.EventQueue;
 
 import javax.swing.JInternalFrame;
-
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
+
 import java.awt.GridLayout;
 import java.awt.Image;
 
@@ -14,6 +14,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
+
 import com.toedter.calendar.JDateChooser;
 
 import uytube.admin.Imagen;
@@ -29,25 +30,33 @@ import uytube.logica.DtVideo;
 import uytube.logica.Factory;
 import uytube.logica.IUsuarioCtrl;
 import uytube.logica.IVideoCtrl;
+import uytube.logica.SystemHandler.Privacidad;
 
 import javax.swing.JTextPane;
 import javax.swing.UIManager;
+
 import java.awt.Color;
 
 import javax.swing.JTable;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
+
 import com.toedter.components.JLocaleChooser;
+
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.JTextArea;
+
 import java.awt.event.ItemListener;
 import java.awt.image.BufferedImage;
 import java.awt.event.ItemEvent;
+
 import javax.swing.JButton;
 
 
@@ -319,7 +328,7 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 		dateChooser.setDate(usr.getFecha_nacimiento().getFecha());
 		
 		textFieldNomCanal.setText(usrCanal.getNombre());
-		if (usrCanal.getPrivacidad()){
+		if (usrCanal.getPrivacidad()==Privacidad.PRIVADO){
 			textFieldPrivacidad.setText("Privado");
 		}else{
 			textFieldPrivacidad.setText("Publico");

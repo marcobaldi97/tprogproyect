@@ -5,6 +5,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+
+
 import uytube.logica.CategoriaHandler;
 import uytube.logica.DtCategoria;
 import uytube.logica.DtComentario;
@@ -13,6 +15,7 @@ import uytube.logica.DtVideo;
 import uytube.logica.Factory;
 import uytube.logica.IUsuarioCtrl;
 import uytube.logica.IVideoCtrl;
+import uytube.logica.SystemHandler.Privacidad;
 import uytube.logica.VideoHandler;
 
 public class DatosDePrueba {
@@ -49,108 +52,116 @@ public class DatosDePrueba {
 		String HR="hrubio";
 		archivo = new File("src\\fotosDatosDePrueba\\hr.jpg");
 		ICU.nuevoUsuario(HR, "Horacio", "Rubino", "horacio.rubino@guambia.com.uy", fechaNac, Imagen.imagenToByte(archivo),
-				"Canal Horacio", "El canal Horacio es para publicar contenido divertido",true, "Entretenimiento");
+				"Canal Horacio", "El canal Horacio es para publicar contenido divertido",Privacidad.PUBLICO, "Entretenimiento");
 		
 		fecha = asignarFecha("14,06,1972 00:00");
 		fechaNac = new DtFecha(fecha);
 		String MB ="mbusca";
 		archivo = new File("src\\fotosDatosDePrueba\\mb.jpg");
 		ICU.nuevoUsuario(MB, "Martin", "Buscaglia", "Martin.bus@agadu.org.uy", fechaNac, Imagen.imagenToByte(archivo),
-				"El bocha", "Mi canal para colgar cosas", true, null);
+				"El bocha", "Mi canal para colgar cosas", Privacidad.PUBLICO, null);
 		
 		fecha = asignarFecha("07,01,1954 00:00");
 		fechaNac = new DtFecha(fecha);
 		String HG="hectorg";
 		ICU.nuevoUsuario(HG, "Hector", "Guido", "hector.gui@elgalpon.org.uy", fechaNac, null,
-				HG, "Canal HG", true, null);
+				HG, "Canal HG", Privacidad.PUBLICO, null);
 		
 		fecha=asignarFecha("24,07,1971 00:00");
 		fechaNac = new DtFecha(fecha);
 		String TC ="tabarec";
 		archivo = new File("src\\fotosDatosDePrueba\\tc.jpg");
 		ICU.nuevoUsuario(TC, "Tabare", "Cardozo", "tabare.car@agadu.otg.uy", fechaNac, Imagen.imagenToByte(archivo),
-				"Tabare", "Mi musica e ainda mais", true, MUS);
+				"Tabare", "Mi musica e ainda mais", Privacidad.PUBLICO, MUS);
 		
 		fecha = asignarFecha("01,01,1947 00:00");
 		fechaNac = new DtFecha(fecha);
 		String CS="cachilas";
 		archivo = new File("src\\fotosDatosDePrueba\\cs.jpg");
 		ICU.nuevoUsuario(CS, "Walder 'Cachila'", "Silva", "Cachila.sil@c1080.org.uy", fechaNac, Imagen.imagenToByte(archivo),
-				"El Cachila", "Para juntar cosas", false, null);
+				"El Cachila", "Para juntar cosas", Privacidad.PRIVADO, null);
 		
 		fecha =asignarFecha("16,03,1927 00:00");
 		fechaNac = new DtFecha(fecha);
 		String JB="juliob";
 		ICU.nuevoUsuario(JB, "Julio", "Bocca", "juliobocca@sodre.com.uy", fechaNac, null,
-				JB, "Canal de JB", true,null);
+				JB, "Canal de JB", Privacidad.PUBLICO,null);
 		
 		fecha=asignarFecha("01,01,1975 00:00");
 		fechaNac = new DtFecha(fecha);
 		String DP="diegop";
 		ICU.nuevoUsuario(DP, "Diego", "Parodi", "diego@efectocine", fechaNac, null,
-				DP, "El Canal de DP", true , null);
+				DP, "El Canal de DP", Privacidad.PUBLICO,null);
 	
 		fecha=asignarFecha("25,04,1840 00:00");
 		fechaNac = new DtFecha(fecha);
 		String KH="kahiroh";
 		archivo = new File("src\\fotosDatosDePrueba\\kh.jpg");
 		ICU.nuevoUsuario(KH, "Kairo", "Herrera", "kairoher@pilsenrock.com.uy", fechaNac, Imagen.imagenToByte(archivo),
-				"Kairo Musica", "Videos de grandes canciones de hoy y siempre", true, MUS);
+				"Kairo Musica", "Videos de grandes canciones de hoy y siempre", Privacidad.PUBLICO, MUS);
 		
 		fecha=asignarFecha("03,08,1940 00:00");
 		fechaNac = new DtFecha(fecha);
 		String RH="robinh";
 		ICU.nuevoUsuario(RH, "Robin", "Henderson", "robin.h@tinglesa.com.uy", fechaNac, null,
-				RH, "Henderson", true, null);
+				RH, "Henderson", Privacidad.PUBLICO, null);
 		
 		fecha=asignarFecha("01,04,1960 00:00");
 		fechaNac = new DtFecha(fecha);
 		String MT="marcelot";
 		ICU.nuevoUsuario(MT, "Marcelo", "Tinelli", "marcelot@ideasdelsur.com.ar", fechaNac, null,
-				"Tinelli total", "Todo lo que querias y mas!", true , ENT);
+				"Tinelli total", "Todo lo que querias y mas!", Privacidad.PUBLICO , ENT);
 		
 		fecha=asignarFecha("17,07,1952 00:00");
 		fechaNac = new DtFecha(fecha);
 		String EN="novick";
 		ICU.nuevoUsuario(EN, "Edgardo", "Novick", "edgardo@novick.com.uy", fechaNac, null,
-				"Con la gente", "Preparando las elecciones", true, null);
+				"Con la gente", "Preparando las elecciones", Privacidad.PUBLICO, null);
 		
 		fecha=asignarFecha("28,01,1950 00:00");
 		fechaNac = new DtFecha(fecha);
 		String SP="sergiop";
 		ICU.nuevoUsuario(SP, "Sergio", "Puglia", "puglia@alpanpan.com.uy", fechaNac, null,
-				"Sergio invita", "Programas del ciclo y videos de cocina mastercheef", true, COM);
+				"Sergio invita", "Programas del ciclo y videos de cocina mastercheef", Privacidad.PUBLICO, COM);
 		
 		fecha=asignarFecha("17,03,1976 00:00");
 		fechaNac = new DtFecha(fecha);
 		String AR="chino";
 		archivo = new File("src\\fotosDatosDePrueba\\ar.jpg");
 		ICU.nuevoUsuario(AR, "Alvaro", "Recoba", "chino@trico.org.uy", fechaNac, Imagen.imagenToByte(archivo),
-				"Chino Recoba", "Canal de goles con Nacional", false, DEP);
+				"Chino Recoba", "Canal de goles con Nacional", Privacidad.PRIVADO, DEP);
 		
 		fecha=asignarFecha("14,02,1955 00:00");
 		fechaNac = new DtFecha(fecha);
 		String AP="tonyp";
 		archivo = new File("src\\fotosDatosDePrueba\\ap.jpg");
         ICU.nuevoUsuario(AP, "Antonio", "Pacheco", "eltony@manya.org.uy", fechaNac, Imagen.imagenToByte(archivo),
-				"Tony Pacheco", "Todos los goles con Peñarol", false, DEP);
+				"Tony Pacheco", "Todos los goles con Peñarol", Privacidad.PRIVADO, DEP);
 		
 		fecha=asignarFecha("09,08,1960 00:00");
 		fechaNac = new DtFecha(fecha);
 		String NJ="nicoJ";
 		ICU.nuevoUsuario(NJ, "Nicolas", "Jodal", "jodal@artech.com.uy", fechaNac, null,
-				"Desde Genexus", "Canal informacion C y T", false, CYT);
+				"Desde Genexus", "Canal informacion C y T", Privacidad.PUBLICO, CYT);
 		
 		
-		//SEGUIDORES seguido/seguidor
-		ICU.seguirUsuario(HR,TC);ICU.seguirUsuario(HR,CS);ICU.seguirUsuario(HR,EN);
-		ICU.seguirUsuario(MB,HG);ICU.seguirUsuario(MB,JB);ICU.seguirUsuario(MB,SP);
-		ICU.seguirUsuario(HG,HR);ICU.seguirUsuario(HG,DP);ICU.seguirUsuario(HG,RH);
-		ICU.seguirUsuario(TC,MB);ICU.seguirUsuario(TC,EN);
-		ICU.seguirUsuario(CS,MB);ICU.seguirUsuario(CS,TC);ICU.seguirUsuario(CS,MT);ICU.seguirUsuario(CS,EN);
-		ICU.seguirUsuario(JB,HG);ICU.seguirUsuario(JB,RH);ICU.seguirUsuario(JB,MT);
-		ICU.seguirUsuario(DP,JB);ICU.seguirUsuario(DP,RH);ICU.seguirUsuario(DP,SP);	ICU.seguirUsuario(DP,NJ);
-		ICU.seguirUsuario(KH,MB);ICU.seguirUsuario(KH,MT);
+		//SEGUIDORES raiz/destino
+		ICU.seguirUsuario(HR,HG);ICU.seguirUsuario(HR,DP);
+		ICU.seguirUsuario(MB,TC);ICU.seguirUsuario(MB,CS);ICU.seguirUsuario(MB,KH);
+		ICU.seguirUsuario(HG,MB);ICU.seguirUsuario(HG,JB);
+		ICU.seguirUsuario(TC,HR);ICU.seguirUsuario(TC,CS);
+		ICU.seguirUsuario(CS,HR);
+		ICU.seguirUsuario(JB,MB);ICU.seguirUsuario(JB,DP);
+		ICU.seguirUsuario(DP,HG);
+		ICU.seguirUsuario(KH,SP);
+		ICU.seguirUsuario(RH,HG);ICU.seguirUsuario(RH,JB);ICU.seguirUsuario(RH,DP);
+		ICU.seguirUsuario(MT,CS);ICU.seguirUsuario(MT,JB);ICU.seguirUsuario(MT,KH);
+		ICU.seguirUsuario(EN,HR);ICU.seguirUsuario(EN,TC);ICU.seguirUsuario(EN,CS);
+		ICU.seguirUsuario(SP,MB);ICU.seguirUsuario(SP,JB);ICU.seguirUsuario(SP,DP);
+		ICU.seguirUsuario(AR,AP);
+		ICU.seguirUsuario(AP,AR);
+		ICU.seguirUsuario(NJ,DP);
+		
 		
 		
 		//VIDEOS
@@ -161,43 +172,43 @@ public class DatosDePrueba {
 		DtCategoria catCYT = new DtCategoria(CYT);
 		
 		String V1="Locura celeste";
-		ICU.aniadirVideo(TC, V1, null, duracion, fechaNac,"https://youtu.be/PAfbzKcePx0",catMUS, false);
-		ICU.aniadirVideo(CS, V1, null, duracion, fechaNac,"https://youtu.be/PAfbzKcePx0",catMUS, false);
+		ICU.aniadirVideo(TC, V1, null, duracion, fechaNac,"https://youtu.be/PAfbzKcePx0",catMUS, Privacidad.PRIVADO);
+		ICU.aniadirVideo(CS, V1, null, duracion, fechaNac,"https://youtu.be/PAfbzKcePx0",catMUS, Privacidad.PRIVADO);
 		String V2="Niño payaso";
-		ICU.aniadirVideo(TC, V2, null, duracion, fechaNac,"https://youtu.be/K-uEIUnyZPg",catMUS, false);
-		ICU.aniadirVideo(CS, V2, null, duracion, fechaNac,"https://youtu.be/K-uEIUnyZPg",catMUS, false);
+		ICU.aniadirVideo(TC, V2, null, duracion, fechaNac,"https://youtu.be/K-uEIUnyZPg",catMUS, Privacidad.PRIVADO);
+		ICU.aniadirVideo(CS, V2, null, duracion, fechaNac,"https://youtu.be/K-uEIUnyZPg",catMUS, Privacidad.PRIVADO);
 		String V3="Sweet child'o mine";
-		ICU.aniadirVideo(JB, V3, null, duracion, fechaNac,"https://youtu.be/1w7OgIMMRc4",catMUS,true);
-		ICU.aniadirVideo(KH, V3, null, duracion, fechaNac,"https://youtu.be/1w7OgIMMRc4",catMUS,true);
+		ICU.aniadirVideo(JB, V3, null, duracion, fechaNac,"https://youtu.be/1w7OgIMMRc4",catMUS,Privacidad.PUBLICO);
+		ICU.aniadirVideo(KH, V3, null, duracion, fechaNac,"https://youtu.be/1w7OgIMMRc4",catMUS,Privacidad.PUBLICO);
 		String V4="Dancing in the Dark";
-		ICU.aniadirVideo(KH, V4, null, duracion, fechaNac,"https://youtu.be/129kuDCQtHs", catMUS, true);
+		ICU.aniadirVideo(KH, V4, null, duracion, fechaNac,"https://youtu.be/129kuDCQtHs", catMUS, Privacidad.PUBLICO);
 		String V5="Thriler";
-		ICU.aniadirVideo(JB, V5, null, duracion, fechaNac,"https://youtu.be/sOnqjkJTMaA",catMUS,true);
-		ICU.aniadirVideo(KH, V5, null, duracion, fechaNac,"https://youtu.be/sOnqjkJTMaA",catMUS,true);
+		ICU.aniadirVideo(JB, V5, null, duracion, fechaNac,"https://youtu.be/sOnqjkJTMaA",catMUS,Privacidad.PUBLICO);
+		ICU.aniadirVideo(KH, V5, null, duracion, fechaNac,"https://youtu.be/sOnqjkJTMaA",catMUS,Privacidad.PUBLICO);
 		String V6="100 años de FING";
-		ICU.aniadirVideo(HG, V6, null, duracion, fechaNac,"https://youtu.be/peGS4TBxSaI",catNOT ,true);
+		ICU.aniadirVideo(HG, V6, null, duracion, fechaNac,"https://youtu.be/peGS4TBxSaI",catNOT ,Privacidad.PUBLICO);
 		String V7="50 años del InCo";
-		ICU.aniadirVideo(HG, V7, null, duracion, fechaNac,"https://youtu.be/GzOJSk4urlM",catNOT , true);
+		ICU.aniadirVideo(HG, V7, null, duracion, fechaNac,"https://youtu.be/GzOJSk4urlM",catNOT , Privacidad.PUBLICO);
 		String V8="Ingenieria de Muestra 2017";
-		ICU.aniadirVideo(HG, V8, null, duracion, fechaNac,"https://youtu.be/RnaYRA1k5j4", catNOT, true);
+		ICU.aniadirVideo(HG, V8, null, duracion, fechaNac,"https://youtu.be/RnaYRA1k5j4", catNOT, Privacidad.PUBLICO);
 		String V9="Etapa A contramano Liguilla";
-		ICU.aniadirVideo(CS, V9, null, duracion, fechaNac,"https://youtu.be/Es6GRMHXeCQ",catCAR , false);
+		ICU.aniadirVideo(CS, V9, null, duracion, fechaNac,"https://youtu.be/Es6GRMHXeCQ",catCAR , Privacidad.PRIVADO);
 		String V10="Etapa Don Timoteo Liguilla";
-		ICU.aniadirVideo(CS, V10, null, duracion, fechaNac,"https://youtu.be/I_spHBU9ZsI",catCAR , false);
+		ICU.aniadirVideo(CS, V10, null, duracion, fechaNac,"https://youtu.be/I_spHBU9ZsI",catCAR , Privacidad.PRIVADO);
 		String V11="Show de Goles";
-		ICU.aniadirVideo(JB, V11, null, duracion, fechaNac,"https://youtu.be/g46w4_kD_lA", catDEP, true);
+		ICU.aniadirVideo(JB, V11, null, duracion, fechaNac,"https://youtu.be/g46w4_kD_lA", catDEP, Privacidad.PUBLICO);
 		String V12="Pacheco goles mas recordados";
-		ICU.aniadirVideo(TC, V12, null, duracion, fechaNac,"https://youtu.be/wlEd6-HsIxI", catDEP, false);
-		ICU.aniadirVideo(AP, V12, null, duracion, fechaNac,"https://youtu.be/wlEd6-HsIxI", catDEP, false);
+		ICU.aniadirVideo(TC, V12, null, duracion, fechaNac,"https://youtu.be/wlEd6-HsIxI", catDEP, Privacidad.PRIVADO);
+		ICU.aniadirVideo(AP, V12, null, duracion, fechaNac,"https://youtu.be/wlEd6-HsIxI", catDEP, Privacidad.PRIVADO);
 		String V13="Inaguracion Estadio Peñarol";
-		ICU.aniadirVideo(JB, V13, null, duracion, fechaNac,"https://youtu.be/U6XPJ8Vz72A",catDEP ,true);
+		ICU.aniadirVideo(JB, V13, null, duracion, fechaNac,"https://youtu.be/U6XPJ8Vz72A",catDEP ,Privacidad.PUBLICO);
 		String V14="Recoba 20 mejores goles";
-		ICU.aniadirVideo(CS, V14, null, duracion, fechaNac,"https://youtu.be/Gy3fZhWdLEQ", catDEP, false);
-		ICU.aniadirVideo(AR, V14, null, duracion, fechaNac,"https://youtu.be/Gy3fZhWdLEQ", catDEP, false);
+		ICU.aniadirVideo(CS, V14, null, duracion, fechaNac,"https://youtu.be/Gy3fZhWdLEQ", catDEP, Privacidad.PRIVADO);
+		ICU.aniadirVideo(AR, V14, null, duracion, fechaNac,"https://youtu.be/Gy3fZhWdLEQ", catDEP, Privacidad.PRIVADO);
 		String V15="Entrevita a director CUTI";
-		ICU.aniadirVideo(NJ, V15, null, duracion, fechaNac,"https://youtu.be/Eq5uBEzI6qs",catCYT,true);
+		ICU.aniadirVideo(NJ, V15, null, duracion, fechaNac,"https://youtu.be/Eq5uBEzI6qs",catCYT,Privacidad.PUBLICO);
 		String V16="Ventana al futuro Uruguay y deficit de ingenieros";
-		ICU.aniadirVideo(NJ, V16, null, duracion, fechaNac,"https://youtu.be/zBR2pnASlQE",catCYT ,true);
+		ICU.aniadirVideo(NJ, V16, null, duracion, fechaNac,"https://youtu.be/zBR2pnASlQE",catCYT ,Privacidad.PUBLICO);
 		
 		//LISTAS PARTICULARES //tienen categoria??
 		//ICU.nuevaListaParticular(String nickU, String nombreL, Boolean privada)

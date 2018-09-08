@@ -1,5 +1,7 @@
 package uytube.logica;
 
+import uytube.logica.SystemHandler.Privacidad;
+
 public class DtVideo {
 	private Integer IDVideo;
 	private String nombre;
@@ -9,7 +11,7 @@ public class DtVideo {
 	private DtFecha fecha_publicacion;
 	private String URL;
 	private DtCategoria cat;
-	private boolean privacidad;
+	private Privacidad privacidad;
 	
 	public DtVideo(Video v) {
 		IDVideo=v.getIDVideo();
@@ -50,7 +52,7 @@ public class DtVideo {
 		return cat;
 	}
 	
-	public boolean getPrivacidad() {
+	public Privacidad getPrivacidad() {
 		return privacidad;
 	}
 	

@@ -21,6 +21,7 @@ import uytube.logica.DtVideo;
 import uytube.logica.ListaReproduccion;
 import uytube.logica.Particular;
 import uytube.logica.PorDefecto;
+import uytube.logica.SystemHandler.Privacidad;
 import uytube.logica.Usuario;
 import uytube.logica.UsuarioCtrl;
 import uytube.logica.Video;
@@ -87,8 +88,8 @@ public class VideoCtrlTest {
 		DtCategoria[] cates=VCU.listarCategorias();
 		DtCategoria cate=cates[0];
 		
-		Video video=new Video("nombreLPCE","duenioLPCE","descr",20,fecha,"hola.com",cate,true);
-		Video video2=new Video("nombre2LPCE","duenio2LPCE","descr2",20,fecha,"hola2.com",cate,true);
+		Video video=new Video("nombreLPCE","duenioLPCE","descr",20,fecha,"hola.com",cate,Privacidad.PRIVADO);
+		Video video2=new Video("nombre2LPCE","duenio2LPCE","descr2",20,fecha,"hola2.com",cate,Privacidad.PRIVADO);
 		
 		categoriaE.addVideo(video);
 		categoriaE.addVideo(video2);
@@ -109,11 +110,11 @@ public class VideoCtrlTest {
 		String duenioVideo="duenioLC";
 		String comentadorVideo1="comentador1LC";
 
-		UCU.nuevoUsuario(duenioVideo,"Jose","Perez","email", fecha,null,"duenioCanal","descripcion",true,"nombreCategoria");
-		UCU.nuevoUsuario(comentadorVideo1,"Roberto","Rodriguez","email2", fecha,null,"duenioCanal2","descripcion2",true,"nombreCategoria");
+		UCU.nuevoUsuario(duenioVideo,"Jose","Perez","email", fecha,null,"duenioCanal","descripcion",Privacidad.PRIVADO,"nombreCategoria");
+		UCU.nuevoUsuario(comentadorVideo1,"Roberto","Rodriguez","email2", fecha,null,"duenioCanal2","descripcion2",Privacidad.PRIVADO,"nombreCategoria");
 		
 		String nombreVideo="nombreListarComentarios";
-		UCU.aniadirVideo(duenioVideo,nombreVideo,"descr",20,fecha,"hola.com",null,true);
+		UCU.aniadirVideo(duenioVideo,nombreVideo,"descr",20,fecha,"hola.com",null,Privacidad.PRIVADO);
 		DtVideo dtVideo=UCU.obtenerInfoAdicVideo(duenioVideo, nombreVideo);
 		VCU.nuevoComentario(dtVideo.getIDVideo(), comentadorVideo1, fecha, "contenido");
 		Integer IDCOM=VCU.verDetallesVideoExt(dtVideo.getIDVideo()).getComentarios()[0].getIDComentario();
@@ -139,12 +140,12 @@ public class VideoCtrlTest {
 		String duenioVideo="duenioVV";
 		String gustaVideo1="gustaVV";
 		String noGustaVideo1="nogustaVV";
-		UCU.nuevoUsuario(duenioVideo,"Jose","Perez","email", fecha,null,"duenioCanal","descripcion",true,"nombreCategoria");
-		UCU.nuevoUsuario(gustaVideo1,"Juan","Gimenez","email3", fecha,null,"duenioCanal3","descripcion3",true,"nombreCategoria");
-		UCU.nuevoUsuario(noGustaVideo1,"Pablo","Pereira","email4", fecha,null,"duenioCanal4","descripcion4",true,"nombreCategoria");
+		UCU.nuevoUsuario(duenioVideo,"Jose","Perez","email", fecha,null,"duenioCanal","descripcion",Privacidad.PRIVADO,"nombreCategoria");
+		UCU.nuevoUsuario(gustaVideo1,"Juan","Gimenez","email3", fecha,null,"duenioCanal3","descripcion3",Privacidad.PRIVADO,"nombreCategoria");
+		UCU.nuevoUsuario(noGustaVideo1,"Pablo","Pereira","email4", fecha,null,"duenioCanal4","descripcion4",Privacidad.PRIVADO,"nombreCategoria");
 		
 		String nombreVideo="nombreValorarVideo";
-		UCU.aniadirVideo(duenioVideo,nombreVideo,"descr",20,fecha,"hola.com",null,true);
+		UCU.aniadirVideo(duenioVideo,nombreVideo,"descr",20,fecha,"hola.com",null,Privacidad.PRIVADO);
 		
 		DtVideo dtVideo=UCU.obtenerInfoAdicVideo(duenioVideo, nombreVideo);
 		VCU.valorarVideo(dtVideo.getIDVideo(),gustaVideo1 , true);
@@ -173,13 +174,13 @@ public class VideoCtrlTest {
 		String comentadorVideo1="comentador1DVE";
 		String gustaVideo1="gustaDVE";
 		String noGustaVideo1="nogustaDVE";
-		UCU.nuevoUsuario(duenioVideo,"Jose","Perez","email", fecha,null,"duenioCanal","descripcion",true,"nombreCategoria");
-		UCU.nuevoUsuario(comentadorVideo1,"Roberto","Rodriguez","email2", fecha,null,"duenioCanal2","descripcion2",true,"nombreCategoria");
-		UCU.nuevoUsuario(gustaVideo1,"Juan","Gimenez","email3", fecha,null,"duenioCanal3","descripcion3",true,"nombreCategoria");
-		UCU.nuevoUsuario(noGustaVideo1,"Pablo","Pereira","email4", fecha,null,"duenioCanal4","descripcion4",true,"nombreCategoria");
+		UCU.nuevoUsuario(duenioVideo,"Jose","Perez","email", fecha,null,"duenioCanal","descripcion",Privacidad.PRIVADO,"nombreCategoria");
+		UCU.nuevoUsuario(comentadorVideo1,"Roberto","Rodriguez","email2", fecha,null,"duenioCanal2","descripcion2",Privacidad.PRIVADO,"nombreCategoria");
+		UCU.nuevoUsuario(gustaVideo1,"Juan","Gimenez","email3", fecha,null,"duenioCanal3","descripcion3",Privacidad.PRIVADO,"nombreCategoria");
+		UCU.nuevoUsuario(noGustaVideo1,"Pablo","Pereira","email4", fecha,null,"duenioCanal4","descripcion4",Privacidad.PRIVADO,"nombreCategoria");
 		DtUsuario gustaVideo =UCU.listarDatosUsuario(gustaVideo1);
 		DtUsuario noGustaVideo =UCU.listarDatosUsuario(noGustaVideo1);
-		UCU.aniadirVideo(duenioVideo,nombreVideo,"descr",20,fecha,"hola.com",cate,true);
+		UCU.aniadirVideo(duenioVideo,nombreVideo,"descr",20,fecha,"hola.com",cate,Privacidad.PRIVADO);
 		DtVideo dtVideo=UCU.obtenerInfoAdicVideo(duenioVideo, nombreVideo);
 		VCU.nuevoComentario(dtVideo.getIDVideo(),comentadorVideo1 , fecha, "hola que ase");
 		VCU.valorarVideo(dtVideo.getIDVideo(),gustaVideo1 , true);
@@ -209,13 +210,13 @@ public class VideoCtrlTest {
 		DtFecha fecha=new DtFecha(new Date(0));
 		String nombreVideo="nombreIAD";
 		String duenioVideo="duenioIAD";
-		UCU.nuevoUsuario(duenioVideo,"Jose","Perez","email", fecha,null,"duenioCanal","descripcion",true,"nombreCategoria");
-		UCU.aniadirVideo(duenioVideo,nombreVideo,"descr",20,fecha,"hola.com",cate,true);		
+		UCU.nuevoUsuario(duenioVideo,"Jose","Perez","email", fecha,null,"duenioCanal","descripcion",Privacidad.PRIVADO,"nombreCategoria");
+		UCU.aniadirVideo(duenioVideo,nombreVideo,"descr",20,fecha,"hola.com",cate,Privacidad.PRIVADO);		
 		DtVideo infoActual=VCU.infoAddVideo(UCU.obtenerInfoAdicVideo(duenioVideo, nombreVideo).getIDVideo());
 		assertEquals(true, infoActual.getNombre()==nombreVideo);
 		assertEquals(true, infoActual.getCategoria().equals(cate));
 		assertEquals(true, infoActual.getDescripcion()=="descr");
-		assertEquals(true, infoActual.getPrivacidad()==true);
+		assertEquals(true, infoActual.getPrivacidad()==Privacidad.PRIVADO);
 	}
 
 	@Test
@@ -229,8 +230,8 @@ public class VideoCtrlTest {
 		DtCategoria cate1=null;
 		DtCategoria cate2=new DtCategoria(categoriaE);
 		
-		Video video=new Video("nombre","duenio","descr",20,fecha,"hola.com",cate1,true);
-		Video video2=new Video("nombre2","duenio2","descr2",20,fecha,"hola2.com",cate2,true);
+		Video video=new Video("nombre","duenio","descr",20,fecha,"hola.com",cate1,Privacidad.PRIVADO);
+		Video video2=new Video("nombre2","duenio2","descr2",20,fecha,"hola2.com",cate2,Privacidad.PRIVADO);
 		
 		categoriaE.addVideo(video2);
 		DtVideo[] videosListados=VCU.listarVideos();

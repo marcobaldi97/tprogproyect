@@ -2,6 +2,8 @@ package uytube.logica;
 import java.util.HashMap;
 import java.util.Map;
 
+import uytube.logica.SystemHandler.Privacidad;
+
 public class Usuario {
 	private String nickname;
 	private String nombre;
@@ -13,7 +15,7 @@ public class Usuario {
     private Map<String,Usuario> usuariosQueSigue;
     private Map<String,Usuario> usuariosQueLeSiguen;
 	
-	public Usuario(String nick,String nom, String ape, String e, DtFecha fn, byte[] fo,String nombreCanal,String desc,Boolean privacidadE, String catE) {
+	public Usuario(String nick,String nom, String ape, String e, DtFecha fn, byte[] fo,String nombreCanal,String desc,Privacidad privacidadE, String catE) {
 		// TODO Auto-generated constructor stub
 		nickname = nick;
 		nombre = nom;
@@ -27,7 +29,7 @@ public class Usuario {
 		
 	}
 	
-	public void createCanal(String nom,String pro,String desc, Boolean privacidadE,String catE) {
+	public void createCanal(String nom,String pro,String desc, Privacidad privacidadE,String catE) {
 		canalPropio = new Canal(nom,pro,desc,privacidadE,catE);
 	}
 	
@@ -93,11 +95,11 @@ public class Usuario {
 		usuariosQueLeSiguen.remove(u.getNickname());
 	}
 	
-	public void aniadirVideo(String nom,String pro, String desc, Integer dur, DtFecha fp, String url, DtCategoria catE, boolean p) {
+	public void aniadirVideo(String nom,String pro, String desc, Integer dur, DtFecha fp, String url, DtCategoria catE, Privacidad p) {
 		canalPropio.aniadirVideo(nom,pro, desc, dur, fp, url, catE, p);
 	}
 	
-	public void ingresarNuevosDatosVideo(String nom, String d, int dur, DtFecha fp, String url, DtCategoria catE, boolean p) {
+	public void ingresarNuevosDatosVideo(String nom, String d, int dur, DtFecha fp, String url, DtCategoria catE, Privacidad p) {
 		canalPropio.ingresarNuevosDatosVideo(nom, d, dur, fp, url, catE, p);
 	}
 	
@@ -176,7 +178,7 @@ public class Usuario {
 		return canalPropio.memberVideoLista(idVideo, nombreListaReproduccion);	
 	}
 
-	public void modificarDatosCanal(String nombreCanal, String descripcion, Boolean privacidad, String catE) {
+	public void modificarDatosCanal(String nombreCanal, String descripcion, Privacidad privacidad, String catE) {
 		canalPropio.modificarDatosCanal(nombreCanal,descripcion,privacidad,catE);
 	}
 

@@ -3,7 +3,9 @@ package uytube.admin.videos;
 import java.awt.EventQueue;
 
 import javax.swing.JInternalFrame;
+
 import java.awt.GridLayout;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
@@ -14,21 +16,26 @@ import uytube.logica.DtCategoria;
 import uytube.logica.DtFecha;
 import uytube.logica.IUsuarioCtrl;
 import uytube.logica.IVideoCtrl;
+import uytube.logica.SystemHandler.Privacidad;
 
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Date;
 
 import org.eclipse.wb.swing.FocusTraversalOnArray;
+
 import java.awt.Component;
 
 public class AltaVideo extends JInternalFrame {
@@ -199,9 +206,11 @@ public class AltaVideo extends JInternalFrame {
 								}
 								//termino de asignar categoria
 								//Asigno privado
-								boolean p = false;
-								if(comboBoxPrivacidad.getSelectedItem() == "privado") p = true;
-								else p = false;
+								Privacidad p = Privacidad.PUBLICO;
+								if(comboBoxPrivacidad.getSelectedIndex()==0){ 
+									p = Privacidad.PRIVADO;
+								}else 
+									p = Privacidad.PUBLICO;
 								//termino de asignar privado.
 								iCU.aniadirVideo(nickU, nom, desc, dur, fp, url, catE, p);
 								infoBox("Video creado exitosamente","Exito");

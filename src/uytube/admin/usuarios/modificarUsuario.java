@@ -15,26 +15,38 @@ import uytube.logica.DtUsuario;
 import uytube.logica.Factory;
 import uytube.logica.IUsuarioCtrl;
 import uytube.logica.IVideoCtrl;
+import uytube.logica.SystemHandler.Privacidad;
 
 import javax.swing.JInternalFrame;
 import javax.swing.BoxLayout;
+
 import java.awt.FlowLayout;
 import java.awt.BorderLayout;
+
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
+
 import java.awt.GridBagLayout;
+
 import javax.swing.JLabel;
+
 import java.awt.GridBagConstraints;
+
 import javax.swing.JPanel;
+
 import java.awt.GridLayout;
 import java.awt.Image;
 
 import javax.swing.JComboBox;
 import javax.swing.border.TitledBorder;
+
 import com.jgoodies.forms.layout.FormSpecs;
+
 import javax.swing.JButton;
+
 import java.awt.Insets;
+
 import javax.swing.JTextField;
 import javax.swing.JEditorPane;
 import javax.swing.JList;
@@ -47,13 +59,17 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JTextPane;
 import javax.swing.UIManager;
+
 import java.awt.Color;
+
 import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDateChooser;
+
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.awt.event.ActionEvent;
+
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JScrollPane;
@@ -292,15 +308,15 @@ public class modificarUsuario extends JInternalFrame {
 		btnModificar_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String  nickU, nomC,des,catE;
-				Boolean priv;
+				Privacidad priv;
 				nickU = (String) comboBoxNick.getSelectedItem();
 				nomC = textFieldNomCanal.getText();
 				des=textAreaDesc.getText();
 				catE= (String)comboBoxCatCanal.getSelectedItem();
 				if(rdbtnPrivado.isSelected()){
-					priv=true;
+					priv=Privacidad.PRIVADO;
 				}else{
-					priv=false;
+					priv=Privacidad.PUBLICO;
 				}
 				
 				if(btnModificar_3.getText()=="Guardar"){
@@ -522,7 +538,7 @@ public class modificarUsuario extends JInternalFrame {
 		dateChooser.setDate(usr.getFecha_nacimiento().getFecha());
 		
 		textFieldNomCanal.setText(usrCanal.getNombre());
-		if (usrCanal.getPrivacidad()){
+		if (usrCanal.getPrivacidad()==Privacidad.PRIVADO){
 			rdbtnPrivado.setSelected(true);
 		}else{
 			rdbtnPublico.setSelected(true);
