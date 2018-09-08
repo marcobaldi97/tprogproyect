@@ -54,7 +54,7 @@ public class VideoCtrlTest {
 		Categoria categoriaE=new Categoria("nombreCategoriaListarLDRE");
 		CHU.addCategoria(categoriaE);
 		PorDefecto lr1=new PorDefecto("nombListaListarLDRE","duenioListarLDRE");
-		Particular lr2=new Particular("nombLista2ListarLDRE","duenio2ListarLDRE",false);
+		Particular lr2=new Particular("nombLista2ListarLDRE","duenio2ListarLDRE",Privacidad.PUBLICO);
 		categoriaE.aniadirLDR(lr1);
 		categoriaE.aniadirLDR(lr2);
 		DtListaReproduccion[] listasActual=VCU.listarLDRPorCategoria("nombreCategoriaListarLDRE");
