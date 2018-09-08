@@ -411,7 +411,7 @@ public class modificarUsuario extends JInternalFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				if(comboBoxNick.getSelectedIndex()!=-1 && comboBoxListas.getSelectedIndex()!=-1){
 					DtListaReproduccion dtLista = controlUsr.infoAdicLDR((String)comboBoxNick.getSelectedItem(), (String)comboBoxListas.getSelectedItem());
-					if (dtLista.getPrivado()){
+					if (dtLista.getPrivado()==Privacidad.PRIVADO){
 						rdbtnPrivado_1.setSelected(true);
 					}else{
 						rdbtnPublico_1.setSelected(true);
@@ -450,8 +450,8 @@ public class modificarUsuario extends JInternalFrame {
 				if(button_1.getText()=="Guardar"){
 					String nickU = (String)comboBoxNick.getSelectedItem();
 					String nombreL = (String)comboBoxListas.getSelectedItem();
-					boolean privE=false;
-					if(rdbtnPrivado_1.isSelected()){privE=true;}
+					Privacidad privE=Privacidad.PUBLICO;
+					if(rdbtnPrivado_1.isSelected()){privE=Privacidad.PRIVADO;}
 					controlUsr.cambiarPrivLDR(nickU,nombreL,privE);
 					infoBox("Lista de reproducion modificada","Modificar usuario");
 					button_1.setText("Modificar");

@@ -1,19 +1,21 @@
 package uytube.logica;
 
+import uytube.logica.SystemHandler.Privacidad;
+
 public class Particular extends ListaReproduccion{
-	private boolean privado;
+	private Privacidad privado;
 	
-	public Particular(String n,String pro, boolean p) {
+	public Particular(String n,String pro, Privacidad p) {
 		super(n,pro);
 		privado = p;
 	}
 	
 	
-	public boolean getPrivado() {
+	public Privacidad getPrivado() {
 		return privado;
 	}
 	
-	public void cambiarPrivLDR(Boolean privE) {
+	public void cambiarPrivLDR(Privacidad privE) {
 		privado = privE;
 	}
 

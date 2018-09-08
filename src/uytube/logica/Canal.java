@@ -144,7 +144,7 @@ public class Canal {
 		listasReproduccion.get(nombreLDR).agregarVideo(v);
 	}
 
-	public void cambiarPrivLDR(String nombreL, Boolean privE) {
+	public void cambiarPrivLDR(String nombreL, Privacidad privE) {
 		Particular lr = (Particular) listasReproduccion.get(nombreL);
 		lr.cambiarPrivLDR(privE);
 	}
@@ -222,7 +222,7 @@ public class Canal {
 
 			if (listaReproduccion instanceof Particular) {
 				final Particular listaParticular = (Particular) listaReproduccion;
-				listaParticular.cambiarPrivLDR(true);
+				listaParticular.cambiarPrivLDR(Privacidad.PRIVADO);
 			}
 		}
 	}

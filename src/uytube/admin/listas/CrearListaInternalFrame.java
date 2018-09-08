@@ -3,21 +3,28 @@ package uytube.admin.listas;
 import java.awt.EventQueue;
 
 import javax.swing.JInternalFrame;
+
 import java.awt.FlowLayout;
 import java.awt.BorderLayout;
+
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+
 import java.awt.GridLayout;
+
 import javax.swing.JTextField;
 
 import uytube.logica.IUsuarioCtrl;
+import uytube.logica.SystemHandler.Privacidad;
 
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 
@@ -144,7 +151,7 @@ public class CrearListaInternalFrame extends JInternalFrame {
 			public void actionPerformed(ActionEvent e) {
 				String nombreLista = textFieldNombre.getText();
 				String nickU = (String) comboBoxNick.getSelectedItem();
-				boolean priv=true;
+				Privacidad priv=Privacidad.PUBLICO;
 				
 				//verificar si los datos ingresados estanb bien
 				if(!nombreLista.isEmpty()){
@@ -158,7 +165,7 @@ public class CrearListaInternalFrame extends JInternalFrame {
 							dispose();
 						}
 					}else{
-						if(rdbtnPublica.isSelected()){priv = false;}
+						if(rdbtnPublica.isSelected()){priv = Privacidad.PUBLICO;}
 						if(comboBoxNick.getSelectedIndex()==-1){
 							infoBox("Campos sin completar","Crear Lista");
 						}else if( controlUsr.memberListaReproduccionPropia(nickU, nombreLista)){
