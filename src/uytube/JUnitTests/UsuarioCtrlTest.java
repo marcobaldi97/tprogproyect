@@ -52,7 +52,7 @@ public class UsuarioCtrlTest {
 		String nombreL="nombreListaLDRMember";
 		UCU.nuevoUsuario(nombreU, "Jose", "Ramirez", "www.cosoarroba3",fecha , null, "canal", "descripcion", Privacidad.PUBLICO, null);
 		assertEquals(false, UCU.memberListaReproduccionPropia(nombreU, nombreL));
-		UCU.nuevaListaParticular(nombreU, nombreL, false);
+		UCU.nuevaListaParticular(nombreU, nombreL, Privacidad.PUBLICO);
 		assertEquals(true, UCU.memberListaReproduccionPropia(nombreU, nombreL));
 	}
 
@@ -130,7 +130,7 @@ public class UsuarioCtrlTest {
 		String nombreL="nombreLNuevaLDR particular";
 		UCU.nuevoUsuario(nombreU, "Jose", "Ramirez", "www.cosoarroba3",fecha , null, "canal", "descripcion", Privacidad.PUBLICO, null);
 		assertEquals(false, UCU.memberListaReproduccionPropia(nombreU, nombreL));
-		UCU.nuevaListaParticular(nombreU, nombreL, false);
+		UCU.nuevaListaParticular(nombreU, nombreL, Privacidad.PUBLICO);
 		assertEquals(true, UCU.memberListaReproduccionPropia(nombreU, nombreL));
 	}
 
@@ -150,7 +150,7 @@ public class UsuarioCtrlTest {
 			}
 		}
 		
-		UCU.nuevaListaParticular(nombreU, nombreL, true);
+		UCU.nuevaListaParticular(nombreU, nombreL, Privacidad.PRIVADO);
 		listas=UCU.listarLDRdeUsuario(nombreU);
 		for(String list:listas){
 			if(nombreL==list){
@@ -169,7 +169,7 @@ public class UsuarioCtrlTest {
 		String nombreL="nombreLNuevaLDRPUsuario";
 		String nombreL2="nombreLNuevaLDRPUsuario2";
 		UCU.nuevoUsuario(nombreU, "Jose", "Ramirez", "www.cosoarroba3",fecha , null, "canal", "descripcion", Privacidad.PUBLICO, null);
-		UCU.nuevaListaParticular(nombreU, nombreL, true);
+		UCU.nuevaListaParticular(nombreU, nombreL, Privacidad.PRIVADO);
 		UCU.nuevaListaPorDefecto(nombreL2);
 		String[] listasP=UCU.listarLDRParticularesdeUsuario(nombreU);
 		boolean existe=false;
@@ -197,7 +197,7 @@ public class UsuarioCtrlTest {
 		String nombreV="nombreVagregVidLista";
 		UCU.nuevoUsuario(nombreU, "Jose", "Ramirez", "www.cosoarroba3",fecha , null, "canal", "descripcion", Privacidad.PUBLICO, null);
 		UCU.aniadirVideo(nombreU, nombreV, "descripcion", 20, fecha, "www.hola.tv", null, Privacidad.PUBLICO);
-		UCU.nuevaListaParticular(nombreU, nombreL, false);
+		UCU.nuevaListaParticular(nombreU, nombreL, Privacidad.PUBLICO);
 		DtVideo dt=UCU.obtenerInfoAdicVideo(nombreU, nombreV);
 		Integer IDVideo=dt.getIDVideo();
 		UCU.agregarVideoLista(nombreU, IDVideo, nombreL);
@@ -228,16 +228,16 @@ public class UsuarioCtrlTest {
 		String nombreL="nombreLagregVidLista";
 		String nombreL2="nombreL2";
 		UCU.nuevoUsuario(nombreU, "Jose", "Ramirez", "www.cosoarroba3",fecha , null, "canal", "descripcion", Privacidad.PUBLICO, null);
-		UCU.nuevaListaParticular(nombreU, nombreL, false);
+		UCU.nuevaListaParticular(nombreU, nombreL, Privacidad.PUBLICO);
 		DtListaReproduccion dtLDR=UCU.infoAdicLDR(nombreU, nombreL);
 		UCU.nuevaListaPorDefecto(nombreL2);
 		boolean existe=false;
 		boolean existe2=false;
-		existe=dtLDR.getPrivado();
-		UCU.cambiarPrivLDR(nombreU, nombreL, true);
+		existe=dtLDR.getPrivado()==Privacidad.PUBLICO;
+		UCU.cambiarPrivLDR(nombreU, nombreL, Privacidad.PRIVADO);
 		dtLDR=UCU.infoAdicLDR(nombreU, nombreL);
-		existe2=dtLDR.getPrivado();
-		assertEquals(false, existe);
+		existe2=dtLDR.getPrivado()==Privacidad.PRIVADO;
+		assertEquals(true, existe);
 		assertEquals(true, existe2);
 	}
 
@@ -457,7 +457,7 @@ public class UsuarioCtrlTest {
 		String nombreU="nombreagregarInfoAdicLDR";
 		String nombreL="nombreLagregInfoAdicLDR";
 		UCU.nuevoUsuario(nombreU, "Jose", "Ramirez", "www.cosoarroba3",fecha , null, "canal", "descripcion", Privacidad.PUBLICO, null);
-		UCU.nuevaListaParticular(nombreU, nombreL, false);
+		UCU.nuevaListaParticular(nombreU, nombreL, Privacidad.PUBLICO);
 		DtListaReproduccion dtLDR=UCU.infoAdicLDR(nombreU, nombreL);
 		assertEquals(true,dtLDR.getNombre()==nombreL);
 		assertEquals(true,dtLDR.getPropietario()==nombreU);
@@ -568,7 +568,7 @@ public class UsuarioCtrlTest {
 		String nombreV2="nombreVLYOVLDR2";
 		String nombreL="nombreLYOVLDR";
 		UCU.nuevoUsuario(nombreU, "Jose", "Ramirez", "www.cosoarroba3",fecha , null, "canal", "descripcion", Privacidad.PUBLICO, null);
-		UCU.nuevaListaParticular(nombreU, nombreL, true);
+		UCU.nuevaListaParticular(nombreU, nombreL, Privacidad.PRIVADO);
 		UCU.aniadirVideo(nombreU, nombreV1, "descrito", 30, fecha, "url", null, Privacidad.PRIVADO);
 		UCU.aniadirVideo(nombreU, nombreV2, "descrito2", 40, fecha, "url2", null, Privacidad.PUBLICO);
 		DtVideo video1=UCU.obtenerInfoAdicVideo(nombreU, nombreV1);
