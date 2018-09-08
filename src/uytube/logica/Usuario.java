@@ -134,12 +134,12 @@ public class Usuario {
 			canalPropio.agregarVideoLDR(id,nombreLDR);
 	}
 	
-	public void nuevaListaParticular(String nombreL,String pro, Boolean privada) {
+	public void nuevaListaParticular(String nombreL,String pro, Privacidad privada) {
 		Particular lr = new Particular(nombreL,pro,privada);
 		canalPropio.addListaReproduccion(lr);
 	}
 	
-	public void cambiarPrivLDR(String nombreL, Boolean privE){
+	public void cambiarPrivLDR(String nombreL, Privacidad privE){
 		canalPropio.cambiarPrivLDR(nombreL,privE);
 	}
 

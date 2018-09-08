@@ -212,12 +212,12 @@ public class DatosDePrueba {
 		
 		//LISTAS PARTICULARES //tienen categoria??
 		//ICU.nuevaListaParticular(String nickU, String nombreL, Boolean privada)
-		String LP1="Nostalgia";	ICU.nuevaListaParticular(KH,LP1,true); //MUS LP1
-		String LP2="De fiesta"; ICU.nuevaListaParticular(TC,LP2,false);//MUS DEP LP2
- 		String LP3="Novedades FING"; ICU.nuevaListaParticular(HG,LP3,true);//NOT LP3
-		String LP4="De todo un poco";ICU.nuevaListaParticular(CS,LP4,false);//MUS DEP CAR LP4
-		String LP5="Noticias y CYT";ICU.nuevaListaParticular(NJ,LP5,true); //NOT CYT LP5
-		String LP6="Solo deportes";ICU.nuevaListaParticular(JB,LP6,true); //dep LP6
+		String LP1="Nostalgia";	ICU.nuevaListaParticular(KH,LP1,Privacidad.PUBLICO); //MUS LP1
+		String LP2="De fiesta"; ICU.nuevaListaParticular(TC,LP2,Privacidad.PRIVADO);//MUS DEP LP2
+ 		String LP3="Novedades FING"; ICU.nuevaListaParticular(HG,LP3,Privacidad.PUBLICO);//NOT LP3
+		String LP4="De todo un poco";ICU.nuevaListaParticular(CS,LP4,Privacidad.PRIVADO);//MUS DEP CAR LP4
+		String LP5="Noticias y CYT";ICU.nuevaListaParticular(NJ,LP5,Privacidad.PUBLICO); //NOT CYT LP5
+		String LP6="Solo deportes";ICU.nuevaListaParticular(JB,LP6,Privacidad.PUBLICO); //dep LP6
 		
 		//DtVideo video = ICU.obtenerInfoAdicVideo(nicknameAutor, nombreVideo);
 	//	int idVideo = video.getIDVideo();

@@ -3,7 +3,9 @@ package uytube.admin.listas;
 import java.awt.EventQueue;
 
 import javax.swing.JInternalFrame;
+
 import java.awt.GridLayout;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
@@ -15,13 +17,17 @@ import uytube.logica.DtListaReproduccion;
 import uytube.logica.IUsuarioCtrl;
 import uytube.logica.IVideoCtrl;
 import uytube.logica.Particular;
+import uytube.logica.SystemHandler.Privacidad;
 
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import org.eclipse.wb.swing.FocusTraversalOnArray;
+
 import java.awt.Component;
 
 public class ModificarListaFrame extends JInternalFrame {
@@ -100,8 +106,8 @@ public class ModificarListaFrame extends JInternalFrame {
 						String nickname = (String) comboBoxNicknames.getSelectedItem();
 						String nombreLista = (String) comboBoxListas.getSelectedItem();
 						DtListaReproduccion dtLista = iCU.infoAdicLDR(nickname, nombreLista);
-						Boolean privacidad = dtLista.getPrivado(); 
-						if (privacidad == true) {
+						Privacidad privacidad = dtLista.getPrivado(); 
+						if (privacidad == Privacidad.PRIVADO) {
 							group.setSelected(rdbtnPrivada.getModel(),true);
 						}else group.setSelected(rdbtnPublica.getModel(),true);
 						ready2 = true;
@@ -147,8 +153,8 @@ public class ModificarListaFrame extends JInternalFrame {
 					if(ready2) {
 						String nickname = (String) comboBoxNicknames.getSelectedItem();
 						String nombreLista = (String) comboBoxListas.getSelectedItem();
-						Boolean privacidad = false;
-						if(group.isSelected(rdbtnPrivada.getModel())) privacidad = true;
+						Privacidad privacidad = Privacidad.PUBLICO;
+						if(group.isSelected(rdbtnPrivada.getModel())) privacidad = Privacidad.PRIVADO;
 						iCU.cambiarPrivLDR(nickname, nombreLista, privacidad);
 						infoBox("Se ha modificado la lista de reproduccion.","¡Exito!");
 						setVisible(false);

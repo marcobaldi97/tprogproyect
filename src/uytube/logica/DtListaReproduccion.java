@@ -1,18 +1,19 @@
 package uytube.logica;
 
 import uytube.logica.ListaReproduccion.TipoLista;
+import uytube.logica.SystemHandler.Privacidad;
 
 public class DtListaReproduccion {
 	private String nombre;
 	private String propietario;
-	private boolean privado;
+	private Privacidad privado;
 	private DtCategoria[] categoriasLDR;
 	private TipoLista tipoL;
 	
 	public DtListaReproduccion(PorDefecto ldr){
 		nombre=ldr.getNombre();
 		propietario= ldr.getPropietario();
-		privado=true;
+		privado=Privacidad.PRIVADO;
 		categoriasLDR=ldr.getInfoCategorias();
 		tipoL=TipoLista.PORDEFECTO;
 	}
@@ -24,7 +25,7 @@ public class DtListaReproduccion {
 		tipoL=TipoLista.PARTICULAR;
 	}
 	
-	public boolean getPrivado(){ 
+	public Privacidad getPrivado(){ 
 		return privado;
 	}
 	public TipoLista getTipoLista(){

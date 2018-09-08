@@ -66,7 +66,7 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 
 	}
 
-	public void nuevaListaParticular(String nickU, String nombreL, Boolean privada) {
+	public void nuevaListaParticular(String nickU, String nombreL, Privacidad privada) {
 		Usuario u = usuarioh.find(nickU);
 		u.nuevaListaParticular(nombreL, nickU, privada);
 	}
@@ -87,7 +87,7 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 
 	}
 
-	public void cambiarPrivLDR(String nickU, String nombreL, Boolean privE) {
+	public void cambiarPrivLDR(String nickU, String nombreL, Privacidad privE) {
 		Usuario u = usuarioh.find(nickU);
 		u.cambiarPrivLDR(nombreL, privE);
 	}

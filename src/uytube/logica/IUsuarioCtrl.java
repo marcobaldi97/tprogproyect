@@ -11,13 +11,13 @@ public interface IUsuarioCtrl {
 
 	public abstract boolean nuevaListaPorDefecto(String nombreL);
 
-	public abstract void nuevaListaParticular(String nickU, String nombreL, Boolean privada);
+	public abstract void nuevaListaParticular(String nickU, String nombreL, Privacidad privada);
 
 	public abstract String[] listarLDRdeUsuario(String nickU);
 
 	public abstract void agregarVideoLista(String nickU, Integer id_video, String nombreLDR);
 
-	public abstract void cambiarPrivLDR(String nickU, String nombreL, Boolean privE);
+	public abstract void cambiarPrivLDR(String nickU, String nombreL, Privacidad privE);
 
 	public abstract void seguirUsuario(String Usu1, String Usu2);
 

@@ -18,6 +18,7 @@ import uytube.logica.DtVideo;
 import uytube.logica.IUsuarioCtrl;
 import uytube.logica.IVideoCtrl;
 import uytube.logica.ListaReproduccion.TipoLista;
+import uytube.logica.SystemHandler.Privacidad;
 
 import javax.swing.JComboBox;
 import javax.swing.JList;
@@ -197,7 +198,7 @@ public class ConsultaListaInternalFrame extends JInternalFrame {
 						//fin de carga de videos.
 						DtListaReproduccion dtLista = iCU.infoAdicLDR(nombreSeleccionado, nombreLista);
 						textFieldNombreLista.setText(dtLista.getNombre());
-						if(dtLista.getPrivado() == true) {
+						if(dtLista.getPrivado() == Privacidad.PRIVADO) {
 							textFieldPrivacidadLista.setText("Privada");
 						}else textFieldPrivacidadLista.setText("Publica");
 						if(dtLista.getTipoLista() ==TipoLista.PARTICULAR){
