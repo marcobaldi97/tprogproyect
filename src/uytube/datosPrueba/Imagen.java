@@ -1,4 +1,4 @@
-package uytube.admin;
+package uytube.datosPrueba;
 
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
@@ -11,6 +11,8 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+
+import uytube.admin.adminPrincipal;
 
 public class Imagen {
 

@@ -15,8 +15,8 @@ public abstract class ListaReproduccion {
 		videos = new HashMap<Integer, Video>();
 		categorias = new HashMap<String, Categoria>();
 	}
-	public Video getVideo(Integer id){
-		return videos.get(id);
+	public Video getVideo(Integer idVideo){
+		return videos.get(idVideo);
 	}
 	public enum TipoLista{
 		PORDEFECTO,
@@ -25,11 +25,11 @@ public abstract class ListaReproduccion {
 	public String getNombre() {
 		return nombre;
 	}
-	public void addVideoToMap(Video v){
-		videos.put(v.getIDVideo(), v);
+	public void addVideoToMap(Video videoAAgregar){
+		videos.put(videoAAgregar.getIDVideo(), videoAAgregar);
 	}
-	public void removeVideoFromMap(Integer id){
-		videos.remove(id);
+	public void removeVideoFromMap(Integer idVideo){
+		videos.remove(idVideo);
 	}
 
 	public abstract DtListaReproduccion verDetallesListareproduccion();
@@ -54,9 +54,9 @@ public abstract class ListaReproduccion {
 
 	}
 
-	public abstract void removerVideo(Integer id);
+	public abstract void removerVideo(Integer idVideo);
 
-	public abstract void agregarVideo(Video v);
+	public abstract void agregarVideo(Video videoAAgregar);
 
 	public DtCategoria[] getInfoCategorias() {
 		DtCategoria[] res = new DtCategoria[categorias.size()];

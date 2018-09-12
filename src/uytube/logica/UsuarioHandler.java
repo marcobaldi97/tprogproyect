@@ -10,30 +10,30 @@ public class UsuarioHandler {
 		usuarios = new HashMap<String, Usuario>();
 	}
 	
-	public void aniadirUsuario(Usuario u) {
-		usuarios.put(u.getNickname(), u);
+	public void aniadirUsuario(Usuario usuarioParticular) {
+		usuarios.put(usuarioParticular.getNickname(), usuarioParticular);
 	}
 	
-	public void removerUsuario(Usuario u) {
-		usuarios.remove(u.getNickname());
+	public void removerUsuario(Usuario usuarioParticular) {
+		usuarios.remove(usuarioParticular.getNickname());
 	}
 	
 	public Usuario find(String nickname) {
 		return usuarios.get(nickname);
 	}
 	
-	public boolean memberUsuario(Usuario u) {
-		return usuarios.containsValue(u);
+	public boolean memberUsuario(Usuario usuarioParticular) {
+		return usuarios.containsValue(usuarioParticular);
 	}
 	
-	public boolean memberNickname(String n) {
-		return usuarios.containsKey(n);
+	public boolean memberNickname(String nickUsuario) {
+		return usuarios.containsKey(nickUsuario);
 	}
 	
-	public boolean memberEmail(String e) {
+	public boolean memberEmail(String emailUsuario) {
 		Boolean existe = false;
 		for(Map.Entry<String, Usuario> entry : usuarios.entrySet()) {
-			if(e == entry.getValue().getEmail())
+			if(emailUsuario == entry.getValue().getEmail())
 				existe = true;
 		}
 		return existe;

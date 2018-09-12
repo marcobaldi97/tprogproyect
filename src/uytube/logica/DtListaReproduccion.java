@@ -44,8 +44,8 @@ public class DtListaReproduccion {
 		return nombre;
 	}
 	
-	public boolean equals(DtListaReproduccion dt) {
-		return nombre == dt.getNombre();
+	public boolean equals(DtListaReproduccion other) {
+		return nombre == other.getNombre();
 	}
 	public String getPropietario() {
 		return propietario;

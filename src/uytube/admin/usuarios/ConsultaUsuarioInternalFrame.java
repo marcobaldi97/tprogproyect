@@ -17,11 +17,11 @@ import javax.swing.JTextField;
 
 import com.toedter.calendar.JDateChooser;
 
-import uytube.admin.Imagen;
 import uytube.admin.adminPrincipal;
 import uytube.admin.listas.ConsultaListaInternalFrame;
 import uytube.admin.videos.ModificarVideo;
 import uytube.admin.videos.consultar.ConsultarVideoInternalFrame;
+import uytube.datosPrueba.Imagen;
 import uytube.logica.DtCanal;
 import uytube.logica.DtCategoria;
 import uytube.logica.DtListaReproduccion;

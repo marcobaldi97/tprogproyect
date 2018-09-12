@@ -22,16 +22,16 @@ public class VideoHandler {
 		return instancia;
 	}
 	
-	public void addVideo(Video v) {
-		videos.put(IDActual, v);
+	public void addVideo(Video vidAAgregar) {
+		videos.put(IDActual, vidAAgregar);
 	}
 	
-	public void removerVideo(Video v) {
-		videos.remove(v.getIDVideo());
+	public void removerVideo(Video vidARemover) {
+		videos.remove(vidARemover.getIDVideo());
 	}
 	
-	public Video find(Integer i) {
-		return videos.get(i);
+	public Video find(Integer IDClave) {
+		return videos.get(IDClave);
 	}
 	
 	public DtVideo[] listarVideos() {
@@ -45,12 +45,12 @@ public class VideoHandler {
 		return infoVideos;
 	}
 	public DtVideo member(String nomVideo,String nick) {
-		DtVideo v = null;
+		DtVideo infoVideo = null;
 		for(Entry<Integer, Video> entry : videos.entrySet()) {
 			if(nomVideo == entry.getValue().getNombre() && nick== entry.getValue().getPropietario())
-				v=new DtVideo(entry.getValue());
+				infoVideo=new DtVideo(entry.getValue());
 		}
-		return v;
+		return infoVideo;
 	}
 	
 	
