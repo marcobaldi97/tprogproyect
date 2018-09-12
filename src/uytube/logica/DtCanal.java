@@ -10,11 +10,11 @@ public class DtCanal {
 	private Privacidad privado;
 	private DtCategoria categoria;
 
-	public DtCanal(Canal c){
-		nombre=c.getNombre();
-		descripcion=c.getDescripcion();
-		privado=c.getPrivacidad();
-		categoria = c.getCategoria();
+	public DtCanal(Canal chanel){
+		nombre=chanel.getNombre();
+		descripcion=chanel.getDescripcion();
+		privado=chanel.getPrivacidad();
+		categoria = chanel.getCategoria();
 	}
 	
 	public String getNombre() {
@@ -33,8 +33,8 @@ public class DtCanal {
 		return categoria;
 	}
 	
-	public Boolean equals(DtCanal c) {
-		return (nombre == c.getNombre()) && (descripcion == c.getDescripcion()) && (privado == c.getPrivacidad());
+	public Boolean equals(DtCanal chanel) {
+		return (nombre == chanel.getNombre()) && (descripcion == chanel.getDescripcion()) && (privado == chanel.getPrivacidad());
 	}
 
 }
