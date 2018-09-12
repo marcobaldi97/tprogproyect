@@ -12,68 +12,68 @@ public class VideoCtrl implements IVideoCtrl{
 	}
 	public DtListaReproduccion [] listarLDRPorCategoria(String cat) 
 	{
-		CategoriaHandler ch=CategoriaHandler.getInstance();
-		if(ch.isMember(cat)){
-			Categoria cate=ch.find(cat);
+		CategoriaHandler CatHandler=CategoriaHandler.getInstance();
+		if(CatHandler.isMember(cat)){
+			Categoria cate=CatHandler.find(cat);
 			return cate.listarLDR();
 		}
 		else return null;
 	}
 	public DtVideo[] listarVideosPorCategoria(String cat){
-		CategoriaHandler ch=CategoriaHandler.getInstance();
-		if(ch.isMember(cat)){
-			Categoria cate=ch.find(cat);
+		CategoriaHandler CatHandler=CategoriaHandler.getInstance();
+		if(CatHandler.isMember(cat)){
+			Categoria cate=CatHandler.find(cat);
 			return cate.listarVideos();
 		}
 		else return null;
 	}
 	public DtComentario[] listarComentarios(Integer IDVideo){
-		VideoHandler vh=VideoHandler.getInstance();
-		Video v=vh.find(IDVideo);
-		return v.getComentarios();
+		VideoHandler VidHandler=VideoHandler.getInstance();
+		Video videoEspecifico=VidHandler.find(IDVideo);
+		return videoEspecifico.getComentarios();
 	}
 	public void nuevoComentario(Integer IDVideo,String nickU,DtFecha fecha,String contenido){
-		VideoHandler vh=VideoHandler.getInstance();
-		Video v=vh.find(IDVideo);
-		v.nuevoComentario(nickU, fecha, contenido);
+		VideoHandler VidHandler=VideoHandler.getInstance();
+		Video videoEspecifico=VidHandler.find(IDVideo);
+		videoEspecifico.nuevoComentario(nickU, fecha, contenido);
 	}
 	public void responderComentario(Integer IDVideo, Integer IDCR, String nickU, DtFecha fecha, String contenido){
-		VideoHandler vh=VideoHandler.getInstance();
-		Video v=vh.find(IDVideo);
-		v.responderComentario(IDCR, nickU, fecha, contenido);
+		VideoHandler VidHandler=VideoHandler.getInstance();
+		Video videoEspecifico=VidHandler.find(IDVideo);
+		videoEspecifico.responderComentario(IDCR, nickU, fecha, contenido);
 	}
 	public void valorarVideo(Integer IDVideo, String nickU, boolean valoracion){
-		VideoHandler vh=VideoHandler.getInstance();
-		Video v=vh.find(IDVideo);
-		v.valorarVideo(nickU, valoracion);
+		VideoHandler VidHandler=VideoHandler.getInstance();
+		Video videoEspecifico=VidHandler.find(IDVideo);
+		videoEspecifico.valorarVideo(nickU, valoracion);
 	}
 	public DtInfoVideo verDetallesVideoExt(Integer IDVideo){
-		VideoHandler vh=VideoHandler.getInstance();
-		Video v=vh.find(IDVideo);
-		return v.getInfoVideoExt();
+		VideoHandler VidHandler=VideoHandler.getInstance();
+		Video videoEspecifico=VidHandler.find(IDVideo);
+		return videoEspecifico.getInfoVideoExt();
 	}
 	public DtVideo infoAddVideo(Integer IDVideo){
-		VideoHandler vh=VideoHandler.getInstance();
-		Video v=vh.find(IDVideo);
-		return v.verDetallesVideo();
+		VideoHandler VidHandler=VideoHandler.getInstance();
+		Video videoEspecifico=VidHandler.find(IDVideo);
+		return videoEspecifico.verDetallesVideo();
 	}
 	public DtVideo[] listarVideos(){
-		VideoHandler vh=VideoHandler.getInstance();
-		return vh.listarVideos();
+		VideoHandler VidHandler=VideoHandler.getInstance();
+		return VidHandler.listarVideos();
 	}
 	public DtCategoria[] listarCategorias(){
-		CategoriaHandler ch=CategoriaHandler.getInstance();
-		return ch.listarCategorias();
+		CategoriaHandler CatHandler=CategoriaHandler.getInstance();
+		return CatHandler.listarCategorias();
 	}
 	public void crearCategoria(String nombreCat){
-		CategoriaHandler ch=CategoriaHandler.getInstance();
-		if(!ch.isMember(nombreCat)){
-			Categoria c=new Categoria(nombreCat);
-			ch.addCategoria(c);
+		CategoriaHandler CatHandler=CategoriaHandler.getInstance();
+		if(!CatHandler.isMember(nombreCat)){
+			Categoria nuevaCat=new Categoria(nombreCat);
+			CatHandler.addCategoria(nuevaCat);
 		}
 	}
 	public boolean existeCategoria(String nombreCat){
-		CategoriaHandler ch=CategoriaHandler.getInstance();
-		return ch.isMember(nombreCat);
+		CategoriaHandler CatHandler=CategoriaHandler.getInstance();
+		return CatHandler.isMember(nombreCat);
 	}
 }

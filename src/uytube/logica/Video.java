@@ -20,13 +20,13 @@ public class Video {
 	private Privacidad privacidad;
 	private Map<Integer, Comentario> comentarios;
 	private List<ListaReproduccion> listas;
-	private ArrayList<Puntuacion> puntuaciones;
+	private List<Puntuacion> puntuaciones;
 
 	public Video(String nombreVideo, String propietario, String descripcionV, int duracionV, DtFecha fechapubli,
-			String url, DtCategoria categ, Privacidad p) {
-		VideoHandler vh = VideoHandler.getInstance();
-		SystemHandler sh = SystemHandler.getInstance();
-		IDVideo = vh.getNewID();
+			String url, DtCategoria categ, Privacidad privacidadVideo) {
+		VideoHandler vidHandler = VideoHandler.getInstance();
+		SystemHandler SysHandler = SystemHandler.getInstance();
+		IDVideo = vidHandler.getNewID();
 		nombre = nombreVideo;
 		setPropietario(propietario);
 		descripcion = descripcionV;
@@ -34,16 +34,16 @@ public class Video {
 		fecha_publicacion = fechapubli;
 		URL = url;
 		listas = new LinkedList<ListaReproduccion>();
-		CategoriaHandler ch = CategoriaHandler.getInstance();
-		if (categ != null && ch.isMember(categ.getNombre())) {
-			cat = ch.find(categ.getNombre());// si la categoria existe la asigno, si no?
+		CategoriaHandler catHandler = CategoriaHandler.getInstance();
+		if (categ != null && catHandler.isMember(categ.getNombre())) {
+			cat = catHandler.find(categ.getNombre());// si la categoria existe la asigno, si no?
 			cat.addVideo(this);
 		} else
-			cat = sh.getSinCat();
-		privacidad = p;
+			cat = SysHandler.getSinCat();
+		privacidad = privacidadVideo;
 		comentarios = new HashMap<Integer, Comentario>();
 		puntuaciones = new ArrayList<Puntuacion>();
-		vh.addVideo(this);
+		vidHandler.addVideo(this);
 
 	}
 
@@ -98,28 +98,28 @@ public class Video {
 		listas.remove(ldr);
 	}
 
-	public void ingresarNuevosDatosVideo(String d, int dur, DtFecha fp, String url, DtCategoria c, Privacidad p) {
+	public void ingresarNuevosDatosVideo(String descripcionV, int duracionV, DtFecha fechaPublicacionV, String url, DtCategoria categoriaV, Privacidad privacidadV) {
 		for (ListaReproduccion ldr : listas) {
 			ldr.removerCategoria(cat);
 			cat.removerLDR(ldr);
 		}
-		SystemHandler sh = SystemHandler.getInstance();
-		descripcion = d;
-		duracion = dur;
-		fecha_publicacion = fp;
+		SystemHandler SysHandler = SystemHandler.getInstance();
+		descripcion = descripcionV;
+		duracion = duracionV;
+		fecha_publicacion = fechaPublicacionV;
 		URL = url;
-		CategoriaHandler ch = CategoriaHandler.getInstance();
+		CategoriaHandler catHandler = CategoriaHandler.getInstance();
 		cat.removerVideo(this);
 
-		if (c != null) {
-			if (ch.isMember(c.getNombre())) {
-				Categoria categoriaNueva = ch.find(c.getNombre());
+		if (categoriaV != null) {
+			if (catHandler.isMember(categoriaV.getNombre())) {
+				Categoria categoriaNueva = catHandler.find(categoriaV.getNombre());
 				cat = categoriaNueva;
 				categoriaNueva.addVideo(this);
 			}
 		} else
-			cat = sh.getSinCat();
-		privacidad = p;
+			cat = SysHandler.getSinCat();
+		privacidad = privacidadV;
 		for (ListaReproduccion ldr : listas) {
 			ldr.refrescarCategorias();
 			cat.aniadirLDR(ldr);
@@ -146,40 +146,38 @@ public class Video {
 	}
 
 	public void nuevoComentario(String nickU, DtFecha fecha, String cont) {
-		SystemHandler sh = SystemHandler.getInstance();
-		Comentario c = new Comentario(sh.recibirId_Comentario(), cont, fecha, true, nickU);
-		comentarios.put(c.getIDComentario(), c);
+		SystemHandler SysHandler = SystemHandler.getInstance();
+		Comentario comentarioNuevo = new Comentario(SysHandler.recibirId_Comentario(), cont, fecha, true, nickU);
+		comentarios.put(comentarioNuevo.getIDComentario(), comentarioNuevo);
 	}
 
 	public void responderComentario(Integer IDCR, String nickU, DtFecha fecha, String cont) {
-		// esto cambia del DCC porque tengo un map, asi que no tengo que iterar todo
-		// para buscar
-		SystemHandler sh = SystemHandler.getInstance();
+		SystemHandler SysHandler = SystemHandler.getInstance();
 		if (comentarios.containsKey(IDCR)) {
-			Comentario c = comentarios.get(IDCR);
-			Comentario cn = new Comentario(sh.recibirId_Comentario(), cont, fecha, false, nickU);
-			c.addComentario(cn);
-			comentarios.put(cn.getIDComentario(), cn);
+			Comentario comentarioPadre = comentarios.get(IDCR);
+			Comentario comentarioNuevo = new Comentario(SysHandler.recibirId_Comentario(), cont, fecha, false, nickU);
+			comentarioPadre.addComentario(comentarioNuevo);
+			comentarios.put(comentarioNuevo.getIDComentario(), comentarioNuevo);
 		}
 	}
 
 	public DtPuntuacion[] getPuntuaciones() {
 		DtPuntuacion[] puntajes = new DtPuntuacion[puntuaciones.size()];
 		for (int i = 0; i < puntuaciones.size(); i++) {
-			Puntuacion p = puntuaciones.get(i);
-			puntajes[i] = new DtPuntuacion(p);
+			Puntuacion puntuacionVideo = puntuaciones.get(i);
+			puntajes[i] = new DtPuntuacion(puntuacionVideo);
 		}
 		return puntajes;
 
 	}
 
-	public void addPuntuacion(Puntuacion p) {
-		puntuaciones.add(p);
+	public void addPuntuacion(Puntuacion puntuacionVideo) {
+		puntuaciones.add(puntuacionVideo);
 	}
 
 	public DtVideo verDetallesVideo() {
-		DtVideo dt = new DtVideo(this);
-		return dt;
+		DtVideo infoVideo = new DtVideo(this);
+		return infoVideo;
 	}
 
 	public void valorarVideo(String nickU, boolean valoracion) {
@@ -190,23 +188,23 @@ public class Video {
 		if (i < puntuaciones.size()) {
 			puntuaciones.get(i).setValoracion(valoracion);
 		} else {
-			Puntuacion p = new Puntuacion(nickU, valoracion);
-			addPuntuacion(p);
+			Puntuacion puntuacionVideo = new Puntuacion(nickU, valoracion);
+			addPuntuacion(puntuacionVideo);
 		}
 
 	}
 
-	public DtUsuario[] getUsuariosPuntuadores(boolean v) {
+	public DtUsuario[] getUsuariosPuntuadores(boolean valoracion) {
 		int puntSize = 0;
-		for (Puntuacion p : puntuaciones) {
-			if (p.getValoracion() == v)
+		for (Puntuacion puntuacionVideo : puntuaciones) {
+			if (puntuacionVideo.getValoracion() == valoracion)
 				puntSize++;
 		}
 		DtUsuario[] usu = new DtUsuario[puntSize];
 		int i = 0;
-		for (Puntuacion p : puntuaciones) {
-			if (p.getValoracion() == v) {
-				usu[i] = (new DtUsuario(p.getUsuario()));
+		for (Puntuacion puntuacionVideo : puntuaciones) {
+			if (puntuacionVideo.getValoracion() == valoracion) {
+				usu[i] = (new DtUsuario(puntuacionVideo.getUsuario()));
 				i++;
 			}
 

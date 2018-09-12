@@ -13,16 +13,16 @@ public class DtVideo {
 	private DtCategoria cat;
 	private Privacidad privacidad;
 	
-	public DtVideo(Video v) {
-		IDVideo=v.getIDVideo();
-		nombre = v.getNombre();
-		setPropietario(v.getPropietario());
-		descripcion = v.getDescripcion();
-		duracionSS = v.getDuracion();
-		fecha_publicacion = v.getFechaPublicacion();
-		URL = v.getURL();
-		cat = v.getCategoria();
-		privacidad = v.getPrivacidad();
+	public DtVideo(Video videoBase) {
+		IDVideo=videoBase.getIDVideo();
+		nombre = videoBase.getNombre();
+		setPropietario(videoBase.getPropietario());
+		descripcion = videoBase.getDescripcion();
+		duracionSS = videoBase.getDuracion();
+		fecha_publicacion = videoBase.getFechaPublicacion();
+		URL = videoBase.getURL();
+		cat = videoBase.getCategoria();
+		privacidad = videoBase.getPrivacidad();
 	}
 
 	public Integer getIDVideo(){
@@ -56,8 +56,8 @@ public class DtVideo {
 		return privacidad;
 	}
 	
-	public boolean equals(DtVideo dt) {
-		return (nombre == dt.getNombre())&&(descripcion == dt.getDescripcion())&&(duracionSS == dt.getDuracion())&&(fecha_publicacion == dt.getFechaPublicacion())&&(URL == dt.getUrl())&&(cat.equals(getCategoria()))&&(privacidad == dt.getPrivacidad());
+	public boolean equals(DtVideo other) {
+		return (nombre == other.getNombre())&&(descripcion == other.getDescripcion())&&(duracionSS == other.getDuracion())&&(fecha_publicacion == other.getFechaPublicacion())&&(URL == other.getUrl())&&(cat.equals(getCategoria()))&&(privacidad == other.getPrivacidad());
 	}
 
 	public String getPropietario() {

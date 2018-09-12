@@ -2,27 +2,27 @@ package uytube.logica;
 import java.util.HashMap;
 import java.util.Map;
 public class Comentario {
-	private Integer IDComentario;
+	private Integer iDComentario;
 	private String texto;
 	private DtFecha fecha;
 	private boolean esPadre;
-	private Map<Integer,Comentario> respuestas;
+	private Map<Integer, Comentario> respuestas;
 	private Usuario usuarioComentador;
 	
-	public Comentario(Integer ID, String t,DtFecha f,boolean p, String u){
-		IDComentario=ID;
-		texto=t;
-		fecha=f;
-		esPadre=p;
-		respuestas=new HashMap<Integer,Comentario>();
-		UsuarioHandler uh=UsuarioHandler.getInstance();
-		Usuario usu=uh.find(u);
-		usuarioComentador=usu;
+	public Comentario(Integer idComentario, String text, DtFecha fech, boolean privacity, String nombreUsuarioComentador){
+		iDComentario=idComentario;
+		texto=text;
+		fecha=fech;
+		esPadre=privacity;
+		respuestas=new HashMap<Integer, Comentario>();
+		UsuarioHandler manejadorUsuario=UsuarioHandler.getInstance();
+		Usuario user=manejadorUsuario.find(nombreUsuarioComentador);
+		usuarioComentador=user;
 	}
 	
 	
 	public Integer getIDComentario(){
-		return IDComentario;
+		return iDComentario;
 	}
 
 	public String getTexto(){
@@ -37,8 +37,8 @@ public class Comentario {
 		return esPadre;
 	}
 
-	public void addComentario(Comentario c){
-		respuestas.put(c.getIDComentario(), c);
+	public void addComentario(Comentario coment){
+		respuestas.put(coment.getIDComentario(), coment);
 	}
 	public Usuario getUsuario(){
 		return usuarioComentador;
@@ -48,7 +48,7 @@ public class Comentario {
 		DtComentario[] res=new DtComentario[respuestas.size()];
 		int contador =0;
 		
-		for(Map.Entry<Integer, Comentario> entry : respuestas.entrySet()) {
+		for (Map.Entry<Integer, Comentario> entry : respuestas.entrySet()) {
 			res[contador] = new DtComentario(entry.getValue());
 			contador++;
 		}

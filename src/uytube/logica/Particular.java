@@ -5,9 +5,9 @@ import uytube.logica.SystemHandler.Privacidad;
 public class Particular extends ListaReproduccion{
 	private Privacidad privado;
 	
-	public Particular(String n,String pro, Privacidad p) {
-		super(n,pro);
-		privado = p;
+	public Particular(String nombreLista,String pro, Privacidad privacidadLista) {
+		super(nombreLista,pro);
+		privado = privacidadLista;
 	}
 	
 	
@@ -21,33 +21,33 @@ public class Particular extends ListaReproduccion{
 
 	@Override
 	public DtListaReproduccion verDetallesListareproduccion() {
-		DtListaReproduccion dt = new DtListaReproduccion(this); 
-		return dt;
+		DtListaReproduccion infoLista = new DtListaReproduccion(this); 
+		return infoLista;
 	}
 
 
 	@Override
-	public void agregarVideo(Video v) {
+	public void agregarVideo(Video videoAAgregar) {
 
 		//videos.put(v.getIDVideo(), v);
-		addVideoToMap(v);
+		addVideoToMap(videoAAgregar);
 		refrescarCategorias();
 		CategoriaHandler catH = CategoriaHandler.getInstance();
-		Categoria c = catH.find(v.getCategoria().getNombre());
-		if (c != null)
-			c.aniadirLDR(this);
-		v.aniadirListaReproduccion(this);
+		Categoria categoriaVideo = catH.find(videoAAgregar.getCategoria().getNombre());
+		if (categoriaVideo != null)
+			categoriaVideo.aniadirLDR(this);
+		videoAAgregar.aniadirListaReproduccion(this);
 
 	}
 
 
 	@Override
-	public void removerVideo(Integer id) {
-		if(existeVideo(getVideo(id))){
-			Categoria categoria = getVideo(id).getObjetoCategoria();
+	public void removerVideo(Integer idVideo) {
+		if(existeVideo(getVideo(idVideo))){
+			Categoria categoria = getVideo(idVideo).getObjetoCategoria();
 			removerCategoria(categoria);
 			categoria.removerLDR(this);
-			removeVideoFromMap(id);
+			removeVideoFromMap(idVideo);
 			refrescarCategorias();
 		}
 	}

@@ -10,8 +10,8 @@ public class DtPuntuacion {
 	public String getNickname(){
 		return nickname;
 	}
-	public DtPuntuacion(Puntuacion p){
-		valoracion=p.getValoracion();
-		nickname=p.getNickPuntuador();
+	public DtPuntuacion(Puntuacion puntuacionBase){
+		valoracion=puntuacionBase.getValoracion();
+		nickname=puntuacionBase.getNickPuntuador();
 	}
 }
