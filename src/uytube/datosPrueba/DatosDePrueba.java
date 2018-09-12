@@ -1,13 +1,10 @@
-package uytube.admin;
+package uytube.datosPrueba;
 
 import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-
-
-import uytube.logica.CategoriaHandler;
 import uytube.logica.DtCategoria;
 import uytube.logica.DtComentario;
 import uytube.logica.DtFecha;
@@ -15,8 +12,8 @@ import uytube.logica.DtVideo;
 import uytube.logica.Factory;
 import uytube.logica.IUsuarioCtrl;
 import uytube.logica.IVideoCtrl;
-import uytube.logica.SystemHandler.Privacidad;
 import uytube.logica.VideoHandler;
+import uytube.logica.SystemHandler.Privacidad;
 
 public class DatosDePrueba {
 	private Factory fabrica = Factory.getInstance();
@@ -71,7 +68,7 @@ public class DatosDePrueba {
 		fechaNac = new DtFecha(fecha);
 		String TC ="tabarec";
 		archivo = new File("src\\fotosDatosDePrueba\\tc.jpg");
-		ICU.nuevoUsuario(TC, "Tabare", "Cardozo", "tabare.car@agadu.otg.uy", fechaNac, Imagen.imagenToByte(archivo),
+		ICU.nuevoUsuario(TC, "Tabare", "Cardozo", "tabare.car@agadu.org.uy", fechaNac, Imagen.imagenToByte(archivo),
 				"Tabare", "Mi musica e ainda mais", Privacidad.PUBLICO, MUS);
 		
 		fecha = asignarFecha("01,01,1947 00:00");
@@ -81,7 +78,7 @@ public class DatosDePrueba {
 		ICU.nuevoUsuario(CS, "Walder 'Cachila'", "Silva", "Cachila.sil@c1080.org.uy", fechaNac, Imagen.imagenToByte(archivo),
 				"El Cachila", "Para juntar cosas", Privacidad.PRIVADO, null);
 		
-		fecha =asignarFecha("16,03,1927 00:00");
+		fecha =asignarFecha("16,03,1967 00:00");
 		fechaNac = new DtFecha(fecha);
 		String JB="juliob";
 		ICU.nuevoUsuario(JB, "Julio", "Bocca", "juliobocca@sodre.com.uy", fechaNac, null,
@@ -90,12 +87,12 @@ public class DatosDePrueba {
 		fecha=asignarFecha("01,01,1975 00:00");
 		fechaNac = new DtFecha(fecha);
 		String DP="diegop";
-		ICU.nuevoUsuario(DP, "Diego", "Parodi", "diego@efectocine", fechaNac, null,
+		ICU.nuevoUsuario(DP, "Diego", "Parodi", "diego@efectocine.com", fechaNac, null,
 				DP, "El Canal de DP", Privacidad.PUBLICO,null);
 	
 		fecha=asignarFecha("25,04,1840 00:00");
 		fechaNac = new DtFecha(fecha);
-		String KH="kahiroh";
+		String KH="kairoh";
 		archivo = new File("src\\fotosDatosDePrueba\\kh.jpg");
 		ICU.nuevoUsuario(KH, "Kairo", "Herrera", "kairoher@pilsenrock.com.uy", fechaNac, Imagen.imagenToByte(archivo),
 				"Kairo Musica", "Videos de grandes canciones de hoy y siempre", Privacidad.PUBLICO, MUS);
@@ -122,7 +119,7 @@ public class DatosDePrueba {
 		fechaNac = new DtFecha(fecha);
 		String SP="sergiop";
 		ICU.nuevoUsuario(SP, "Sergio", "Puglia", "puglia@alpanpan.com.uy", fechaNac, null,
-				"Sergio invita", "Programas del ciclo y videos de cocina mastercheef", Privacidad.PUBLICO, COM);
+				"Puglia invita", "Programas del ciclo y videos de cocina mastercheef", Privacidad.PUBLICO, COM);
 		
 		fecha=asignarFecha("17,03,1976 00:00");
 		fechaNac = new DtFecha(fecha);
@@ -182,7 +179,7 @@ public class DatosDePrueba {
 		ICU.aniadirVideo(KH, V3, null, duracion, fechaNac,"https://youtu.be/1w7OgIMMRc4",catMUS,Privacidad.PUBLICO);
 		String V4="Dancing in the Dark";
 		ICU.aniadirVideo(KH, V4, null, duracion, fechaNac,"https://youtu.be/129kuDCQtHs", catMUS, Privacidad.PUBLICO);
-		String V5="Thriler";
+		String V5="Thriller";
 		ICU.aniadirVideo(JB, V5, null, duracion, fechaNac,"https://youtu.be/sOnqjkJTMaA",catMUS,Privacidad.PUBLICO);
 		ICU.aniadirVideo(KH, V5, null, duracion, fechaNac,"https://youtu.be/sOnqjkJTMaA",catMUS,Privacidad.PUBLICO);
 		String V6="100 años de FING";
@@ -205,7 +202,7 @@ public class DatosDePrueba {
 		String V14="Recoba 20 mejores goles";
 		ICU.aniadirVideo(CS, V14, null, duracion, fechaNac,"https://youtu.be/Gy3fZhWdLEQ", catDEP, Privacidad.PRIVADO);
 		ICU.aniadirVideo(AR, V14, null, duracion, fechaNac,"https://youtu.be/Gy3fZhWdLEQ", catDEP, Privacidad.PRIVADO);
-		String V15="Entrevita a director CUTI";
+		String V15="Entrevista a director CUTI";
 		ICU.aniadirVideo(NJ, V15, null, duracion, fechaNac,"https://youtu.be/Eq5uBEzI6qs",catCYT,Privacidad.PUBLICO);
 		String V16="Ventana al futuro Uruguay y deficit de ingenieros";
 		ICU.aniadirVideo(NJ, V16, null, duracion, fechaNac,"https://youtu.be/zBR2pnASlQE",catCYT ,Privacidad.PUBLICO);
@@ -281,6 +278,7 @@ public class DatosDePrueba {
 		video = ICU.obtenerInfoAdicVideo(HG,V8);
 		idVideo = video.getIDVideo();
 		ICU.agregarVideoLista(NJ,idVideo,LP5);
+		
 		video = ICU.obtenerInfoAdicVideo(NJ,V16);
 		idVideo = video.getIDVideo();
 		ICU.agregarVideoLista(NJ,idVideo,LP5);
@@ -313,16 +311,15 @@ public class DatosDePrueba {
 		
 		comentarioPadre=obtenerIdComentario(dtVideo.getIDVideo(),HR, fechaVideo);
 		fecha = asignarFecha("10,12,2017 17:09");fechaVideo = new DtFecha(fecha); 
-		ICV.responderComentario(dtVideo.getIDVideo(),comentarioPadre, HR, fechaVideo, "Yo ofrezco a la banda tb");
+		ICV.responderComentario(dtVideo.getIDVideo(),comentarioPadre, TC, fechaVideo, "Yo ofrezco a la banda tb");
 		
-		//otros videos
 		dtVideo =vh.member(V6,HG);
 		fecha=asignarFecha("07,09,2017 04:56");fechaVideo = new DtFecha(fecha); 
 		ICV.nuevoComentario(dtVideo.getIDVideo(), NJ, fechaVideo, "Felicitaciones FING");
 		
 		dtVideo =vh.member(V8,HG);
 		fecha=asignarFecha("23,10,2017 12:58");fechaVideo = new DtFecha(fecha);
-		ICV.nuevoComentario(dtVideo.getIDVideo(),KH , fechaVideo, "Un gusto cubrir eventos como este.");
+		ICV.nuevoComentario(dtVideo.getIDVideo(),KH,fechaVideo, "Un gusto cubrir eventos como este.");
 		
 		dtVideo =vh.member(V13,JB);
 		fecha=asignarFecha("14,11,2016 05:34");fechaVideo = new DtFecha(fecha);
@@ -337,7 +334,7 @@ public class DatosDePrueba {
 		
 		dtVideo =vh.member(V4,KH);
 		fecha=asignarFecha("25,08,2018 18:00");fechaVideo = new DtFecha(fecha);
-		ICV.nuevoComentario(dtVideo.getIDVideo(),MT,fechaVideo,"Anoche explotó!!!");
+		ICV.nuevoComentario(dtVideo.getIDVideo(),MT,fechaVideo,"Anoche exploto!!!");
 		
 		dtVideo =vh.member(V1,CS);
 		fecha=asignarFecha("11,09,2017 03:45");fechaVideo = new DtFecha(fecha);
@@ -355,7 +352,7 @@ public class DatosDePrueba {
 		
 		//ME GUSTA
 		video = ICU.obtenerInfoAdicVideo(HG,V7);
-		ICV.valorarVideo(video.getIDVideo(),SP, false);
+		ICV.valorarVideo(video.getIDVideo(),SP, false); //falso = NO LE GUSTA
 		
 		video = ICU.obtenerInfoAdicVideo(HG,V8);
 		ICV.valorarVideo(video.getIDVideo(),SP, true);
@@ -395,14 +392,19 @@ public class DatosDePrueba {
 	}
 	private int obtenerIdComentario(int idVideo,String nick, DtFecha fechaComen){
 		DtComentario[] coments= ICV.listarComentarios(idVideo);
-		int i=0;
-		Boolean encontro=false;
-		while(i<coments.length && !encontro){
+		return buscarComentario(coments, nick,fechaComen);
+	}
+	private int buscarComentario(DtComentario[] coments, String nick, DtFecha fechaComen){
+		DtComentario[] comentsHijos;
+		int i=0; int idComentario=-1;
+		while(i<coments.length){
 			if(coments[i].getFecha()==fechaComen && coments[i].getNickUsuario()==nick){
-				encontro=true;
+				return coments[i].getIDComentario();
 			}
+			comentsHijos = coments[i].getRespuestas();
+			idComentario = buscarComentario(comentsHijos,nick, fechaComen);
 			i++;
 		}
-		return coments[i-1].getIDComentario();
+		return idComentario;
 	}
 }
