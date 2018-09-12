@@ -23,18 +23,18 @@ public interface IUsuarioCtrl {
 
 	public abstract void dejarUsuario(String Usu1, String Usu2);
 
-	public abstract void aniadirVideo(String nickU, String nom, String desc, Integer dur, DtFecha fp, String url,
-			DtCategoria catE, Privacidad p);
+	public abstract void aniadirVideo(String nickU, String nombreV, String descripcionV, Integer duracionV, DtFecha fechaPublicacionV, String urlV,
+			DtCategoria catV, Privacidad privacidadV);
 
-	public abstract void ingresarNuevosDatosVideo(String nickU, String nom, String d, int dur, DtFecha fp, String url,
-			DtCategoria catE, Privacidad p);
+	public abstract void ingresarNuevosDatosVideo(String nickU, String nuevoNombreV, String nuevaDescripcionV, int nuevaDuracionV, DtFecha nuevaFechaPublicacionV, String nuevaURL,
+			DtCategoria nuevaCatV, Privacidad nuevaPrivacidadV);
 
 	public abstract Boolean verificarDispUsuario(String nickU, String email);
 
-	public abstract void nuevoUsuario(String nick, String nom, String ape, String e, DtFecha fn, byte[] fo,
-			String nombreCanal, String desc, Privacidad privacidadE, String catE);
+	public abstract void nuevoUsuario(String nickU, String nombreU, String apellidoU, String emailU, DtFecha fechaNacimientoU, byte[] fotoU,
+			String nombreCanal, String descripcionCanal, Privacidad privacidadCanal, String categoriaCanal);
 
-	public abstract void editarDatosUsuario(String nickU, String nom, String ape, DtFecha fn, byte[] fo);
+	public abstract void editarDatosUsuario(String nickU, String nuevoNombreU, String nuevoApeliidoU, DtFecha nuevaFechaNacU, byte[] nuevaFotoU);
 
 	public abstract DtListaReproduccion infoAdicLDR(String nickU, String nombreL);
 
