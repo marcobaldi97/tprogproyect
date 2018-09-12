@@ -32,7 +32,7 @@ import javax.swing.ImageIcon;
 
 import com.toedter.calendar.JDateChooser;
 
-import uytube.admin.Imagen;
+import uytube.datosPrueba.Imagen;
 import uytube.logica.DtCategoria;
 import uytube.logica.DtFecha;
 import uytube.logica.IUsuarioCtrl;
