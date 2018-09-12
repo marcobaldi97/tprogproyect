@@ -6,15 +6,12 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
 import uytube.logica.Factory;
 import uytube.logica.IUsuarioCtrl;
 import uytube.logica.IVideoCtrl;
-
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -213,7 +210,7 @@ public class adminPrincipal extends JFrame {
 		JMenuItem mntmModificar_1 = new JMenuItem("Modificar");
 		mntmModificar_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				modificarListaFrame = new ModificarListaFrame(ICU,ICV);
+				modificarListaFrame = new ModificarListaFrame(ICU, ICV);
 				contentPane.setLayout(null);
 				contentPane.add(modificarListaFrame);
 				modificarListaFrame.setVisible(true);

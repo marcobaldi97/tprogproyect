@@ -69,7 +69,7 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 	private JComboBox comboBoxVideos;
 	private JComboBox<String> comboBoxListas;
 	private IUsuarioCtrl controlUsr;
-	JDateChooser dateChooser;
+	private JDateChooser dateChooser;
 	private JTextField textFieldPrivacidad;
 	private JTextField textFieldCatCanal;
 	private JTextArea textAreaDescVideo;
@@ -116,9 +116,9 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 		comboBoxNick = new JComboBox();
 		comboBoxNick.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String nickU = (String)comboBoxNick.getSelectedItem();
+				String nickU = (String) comboBoxNick.getSelectedItem();
 				//limpiar();
-				if((String)comboBoxNick.getSelectedItem() != " " && comboBoxNick.getSelectedIndex()!=-1){
+				if ((String) comboBoxNick.getSelectedItem() != " " && comboBoxNick.getSelectedIndex()!=-1){
 					//pedir Dt
 					DtUsuario usr= controlUsr.listarDatosUsuario(nickU);
 					DtCanal usrCanal = controlUsr.mostrarInfoCanal(nickU);
@@ -217,10 +217,10 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 		comboBoxVideos = new JComboBox();
 		comboBoxVideos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String video = (String)comboBoxVideos.getSelectedItem();
-				if( comboBoxVideos.getSelectedIndex()!=-1){
+				String video = (String) comboBoxVideos.getSelectedItem();
+				if ( comboBoxVideos.getSelectedIndex()!=-1){
 					//crear dtVideo
-					DtVideo dtVideo = controlUsr.obtenerInfoAdicVideo((String)comboBoxNick.getSelectedItem(), video);
+					DtVideo dtVideo = controlUsr.obtenerInfoAdicVideo((String) comboBoxNick.getSelectedItem(), video);
 					//cargar datos video
 					textAreaDescVideo.setText(dtVideo.getDescripcion());
 				}
@@ -259,8 +259,7 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 		comboBoxListas.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				//cargar datos lista
-							//
-						
+					
 			}
 		});
 		panelDLista.add(comboBoxListas);
@@ -270,17 +269,17 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 			public void actionPerformed(ActionEvent e) {
 				Factory fabrica = Factory.getInstance();
 				IVideoCtrl ICV = fabrica.getIVideoCtrl();
-				ConsultaListaInternalFrame listaIFrame = new ConsultaListaInternalFrame(controlUsr,ICV);
-				String lista = (String)comboBoxListas.getSelectedItem();
-				String nickU = (String)comboBoxNick.getSelectedItem();
+				ConsultaListaInternalFrame listaIFrame = new ConsultaListaInternalFrame(controlUsr, ICV);
+				String lista = (String) comboBoxListas.getSelectedItem();
+				String nickU = (String) comboBoxNick.getSelectedItem();
 
-				if(comboBoxListas.getSelectedIndex()!=-1 && (String)comboBoxNick.getSelectedItem() != " " && comboBoxNick.getSelectedIndex()!=-1 ){
+				if (comboBoxListas.getSelectedIndex()!=-1 && (String) comboBoxNick.getSelectedItem() != " " && comboBoxNick.getSelectedIndex()!=-1 ){
 					listaIFrame.llamadaParticular(nickU, lista);
 					adminPrincipal.getFrames()[0].setLayout(null);
 					adminPrincipal.getFrames()[0].add(listaIFrame);
 					listaIFrame.show();
-				}else{
-					infoBox("Falta seleccionar usuario y/o lista","Consulta usuario");
+				}else {
+					infoBox("Falta seleccionar usuario y/o lista", "Consulta usuario");
 				}
 			
 			}
@@ -313,7 +312,7 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 		
 		//CARGAR NICK
 		String[] nickUsuario = controlUsr.listarNicknamesUsuarios();
-		for(int i=0; i<nickUsuario.length;i++){
+		for (int i=0; i<nickUsuario.length; i++){
 			 comboBoxNick.addItem(nickUsuario[i]);
 	     }
 		comboBoxNick.setSelectedIndex(-1);
@@ -330,26 +329,26 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 		textFieldNomCanal.setText(usrCanal.getNombre());
 		if (usrCanal.getPrivacidad()==Privacidad.PRIVADO){
 			textFieldPrivacidad.setText("Privado");
-		}else{
+		}else {
 			textFieldPrivacidad.setText("Publico");
 		}
 		textPaneDesc.setText(usrCanal.getDescripcion());
 		textFieldCatCanal.setText(usrCanal.getCategoria().getNombre());
 		
 		byte[] fotoUsr=usr.getFoto();
-		if(fotoUsr!=null){
+		if (fotoUsr!=null){
 			lblFoto.setVisible(true);
 			BufferedImage image = Imagen.byteToImagen(fotoUsr);
-			lblFoto.setSize(140,140);
+			lblFoto.setSize(140, 140);
 		 	ImageIcon icono = new ImageIcon(image.getScaledInstance(lblFoto.getWidth(), lblFoto.getHeight(), Image.SCALE_DEFAULT));
 		 	lblFoto.setIcon(icono);
-		}else{
+		}else {
 			 ImageIcon icono = new ImageIcon();
 			 lblFoto.setIcon(icono);
 		 }
 		//CARGAR VIDEOS
 		String[] nomVideos = controlUsr.listarVideosCanal(nickU);
-		for(int i=0; i<nomVideos.length;i++){
+		for (int i=0; i<nomVideos.length; i++){
 			 comboBoxVideos.addItem(nomVideos[i]);
 		}
 		comboBoxVideos.setSelectedIndex(-1);
@@ -357,7 +356,7 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 		//CARGAR LISTAS
 		String[] nomListas = controlUsr.listarLDRdeUsuario(nickU);
 
-		for(int e=0; e<nomListas.length;e++){
+		for (int e=0; e<nomListas.length; e++){
 			 comboBoxListas.addItem(nomListas[e]);
 		}
 		comboBoxListas.setSelectedIndex(-1);
@@ -367,14 +366,14 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 		DefaultListModel model=new DefaultListModel();
 		listSeguidos.setModel(model);
 	  
-		for(int i=0; i<usrSigue.length;i++){
+		for (int i=0; i<usrSigue.length; i++){
 			model.addElement(usrSigue[i]);
 		}
 		//CARRGAR SEGUIDORES 
 		String[] usrSiguedores = controlUsr.listarUsuariosQueLeSigue(nickU);
 		DefaultListModel model2=new DefaultListModel();
 		listSeguidores.setModel(model2);
-		for(int i=0; i<usrSiguedores.length;i++){
+		for (int i=0; i<usrSiguedores.length; i++){
 			model2.addElement(usrSiguedores[i]);
 		}
 		
@@ -384,18 +383,18 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 		Factory fabrica = Factory.getInstance();
 		IVideoCtrl ICV = fabrica.getIVideoCtrl();
 		
-		String nomVideo = (String)comboBoxVideos.getSelectedItem();
-		String nickU = (String)comboBoxNick.getSelectedItem();
+		String nomVideo = (String) comboBoxVideos.getSelectedItem();
+		String nickU = (String) comboBoxNick.getSelectedItem();
 
-		if(comboBoxVideos.getSelectedIndex()!=-1 && (String)comboBoxNick.getSelectedItem() != " " && comboBoxNick.getSelectedIndex()!=-1 ){
+		if (comboBoxVideos.getSelectedIndex()!=-1 && (String) comboBoxNick.getSelectedItem() != " " && comboBoxNick.getSelectedIndex()!=-1 ){
 			ConsultarVideoInternalFrame consVideoIFrame = new ConsultarVideoInternalFrame();
 			consVideoIFrame.llamadaParticular(nickU, nomVideo);
 			adminPrincipal.getFrames()[0].setLayout(null);
 			adminPrincipal.getFrames()[0].add(consVideoIFrame);
 			consVideoIFrame.show();
 			consVideoIFrame.moveToFront();
-		}else{
-			infoBox("Faltan seleccionar el usuario y/o video","Consulta Usuario");
+		}else {
+			infoBox("Faltan seleccionar el usuario y/o video", "Consulta Usuario");
 		}
 	//   modUsrIFrame.setVisible(true);
 	 }

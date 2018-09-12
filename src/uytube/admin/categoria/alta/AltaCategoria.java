@@ -30,7 +30,6 @@ import com.toedter.components.JSpinField;
 import com.toedter.components.JLocaleChooser;
 
 public class AltaCategoria extends JInternalFrame {
-	private JTextField textField;
 	private JTextField textField_1;
 
 	 public static void infoBox(String infoMessage, String titleBar){

@@ -45,7 +45,7 @@ public class ListarUsuariosInternalFrame extends JInternalFrame {
 		DefaultListModel model=new DefaultListModel();
 	    listUsuarios.setModel(model);
 	  
-	    for(int i=0; i<usr.length;i++){
+	    for (int i=0; i<usr.length; i++){
 	    	  model.addElement(usr[i]);
 	     }
 	    

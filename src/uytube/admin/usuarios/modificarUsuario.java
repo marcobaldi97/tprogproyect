@@ -82,8 +82,8 @@ public class modificarUsuario extends JInternalFrame {
 	private JTextField textFieldEmail;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private JDateChooser dateChooser;
-	private JRadioButton rdbtnPrivado;
-	private JRadioButton rdbtnPublico;
+	private JRadioButton rdbtnPrivadoCanal;
+	private JRadioButton rdbtnPublicoCanal;
 	private JComboBox comboBoxVideos;
 	private IUsuarioCtrl controlUsr;
 	private JComboBox comboBoxListas;
@@ -91,8 +91,8 @@ public class modificarUsuario extends JInternalFrame {
 	private JButton btnModificar ;
 	private JButton btnCancelar_2;
 	private JTextArea textAreaDesc;
-	private JRadioButton rdbtnPrivado_1;
-	private JRadioButton rdbtnPublico_1;
+	private JRadioButton rdbtnPrivadoLista;
+	private JRadioButton rdbtnPublicoLista;
 	private DtUsuario usr;
 	private DtCanal usrCanal;
 	private File archivo;
@@ -134,8 +134,8 @@ public class modificarUsuario extends JInternalFrame {
 		comboBoxNick = new JComboBox();
 		comboBoxNick.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String nickU = (String)comboBoxNick.getSelectedItem();
-				if((String)comboBoxNick.getSelectedItem() != " " && comboBoxNick.getSelectedIndex()!=-1){
+				String nickU = (String) comboBoxNick.getSelectedItem();
+				if ((String) comboBoxNick.getSelectedItem() != " " && comboBoxNick.getSelectedIndex()!=-1){
 					//pedir Dt
 					usr= controlUsr.listarDatosUsuario(nickU);
 					usrCanal = controlUsr.mostrarInfoCanal(nickU);
@@ -274,19 +274,19 @@ public class modificarUsuario extends JInternalFrame {
 		JLabel lblPrivacidad = new JLabel("Privacidad");
 		panelDatosCanal.add(lblPrivacidad);
 		
-		rdbtnPrivado = new JRadioButton("Privado");
-		rdbtnPrivado.setEnabled(false);
-		rdbtnPrivado.setSelected(true);
-		buttonGroup.add(rdbtnPrivado);
-		panelDatosCanal.add(rdbtnPrivado);
+		rdbtnPrivadoCanal = new JRadioButton("Privado");
+		rdbtnPrivadoCanal.setEnabled(false);
+		rdbtnPrivadoCanal.setSelected(true);
+		buttonGroup.add(rdbtnPrivadoCanal);
+		panelDatosCanal.add(rdbtnPrivadoCanal);
 		
 		JLabel label_1 = new JLabel("");
 		panelDatosCanal.add(label_1);
 		
-		rdbtnPublico = new JRadioButton("Publico");
-		rdbtnPublico.setEnabled(false);
-		buttonGroup.add(rdbtnPublico);
-		panelDatosCanal.add(rdbtnPublico);
+		rdbtnPublicoCanal = new JRadioButton("Publico");
+		rdbtnPublicoCanal.setEnabled(false);
+		buttonGroup.add(rdbtnPublicoCanal);
+		panelDatosCanal.add(rdbtnPublicoCanal);
 		
 		JLabel lblDescripicin = new JLabel("Descripici\u00F3n");
 		panelDatosCanal.add(lblDescripicin);
@@ -313,7 +313,7 @@ public class modificarUsuario extends JInternalFrame {
 				nomC = textFieldNomCanal.getText();
 				des=textAreaDesc.getText();
 				catE= (String)comboBoxCatCanal.getSelectedItem();
-				if(rdbtnPrivado.isSelected()){
+				if(rdbtnPrivadoCanal.isSelected()){
 					priv=Privacidad.PRIVADO;
 				}else{
 					priv=Privacidad.PUBLICO;
@@ -324,8 +324,8 @@ public class modificarUsuario extends JInternalFrame {
 						controlUsr.modificarDatosCanal(nickU,nomC,des,priv,catE);
 						infoBox("Canal modificado","Modificar usuario");
 						textFieldNomCanal.setEditable(false);
-						rdbtnPrivado.setEnabled(false);
-						rdbtnPublico.setEnabled(false);
+						rdbtnPrivadoCanal.setEnabled(false);
+						rdbtnPublicoCanal.setEnabled(false);
 						comboBoxCatCanal.setEnabled(false);
 						textAreaDesc.setEditable(false);
 						btnModificar_3.setText("Modificar");
@@ -334,8 +334,8 @@ public class modificarUsuario extends JInternalFrame {
 					}
 					btnCancelar_2.setEnabled(false);
 				}else if(btnModificar.getText()=="Modificar"){
-					rdbtnPrivado.setEnabled(true);
-					rdbtnPublico.setEnabled(true);
+					rdbtnPrivadoCanal.setEnabled(true);
+					rdbtnPublicoCanal.setEnabled(true);
 					comboBoxCatCanal.setEnabled(true);
 					textAreaDesc.setEditable(true);
 					textFieldNomCanal.setEditable(true);
@@ -350,8 +350,8 @@ public class modificarUsuario extends JInternalFrame {
 		btnCancelar_2.setEnabled(true);
 		btnCancelar_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				rdbtnPrivado.setEnabled(false);
-				rdbtnPublico.setEnabled(false);
+				rdbtnPrivadoCanal.setEnabled(false);
+				rdbtnPublicoCanal.setEnabled(false);
 				textFieldNomCanal.setEditable(false);
 				textAreaDesc.setEditable(false);
 				comboBoxCatCanal.setEnabled(false);
@@ -412,9 +412,9 @@ public class modificarUsuario extends JInternalFrame {
 				if(comboBoxNick.getSelectedIndex()!=-1 && comboBoxListas.getSelectedIndex()!=-1){
 					DtListaReproduccion dtLista = controlUsr.infoAdicLDR((String)comboBoxNick.getSelectedItem(), (String)comboBoxListas.getSelectedItem());
 					if (dtLista.getPrivado()==Privacidad.PRIVADO){
-						rdbtnPrivado_1.setSelected(true);
+						rdbtnPrivadoLista.setSelected(true);
 					}else{
-						rdbtnPublico_1.setSelected(true);
+						rdbtnPublicoLista.setSelected(true);
 						//	System.out.println("publico");
 					}
 				}
@@ -425,19 +425,19 @@ public class modificarUsuario extends JInternalFrame {
 		JLabel lblPrivacidad_1 = new JLabel("Privacidad");
 		panel_1.add(lblPrivacidad_1);
 		
-		rdbtnPrivado_1 = new JRadioButton("Privado");
-		rdbtnPrivado_1.setEnabled(false);
-		rdbtnPrivado_1.setSelected(true);
-		buttonGroup_1.add(rdbtnPrivado_1);
-		panel_1.add(rdbtnPrivado_1);
+		rdbtnPrivadoLista = new JRadioButton("Privado");
+		rdbtnPrivadoLista.setEnabled(false);
+		rdbtnPrivadoLista.setSelected(true);
+		buttonGroup_1.add(rdbtnPrivadoLista);
+		panel_1.add(rdbtnPrivadoLista);
 		
 		JLabel label_3 = new JLabel("");
 		panel_1.add(label_3);
 		
-		rdbtnPublico_1 = new JRadioButton("Publico");
-		rdbtnPublico_1.setEnabled(false);
-		buttonGroup_1.add(rdbtnPublico_1);
-		panel_1.add(rdbtnPublico_1);
+		rdbtnPublicoLista = new JRadioButton("Publico");
+		rdbtnPublicoLista.setEnabled(false);
+		buttonGroup_1.add(rdbtnPublicoLista);
+		panel_1.add(rdbtnPublicoLista);
 		
 		
 		
@@ -451,16 +451,16 @@ public class modificarUsuario extends JInternalFrame {
 					String nickU = (String)comboBoxNick.getSelectedItem();
 					String nombreL = (String)comboBoxListas.getSelectedItem();
 					Privacidad privE=Privacidad.PUBLICO;
-					if(rdbtnPrivado_1.isSelected()){privE=Privacidad.PRIVADO;}
+					if(rdbtnPrivadoLista.isSelected()){privE=Privacidad.PRIVADO;}
 					controlUsr.cambiarPrivLDR(nickU,nombreL,privE);
 					infoBox("Lista de reproducion modificada","Modificar usuario");
 					button_1.setText("Modificar");
-					rdbtnPrivado_1.setEnabled(false);
-					rdbtnPublico_1.setEnabled(false);
+					rdbtnPrivadoLista.setEnabled(false);
+					rdbtnPublicoLista.setEnabled(false);
 				}else if(button_1.getText()=="Modificar"){
 					button_1.setText("Guardar");
-					rdbtnPrivado_1.setEnabled(true);
-					rdbtnPublico_1.setEnabled(true);
+					rdbtnPrivadoLista.setEnabled(true);
+					rdbtnPublicoLista.setEnabled(true);
 				}
 				
 			}
@@ -539,9 +539,9 @@ public class modificarUsuario extends JInternalFrame {
 		
 		textFieldNomCanal.setText(usrCanal.getNombre());
 		if (usrCanal.getPrivacidad()==Privacidad.PRIVADO){
-			rdbtnPrivado.setSelected(true);
+			rdbtnPrivadoCanal.setSelected(true);
 		}else{
-			rdbtnPublico.setSelected(true);
+			rdbtnPublicoCanal.setSelected(true);
 		}
 		textAreaDesc.setText(usrCanal.getDescripcion());
 				
