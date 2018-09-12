@@ -7,8 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import uytube.logica.DtCategoria;
-import uytube.logica.DtFecha;
+
 import uytube.logica.Factory;
 import uytube.logica.IUsuarioCtrl;
 //import presentacion.CrearUsuario;
@@ -17,15 +16,12 @@ import uytube.logica.IVideoCtrl;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 
-import uytube.admin.videos.VideosMenu;
+
 
 import javax.swing.JMenuItem;
 
 import java.awt.event.ActionListener;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.awt.event.ActionEvent;
-import java.util.Date;
+
 
 import uytube.admin.usuarios.*;
 import uytube.admin.listas.*;
@@ -34,7 +30,6 @@ import uytube.admin.categoria.consulta.*;
 import uytube.admin.videos.alta.*;
 import uytube.admin.videos.consultar.ConsultarVideoInternalFrame;
 import uytube.admin.videos.consultar.ListarCategoriasInternalFrame;
-import uytube.datosPrueba.DatosDePrueba;
 import uytube.admin.videos.*;
 
 public class adminPrincipal extends JFrame {

@@ -15,22 +15,22 @@ public class Usuario {
     private Map<String,Usuario> usuariosQueSigue;
     private Map<String,Usuario> usuariosQueLeSiguen;
 	
-	public Usuario(String nick,String nom, String ape, String e, DtFecha fn, byte[] fo,String nombreCanal,String desc,Privacidad privacidadE, String catE) {
+	public Usuario(String nickU,String nombreU, String apellidoU, String emailU, DtFecha fechaNacU, byte[] fotoU,String nombreCanal,String descripcionCanal,Privacidad privacidadCanal, String catCanal) {
 		// TODO Auto-generated constructor stub
-		nickname = nick;
-		nombre = nom;
-		apellido = ape;
-		email = e;
-		fecha_nacimiento = fn;
-		foto = fo;
+		nickname = nickU;
+		nombre = nombreU;
+		apellido = apellidoU;
+		email = emailU;
+		fecha_nacimiento = fechaNacU;
+		foto = fotoU;
 		usuariosQueSigue = new HashMap<String, Usuario>();
 		usuariosQueLeSiguen = new HashMap<String, Usuario>();
-		this.createCanal(nombreCanal,nick, desc, privacidadE, catE);;
+		this.createCanal(nombreCanal,nickU, descripcionCanal, privacidadCanal, catCanal);;
 		
 	}
 	
-	public void createCanal(String nom,String pro,String desc, Privacidad privacidadE,String catE) {
-		canalPropio = new Canal(nom,pro,desc,privacidadE,catE);
+	public void createCanal(String nombreCanal,String propietarioCanal,String descricpcionCanal, Privacidad privacidadCanal,String categoriaCanal) {
+		canalPropio = new Canal(nombreCanal,propietarioCanal,descricpcionCanal,privacidadCanal,categoriaCanal);
 	}
 	
 	public String getNickname() {
@@ -50,11 +50,11 @@ public class Usuario {
 		return email;
 	}
 	
-	public void editarDatosUsuario(String nom, String ape, DtFecha fn, byte[] fo) {
-		nombre = nom;
-		apellido = ape;
-		fecha_nacimiento = fn;
-		foto = fo;
+	public void editarDatosUsuario(String nuevoNombre, String nuevoApellido, DtFecha nuevaFechaNacimiento, byte[] fotoUsuario) {
+		nombre = nuevoNombre;
+		apellido = nuevoApellido;
+		fecha_nacimiento = nuevaFechaNacimiento;
+		foto = fotoUsuario;
 	}
 	
 	public DtCanal mostrarInfoCanal() {
@@ -62,19 +62,19 @@ public class Usuario {
 	}
 	
 	public DtUsuario listarDatosUsuario() {
-		DtUsuario dt = new DtUsuario(this);
-		return dt;
+		DtUsuario infoUsuario = new DtUsuario(this);
+		return infoUsuario;
 	}
 	public byte[] getFoto(){
 		return foto;
 	}
 	
-	public void aniadirUsuarioASeguir(Usuario u) {
-		usuariosQueSigue.put(u.getNickname(),u);
+	public void aniadirUsuarioASeguir(Usuario usuarioParticular) {
+		usuariosQueSigue.put(usuarioParticular.getNickname(),usuarioParticular);
 	}
 	
-	public void removerUsuarioASeguir(Usuario u) {
-		usuariosQueSigue.remove(u.getNickname());
+	public void removerUsuarioASeguir(Usuario usuarioParticular) {
+		usuariosQueSigue.remove(usuarioParticular.getNickname());
 	}
 	
 	public String[] listarUsuariosQueSigue() {
@@ -87,20 +87,20 @@ public class Usuario {
 		return nicknames;
 	}
 	
-	public void aniadirUsuarioQueLeSigue(Usuario u) {
-		usuariosQueLeSiguen.put(u.getNickname(),u);
+	public void aniadirUsuarioQueLeSigue(Usuario usuarioParticular) {
+		usuariosQueLeSiguen.put(usuarioParticular.getNickname(),usuarioParticular);
 	}
 	
-	public void removerUsuarioQueLeSigue(Usuario u) {
-		usuariosQueLeSiguen.remove(u.getNickname());
+	public void removerUsuarioQueLeSigue(Usuario usuarioParticular) {
+		usuariosQueLeSiguen.remove(usuarioParticular.getNickname());
 	}
 	
-	public void aniadirVideo(String nom,String pro, String desc, Integer dur, DtFecha fp, String url, DtCategoria catE, Privacidad p) {
-		canalPropio.aniadirVideo(nom,pro, desc, dur, fp, url, catE, p);
+	public void aniadirVideo(String nombreVideo,String propietarioVideo, String descripcionVideo, Integer duracion, DtFecha fechaPublicacion, String url, DtCategoria catE, Privacidad privacidadVideo) {
+		canalPropio.aniadirVideo(nombreVideo,propietarioVideo, descripcionVideo, duracion, fechaPublicacion, url, catE, privacidadVideo);
 	}
 	
-	public void ingresarNuevosDatosVideo(String nom, String d, int dur, DtFecha fp, String url, DtCategoria catE, Privacidad p) {
-		canalPropio.ingresarNuevosDatosVideo(nom, d, dur, fp, url, catE, p);
+	public void ingresarNuevosDatosVideo(String nom, String descripcionVideo, int duracion, DtFecha fechaPublicacion, String url, DtCategoria catE, Privacidad privacidadVideo) {
+		canalPropio.ingresarNuevosDatosVideo(nom, descripcionVideo, duracion, fechaPublicacion, url, catE, privacidadVideo);
 	}
 	
 	public String[] listarVideosCanal() {
@@ -130,13 +130,13 @@ public class Usuario {
 		return canalPropio.listarVideosPorLDR(nombreLDR);
 	}
 	
-	public void agregarVideoLDR(Integer id, String nombreLDR) {
-			canalPropio.agregarVideoLDR(id,nombreLDR);
+	public void agregarVideoLDR(Integer idVideo, String nombreLDR) {
+			canalPropio.agregarVideoLDR(idVideo,nombreLDR);
 	}
 	
 	public void nuevaListaParticular(String nombreL,String pro, Privacidad privada) {
-		Particular lr = new Particular(nombreL,pro,privada);
-		canalPropio.addListaReproduccion(lr);
+		Particular ldr = new Particular(nombreL,pro,privada);
+		canalPropio.addListaReproduccion(ldr);
 	}
 	
 	public void cambiarPrivLDR(String nombreL, Privacidad privE){

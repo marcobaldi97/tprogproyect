@@ -19,11 +19,11 @@ public class DtInfoVideo {
 	public DtUsuario[] getUsuariosNoGusta(){
 		return usuariosNoGusta;
 	}
-	public DtInfoVideo(Video v){
-		infoVideo=new DtVideo(v);
-		comentarios=v.getComentarios();
-		usuariosGusta=v.getUsuariosPuntuadores(true);
-		usuariosNoGusta=v.getUsuariosPuntuadores(false);
+	public DtInfoVideo(Video videoBase){
+		infoVideo=new DtVideo(videoBase);
+		comentarios=videoBase.getComentarios();
+		usuariosGusta=videoBase.getUsuariosPuntuadores(true);
+		usuariosNoGusta=videoBase.getUsuariosPuntuadores(false);
 	}
 	
 }

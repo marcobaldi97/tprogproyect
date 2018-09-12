@@ -29,26 +29,26 @@ public class SystemHandler {
 		return aux;
 	}//devuelve una key 
 
-	public void aniadirListaDefault(DtListaReproduccion dt) {
-		listasDefault.put(dt.getNombre(), dt);
+	public void aniadirListaDefault(DtListaReproduccion nuevaListaPorDefecto) {
+		listasDefault.put(nuevaListaPorDefecto.getNombre(), nuevaListaPorDefecto);
 	}
 	
 	
 	
-	public void removerListaDefault(String n) {
-		listasDefault.remove(n);
+	public void removerListaDefault(String nombreLista) {
+		listasDefault.remove(nombreLista);
 	}
 	
-	public void memberListaDefault(DtListaReproduccion dt) {
-		listasDefault.containsKey(dt.getNombre());
+	public void memberListaDefault(DtListaReproduccion infoListaPorDefecto) {
+		listasDefault.containsKey(infoListaPorDefecto.getNombre());
 	}
 	
 	public Boolean memberListaReproduccionDefecto(String nombreLista) {
 		return listasDefault.containsKey(nombreLista);
 	}
 	
-	public DtListaReproduccion getLista(String n) {
-		return listasDefault.get(n);
+	public DtListaReproduccion getLista(String nombreLista) {
+		return listasDefault.get(nombreLista);
 	}
 	
 	public DtListaReproduccion[] obtenerListasReproduccion(){
