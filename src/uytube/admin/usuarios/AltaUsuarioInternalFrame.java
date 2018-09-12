@@ -238,7 +238,7 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 		//CARGAR CATEGORIAS
         DtCategoria[] set_cat=iCV.listarCategorias();
            
-        for(int i=0; i<set_cat.length;i++){
+        for (int i=0 ; i<set_cat.length; i++) {
              comboBoxCat.addItem(set_cat[i].getNombre());
         }
         comboBoxCat.setSelectedIndex(-1);
@@ -246,11 +246,13 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 	}
 	
 	private Boolean verificarCampos(){
-		if(textFieldNick.getText().isEmpty() || textFieldEmail.getText().isEmpty()|| textFieldNombre.getText().isEmpty()
+		if ( textFieldNick.getText().isEmpty() || textFieldEmail.getText().isEmpty()|| textFieldNombre.getText().isEmpty( )
 				|| txtApellido.getText().isEmpty() || dateChooser.getDate()==null){
 			infoBox("Campos sin completar", "Aviso");
 			return false;
-		}else{return true;}
+		}else {
+			return true;
+		}
 		
 	}
 	private void limpiar(){

@@ -6,11 +6,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
 
 import uytube.admin.adminPrincipal;
 
@@ -24,8 +21,7 @@ public class Imagen {
 		public static File elegirImagen(){
 			File archivo = null;
 			JFileChooser fileChooser = new JFileChooser();
-			int opc = fileChooser.showOpenDialog(adminPrincipal.getFrames()[0]);
-			if(opc == JFileChooser.APPROVE_OPTION){
+			if(fileChooser.showOpenDialog(adminPrincipal.getFrames()[0]) == JFileChooser.APPROVE_OPTION){
 				archivo = fileChooser.getSelectedFile();
 			}
 			return archivo;
@@ -34,11 +30,12 @@ public class Imagen {
 		public static byte[] imagenToByte(File archivo){
 			 //imagen a byte[]
 			try{
-				byte[] imgFoto = new byte[(int)archivo.length()]; 
+				byte[] imgFoto = new byte[(int) archivo.length()]; 
 				InputStream inte = new FileInputStream(archivo);
 				inte.read(imgFoto);
 				return imgFoto;
-			}catch(Exception e){ System.out.println(e.getMessage());}
+			}catch(Exception e){
+				System.out.println(e.getMessage());}
 			return null;
 		}
 		public static BufferedImage byteToImagen(byte[] imgFoto){

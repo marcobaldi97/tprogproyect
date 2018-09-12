@@ -6,26 +6,15 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-import uytube.logica.DtCategoria;
-import uytube.logica.DtFecha;
 import uytube.logica.Factory;
 import uytube.logica.IUsuarioCtrl;
-//import presentacion.CrearUsuario;
 import uytube.logica.IVideoCtrl;
-
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
-
-import uytube.admin.videos.VideosMenu;
-
 import javax.swing.JMenuItem;
-
 import java.awt.event.ActionListener;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
-import java.util.Date;
+
 
 import uytube.admin.usuarios.*;
 import uytube.admin.listas.*;
@@ -214,7 +203,7 @@ public class adminPrincipal extends JFrame {
 		JMenuItem mntmModificar_1 = new JMenuItem("Modificar");
 		mntmModificar_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				modificarListaFrame = new ModificarListaFrame(ICU,ICV);
+				modificarListaFrame = new ModificarListaFrame(ICU, ICV);
 				contentPane.setLayout(null);
 				contentPane.add(modificarListaFrame);
 				modificarListaFrame.setVisible(true);
