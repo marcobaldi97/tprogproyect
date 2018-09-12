@@ -7,35 +7,44 @@ public class DtComentario {
 	private String nickUsuario;
 	private boolean esPadre;
 	private DtComentario[] respuestas;
-	
-	
-	public Integer getIDComentario(){
+
+	public Integer getIDComentario() {
 		return idComentario;
 	}
-	public String getNickUsuario(){
+
+	public String getNickUsuario() {
 		return nickUsuario;
 	}
-	public String getTexto(){
+
+	public String getTexto() {
 		return texto;
 	}
-	public DtFecha getFecha(){
+
+	public DtFecha getFecha() {
 		return fecha;
 	}
-	public boolean getEsPadre(){
+
+	public boolean getEsPadre() {
 		return esPadre;
 	}
-	public DtComentario[] getRespuestas(){
+
+	public DtComentario[] getRespuestas() {
 		return respuestas;
 	}
-	public DtComentario(Comentario comment){
-		idComentario=comment.getIDComentario();
-		texto=comment.getTexto();
-		fecha=comment.getFecha();
-		esPadre=comment.getEsPadre();
-		respuestas=comment.getDtRespuestas();
+
+	public DtComentario(Comentario comment) {
+		idComentario = comment.getIDComentario();
+		texto = comment.getTexto();
+		fecha = comment.getFecha();
+		esPadre = comment.getEsPadre();
+		respuestas = comment.getDtRespuestas();
 	}
+
 	public boolean equals(DtComentario dataTipo) {
-		return (idComentario == dataTipo.idComentario)&&(texto == dataTipo.getTexto())&&(fecha.equals(dataTipo.getFecha())&&(esPadre == dataTipo.getEsPadre())&&(nickUsuario == dataTipo.getNickUsuario()));
+		return (idComentario == dataTipo.idComentario)
+				&& (texto == dataTipo.getTexto())
+				&& (fecha.equals(dataTipo.getFecha())
+						&& (esPadre == dataTipo.getEsPadre()) && (nickUsuario == dataTipo
+						.getNickUsuario()));
 	}
 }
-
