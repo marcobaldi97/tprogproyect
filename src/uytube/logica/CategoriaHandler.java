@@ -3,12 +3,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CategoriaHandler {
-	private Map<String,Categoria> categorias;
+	private Map<String, Categoria> categorias;
 	private static CategoriaHandler instancia = null;
 	
 	private CategoriaHandler() {
 		// TODO Auto-generated constructor stub
-		categorias = new HashMap<String,Categoria>();
+		categorias = new HashMap<String, Categoria>();
 	}
 	
 	public static CategoriaHandler getInstance() {
@@ -17,22 +17,22 @@ public class CategoriaHandler {
 		return instancia;
 	}
 	
-	public void addCategoria(Categoria c) {
-		categorias.put(c.getNombre(), c);
+	public void addCategoria(Categoria categ) {
+		categorias.put(categ.getNombre(), categ);
 	}
 	
-	public void removerCategoria(Categoria c) {
-		categorias.remove(c.getNombre());
+	public void removerCategoria(Categoria categ) {
+		categorias.remove(categ.getNombre());
 	}
 	
-	public Categoria find(String s) {
-		return categorias.get(s);
+	public Categoria find(String nombreCateg) {
+		return categorias.get(nombreCateg);
 	}
 	
 	public DtCategoria[] listarCategorias() {
 		DtCategoria[] dtCategorias = new DtCategoria[categorias.size()];
 		Integer contador = 0;
-		for(Map.Entry<String, Categoria> entry : categorias.entrySet()) {
+		for (Map.Entry<String, Categoria> entry : categorias.entrySet()) {
 			dtCategorias[contador] = new DtCategoria(entry.getValue());
 			contador++;
 		}

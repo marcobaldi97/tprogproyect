@@ -3,8 +3,8 @@ package uytube.logica;
 public class DtCategoria {
 	private String nombre;
 
-	public DtCategoria(Categoria c) {
-		nombre = c.getNombre();
+	public DtCategoria(Categoria categoria) {
+		nombre = categoria.getNombre();
 	}
 
 	public DtCategoria(final String nombre) {
@@ -15,9 +15,9 @@ public class DtCategoria {
 		return nombre;
 	}
 
-	public boolean equals(DtCategoria dt) {
-		if (dt != null) {
-			return nombre == dt.getNombre();
+	public boolean equals(DtCategoria dataTipo) {
+		if (dataTipo != null) {
+			return nombre == dataTipo.getNombre();
 		} else
 			return false;
 	}

@@ -1,7 +1,7 @@
 package uytube.logica;
 
 public class DtComentario {
-	private Integer IDComentario;
+	private Integer idComentario;
 	private String texto;
 	private DtFecha fecha;
 	private String nickUsuario;
@@ -10,7 +10,7 @@ public class DtComentario {
 	
 	
 	public Integer getIDComentario(){
-		return IDComentario;
+		return idComentario;
 	}
 	public String getNickUsuario(){
 		return nickUsuario;
@@ -27,16 +27,15 @@ public class DtComentario {
 	public DtComentario[] getRespuestas(){
 		return respuestas;
 	}
-	public DtComentario(Comentario c){
-		IDComentario=c.getIDComentario();
-		texto=c.getTexto();
-		fecha=c.getFecha();
-		esPadre=c.getEsPadre();
-		respuestas=c.getDtRespuestas();
-		nickUsuario=c.getUsuario().getNickname();
+	public DtComentario(Comentario comment){
+		idComentario=comment.getIDComentario();
+		texto=comment.getTexto();
+		fecha=comment.getFecha();
+		esPadre=comment.getEsPadre();
+		respuestas=comment.getDtRespuestas();
 	}
-	public boolean equals(DtComentario dt) {
-		return (IDComentario == dt.IDComentario)&&(texto == dt.getTexto())&&(fecha.equals(dt.getFecha())&&(esPadre == dt.getEsPadre())&&(nickUsuario == dt.getNickUsuario()));
+	public boolean equals(DtComentario dataTipo) {
+		return (idComentario == dataTipo.idComentario)&&(texto == dataTipo.getTexto())&&(fecha.equals(dataTipo.getFecha())&&(esPadre == dataTipo.getEsPadre())&&(nickUsuario == dataTipo.getNickUsuario()));
 	}
 }
 

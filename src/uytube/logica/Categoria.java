@@ -7,35 +7,35 @@ import java.util.Map;
 
 public class Categoria {
 	private String nombre;
-	private Map<Integer,Video> videos;
-	private List<ListaReproduccion> LDR;
+	private Map<Integer, Video> videos;
+	private List<ListaReproduccion> lDReproduccion;
 
-	public Categoria(String n) {
-		nombre = n;
-		videos = new HashMap<Integer,Video>();
-		LDR = new LinkedList<ListaReproduccion>();
+	public Categoria(String name) {
+		nombre = name;
+		videos = new HashMap<Integer, Video>();
+		lDReproduccion = new LinkedList<ListaReproduccion>();
 	}
 
-	public void aniadirLDR(ListaReproduccion lr) {
-		if (!LDR.contains(lr)) {
-			LDR.add(lr);
+	public void aniadirLDR(ListaReproduccion listaReproduccion) {
+		if (!lDReproduccion.contains(listaReproduccion)) {
+			lDReproduccion.add(listaReproduccion);
 		}
 	}
 
-	public void removerLDR(ListaReproduccion lr) {
-		LDR.remove(lr);
+	public void removerLDR(ListaReproduccion listaReproduccion) {
+		lDReproduccion.remove(listaReproduccion);
 	}
 
 	public String getNombre() {
 		return nombre;
 	}
 
-	public void addVideo(Video v) {
-		videos.put(v.getIDVideo(), v);
+	public void addVideo(Video video) {
+		videos.put(video.getIDVideo(), video);
 	}
 
-	public void removerVideo(Video v) {
-		videos.remove(v.getIDVideo());
+	public void removerVideo(Video video) {
+		videos.remove(video.getIDVideo());
 	}
 
 	/*
@@ -43,28 +43,28 @@ public class Categoria {
 	 */
 
 	public DtCategoria getInfoCategoria() {
-		DtCategoria dt = new DtCategoria(this);
-		return dt;
+		DtCategoria dataTipo = new DtCategoria(this);
+		return dataTipo;
 	}
 
 	public DtVideo[] listarVideos() {
-		DtVideo[] res = new DtVideo[videos.size()];
+		DtVideo[] resultado = new DtVideo[videos.size()];
 		Integer contador = 0;
-		for(Map.Entry<Integer, Video> entry :videos.entrySet()) {
-			res[contador] = new DtVideo(entry.getValue());
+		for (Map.Entry<Integer, Video> entry :videos.entrySet()) {
+			resultado[contador] = new DtVideo(entry.getValue());
 			contador++;
 		}
-		return res;
+		return resultado;
 	}
 
 	public DtListaReproduccion[] listarLDR() {
-		DtListaReproduccion[] res = new DtListaReproduccion[LDR.size()];
+		DtListaReproduccion[] resultado = new DtListaReproduccion[lDReproduccion.size()];
 		Integer contador = 0;
-		for (ListaReproduccion ldr : LDR) {
-			res[contador] = ldr.verDetallesListareproduccion();
+		for (ListaReproduccion lDReproduccion : lDReproduccion) {
+			resultado[contador] = lDReproduccion.verDetallesListareproduccion();
 			contador++;
 		}
-		return res;
+		return resultado;
 	}
 
 }

@@ -7,30 +7,34 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-
 import uytube.logica.Factory;
 import uytube.logica.IUsuarioCtrl;
-//import presentacion.CrearUsuario;
 import uytube.logica.IVideoCtrl;
 
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 
-
-
 import javax.swing.JMenuItem;
 
 import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-
-import uytube.admin.usuarios.*;
-import uytube.admin.listas.*;
-import uytube.admin.categoria.alta.*;
-import uytube.admin.categoria.consulta.*;
-import uytube.admin.videos.alta.*;
+import uytube.admin.categoria.alta.AltaCategoria;
+import uytube.admin.categoria.consulta.ConsultaCategoriaJInternalFrame;
+import uytube.admin.listas.AgregarVideoListaInternalFrame;
+import uytube.admin.listas.ConsultaListaInternalFrame;
+import uytube.admin.listas.CrearListaInternalFrame;
+import uytube.admin.listas.ModificarListaFrame;
+import uytube.admin.listas.QuitarVideoListaInternalFrame;
+import uytube.admin.usuarios.AltaUsuarioInternalFrame;
+import uytube.admin.usuarios.ConsultaUsuarioInternalFrame;
+import uytube.admin.usuarios.ListarUsuariosInternalFrame;
+import uytube.admin.usuarios.modificarUsuario;
+import uytube.admin.videos.AltaVideo;
+import uytube.admin.videos.ModificarVideo;
+import uytube.admin.videos.ValorarVideo;
 import uytube.admin.videos.consultar.ConsultarVideoInternalFrame;
 import uytube.admin.videos.consultar.ListarCategoriasInternalFrame;
-import uytube.admin.videos.*;
 
 public class adminPrincipal extends JFrame {
 
