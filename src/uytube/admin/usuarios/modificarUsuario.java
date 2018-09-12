@@ -2,11 +2,11 @@ package uytube.admin.usuarios;
 
 import java.awt.EventQueue;
 
-import uytube.admin.Imagen;
 import uytube.admin.adminPrincipal;
 import uytube.admin.videos.ModificarVideo;
 import uytube.admin.videos.consultar.ConsultarVideoInternalFrame;
 import uytube.admin.videos.modificar.*;
+import uytube.datosPrueba.Imagen;
 import uytube.logica.DtCanal;
 import uytube.logica.DtCategoria;
 import uytube.logica.DtFecha;
