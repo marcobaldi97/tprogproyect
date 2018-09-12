@@ -2,21 +2,23 @@ package uytube.logica;
 
 public class Factory {
 	private static Factory instancia;
-	
-	private Factory(){
-		
+
+	private Factory() {
+
 	}
-	public static Factory getInstance(){
-		if(instancia == null){
-			instancia= new Factory();
+
+	public static Factory getInstance() {
+		if (instancia == null) {
+			instancia = new Factory();
 		}
 		return instancia;
 	}
-	
-	public IUsuarioCtrl getIUsuarioCtrl(){
+
+	public IUsuarioCtrl getIUsuarioCtrl() {
 		return UsuarioCtrl.getInstance();
 	}
-	public IVideoCtrl getIVideoCtrl(){
+
+	public IVideoCtrl getIVideoCtrl() {
 		return VideoCtrl.getInstance();
 	}
 }

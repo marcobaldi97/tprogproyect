@@ -2,14 +2,15 @@ package uytube.logica;
 
 import java.util.Date;
 
-public class DtFecha {	
+public class DtFecha {
 	private Date fecha;
-	
-	public DtFecha(Date fechaBase){
+
+	public DtFecha(Date fechaBase) {
 		fecha = fechaBase;
 	}
-	public Date getFecha(){
+
+	public Date getFecha() {
 		return fecha;
 	}
-	
+
 }

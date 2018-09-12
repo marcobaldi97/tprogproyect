@@ -50,7 +50,7 @@ public class Categoria {
 	public DtVideo[] listarVideos() {
 		DtVideo[] resultado = new DtVideo[videos.size()];
 		Integer contador = 0;
-		for (Map.Entry<Integer, Video> entry :videos.entrySet()) {
+		for (Map.Entry<Integer, Video> entry : videos.entrySet()) {
 			resultado[contador] = new DtVideo(entry.getValue());
 			contador++;
 		}
@@ -58,7 +58,8 @@ public class Categoria {
 	}
 
 	public DtListaReproduccion[] listarLDR() {
-		DtListaReproduccion[] resultado = new DtListaReproduccion[lDReproduccion.size()];
+		DtListaReproduccion[] resultado = new DtListaReproduccion[lDReproduccion
+				.size()];
 		Integer contador = 0;
 		for (ListaReproduccion lDReproduccion : lDReproduccion) {
 			resultado[contador] = lDReproduccion.verDetallesListareproduccion();

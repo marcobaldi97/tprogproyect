@@ -3,11 +3,11 @@ package uytube.logica;
 public class DtUsuario {
 	private String nickname;
 	private String nombre;
-    private String apellido;
-    private String email;
-    private DtFecha fecha_nacimiento;
-    private byte[] foto;
-	
+	private String apellido;
+	private String email;
+	private DtFecha fecha_nacimiento;
+	private byte[] foto;
+
 	public DtUsuario(Usuario usuarioBase) {
 		nickname = usuarioBase.getNickname();
 		nombre = usuarioBase.getNombre();
@@ -17,11 +17,15 @@ public class DtUsuario {
 		foto = usuarioBase.getFoto();
 	}
 
-	//OBS: no compara fotos
+	// OBS: no compara fotos
 	public boolean equals(DtUsuario other) {
-		return (nickname == other.getNickname()) && (nombre == other.getNombre()) && (apellido == other.getApellido()) && (email == other.getEmail()) && (fecha_nacimiento == other.getFecha_nacimiento());
+		return (nickname == other.getNickname())
+				&& (nombre == other.getNombre())
+				&& (apellido == other.getApellido())
+				&& (email == other.getEmail())
+				&& (fecha_nacimiento == other.getFecha_nacimiento());
 	}
-	
+
 	public String getNickname() {
 		return nickname;
 	}
@@ -29,15 +33,15 @@ public class DtUsuario {
 	public String getNombre() {
 		return nombre;
 	}
-	
+
 	public String getApellido() {
 		return apellido;
 	}
-	
+
 	public String getEmail() {
 		return email;
 	}
-	
+
 	public DtFecha getFecha_nacimiento() {
 		return fecha_nacimiento;
 	}
@@ -45,6 +49,5 @@ public class DtUsuario {
 	public byte[] getFoto() {
 		return foto;
 	}
-	
 
 }

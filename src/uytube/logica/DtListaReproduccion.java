@@ -9,44 +9,47 @@ public class DtListaReproduccion {
 	private Privacidad privado;
 	private DtCategoria[] categoriasLDR;
 	private TipoLista tipoL;
-	
-	public DtListaReproduccion(PorDefecto ldr){
-		nombre=ldr.getNombre();
-		propietario= ldr.getPropietario();
-		privado=Privacidad.PRIVADO;
-		categoriasLDR=ldr.getInfoCategorias();
-		tipoL=TipoLista.PORDEFECTO;
+
+	public DtListaReproduccion(PorDefecto ldr) {
+		nombre = ldr.getNombre();
+		propietario = ldr.getPropietario();
+		privado = Privacidad.PRIVADO;
+		categoriasLDR = ldr.getInfoCategorias();
+		tipoL = TipoLista.PORDEFECTO;
 	}
-	public DtListaReproduccion(Particular ldr){
-		nombre=ldr.getNombre();
-		propietario=ldr.getPropietario();
-		privado=ldr.getPrivado();
-		categoriasLDR=ldr.getInfoCategorias();
-		tipoL=TipoLista.PARTICULAR;
+
+	public DtListaReproduccion(Particular ldr) {
+		nombre = ldr.getNombre();
+		propietario = ldr.getPropietario();
+		privado = ldr.getPrivado();
+		categoriasLDR = ldr.getInfoCategorias();
+		tipoL = TipoLista.PARTICULAR;
 	}
-	
-	public Privacidad getPrivado(){ 
+
+	public Privacidad getPrivado() {
 		return privado;
 	}
-	public TipoLista getTipoLista(){
+
+	public TipoLista getTipoLista() {
 		return tipoL;
 	}
-	
-	public DtCategoria[] getCategoriasLDR(){
+
+	public DtCategoria[] getCategoriasLDR() {
 		return categoriasLDR;
 	}
-	
+
 	public DtListaReproduccion(String nombreL) {
 		nombre = nombreL;
 	}
-	
+
 	public String getNombre() {
 		return nombre;
 	}
-	
+
 	public boolean equals(DtListaReproduccion other) {
 		return nombre == other.getNombre();
 	}
+
 	public String getPropietario() {
 		return propietario;
 	}

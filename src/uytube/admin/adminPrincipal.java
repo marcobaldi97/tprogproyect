@@ -13,7 +13,6 @@ import uytube.logica.IVideoCtrl;
 
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
-
 import javax.swing.JMenuItem;
 
 import java.awt.event.ActionListener;
@@ -35,6 +34,7 @@ import uytube.admin.videos.ModificarVideo;
 import uytube.admin.videos.ValorarVideo;
 import uytube.admin.videos.consultar.ConsultarVideoInternalFrame;
 import uytube.admin.videos.consultar.ListarCategoriasInternalFrame;
+import uytube.datosPrueba.DatosDePrueba;
 
 public class adminPrincipal extends JFrame {
 
