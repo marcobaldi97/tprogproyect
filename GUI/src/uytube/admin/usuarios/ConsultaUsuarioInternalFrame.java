@@ -324,7 +324,7 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 		textFieldEmail.setText(usr.getEmail());
 		textFieldNombre.setText(usr.getNombre());
 		textFieldApellido.setText(usr.getApellido());
-		dateChooser.setDate(usr.getFecha_nacimiento().getFecha());
+		dateChooser.setDate(usr.getFechaNacimiento().getFecha());
 		
 		textFieldNomCanal.setText(usrCanal.getNombre());
 		if (usrCanal.getPrivacidad()==Privacidad.PRIVADO){

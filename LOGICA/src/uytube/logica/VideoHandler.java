@@ -7,15 +7,15 @@ import java.util.Map.Entry;
 public class VideoHandler {
 	private Map<Integer, Video> videos;
 	private static VideoHandler instancia = null;
-	private Integer IDActual;
+	private Integer iDActual;
 
 	private VideoHandler() {
 		videos = new HashMap<Integer, Video>();
-		IDActual = 0;
+		iDActual = 0;
 	}
 
 	public Integer getNewID() {
-		return ++IDActual;
+		return ++iDActual;
 	}
 
 	public static VideoHandler getInstance() {
@@ -25,7 +25,7 @@ public class VideoHandler {
 	}
 
 	public void addVideo(Video vidAAgregar) {
-		videos.put(IDActual, vidAAgregar);
+		videos.put(iDActual, vidAAgregar);
 	}
 
 	public void removerVideo(Video vidARemover) {

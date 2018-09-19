@@ -3,30 +3,30 @@ package uytube.logica;
 import uytube.logica.SystemHandler.Privacidad;
 
 public class DtVideo {
-	private Integer IDVideo;
+	private Integer iDVideo;
 	private String nombre;
 	private String propietario;
 	private String descripcion;
 	private int duracionSS;
-	private DtFecha fecha_publicacion;
-	private String URL;
+	private DtFecha fechaPublicacion;
+	private String url;
 	private DtCategoria cat;
 	private Privacidad privacidad;
 
 	public DtVideo(Video videoBase) {
-		IDVideo = videoBase.getIDVideo();
+		iDVideo = videoBase.getIDVideo();
 		nombre = videoBase.getNombre();
 		setPropietario(videoBase.getPropietario());
 		descripcion = videoBase.getDescripcion();
 		duracionSS = videoBase.getDuracion();
-		fecha_publicacion = videoBase.getFechaPublicacion();
-		URL = videoBase.getURL();
+		fechaPublicacion = videoBase.getFechaPublicacion();
+		url = videoBase.getURL();
 		cat = videoBase.getCategoria();
 		privacidad = videoBase.getPrivacidad();
 	}
 
 	public Integer getIDVideo() {
-		return IDVideo;
+		return iDVideo;
 	}
 
 	public String getNombre() {
@@ -42,11 +42,11 @@ public class DtVideo {
 	}
 
 	public DtFecha getFechaPublicacion() {
-		return fecha_publicacion;
+		return fechaPublicacion;
 	}
 
 	public String getUrl() {
-		return URL;
+		return url;
 	}
 
 	public DtCategoria getCategoria() {
@@ -61,8 +61,8 @@ public class DtVideo {
 		return (nombre == other.getNombre())
 				&& (descripcion == other.getDescripcion())
 				&& (duracionSS == other.getDuracion())
-				&& (fecha_publicacion == other.getFechaPublicacion())
-				&& (URL == other.getUrl()) && (cat.equals(getCategoria()))
+				&& (fechaPublicacion == other.getFechaPublicacion())
+				&& (url == other.getUrl()) && (cat.equals(getCategoria()))
 				&& (privacidad == other.getPrivacidad());
 	}
 
