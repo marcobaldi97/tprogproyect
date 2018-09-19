@@ -10,7 +10,7 @@ public class SystemHandler {
 
 	private static SystemHandler instance = null;
 	private Map<String, DtListaReproduccion> listasDefault;
-	private int id_comentario = 0;
+	private int idComentario = 0;
 	private Categoria sinCat = new Categoria("Sin Categoria");
 
 	private SystemHandler() {
@@ -27,9 +27,9 @@ public class SystemHandler {
 		return instance;
 	}
 
-	public int recibirId_Comentario() {
-		int aux = id_comentario;
-		id_comentario++;
+	public int recibirIDComentario() {
+		int aux = idComentario;
+		idComentario++;
 		return aux;
 	}// devuelve una key
 

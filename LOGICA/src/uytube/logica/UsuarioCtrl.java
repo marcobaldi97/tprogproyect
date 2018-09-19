@@ -135,8 +135,8 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 	}
 
 	public Boolean verificarDispUsuario(String nickU, String email) {
-		Boolean flag = (usuarioh.memberNickname(nickU) || usuarioh
-				.memberEmail(email));
+		Boolean flag = usuarioh.memberNickname(nickU) || usuarioh
+				.memberEmail(email);
 		return !flag;
 	}// true si está disponible, false si ya está ocupado
 

@@ -10,7 +10,7 @@ public class Usuario {
 	private String nombre;
 	private String apellido;
 	private String email;
-	private DtFecha fecha_nacimiento;
+	private DtFecha fechaNacimiento;
 	private byte[] foto;
 	private Canal canalPropio;
 	private Map<String, Usuario> usuariosQueSigue;
@@ -24,7 +24,7 @@ public class Usuario {
 		nombre = nombreU;
 		apellido = apellidoU;
 		email = emailU;
-		fecha_nacimiento = fechaNacU;
+		fechaNacimiento = fechaNacU;
 		foto = fotoU;
 		usuariosQueSigue = new HashMap<String, Usuario>();
 		usuariosQueLeSiguen = new HashMap<String, Usuario>();
@@ -54,7 +54,7 @@ public class Usuario {
 	}
 
 	public DtFecha getFechaNac() {
-		return fecha_nacimiento;
+		return fechaNacimiento;
 	}
 
 	public String getEmail() {
@@ -65,7 +65,7 @@ public class Usuario {
 			DtFecha nuevaFechaNacimiento, byte[] fotoUsuario) {
 		nombre = nuevoNombre;
 		apellido = nuevoApellido;
-		fecha_nacimiento = nuevaFechaNacimiento;
+		fechaNacimiento = nuevaFechaNacimiento;
 		foto = fotoUsuario;
 	}
 
