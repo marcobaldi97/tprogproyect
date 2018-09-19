@@ -5,7 +5,7 @@ public class DtUsuario {
 	private String nombre;
 	private String apellido;
 	private String email;
-	private DtFecha fecha_nacimiento;
+	private DtFecha fechaNacimiento;
 	private byte[] foto;
 
 	public DtUsuario(Usuario usuarioBase) {
@@ -13,7 +13,7 @@ public class DtUsuario {
 		nombre = usuarioBase.getNombre();
 		apellido = usuarioBase.getApellido();
 		email = usuarioBase.getEmail();
-		fecha_nacimiento = usuarioBase.getFechaNac();
+		fechaNacimiento = usuarioBase.getFechaNac();
 		foto = usuarioBase.getFoto();
 	}
 
@@ -23,7 +23,7 @@ public class DtUsuario {
 				&& (nombre == other.getNombre())
 				&& (apellido == other.getApellido())
 				&& (email == other.getEmail())
-				&& (fecha_nacimiento == other.getFecha_nacimiento());
+				&& (fechaNacimiento == other.getFechaNacimiento());
 	}
 
 	public String getNickname() {
@@ -42,8 +42,8 @@ public class DtUsuario {
 		return email;
 	}
 
-	public DtFecha getFecha_nacimiento() {
-		return fecha_nacimiento;
+	public DtFecha getFechaNacimiento() {
+		return fechaNacimiento;
 	}
 
 	public byte[] getFoto() {

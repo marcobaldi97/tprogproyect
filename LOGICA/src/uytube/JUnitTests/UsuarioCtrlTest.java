@@ -254,7 +254,7 @@ public class UsuarioCtrlTest {
 		assertEquals(true,dtUsuario.getNombre()=="Jose");
 		assertEquals(true,dtUsuario.getApellido()=="Ramirez");
 		assertEquals(true,dtUsuario.getEmail()=="www.cosoarroba3");
-		assertEquals(true,dtUsuario.getFecha_nacimiento().equals(fecha));
+		assertEquals(true,dtUsuario.getFechaNacimiento().equals(fecha));
 		assertEquals(true,dtUsuario.getFoto()==null);
 		UCU.editarDatosUsuario(nombreU, "Josefina", "Ramireza", fecha2, null);
 		dtUsuario=UCU.listarDatosUsuario(nombreU);
@@ -262,7 +262,7 @@ public class UsuarioCtrlTest {
 		assertEquals(true,dtUsuario.getNombre()=="Josefina");
 		assertEquals(true,dtUsuario.getApellido()=="Ramireza");
 		assertEquals(true,dtUsuario.getEmail()=="www.cosoarroba3");
-		assertEquals(true,dtUsuario.getFecha_nacimiento().equals(fecha2));
+		assertEquals(true,dtUsuario.getFechaNacimiento().equals(fecha2));
 		assertEquals(true,dtUsuario.getFoto()==null);
 	}
 
@@ -476,7 +476,7 @@ public class UsuarioCtrlTest {
 		assertEquals(true,usuarioActual.getNombre()=="Jose");
 		assertEquals(true,usuarioActual.getApellido()=="Ramirez");
 		assertEquals(true,usuarioActual.getEmail()=="www.cosoarroba3");
-		assertEquals(true,usuarioActual.getFecha_nacimiento().equals(fecha));
+		assertEquals(true,usuarioActual.getFechaNacimiento().equals(fecha));
 		assertEquals(true,usuarioActual.getFoto()==null);
 		
 	}

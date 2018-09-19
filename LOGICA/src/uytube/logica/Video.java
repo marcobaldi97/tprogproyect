@@ -9,13 +9,13 @@ import java.util.Map;
 import uytube.logica.SystemHandler.Privacidad;
 
 public class Video {
-	private Integer IDVideo;
+	private Integer idVideo;
 	private String nombre;
 	private String propietario;
 	private String descripcion;
 	private int duracion;
-	private DtFecha fecha_publicacion;
-	private String URL;
+	private DtFecha fechaPublicacion;
+	private String urlVideo;
 	private Categoria cat;
 	private Privacidad privacidad;
 	private Map<Integer, Comentario> comentarios;
@@ -27,17 +27,17 @@ public class Video {
 			Privacidad privacidadVideo) {
 		VideoHandler vidHandler = VideoHandler.getInstance();
 		SystemHandler SysHandler = SystemHandler.getInstance();
-		IDVideo = vidHandler.getNewID();
+		idVideo = vidHandler.getNewID();
 		nombre = nombreVideo;
 		setPropietario(propietario);
 		descripcion = descripcionV;
 		duracion = duracionV;
-		fecha_publicacion = fechapubli;
-		URL = url;
+		fechaPublicacion = fechapubli;
+		urlVideo = url;
 		listas = new LinkedList<ListaReproduccion>();
 		CategoriaHandler catHandler = CategoriaHandler.getInstance();
 		if (categ != null && catHandler.isMember(categ.getNombre())) {
-			cat = catHandler.find(categ.getNombre());// si la categoria existe
+			cat = catHandler.find(categ.getNombre()); // si la categoria existe
 														// la asigno, si no?
 			cat.addVideo(this);
 		} else
@@ -50,7 +50,7 @@ public class Video {
 	}
 
 	public Integer getIDVideo() {
-		return IDVideo;
+		return idVideo;
 	}
 
 	public String getNombre() {
@@ -66,11 +66,11 @@ public class Video {
 	}
 
 	public DtFecha getFechaPublicacion() {
-		return fecha_publicacion;
+		return fechaPublicacion;
 	}
 
 	public String getURL() {
-		return URL;
+		return urlVideo;
 	}
 
 	public DtCategoria getCategoria() {
@@ -110,8 +110,8 @@ public class Video {
 		SystemHandler SysHandler = SystemHandler.getInstance();
 		descripcion = descripcionV;
 		duracion = duracionV;
-		fecha_publicacion = fechaPublicacionV;
-		URL = url;
+		fechaPublicacion = fechaPublicacionV;
+		urlVideo = url;
 		CategoriaHandler catHandler = CategoriaHandler.getInstance();
 		cat.removerVideo(this);
 
@@ -153,7 +153,7 @@ public class Video {
 	public void nuevoComentario(String nickU, DtFecha fecha, String cont) {
 		SystemHandler SysHandler = SystemHandler.getInstance();
 		Comentario comentarioNuevo = new Comentario(
-				SysHandler.recibirId_Comentario(), cont, fecha, true, nickU);
+				SysHandler.recibirIDComentario(), cont, fecha, true, nickU);
 		comentarios.put(comentarioNuevo.getIDComentario(), comentarioNuevo);
 	}
 
@@ -163,7 +163,7 @@ public class Video {
 		if (comentarios.containsKey(IDCR)) {
 			Comentario comentarioPadre = comentarios.get(IDCR);
 			Comentario comentarioNuevo = new Comentario(
-					SysHandler.recibirId_Comentario(), cont, fecha, false,
+					SysHandler.recibirIDComentario(), cont, fecha, false,
 					nickU);
 			comentarioPadre.addComentario(comentarioNuevo);
 			comentarios.put(comentarioNuevo.getIDComentario(), comentarioNuevo);
@@ -214,7 +214,7 @@ public class Video {
 		int i = 0;
 		for (Puntuacion puntuacionVideo : puntuaciones) {
 			if (puntuacionVideo.getValoracion() == valoracion) {
-				usu[i] = (new DtUsuario(puntuacionVideo.getUsuario()));
+				usu[i] = new DtUsuario(puntuacionVideo.getUsuario());
 				i++;
 			}
 
