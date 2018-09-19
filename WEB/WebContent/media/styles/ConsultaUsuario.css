@@ -1,0 +1,51 @@
+@CHARSET "ISO-8859-1";
+table.tabs {
+    border-collapse: separate;
+    border-spacing: 0;
+    background-color: transparent;
+    font-size: 0.9em;
+    }
+th.tabck {
+    border: gray solid 1px;
+    border-bottom: 0;
+    border-radius: 0.5em 0.5em 0 0;
+    background-color: transparent;
+    padding: 0.3em;
+    text-align: center;
+    cursor: pointer;
+    }
+th.tabcks {
+    border: 0;
+    border-bottom: gray solid 1px;
+    }
+th.tabcks:first-child {
+    border-left: gray solid 1px;
+    }
+th.tabcks:last-child {
+    border-right: gray solid 1px;
+    }
+table.tabs tr:first-child th.tabcks {
+    border-left: none;
+    border-right: none;
+    }
+table.tabs[data-filas] th.tabck {
+    box-shadow: 0 -0.15em 0.1em 0 white;
+    }
+table.tabs td {
+    border: gray solid 1px;
+    border-top: 0;
+    }
+/* El ancho y alto de los div.tabdiv se configuran
+en cada aplicación */
+div.tabdiv {
+    border: 0;
+    padding: 0.5em;
+    overflow: auto;
+    display: none;
+    width: 100%;
+    height: auto;
+    } 
+body{
+	 background-color: #ffffff;
+	  text-align: center;
+}

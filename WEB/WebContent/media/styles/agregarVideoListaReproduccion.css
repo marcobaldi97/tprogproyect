@@ -1,0 +1,11 @@
+@charset "ISO-8859-1";
+
+form{
+	text-align: center;
+	border: 1% solid #929eb2;
+	margin: 2%;
+	background-color: #d7d9dd;
+	font-family: arial;
+	font-size: 16px;
+	padding: 10%;
+}
