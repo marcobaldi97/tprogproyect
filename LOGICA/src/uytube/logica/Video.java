@@ -22,9 +22,8 @@ public class Video {
 	private List<ListaReproduccion> listas;
 	private List<Puntuacion> puntuaciones;
 
-	public Video(String nombreVideo, String propietario, String descripcionV,
-			int duracionV, DtFecha fechapubli, String url, DtCategoria categ,
-			Privacidad privacidadVideo) {
+	public Video(String nombreVideo, String propietario, String descripcionV, int duracionV, DtFecha fechapubli,
+			String url, DtCategoria categ, Privacidad privacidadVideo) {
 		VideoHandler vidHandler = VideoHandler.getInstance();
 		SystemHandler SysHandler = SystemHandler.getInstance();
 		idVideo = vidHandler.getNewID();
@@ -100,9 +99,8 @@ public class Video {
 		listas.remove(ldr);
 	}
 
-	public void ingresarNuevosDatosVideo(String descripcionV, int duracionV,
-			DtFecha fechaPublicacionV, String url, DtCategoria categoriaV,
-			Privacidad privacidadV) {
+	public void ingresarNuevosDatosVideo(String descripcionV, int duracionV, DtFecha fechaPublicacionV, String url,
+			DtCategoria categoriaV, Privacidad privacidadV) {
 		for (ListaReproduccion ldr : listas) {
 			ldr.removerCategoria(cat);
 			cat.removerLDR(ldr);
@@ -117,8 +115,7 @@ public class Video {
 
 		if (categoriaV != null) {
 			if (catHandler.isMember(categoriaV.getNombre())) {
-				Categoria categoriaNueva = catHandler.find(categoriaV
-						.getNombre());
+				Categoria categoriaNueva = catHandler.find(categoriaV.getNombre());
 				cat = categoriaNueva;
 				categoriaNueva.addVideo(this);
 			}
@@ -152,19 +149,15 @@ public class Video {
 
 	public void nuevoComentario(String nickU, DtFecha fecha, String cont) {
 		SystemHandler SysHandler = SystemHandler.getInstance();
-		Comentario comentarioNuevo = new Comentario(
-				SysHandler.recibirIDComentario(), cont, fecha, true, nickU);
+		Comentario comentarioNuevo = new Comentario(SysHandler.recibirIDComentario(), cont, fecha, true, nickU);
 		comentarios.put(comentarioNuevo.getIDComentario(), comentarioNuevo);
 	}
 
-	public void responderComentario(Integer IDCR, String nickU, DtFecha fecha,
-			String cont) {
+	public void responderComentario(Integer IDCR, String nickU, DtFecha fecha, String cont) {
 		SystemHandler SysHandler = SystemHandler.getInstance();
 		if (comentarios.containsKey(IDCR)) {
 			Comentario comentarioPadre = comentarios.get(IDCR);
-			Comentario comentarioNuevo = new Comentario(
-					SysHandler.recibirIDComentario(), cont, fecha, false,
-					nickU);
+			Comentario comentarioNuevo = new Comentario(SysHandler.recibirIDComentario(), cont, fecha, false, nickU);
 			comentarioPadre.addComentario(comentarioNuevo);
 			comentarios.put(comentarioNuevo.getIDComentario(), comentarioNuevo);
 		}
@@ -191,8 +184,7 @@ public class Video {
 
 	public void valorarVideo(String nickU, boolean valoracion) {
 		int i = 0;
-		while (i < puntuaciones.size()
-				&& puntuaciones.get(i).getNickPuntuador() != nickU) {
+		while (i < puntuaciones.size() && puntuaciones.get(i).getNickPuntuador() != nickU) {
 			i++;
 		}
 		if (i < puntuaciones.size()) {
@@ -202,6 +194,19 @@ public class Video {
 			addPuntuacion(puntuacionVideo);
 		}
 
+	}
+
+	public DtListaReproduccion[] getListas() {
+		DtListaReproduccion[] listasADevolver = new DtListaReproduccion[listas.size()];
+		int iterador = 0;
+		for (ListaReproduccion lista : listas) {
+			if (lista instanceof PorDefecto)
+				listasADevolver[iterador] = new DtListaReproduccion((PorDefecto) lista);
+			else if (lista instanceof Particular)
+				listasADevolver[iterador] = new DtListaReproduccion((Particular) lista);
+			iterador++;
+		}
+		return listasADevolver;
 	}
 
 	public DtUsuario[] getUsuariosPuntuadores(boolean valoracion) {

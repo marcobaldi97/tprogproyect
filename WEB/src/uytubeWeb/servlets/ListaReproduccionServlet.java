@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class ListaReproduccionServlet
  */
-@WebServlet("/Listas")
+@WebServlet({"/playlist","/addVidPlaylist","/removeVidPlaylist","/modifyPlaylist","/newPlaylist"})
+
+
 public class ListaReproduccionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

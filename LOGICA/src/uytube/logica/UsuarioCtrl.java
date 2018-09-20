@@ -217,4 +217,10 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 		Usuario usuarioParticular = usuarioh.find(nickname);
 		return usuarioParticular.listarLDRParticularesdeUsuario();
 	}
+
+	@Override
+	public DtCanal[] listarCanalesPorNombre(String nombre) {
+		
+		return usuarioh.listarCanalesPorNombre(nombre);
+	}
 }
