@@ -84,5 +84,7 @@ public interface IUsuarioCtrl {
 			String catE);
 
 	public abstract String[] listarLDRParticularesdeUsuario(String nickname);
+	
+	public abstract DtCanal[] listarCanalesPorNombre(String nombre);
 
 }

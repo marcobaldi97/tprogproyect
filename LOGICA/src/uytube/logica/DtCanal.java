@@ -1,5 +1,7 @@
 package uytube.logica;
 
+import java.util.Date;
+
 import uytube.logica.SystemHandler.Privacidad;
 
 public class DtCanal {
@@ -7,12 +9,14 @@ public class DtCanal {
 	private String descripcion;
 	private Privacidad privado;
 	private DtCategoria categoria;
+	private Date ultimoVideo;
 
 	public DtCanal(Canal chanel) {
 		nombre = chanel.getNombre();
 		descripcion = chanel.getDescripcion();
 		privado = chanel.getPrivacidad();
 		categoria = chanel.getCategoria();
+		ultimoVideo = chanel.getFechaUltimoVideo();
 	}
 
 	public String getNombre() {
@@ -32,8 +36,7 @@ public class DtCanal {
 	}
 
 	public Boolean equals(DtCanal chanel) {
-		return (nombre == chanel.getNombre())
-				&& (descripcion == chanel.getDescripcion())
+		return (nombre == chanel.getNombre()) && (descripcion == chanel.getDescripcion())
 				&& (privado == chanel.getPrivacidad());
 	}
 

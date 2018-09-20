@@ -1,7 +1,11 @@
 package uytube.logica;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import uytube.logica.SystemHandler.Privacidad;
 
 public class UsuarioHandler {
 	private Map<String, Usuario> usuarios;
@@ -50,6 +54,16 @@ public class UsuarioHandler {
 		}
 		return nickUsuarios;
 
+	}
+
+	public DtCanal[] listarCanalesPorNombre(String nombre) {
+		List<DtCanal> listaUsuarios=new ArrayList<DtCanal>();
+		for(Map.Entry<String, Usuario> entry : usuarios.entrySet()) {
+			if(entry.getValue().mostrarInfoCanal().getPrivacidad()==Privacidad.PUBLICO && entry.getValue().mostrarInfoCanal().getNombre().contains(nombre))
+				listaUsuarios.add(entry.getValue().mostrarInfoCanal());
+		}
+		DtCanal[] resultadosBusqueda=listaUsuarios.toArray(new DtCanal[0]);
+		return resultadosBusqueda;
 	}
 
 	public static UsuarioHandler getInstance() {

@@ -1,5 +1,8 @@
 package uytube.logica;
 
+import static org.junit.Assert.assertNotNull;
+
+import java.util.Date;
 //prueba commit
 import java.util.HashMap;
 import java.util.Map;
@@ -51,8 +54,7 @@ public class Canal {
 	public String[] listarListasReproduccion() {
 		String[] nombresListas = new String[listasReproduccion.size()];
 		Integer contador = 0;
-		for (Map.Entry<String, ListaReproduccion> entry : listasReproduccion
-				.entrySet()) {
+		for (Map.Entry<String, ListaReproduccion> entry : listasReproduccion.entrySet()) {
 			if (entry.getValue() != null) {
 				String nomb = entry.getValue().getNombre();
 				nombresListas[contador] = nomb;
@@ -72,14 +74,12 @@ public class Canal {
 		return dataTipo;
 	}
 
-	public Canal(String nomb, String proprietary, String desc,
-			Privacidad privacidadE, String catE) {
+	public Canal(String nomb, String proprietary, String desc, Privacidad privacidadE, String catE) {
 		nombre = nomb;
 		descripcion = desc;
 		privacidadCanal = privacidadE;
 		if (catE != null) {
-			CategoriaHandler manejadorCategoria = CategoriaHandler
-					.getInstance();
+			CategoriaHandler manejadorCategoria = CategoriaHandler.getInstance();
 			cate = manejadorCategoria.find(catE);
 		} else {
 			SystemHandler manejadorSistema = SystemHandler.getInstance();
@@ -88,11 +88,9 @@ public class Canal {
 		videos = new HashMap<String, Video>();
 		listasReproduccion = new HashMap<String, ListaReproduccion>();
 		SystemHandler manejadorSistema = SystemHandler.getInstance();
-		DtListaReproduccion[] listasDefault = manejadorSistema
-				.obtenerListasReproduccion();
+		DtListaReproduccion[] listasDefault = manejadorSistema.obtenerListasReproduccion();
 		for (int index = 0; index < listasDefault.length; index++) {
-			PorDefecto listaRep = new PorDefecto(
-					listasDefault[index].getNombre(), proprietary);
+			PorDefecto listaRep = new PorDefecto(listasDefault[index].getNombre(), proprietary);
 			addListaReproduccion(listaRep);
 		}
 	}
@@ -114,22 +112,18 @@ public class Canal {
 		return videos.get(sNombre);
 	}
 
-	public void aniadirVideo(String nomb, String proprietary, String desc,
-			Integer duracion, DtFecha fechaPublicacion, String urlVideo,
-			DtCategoria catE, Privacidad priv) {
-		Video vVideo = new Video(nomb, proprietary, desc, duracion,
-				fechaPublicacion, urlVideo, catE, priv);
+	public void aniadirVideo(String nomb, String proprietary, String desc, Integer duracion, DtFecha fechaPublicacion,
+			String urlVideo, DtCategoria catE, Privacidad priv) {
+		Video vVideo = new Video(nomb, proprietary, desc, duracion, fechaPublicacion, urlVideo, catE, priv);
 		this.addVideo(vVideo);
 		VideoHandler vidH = VideoHandler.getInstance();
 		vidH.addVideo(vVideo);
 	}
 
-	public void ingresarNuevosDatosVideo(String nomb, String desc,
-			int duracion, DtFecha fechaPublicacion, String urlVideo,
-			DtCategoria catE, Privacidad priv) {
+	public void ingresarNuevosDatosVideo(String nomb, String desc, int duracion, DtFecha fechaPublicacion,
+			String urlVideo, DtCategoria catE, Privacidad priv) {
 		Video vVideo = videos.get(nomb);
-		vVideo.ingresarNuevosDatosVideo(desc, duracion, fechaPublicacion,
-				urlVideo, catE, priv);
+		vVideo.ingresarNuevosDatosVideo(desc, duracion, fechaPublicacion, urlVideo, catE, priv);
 	}
 
 	public String[] listarVideosCanal() {
@@ -199,14 +193,12 @@ public class Canal {
 		return lista.existeVideo(video);
 	}
 
-	public void modificarDatosCanal(String nombreCanal, String descripcion2,
-			Privacidad privacidad, String catE2) {
+	public void modificarDatosCanal(String nombreCanal, String descripcion2, Privacidad privacidad, String catE2) {
 		nombre = nombreCanal;
 		descripcion = descripcion2;
 		privacidadCanal = privacidad;
 		if (catE2 != null) {
-			CategoriaHandler manejadorCategoria = CategoriaHandler
-					.getInstance();
+			CategoriaHandler manejadorCategoria = CategoriaHandler.getInstance();
 			cate = manejadorCategoria.find(catE2);
 		} else {
 			SystemHandler manejadorSistema = SystemHandler.getInstance();
@@ -227,8 +219,7 @@ public class Canal {
 	}
 
 	private void cambiarPrivacidadListasParticularesAPrivado() {
-		for (final Map.Entry<String, ListaReproduccion> entry : listasReproduccion
-				.entrySet()) {
+		for (final Map.Entry<String, ListaReproduccion> entry : listasReproduccion.entrySet()) {
 			final ListaReproduccion listaReproduccion = entry.getValue();
 
 			if (listaReproduccion instanceof Particular) {
@@ -241,8 +232,7 @@ public class Canal {
 	public String[] listarLDRParticularesdeUsuario() {
 		String[] nombresListas = new String[listasReproduccion.size()];
 		Integer contador = 0;
-		for (Map.Entry<String, ListaReproduccion> entry : listasReproduccion
-				.entrySet()) {
+		for (Map.Entry<String, ListaReproduccion> entry : listasReproduccion.entrySet()) {
 			if (entry.getValue() != null) {
 				if (entry.getValue() instanceof Particular) {
 					String nomb = entry.getValue().getNombre();
@@ -257,5 +247,19 @@ public class Canal {
 			nombresListasAjustado[i] = nombresListas[i];
 		}
 		return nombresListasAjustado;
+	}
+
+	public Date getFechaUltimoVideo() {
+		Date LastFecha = new Date(0);
+		boolean found = false;
+		for (Map.Entry<String, Video> entry : videos.entrySet()) {
+			if (!found) {
+				LastFecha = entry.getValue().getFechaPublicacion().getFecha();
+				found = true;
+			} else if (entry.getValue().getFechaPublicacion().getFecha().before(LastFecha)) {
+				LastFecha = entry.getValue().getFechaPublicacion().getFecha();
+			}
+		}
+		return LastFecha;
 	}
 }
