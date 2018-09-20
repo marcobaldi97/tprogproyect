@@ -13,7 +13,6 @@
   <a href="#about">Iniciar Sesion</a>
 <button type="button">Mandale Mecha!</button>
 <input type="text" placeholder="Buscar..">
-	
 </div>
 
 

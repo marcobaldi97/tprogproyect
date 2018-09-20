@@ -1,0 +1,137 @@
+@charset "ISO-8859-1";
+#titulo{
+	font-family: arial;
+	font-size: 20px;
+}
+table{
+    border: 2px solid #c0c0c0;
+    border-radius: 5px;
+}
+.encapsulated_border{
+	border-top: 2px solid #c0c0c0;
+	border-bottom: 2px solid #c0c0c0;
+}
+.right_left_separators{
+	border-right: 2px solid #c0c0c0;
+	border-left: 2px solid #c0c0c0;
+	text_align:left;
+}
+.left_separator{
+	border-left: 2px solid #c0c0c0;
+}
+.right_separator{
+	border-right: 2px solid #c0c0c0;
+}
+#like_button{
+    background-color: #cbf2ae;
+    border: none;
+    color: black;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+#like_button:hover{
+	background-color: #e1f8d1;
+}
+#dislike_button{
+	background-color: #f14141;
+    border: none;
+    color: black;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+#dislike_button:hover{
+	background-color: #f57e7e;
+}
+.texto_simple{
+	font-family: arial;
+	font-size: 16px;
+}
+.descripcion{
+	font-family: arial;
+	font-size: 12px;
+}
+.categoria{
+	font-family: arial;
+	font-size: 14px;
+	color: #d0cdd1;
+	text-align: left;
+}
+#nombre_autor{
+	text-align:left;
+}
+#fecha_publicacion{
+	text-align:left;
+}
+.botones_like_dislike{
+	align:right;
+	
+}
+#agregar_lista_button{
+	background-color: #d0cdd1;
+    border: none;
+    color: black;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+#agregar_lista_button:hover{
+	background-color: #e8e6e8;
+}
+#comentario_a_comentar{
+	text_align: left;
+	border: 2px solid #c0c0c0;
+	font-family: arial;
+	font-size: 16px;
+}
+textarea{
+	width : 90%;
+	height : 140px;
+}
+#logo{
+    border-radius: 50%;
+    border: 1px solid #000000;
+    height: 100px;
+    width: 100px;
+}
+#seguir_button{
+	background-color: #f14141;
+    border: none;
+    color: black;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    width: 100%;
+}
+#seguir_button:hover{
+	background-color: #f57e7e;
+}
+#response_button{
+	background-color: #d0cdd1;
+    border: none;
+    color: black;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+#response_button:hover{
+	background-color: #e8e6e8;
+}
+#logo_container{
+	padding: 2px 2px 2px 2px;
+}
+.comentario_hijo{
+	margin-top:1em;
+	margin-left:5em;
+}
