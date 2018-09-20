@@ -3,12 +3,11 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/uyTubeLogic"/>
-	<classpathentry kind="lib" path="/uyTube/jcalendar-1.4.jar"/>
-	<classpathentry kind="lib" path="/uyTube/jgoodies-common-1.8.0-sources.jar"/>
-	<classpathentry kind="lib" path="/uyTube/jgoodies-common-1.8.0.jar" sourcepath="/uyTube/jgoodies-common-1.8.0-sources.jar"/>
-	<classpathentry kind="lib" path="/uyTube/jgoodies-forms-1.8.0-sources.jar"/>
-	<classpathentry kind="lib" path="/uyTube/jgoodies-forms-1.8.0.jar" sourcepath="/uyTube/jgoodies-forms-1.8.0-sources.jar"/>
-	<classpathentry kind="lib" path="/uyTube/miglayout-src.zip"/>
-	<classpathentry kind="lib" path="/uyTube/miglayout15-swing.jar" sourcepath="/uyTube/miglayout-src.zip"/>
+	<classpathentry kind="lib" path="jcalendar-1.4.jar"/>
+	<classpathentry kind="lib" path="jgoodies-common-1.8.0-sources.jar"/>
+	<classpathentry kind="lib" path="jgoodies-common-1.8.0.jar"/>
+	<classpathentry kind="lib" path="jgoodies-forms-1.8.0-sources.jar"/>
+	<classpathentry kind="lib" path="jgoodies-forms-1.8.0.jar"/>
+	<classpathentry kind="lib" path="miglayout15-swing.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
