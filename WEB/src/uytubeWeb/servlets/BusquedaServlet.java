@@ -7,8 +7,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import uytube.logica.DtCanal;
+import uytube.logica.DtListaReproduccion;
 import uytube.logica.DtVideo;
 import uytube.logica.Factory;
+import uytube.logica.IUsuarioCtrl;
 import uytube.logica.IVideoCtrl;
 
 /**
@@ -33,9 +36,17 @@ public class BusquedaServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String busqueda="busqueda";
+		String defaultBusqueda="";
+		if(request.getParameter(busqueda)==null)
+			request.setAttribute("busqueda", defaultBusqueda);
 		Factory fabrica = Factory.getInstance();
 		IVideoCtrl interfazVideos = fabrica.getIVideoCtrl();
-		DtVideo[] videos = interfazVideos.listarVideos();
+		IUsuarioCtrl interfazUsuarios = fabrica.getIUsuarioCtrl();
+		DtVideo[] videos = interfazVideos.listarVideosPublicosPorNombre(request.getParameter(busqueda));
+		DtCanal[] canales = interfazUsuarios.listarCanalesPorNombre(request.getParameter(busqueda));
+		DtListaReproduccion[] listas = interfazVideos.listarLDRPublicasPorNombre(busqueda);
+		
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
