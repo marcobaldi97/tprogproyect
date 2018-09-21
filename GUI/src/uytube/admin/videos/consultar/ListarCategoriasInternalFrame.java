@@ -8,9 +8,9 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
-import uytube.logica.DtCategoria;
-import uytube.logica.IUsuarioCtrl;
-import uytube.logica.IVideoCtrl;
+import uytubeLogic.logica.DtCategoria;
+import uytubeLogic.logica.IUsuarioCtrl;
+import uytubeLogic.logica.IVideoCtrl;
 
 import javax.swing.JList;
 import javax.swing.JScrollPane;

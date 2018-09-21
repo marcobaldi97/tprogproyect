@@ -3,6 +3,7 @@
 	<name>UyTubeWeb</name>
 	<comment></comment>
 	<projects>
+		<project>uyTubeLogic</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

@@ -7,11 +7,6 @@ import javax.swing.JInternalFrame;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
-import uytube.logica.DtCategoria;
-import uytube.logica.DtVideo;
-import uytube.logica.IUsuarioCtrl;
-
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -25,6 +20,10 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
+
+import uytubeLogic.logica.DtCategoria;
+import uytubeLogic.logica.DtVideo;
+import uytubeLogic.logica.IUsuarioCtrl;
 
 public class AgregarVideoListaInternalFrame extends JInternalFrame {
 

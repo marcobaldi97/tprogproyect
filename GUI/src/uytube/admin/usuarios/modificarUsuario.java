@@ -2,20 +2,20 @@ package uytube.admin.usuarios;
 
 import java.awt.EventQueue;
 
+import uytube.Imagen;
 import uytube.admin.adminPrincipal;
 import uytube.admin.videos.ModificarVideo;
 import uytube.admin.videos.consultar.ConsultarVideoInternalFrame;
 import uytube.admin.videos.modificar.*;
-import uytube.datosPrueba.Imagen;
-import uytube.logica.DtCanal;
-import uytube.logica.DtCategoria;
-import uytube.logica.DtFecha;
-import uytube.logica.DtListaReproduccion;
-import uytube.logica.DtUsuario;
-import uytube.logica.Factory;
-import uytube.logica.IUsuarioCtrl;
-import uytube.logica.IVideoCtrl;
-import uytube.logica.SystemHandler.Privacidad;
+import uytubeLogic.logica.DtCanal;
+import uytubeLogic.logica.DtCategoria;
+import uytubeLogic.logica.DtFecha;
+import uytubeLogic.logica.DtListaReproduccion;
+import uytubeLogic.logica.DtUsuario;
+import uytubeLogic.logica.Fabrica;
+import uytubeLogic.logica.IUsuarioCtrl;
+import uytubeLogic.logica.IVideoCtrl;
+import uytubeLogic.logica.SystemHandler.Privacidad;
 
 import javax.swing.JInternalFrame;
 import javax.swing.BoxLayout;
@@ -499,7 +499,7 @@ public class modificarUsuario extends JInternalFrame {
 	}
 	private void openModificarVideo(){
 		 // int idVideo; 
-		  Factory fabrica = Factory.getInstance();
+		  Fabrica fabrica = Fabrica.getInstance();
 		  IVideoCtrl ICV = fabrica.getIVideoCtrl();
 		  ModificarVideo modVideoIFrame = new ModificarVideo(controlUsr, ICV); 
 		  String nick = (String)comboBoxNick.getSelectedItem();
@@ -546,7 +546,7 @@ public class modificarUsuario extends JInternalFrame {
 		textAreaDesc.setText(usrCanal.getDescripcion());
 				
 		//CARGAR CATEGORIAS
-		Factory fabrica = Factory.getInstance();
+		Fabrica fabrica = Fabrica.getInstance();
 		IVideoCtrl iCV = fabrica.getIVideoCtrl();
         DtCategoria[] set_cat=iCV.listarCategorias();
            

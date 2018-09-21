@@ -23,11 +23,11 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 
-import uytube.logica.DtCategoria;
-import uytube.logica.DtListaReproduccion;
-import uytube.logica.DtVideo;
-import uytube.logica.Factory;
-import uytube.logica.IVideoCtrl;
+import uytubeLogic.logica.DtCategoria;
+import uytubeLogic.logica.DtListaReproduccion;
+import uytubeLogic.logica.DtVideo;
+import uytubeLogic.logica.Fabrica;
+import uytubeLogic.logica.IVideoCtrl;
 
 import com.jgoodies.forms.layout.FormSpecs;
 import java.awt.FlowLayout;

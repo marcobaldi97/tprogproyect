@@ -17,8 +17,8 @@ import java.awt.GridLayout;
 
 import javax.swing.JTextField;
 
-import uytube.logica.IUsuarioCtrl;
-import uytube.logica.SystemHandler.Privacidad;
+import uytubeLogic.logica.IUsuarioCtrl;
+import uytubeLogic.logica.SystemHandler.Privacidad;
 
 import javax.swing.JButton;
 

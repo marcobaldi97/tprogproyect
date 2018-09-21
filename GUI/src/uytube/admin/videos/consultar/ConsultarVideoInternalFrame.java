@@ -19,13 +19,13 @@ import javax.swing.JTextField;
 import uytube.admin.adminPrincipal;
 import uytube.admin.videos.ListarComentariosInternalFrame;
 import uytube.admin.videos.modificar.ModificarVideoInternalFrame;
-import uytube.logica.DtInfoVideo;
-import uytube.logica.DtUsuario;
-import uytube.logica.DtVideo;
-import uytube.logica.Factory;
-import uytube.logica.IUsuarioCtrl;
-import uytube.logica.IVideoCtrl;
-import uytube.logica.SystemHandler.Privacidad;
+import uytubeLogic.logica.DtInfoVideo;
+import uytubeLogic.logica.DtUsuario;
+import uytubeLogic.logica.DtVideo;
+import uytubeLogic.logica.Fabrica;
+import uytubeLogic.logica.IUsuarioCtrl;
+import uytubeLogic.logica.IVideoCtrl;
+import uytubeLogic.logica.SystemHandler.Privacidad;
 
 import java.awt.GridLayout;
 import java.awt.FlowLayout;
@@ -44,7 +44,7 @@ import javax.swing.JRadioButton;
 public class ConsultarVideoInternalFrame extends JInternalFrame {
 	static final long serialVersionUID = 113423;
 
-	Factory fabrica = Factory.getInstance();
+	Fabrica fabrica = Fabrica.getInstance();
     IUsuarioCtrl ICU = fabrica.getIUsuarioCtrl();
     IVideoCtrl VCU = fabrica.getIVideoCtrl();
 	private JComboBox authorNicknameComboBox = new JComboBox();
