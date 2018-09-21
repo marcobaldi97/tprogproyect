@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ page import = "uytube.logica.DtVideo"%>
-<%@ page import = "uytube.logica.DtCategoria"%>
-<%@ page import = "uytube.logica.DtFecha"%>
-<%@ page import = "uytube.logica.DtUsuario"%>
-<%@ page import = "uytube.logica.Factory"%>
-<%@ page import = "uytube.logica.IUsuarioCtrl"%>
-<%@ page import = "uytube.logica.IVideoCtrl"%>
+<%@ page import = "uytubeLogic.logica.DtVideo"%>
+<%@ page import = "uytubeLogic.logica.DtCategoria"%>
+<%@ page import = "uytubeLogic.logica.DtFecha"%>
+<%@ page import = "uytubeLogic.logica.DtUsuario"%>
+<%@ page import = "uytubeLogic.logica.Fabrica"%>
+<%@ page import = "uytubeLogic.logica.IUsuarioCtrl"%>
+<%@ page import = "uytubeLogic.logica.IVideoCtrl"%>
 <%@ page import = "java.util.Date"%>
 <!DOCTYPE html>
 <html>
@@ -27,7 +27,7 @@
 	   int dia = fecha_publicacion.getDay();
 	   int mes =  fecha_publicacion.getMonth();
 	   int anio = fecha_publicacion.getYear();
-	   Factory fabrica = Factory.getInstance();
+	   Fabrica fabrica = Fabrica.getInstance();
 	   IUsuarioCtrl controlador_usuario = fabrica.getIUsuarioCtrl();
 	   DtUsuario info_propietario = controlador_usuario.listarDatosUsuario(propietario);
 	   String nombre_canal = controlador_usuario.mostrarInfoCanal(propietario).getNombre();

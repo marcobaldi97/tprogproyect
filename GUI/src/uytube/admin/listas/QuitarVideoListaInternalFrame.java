@@ -20,9 +20,9 @@ import javax.swing.JOptionPane;
 import javax.swing.ListCellRenderer;
 import javax.swing.ListModel;
 
-import uytube.logica.DtVideo;
-import uytube.logica.IUsuarioCtrl;
-import uytube.logica.UsuarioCtrl;
+import uytubeLogic.logica.DtVideo;
+import uytubeLogic.logica.IUsuarioCtrl;
+import uytubeLogic.logica.UsuarioCtrl;
 
 public class QuitarVideoListaInternalFrame extends JInternalFrame {
 	private IUsuarioCtrl controlUsr;

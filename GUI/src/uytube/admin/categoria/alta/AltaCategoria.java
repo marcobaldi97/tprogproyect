@@ -9,9 +9,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-import uytube.logica.IUsuarioCtrl;
-import uytube.logica.IVideoCtrl;
-
 import java.awt.GridLayout;
 import javax.swing.JPanel;
 import javax.swing.JButton;
@@ -27,6 +24,10 @@ import java.awt.BorderLayout;
 import com.toedter.calendar.JCalendarBeanInfo;
 import com.jgoodies.forms.factories.DefaultComponentFactory;
 import com.toedter.components.JSpinField;
+
+import uytubeLogic.logica.IUsuarioCtrl;
+import uytubeLogic.logica.IVideoCtrl;
+
 import com.toedter.components.JLocaleChooser;
 
 public class AltaCategoria extends JInternalFrame {

@@ -6,11 +6,12 @@ import javax.swing.DefaultListModel;
 import javax.swing.JInternalFrame;
 import javax.swing.JList;
 
-import uytube.logica.IUsuarioCtrl;
-
 import java.awt.BorderLayout;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
+
+import uytubeLogic.logica.IUsuarioCtrl;
+
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
