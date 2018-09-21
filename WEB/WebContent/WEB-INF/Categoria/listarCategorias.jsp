@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import = "uytube.logica.DtCategoria"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,12 +9,18 @@
 <meta charset="ISO-8859-1">
 <title>UyTube</title>
 </head>
-Categorias:
 <body>
+	<% 
+		DtCategoria[] cat= (DtCategoria[]) request.getAttribute("listarCategorias");
+		
+	%>
 	<ul style="list-style-type:disc">
-	  <li>cat1</li>
-	  <li>cat2</li>
-	  <li>cat3</li>
+		<li><%  
+		  for(int i = 0; i < cat.length; i++)
+		    {
+		       out.println((String)cat[i].getNombre());
+		    }
+		%></li>
 	</ul>
 </body>
 </html>
