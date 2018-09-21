@@ -4,10 +4,17 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<link rel="stylesheet" href="media/styles/home.css">
 <title>UyTube!</title>
 </head>
 <body>
-	<%@include file="WEB-INF/buscador.jsp" %>
-	<%@include file="WEB-INF/sidebar.jsp" %>
+
+<div class="topnav">
+  <a href="#about">Iniciar Sesion</a>
+<button type="button">Mandale Mecha!</button>
+<input type="text" placeholder="Buscar..">
+</div>
+
+
 </body>
 </html>

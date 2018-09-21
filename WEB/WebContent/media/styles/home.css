@@ -29,7 +29,7 @@
 
 /* Style the links inside the navigation bar */
 .topnav a {
-    float: left;
+    float: right;
     display: block;
     color: black;
     text-align: center;

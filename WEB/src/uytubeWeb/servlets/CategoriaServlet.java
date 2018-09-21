@@ -7,6 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import uytube.logica.DtCategoria;
+import uytube.logica.Factory;
+import uytube.logica.IVideoCtrl;
+
 /**
  * Servlet implementation class CategoriaServlet
  */
@@ -26,8 +30,14 @@ public class CategoriaServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Factory fabrica=Factory.getInstance();
+		IVideoCtrl interfazVideos = fabrica.getIVideoCtrl();
+		String MUS="Musica";interfazVideos.crearCategoria(MUS);
+		DtCategoria[] categorias=interfazVideos.listarCategorias();
+		request.setAttribute("listarCategorias", categorias);// se accede con ${categorias} en JSP
+		request.getRequestDispatcher("/WEB-INF/Categoria/listarCategorias.jsp").forward(request, response);;
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
