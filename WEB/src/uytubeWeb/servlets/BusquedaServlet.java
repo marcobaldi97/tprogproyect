@@ -81,7 +81,6 @@ public class BusquedaServlet extends HttpServlet {
 		request.setAttribute(parametroCanales, canales);
 		request.setAttribute(parametroVideos, videos);
 		
-		response.getWriter().append("Served at: ").append(request.getContextPath());
 		request.getRequestDispatcher("/WEB-INF/Busqueda.jsp").forward(request, response);
 	}
 
