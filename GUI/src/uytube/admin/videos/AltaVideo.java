@@ -12,11 +12,11 @@ import javax.swing.SwingConstants;
 
 import com.toedter.calendar.JDateChooser;
 
-import uytube.logica.DtCategoria;
-import uytube.logica.DtFecha;
-import uytube.logica.IUsuarioCtrl;
-import uytube.logica.IVideoCtrl;
-import uytube.logica.SystemHandler.Privacidad;
+import uytubeLogic.logica.DtCategoria;
+import uytubeLogic.logica.DtFecha;
+import uytubeLogic.logica.IUsuarioCtrl;
+import uytubeLogic.logica.IVideoCtrl;
+import uytubeLogic.logica.SystemHandler.Privacidad;
 
 import javax.swing.JComboBox;
 import javax.swing.JTextField;

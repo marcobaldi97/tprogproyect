@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
-import uytube.logica.DtVideo;
+import uytubeLogic.logica.DtVideo;
 
 public final class ElegirAutorPanel {
 	private final JPanel mainPanel = new JPanel();

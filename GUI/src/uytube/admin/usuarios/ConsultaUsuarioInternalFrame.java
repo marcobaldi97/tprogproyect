@@ -17,20 +17,20 @@ import javax.swing.JTextField;
 
 import com.toedter.calendar.JDateChooser;
 
+import uytube.Imagen;
 import uytube.admin.adminPrincipal;
 import uytube.admin.listas.ConsultaListaInternalFrame;
 import uytube.admin.videos.ModificarVideo;
 import uytube.admin.videos.consultar.ConsultarVideoInternalFrame;
-import uytube.datosPrueba.Imagen;
-import uytube.logica.DtCanal;
-import uytube.logica.DtCategoria;
-import uytube.logica.DtListaReproduccion;
-import uytube.logica.DtUsuario;
-import uytube.logica.DtVideo;
-import uytube.logica.Factory;
-import uytube.logica.IUsuarioCtrl;
-import uytube.logica.IVideoCtrl;
-import uytube.logica.SystemHandler.Privacidad;
+import uytubeLogic.logica.DtCanal;
+import uytubeLogic.logica.DtCategoria;
+import uytubeLogic.logica.DtListaReproduccion;
+import uytubeLogic.logica.DtUsuario;
+import uytubeLogic.logica.DtVideo;
+import uytubeLogic.logica.Fabrica;
+import uytubeLogic.logica.IUsuarioCtrl;
+import uytubeLogic.logica.IVideoCtrl;
+import uytubeLogic.logica.SystemHandler.Privacidad;
 
 import javax.swing.JTextPane;
 import javax.swing.UIManager;
@@ -267,7 +267,7 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 		JButton btnMasInformacion_1 = new JButton("Mas informacion");
 		btnMasInformacion_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Factory fabrica = Factory.getInstance();
+				Fabrica fabrica = Fabrica.getInstance();
 				IVideoCtrl ICV = fabrica.getIVideoCtrl();
 				ConsultaListaInternalFrame listaIFrame = new ConsultaListaInternalFrame(controlUsr, ICV);
 				String lista = (String) comboBoxListas.getSelectedItem();
@@ -380,7 +380,7 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 	}
 	private void openConsultarVideo(){
 	   //modificarUsuario modUsrIFrame = new modificarUsuario();
-		Factory fabrica = Factory.getInstance();
+		Fabrica fabrica = Fabrica.getInstance();
 		IVideoCtrl ICV = fabrica.getIVideoCtrl();
 		
 		String nomVideo = (String) comboBoxVideos.getSelectedItem();

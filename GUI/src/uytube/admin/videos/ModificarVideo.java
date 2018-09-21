@@ -20,12 +20,12 @@ import javax.swing.SwingConstants;
 
 import com.toedter.calendar.JDateChooser;
 
-import uytube.logica.DtCategoria;
-import uytube.logica.DtFecha;
-import uytube.logica.DtVideo;
-import uytube.logica.IUsuarioCtrl;
-import uytube.logica.IVideoCtrl;
-import uytube.logica.SystemHandler.Privacidad;
+import uytubeLogic.logica.DtCategoria;
+import uytubeLogic.logica.DtFecha;
+import uytubeLogic.logica.DtVideo;
+import uytubeLogic.logica.IUsuarioCtrl;
+import uytubeLogic.logica.IVideoCtrl;
+import uytubeLogic.logica.SystemHandler.Privacidad;
 
 public class ModificarVideo extends JInternalFrame {
 	private JComboBox comboBoxNombreVideo = new JComboBox();

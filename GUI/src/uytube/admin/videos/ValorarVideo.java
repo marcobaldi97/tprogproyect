@@ -14,14 +14,6 @@ import java.awt.BorderLayout;
 
 import javax.swing.JComboBox;
 import javax.swing.SwingConstants;
-
-import uytube.logica.DtCanal;
-import uytube.logica.DtUsuario;
-import uytube.logica.DtVideo;
-import uytube.logica.Factory;
-import uytube.logica.IUsuarioCtrl;
-import uytube.logica.IVideoCtrl;
-
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;
@@ -41,6 +33,14 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import javax.swing.event.ListSelectionListener;
+
+import uytubeLogic.logica.DtCanal;
+import uytubeLogic.logica.DtUsuario;
+import uytubeLogic.logica.DtVideo;
+import uytubeLogic.logica.Fabrica;
+import uytubeLogic.logica.IUsuarioCtrl;
+import uytubeLogic.logica.IVideoCtrl;
+
 import javax.swing.event.ListSelectionEvent;
 
 
@@ -58,7 +58,7 @@ public class ValorarVideo extends JInternalFrame {
 	private static void infoBox(String infoMessage, String titleBar){
         JOptionPane.showMessageDialog(null, infoMessage, "" + titleBar, JOptionPane.INFORMATION_MESSAGE);
     }
-	Factory fabrica=Factory.getInstance();
+	Fabrica fabrica=Fabrica.getInstance();
 	IUsuarioCtrl ICU=fabrica.getIUsuarioCtrl();
 	IVideoCtrl VCU=fabrica.getIVideoCtrl();
 

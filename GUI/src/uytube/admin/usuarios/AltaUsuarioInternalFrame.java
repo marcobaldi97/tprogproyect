@@ -32,12 +32,12 @@ import javax.swing.ImageIcon;
 
 import com.toedter.calendar.JDateChooser;
 
-import uytube.datosPrueba.Imagen;
-import uytube.logica.DtCategoria;
-import uytube.logica.DtFecha;
-import uytube.logica.IUsuarioCtrl;
-import uytube.logica.IVideoCtrl;
-import uytube.logica.SystemHandler.Privacidad;
+import uytube.Imagen;
+import uytubeLogic.logica.DtCategoria;
+import uytubeLogic.logica.DtFecha;
+import uytubeLogic.logica.IUsuarioCtrl;
+import uytubeLogic.logica.IVideoCtrl;
+import uytubeLogic.logica.SystemHandler.Privacidad;
 
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;

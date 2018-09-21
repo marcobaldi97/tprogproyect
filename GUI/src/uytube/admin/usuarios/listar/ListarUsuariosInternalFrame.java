@@ -8,7 +8,7 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import uytube.logica.DtUsuario;
+import uytubeLogic.logica.DtUsuario;
 
 public final class ListarUsuariosInternalFrame {
 	private final JInternalFrame internalFrame = new JInternalFrame();

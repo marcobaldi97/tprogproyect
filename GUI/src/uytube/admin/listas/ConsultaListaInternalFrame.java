@@ -13,12 +13,12 @@ import javax.swing.SwingConstants;
 import uytube.admin.adminPrincipal;
 import uytube.admin.videos.consultar.ConsultarVideoInternalFrame;
 import uytube.admin.videos.modificar.ModificarVideoInternalFrame;
-import uytube.logica.DtListaReproduccion;
-import uytube.logica.DtVideo;
-import uytube.logica.IUsuarioCtrl;
-import uytube.logica.IVideoCtrl;
-import uytube.logica.ListaReproduccion.TipoLista;
-import uytube.logica.SystemHandler.Privacidad;
+import uytubeLogic.logica.DtListaReproduccion;
+import uytubeLogic.logica.DtVideo;
+import uytubeLogic.logica.IUsuarioCtrl;
+import uytubeLogic.logica.IVideoCtrl;
+import uytubeLogic.logica.ListaReproduccion.TipoLista;
+import uytubeLogic.logica.SystemHandler.Privacidad;
 
 import javax.swing.JComboBox;
 import javax.swing.JList;

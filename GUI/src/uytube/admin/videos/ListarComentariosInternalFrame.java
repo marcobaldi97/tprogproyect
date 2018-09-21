@@ -15,11 +15,11 @@ import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
-import uytube.logica.DtComentario;
-import uytube.logica.DtVideo;
-import uytube.logica.Factory;
-import uytube.logica.IUsuarioCtrl;
-import uytube.logica.IVideoCtrl;
+import uytubeLogic.logica.DtComentario;
+import uytubeLogic.logica.DtVideo;
+import uytubeLogic.logica.Fabrica;
+import uytubeLogic.logica.IUsuarioCtrl;
+import uytubeLogic.logica.IVideoCtrl;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -78,7 +78,7 @@ public class ListarComentariosInternalFrame extends JInternalFrame {
 		try{
 			int idVideo = buscarIdVideo(nickU, nomLista);
 			//temporalmente crae la fabrica, deberia recibirla por parametro
-			Factory fabrica = Factory.getInstance();
+			Fabrica fabrica = Fabrica.getInstance();
 		    IVideoCtrl ICV = fabrica.getIVideoCtrl();
 		    DtComentario[] dtComentarios = ICV.listarComentarios(idVideo);
 			
@@ -119,7 +119,7 @@ public class ListarComentariosInternalFrame extends JInternalFrame {
 
 	private int buscarIdVideo(String nickU, String nomVideo){
 		//verificar que los param recibidos sean correctos
-		Factory fabrica = Factory.getInstance();
+		Fabrica fabrica = Fabrica.getInstance();
 	    IUsuarioCtrl ICU = fabrica.getIUsuarioCtrl();
 		DtVideo dtVideo = ICU.obtenerInfoAdicVideo(nickU,nomVideo);
 		return dtVideo.getIDVideo();
