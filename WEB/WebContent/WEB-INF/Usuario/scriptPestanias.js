@@ -1,10 +1,12 @@
 /**
  * 
  */
+window.onload = function() {
+        activarTab(document.getElementById("tabck-0"));
+}; //al cargar salga abierta la primera pestaña
 function activarTab(unTab) {
-	window.onload = function() {
-		activarTab(tabck-0);
-	}
+	
+	
     try {
         //Los elementos div de todas las pestañas están todos juntos en una
         //única celda de la segunda fila de la tabla de estructura de pestañas.
