@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link rel="stylesheet" href="AltaVideo.css">
+<link rel="stylesheet" href="media/styles/AltaVideo.css">
 
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
@@ -49,7 +49,7 @@ firstDay: 1
 </head>
 <body>
 <h2>Alta Video</h2>
-	<form>
+	<form action="/UyTubeWeb/newVideo" method="get">
 		Nombre del Video:<br/>
 		<input type="text" name="nombreVideo"/><br/>
 		Duracion:<br/>
@@ -61,15 +61,13 @@ firstDay: 1
 		Fecha:<br/>
 		<input type="text" id="datepicker" name="fechaVideo"><br/>
 		Categoria:<br/>
-		<select>
+		<select name="categoria">
           <option value="cat1">cat1</option>
           <option value="cat2">cat2</option>
           <option value="cat3">cat3</option>
           <option value="cat4">cat4</option>
        	 </select></br>
-       	<input type="submit" value="Crear"/>
-		<input type="submit" value="Cancelar"/>
-	</form>
-	
+       	 <button id="crearVideo" name="opcion" value="altaVideo">Crear</button>
+     </form>
 </body>
 </html>
