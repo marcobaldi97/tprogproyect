@@ -7,9 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import uytube.logica.DtCategoria;
-import uytube.logica.Factory;
-import uytube.logica.IVideoCtrl;
+import uytubeLogic.logica.DtCategoria;
+import uytubeLogic.logica.Fabrica;
+import uytubeLogic.logica.IVideoCtrl;
 
 /**
  * Servlet implementation class CategoriaServlet
@@ -30,7 +30,7 @@ public class CategoriaServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Factory fabrica=Factory.getInstance();
+		Fabrica fabrica=Fabrica.getInstance();
 		IVideoCtrl interfazVideos = fabrica.getIVideoCtrl();
 		String MUS="Musica";interfazVideos.crearCategoria(MUS);
 		DtCategoria[] categorias=interfazVideos.listarCategorias();

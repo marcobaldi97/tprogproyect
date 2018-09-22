@@ -12,13 +12,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import uytube.logica.DtCategoria;
-import uytube.logica.DtFecha;
-import uytube.logica.Factory;
-import uytube.logica.IUsuarioCtrl;
-import uytube.logica.IVideoCtrl;
-import uytube.logica.Usuario;
-import uytube.logica.SystemHandler.Privacidad;
+import uytubeLogic.logica.DtCategoria;
+import uytubeLogic.logica.DtFecha;
+import uytubeLogic.logica.Fabrica;
+import uytubeLogic.logica.IUsuarioCtrl;
+import uytubeLogic.logica.IVideoCtrl;
+import uytubeLogic.logica.SystemHandler.Privacidad;
+
+
 
 
 /**
@@ -37,7 +38,7 @@ public class VideoServlet extends HttpServlet {
     }
     
     private void creaUsrPrueba(){
-    	   Factory fabrica = Factory.getInstance();
+    	   Fabrica fabrica = Fabrica.getInstance();
      	   IUsuarioCtrl usrCtrl = fabrica.getIUsuarioCtrl();
 		Date fecha = ParseFecha("25/02/1962");
 		DtFecha fechaNac = new DtFecha(fecha);
@@ -59,7 +60,7 @@ public class VideoServlet extends HttpServlet {
         return fechaDate;
     }
     private void crearVideo(String nomVideo, String duracion, String url, String fecha, String categoria, String descripcionV ){
-       Factory fabrica = Factory.getInstance();
+       Fabrica fabrica = Fabrica.getInstance();
  	   IUsuarioCtrl usrCtrl = fabrica.getIUsuarioCtrl();
  	   IVideoCtrl ICV = fabrica.getIVideoCtrl();
  	   creaUsrPrueba();
