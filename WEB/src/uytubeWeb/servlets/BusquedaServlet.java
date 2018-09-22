@@ -65,6 +65,7 @@ public class BusquedaServlet extends HttpServlet {
 		
 		HttpSession session=request.getSession();
 		if(session.getAttribute("usuarioLogueado")!=null) {
+			System.out.println("hay un usuario logueado");
 			String login=(String)session.getAttribute("login");
 			DtVideo[] videosPrivadosSesion=interfazUsuarios.infoVideosCanal(login, Privacidad.PRIVADO);
 			DtListaReproduccion[] listasPrivadasSesion=interfazUsuarios.infoLDRdeUsuario(login, Privacidad.PRIVADO);
@@ -78,9 +79,13 @@ public class BusquedaServlet extends HttpServlet {
 		String parametroListas="listas";
 		String parametroCanales="canales";
 		String parametroVideos="videos";
+		System.out.println("el primero");
+		
 		request.setAttribute(parametroListas, listas);
 		request.setAttribute(parametroCanales, canales);
 		request.setAttribute(parametroVideos, videos);
+		
+		DtVideo[] videoA=(DtVideo[]) request.getAttribute(parametroVideos);
 		
 		request.getRequestDispatcher("/WEB-INF/Busqueda.jsp").forward(request, response);
 	}

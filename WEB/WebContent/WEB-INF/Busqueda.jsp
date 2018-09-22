@@ -7,17 +7,36 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Resultados De Busqueda</title>
 </head>
 <body>
-algo?
-<%if(request.getAttribute("videos")!=null){%>
-
-<%DtVideo[] vid= (DtVideo[])request.getAttribute("videos"); 
-for(DtVideo entry:vid){ %>
-				
-oh, un video con 
-<%out.print((String)request.getAttribute("busqueda")); %><br>
-	<% } }%>
+	algo?
+	<%
+	if (request.getAttribute("videos") != null) {
+%>
+<ul>
+	<%
+		DtVideo[] vid = (DtVideo[]) request.getAttribute("videos");
+		for (DtVideo entry : vid) {
+			String nombreV=entry.getNombre();
+			String descV=entry.getDescripcion();
+			Integer duracionMM=entry.getDuracion()/60;
+			Integer duracionSS=entry.getDuracion()%60;
+			String duracionV = String.format("%02d:%02d", duracionMM, duracionSS);
+			String propietarioV = entry.getPropietario();
+	%>
+	<li>
+	<div>
+	Nombre : <%=nombreV %> <%=duracionV %><br>
+	Propietario : <%=propietarioV %> <br>
+	Descripcion : <%=descV %><br>
+	</div>
+	</li>
+	
+	<%
+		}
+	}
+	%>
+</ul>)
 </body>
 </html>

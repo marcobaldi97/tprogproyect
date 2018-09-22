@@ -52,21 +52,14 @@ public class VideoHandler {
 	}
 
 	public DtVideo[] listarVideosPublicosPorNombre(String nombre) {
-		int cantVideosConNombre = 0;
+		List<DtVideo> listaVideos = new ArrayList<DtVideo>();
 		for (Map.Entry<Integer, Video> entry : videos.entrySet()) {
-			if (entry.getValue().getNombre().contains(nombre)
-					&& entry.getValue().getPrivacidad() == (Privacidad.PUBLICO))
-				cantVideosConNombre++;
-
-		}
-		DtVideo[] infoVideos = new DtVideo[cantVideosConNombre];
-		int iterador = 0;
-		for (Map.Entry<Integer, Video> entry : videos.entrySet()) {
-			if (entry.getValue().getNombre().contains(nombre)
-					&& entry.getValue().getPrivacidad() == (Privacidad.PUBLICO))
-				infoVideos[iterador] = new DtVideo(entry.getValue());
-		}
-		return infoVideos;
+			if (entry.getValue().getPrivacidad() == Privacidad.PUBLICO && entry.getValue().getNombre().contains(nombre)) {
+					listaVideos.add(new DtVideo(entry.getValue()));
+				}
+			}
+		DtVideo[] resultadosBusqueda=listaVideos.toArray(new DtVideo[0]);
+		return resultadosBusqueda;
 	}
 
 	public DtListaReproduccion[] listarLDRPublicasPorNombre(String nombre) {
