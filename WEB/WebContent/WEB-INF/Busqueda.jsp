@@ -24,6 +24,7 @@
 			Integer duracionSS=entry.getDuracion()%60;
 			String duracionV = String.format("%02d:%02d", duracionMM, duracionSS);
 			String propietarioV = entry.getPropietario();
+			
 	%>
 	<li>
 	<div>
