@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@page errorPage="error404.jsp" %>
 <%@ page import = "uytubeLogic.logica.DtVideo"%>
 <%@ page import = "uytubeLogic.logica.DtCategoria"%>
 <%@ page import = "uytubeLogic.logica.DtFecha"%>
@@ -16,7 +17,7 @@
 	<title>Insert title here</title>
 </head>
 <body height="100%" width="100%">
-	<% DtVideo dataVideo = (DtVideo) request.getAttribute("dataVideo");
+	<% /*DtVideo dataVideo = (DtVideo) request.getAttribute("dataVideo");
 	   String titulo = dataVideo.getNombre();	
 	   String url_video = dataVideo.getUrl();
 	   String propietario = dataVideo.getPropietario();
@@ -31,13 +32,32 @@
 	   IUsuarioCtrl controlador_usuario = fabrica.getIUsuarioCtrl();
 	   DtUsuario info_propietario = controlador_usuario.listarDatosUsuario(propietario);
 	   String nombre_canal = controlador_usuario.mostrarInfoCanal(propietario).getNombre();
-	   //estos son los datos que tienen que ver con el usuario propietario y el video en sí.
+	   *///estos son los datos que tienen que ver con el usuario propietario y el video en sí.
+	%>
+	<%int id_video = 21;
+	  String url_video = "https://www.youtube.com/embed/5bHimOJb-Xw";
+	  String titulo = "Pomf Pomf With lyrics and Download";
+	  String nombre_canal = "johnchandler100";
+	  String descripcion = "Onii-san what's that sticky stuff on me?";
+	  String nombre_categoria = "Loli-power";
+	  int dia=9; int mes=8;int anio=1997;
+	  String url_logo_autor = "https://i.ytimg.com/vi/5bHimOJb-Xw/hqdefault.jpg";
+	  String url_logo_usuario_iniciado = "http://www.sddistribuciones.com//Portadas/GSCBSG90486_3.JPG";
+	  //datos de prueba
 	%>
 	<script>
-		void me_gusta_script(){}
+		void me_gusta_script(){
+			request.setAttribute("opcion","likeVideo");
+			request.setAttribute("id_video",id_video);
+			request.getRequestDispatcher("/likeVideo").forward(request, response);
+		}
 	</script>
 	<script>
-		void no_me_gusta_script(){}
+		void no_me_gusta_script(){
+			request.setAttribute("opcion","dislikeVideo");
+			request.setAttribute("id_video",id_video);
+			request.getRequestDispatcher("/dislikeVideo").forward(request, response);
+		}
 	</script>
 	<script>
 		void agregar_lista_script(){}
@@ -45,12 +65,12 @@
 	<script>
 		void seguir_script(){}
 	</script>
-	<t id="titulo"><%=titulo%>></t><br>
+	<t id="titulo"><%=titulo%></t><br>
 	<iframe width="100%" height="430px" src="<%=url_video%>"></iframe><br>
 	<table width="100%">
 		<tr>
-			<th rowspan="2" width="10%"><img id="logo" src="https://yt3.ggpht.com/a-/AN66SAx_Kkbq6jXKpAECX77DOrAuYREUbX2S_ZtJWQ=s48-mo-c-c0xffffffff-rj-k-no" width="100px" height="70px"> </th>
-			<th class="texto_simple" id="nombre_autor" width="30%" href><%=nombre_canal%></th>
+			<th rowspan="2" width="10%"><img id="logo" src=<%=url_logo_autor %> width="100px" height="70px"> </th>
+			<th class="texto_simple" id="nombre_autor" width="30%"><%=nombre_canal%></th>
 			<th rowspan="2" class="right_left_separators"  id="fecha_publicacion" width="30%"><t class="texto_simple"><%=dia%>/<%=mes%>/<%=anio%></t></th>
 			<th rowspan="2" class="botones_like_dislike" width="30%">
 				<button class="like_dislike_button" style="width:50%" id="like_button" name="like_button" value="Me gusta" onclick="javascript:me_gusta_script();">  Me gusta  </button><button class="like_dislike_button" style="width:50%" id="dislike_button" name="dislike_button" value="No me gusta" onclick="javascript:no_me_gusta_script();">No me gusta </button></th>
@@ -59,7 +79,7 @@
 			<th><button id="seguir_button" name="boton_seguir" value="Seguir" onclick="javascript:seguir_script();">Seguir</button></th>
 		</tr>
 		<tr>
-			<th  class="encapsulated_border" colspan="4" class="descripcion"><p align="left">Descripción</p></th>
+			<th  class="encapsulated_border" colspan="4" class="descripcion"><p align="left"><%=descripcion%></p></th>
 		</tr>
 		<tr>
 			<th colspan="3" class="categoria" width="80%">Categoría: <%=nombre_categoria%></th>
@@ -71,7 +91,7 @@
 			<th  class="texto_simple" id="nombre_autor">Comentar video:</th>
 		</tr>
 		<tr>
-			<th rowspan="2" width="20%" height="150px"><img width="100%" height="150px" id="logo" src="http://www.sddistribuciones.com//Portadas/GSCBSG90486_3.JPG" width="100px" height="70px"></img></th>
+			<th rowspan="2" width="20%" height="150px"><img width="100%" height="150px" id="logo" src=<%=url_logo_usuario_iniciado%> width="100px" height="70px"></img></th>
 			<th rowspan="2" width="80%" id="cell_comentar"><textarea class="comentario" id="comentario_a_comentar"></textarea></th>
 		</tr>
 		<tr>

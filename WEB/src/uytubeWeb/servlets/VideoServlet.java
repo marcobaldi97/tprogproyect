@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import uytubeLogic.logica.DtCategoria;
 import uytubeLogic.logica.DtFecha;
@@ -25,7 +26,7 @@ import uytubeLogic.logica.SystemHandler.Privacidad;
 /**
  * Servlet implementation class VideoServlet
  */
-@WebServlet(name="Video",urlPatterns={"/watch","/newVideo","/modifyVideo","/likeVideo","/newComment","/newResponse"})
+@WebServlet(name="Video",urlPatterns={"/watch","/newVideo","/modifyVideo","/likeVideo","/dislikeVideo","/newComment","/newResponse"})
 public class VideoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -73,6 +74,11 @@ public class VideoServlet extends HttpServlet {
  		   System.out.println("OKKKK");
  	   }
     }
+    private void valorarVideo(int id_video, String nombre_usuario, boolean like) {
+		Fabrica fabrica = Fabrica.getInstance();
+	 	IVideoCtrl interfaz_video = fabrica.getIVideoCtrl();
+    	interfaz_video.valorarVideo(id_video,nombre_usuario,like);
+    }
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -89,6 +95,22 @@ public class VideoServlet extends HttpServlet {
 		break;
 		case "null":
 		break;
+		case "likeVideo":{
+			System.out.println("Quiero darle me gusta a un video");
+			HttpSession session=request.getSession();
+		 	Integer id_video = (int) request.getAttribute("id_video");
+		 	String nombre_usuario = (String)session.getAttribute("nombre_usuario");
+		 	valorarVideo(id_video,nombre_usuario,true);
+		 	break;
+		}
+		case "dislikeVideo":{
+			System.out.println("Quiero darle no me gusta a un video");
+			HttpSession session=request.getSession();
+		 	Integer id_video = (int) request.getAttribute("id_video");
+		 	String nombre_usuario = (String)session.getAttribute("nombre_usuario");
+		 	valorarVideo(id_video,nombre_usuario,false);
+		 	break;
+		}
 		default:
 			System.out.println("Error");
 		break;	
