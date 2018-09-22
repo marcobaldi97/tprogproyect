@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    <%@ page import = "uytube.logica.DtVideo"%>
-<%@ page import = "uytube.logica.DtCategoria"%>
-<%@ page import = "uytube.logica.DtFecha"%>
-<%@ page import = "uytube.logica.DtCanal"%>
-<%@ page import = "uytube.logica.DtUsuario"%>
-<%@ page import = "uytube.logica.Factory"%>
-<%@ page import = "uytube.logica.IUsuarioCtrl"%>
+    <%@ page import = "uytubeLogic.logica.DtVideo"%>
+<%@ page import = "uytubeLogic.logica.DtCategoria"%>
+<%@ page import = "uytubeLogic.logica.DtFecha"%>
+<%@ page import = "uytubeLogic.logica.DtCanal"%>
+<%@ page import = "uytubeLogic.logica.DtUsuario"%>
+<%@ page import = "uytubeLogic.logica.Fabrica"%>
+<%@ page import = "uytubeLogic.logica.IUsuarioCtrl"%>
 <%@ page import = "java.util.Date"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -27,7 +27,7 @@
 	int mes = fechaNac.getMonth();
 	int anio = fechaNac.getYear();
 	byte[] foto = dataUsuario.getFoto();
-	Factory fabrica = Factory.getInstance();
+	Fabrica fabrica = Fabrica.getInstance();
 	IUsuarioCtrl usuarioCtrl = fabrica.getIUsuarioCtrl();
 	DtCanal dataCanal = usuarioCtrl.mostrarInfoCanal(nick);
 	String nombre_canal = dataCanal.getNombre();

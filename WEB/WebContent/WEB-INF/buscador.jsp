@@ -11,8 +11,10 @@
 
 <div class="topnav">
   <a href="#about">Iniciar Sesion</a>
-<button type="button">Mandale Mecha!</button>
-<input type="text" placeholder="Buscar..">
+  	<form action="search" method="get">
+  		<button type="submit">Mandale Mecha!</button>
+		<input type="text" name="busqueda" placeholder="Buscar..">
+	</form>
 </div>
 
 

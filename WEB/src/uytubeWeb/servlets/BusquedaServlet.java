@@ -45,11 +45,12 @@ public class BusquedaServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String busqueda="busqueda";
 		String defaultBusqueda="";
+		System.out.println(request.getParameter(busqueda));
 		if(request.getParameter(busqueda)==null) {
 			request.setAttribute(busqueda, defaultBusqueda);
-			
-			System.out.println("holiwi");
-			System.out.println(request.getAttribute(busqueda));
+		}
+		else {
+			request.setAttribute(busqueda, request.getParameter(busqueda));
 		}
 		//ESTO BORRARLO DE INMEDIATO
 		DatosDePrueba data=new DatosDePrueba();

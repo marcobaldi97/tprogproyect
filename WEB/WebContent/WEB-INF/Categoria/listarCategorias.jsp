@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ page import = "uytube.logica.DtCategoria"%>
+<%@ page import = "uytubeLogic.logica.DtCategoria"%>
 
 <!DOCTYPE html>
 <html>

@@ -16,7 +16,8 @@ algo?
 <%DtVideo[] vid= (DtVideo[])request.getAttribute("videos"); 
 for(DtVideo entry:vid){ %>
 				
-
+oh, un video con 
+<%out.print((String)request.getAttribute("busqueda")); %><br>
 	<% } }%>
 </body>
 </html>
