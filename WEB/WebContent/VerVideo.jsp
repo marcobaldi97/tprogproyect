@@ -37,6 +37,7 @@
 	<%int id_video = 21;
 	  String url_video = "https://www.youtube.com/embed/5bHimOJb-Xw";
 	  String titulo = "Pomf Pomf With lyrics and Download";
+	  String propietario = "johnchandler100";
 	  String nombre_canal = "johnchandler100";
 	  String descripcion = "Onii-san what's that sticky stuff on me?";
 	  String nombre_categoria = "Loli-power";
@@ -60,10 +61,16 @@
 		}
 	</script>
 	<script>
-		void agregar_lista_script(){}
+		void agregar_lista_script(){
+			request.setAttribute();
+		}
 	</script>
 	<script>
-		void seguir_script(){}
+		void seguir_script(){
+			request.setAttribute("opcion","follow");
+			request.setAttribute("usuario_a_seguir",propietario);
+			request.getRequestDispatcher("/follow").forward(request, response);
+		}
 	</script>
 	<t id="titulo"><%=titulo%></t><br>
 	<iframe width="100%" height="430px" src="<%=url_video%>"></iframe><br>
@@ -73,7 +80,7 @@
 			<th class="texto_simple" id="nombre_autor" width="30%"><%=nombre_canal%></th>
 			<th rowspan="2" class="right_left_separators"  id="fecha_publicacion" width="30%"><t class="texto_simple"><%=dia%>/<%=mes%>/<%=anio%></t></th>
 			<th rowspan="2" class="botones_like_dislike" width="30%">
-				<button class="like_dislike_button" style="width:50%" id="like_button" name="like_button" value="Me gusta" onclick="javascript:me_gusta_script();">  Me gusta  </button><button class="like_dislike_button" style="width:50%" id="dislike_button" name="dislike_button" value="No me gusta" onclick="javascript:no_me_gusta_script();">No me gusta </button></th>
+				<button class="like_dislike_button" style="width:50%" id="like_button" name="opcion" value="likeVideo" onclick="javascript:me_gusta_script();">  Me gusta  </button><button class="like_dislike_button" style="width:50%" id="dislike_button" name="opcion" value="dislikeVideo" onclick="javascript:no_me_gusta_script();">No me gusta </button></th>
 		</tr>
 		<tr>
 			<th><button id="seguir_button" name="boton_seguir" value="Seguir" onclick="javascript:seguir_script();">Seguir</button></th>
