@@ -122,8 +122,8 @@ public class VideoServlet extends HttpServlet {
 			IVideoCtrl VidController=fabricaControladores.getIVideoCtrl();
 			DtVideo dataVideo=VidController.infoAddVideo(Integer.parseInt(request.getParameter("ID")));
 			request.setAttribute("dataVideo", dataVideo);
-			request.getRequestDispatcher("WEB-INF/VerVideo.jsp").forward(request, response);
-			
+			request.getRequestDispatcher("VerVideo.jsp").forward(request, response);
+			break;
 		}
 		default:
 			System.out.println("Error");
