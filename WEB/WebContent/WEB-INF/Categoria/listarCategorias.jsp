@@ -10,17 +10,24 @@
 <title>UyTube</title>
 </head>
 <body>
-	<% 
+	
+	<form action="/UyTubeWeb/list" method="get">
+	<ul>
+	<%
 		DtCategoria[] cat= (DtCategoria[]) request.getAttribute("listarCategorias");
-		
+		for (DtCategoria entry : cat) {
+			String nombreC=entry.getNombre();
 	%>
-	<ul style="list-style-type:disc">
-		<li><%  
-		  for(int i = 0; i < cat.length; i++)
-		    {
-		       out.println((String)cat[i].getNombre());
-		    }
-		%></li>
+	
+	<li>
+	<div>
+	<%=nombreC %><br>
+	</div>
+	</li>
+		<%}%>
 	</ul>
+	</form>
+	
+	
 </body>
 </html>

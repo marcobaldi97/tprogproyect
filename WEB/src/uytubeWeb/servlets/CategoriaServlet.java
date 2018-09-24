@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import uytube.datosPrueba.DatosDePrueba;
 import uytubeLogic.logica.DtCategoria;
 import uytubeLogic.logica.Fabrica;
 import uytubeLogic.logica.IVideoCtrl;
@@ -14,7 +15,7 @@ import uytubeLogic.logica.IVideoCtrl;
 /**
  * Servlet implementation class CategoriaServlet
  */
-@WebServlet("/Categorias")
+@WebServlet(name="Categorias",urlPatterns={"/list","/consult"})
 public class CategoriaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -30,12 +31,32 @@ public class CategoriaServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//ESTO BORRARLO DE INMEDIATO
+		DatosDePrueba data=new DatosDePrueba();
+		data.cargarDatosDePrueba();
+		
+		String opc=request.getParameter("opcion");
+		System.out.println(opc);
+		
 		Fabrica fabrica=Fabrica.getInstance();
-		IVideoCtrl interfazVideos = fabrica.getIVideoCtrl();
-		String MUS="Musica";interfazVideos.crearCategoria(MUS);
-		DtCategoria[] categorias=interfazVideos.listarCategorias();
-		request.setAttribute("listarCategorias", categorias);// se accede con ${categorias} en JSP
-		request.getRequestDispatcher("/WEB-INF/Categoria/listarCategorias.jsp").forward(request, response);;
+		
+		
+		switch(opc) 
+		{
+			case "list":{
+						 IVideoCtrl interfazVideos = fabrica.getIVideoCtrl();
+						 DtCategoria[] categorias=interfazVideos.listarCategorias();
+						 request.setAttribute("listarCategorias", categorias);
+						 request.getRequestDispatcher("/WEB-INF/Categoria/listarCategorias.jsp").forward(request, response);}break;
+			
+			case "consult":{
+				
+			};break;
+		
+		}
+		
+		
+		request.getRequestDispatcher("/WEB-INF/Categoria/consultaCategoria.jsp").forward(request, response);
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
