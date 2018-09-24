@@ -62,19 +62,21 @@ public class VideoServlet extends HttpServlet {
         }
         return fechaDate;
     }
-    private void crearVideo(String nomVideo, String duracion, String url, String fecha, String categoria, String descripcionV ){
+    private void crearVideo(String nomVideo, String duracion, String url, String fecha, String categoria, String descripcionV, HttpServletResponse response ){
        Fabrica fabrica = Fabrica.getInstance();
  	   IUsuarioCtrl usrCtrl = fabrica.getIUsuarioCtrl();
  	   IVideoCtrl ICV = fabrica.getIVideoCtrl();
  	   creaUsrPrueba();
- 	   ICV.crearCategoria(categoria); //crea la categoria para que no haya problemas
  	   DtFecha fechaPublicacionV= new DtFecha(ParseFecha(fecha));
  	   DtCategoria catV = new DtCategoria(categoria);
  	   usrCtrl.aniadirVideo("horacio", nomVideo, descripcionV,(Integer.parseInt(duracion)), fechaPublicacionV, url, catV, Privacidad.PUBLICO);
- 	   Boolean ok=  usrCtrl.memberVideoEnUsuario("horacio",nomVideo);
- 	   if(ok){
- 		   System.out.println("OKKKK");
- 	   }
+	   try {
+		response.sendRedirect("/UyTubeWeb/AltaVideo.jsp");
+	   } catch (IOException e) {
+		   // TODO Auto-generated catch block
+		   e.printStackTrace();
+	   }
+ 	 
     }
     private void verVideo(DtVideo dataVideo) {
     	
@@ -96,7 +98,7 @@ public class VideoServlet extends HttpServlet {
 		case "altaVideo":
 			System.out.println("Quiero crear video");
 			crearVideo(request.getParameter("nombreVideo"),request.getParameter("duracionVideo"),request.getParameter("urlVideo"),
-					request.getParameter("fechaVideo"),request.getParameter("categoria"),request.getParameter("descVideo"));
+					request.getParameter("fechaVideo"),request.getParameter("categoria"),request.getParameter("descVideo"),response);
 		break;
 		case "null":
 		break;
