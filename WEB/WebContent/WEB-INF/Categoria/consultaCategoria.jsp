@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ page import = "uytubeLogic.logica.DtCategoria"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,10 +11,16 @@
 <body>
 	Seleccione una categoria:
 	<select style="width:25%" name="cmbCategoria">
-		  <option value="cat1">cat1</option>
-          <option value="cat2">cat2</option>
-          <option value="cat3">cat3</option>
-          <option value="cat4">cat4</option>
+	
+	<%
+		DtCategoria[] cat= (DtCategoria[]) request.getAttribute("listarCategorias");
+		for (DtCategoria entry : cat) {
+			String nombreC=entry.getNombre();
+			
+	%>
+		  <option value="null">Categorias...</option>
+          <option value="<%=nombreC%>"><%=nombreC%></option>
+     <%}%>     
 	</select>
 	<br><br><br>
 	Videos:
