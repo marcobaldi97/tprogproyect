@@ -12,6 +12,10 @@
 <script src="jquery.ui.datepicker-es.js"></script>
 
 
+<%@ page import = "uytubeLogic.logica.DtCategoria"%>
+<%@ page import = "uytubeLogic.logica.Fabrica"%>
+<%@ page import = "uytubeLogic.logica.IVideoCtrl"%>
+
 <script>
  $.datepicker.regional['es'] = {
  closeText: 'Cerrar',
@@ -44,11 +48,10 @@ firstDay: 1
 });
 });
 </script>
-
+<%@include file="WEB-INF/buscador.jsp" %>
 <title>Alta Video</title>
 </head>
 <body>
-<h2>Alta Video</h2>
 	<form action="/UyTubeWeb/newVideo" method="get">
 		Nombre del Video:<br/>
 		<input type="text" name="nombreVideo"/><br/>
@@ -61,12 +64,21 @@ firstDay: 1
 		Fecha:<br/>
 		<input type="text" id="datepicker" name="fechaVideo"><br/>
 		Categoria:<br/>
-		<select name="categoria">
-          <option value="cat1">cat1</option>
-          <option value="cat2">cat2</option>
-          <option value="cat3">cat3</option>
-          <option value="cat4">cat4</option>
-       	 </select></br>
+		
+		 <select name="categoria">
+			<% 
+			Fabrica fabrica = Fabrica.getInstance();
+			IVideoCtrl videoCtr = fabrica.getIVideoCtrl();
+    		DtCategoria[] cat = videoCtr.listarCategorias(); 
+        	String opciones="";
+          	for (int i=0;i<cat.length;i++)
+          	{
+          	 opciones=opciones+"<option value="+cat[i].getNombre()+">"+cat[i].getNombre()+"</option>";
+          
+    	     	}
+      		%>
+			<%=opciones %>
+         </select></br>
        	 <button id="crearVideo" name="opcion" value="altaVideo">Crear</button>
      </form>
 </body>
