@@ -24,11 +24,15 @@
 			Integer duracionSS=entry.getDuracion()%60;
 			String duracionV = String.format("%02d:%02d", duracionMM, duracionSS);
 			String propietarioV = entry.getPropietario();
-			
+			request.setAttribute("IDVideo", entry.getIDVideo().toString());
+			request.setAttribute(nombreV, nombreV);
 	%>
 	<li>
 	<div>
-	Nombre : <%=nombreV %> <%=duracionV %><br>
+	<form action="watch" method="get"> 
+	<input type="hidden" name="opcion" value="ver">
+	<input type="hidden" name="ID" value="<%=entry.getIDVideo()%>">
+	<input type="submit" value="Ver Ahora">Nombre : </form> <%=nombreV%><%=duracionV %><br>
 	Propietario : <%=propietarioV %> <br>
 	Descripcion : <%=descV %><br>
 	</div>

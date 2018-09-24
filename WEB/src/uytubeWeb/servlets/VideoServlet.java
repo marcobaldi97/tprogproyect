@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpSession;
 
 import uytubeLogic.logica.DtCategoria;
 import uytubeLogic.logica.DtFecha;
+import uytubeLogic.logica.DtVideo;
 import uytubeLogic.logica.Fabrica;
 import uytubeLogic.logica.IUsuarioCtrl;
 import uytubeLogic.logica.IVideoCtrl;
@@ -26,7 +28,7 @@ import uytubeLogic.logica.SystemHandler.Privacidad;
 /**
  * Servlet implementation class VideoServlet
  */
-@WebServlet(name="Video",urlPatterns={"/watch","/newVideo","/modifyVideo","/likeVideo","/dislikeVideo","/newComment","/newResponse"})
+@WebServlet(name="VideoServlet",urlPatterns={"/watch","/newVideo","/modifyVideo","/likeVideo","/dislikeVideo","/newComment","/newResponse"})
 public class VideoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -74,6 +76,9 @@ public class VideoServlet extends HttpServlet {
  		   System.out.println("OKKKK");
  	   }
     }
+    private void verVideo(DtVideo dataVideo) {
+    	
+    }
     private void valorarVideo(int id_video, String nombre_usuario, boolean like) {
 		Fabrica fabrica = Fabrica.getInstance();
 	 	IVideoCtrl interfaz_video = fabrica.getIVideoCtrl();
@@ -110,6 +115,15 @@ public class VideoServlet extends HttpServlet {
 		 	String nombre_usuario = (String)session.getAttribute("nombre_usuario");
 		 	valorarVideo(id_video,nombre_usuario,false);
 		 	break;
+		}
+		case "ver":{
+			System.out.println("Quiero ver un video");
+			Fabrica fabricaControladores=Fabrica.getInstance();
+			IVideoCtrl VidController=fabricaControladores.getIVideoCtrl();
+			DtVideo dataVideo=VidController.infoAddVideo(Integer.parseInt(request.getParameter("ID")));
+			request.setAttribute("dataVideo", dataVideo);
+			request.getRequestDispatcher("WEB-INF/VerVideo.jsp").forward(request, response);
+			
 		}
 		default:
 			System.out.println("Error");
