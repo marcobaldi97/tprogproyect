@@ -9,5 +9,22 @@
 <body>
 	<%@include file="WEB-INF/buscador.jsp" %>
 	<%@include file="WEB-INF/sidebar.jsp" %>
+	<form action="cargarDatosPrueba">
+	<button type="button" onclick="test()">Cargar Datos de Prueba</button>
+	</form>
+	
+	<p id="Datos"></p>
+    <script>
+
+    function test(){
+    var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("Datos").innerHTML = this.responseText;
+    }
+  };
+  xhttp.open("GET", "cargarDatos", true);
+  xhttp.send();
+    }</script>
 </body>
 </html>

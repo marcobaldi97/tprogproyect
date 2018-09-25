@@ -68,7 +68,8 @@ public class VideoHandler {
 			DtListaReproduccion[] listasEnVideo = entry.getValue().getListas();
 			for (DtListaReproduccion lista : listasEnVideo) {
 
-				if (lista.getPrivado() == Privacidad.PUBLICO && lista.getNombre().contains(nombre)) {
+				if (lista.getPrivado() == Privacidad.PUBLICO && lista.getNombre().contains(nombre) && !listaLDR.contains(lista)) {
+					System.out.println("agregue algo wii");
 					listaLDR.add(lista);
 				}
 			}
