@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import uytubeLogic.logica.DtCategoria;
+import uytubeLogic.logica.DtComentario;
 import uytubeLogic.logica.DtFecha;
 import uytubeLogic.logica.DtVideo;
 import uytubeLogic.logica.Fabrica;
@@ -87,6 +88,13 @@ public class VideoServlet extends HttpServlet {
 		IUsuarioCtrl usrCtrl = fabrica.getIUsuarioCtrl();
 		usrCtrl.seguirUsuario(nombre_usuario, propietario);
 	}
+	private void comentarVideo(int id_video, String comentador, String contenido) {
+		Fabrica fabrica = Fabrica.getInstance();
+		IVideoCtrl interfaz_video = fabrica.getIVideoCtrl();
+		Date fecha_actual = new Date(); 
+		DtFecha fecha = new DtFecha(fecha_actual);
+		interfaz_video.nuevoComentario(id_video, comentador, fecha , contenido);
+	}
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -122,9 +130,11 @@ public class VideoServlet extends HttpServlet {
 		case "ver":{
 			System.out.println("Quiero ver un video");
 			Fabrica fabricaControladores=Fabrica.getInstance();
-			IVideoCtrl VidController=fabricaControladores.getIVideoCtrl();
-			DtVideo dataVideo=VidController.infoAddVideo(Integer.parseInt(request.getParameter("ID")));
+			IVideoCtrl vidController=fabricaControladores.getIVideoCtrl();
+			DtVideo dataVideo=vidController.infoAddVideo(Integer.parseInt(request.getParameter("ID")));
 			request.setAttribute("dataVideo", dataVideo);
+			DtComentario[] comentarios = vidController.listarComentarios(dataVideo.getIDVideo());
+			request.setAttribute("comentarios", comentarios);
 			request.getRequestDispatcher("VerVideo.jsp").forward(request, response);
 			break;
 		}
@@ -134,6 +144,16 @@ public class VideoServlet extends HttpServlet {
 			String propietario = request.getParameter("propietario");
 			String nombre_usuario = (String)session.getAttribute("nombre_usuario");
 			seguirUsuario(nombre_usuario,propietario);
+			break;
+		}
+		case "comment":{
+			System.out.println("Quiero hacer un comentario");
+			HttpSession session=request.getSession();
+			String comentador = (String)session.getAttribute("nombre_usuario");
+			int id_video = Integer.parseInt(request.getParameter("id_video"));
+			String contenido = request.getParameter("contenido");
+			comentarVideo(id_video, comentador, contenido);
+			break;
 		}
 		default:
 			System.out.println("Error");

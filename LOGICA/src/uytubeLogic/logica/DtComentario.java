@@ -33,6 +33,7 @@ public class DtComentario {
 	}
 
 	public DtComentario(Comentario comment) {
+		nickUsuario = comment.getUsuario().getNickname();
 		idComentario = comment.getIDComentario();
 		texto = comment.getTexto();
 		fecha = comment.getFecha();
