@@ -6,7 +6,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -78,14 +77,16 @@ public class VideoServlet extends HttpServlet {
 	   }
  	 
     }
-    private void verVideo(DtVideo dataVideo) {
-    	
-    }
     private void valorarVideo(int id_video, String nombre_usuario, boolean like) {
 		Fabrica fabrica = Fabrica.getInstance();
 	 	IVideoCtrl interfaz_video = fabrica.getIVideoCtrl();
     	interfaz_video.valorarVideo(id_video,nombre_usuario,like);
     }
+	private void seguirUsuario(String nombre_usuario, String propietario) {
+		Fabrica fabrica = Fabrica.getInstance();
+		IUsuarioCtrl usrCtrl = fabrica.getIUsuarioCtrl();
+		usrCtrl.seguirUsuario(nombre_usuario, propietario);
+	}
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -105,7 +106,7 @@ public class VideoServlet extends HttpServlet {
 		case "likeVideo":{
 			System.out.println("Quiero darle me gusta a un video");
 			HttpSession session=request.getSession();
-		 	Integer id_video = (int) request.getAttribute("id_video");
+		 	Integer id_video =Integer.parseInt(request.getParameter("id_video"));
 		 	String nombre_usuario = (String)session.getAttribute("nombre_usuario");
 		 	valorarVideo(id_video,nombre_usuario,true);
 		 	break;
@@ -113,7 +114,7 @@ public class VideoServlet extends HttpServlet {
 		case "dislikeVideo":{
 			System.out.println("Quiero darle no me gusta a un video");
 			HttpSession session=request.getSession();
-		 	Integer id_video = (int) request.getAttribute("id_video");
+		 	Integer id_video = Integer.parseInt(request.getParameter("id_video"));
 		 	String nombre_usuario = (String)session.getAttribute("nombre_usuario");
 		 	valorarVideo(id_video,nombre_usuario,false);
 		 	break;
@@ -127,12 +128,18 @@ public class VideoServlet extends HttpServlet {
 			request.getRequestDispatcher("VerVideo.jsp").forward(request, response);
 			break;
 		}
+		case "follow":{
+			System.out.println("Quiero seguir a un usuario");
+			HttpSession session=request.getSession();
+			String propietario = request.getParameter("propietario");
+			String nombre_usuario = (String)session.getAttribute("nombre_usuario");
+			seguirUsuario(nombre_usuario,propietario);
+		}
 		default:
 			System.out.println("Error");
 		break;	
 		}
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

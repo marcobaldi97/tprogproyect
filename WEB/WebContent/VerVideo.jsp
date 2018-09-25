@@ -47,17 +47,27 @@
 	  //datos de prueba
 	%>
 	<script>
-		void me_gusta_script(){
-			request.setAttribute("opcion","likeVideo");
-			request.setAttribute("id_video",id_video);
-			request.getRequestDispatcher("/likeVideo").forward(request, response);
+		function me_gusta_script(){
+		    var xhttp = new XMLHttpRequest();
+		    xhttp.onreadystatechange = function() {
+		      if (this.readyState == 4 && this.status == 200) {
+		        document.getElementById("demo").innerHTML = this.responseText;
+		      }
+		    };
+		    xhttp.open("GET", "/likeVideo?id_video="+id_video+"&opcion=likeVideo", true);
+		    xhttp.send();
 		}
 	</script>
 	<script>
 		void no_me_gusta_script(){
-			request.setAttribute("opcion","dislikeVideo");
-			request.setAttribute("id_video",id_video);
-			request.getRequestDispatcher("/dislikeVideo").forward(request, response);
+		    var xhttp = new XMLHttpRequest();
+		    xhttp.onreadystatechange = function() {
+		      if (this.readyState == 4 && this.status == 200) {
+		        document.getElementById("demo").innerHTML = this.responseText;
+		      }
+		    };
+		    xhttp.open("GET", "/dislikeVideo?id_video="+id_video+"&opcion=dislikeVideo", true);
+		    xhttp.send();
 		}
 	</script>
 	<script>
@@ -67,9 +77,14 @@
 	</script>
 	<script>
 		void seguir_script(){
-			request.setAttribute("opcion","follow");
-			request.setAttribute("usuario_a_seguir",propietario);
-			request.getRequestDispatcher("/follow").forward(request, response);
+		    var xhttp = new XMLHttpRequest();
+		    xhttp.onreadystatechange = function() {
+		      if (this.readyState == 4 && this.status == 200) {
+		        document.getElementById("demo").innerHTML = this.responseText;
+		      }
+		    };
+		    xhttp.open("GET", "/follow?usuario_a_seguir="+propietario+"&opcion=follow", true);
+		    xhttp.send();
 		}
 	</script>
 	<t id="titulo"><%=titulo%></t><br>
