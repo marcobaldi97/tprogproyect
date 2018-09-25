@@ -15,39 +15,6 @@
 <%@ page import = "uytubeLogic.logica.DtCategoria"%>
 <%@ page import = "uytubeLogic.logica.Fabrica"%>
 <%@ page import = "uytubeLogic.logica.IVideoCtrl"%>
-
-<script>
- $.datepicker.regional['es'] = {
- closeText: 'Cerrar',
- prevText: '< Ant',
- nextText: 'Sig >',
- currentText: 'Hoy',
- monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
- monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
- dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
- dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
- dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
- weekHeader: 'Sm',
- dateFormat: 'dd/mm/yy',
- firstDay: 1,
- isRTL: false,
- showMonthAfterYear: false,
- yearSuffix: ''
- };
- $.datepicker.setDefaults($.datepicker.regional['es']);
-$(function () {
-$("#fecha").datepicker();
-});
-</script>
-<script>
-
-$(function () {
-$.datepicker.setDefaults($.datepicker.regional["es"]);
-$("#datepicker").datepicker({
-firstDay: 1
-});
-});
-</script>
 <%@include file="WEB-INF/buscador.jsp" %>
 <title>Alta Video</title>
 </head>
@@ -62,6 +29,7 @@ firstDay: 1
 		Descripcion:<br/>
 		<input type="text" name="descVideo"/><br/>
 		Fecha:<br/>
+		<script type="text/javascript" src="fechaInput.js"></script>
 		<input type="text" id="datepicker" name="fechaVideo"><br/>
 		Categoria:<br/>
 		

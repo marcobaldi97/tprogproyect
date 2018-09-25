@@ -31,7 +31,9 @@ public class UsuarioServlet extends HttpServlet {
 		IUsuarioCtrl interfaz_usuario = fabrica.getIUsuarioCtrl();
 		interfaz_usuario.seguirUsuario(nombre_usuario, usuario_a_seguir);
 	}
-
+	private void nuevoUsuario(String nickname, String email, String nombre, String apellido, String contrasenia, String contraseniaConfir, String fechaNac, String foto,String nomCanal, String descripcion, String privacidad, String categoria){
+		System.out.println("OKK");
+	}
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -47,6 +49,13 @@ public class UsuarioServlet extends HttpServlet {
 		 	seguirUsuario(nombre_usuario, usuario_a_seguir);
 			break;
 		}
+		/*case "nuevoUsuario":{
+			HttpSession session=request.getSession();
+			nuevoUsuario((String)session.getAttribute("nickname"),(String)session.getAttribute("email"),(String)session.getAttribute("nombre"),
+					(String)session.getAttribute("apellido"),(String)session.getAttribute("contrasenia"),(String)session.getAttribute("contraseniaConfirmacion"),
+					(String)session.getAttribute("fecha_nacimiento"),(String)session.getAttribute("filename"),(String)session.getAttribute("nombre_canal"),
+					(String)session.getAttribute("descripcion"),(String)session.getAttribute("privacidad"),(String)session.getAttribute("categoria"));
+		}*/
 		}
 	}
 	/**
