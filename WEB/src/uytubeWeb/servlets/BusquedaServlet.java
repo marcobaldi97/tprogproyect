@@ -52,10 +52,7 @@ public class BusquedaServlet extends HttpServlet {
 		else {
 			request.setAttribute(busqueda, request.getParameter(busqueda));
 		}
-		//ESTO BORRARLO DE INMEDIATO
-		DatosDePrueba data=new DatosDePrueba();
-		data.cargarDatosDePrueba();
-		//CUANDO ESTO FUNQUE BIEN
+		
 		Fabrica fabrica = Fabrica.getInstance();
 		IVideoCtrl interfazVideos = fabrica.getIVideoCtrl();
 		IUsuarioCtrl interfazUsuarios = fabrica.getIUsuarioCtrl();
