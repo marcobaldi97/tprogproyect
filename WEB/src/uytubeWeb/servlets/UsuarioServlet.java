@@ -1,6 +1,10 @@
 package uytubeWeb.servlets;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,8 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import uytubeLogic.logica.DtFecha;
+import uytubeLogic.logica.DtUsuario;
 import uytubeLogic.logica.Fabrica;
 import uytubeLogic.logica.IUsuarioCtrl;
+import uytubeLogic.logica.SystemHandler.Privacidad;
 
 /**
  * Servlet implementation class UsuarioServlet
@@ -31,8 +38,29 @@ public class UsuarioServlet extends HttpServlet {
 		IUsuarioCtrl interfaz_usuario = fabrica.getIUsuarioCtrl();
 		interfaz_usuario.seguirUsuario(nombre_usuario, usuario_a_seguir);
 	}
+  public static Date ParseFecha(String fecha)
+    {
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        Date fechaDate = null;
+        try {
+            fechaDate = formato.parse(fecha);
+        } 
+        catch (ParseException ex) 
+        {
+            System.out.println(ex);
+        }
+        return fechaDate;
+    }
 	private void nuevoUsuario(String nickname, String email, String nombre, String apellido, String contrasenia, String contraseniaConfir, String fechaNac, String foto,String nomCanal, String descripcion, String privacidad, String categoria){
-		System.out.println("OKK");
+		Fabrica fabrica = Fabrica.getInstance();
+     	IUsuarioCtrl usrCtrl = fabrica.getIUsuarioCtrl();
+   		DtFecha dtFechaNac = new DtFecha(ParseFecha(fechaNac));
+		Privacidad priv;
+		if (privacidad=="PRIVADO"){ priv=Privacidad.PRIVADO;}
+		else{priv = Privacidad.PUBLICO;}
+		usrCtrl.nuevoUsuario(nickname,nombre,apellido,email, dtFechaNac, null,
+				nomCanal,descripcion,priv,categoria);
+		//FALTA INSERTAR FOTO y CONTRASEÑA
 	}
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -40,22 +68,31 @@ public class UsuarioServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-		String opcion = (String) request.getAttribute("opcion");
+		String opcion = request.getParameter("opcion");
 		switch (opcion) {
+		case "null":
+		break;
 		case "follow":{
 			HttpSession session=request.getSession();
 		 	String nombre_usuario = (String)session.getAttribute("nombre_usuario");
 		 	String usuario_a_seguir = (String) request.getAttribute("usuario_a_seguir");
 		 	seguirUsuario(nombre_usuario, usuario_a_seguir);
 			break;
+		}	
+		case "nuevoUsuario":{
+			//HttpSession session=request.getSession();
+			nuevoUsuario((String)request.getParameter("nickname"),(String)request.getParameter("email"),(String) request.getParameter("nombre"),
+					(String)request.getParameter("apellido"),(String)request.getParameter("contrasenia"),(String)request.getParameter("contraseniaConfirmacion"),
+					(String)request.getParameter("fecha_nacimiento"),(String)request.getParameter("filename"),(String)request.getParameter("nombre_canal"),
+					(String)request.getParameter("descripcion"),(String)request.getParameter("privacidad"),(String)request.getParameter("categoria"));
+		
+			Fabrica fabrica = Fabrica.getInstance();
+	     	IUsuarioCtrl usrCtrl = fabrica.getIUsuarioCtrl();
+			DtUsuario usr= usrCtrl.listarDatosUsuario((String)request.getParameter("nickname"));
+			request.setAttribute("dataUsuario", usr);
+			request.getRequestDispatcher("WEB-INF/Usuario/ConsultaUsuario.jsp").forward(request, response);
 		}
-		/*case "nuevoUsuario":{
-			HttpSession session=request.getSession();
-			nuevoUsuario((String)session.getAttribute("nickname"),(String)session.getAttribute("email"),(String)session.getAttribute("nombre"),
-					(String)session.getAttribute("apellido"),(String)session.getAttribute("contrasenia"),(String)session.getAttribute("contraseniaConfirmacion"),
-					(String)session.getAttribute("fecha_nacimiento"),(String)session.getAttribute("filename"),(String)session.getAttribute("nombre_canal"),
-					(String)session.getAttribute("descripcion"),(String)session.getAttribute("privacidad"),(String)session.getAttribute("categoria"));
-		}*/
+	
 		}
 	}
 	/**
@@ -64,6 +101,5 @@ public class UsuarioServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
-	}
-
+		}
 }
