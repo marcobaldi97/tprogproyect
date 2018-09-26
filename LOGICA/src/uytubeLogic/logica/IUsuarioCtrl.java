@@ -36,7 +36,7 @@ public interface IUsuarioCtrl {
 
 	public abstract Boolean verificarDispUsuario(String nickU, String email);
 
-	public abstract void nuevoUsuario(String nickU, String nombreU,
+	public abstract void nuevoUsuario(String nickU, String pass, String nombreU,
 			String apellidoU, String emailU, DtFecha fechaNacimientoU,
 			byte[] fotoU, String nombreCanal, String descripcionCanal,
 			Privacidad privacidadCanal, String categoriaCanal);
@@ -91,5 +91,6 @@ public interface IUsuarioCtrl {
 	
 	public abstract DtListaReproduccion[] infoLDRdeUsuario(String nickU,Privacidad priv);
 	
+	public abstract boolean verificarLogin(String nick,String pass);
 	
 }

@@ -58,9 +58,9 @@ public class UsuarioServlet extends HttpServlet {
 		Privacidad priv;
 		if (privacidad=="PRIVADO"){ priv=Privacidad.PRIVADO;}
 		else{priv = Privacidad.PUBLICO;}
-		usrCtrl.nuevoUsuario(nickname,nombre,apellido,email, dtFechaNac, null,
+		usrCtrl.nuevoUsuario(nickname,contrasenia,nombre,apellido,email, dtFechaNac, null,
 				nomCanal,descripcion,priv,categoria);
-		//FALTA INSERTAR FOTO y CONTRASEÑA
+		//FALTA INSERTAR FOTO y CONTROLAR CONTRASEÑA
 	}
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -68,10 +68,16 @@ public class UsuarioServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-		String opcion = request.getParameter("opcion");
+		String opcion = (String) request.getParameter("opcion");
 		switch (opcion) {
 		case "null":
 		break;
+		case "login" :{
+				System.out.println("me voy pal login");
+				request.getRequestDispatcher("WEB-INF/Usuario/Login.jsp").forward(request, response);
+			
+			break;
+		}
 		case "follow":{
 			HttpSession session=request.getSession();
 		 	String nombre_usuario = (String)session.getAttribute("nombre_usuario");
@@ -100,6 +106,33 @@ public class UsuarioServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		String opcion = (String) request.getParameter("opcion");
+		switch (opcion) {
+		case "login" :{
+			Fabrica fabrica=Fabrica.getInstance();
+			IUsuarioCtrl UsuarioController = fabrica.getIUsuarioCtrl();
+			System.out.println("estoy probando con:");
+			System.out.println(request.getParameter("nickInicio"));
+			System.out.println(request.getParameter("passInicio"));
+			if(UsuarioController.verificarLogin(request.getParameter("nickInicio"), request.getParameter("passInicio"))) {
+				System.out.println("existe el usuario con esa contraseña");
+				HttpSession sesion= request.getSession(true);
+				sesion.setAttribute("nombre_usuario", request.getParameter("nickInicio"));
+				response.sendRedirect(request.getContextPath() + "/home");
+			}else {
+				System.out.println("no existe el usuario con esa contraseña");
+				response.getWriter().append("se produjo un error en el login");
+				doGet(request,response);
+			}
+			break;
+		}
+		case "follow":{
+			HttpSession session=request.getSession();
+		 	String nombre_usuario = (String)session.getAttribute("nombre_usuario");
+		 	String usuario_a_seguir = (String) request.getAttribute("usuario_a_seguir");
+		 	seguirUsuario(nombre_usuario, usuario_a_seguir);
+			break;
+		}
+		}
 		}
 }

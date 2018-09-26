@@ -10,12 +10,15 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<link rel="stylesheet" href="/media/styles/Busqueda.css">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Resultados De Busqueda</title>
 </head>
 <body>
-	<%@include file="buscador.jsp" %>
-	<%@include file="sidebar.jsp" %>
+<div><%@include file="buscador.jsp" %></div>
+<div class="sidenav"><%@include file="sidebar.jsp" %></div>
+<div class="main">	
+	
 	Ordenar por:
 	<select id="Ordenar" class="icon-menu" onchange="sortTable()">
 		<option value=1>Nombre</option>
@@ -27,11 +30,11 @@
 %>
 <table id="TablaContenidos">
 <tr>
-<th> Tipo </th>
-<th> Nombre </th>
-<th> Descripcion </th>
-<th> Propietario </th>
-<th> Fecha publicación </th>
+<th valign="top"> Tipo </th>
+<th valign="top"> Nombre </th>
+<th valign="top"> Descripcion </th>
+<th valign="top"> Propietario </th>
+<th valign="top"> Fecha publicación </th>
 </tr>
 	<%
 		DtVideo[] vid = (DtVideo[]) request.getAttribute("videos");
@@ -102,6 +105,7 @@
 	</tr>
 </table>)
 
+</div>
 <script>
 function sortTable() {
 	var selected = document.getElementById("Ordenar").value;
