@@ -1,4 +1,12 @@
 @charset "ISO-8859-1";
+
+.main-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-content: flex-start;
+}
+
 .vertical-menu {
   flex: 1 1 auto;
   justify-content: center;
@@ -68,4 +76,10 @@
 .topnav a:hover {
   background-color: #ff0000;
   color: white;
+}
+
+@media screen and (min-width: 768px) {
+  .vertical-menu {
+    max-width: 200px;
+  }
 }

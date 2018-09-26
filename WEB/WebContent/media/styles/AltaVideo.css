@@ -1,55 +1,54 @@
-@CHARSET "ISO-8859-1";
-body{
-	 background-color: #ffffff;
-	  text-align: center;
+@charset "ISO-8859-1";
+body {
+  background-color: #ffffff;
+  text-align: center;
 }
-form{
-	 text-align: center;
-	 border: 1% solid #929eb2;
-	 margin: 2%;
-	 background-color: #d7d9dd;
-	 font-family: arial;
-	 font-size: 16px;
-	 padding: 10%;
+form {
+  text-align: center;
+  border: 1% solid #929eb2;
+  margin: 2%;
+  background-color: #d7d9dd;
+  font-family: arial;
+  font-size: 16px;
 }
 
-input[type=submit]{
-    background-color: #cbf2ae;
-    border: none;
-    color: black;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
+input[type="submit"] {
+  background-color: #cbf2ae;
+  border: none;
+  color: black;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
 }
-input[type=reset]{
-    background-color: #cbf2ae;
-    border: none;
-    color: black;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
+input[type="reset"] {
+  background-color: #cbf2ae;
+  border: none;
+  color: black;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
 }
-input[type=file]{
-    background-color: #d7d9dd;
-    border: none;
-    color: black;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
+input[type="file"] {
+  background-color: #d7d9dd;
+  border: none;
+  color: black;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
 }
-select{
-    background-color: #d7d9dd;
-    border: none;
-    color: black;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
+select {
+  background-color: #d7d9dd;
+  border: none;
+  color: black;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
 }
