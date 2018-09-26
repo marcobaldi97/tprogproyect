@@ -60,10 +60,10 @@ public class BusquedaServlet extends HttpServlet {
 		DtCanal[] canales = interfazUsuarios.listarCanalesPorNombre((String)request.getAttribute(busqueda));
 		DtListaReproduccion[] listas = interfazVideos.listarLDRPublicasPorNombre((String)request.getAttribute(busqueda));
 		
-		HttpSession session=request.getSession(false);
-		if(session!=null && session.getAttribute("nombre_usuario")!=null) {
+		HttpSession session=request.getSession();
+		if(session.getAttribute("usuarioLogueado")!=null) {
 			System.out.println("hay un usuario logueado");
-			String login=(String)session.getAttribute("nombre_usuario");
+			String login=(String)session.getAttribute("login");
 			DtVideo[] videosPrivadosSesion=interfazUsuarios.infoVideosCanal(login, Privacidad.PRIVADO);
 			DtListaReproduccion[] listasPrivadasSesion=interfazUsuarios.infoLDRdeUsuario(login, Privacidad.PRIVADO);
 			List<DtVideo> videosAux= new ArrayList<DtVideo>(Arrays.asList(videos));

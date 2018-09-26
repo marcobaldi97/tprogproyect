@@ -33,17 +33,17 @@
                 Categoria:<br />
 
                 <select name="categoria">
-                    <%
-			Fabrica fabrica = Fabrica.getInstance();
-			IVideoCtrl videoCtr = fabrica.getIVideoCtrl();
-    		DtCategoria[] cat = videoCtr.listarCategorias();
-        	String opciones="";
-          	for (int i=0;i<cat.length;i++)
-          	{
-          	 opciones=opciones+"<option value="+cat[i].getNombre()+">"+cat[i].getNombre()+"</option>";
-
-    	     	}
-      		%>
+               		<%
+					Fabrica fabrica = Fabrica.getInstance();
+					IVideoCtrl videoCtr = fabrica.getIVideoCtrl();
+			 		DtCategoria[] cat = videoCtr.listarCategorias();
+			     	String opciones="";
+			       	for (int i=0;i<cat.length;i++)
+			       	{
+			       	 opciones=opciones+"<option value="+cat[i].getNombre()+">"+cat[i].getNombre()+"</option>";
+			
+		 	     	}
+      				%>
                     <%=opciones %>
                 </select><br />
                 <button id="crearVideo" name="opcion" value="altaVideo">Crear</button>

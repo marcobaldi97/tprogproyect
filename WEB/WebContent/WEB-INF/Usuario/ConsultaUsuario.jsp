@@ -12,8 +12,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<link rel="stylesheet" type="text/css" href="../media/styles/ConsultaUsuario.css"/>
-    <script type="text/javascript" src="scriptPestanias.js">activarTab(unTab)</script>
+	<link rel="stylesheet" type="text/css" href="../../media/styles/ConsultaUsuario.css"/>
+    <script type="text/javascript" src="WEB-INF/Usuario/scriptPestanias.js">activarTab(unTab)</script>
  <title>Consulta Usuario</title>
 </head>
 <body>
@@ -41,7 +41,7 @@
 	<table width="80%" id="usrDatosTable">
 		<tr>
 		<td><img id="fotoUsr" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrBaBrL0HSQ4XIEXnI_6S75eIW7r1OqZpNadTC_6QavMI2M4Tx" width="100px" height="70px"></td>
-		<td>NICK</td>
+		<td><%=nick%></td>
 		</tr>
 		<tr>
 		<td>Cant. Seguidores</td>
