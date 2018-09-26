@@ -7,6 +7,7 @@
 <%@ page import = "uytubeLogic.logica.DtUsuario"%>
 <%@ page import = "uytubeLogic.logica.DtComentario"%>
 <%@ page import = "uytubeLogic.logica.DtUsuario"%>
+<%@ page import = "uytubeLogic.logica.DtCanal"%>
 <%@ page import = "uytubeLogic.logica.Fabrica"%>
 <%@ page import = "uytubeLogic.logica.IUsuarioCtrl"%>
 <%@ page import = "uytubeLogic.logica.IVideoCtrl"%>
@@ -20,10 +21,19 @@
 	<title>Insert title here</title>
 </head>
 <body height="100%" width="100%">
+	<%!
+		private String obtenerURLdeImagen(byte[] imagen){
+			Base64.Encoder encoder = Base64.getEncoder();
+			String imagen_a_string = encoder.encodeToString(imagen);
+			String url_a_devolver = "data:image/png;base64,"+imagen_a_string;
+			return url_a_devolver;
+		}//descodifica la imagen
+		
+	%>
 	<%
-		//Base64.Encoder encoder = Base64.getEncoder();
 		DtVideo dataVideo = (DtVideo) request.getAttribute("dataVideo");
-		DtUsuario usuario_propietario = (DtUsuario) request.getAttribute("usuario_propietario");
+		DtUsuario info_propietario = (DtUsuario) request.getAttribute("usuario_propietario");
+		DtCanal canal_propietario = (DtCanal) request.getAttribute("canal_propietario");
 		String titulo = dataVideo.getNombre();
 		String url_video = dataVideo.getUrl();
 		String propietario = dataVideo.getPropietario();
@@ -35,13 +45,10 @@
 		int dia = fecha_publicacion.getDate();
 		int mes =  fecha_publicacion.getMonth();
 		int anio = fecha_publicacion.getYear() + 1900;
-		Fabrica fabrica = Fabrica.getInstance();
-		//String url_logo_autor = "data:image/png;base64," + encoder.encodeToString(usuario_propietario.getFoto());
+		//String url_logo_autor = obtenerURLdeImagen(info_propietario.getFoto());
 		String url_logo_autor = "https://i.ytimg.com/vi/5bHimOJb-Xw/hqdefault.jpg";
 		String url_logo_usuario_iniciado = "http://www.sddistribuciones.com//Portadas/GSCBSG90486_3.JPG";
-		IUsuarioCtrl controlador_usuario = fabrica.getIUsuarioCtrl();
-		DtUsuario info_propietario = controlador_usuario.listarDatosUsuario(propietario);
-		String nombre_canal = controlador_usuario.mostrarInfoCanal(propietario).getNombre();
+		String nombre_canal = canal_propietario.getNombre();
 		//estos son los datos que tienen que ver con el usuario propietario y el video en s�.
 	%>
 	<%/*int id_video = 21;
