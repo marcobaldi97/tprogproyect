@@ -73,11 +73,18 @@ public class UsuarioServlet extends HttpServlet {
 		case "login" :{
 			Fabrica fabrica=Fabrica.getInstance();
 			IUsuarioCtrl UsuarioController = fabrica.getIUsuarioCtrl();
-			if(UsuarioController.verificarLogin(request.getParameter("nickInicio"), "passInicio")) {
+			System.out.println("estoy probando con:");
+			System.out.println(request.getParameter("nickInicio"));
+			System.out.println(request.getParameter("passInicio"));
+			if(UsuarioController.verificarLogin(request.getParameter("nickInicio"), request.getParameter("passInicio"))) {
+				System.out.println("existe el usuario con esa contraseña");
 				HttpSession sesion= request.getSession(true);
-				
-				
 				sesion.setAttribute("nombre_usuario", request.getParameter("nickInicio"));
+				response.sendRedirect(request.getContextPath() + "/home");
+			}else {
+				System.out.println("no existe el usuario con esa contraseña");
+				response.getWriter().append("se produjo un error en el login");
+				doGet(request,response);
 			}
 			break;
 		}
