@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import uytubeLogic.logica.DtCategoria;
 import uytubeLogic.logica.DtComentario;
 import uytubeLogic.logica.DtFecha;
+import uytubeLogic.logica.DtUsuario;
 import uytubeLogic.logica.DtVideo;
 import uytubeLogic.logica.Fabrica;
 import uytubeLogic.logica.IUsuarioCtrl;
@@ -131,10 +132,13 @@ public class VideoServlet extends HttpServlet {
 			System.out.println("Quiero ver un video");
 			Fabrica fabricaControladores=Fabrica.getInstance();
 			IVideoCtrl vidController=fabricaControladores.getIVideoCtrl();
+			IUsuarioCtrl usrController = fabricaControladores.getIUsuarioCtrl();
 			DtVideo dataVideo=vidController.infoAddVideo(Integer.parseInt(request.getParameter("ID")));
 			request.setAttribute("dataVideo", dataVideo);
 			DtComentario[] comentarios = vidController.listarComentarios(dataVideo.getIDVideo());
 			request.setAttribute("comentarios", comentarios);
+			DtUsuario usuario_propietario = usrController.listarDatosUsuario(dataVideo.getPropietario());
+			request.setAttribute("usuario_propietario", usuario_propietario);
 			request.getRequestDispatcher("VerVideo.jsp").forward(request, response);
 			break;
 		}

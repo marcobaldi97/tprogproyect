@@ -6,9 +6,11 @@
 <%@ page import = "uytubeLogic.logica.DtFecha"%>
 <%@ page import = "uytubeLogic.logica.DtUsuario"%>
 <%@ page import = "uytubeLogic.logica.DtComentario"%>
+<%@ page import = "uytubeLogic.logica.DtUsuario"%>
 <%@ page import = "uytubeLogic.logica.Fabrica"%>
 <%@ page import = "uytubeLogic.logica.IUsuarioCtrl"%>
 <%@ page import = "uytubeLogic.logica.IVideoCtrl"%>
+<%@page import="java.util.Base64"%>
 <%@ page import = "java.util.Date"%>
 <!DOCTYPE html>
 <html>
@@ -19,7 +21,9 @@
 </head>
 <body height="100%" width="100%">
 	<%
+		//Base64.Encoder encoder = Base64.getEncoder();
 		DtVideo dataVideo = (DtVideo) request.getAttribute("dataVideo");
+		DtUsuario usuario_propietario = (DtUsuario) request.getAttribute("usuario_propietario");
 		String titulo = dataVideo.getNombre();
 		String url_video = dataVideo.getUrl();
 		String propietario = dataVideo.getPropietario();
@@ -32,6 +36,7 @@
 		int mes =  fecha_publicacion.getMonth();
 		int anio = fecha_publicacion.getYear() + 1900;
 		Fabrica fabrica = Fabrica.getInstance();
+		//String url_logo_autor = "data:image/png;base64," + encoder.encodeToString(usuario_propietario.getFoto());
 		String url_logo_autor = "https://i.ytimg.com/vi/5bHimOJb-Xw/hqdefault.jpg";
 		String url_logo_usuario_iniciado = "http://www.sddistribuciones.com//Portadas/GSCBSG90486_3.JPG";
 		IUsuarioCtrl controlador_usuario = fabrica.getIUsuarioCtrl();
@@ -150,10 +155,10 @@
 				String descripcion_comentario = comentarios[index].getTexto();
 				DtComentario[] hijos = comentarios[index].getRespuestas();
 		   		out.println("<ul class=\"comment\">");
-		   		out.println("	<li><img id=\"logo\" src=\"https://i0.wp.com/blogthinkbig.com/wp-content/uploads/2018/04/3hfXV9eW-mAQfO4XNZrGX1OJPTm-FuEjVT_yxNH0cQM.jpg?resize=610%2C343\"></img> <p>"+autor_comentario+" "+dia_comment+"/"+mes_comment+"/"+anio_comment+"</p></li>");
+		   		out.println("	<li><img id=\"logo\" src=\"https://i0.wp.com/blogthinkbig.com/wp-content/uploads/2018/04/3hfXV9eW-mAQfO4XNZrGX1OJPTm-FuEjVT_yxNH0cQM.jpg?resize=610%2C343\"></img> <p id=\"nombre_autor\">"+autor_comentario+" "+dia_comment+"/"+mes_comment+"/"+anio_comment+"</p></li>");
 				out.println("	<li><p class=\"descripcion\">"+descripcion_comentario+"</p></li>");
 				out.println("	<li><button style=\"width:30%\" id=\"response_button\" name=\"response_button\" value=\"Responder\">  Responder  </button></li>");
-				printComentarios(out,hijos);
+				if(hijos.length != 0)printComentarios(out,hijos);
 				out.println("</ul>");
 			}
 		}
