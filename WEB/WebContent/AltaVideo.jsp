@@ -17,8 +17,7 @@
     <%@include file = "WEB-INF/buscador.jsp" %>
     <div class="main-container">
         <%@include file = "WEB-INF/sidebar.jsp" %>
-        <div>hola</div>
-        <div style="flex: 1 1 50%;">
+        <div class="main-content">
             <form action="/UyTubeWeb/newVideo" method="get">
                 Nombre del Video:<br />
                 <input type="text" name="nombreVideo" /><br />

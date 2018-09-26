@@ -1,5 +1,9 @@
 @charset "ISO-8859-1";
 
+body {
+  background-color: #ffffff;
+}
+
 .main-container {
   display: flex;
   flex-flow: row wrap;
@@ -7,11 +11,15 @@
   align-content: flex-start;
 }
 
+.main-content {
+  flex: 1 1 auto;
+}
+
 .vertical-menu {
   flex: 1 1 auto;
   justify-content: center;
   min-width: 200px; /* Set a width if you like */
-  margin: auto;
+  margin: 0 auto;
 }
 
 .vertical-menu a {

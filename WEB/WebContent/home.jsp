@@ -4,18 +4,21 @@
 <html>
 
 <head>
-  <meta charset="ISO-8859-1">
+  <%@include file = "WEB-INF/cosasComunesDelHead.jsp" %>
   <title>UyTube!</title>
 </head>
 
 <body>
   <%@include file="WEB-INF/buscador.jsp" %>
-  <%@include file="WEB-INF/sidebar.jsp" %>
-  <form action="cargarDatosPrueba">
-    <button type="button" onclick="test()">Cargar Datos de Prueba</button>
-  </form>
-
-  <p id="Datos"></p>
+  <div class="main-container">
+    <%@include file="WEB-INF/sidebar.jsp" %>
+    <div class="main-content">
+      <form action="cargarDatosPrueba">
+        <button type="button" onclick="test()">Cargar Datos de Prueba</button>
+      </form>
+      <p id="Datos"></p>
+    </div>
+  </div>
   <script>
 
     function test() {
