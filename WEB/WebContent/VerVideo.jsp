@@ -13,14 +13,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <%@include file = "WEB-INF/cosasComunesDelHead.jsp" %>
 	<link rel="stylesheet" href="VerVideo.css">
-	<meta charset="ISO-8859-1">
 	<title>Insert title here</title>
 </head>
 <body height="100%" width="100%">
-	<% 
+	<%
 		DtVideo dataVideo = (DtVideo) request.getAttribute("dataVideo");
-		String titulo = dataVideo.getNombre();	
+		String titulo = dataVideo.getNombre();
 		String url_video = dataVideo.getUrl();
 		String propietario = dataVideo.getPropietario();
 		String descripcion = dataVideo.getDescripcion();
@@ -37,7 +37,7 @@
 		IUsuarioCtrl controlador_usuario = fabrica.getIUsuarioCtrl();
 		DtUsuario info_propietario = controlador_usuario.listarDatosUsuario(propietario);
 		String nombre_canal = controlador_usuario.mostrarInfoCanal(propietario).getNombre();
-		//estos son los datos que tienen que ver con el usuario propietario y el video en sí.
+		//estos son los datos que tienen que ver con el usuario propietario y el video en sï¿½.
 	%>
 	<%/*int id_video = 21;
 	  String url_video = "https://www.youtube.com/embed/5bHimOJb-Xw";
@@ -122,7 +122,7 @@
 			<th  class="encapsulated_border" colspan="4" class="descripcion"><p align="left"><%=descripcion%></p></th>
 		</tr>
 		<tr>
-			<th colspan="3" class="categoria" width="80%">Categoría: <%=nombre_categoria%></th>
+			<th colspan="3" class="categoria" width="80%">Categorï¿½a: <%=nombre_categoria%></th>
 			<th colspan="2" width="20%" class="left_separator"><button id="agregar_lista_button" name="add_lista_button" onclick="agregar_lista_script()">Agregar a lista...</button>
 		</tr>
 	</table>
@@ -170,10 +170,10 @@
 		<tr>
 			<th id="logo_container" class="right_separator" rowspan="3" width="10%" height="100%"><img id="logo" src="https://i0.wp.com/blogthinkbig.com/wp-content/uploads/2018/04/3hfXV9eW-mAQfO4XNZrGX1OJPTm-FuEjVT_yxNH0cQM.jpg?resize=610%2C343"></img></th>
 			<th  class="texto_simple" id="nombre_autor" colspan="2">Autor Comentario</th>
-			<th class="right_left_separators"  id="fecha_publicacion" width="30%"><t class="texto_simple">Fecha de publicación</t></th>
+			<th class="right_left_separators"  id="fecha_publicacion" width="30%"><t class="texto_simple">Fecha de publicaciï¿½n</t></th>
 		</tr>
 		<tr>
-			<th  class="encapsulated_border" colspan="3" class="descripcion"><p align="left">Descripción</p></th>
+			<th  class="encapsulated_border" colspan="3" class="descripcion"><p align="left">Descripciï¿½n</p></th>
 		</tr>
 		<tr>
 			<th colspan="2"></th>
