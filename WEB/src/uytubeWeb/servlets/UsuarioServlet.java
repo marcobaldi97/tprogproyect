@@ -47,6 +47,13 @@ public class UsuarioServlet extends HttpServlet {
 			
 			break;
 		}
+		case "logout" :{
+			System.out.println("estoy cerrando sesion");
+			request.getSession(false).removeAttribute("nombre_usuario");
+			request.getSession().invalidate();
+			response.sendRedirect(request.getContextPath() + "/home");
+			break;
+		}
 		case "follow":{
 			HttpSession session=request.getSession();
 		 	String nombre_usuario = (String)session.getAttribute("nombre_usuario");
@@ -68,6 +75,7 @@ public class UsuarioServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
 		String opcion = (String) request.getParameter("opcion");
 		switch (opcion) {
 		case "login" :{
@@ -83,9 +91,17 @@ public class UsuarioServlet extends HttpServlet {
 				response.sendRedirect(request.getContextPath() + "/home");
 			}else {
 				System.out.println("no existe el usuario con esa contraseña");
-				response.getWriter().append("se produjo un error en el login");
+				request.setAttribute("error", "Se produjo un error en el ingreso de datos");
 				doGet(request,response);
 			}
+			break;
+		}
+		case "checkLogin" :{
+			String nomUsu=(String)request.getSession().getAttribute("nombre_usuario");
+			if(nomUsu==null) {
+				response.getWriter().append("<a href='login?opcion=login'>Iniciar Sesion</a>");
+			}else
+				response.getWriter().append("<a href='login?opcion=logout'>Cerrar Sesion</a>");
 			break;
 		}
 		case "follow":{

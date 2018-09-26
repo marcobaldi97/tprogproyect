@@ -76,7 +76,6 @@ public class BusquedaServlet extends HttpServlet {
 		String parametroListas="listas";
 		String parametroCanales="canales";
 		String parametroVideos="videos";
-		System.out.println("el primero");
 		
 		request.setAttribute(parametroListas, listas);
 		request.setAttribute(parametroCanales, canales);
