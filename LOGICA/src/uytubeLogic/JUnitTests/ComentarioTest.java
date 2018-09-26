@@ -19,7 +19,7 @@ public class ComentarioTest {
 		String nombreU = "nombreComentario";
 		UsuarioCtrl UCU = UsuarioCtrl.getInstance();
 		DtFecha fecha = new DtFecha(new Date(2));
-		UCU.nuevoUsuario(nombreU, "pedrito", "gimenez", "email.com", fecha, null, "nombrecito", "descripcion",
+		UCU.nuevoUsuario(nombreU,"1234", "pedrito", "gimenez", "email.com", fecha, null, "nombrecito", "descripcion",
 				Privacidad.PUBLICO, null);
 		Comentario coment = new Comentario(1, "texto", fecha, true, nombreU);
 		assertEquals(nombreU, coment.getUsuario().getNickname());

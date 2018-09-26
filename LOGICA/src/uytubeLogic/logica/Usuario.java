@@ -7,6 +7,7 @@ import uytubeLogic.logica.SystemHandler.Privacidad;
 
 public class Usuario {
 	private String nickname;
+	private String pass;
 	private String nombre;
 	private String apellido;
 	private String email;
@@ -16,11 +17,12 @@ public class Usuario {
 	private Map<String, Usuario> usuariosQueSigue;
 	private Map<String, Usuario> usuariosQueLeSiguen;
 
-	public Usuario(String nickU, String nombreU, String apellidoU,
+	public Usuario(String nickU, String passU,String nombreU, String apellidoU,
 			String emailU, DtFecha fechaNacU, byte[] fotoU, String nombreCanal,
 			String descripcionCanal, Privacidad privacidadCanal, String catCanal) {
 		// TODO Auto-generated constructor stub
 		nickname = nickU;
+		pass=passU;
 		nombre = nombreU;
 		apellido = apellidoU;
 		email = emailU;
@@ -43,6 +45,10 @@ public class Usuario {
 
 	public String getNickname() {
 		return nickname;
+	}
+	
+	public String getPasswrod() {
+		return pass;
 	}
 
 	public String getNombre() {

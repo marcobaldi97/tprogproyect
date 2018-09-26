@@ -20,8 +20,7 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 		systemh = SystemHandler.getInstance();
 	}
 
-	public Boolean memberListaReproduccionPropia(String nickU,
-			String nombreLista) {
+	public Boolean memberListaReproduccionPropia(String nickU, String nombreLista) {
 		UsuarioHandler usuHandler = UsuarioHandler.getInstance();
 		Usuario usuarioParticular = usuHandler.find(nickU);
 		return usuarioParticular.memberListaReproduccionPropia(nombreLista);
@@ -41,7 +40,7 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 		Usuario usuarioParticular = usuarioh.find(nickU);
 		return usuarioParticular.listarVideosCanal();
 	}
-	
+
 	public DtVideo[] infoVideosCanal(String nickU, Privacidad priv) {
 		Usuario usuarioParticular = usuarioh.find(nickU);
 		return usuarioParticular.infoVideosCanal(priv);
@@ -70,8 +69,7 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 
 	}
 
-	public void nuevaListaParticular(String nickU, String nombreL,
-			Privacidad privada) {
+	public void nuevaListaParticular(String nickU, String nombreL, Privacidad privada) {
 		Usuario usuarioParticular = usuarioh.find(nickU);
 		usuarioParticular.nuevaListaParticular(nombreL, nickU, privada);
 	}
@@ -81,14 +79,12 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 		return usuarioParticular.listarListasReproduccion();
 	}
 
-	public void agregarVideoLista(String nickU, Integer id_video,
-			String nombreLDR) {
+	public void agregarVideoLista(String nickU, Integer id_video, String nombreLDR) {
 		Usuario usuarioParticular = usuarioh.find(nickU);
 		usuarioParticular.agregarVideoLDR(id_video, nombreLDR);
 	}// comentarle a Carmona sobre el cambio con la id.
 
-	public void eliminarVideoLista(String nickU, Integer id_video,
-			String nombreLDR) {
+	public void eliminarVideoLista(String nickU, Integer id_video, String nombreLDR) {
 		Usuario usuarioParticular = usuarioh.find(nickU);
 		usuarioParticular.eliminarVideoLista(id_video, nombreLDR);
 
@@ -99,12 +95,10 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 		usuarioParticular.cambiarPrivLDR(nombreL, privE);
 	}
 
-	public void editarDatosUsuario(String nickU, String nuevoNombreU,
-			String nuevoApellidoU, DtFecha nuevaFechaNacimientoU,
-			byte[] nuevaFotoU) {
+	public void editarDatosUsuario(String nickU, String nuevoNombreU, String nuevoApellidoU,
+			DtFecha nuevaFechaNacimientoU, byte[] nuevaFotoU) {
 		Usuario usuarioParticular = usuarioh.find(nickU);
-		usuarioParticular.editarDatosUsuario(nuevoNombreU, nuevoApellidoU,
-				nuevaFechaNacimientoU, nuevaFotoU);
+		usuarioParticular.editarDatosUsuario(nuevoNombreU, nuevoApellidoU, nuevaFechaNacimientoU, nuevaFotoU);
 	}
 
 	public void seguirUsuario(String Usu1, String Usu2) {
@@ -121,37 +115,30 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 		udestino.removerUsuarioQueLeSigue(uraiz);
 	}
 
-	public void aniadirVideo(String nickU, String nombreV, String descripcionV,
-			Integer duracionV, DtFecha fechaPublicacion, String url,
-			DtCategoria catE, Privacidad privacidadV) {
+	public void aniadirVideo(String nickU, String nombreV, String descripcionV, Integer duracionV,
+			DtFecha fechaPublicacion, String url, DtCategoria catE, Privacidad privacidadV) {
 		Usuario usuarioParticular = usuarioh.find(nickU);
-		usuarioParticular.aniadirVideo(nombreV, nickU, descripcionV, duracionV,
-				fechaPublicacion, url, catE, privacidadV);
+		usuarioParticular.aniadirVideo(nombreV, nickU, descripcionV, duracionV, fechaPublicacion, url, catE,
+				privacidadV);
 	}
 
-	public void ingresarNuevosDatosVideo(String nickU, String nuevoNombre,
-			String nuevaDescripcion, int nuevaDuracion,
-			DtFecha nuevaFechaPublicacion, String nuevaUrl,
-			DtCategoria nuevaCat, Privacidad nuevaPrivacidad) {
+	public void ingresarNuevosDatosVideo(String nickU, String nuevoNombre, String nuevaDescripcion, int nuevaDuracion,
+			DtFecha nuevaFechaPublicacion, String nuevaUrl, DtCategoria nuevaCat, Privacidad nuevaPrivacidad) {
 		Usuario usuarioParticular = usuarioh.find(nickU);
-		usuarioParticular.ingresarNuevosDatosVideo(nuevoNombre,
-				nuevaDescripcion, nuevaDuracion, nuevaFechaPublicacion,
+		usuarioParticular.ingresarNuevosDatosVideo(nuevoNombre, nuevaDescripcion, nuevaDuracion, nuevaFechaPublicacion,
 				nuevaUrl, nuevaCat, nuevaPrivacidad);
 	}
 
 	public Boolean verificarDispUsuario(String nickU, String email) {
-		Boolean flag = usuarioh.memberNickname(nickU) || usuarioh
-				.memberEmail(email);
+		Boolean flag = usuarioh.memberNickname(nickU) || usuarioh.memberEmail(email);
 		return !flag;
 	}// true si está disponible, false si ya está ocupado
 
-	public void nuevoUsuario(String nickU, String nombreUsuario,
-			String apellidoU, String emailU, DtFecha fechaNacimientoU,
-			byte[] fotoU, String nombreCanal, String descripcionCanal,
+	public void nuevoUsuario(String nickU, String pass,String nombreUsuario, String apellidoU, String emailU,
+			DtFecha fechaNacimientoU, byte[] fotoU, String nombreCanal, String descripcionCanal,
 			Privacidad privacidadCanal, String categoriaCanal) {
-		Usuario usuarioParticular = new Usuario(nickU, nombreUsuario,
-				apellidoU, emailU, fechaNacimientoU, fotoU, nombreCanal,
-				descripcionCanal, privacidadCanal, categoriaCanal);
+		Usuario usuarioParticular = new Usuario(nickU, pass,nombreUsuario, apellidoU, emailU, fechaNacimientoU, fotoU,
+				nombreCanal, descripcionCanal, privacidadCanal, categoriaCanal);
 		usuarioh.aniadirUsuario(usuarioParticular);
 	}
 
@@ -190,32 +177,25 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 		return usuarioParticular.listarUsuariosQueLeSigue();
 	}
 
-	public String[] listarVideosListaReproduccionUsuario(String nickname,
-			String nombreLista) {
+	public String[] listarVideosListaReproduccionUsuario(String nickname, String nombreLista) {
 		Usuario usuarioParticular = usuarioh.find(nickname);
-		return usuarioParticular
-				.listarVideosListaReproduccionUsuario(nombreLista);
+		return usuarioParticular.listarVideosListaReproduccionUsuario(nombreLista);
 	}
 
-	public DtVideo[] obtenerDtsVideosListaReproduccionUsuario(String nickname,
-			String nombreLista) {
+	public DtVideo[] obtenerDtsVideosListaReproduccionUsuario(String nickname, String nombreLista) {
 		Usuario usuarioParticular = usuarioh.find(nickname);
-		return usuarioParticular
-				.obtenerDtsVideosListaReproduccionUsuario(nombreLista);
+		return usuarioParticular.obtenerDtsVideosListaReproduccionUsuario(nombreLista);
 	}
 
-	public boolean memberVideoLista(String nicknameUsuario, int idVideo,
-			String nombreListaReproduccion) {
+	public boolean memberVideoLista(String nicknameUsuario, int idVideo, String nombreListaReproduccion) {
 		Usuario usuarioParticular = usuarioh.find(nicknameUsuario);
-		return usuarioParticular.memberVideoLista(idVideo,
-				nombreListaReproduccion);
+		return usuarioParticular.memberVideoLista(idVideo, nombreListaReproduccion);
 	}
 
-	public void modificarDatosCanal(String nickname, String nombreCanal,
-			String descripcion, Privacidad privacidad, String catE) {
+	public void modificarDatosCanal(String nickname, String nombreCanal, String descripcion, Privacidad privacidad,
+			String catE) {
 		Usuario usuarioParticular = usuarioh.find(nickname);
-		usuarioParticular.modificarDatosCanal(nombreCanal, descripcion,
-				privacidad, catE);
+		usuarioParticular.modificarDatosCanal(nombreCanal, descripcion, privacidad, catE);
 	}
 
 	public String[] listarLDRParticularesdeUsuario(String nickname) {
@@ -225,7 +205,7 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 
 	@Override
 	public DtCanal[] listarCanalesPorNombre(String nombre) {
-		
+
 		return usuarioh.listarCanalesPorNombre(nombre);
 	}
 
@@ -233,5 +213,10 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 	public DtListaReproduccion[] infoLDRdeUsuario(String nickU, Privacidad priv) {
 		Usuario usuarioParticular = usuarioh.find(nickU);
 		return usuarioParticular.infoLDRdeUsuario(priv);
+	}
+
+	public boolean verificarLogin(String nick,String pass) {
+		Usuario usuarioParticular = usuarioh.find(nick);
+		return(usuarioParticular!=null && usuarioParticular.getPasswrod()==pass);
 	}
 }

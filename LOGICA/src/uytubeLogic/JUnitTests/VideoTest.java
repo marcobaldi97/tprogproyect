@@ -58,7 +58,7 @@ public class VideoTest {
 		String nombreU="nombreUNC";
 		UsuarioCtrl UCU=UsuarioCtrl.getInstance();
 		DtFecha fecha=new DtFecha(new Date(2));
-		UCU.nuevoUsuario(nombreU, "pedrito", "gimenez", "email.com", fecha, null, "nombrecito", "descripcion", Privacidad.PRIVADO, null);
+		UCU.nuevoUsuario(nombreU,"1234", "pedrito", "gimenez", "email.com", fecha, null, "nombrecito", "descripcion", Privacidad.PRIVADO, null);
 		Video video=new Video(nombreVideo,"pepito","descrito",20,fecha,"url.com",null,Privacidad.PRIVADO);
 		video.nuevoComentario(nombreU, fecha, "contenidoComentario");
 		video.nuevoComentario(nombreU, fecha, "contenidoComentario2");
@@ -85,7 +85,7 @@ public class VideoTest {
 		String nombreU="nombreURC";
 		UsuarioCtrl UCU=UsuarioCtrl.getInstance();
 		DtFecha fecha=new DtFecha(new Date(2));
-		UCU.nuevoUsuario(nombreU, "pedrito", "gimenez", "email.com", fecha, null, "nombrecito", "descripcion", Privacidad.PRIVADO, null);
+		UCU.nuevoUsuario(nombreU,"1234", "pedrito", "gimenez", "email.com", fecha, null, "nombrecito", "descripcion", Privacidad.PRIVADO, null);
 		Video video=new Video(nombreVideo,"pepito","descrito",20,fecha,"url.com",null,Privacidad.PRIVADO);
 		video.nuevoComentario(nombreU, fecha, "contenidoComentario");
 		DtComentario[] comentarios=video.getComentarios();
@@ -118,8 +118,8 @@ public class VideoTest {
 		String nombreU2="nombreUAP2";
 		UsuarioCtrl UCU=UsuarioCtrl.getInstance();
 		DtFecha fecha=new DtFecha(new Date(2));
-		UCU.nuevoUsuario(nombreU, "pedrito", "gimenez", "email.com", fecha, null, "nombrecito", "descripcion", Privacidad.PRIVADO, null);
-		UCU.nuevoUsuario(nombreU2, "pedrito", "gimenez", "email.com", fecha, null, "nombrecito", "descripcion", Privacidad.PRIVADO, null);
+		UCU.nuevoUsuario(nombreU, "1234","pedrito", "gimenez", "email.com", fecha, null, "nombrecito", "descripcion", Privacidad.PRIVADO, null);
+		UCU.nuevoUsuario(nombreU2,"1234", "pedrito", "gimenez", "email.com", fecha, null, "nombrecito", "descripcion", Privacidad.PRIVADO, null);
 		Video video=new Video(nombreVideo,"pepito","descrito",20,fecha,"url.com",null,Privacidad.PRIVADO);
 		video.valorarVideo(nombreU, true);
 		video.valorarVideo(nombreU2,false);
