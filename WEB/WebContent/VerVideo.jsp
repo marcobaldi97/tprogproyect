@@ -122,7 +122,7 @@
 			<th  class="encapsulated_border" colspan="4" class="descripcion"><p align="left"><%=descripcion%></p></th>
 		</tr>
 		<tr>
-			<th colspan="3" class="categoria" width="80%">Categor�a: <%=nombre_categoria%></th>
+			<th colspan="3" class="categoria" width="80%">Categoria: <%=nombre_categoria%></th>
 			<th colspan="2" width="20%" class="left_separator"><button id="agregar_lista_button" name="add_lista_button" onclick="agregar_lista_script()">Agregar a lista...</button>
 		</tr>
 	</table>
@@ -138,33 +138,29 @@
 			<th><button style="width:100%" id="response_button" name="response_button" value="Comentar">  Comentar  </button></th>
 		</tr>
 	</table>
+	<%!
+		private void printComentarios(javax.servlet.jsp.JspWriter out, DtComentario[] comentarios) throws java.io.IOException{
+			for(int index = 0 ; index < comentarios.length; index++){
+				String autor_comentario = comentarios[index].getNickUsuario();
+				Date fecha_publicacion_comentario = comentarios[index].getFecha().getFecha();
+				int dia_comment, mes_comment, anio_comment;
+				dia_comment = fecha_publicacion_comentario.getDate();
+				mes_comment = fecha_publicacion_comentario.getMonth();
+				anio_comment = fecha_publicacion_comentario.getYear() + 1900;
+				String descripcion_comentario = comentarios[index].getTexto();
+				DtComentario[] hijos = comentarios[index].getRespuestas();
+		   		out.println("<ul class=\"comment\">");
+		   		out.println("	<li><img id=\"logo\" src=\"https://i0.wp.com/blogthinkbig.com/wp-content/uploads/2018/04/3hfXV9eW-mAQfO4XNZrGX1OJPTm-FuEjVT_yxNH0cQM.jpg?resize=610%2C343\"></img> <p>"+autor_comentario+" "+dia_comment+"/"+mes_comment+"/"+anio_comment+"</p></li>");
+				out.println("	<li><p class=\"descripcion\">"+descripcion_comentario+"</p></li>");
+				out.println("	<li><button style=\"width:30%\" id=\"response_button\" name=\"response_button\" value=\"Responder\">  Responder  </button></li>");
+				printComentarios(out,hijos);
+				out.println("</ul>");
+			}
+		}
+	%>
 	<%
 		DtComentario[] comentarios = (DtComentario[]) request.getAttribute("comentarios");
-		for(int index = 0 ; index < comentarios.length; index++){//este for es para los padres
-			String autor_comentario = comentarios[index].getNickUsuario();
-			Date fecha_publicacion_comentario = comentarios[index].getFecha().getFecha();
-			int dia_comment, mes_comment, anio_comment;
-			dia_comment = fecha_publicacion_comentario.getDate();
-			mes_comment = fecha_publicacion_comentario.getMonth();
-			anio_comment = fecha_publicacion_comentario.getYear() + 1900;
-			String descripcion_comentario = comentarios[index].getTexto();
-			%>
-				<table width="100%" height="20%">
-					<tr>
-						<th id="logo_container" class="right_separator" rowspan="3" width="10%" height="100%"><img id="logo" src="https://i0.wp.com/blogthinkbig.com/wp-content/uploads/2018/04/3hfXV9eW-mAQfO4XNZrGX1OJPTm-FuEjVT_yxNH0cQM.jpg?resize=610%2C343"></img></th>
-						<th  class="texto_simple" id="nombre_autor" colspan="2"><%=autor_comentario%></th>
-						<th class="right_left_separators"  id="fecha_publicacion" width="30%"><t class="texto_simple"><%=dia_comment%>/<%=mes_comment%>/<%=anio_comment%></t></th>
-					</tr>
-					<tr>
-						<th  class="encapsulated_border" colspan="3" class="descripcion"><p align="left"><%=descripcion_comentario%></p></th>
-					</tr>
-					<tr>
-						<th colspan="2"></th>
-						<th><button style="width:100%" id="response_button" name="response_button" value="Responder">  Responder  </button></th>
-					</tr>
-				</table>
-			<%
-		}
+		printComentarios(out,comentarios);
 	%>
 	<table width="100%" height="20%">
 		<tr>
