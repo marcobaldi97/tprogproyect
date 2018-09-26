@@ -46,7 +46,7 @@ public class VideoServlet extends HttpServlet {
 		Date fecha = ParseFecha("25/02/1962");
 		DtFecha fechaNac = new DtFecha(fecha);
 		String HR="hrubio";
-		usrCtrl.nuevoUsuario("horacio", "Horacio", "Rubino", "horacio.rubino@guambia.com.uy", fechaNac, null,
+		usrCtrl.nuevoUsuario("horacio","1234", "Horacio", "Rubino", "horacio.rubino@guambia.com.uy", fechaNac, null,
 				"Canal Horacio", "El canal Horacio es para publicar contenido divertido",Privacidad.PUBLICO, "Entretenimiento");
     }
     public static Date ParseFecha(String fecha)
