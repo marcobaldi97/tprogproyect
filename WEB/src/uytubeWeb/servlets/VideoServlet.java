@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import uytubeLogic.logica.DtCanal;
 import uytubeLogic.logica.DtCategoria;
 import uytubeLogic.logica.DtComentario;
 import uytubeLogic.logica.DtFecha;
@@ -139,6 +140,8 @@ public class VideoServlet extends HttpServlet {
 			request.setAttribute("comentarios", comentarios);
 			DtUsuario usuario_propietario = usrController.listarDatosUsuario(dataVideo.getPropietario());
 			request.setAttribute("usuario_propietario", usuario_propietario);
+			DtCanal canal_propietario = usrController.mostrarInfoCanal(dataVideo.getPropietario());
+			request.setAttribute("canal_propietario",canal_propietario);
 			request.getRequestDispatcher("VerVideo.jsp").forward(request, response);
 			break;
 		}
