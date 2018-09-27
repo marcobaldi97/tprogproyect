@@ -7,10 +7,9 @@
 <link rel="stylesheet" href="media/styles/home.css">
 <title>UyTube!</title>
 </head>
-<body>
-
+<body onload="checkLogin()">
 <div class="topnav">
-  <a href="login?opcion=login">Iniciar Sesion</a>
+<a id=loginlogout></a>
   	<form action="search" method="get">
   		<button type="submit">Mandale Mecha!</button>
 		<input type="text" name="busqueda" placeholder="Buscar..">
@@ -18,6 +17,20 @@
 </div>
 
 
+
+<script>
+
+    function checkLogin() {
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          document.getElementById("loginlogout").innerHTML = this.responseText;
+        }
+      };
+      xhttp.open("POST", "login?opcion=checkLogin", true);
+      xhttp.send();
+    }</script>
 </body>
+
 </html>
 

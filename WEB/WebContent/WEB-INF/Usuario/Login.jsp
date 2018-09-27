@@ -14,5 +14,8 @@ Por favor ingrese sus datos para el inicio de sesión:<br>
 	<button type="submit">Iniciar Sesión</button>
 	<input type="hidden" name="opcion" value="login"></input>
 </form>
+<%if(request.getAttribute("error")!=null) 
+	out.println((String)request.getAttribute("error"));%>
+
 </body>
 </html>
