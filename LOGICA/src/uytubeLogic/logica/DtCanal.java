@@ -10,6 +10,7 @@ public class DtCanal {
 	private Privacidad privado;
 	private DtCategoria categoria;
 	private Date ultimoVideo;
+	private String propietario;
 
 	public DtCanal(Canal chanel) {
 		nombre = chanel.getNombre();
@@ -17,12 +18,16 @@ public class DtCanal {
 		privado = chanel.getPrivacidad();
 		categoria = chanel.getCategoria();
 		ultimoVideo = chanel.getFechaUltimoVideo();
+		propietario = chanel.getPropietario();
 	}
 
 	public String getNombre() {
 		return nombre;
 	}
-
+	
+	public String getPropietario() {
+		return propietario;
+	}
 	public String getDescripcion() {
 		return descripcion;
 	}

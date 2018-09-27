@@ -27,9 +27,7 @@
 	int mes = fechaNac.getMonth();
 	int anio = fechaNac.getYear();
 	byte[] foto = dataUsuario.getFoto();
-	Fabrica fabrica = Fabrica.getInstance();
-	IUsuarioCtrl usuarioCtrl = fabrica.getIUsuarioCtrl();
-	DtCanal dataCanal = usuarioCtrl.mostrarInfoCanal(nick);
+	DtCanal dataCanal = (DtCanal) request.getAttribute("dataCanal");
 	String nombre_canal = dataCanal.getNombre();
 	String descCanal= dataCanal.getDescripcion();
 	String categoriaCanal=dataCanal.getCategoria().getNombre();

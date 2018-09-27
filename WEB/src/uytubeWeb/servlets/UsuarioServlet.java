@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import uytubeLogic.logica.DtCanal;
+import uytubeLogic.logica.DtUsuario;
 import uytubeLogic.logica.Fabrica;
 import uytubeLogic.logica.IUsuarioCtrl;
 
@@ -31,7 +33,7 @@ public class UsuarioServlet extends HttpServlet {
 		IUsuarioCtrl interfaz_usuario = fabrica.getIUsuarioCtrl();
 		interfaz_usuario.seguirUsuario(nombre_usuario, usuario_a_seguir);
 	}
-	private void nuevoUsuario(String nickname, String email, String nombre, String apellido, String contrasenia, String contraseniaConfir, String fechaNac, String foto,String nomCanal, String descripcion, String privacidad, String categoria){
+	private void nuevoUsuario(String nickname,String pass, String email, String nombre, String apellido, String contrasenia, String contraseniaConfir, String fechaNac, String foto,String nomCanal, String descripcion, String privacidad, String categoria){
 		System.out.println("OKK");
 	}
 	/**
@@ -59,6 +61,19 @@ public class UsuarioServlet extends HttpServlet {
 		 	String nombre_usuario = (String)session.getAttribute("nombre_usuario");
 		 	String usuario_a_seguir = (String) request.getAttribute("usuario_a_seguir");
 		 	seguirUsuario(nombre_usuario, usuario_a_seguir);
+			break;
+		}
+		case "Perfil":{
+			String nickname = (String)request.getParameter("nickname");
+			Fabrica fabrica=Fabrica.getInstance();
+			IUsuarioCtrl UsuarioController = fabrica.getIUsuarioCtrl();
+			System.out.println("estoy yendo a consultar a " + nickname);
+			DtCanal infoCanal = UsuarioController.mostrarInfoCanal(nickname);
+			DtUsuario usuario = UsuarioController.listarDatosUsuario(nickname);
+			request.setAttribute("dataCanal", infoCanal);
+			request.setAttribute("dataUsuario", usuario);
+			request.getRequestDispatcher("WEB-INF/Usuario/ConsultaUsuario.jsp").forward(request, response);
+			
 			break;
 		}
 		/*case "nuevoUsuario":{

@@ -19,11 +19,15 @@ public class Canal {
 	private Categoria cate;
 	private Map<String, Video> videos;
 	private Map<String, ListaReproduccion> listasReproduccion;
+	private String propietario;
 
 	public String getNombre() {
 		return nombre;
 	}
 
+	public String getPropietario() {
+		return propietario;
+	}
 	public String getDescripcion() {
 		return descripcion;
 	}
@@ -80,6 +84,7 @@ public class Canal {
 		nombre = nomb;
 		descripcion = desc;
 		privacidadCanal = privacidadE;
+		propietario = proprietary;
 		if (catE != null) {
 			CategoriaHandler manejadorCategoria = CategoriaHandler.getInstance();
 			cate = manejadorCategoria.find(catE);

@@ -5,6 +5,7 @@
 <%@ page import = "uytubeLogic.logica.DtCanal"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@page errorPage="error404.jsp" %>
 
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -16,7 +17,6 @@
 </head>
 <body>
 <div><%@include file="buscador.jsp" %></div>
-<div class="sidenav"><%@include file="sidebar.jsp" %></div>
 <div class="main">	
 	
 	Ordenar por:
@@ -89,13 +89,14 @@
 			%>
 		<tr>
 		<td>Canal
-	<form action="watch" method="get"> 
-	<input type="hidden" name="opcion" value="consulta">
+	<form action="profile" method="get"> 
+	<input type="hidden" name="opcion" value="Perfil">
+	<input type="hidden" name="nickname" value="<%=entry.getPropietario()%>">
 	<input type="submit" value="Ver Canal"> </form> 
 	</td>
 		<td id="NombreTD"><%=entry.getNombre()%></td>
 		<td id="DescripcionTD"><%=entry.getDescripcion() %></td>
-		<td id="PropietarioTD"></td>
+		<td id="PropietarioTD"><%=entry.getPropietario() %></td>
 		<td id="FechaTD"><%=entry.getFechaUltimoVideo().toString() %></td>
 		<%String fechaHidden=df.format(entry.getFechaUltimoVideo()); %>
 	<td style="display:none;"><%=fechaHidden%></td>
