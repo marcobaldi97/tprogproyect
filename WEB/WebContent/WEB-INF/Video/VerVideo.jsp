@@ -16,11 +16,64 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <%@include file = "WEB-INF/cosasComunesDelHead.jsp" %>
-	<link rel="stylesheet" href="VerVideo.css">
+    <%@include file = "../cosasComunesDelHead.jsp" %>
+	<link rel="stylesheet" href="media/styles/VerVideo.css">
 	<title>Insert title here</title>
 </head>
-<body height="100%" width="100%">
+<body >
+<script type="text/javascript">
+	function me_gusta_script() {
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				window.alert("me gusta");
+			}
+		};
+		String
+		operacion = "likeVideo?id_video=" + id_video + "&opcion=likeVideo";
+		xhttp.open("GET", "likeVideo?id_video=" + id_video + "&opcion=likeVideo",
+				true);
+		xhttp.send();
+	}
+	
+	function no_me_gusta_script() {
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+	
+			}
+		};
+		String
+		operacion = "dislikeVideo?id_video=" + id_video + "&opcion=dislikeVideo";
+		System.out.println("operacion");
+		xhttp.open("GET", operacion, true);
+		xhttp.send();
+	}
+	
+	function agregar_lista_script() {
+		request.setAttribute();
+	}
+	
+	function seguir_script() {
+		var xhttp = new XMLHttpRequest();
+		xhttp.open("GET", "/follow?usuario_a_seguir=" + propietario
+				+ "&opcion=follow", true);
+		xhttp.send();
+	}
+	
+	function comentar_video() {
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				document.getElementById("demo").innerHTML = this.responseText;
+			}
+		};
+		String
+		contenido = document.getElementById("comentario_a_comentar");
+		xhttp.open("GET", "/newComment?id_video=" + id_video
+				+ "&opcion=comment&contenido=" + contenido, true);
+		xhttp.send();
+}</script>
 	<%!
 		private String obtenerURLdeImagen(byte[] imagen){
 			Base64.Encoder encoder = Base64.getEncoder();
@@ -32,6 +85,7 @@
 	%>
 	<%
 		DtVideo dataVideo = (DtVideo) request.getAttribute("dataVideo");
+		String id_video = dataVideo.getIDVideo().toString();
 		DtUsuario info_propietario = (DtUsuario) request.getAttribute("usuario_propietario");
 		DtCanal canal_propietario = (DtCanal) request.getAttribute("canal_propietario");
 		String titulo = dataVideo.getNombre();
@@ -63,69 +117,16 @@
 	  String url_logo_usuario_iniciado = "http://www.sddistribuciones.com//Portadas/GSCBSG90486_3.JPG";
 	  *///datos de prueba
 	%>
-	<script type="text/javascript">
-		function me_gusta_script(){
-		    var xhttp = new XMLHttpRequest();
-		    xhttp.onreadystatechange = function() {
-		      if (this.readyState == 4 && this.status == 200) {
-		        document.getElementById("demo").innerHTML = this.responseText;
-		      }
-		    };
-		    xhttp.open("GET", "/likeVideo?id_video="+id_video+"&opcion=likeVideo", true);
-		    xhttp.send();
-		}
-	</script>
-	<script type="text/javascript">
-		function no_me_gusta_script(){
-		    var xhttp = new XMLHttpRequest();
-		    xhttp.onreadystatechange = function() {
-		      if (this.readyState == 4 && this.status == 200) {
-		        document.getElementById("demo").innerHTML = this.responseText;
-		      }
-		    };
-		    xhttp.open("GET", "/dislikeVideo?id_video="+id_video+"&opcion=dislikeVideo", true);
-		    xhttp.send();
-		}
-	</script>
-	<script type="text/javascript">
-		function agregar_lista_script(){
-			request.setAttribute();
-		}
-	</script>
-	<script type="text/javascript">
-		function seguir_script(){
-		    var xhttp = new XMLHttpRequest();
-		    xhttp.onreadystatechange = function() {
-		      if (this.readyState == 4 && this.status == 200) {
-		        document.getElementById("demo").innerHTML = this.responseText;
-		      }
-		    };
-		    xhttp.open("GET", "/follow?usuario_a_seguir="+propietario+"&opcion=follow", true);
-		    xhttp.send();
-		}
-	</script>
-	<script type="text/javascript">
-		function comentar_video(){
-		    var xhttp = new XMLHttpRequest();
-		    xhttp.onreadystatechange = function() {
-		      if (this.readyState == 4 && this.status == 200) {
-		        document.getElementById("demo").innerHTML = this.responseText;
-		      }
-		    };
-		    String contenido = document.getElementById("comentario_a_comentar");
-		    xhttp.open("GET", "/newComment?id_video="+id_video+"&opcion=comment&contenido="+contenido, true);
-		    xhttp.send();
-		}
-	</script>
-	<t id="titulo"><%=titulo%></t><br>
+	
+	<p id="titulo"><%=titulo%></p><br>
 	<iframe width="100%" height="430px" src="<%=url_video%>"></iframe><br>
 	<table width="100%">
 		<tr>
 			<th rowspan="2" width="10%"><img id="logo" src=<%=url_logo_autor %> width="100px" height="70px"> </th>
 			<th class="texto_simple" id="nombre_autor" width="30%"><%=nombre_canal%></th>
-			<th rowspan="2" class="right_left_separators"  id="fecha_publicacion" width="30%"><t class="texto_simple"><%=dia%>/<%=mes%>/<%=anio%></t></th>
+			<th rowspan="2" class="right_left_separators"  id="fecha_publicacion" width="30%"><p class="texto_simple"><%=dia%>/<%=mes%>/<%=anio%></p></th>
 			<th rowspan="2" class="botones_like_dislike" width="30%">
-				<button class="like_dislike_button" style="width:50%" id="like_button" name="opcion" value="likeVideo" onclick="me_gusta_script()">  Me gusta  </button><button class="like_dislike_button" style="width:50%" id="dislike_button" name="opcion" value="dislikeVideo" onclick="no_me_gusta_script()">No me gusta </button></th>
+				<button class="like_dislike_button" style="width:50%" id="like_button" onclick="me_gusta_script()">  Me gusta  </button><button class="like_dislike_button" style="width:50%" id="dislike_button" name="opcion" value="dislikeVideo" onclick="no_me_gusta_script()">No me gusta </button></th>
 		</tr>
 		<tr>
 			<th><button id="seguir_button" name="boton_seguir" value="Seguir" onclick="seguir_script()">Seguir</button></th>
@@ -139,7 +140,7 @@
 		</tr>
 	</table>
 	<table width="100%" >
-		<tr colspan="3">
+		<tr>
 			<th  class="texto_simple" id="nombre_autor">Comentar video:</th>
 		</tr>
 		<tr>
@@ -178,7 +179,7 @@
 		<tr>
 			<th id="logo_container" class="right_separator" rowspan="3" width="10%" height="100%"><img id="logo" src="https://i0.wp.com/blogthinkbig.com/wp-content/uploads/2018/04/3hfXV9eW-mAQfO4XNZrGX1OJPTm-FuEjVT_yxNH0cQM.jpg?resize=610%2C343"></img></th>
 			<th  class="texto_simple" id="nombre_autor" colspan="2">Autor Comentario</th>
-			<th class="right_left_separators"  id="fecha_publicacion" width="30%"><t class="texto_simple">Fecha de publicaci�n</t></th>
+			<th class="right_left_separators"  id="fecha_publicacion" width="30%"><p class="texto_simple">Fecha de publicaci�n</p></th>
 		</tr>
 		<tr>
 			<th  class="encapsulated_border" colspan="3" class="descripcion"><p align="left">Descripci�n</p></th>

@@ -97,7 +97,7 @@ public class UsuarioServlet extends HttpServlet {
 		}	
 		case "nuevoUsuario":{
 			//HttpSession session=request.getSession();
-			nuevoUsuario((String)request.getParameter("nickname"),(String)request.getParameter("pass"),(String)request.getParameter("email"),(String) request.getParameter("nombre"),
+			nuevoUsuario((String)request.getParameter("nickname"),(String)request.getParameter("contrasenia"),(String)request.getParameter("email"),(String) request.getParameter("nombre"),
 					(String)request.getParameter("apellido"),(String)request.getParameter("contrasenia"),(String)request.getParameter("contraseniaConfirmacion"),
 					(String)request.getParameter("fecha_nacimiento"),(String)request.getParameter("filename"),(String)request.getParameter("nombre_canal"),
 					(String)request.getParameter("descripcion"),(String)request.getParameter("privacidad"),(String)request.getParameter("categoria"));

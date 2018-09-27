@@ -103,6 +103,7 @@ public class VideoServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		System.out.println("estoy en videoServlet");
 		String opc=request.getParameter("opcion");
 		System.out.println(opc);
 		switch(opc){
@@ -119,6 +120,7 @@ public class VideoServlet extends HttpServlet {
 		 	Integer id_video =Integer.parseInt(request.getParameter("id_video"));
 		 	String nombre_usuario = (String)session.getAttribute("nombre_usuario");
 		 	valorarVideo(id_video,nombre_usuario,true);
+		 	System.out.println("le di me gusta");
 		 	break;
 		}
 		case "dislikeVideo":{
@@ -127,6 +129,7 @@ public class VideoServlet extends HttpServlet {
 		 	Integer id_video = Integer.parseInt(request.getParameter("id_video"));
 		 	String nombre_usuario = (String)session.getAttribute("nombre_usuario");
 		 	valorarVideo(id_video,nombre_usuario,false);
+		 	System.out.println("le di no me gusta");
 		 	break;
 		}
 		case "ver":{
@@ -142,7 +145,7 @@ public class VideoServlet extends HttpServlet {
 			request.setAttribute("usuario_propietario", usuario_propietario);
 			DtCanal canal_propietario = usrController.mostrarInfoCanal(dataVideo.getPropietario());
 			request.setAttribute("canal_propietario",canal_propietario);
-			request.getRequestDispatcher("VerVideo.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/Video/VerVideo.jsp").forward(request, response);
 			break;
 		}
 		case "follow":{
