@@ -1,4 +1,14 @@
 @CHARSET "ISO-8859-1";
+.main-content{
+	 display: inline-block;
+	 background-color: #eee;
+}
+body {
+  background-color: #eee;
+  text-align: center;
+  text-decoration: none;  
+} 
+
 table.tabs {
     border-collapse: separate;
     border-spacing: 0;
@@ -38,14 +48,11 @@ table.tabs td {
 /* El ancho y alto de los div.tabdiv se configuran
 en cada aplicación */
 div.tabdiv {
+	background-color: #eee;
     border: 0;
     padding: 0.5em;
     overflow: auto;
     display: none;
     width: 100%;
     height: auto;
-    } 
-body{
-	 background-color: #ffffff;
-	  text-align: center;
-}
+    }

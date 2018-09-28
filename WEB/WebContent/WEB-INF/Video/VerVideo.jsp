@@ -104,7 +104,13 @@
 		String url_logo_usuario_iniciado = "http://www.sddistribuciones.com//Portadas/GSCBSG90486_3.JPG";
 		String nombre_canal = canal_propietario.getNombre();
 		//estos son los datos que tienen que ver con el usuario propietario y el video en s�.
+		
+		byte[] fotoByte = info_propietario.getFoto();
+		Base64.Encoder encoder = Base64.getEncoder();
+		String fotoString = encoder.encodeToString(fotoByte);
+		String urlFoto = "data:image/png;base64,"+ fotoString;
 	%>
+	
 	<%/*int id_video = 21;
 	  String url_video = "https://www.youtube.com/embed/5bHimOJb-Xw";
 	  String titulo = "Pomf Pomf With lyrics and Download";
@@ -119,6 +125,9 @@
 	%>
 	
 	<p id="titulo"><%=titulo%></p><br>
+	
+	<img src="<%= urlFoto%>"/>
+	
 	<iframe width="100%" height="430px" src="<%=url_video%>"></iframe><br>
 	<table width="100%">
 		<tr>
