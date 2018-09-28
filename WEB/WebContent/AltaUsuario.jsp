@@ -4,9 +4,9 @@
 <html>
 <head>
   <%@ page import = "uytubeLogic.logica.DtCategoria"%>
-    <%@ page import = "uytubeLogic.logica.Fabrica"%>
-    <%@ page import = "uytubeLogic.logica.IVideoCtrl"%>
-    <%@include file = "WEB-INF/cosasComunesDelHead.jsp" %>
+  <%@ page import = "uytubeLogic.logica.Fabrica"%>
+  <%@ page import = "uytubeLogic.logica.IVideoCtrl"%>
+  <%@include file = "WEB-INF/cosasComunesDelHead.jsp" %>
 	<link rel="stylesheet" href="media/styles/AltaUsuario.css">
 	<title>Alta Usuario</title>
 </head>
@@ -14,9 +14,9 @@
 	<%@include file="WEB-INF/buscador.jsp" %>
 
     <div class="main-container">
-        <%@include file="WEB-INF/sidebar.jsp" %>
-        <div class="main-content">
-            <form class="alta-usuario-form" action="/UyTubeWeb/newUser" method ="post">
+    <%@include file="WEB-INF/sidebar.jsp" %>
+    <div class="main-content">
+    	<form class="alta-usuario-form" action="newUser" method ="post">
             Nickname:<br>
             <input type="text" name="nickname"><br>
             Correo electronico:<br>
@@ -26,9 +26,24 @@
             Apellido:<br>
             <input type="text" name="apellido"><br>
             Contraseña:<br>
-            <input type="password" name="contrasenia"><br>
+            
+            <input type="password" id="pass1" name="contrasenia"><br>
             Confirmar Contraseña:<br>
-            <input type="password" name="contraseniaConfirmacion"><br>
+            <input type="password" id="pass2" name="contraseniaConfirmacion" onblur="comprobarClave(this.form)"><br>
+            <script>
+            function comprobarClave(frm){ 
+            	contra1= document.getElementById("pass1").value;
+            	contra2= document.getElementById("pass2").value;
+                if(contra1==contra2){
+            		frm.opcion.disabled = false;
+            	}else{
+            	   	alert("Las contraseñas son distintas!"); 
+            	   	frm.opcion.disabled = true;
+	           	}                      
+             } 
+            </script>
+
+                    
             <script type="text/javascript" src="fechaInput.js"></script>
             Fecha nacimiento:<br>
             <input type="text" id="datepicker" name="fecha_nacimiento"><br/>
@@ -56,12 +71,12 @@
       				%>
                     <%=opciones %>
               </select><br />
+			
+            <button id="crearUsuario" name="opcion" disabled="disabled" value="nuevoUsuario"  >Crear</button>
+        	
 
-            <button id="crearUsuario" name="opcion" value="nuevoUsuario">Crear</button>
-        
-
-            </form>
-        </div>
+    	</form>
+    </div>
     </div>
 
 </body>

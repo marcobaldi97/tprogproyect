@@ -72,6 +72,7 @@ public class UsuarioServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		String opcion = (String) request.getParameter("opcion");
+		System.out.println(opcion);
 		switch (opcion) {
 		case "null":
 		break;
@@ -95,20 +96,6 @@ public class UsuarioServlet extends HttpServlet {
 		 	seguirUsuario(nombre_usuario, usuario_a_seguir);
 			break;
 		}	
-		case "nuevoUsuario":{
-			//HttpSession session=request.getSession();
-			nuevoUsuario((String)request.getParameter("nickname"),(String)request.getParameter("contrasenia"),(String)request.getParameter("email"),(String) request.getParameter("nombre"),
-					(String)request.getParameter("apellido"),(String)request.getParameter("contrasenia"),(String)request.getParameter("contraseniaConfirmacion"),
-					(String)request.getParameter("fecha_nacimiento"),(String)request.getParameter("filename"),(String)request.getParameter("nombre_canal"),
-					(String)request.getParameter("descripcion"),(String)request.getParameter("privacidad"),(String)request.getParameter("categoria"));
-		
-			Fabrica fabrica = Fabrica.getInstance();
-	     	IUsuarioCtrl usrCtrl = fabrica.getIUsuarioCtrl();
-			DtUsuario usr= usrCtrl.listarDatosUsuario((String)request.getParameter("nickname"));
-			request.setAttribute("dataUsuario", usr);
-			request.getRequestDispatcher("WEB-INF/Usuario/ConsultaUsuario.jsp").forward(request, response);
-		}
-
 		case "Perfil":{
 			String nickname = (String)request.getParameter("nickname");
 			Fabrica fabrica=Fabrica.getInstance();
@@ -122,14 +109,6 @@ public class UsuarioServlet extends HttpServlet {
 			
 			break;
 		}
-		/*case "nuevoUsuario":{
-			HttpSession session=request.getSession();
-			nuevoUsuario((String)session.getAttribute("nickname"),(String)session.getAttribute("email"),(String)session.getAttribute("nombre"),
-					(String)session.getAttribute("apellido"),(String)session.getAttribute("contrasenia"),(String)session.getAttribute("contraseniaConfirmacion"),
-					(String)session.getAttribute("fecha_nacimiento"),(String)session.getAttribute("filename"),(String)session.getAttribute("nombre_canal"),
-					(String)session.getAttribute("descripcion"),(String)session.getAttribute("privacidad"),(String)session.getAttribute("categoria"));
-		}*/
-
 		}
 	}
 	/**
@@ -172,6 +151,20 @@ public class UsuarioServlet extends HttpServlet {
 		 	String usuario_a_seguir = (String) request.getAttribute("usuario_a_seguir");
 		 	seguirUsuario(nombre_usuario, usuario_a_seguir);
 			break;
+		}
+		case "nuevoUsuario":{
+			nuevoUsuario((String)request.getParameter("nickname"),(String)request.getParameter("contrasenia"),(String)request.getParameter("email"),(String) request.getParameter("nombre"),
+					(String)request.getParameter("apellido"),(String)request.getParameter("contrasenia"),(String)request.getParameter("contraseniaConfirmacion"),
+					(String)request.getParameter("fecha_nacimiento"),(String)request.getParameter("filename"),(String)request.getParameter("nombre_canal"),
+					(String)request.getParameter("descripcion"),(String)request.getParameter("privacidad"),(String)request.getParameter("categoria"));
+			Fabrica fabrica = Fabrica.getInstance();
+	     	IUsuarioCtrl usrCtrl = fabrica.getIUsuarioCtrl();
+	       	DtCanal infoCanal = usrCtrl.mostrarInfoCanal((String)request.getParameter("nickname"));
+			DtUsuario usuario = usrCtrl.listarDatosUsuario((String)request.getParameter("nickname"));
+			request.setAttribute("dataCanal", infoCanal);
+			request.setAttribute("dataUsuario", usuario);
+			request.getRequestDispatcher("WEB-INF/Usuario/ConsultaUsuario.jsp").forward(request, response);
+			
 		}
 		}
 		}
