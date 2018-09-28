@@ -1,43 +1,83 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.text.DateFormat"%>
+<%@page import="uytubeLogic.logica.DtListaReproduccion"%>
+<%@ page import = "uytubeLogic.logica.DtVideo"%>
+<%@ page import = "uytubeLogic.logica.SystemHandler.Privacidad"%>
+<%@ page import = "uytubeLogic.logica.DtCanal"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    <%@ page import = "uytubeLogic.logica.DtCategoria"%>
-<!DOCTYPE html>
+<%@page errorPage="error404.jsp" %>
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<link rel="stylesheet" href="consultaCategoria.css">
-<meta charset="ISO-8859-1">
-<title>UyTube</title>
+<link rel="stylesheet" href="/media/styles/Busqueda.css">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Resultados De Consulta</title>
 </head>
 <body>
-	Seleccione una categoria:
-	<select style="width:25%" name="cmbCategoria">
+
+
+<table id="TablaContenidos">
+<tr>
+<th valign="top"> Tipo </th>
+<th valign="top"> Nombre </th>
+<th valign="top"> Propietario </th>
+
+</tr>
+	<%
+		DtVideo[] vid = (DtVideo[]) request.getAttribute("videos");
+		for (DtVideo entry : vid) {
+			String nombreV=entry.getNombre();
+			String descV=entry.getDescripcion();
+			String propietarioV = entry.getPropietario();
+			request.setAttribute("IDVideo", entry.getIDVideo().toString());
+			request.setAttribute(nombreV, nombreV);
+			if(entry.getPrivacidad().equals(Privacidad.PUBLICO)){
+	%>
+	<tr>
+	<td>Video
+	<form action="watch" method="get"> 
+	<input type="hidden" name="opcion" value="ver">
+	<input type="hidden" name="ID" value="<%=entry.getIDVideo()%>">
+	<input type="submit" value="Ver Ahora"> </form> 
+	</td>
+	<td id="NombreTD"><%=nombreV%></td>
+	<td id="PropietarioTD"><%=propietarioV %></td>
+	</tr>
 	
 	<%
-		DtCategoria[] cat= (DtCategoria[]) request.getAttribute("listarCategorias");
-		for (DtCategoria entry : cat) {
-			String nombreC=entry.getNombre();
-			
+	}
+		}		
+		
+	
+		DtListaReproduccion[] listas=(DtListaReproduccion[]) request.getAttribute("listas");
+		for(DtListaReproduccion entry: listas){
+			if(entry.getPrivado().equals(Privacidad.PUBLICO)){
+		%>
+	<tr>
+	<td>Lista de Reproduccion
+	<form action="watch" method="get"> 
+	<input type="hidden" name="opcion" value="consulta">
+	<input type="submit" value="Ver Info"> </form> 
+	</td>
+	<td id="NombreTD"><%=entry.getNombre()%></td>
+	<td id="PropietarioTD"><%=entry.getPropietario() %></td>
+	</tr>
+	
+	<%	}
+		}
 	%>
-		  <option value="null">Categorias...</option>
-          <option value="<%=nombreC%>"><%=nombreC%></option>
-     <%}%>     
-	</select>
-	<br><br><br>
-	Videos:
-	<br>
-	<table style="width:35%" name='tableVideo'>
 		<tr>
-		    <th>Nombre</th>
-		    <th>Propietario</th> 
-		</tr>
-	</table>
-	<br><br><br>
-	Listas de Reproduccion:
-	<table style="width:35%" name='tableListas'>
-		<tr>
-		    <th>Nombre</th>
-		    <th>Propietario</th> 
-		</tr>
-	</table>
+		<td>
+	
+	
+	
+	</tr>
+</table>
+
+
+
 </body>
 </html>
