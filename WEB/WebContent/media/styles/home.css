@@ -14,6 +14,20 @@
   text-decoration: none; /* Remove underline from links */
 }
 
+
+.btn-link{
+  border:none;
+  outline:none;
+  background:none;
+  cursor:pointer;
+  color:#0000EE;
+  padding:0;
+  text-decoration:underline;
+  font-family:inherit;
+  font-size:inherit;
+}
+
+
 .vertical-menu a:hover {
   background-color: #ccc; /* Dark grey background on mouse-over */
 }

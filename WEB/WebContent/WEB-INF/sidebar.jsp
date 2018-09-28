@@ -1,7 +1,7 @@
 <div class="vertical-menu">
   <a href="#" class="active">Bienvenido</a>
-  <a href="#">Link 1</a>
-  <a href="#">Link 2</a>
-  <a href="#">Link 3</a>
-  <a href="#">Link 4</a>
+  <form id="sideBar" action="list" method="get">
+  <input type="hidden" name="action" value="list">
+  <button type="submit" value="categorias" class="btn-link" >Categorias</button>
+  </form>
 </div>
