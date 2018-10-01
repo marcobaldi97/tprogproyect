@@ -286,6 +286,11 @@ public class Canal {
 				Particular listaP=(Particular)entry.getValue();
 				if (listaP.getPrivado()==priv)
 					listaLDR.add(new DtListaReproduccion(listaP));
+			}else {
+				PorDefecto listaPD=(PorDefecto)entry.getValue();
+				if(priv==Privacidad.PRIVADO) {//las por defecto son SIEMPRE privadas
+					listaLDR.add(new DtListaReproduccion(listaPD));
+				}
 			}
 		}
 		return listaLDR.toArray(new DtListaReproduccion[0]);
