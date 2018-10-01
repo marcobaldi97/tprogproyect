@@ -7,15 +7,15 @@
   <%@ page import = "uytubeLogic.logica.Fabrica"%>
   <%@ page import = "uytubeLogic.logica.IVideoCtrl"%>
   <%@ page import = "uytubeLogic.logica.IUsuarioCtrl"%>
-  <%@include file = "WEB-INF/cosasComunesDelHead.jsp" %>
+  <%@include file = "../cosasComunesDelHead.jsp" %>
 	<link rel="stylesheet" href="media/styles/AltaUsuario.css">
 	<title>Alta Usuario</title>
 </head>
 <body>
-	<%@include file="WEB-INF/buscador.jsp" %>
+	<%@include file="../buscador.jsp" %>
 
     <div class="main-container">
-    <%@include file="WEB-INF/sidebar.jsp" %>
+    <%@include file="../sidebar.jsp" %>
     <div class="main-content">
     	<form class="alta-usuario-form" action="newUser" method ="post">
             Nickname:<br>
