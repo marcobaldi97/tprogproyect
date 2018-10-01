@@ -96,6 +96,9 @@ public class UsuarioServlet extends HttpServlet {
 		 	seguirUsuario(nombre_usuario, usuario_a_seguir);
 			break;
 		}	
+		case "nuevoUsuario":{
+			request.getRequestDispatcher("WEB-INF/Usuario/AltaUsuario.jsp").forward(request, response);
+		}
 		case "Perfil":{
 			String nickname = (String)request.getParameter("nickname");
 			Fabrica fabrica=Fabrica.getInstance();
@@ -140,7 +143,8 @@ public class UsuarioServlet extends HttpServlet {
 		case "checkLogin" :{
 			String nomUsu=(String)request.getSession().getAttribute("nombre_usuario");
 			if(nomUsu==null) {
-				response.getWriter().append("<a href='login?opcion=login'>Iniciar Sesion</a>");
+				response.getWriter().append("<a href='login?opcion=login'>Iniciar Sesion</a>   ");
+				response.getWriter().append("<a href='newUser?opcion=nuevoUsuario'>Nuevo Usuario</a>");
 			}else
 				response.getWriter().append("<a href='login?opcion=logout'>Cerrar Sesion</a>");
 			break;
