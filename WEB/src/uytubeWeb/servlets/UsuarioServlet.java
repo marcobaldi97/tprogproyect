@@ -25,6 +25,7 @@ import uytubeLogic.logica.SystemHandler.Privacidad;
 @WebServlet({"/login","/newUser","/profile","/modifyUser","/follow"})
 public class UsuarioServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private Object document;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -118,6 +119,7 @@ public class UsuarioServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		String opcion = (String) request.getParameter("opcion");
+		System.out.println(opcion);
 		switch (opcion) {
 		case "login" :{
 			Fabrica fabrica=Fabrica.getInstance();
@@ -151,19 +153,28 @@ public class UsuarioServlet extends HttpServlet {
 		 	String usuario_a_seguir = (String) request.getAttribute("usuario_a_seguir");
 		 	seguirUsuario(nombre_usuario, usuario_a_seguir);
 			break;
-		}
+		}		
 		case "nuevoUsuario":{
-			nuevoUsuario((String)request.getParameter("nickname"),(String)request.getParameter("contrasenia"),(String)request.getParameter("email"),(String) request.getParameter("nombre"),
-					(String)request.getParameter("apellido"),(String)request.getParameter("contrasenia"),(String)request.getParameter("contraseniaConfirmacion"),
-					(String)request.getParameter("fecha_nacimiento"),(String)request.getParameter("filename"),(String)request.getParameter("nombre_canal"),
-					(String)request.getParameter("descripcion"),(String)request.getParameter("privacidad"),(String)request.getParameter("categoria"));
+			System.out.println((String)request.getParameter("nickname"));
 			Fabrica fabrica = Fabrica.getInstance();
-	     	IUsuarioCtrl usrCtrl = fabrica.getIUsuarioCtrl();
-	       	DtCanal infoCanal = usrCtrl.mostrarInfoCanal((String)request.getParameter("nickname"));
-			DtUsuario usuario = usrCtrl.listarDatosUsuario((String)request.getParameter("nickname"));
-			request.setAttribute("dataCanal", infoCanal);
-			request.setAttribute("dataUsuario", usuario);
-			request.getRequestDispatcher("WEB-INF/Usuario/ConsultaUsuario.jsp").forward(request, response);
+			IUsuarioCtrl usuarioCtrl = fabrica.getIUsuarioCtrl();
+			boolean disponible=usuarioCtrl.verificarDispUsuario((String)request.getParameter("nickname"), (String)request.getParameter("email"));
+    		if(!disponible){
+    			response.getWriter().append("El nick y/o email esta ocupado"); 
+    	  	}else{
+        		nuevoUsuario((String)request.getParameter("nickname"),(String)request.getParameter("contrasenia"),(String)request.getParameter("email"),(String) request.getParameter("nombre"),
+    					(String)request.getParameter("apellido"),(String)request.getParameter("contrasenia"),(String)request.getParameter("contraseniaConfirmacion"),
+    					(String)request.getParameter("fecha_nacimiento"),(String)request.getParameter("filename"),(String)request.getParameter("nombre_canal"),
+    					(String)request.getParameter("descripcion"),(String)request.getParameter("privacidad"),(String)request.getParameter("categoria"));
+    		//	Fabrica fabrica = Fabrica.getInstance();
+    	     	IUsuarioCtrl usrCtrl = fabrica.getIUsuarioCtrl();
+    	       	DtCanal infoCanal = usrCtrl.mostrarInfoCanal((String)request.getParameter("nickname"));
+    			DtUsuario usuario = usrCtrl.listarDatosUsuario((String)request.getParameter("nickname"));
+    			request.setAttribute("dataCanal", infoCanal);
+    			request.setAttribute("dataUsuario", usuario);
+    			request.getRequestDispatcher("WEB-INF/Usuario/ConsultaUsuario.jsp").forward(request, response);
+        	}
+			
 			
 		}
 		}
