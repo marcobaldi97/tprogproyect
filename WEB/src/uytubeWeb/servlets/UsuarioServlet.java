@@ -73,7 +73,6 @@ public class UsuarioServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		String opcion = (String) request.getParameter("opcion");
-		System.out.println(opcion);
 		switch (opcion) {
 		case "null":
 		break;
@@ -98,7 +97,9 @@ public class UsuarioServlet extends HttpServlet {
 			break;
 		}	
 		case "nuevoUsuario":{
+			System.out.println("nuevo usuario GET");
 			request.getRequestDispatcher("WEB-INF/Usuario/AltaUsuario.jsp").forward(request, response);
+			break;
 		}
 		case "Perfil":{
 			String nickname = (String)request.getParameter("nickname");
