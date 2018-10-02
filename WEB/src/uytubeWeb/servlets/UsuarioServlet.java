@@ -63,7 +63,7 @@ public class UsuarioServlet extends HttpServlet {
 		else{priv = Privacidad.PUBLICO;}
 		usrCtrl.nuevoUsuario(nickname,contrasenia,nombre,apellido,email, dtFechaNac, null,
 				nomCanal,descripcion,priv,categoria);
-		//FALTA INSERTAR FOTO y CONTROLAR CONTRASEÑA
+		//FALTA INSERTAR FOTO y CONTROLAR CONTRASEï¿½A
 
 	}
 	/**
@@ -132,12 +132,12 @@ public class UsuarioServlet extends HttpServlet {
 			System.out.println(request.getParameter("nickInicio"));
 			System.out.println(request.getParameter("passInicio"));
 			if(UsuarioController.verificarLogin(request.getParameter("nickInicio"), request.getParameter("passInicio"))) {
-				System.out.println("existe el usuario con esa contraseña");
+				System.out.println("existe el usuario con esa contraseï¿½a");
 				HttpSession sesion= request.getSession(true);
 				sesion.setAttribute("nombre_usuario", request.getParameter("nickInicio"));
 				response.sendRedirect(request.getContextPath() + "/home");
 			}else {
-				System.out.println("no existe el usuario con esa contraseña");
+				System.out.println("no existe el usuario con esa contraseï¿½a");
 				request.setAttribute("error", "Se produjo un error en el ingreso de datos");
 				doGet(request,response);
 			}
@@ -158,16 +158,25 @@ public class UsuarioServlet extends HttpServlet {
 		 	String usuario_a_seguir = (String) request.getAttribute("usuario_a_seguir");
 		 	seguirUsuario(nombre_usuario, usuario_a_seguir);
 			break;
-		}		
-		case "nuevoUsuario":{
+		}
+		case "checkDispUsr":{
 			System.out.println((String)request.getParameter("nickname"));
 			Fabrica fabrica = Fabrica.getInstance();
 			IUsuarioCtrl usuarioCtrl = fabrica.getIUsuarioCtrl();
 			boolean disponible=usuarioCtrl.verificarDispUsuario((String)request.getParameter("nickname"), (String)request.getParameter("email"));
     		if(!disponible){
-    			response.getWriter().append("El nick y/o email esta ocupado"); 
-    	  	}else{
-        		nuevoUsuario((String)request.getParameter("nickname"),(String)request.getParameter("contrasenia"),(String)request.getParameter("email"),(String) request.getParameter("nombre"),
+    			response.getWriter().print("el nick y/o email estan ocupados"); 
+    	  	}
+		break;	
+		}
+		case "nuevoUsuario":{
+			System.out.println((String)request.getParameter("nickname"));
+			Fabrica fabrica = Fabrica.getInstance();
+			IUsuarioCtrl usuarioCtrl = fabrica.getIUsuarioCtrl();
+			boolean disponible=usuarioCtrl.verificarDispUsuario((String)request.getParameter("nickname"), (String)request.getParameter("email"));
+			boolean passIguales =(String)request.getParameter("pass1")==(String)request.getParameter("pass2");
+			if(disponible && passIguales){
+    			nuevoUsuario((String)request.getParameter("nickname"),(String)request.getParameter("contrasenia"),(String)request.getParameter("email"),(String) request.getParameter("nombre"),
     					(String)request.getParameter("apellido"),(String)request.getParameter("contrasenia"),(String)request.getParameter("contraseniaConfirmacion"),
     					(String)request.getParameter("fecha_nacimiento"),(String)request.getParameter("filename"),(String)request.getParameter("nombre_canal"),
     					(String)request.getParameter("descripcion"),(String)request.getParameter("privacidad"),(String)request.getParameter("categoria"));
@@ -178,10 +187,13 @@ public class UsuarioServlet extends HttpServlet {
     			request.setAttribute("dataCanal", infoCanal);
     			request.setAttribute("dataUsuario", usuario);
     			request.getRequestDispatcher("WEB-INF/Usuario/ConsultaUsuario.jsp").forward(request, response);
+        	}else{
+        		response.getWriter().print("Compruebe los datos"); 
         	}
+			break;
 			
-			
 		}
 		}
 		}
+	
 }
