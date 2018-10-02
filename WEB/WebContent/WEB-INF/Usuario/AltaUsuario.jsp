@@ -21,36 +21,36 @@
             Nickname:<br>
             <input type="text" name="nickname" id="nickname" ><br>
             Correo electronico:<br>
-            <input type="email" name="email" id="email" onchange="comprobarDisponibilidadUsr()"><br>
-            <p id=disponible></p>
+            <input type="email" name="email" id="email" onblur="comprobarDisponibilidadUsr()"><br>
+            <p id="disponible"></p>
             <script>
            		 function comprobarDisponibilidadUsr() {
            			var xhttp = new XMLHttpRequest();
 	                xhttp.onreadystatechange = function () {
 	                  if (this.readyState == 4 && this.status == 200) {
-	                    document.getElementById("disponible").innerHTML = this.responseText;
+	                	                	 
+	                	//  if(mensaje=="")alert(this.responseText,"¡ALERTA!");
+	                	document.getElementById("disponible").innerHTML = this.responseText;
+	                	
 	                  }
 	                };
-	                xhttp.open("POST", "nuevoUsuario?opcion=nuevoUsuario&nick="+document.getElementById("nickname").value+"&email="+document.getElementById("email").value, true);
-	                xhttp.send();
-              	}
-            </script>
-            <script>
-                    function comprobarFormulario(frm){
-                    	
-	            		contra1= document.getElementById("pass1").value;
-	                 	contra2= document.getElementById("pass2").value;
-	            		if(contra1!=contra2){
-	                 	   	alert("Las contraseñas son distintas!"); 
-	                     }                      
-	
-	            	    if(contra1==contra2){
-	            			return true;
-	            		 }else{
-	            		    return false;
-	            		 }
-            		 }
-            </script>
+	                xhttp.open("POST", "newUser?opcion=checkDispUsr&nickname="+document.getElementById("nickname").value+"&email="+document.getElementById("email").value, true);
+	                xhttp.send();	                
+	            }
+           		 
+       	        function comprobarFormulario(frm){
+       	     	var xhttp2 = new XMLHttpRequest();
+                xhttp2.onreadystatechange = function () {
+                  if (this.readyState == 4 && this.status == 200) {
+                	 alert(this.responseText);
+                	
+                  }
+                };
+                xhttp2.open("POST", "newUser?opcion=nuevoUsuario&nickname="+document.getElementById("nickname").value+"&email="+document.getElementById("email").value+"&pass1="+ document.getElementById("pass1").value
+                		+"&pass2="+ document.getElementById("pass2").value, true);
+                xhttp2.send();
+               	 }
+       	     </script>
             Nombre:<br>
             <input type="text" name="nombre"><br>
             Apellido:<br>
@@ -90,7 +90,7 @@
                     <%=opciones %>
               </select><br />
 			
-            <button id="crearUsuario" name="opcion" value="nuevoUsuario" onclick="return comprobarFormulario(this.form)">Crear</button>
+            <button id="crearUsuario" name="opcion" value="nuevoUsuario" onclick="return comprobarFormulario()">Crear</button>
         	
 
     	</form>
