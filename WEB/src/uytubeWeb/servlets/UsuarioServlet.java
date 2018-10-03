@@ -152,6 +152,16 @@ public class UsuarioServlet extends HttpServlet {
 				response.getWriter().append("<a href='login?opcion=logout'>Cerrar Sesion</a>");
 			break;
 		}
+		case "checkLoginSidebar" :{
+			System.out.println("estoy en chekloginsidebar");
+			String nomUsu=(String)request.getSession().getAttribute("nombre_usuario");
+			if(nomUsu==null) {
+			
+			}else
+				response.getWriter().append("<a href=\"newVideo?opcion=altaVideo\">nuevoVideo</a>");
+			
+			break;
+		}
 		case "follow":{
 			HttpSession session=request.getSession();
 		 	String nombre_usuario = (String)session.getAttribute("nombre_usuario");
