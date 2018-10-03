@@ -1,6 +1,5 @@
 package uytubeWeb.servlets;
 
-import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -116,20 +115,26 @@ public class VideoServlet extends HttpServlet {
 		break;
 		case "likeVideo":{
 			System.out.println("Quiero darle me gusta a un video");
-			HttpSession session=request.getSession();
-		 	Integer id_video =Integer.parseInt(request.getParameter("id_video"));
-		 	String nombre_usuario = (String)session.getAttribute("nombre_usuario");
-		 	valorarVideo(id_video,nombre_usuario,true);
-		 	System.out.println("le di me gusta");
+			HttpSession session=request.getSession(false);
+            if(session!=null && session.getAttribute("nombre_usuario")!=null) {
+    		 	Integer id_video =Integer.parseInt(request.getParameter("id_video"));
+    		 	String nombre_usuario = (String)session.getAttribute("nombre_usuario");
+    		 	valorarVideo(id_video,nombre_usuario,true);
+    		 	System.out.println("usuario "+nombre_usuario+" id_video:" +id_video);//esto es para ver si no manda nada null.
+    		 	System.out.println("le di me gusta");
+            }
 		 	break;
 		}
 		case "dislikeVideo":{
 			System.out.println("Quiero darle no me gusta a un video");
-			HttpSession session=request.getSession();
-		 	Integer id_video = Integer.parseInt(request.getParameter("id_video"));
-		 	String nombre_usuario = (String)session.getAttribute("nombre_usuario");
-		 	valorarVideo(id_video,nombre_usuario,false);
-		 	System.out.println("le di no me gusta");
+			HttpSession session=request.getSession(false);
+            if(session!=null && session.getAttribute("nombre_usuario")!=null) {
+    		 	Integer id_video = Integer.parseInt(request.getParameter("id_video"));
+    		 	String nombre_usuario = (String)session.getAttribute("nombre_usuario");
+    		 	valorarVideo(id_video,nombre_usuario,false);
+    		 	System.out.println("usuario "+nombre_usuario+" id_video:" +id_video);
+    		 	System.out.println("le di no me gusta");
+            }
 		 	break;
 		}
 		case "ver":{
@@ -145,24 +150,23 @@ public class VideoServlet extends HttpServlet {
 			request.setAttribute("usuario_propietario", usuario_propietario);
 			DtCanal canal_propietario = usrController.mostrarInfoCanal(dataVideo.getPropietario());
 			request.setAttribute("canal_propietario",canal_propietario);
+			HttpSession session=request.getSession(false);
+            if(session!=null && session.getAttribute("nombre_usuario")!=null) {
+            	request.setAttribute("logged" ,true);
+            }else request.setAttribute("logged" ,false);
 			request.getRequestDispatcher("/WEB-INF/Video/VerVideo.jsp").forward(request, response);
-			break;
-		}
-		case "follow":{
-			System.out.println("Quiero seguir a un usuario");
-			HttpSession session=request.getSession();
-			String propietario = request.getParameter("propietario");
-			String nombre_usuario = (String)session.getAttribute("nombre_usuario");
-			seguirUsuario(nombre_usuario,propietario);
 			break;
 		}
 		case "comment":{
 			System.out.println("Quiero hacer un comentario");
-			HttpSession session=request.getSession();
-			String comentador = (String)session.getAttribute("nombre_usuario");
-			int id_video = Integer.parseInt(request.getParameter("id_video"));
-			String contenido = request.getParameter("contenido");
-			comentarVideo(id_video, comentador, contenido);
+			HttpSession session=request.getSession(false);
+            if(session!=null && session.getAttribute("nombre_usuario")!=null) {
+    			String comentador = (String)session.getAttribute("nombre_usuario");
+    			int id_video = Integer.parseInt(request.getParameter("id_video"));
+    			String contenido = request.getParameter("contenido");
+    			comentarVideo(id_video, comentador, contenido);
+    			System.out.println("comentador "+comentador+" id_video:" +id_video+ "contenido: "+contenido);
+            }
 			break;
 		}
 		default:
