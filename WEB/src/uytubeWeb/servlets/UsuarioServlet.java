@@ -92,7 +92,8 @@ public class UsuarioServlet extends HttpServlet {
 		case "follow":{
 			HttpSession session=request.getSession();
 		 	String nombre_usuario = (String)session.getAttribute("nombre_usuario");
-		 	String usuario_a_seguir = (String) request.getAttribute("usuario_a_seguir");
+		 	String usuario_a_seguir = (String) request.getParameter("usuario_a_seguir");
+		 	System.out.println("usuario: "+nombre_usuario+ " va a seguir a :"+usuario_a_seguir);
 		 	seguirUsuario(nombre_usuario, usuario_a_seguir);
 			break;
 		}	

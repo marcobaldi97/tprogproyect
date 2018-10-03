@@ -11,6 +11,7 @@
 <%@ page import = "uytubeLogic.logica.Fabrica"%>
 <%@ page import = "uytubeLogic.logica.IUsuarioCtrl"%>
 <%@ page import = "uytubeLogic.logica.IVideoCtrl"%>
+<%@ page import = "javax.servlet.http.HttpSession"%>
 <%@page import="java.util.Base64"%>
 <%@ page import = "java.util.Date"%>
 <!DOCTYPE html>
@@ -45,17 +46,29 @@
 		String fotoString = encoder.encodeToString(fotoByte);
 		urlFoto = "data:image/png;base64,"+ fotoString;
 	}	
+	String logged_state = "";
+	if((boolean)request.getAttribute("logged") == true) logged_state = "true";
+	else logged_state = "false";
 	%>
-    <%@include file = "../cosasComunesDelHead.jsp" %>
     <meta charset="ISO-8859-1">
 	<link rel="stylesheet" href="media/styles/VerVideo.css">
 	<title><%=titulo%></title>	
 	<script type="text/javascript">
 	window.onload=function(){
-		document.getElementById("like_button").addEventListener("click", me_gusta_script);
-		document.getElementById("dislike_button").addEventListener("click", no_me_gusta_script);
-		document.getElementById("seguir_button").addEventListener("click",seguir_script);
-		document.getElementById("response_button").addEventListener("click",comentar_video);
+		var logged = "<%=logged_state%>";
+		if(logged == "true"){
+	    	document.getElementById("like_button").addEventListener("click", me_gusta_script);
+	    	document.getElementById("dislike_button").addEventListener("click", no_me_gusta_script);
+	    	document.getElementById("seguir_button").addEventListener("click",seguir_script);
+	    	document.getElementById("response_button").addEventListener("click",comentar_video);
+		}else{
+	    	document.getElementById("like_button").style.display = "none";
+	    	document.getElementById("dislike_button").style.display = "none";
+	    	document.getElementById("seguir_button").style.display = "none";
+	    	document.getElementById("response_button").style.display = "none";
+	    	document.getElementById("agregar_lista_button").style.display = "none";
+	    	document.getElementById("tabla_para_comentar").style.display = "none";
+		}//si no está loggeado, no muestra estos elementos.
 	}
 
 	function me_gusta_script() {
@@ -90,7 +103,7 @@
 	
 	function seguir_script() {
 		var xhttp = new XMLHttpRequest();
-		xhttp.open("GET", "/follow?usuario_a_seguir=<%=propietario%>&opcion=follow", true);
+		xhttp.open("GET", "follow?usuario_a_seguir=<%=propietario%>&opcion=follow", true);
 		xhttp.send();
 	}
 	
@@ -102,7 +115,7 @@
 			}
 		};
 		var contenido = document.getElementById("comentario_a_comentar").value;
-		xhttp.open("GET", "/newComment?id_video="+<%=id_video%>+"&opcion=comment&contenido=" + contenido, true);
+		xhttp.open("GET", "newComment?id_video=<%=id_video%>&opcion=comment&contenido=" + contenido, true);
 		xhttp.send();
 	}
 	
@@ -148,7 +161,7 @@
 			<th colspan="2" width="20%" class="left_separator"><button id="agregar_lista_button" name="add_lista_button" onclick="agregar_lista_script()">Agregar a lista...</button>
 		</tr>
 	</table>
-	<table style="width:100%" >
+	<table style="width:100%" id = "tabla_para_comentar">
 		<tr>
 			<th  class="texto_simple" id="nombre_autor">Comentar video:</th>
 		</tr>
