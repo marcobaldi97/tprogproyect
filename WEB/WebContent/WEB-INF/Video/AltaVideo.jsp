@@ -4,7 +4,7 @@
 <html>
 
 <head>
-    <%@include file = "WEB-INF/cosasComunesDelHead.jsp" %>
+    <%@include file = "../cosasComunesDelHead.jsp" %>
     <link rel="stylesheet" href="media/styles/AltaVideo.css">
 
     <%@ page import = "uytubeLogic.logica.DtCategoria"%>
@@ -14,11 +14,11 @@
 </head>
 
 <body>
-    <%@include file = "WEB-INF/buscador.jsp" %>
+    <%@include file = "../buscador.jsp" %>
     <div class="main-container">
-        <%@include file = "WEB-INF/sidebar.jsp" %>
+        <%@include file = "../sidebar.jsp" %>
         <div class="main-content">
-            <form action="/UyTubeWeb/newVideo" method="get">
+            <form action="newVideo" method="post">
                 Nombre del Video:<br />
                 <input type="text" name="nombreVideo" /><br />
                 Duracion:<br />
@@ -33,6 +33,7 @@
                 Categoria:<br />
 
                 <select name="categoria">
+                	<option value="Sin Categoria">Sin Categoria</option>
                		<%
 					Fabrica fabrica = Fabrica.getInstance();
 					IVideoCtrl videoCtr = fabrica.getIVideoCtrl();

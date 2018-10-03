@@ -9,4 +9,5 @@
   <input type="hidden" name="action" value="list">
   <button type="submit" value="categorias" class="btn-link" >Listas</button>
   </form>
+  <a href="newVideo?opcion=altaVideo">nuevoVideo</a>
 </div>
