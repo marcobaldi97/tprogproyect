@@ -49,6 +49,31 @@
 	%>
 		<tr>
 		<td>
+		
+		
+		<%
+		if((DtListaReproduccion[]) request.getAttribute("listasPrivadasSesion")!=null){
+		DtListaReproduccion[] listasPrivadas=(DtListaReproduccion[]) request.getAttribute("listasPrivadasSesion");
+		for(DtListaReproduccion entry: listasPrivadas){
+				
+		%>
+	<tr>
+	<td>Lista de Reproduccion Privada
+	<form action="playlist" method="get"> 
+	<input type="hidden" name="action" value="details">
+	<input type="hidden" name="nameList" value="<%=entry.getNombre()%>">
+	<input type="hidden" name="ownerList" value="<%=entry.getPropietario() %>">
+	<input type="submit" value="Ver Info"> </form> 
+	</td>
+	<td id="NombreTD"><%=entry.getNombre()%></td>
+	<td id="PropietarioTD"><%=entry.getPropietario() %></td>
+	</tr>
+	
+	<%	
+		}}
+	%>
+		<tr>
+		<td>	
 	
 	
 	

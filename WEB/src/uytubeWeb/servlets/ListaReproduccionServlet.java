@@ -1,11 +1,16 @@
 package uytubeWeb.servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import uytubeLogic.logica.DtCategoria;
 import uytubeLogic.logica.DtListaReproduccion;
@@ -13,6 +18,7 @@ import uytubeLogic.logica.DtVideo;
 import uytubeLogic.logica.Fabrica;
 import uytubeLogic.logica.IUsuarioCtrl;
 import uytubeLogic.logica.IVideoCtrl;
+import uytubeLogic.logica.SystemHandler.Privacidad;
 
 /**
  * Servlet implementation class ListaReproduccionServlet
@@ -39,10 +45,23 @@ public class ListaReproduccionServlet extends HttpServlet {
 		Fabrica fabrica=Fabrica.getInstance();
 		IVideoCtrl interfazVideos = fabrica.getIVideoCtrl();
 		IUsuarioCtrl interfazUsuario = fabrica.getIUsuarioCtrl();
+		HttpSession session=request.getSession(false);
 		
 		switch(action) 
 		{
 			case "details":{
+				 if(session!=null) {
+			            String login=(String)session.getAttribute("nombre_usuario");
+			            if(login!=null) {
+							 request.setAttribute("nicknameLogin", login);
+			            }
+			     }
+				 else
+				 {
+					 request.setAttribute("nicknameLogin", null);
+
+				 } 
+				
 				String nombreLista = request.getParameter("nameList");
 				String propietarioLista = request.getParameter("ownerList");
 				DtVideo[] videosLista=interfazUsuario.obtenerDtsVideosListaReproduccionUsuario(propietarioLista, nombreLista);
@@ -56,6 +75,20 @@ public class ListaReproduccionServlet extends HttpServlet {
 				
 			};break;
 			case "list":{
+				
+				
+				 if(session!=null) {
+			            String login=(String)session.getAttribute("nombre_usuario");
+			            if(login!=null) {
+			            	DtListaReproduccion[] listasPrivadasSesion=interfazUsuario.infoLDRdeUsuario(login, Privacidad.PRIVADO);
+							 request.setAttribute("listasPrivadasSesion", listasPrivadasSesion);
+
+			            }
+			     }
+				 else
+				 {
+					 request.setAttribute("listasPrivadasSesion", null);
+				 }	 
 				
 				 DtListaReproduccion[] listas=interfazVideos.listarLDRPublicasPorNombre("");
 				 request.setAttribute("listarListasReproduccion", listas);
