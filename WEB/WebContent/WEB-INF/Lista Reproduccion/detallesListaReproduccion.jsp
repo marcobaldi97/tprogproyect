@@ -66,6 +66,35 @@
 	}
 		}
 		%>
+	<%
+		if((String) request.getAttribute("nicknameLogin")!=null){
+			String nickname=(String) request.getAttribute("nicknameLogin");
+		for (DtVideo entry : vid) {
+			String nombreV=entry.getNombre();
+			String descV=entry.getDescripcion();
+			String propietarioV = entry.getPropietario();
+			request.setAttribute("IDVideo", entry.getIDVideo().toString());
+			request.setAttribute(nombreV, nombreV);
+			System.out.println(nickname);
+			System.out.println(entry.getPropietario());
+			if(entry.getPrivacidad().equals(Privacidad.PRIVADO) && entry.getPropietario().equals(nickname)){
+	%>
+	<tr>
+	<td>Video Privado
+	<form action="watch" method="get"> 
+	<input type="hidden" name="opcion" value="ver">
+	<input type="hidden" name="ID" value="<%=entry.getIDVideo()%>">
+	<input type="submit" value="Ver Ahora"> </form> 
+	</td>
+	<td id="NombreTD"><%=nombreV%></td>
+	<td id="PropietarioTD"><%=propietarioV %></td>
+	</tr>
+	
+	<%
+	}
+		}
+		  }
+		%>	
 
 	
 
