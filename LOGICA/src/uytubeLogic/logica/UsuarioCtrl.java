@@ -118,6 +118,16 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 	public void aniadirVideo(String nickU, String nombreV, String descripcionV, Integer duracionV,
 			DtFecha fechaPublicacion, String url, DtCategoria catE, Privacidad privacidadV) {
 		Usuario usuarioParticular = usuarioh.find(nickU);
+		System.out.println("la url es "+url);
+		if(url.contains("https://www.youtube.com/watch?v=")) {
+			System.out.println("contiene el watch");
+			url=url.replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/");
+			System.out.println("ahora es " +url);
+		}else if(url.contains("https://youtu.be/")) {
+			System.out.println("contiene el punto");
+			url=url.replace("https://youtu.be/" ,"https://www.youtube.com/embed/");
+			System.out.println("ahora es " + url);
+		}
 		usuarioParticular.aniadirVideo(nombreV, nickU, descripcionV, duracionV, fechaPublicacion, url, catE,
 				privacidadV);
 	}
