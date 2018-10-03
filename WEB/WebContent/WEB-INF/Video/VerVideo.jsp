@@ -69,7 +69,6 @@
 	    	document.getElementById("agregar_lista_button").style.display = "none";
 	    	document.getElementById("tabla_para_comentar").style.display = "none";
 		}//si no está loggeado, no muestra estos elementos.
-
 	}
 
 	function me_gusta_script() {
