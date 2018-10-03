@@ -49,20 +49,26 @@
     <%@include file = "../cosasComunesDelHead.jsp" %>
     <meta charset="ISO-8859-1">
 	<link rel="stylesheet" href="media/styles/VerVideo.css">
-	<title><%=titulo%></title>
-<script type="text/javascript">
+	<title><%=titulo%></title>	
+	<script type="text/javascript">
+	window.onload=function(){
+		document.getElementById("like_button").addEventListener("click", me_gusta_script);
+		document.getElementById("dislike_button").addEventListener("click", no_me_gusta_script);
+		document.getElementById("seguir_button").addEventListener("click",seguir_script);
+		document.getElementById("response_button").addEventListener("click",comentar_video);
+	}
+
 	function me_gusta_script() {
+		console.log("acabo de dar like");
 		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200) {
 				window.alert("me gusta");
 			}
 		};
-		String
-		operacion = "likeVideo?id_video=" + id_video + "&opcion=likeVideo";
-		xhttp.open("GET", "likeVideo?id_video=" + id_video + "&opcion=likeVideo",
-				true);
+		xhttp.open("GET", "likeVideo?id_video="+<%=id_video%>+"&opcion=likeVideo",true);
 		xhttp.send();
+		console.log("ya envíe la request");
 	}
 	
 	function no_me_gusta_script() {
@@ -73,8 +79,7 @@
 			}
 		};
 		String
-		operacion = "dislikeVideo?id_video=" + id_video + "&opcion=dislikeVideo";
-		System.out.println("operacion");
+		operacion = "dislikeVideo?id_video="+<%=id_video%>+"&opcion=dislikeVideo";
 		xhttp.open("GET", operacion, true);
 		xhttp.send();
 	}
@@ -85,8 +90,7 @@
 	
 	function seguir_script() {
 		var xhttp = new XMLHttpRequest();
-		xhttp.open("GET", "/follow?usuario_a_seguir=" + propietario
-				+ "&opcion=follow", true);
+		xhttp.open("GET", "/follow?usuario_a_seguir=<%=propietario%>&opcion=follow", true);
 		xhttp.send();
 	}
 	
@@ -97,10 +101,8 @@
 				document.getElementById("demo").innerHTML = this.responseText;
 			}
 		};
-		String
-		contenido = document.getElementById("comentario_a_comentar");
-		xhttp.open("GET", "/newComment?id_video=" + id_video
-				+ "&opcion=comment&contenido=" + contenido, true);
+		var contenido = document.getElementById("comentario_a_comentar").value;
+		xhttp.open("GET", "/newComment?id_video="+<%=id_video%>+"&opcion=comment&contenido=" + contenido, true);
 		xhttp.send();
 	}
 	
@@ -120,26 +122,23 @@
 		    alert("Url incorrecta");
 		}
 	}
-	//se supone que tiene que cargar el video en la frame.
-    window.onload = function() {
-        document.getElementById('frame').src = youtube_parser(<%=url_video%>);
-    }
-</script>	
+
+</script>
 </head>
 <body >
 	<p id="titulo"><%=titulo%></p><br> 
 	
-	<iframe style="width:100%" height="430px" id="frame" src=""></iframe><br>
+	<iframe style="width:100%" height="430px" id="frame" src="<%=url_video%>"></iframe><br>
 	<table style="width:100%">
 		<tr>
 			<th rowspan="2" width="10%"><img id="logo" src=<%=url_logo_autor%> width="100px" height="70px" onclick="ir_a_perfil(<%=propietario%>)"></img></th>
 			<th class="texto_simple" id="nombre_autor" width="30%"><%=nombre_canal%></th>
 			<th rowspan="2" class="right_left_separators"  id="fecha_publicacion" width="30%"><p class="texto_simple"><%=dia%>/<%=mes%>/<%=anio%></p></th>
 			<th rowspan="2" class="botones_like_dislike" width="30%">
-				<button class="like_dislike_button" style="width:50%" id="like_button" onclick="me_gusta_script()">  Me gusta  </button><button class="like_dislike_button" style="width:50%" id="dislike_button" name="opcion" value="dislikeVideo" onclick="no_me_gusta_script()">No me gusta </button></th>
+				<button class="like_dislike_button" style="width:50%" id="like_button">  Me gusta  </button><button class="like_dislike_button" style="width:50%" id="dislike_button" name="opcion" value="dislikeVideo">No me gusta </button></th>
 		</tr>
 		<tr>
-			<th><button id="seguir_button" name="boton_seguir" value="Seguir" onclick="seguir_script()">Seguir</button></th>
+			<th><button id="seguir_button" name="boton_seguir" value="Seguir">Seguir</button></th>
 		</tr>
 		<tr>
 			<th  class="encapsulated_border" colspan="4" class="descripcion"><p align="left"><%=descripcion%></p></th>
