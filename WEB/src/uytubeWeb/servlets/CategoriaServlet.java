@@ -39,7 +39,7 @@ public class CategoriaServlet extends HttpServlet {
 		Fabrica fabrica=Fabrica.getInstance();
 		IVideoCtrl interfazVideos = fabrica.getIVideoCtrl();
 		 
-		
+		System.out.println("estoy en categoria servlet GET");
 		
 		
 		switch(action) 
@@ -62,6 +62,16 @@ public class CategoriaServlet extends HttpServlet {
 				
 				
 			};break;
+			
+			case "listarEmbed":{
+				System.out.println("estoy aqui aqui para quereerte");
+				DtCategoria[] categorias = interfazVideos.listarCategorias();
+				response.getWriter().append("<ul>");
+				for(DtCategoria entry:categorias) {
+					response.getWriter().append("<li><a href='consult?action=consult&type="+entry.getNombre()+"'>"+entry.getNombre()+"</a> </li>");
+				}
+				response.getWriter().append("</ul>");
+			}
 		
 		}
 		

@@ -11,12 +11,35 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<link rel="stylesheet" href="/media/styles/Busqueda.css">
+<style>table{
+	width: 100%;
+	table-layout: fixed;
+}
+th {
+	color: white;
+	padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    background-color: #ff0000;
+    color: white;
+    vertical-align: text-top;
+}
+td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+tr:nth-child(even) {background-color: #f2f2f2;}</style>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Resultados De Busqueda</title>
+<div><%@include file="buscador.jsp" %></div>
 </head>
 <body>
-<div><%@include file="buscador.jsp" %></div>
+
+
+<button onclick="toggleVideos()">Ver/Ocultar Videos</button>
+<button onclick="toggleListas()">Ver/Ocultar Listas</button>
+<button onclick="toggleCanales()">Ver/Ocultar Canales</button>
 <div class="main">	
 	
 	Ordenar por:
@@ -45,7 +68,7 @@
 			request.setAttribute("IDVideo", entry.getIDVideo().toString());
 			request.setAttribute(nombreV, nombreV);
 	%>
-	<tr>
+	<tr class="videoRow">
 	<td>Video
 	<form action="watch" method="get"> 
 	<input type="hidden" name="opcion" value="ver">
@@ -67,7 +90,7 @@
 	if(request.getAttribute("listas")!=null){
 		DtListaReproduccion[] listas=(DtListaReproduccion[]) request.getAttribute("listas");
 		for(DtListaReproduccion entry: listas){%>
-	<tr>
+	<tr class="listaRow">
 	<td>Lista de Reproduccion
 	<form action="watch" method="get"> 
 	<input type="hidden" name="opcion" value="consulta">
@@ -87,7 +110,7 @@
 	if(request.getAttribute("canales")!=null){
 		for(DtCanal entry:(DtCanal[])request.getAttribute("canales")){
 			%>
-		<tr>
+		<tr class="canalRow">
 		<td>Canal
 	<form action="profile" method="get"> 
 	<input type="hidden" name="opcion" value="Perfil">
@@ -108,6 +131,43 @@
 
 </div>
 <script>
+function toggleVideos(){
+	var x = document.getElementsByClassName("videoRow");
+	if(x[0].style.display != "none"){
+	for(i=0 ; i < x.length ; i++){
+		x[i].style.display = "none";
+	}
+	}else{
+	for(i=0 ; i < x.length ; i++){
+		x[i].style.display = "table-row";
+	}
+	}
+}
+function toggleListas(){
+var x = document.getElementsByClassName("listaRow");
+	if(x[0].style.display != "none"){
+	for(i=0 ; i < x.length ; i++){
+		x[i].style.display = "none";
+	}
+	}else{
+	for(i=0 ; i < x.length ; i++){
+		x[i].style.display = "table-row";
+	}
+	}
+	
+}
+function toggleCanales(){
+var x = document.getElementsByClassName("canalRow");
+	if(x[0].style.display != "none"){
+	for(i=0 ; i < x.length ; i++){
+		x[i].style.display = "none";
+	}
+	}else{
+	for(i=0 ; i < x.length ; i++){
+		x[i].style.display = "table-row";
+	}
+	}
+}
 function sortTable() {
 	var selected = document.getElementById("Ordenar").value;
   var table, rows, switching, i, x, y, shouldSwitch;

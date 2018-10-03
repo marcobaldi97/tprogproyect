@@ -63,7 +63,7 @@ public class VideoServlet extends HttpServlet {
 	}
 
 	private void crearVideo(String nomVideo, String duracion, String url, String fecha, String categoria,
-			String descripcionV, HttpServletResponse response) {
+			String descripcionV) {
 		System.out.println("estoy creando el video");
 		Fabrica fabrica = Fabrica.getInstance();
 		IUsuarioCtrl usrCtrl = fabrica.getIUsuarioCtrl();
@@ -72,13 +72,7 @@ public class VideoServlet extends HttpServlet {
 		DtFecha fechaPublicacionV = new DtFecha(ParseFecha(fecha));
 		DtCategoria catV = new DtCategoria(categoria);
 		usrCtrl.aniadirVideo("horacio", nomVideo, descripcionV, (Integer.parseInt(duracion)), fechaPublicacionV, url,
-				catV, Privacidad.PUBLICO);
-		try {
-			response.sendRedirect("/UyTubeWeb/AltaVideo.jsp");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+				catV, Privacidad.PRIVADO);
 
 	}
 
@@ -201,7 +195,8 @@ public class VideoServlet extends HttpServlet {
 			String categoria = request.getParameter("categoria");
 			String descVideo = request.getParameter("descVideo");
 			if (nombreVideo != "" && duracionVideo != "" && urlVideo != "" && fechaVideo != "" && descVideo != "") {
-				crearVideo(nombreVideo, duracionVideo, urlVideo, fechaVideo, categoria, descVideo, response);
+				crearVideo(nombreVideo, duracionVideo, urlVideo, fechaVideo, categoria, descVideo);
+				response.sendRedirect(request.getContextPath() + "/home");
 			} else {
 				response.getWriter().append("Error, verifique que los campos no esten vacíos");
 			}

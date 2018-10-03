@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="media/styles/home.css">
 <title>UyTube!</title>
 </head>
-<body onload="checkLogin()">
+<body>
 <div class="topnav">
 <a id=loginlogout></a>
   	<form action="search" method="get">
@@ -20,7 +20,6 @@
 
 <script>
 
-    function checkLogin() {
       var xhttp = new XMLHttpRequest();
       xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
@@ -29,7 +28,7 @@
       };
       xhttp.open("POST", "login?opcion=checkLogin", true);
       xhttp.send();
-    }</script>
+    </script>
 </body>
 
 </html>
