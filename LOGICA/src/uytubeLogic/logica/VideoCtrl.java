@@ -96,11 +96,8 @@ public class VideoCtrl implements IVideoCtrl {
 		return CatHandler.isMember(nombreCat);
 	}
 
-	@Override
-	public DtListaReproduccion[] listarLDRPublicasPorNombre(String nombre) {
-		VideoHandler VidHandler = VideoHandler.getInstance();
-		return VidHandler.listarLDRPublicasPorNombre(nombre);
-	}
+	
+	
 
 	@Override
 	public DtVideo[] listarVideosPublicosPorNombre(String nombre) {

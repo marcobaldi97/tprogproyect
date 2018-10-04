@@ -91,6 +91,8 @@ public interface IUsuarioCtrl {
 	
 	public abstract DtListaReproduccion[] infoLDRdeUsuario(String nickU,Privacidad priv);
 	
+	public abstract DtListaReproduccion[] listarLDRPublicasPorNombre(String nombre);
+	
 	public abstract boolean verificarLogin(String nick,String pass);
 	
 }

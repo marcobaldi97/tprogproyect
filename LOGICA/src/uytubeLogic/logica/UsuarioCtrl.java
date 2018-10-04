@@ -1,5 +1,9 @@
 package uytubeLogic.logica;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import uytubeLogic.logica.SystemHandler.Privacidad;
 
 public class UsuarioCtrl implements IUsuarioCtrl {
@@ -211,6 +215,10 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 	public String[] listarLDRParticularesdeUsuario(String nickname) {
 		Usuario usuarioParticular = usuarioh.find(nickname);
 		return usuarioParticular.listarLDRParticularesdeUsuario();
+	}
+	public DtListaReproduccion[] listarLDRPublicasPorNombre(String nombre) {
+		
+		return usuarioh.listarLDRPublicasPorNombre(nombre);
 	}
 
 	@Override
