@@ -66,6 +66,7 @@
 	    	document.getElementById("dislike_button").addEventListener("click", no_me_gusta_script);
 	    	document.getElementById("seguir_button").addEventListener("click",seguir_script);
 	    	document.getElementById("response_button").addEventListener("click",comentar_video);
+	    	document.getElementById("listasUsuarioLogged").addEventListener("click",agregar_lista_script);
 		}else{
 	    	document.getElementById("like_button").style.display = "none";
 	    	document.getElementById("dislike_button").style.display = "none";
@@ -74,7 +75,6 @@
 	    	document.getElementById("tabla_para_comentar").style.display = "none";
 		}//si no está loggeado, no muestra estos elementos.
 	}
-
 	function me_gusta_script() {
 		console.log("acabo de dar like");
 		var xhttp = new XMLHttpRequest();
