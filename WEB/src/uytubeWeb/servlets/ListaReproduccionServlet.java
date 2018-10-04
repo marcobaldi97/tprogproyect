@@ -86,16 +86,8 @@ public class ListaReproduccionServlet extends HttpServlet {
 				 DtListaReproduccion[] listas=interfazUsuario.listarLDRPublicasPorNombre("");
 				 request.setAttribute("listarListasReproduccion", listas);
 				 request.getRequestDispatcher("/WEB-INF/Lista Reproduccion/consultaListaReproduccion.jsp").forward(request, response);
+
 			};break;
-			
-			case "nuevaLDR":{
-				
-				if(session!=null && session.getAttribute("nombre_usuario")!=null) {
-					request.getRequestDispatcher("WEB-INF/Lista Reproduccion/CrearListaParticular.jsp").forward(request, response);
-				}else {
-					response.sendRedirect(request.getContextPath() + "/home");
-				}
-			}
 			
 			case "agregarVideoALista":{
 				session=request.getSession(false);
@@ -108,6 +100,15 @@ public class ListaReproduccionServlet extends HttpServlet {
 				break;
 			}
 
+			
+			case "nuevaLDR":{
+				
+				if(session!=null && session.getAttribute("nombre_usuario")!=null) {
+					request.getRequestDispatcher("WEB-INF/Lista Reproduccion/CrearListaParticular.jsp").forward(request, response);
+				}else {
+					response.sendRedirect(request.getContextPath() + "/home");
+				}
+			}
 		}
 		
 		response.getWriter().append("Served at: ").append(request.getContextPath());

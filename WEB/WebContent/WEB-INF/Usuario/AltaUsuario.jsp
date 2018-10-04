@@ -19,7 +19,7 @@
     <div class="main-content">
     	<form class="alta-usuario-form" action="newUser" method ="post">
             Nickname:<br>
-            <input type="text" name="nickname" id="nickname" ><br>
+            <input type="text" name="nickname" id="nickname" onblur="comprobarDisponibilidadUsr()" ><br>
             Correo electronico:<br>
             <input type="email" name="email" id="email" onblur="comprobarDisponibilidadUsr()"><br>
             <p id="disponible"></p>
@@ -37,17 +37,16 @@
 	                xhttp.open("POST", "newUser?opcion=checkDispUsr&nickname="+document.getElementById("nickname").value+"&email="+document.getElementById("email").value, true);
 	                xhttp.send();	                
 	            }
-           		 
+           		
        	        function comprobarFormulario(frm){
        	     	var xhttp2 = new XMLHttpRequest();
                 xhttp2.onreadystatechange = function () {
                   if (this.readyState == 4 && this.status == 200) {
-                	 alert(this.responseText);
-                	
+                	  document.getElementById("error").innerHTML = this.responseText;
                   }
-                };
-                xhttp2.open("POST", "newUser?opcion=nuevoUsuario&nickname="+document.getElementById("nickname").value+"&email="+document.getElementById("email").value+"&pass1="+ document.getElementById("pass1").value
-                		+"&pass2="+ document.getElementById("pass2").value, true);
+                }; 
+                xhttp2.open("POST", "newUser?opcion=nuevoUsuario&nickname="+document.getElementById("nickname").value+"&email="+document.getElementById("email").value+"&contrasenia="+ document.getElementById("contrasenia").value
+                		+"&contraseniaConfirmacion="+ document.getElementById("contraseniaConfirmacion").value, true);
                 xhttp2.send();
                	 }
        	     </script>
@@ -57,9 +56,9 @@
             <input type="text" name="apellido"><br>
             Contraseña:<br>
             
-            <input type="password" id="pass1" name="contrasenia"><br>
+            <input type="password" id="contrasenia" name="contrasenia"><br>
             Confirmar Contraseña:<br>
-            <input type="password" id="pass2" name="contraseniaConfirmacion"><br>
+            <input type="password" id="contraseniaConfirmacion" name="contraseniaConfirmacion"><br>
 			<a id=correctaPass></a>
             
             <script type="text/javascript" src="fechaInput.js"></script>
@@ -76,6 +75,7 @@
             <input type="radio" name="privacidad" value="PUBLICO">Publico<br>
             Categoria(opcional)<br>
             <select name="categoria">
+         		   
                		<%
 					Fabrica fabrica = Fabrica.getInstance();
 					IVideoCtrl videoCtr = fabrica.getIVideoCtrl();
@@ -89,7 +89,7 @@
       				%>
                     <%=opciones %>
               </select><br />
-			
+			 <p id="error"></p>
             <button id="crearUsuario" name="opcion" value="nuevoUsuario" onclick="return comprobarFormulario()">Crear</button>
         	
 
