@@ -162,6 +162,7 @@ public class UsuarioServlet extends HttpServlet {
 				response.getWriter().append("<a href=\"newVideo?opcion=altaVideo\">Nuevo Video</a>");
 				response.getWriter().append("<a href=\"newPlaylist?action=nuevaLDR\">Nueva Lista</a>");
 			}
+			
 			break;
 		}
 		case "follow":{
