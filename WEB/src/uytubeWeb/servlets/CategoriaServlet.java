@@ -53,6 +53,7 @@ public class CategoriaServlet extends HttpServlet {
 				request.setAttribute("listas", listaReproduccion);
 				//una pequeña pruebita
 				//request.getRequestDispatcher("/WEB-INF/Categoria/consultaCategoria.jsp").forward(request, response);
+				request.setAttribute("titulo", "Consulta de Categoria");
 				request.getRequestDispatcher("WEB-INF/Busqueda.jsp").forward(request, response);
 			};break;
 			case "list":{

@@ -31,7 +31,7 @@ td {
 }
 tr:nth-child(even) {background-color: #f2f2f2;}</style>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Resultados De Busqueda</title>
+<title><%=request.getAttribute("titulo") %></title>
 <div><%@include file="buscador.jsp" %></div>
 </head>
 <body>

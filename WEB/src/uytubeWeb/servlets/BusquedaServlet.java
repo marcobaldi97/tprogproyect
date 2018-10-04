@@ -84,7 +84,7 @@ public class BusquedaServlet extends HttpServlet {
 		request.setAttribute(parametroVideos, videos);
 		
 		DtVideo[] videoA=(DtVideo[]) request.getAttribute(parametroVideos);
-		
+		request.setAttribute("titulo", "Resultados de Busqueda");
 		request.getRequestDispatcher("/WEB-INF/Busqueda.jsp").forward(request, response);
 	}
 
