@@ -7,13 +7,14 @@
 <title>Crear Lista Particular</title>
 </head>
 <body>
-	<form>
+	<form action="newPlaylist" method="post">
 	  Nombre de la lista<br>
 	  <input type="text" name="nombreLista"><br>
 	  Privacidad<br>
 	  <input type="radio" name="grupoPrivacidad" value="Publico" checked>Publico<br>
 	  <input type="radio" name="grupoPrivacidad" value="Privado">Privado<br>
-	  <button id="botonCrear" value="crearListaRP" >Crear</button>
+	  <input type="hidden" name="action" value="crearLDR">
+	  <button type="submit">Crear</button>
 	  </form>
 </body>
 </html>

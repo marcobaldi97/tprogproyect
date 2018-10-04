@@ -65,6 +65,21 @@ public class UsuarioHandler {
 		DtCanal[] resultadosBusqueda=listaUsuarios.toArray(new DtCanal[0]);
 		return resultadosBusqueda;
 	}
+	
+	public DtListaReproduccion[] listarLDRPublicasPorNombre(String nombre) {
+		List<DtListaReproduccion> listaLDR = new ArrayList<DtListaReproduccion>();
+		for (Map.Entry<String, Usuario> entry : usuarios.entrySet()) {
+			DtListaReproduccion[] listasEnVideo = entry.getValue().getListas();
+			for (DtListaReproduccion lista : listasEnVideo) {
+				if (lista.getPrivado() == Privacidad.PUBLICO && lista.getNombre().contains(nombre) && !listaLDR.contains(lista)) {
+					System.out.println("agregue algo wii");
+					listaLDR.add(lista);
+				}
+			}
+		}
+		DtListaReproduccion[] resultadosBusqueda = listaLDR.toArray(new DtListaReproduccion[0]);
+		return resultadosBusqueda;
+	}
 
 	public static UsuarioHandler getInstance() {
 		if (instancia == null)

@@ -27,9 +27,7 @@ public interface IVideoCtrl {
 	public abstract void crearCategoria(String nombreCat);
 
 	public abstract boolean existeCategoria(String nombreCat);
-	
-	public abstract DtListaReproduccion[] listarLDRPublicasPorNombre(String nombre);
-	
+		
 	public abstract DtVideo[] listarVideosPublicosPorNombre(String nombre);
 
 
