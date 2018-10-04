@@ -19,7 +19,7 @@
 
 
 <div class="topnav">
-<a href="home"id="homeButton"><img src="media/images/Logo.jpg" height="70" width="150" alt="Home"></a>
+<a href="home"id="homeButton"><img src="media/images/Logo.png" height="70" width="150" alt="Home"></a>
 <a id=loginlogout></a>
   	<form action="search" method="get">
   		<button type="submit">Mandale Mecha!</button>
