@@ -31,7 +31,7 @@ td {
 }
 tr:nth-child(even) {background-color: #f2f2f2;}</style>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Resultados De Busqueda</title>
+<title><%=request.getAttribute("titulo") %></title>
 <div><%@include file="buscador.jsp" %></div>
 </head>
 <body>
@@ -92,8 +92,10 @@ tr:nth-child(even) {background-color: #f2f2f2;}</style>
 		for(DtListaReproduccion entry: listas){%>
 	<tr class="listaRow">
 	<td>Lista de Reproduccion
-	<form action="watch" method="get"> 
-	<input type="hidden" name="opcion" value="consulta">
+	<form action="playlist" method="get"> 
+	<input type="hidden" name="action" value="details">
+	<input type="hidden" name="nameList" value="<%=entry.getNombre() %>">
+	<input type="hidden" name="ownerList" value="<%=entry.getPropietario() %>">
 	<input type="submit" value="Ver Info"> </form> 
 	</td>
 	<td id="NombreTD"><%=entry.getNombre()%></td>
