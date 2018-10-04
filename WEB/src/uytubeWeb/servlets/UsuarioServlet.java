@@ -6,7 +6,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,8 +22,10 @@ import uytubeLogic.logica.DtCanal;
 import uytubeLogic.logica.DtFecha;
 import uytubeLogic.logica.DtListaReproduccion;
 import uytubeLogic.logica.DtUsuario;
+import uytubeLogic.logica.DtVideo;
 import uytubeLogic.logica.Fabrica;
 import uytubeLogic.logica.IUsuarioCtrl;
+import uytubeLogic.logica.IVideoCtrl;
 import uytubeLogic.logica.SystemHandler.Privacidad;
 
 /**
@@ -121,13 +126,38 @@ public class UsuarioServlet extends HttpServlet {
 		case "Perfil":{
 			String nickname = (String)request.getParameter("nickname");
 			Fabrica fabrica=Fabrica.getInstance();
-			IUsuarioCtrl usuarioController = fabrica.getIUsuarioCtrl();
+			IUsuarioCtrl interfazUsuarios = fabrica.getIUsuarioCtrl();
+			
+			
 			System.out.println("estoy yendo a consultar a " + nickname);
-			DtCanal infoCanal = usuarioController.mostrarInfoCanal(nickname);
-			DtUsuario usuario = usuarioController.listarDatosUsuario(nickname);
+			DtCanal infoCanal = interfazUsuarios.mostrarInfoCanal(nickname);
+			DtUsuario usuario = interfazUsuarios.listarDatosUsuario(nickname);
 			request.setAttribute("dataCanal", infoCanal);
 			request.setAttribute("dataUsuario", usuario);
-						        
+		
+			DtListaReproduccion[] listas = interfazUsuarios.infoLDRdeUsuario(nickname, Privacidad.PRIVADO);
+		    DtVideo[] videos = interfazUsuarios.infoVideosCanal(nickname, Privacidad.PUBLICO);
+	        HttpSession session=request.getSession(false);
+	        if(session!=null) {
+	            String login=(String)session.getAttribute("nombre_usuario");
+	            if(login!=null) {
+	                System.out.println("hay un usuario logueado");
+	                DtVideo[] videosPrivadosSesion=interfazUsuarios.infoVideosCanal(login, Privacidad.PRIVADO);
+	                DtListaReproduccion[] listasPrivadasSesion=interfazUsuarios.infoLDRdeUsuario(login, Privacidad.PRIVADO);
+	                List<DtVideo> videosAux= new ArrayList<DtVideo>(Arrays.asList(videos));
+	                videosAux.addAll(Arrays.asList(videosPrivadosSesion));
+	                videos=videosAux.toArray(new DtVideo[0]);
+	                List<DtListaReproduccion> listasAux = new ArrayList<DtListaReproduccion>(Arrays.asList(listas));
+	                listasAux.addAll(Arrays.asList(listasPrivadasSesion));
+	                listas=listasAux.toArray(new DtListaReproduccion[0]);
+	            }
+	        }
+	        String parametroListas="listas";
+	        String parametroVideos="videos";
+
+	        request.setAttribute(parametroListas, listas);
+	        request.setAttribute(parametroVideos, videos);
+
 			request.getRequestDispatcher("WEB-INF/Usuario/ConsultaUsuario.jsp").forward(request, response);
 			
 			break;
