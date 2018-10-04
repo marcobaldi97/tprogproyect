@@ -60,23 +60,16 @@ public class ListaReproduccionServlet extends HttpServlet {
 				 {
 					 request.setAttribute("nicknameLogin", null);
 
-				 } 
-				
+				 } 	
 				String nombreLista = request.getParameter("nameList");
 				String propietarioLista = request.getParameter("ownerList");
 				DtVideo[] videosLista=interfazUsuario.obtenerDtsVideosListaReproduccionUsuario(propietarioLista, nombreLista);
 				DtListaReproduccion infoLista = interfazUsuario.infoAdicLDR(propietarioLista, nombreLista);
 				request.setAttribute("videosLista", videosLista);
 				request.setAttribute("infoLista", infoLista);
-				request.getRequestDispatcher("/WEB-INF/Lista Reproduccion/detallesListaReproduccion.jsp").forward(request, response);
-
-
-
-				
+				request.getRequestDispatcher("/WEB-INF/Lista Reproduccion/detallesListaReproduccion.jsp").forward(request, response);	
 			};break;
 			case "list":{
-				
-				
 				 if(session!=null) {
 			            String login=(String)session.getAttribute("nombre_usuario");
 			            if(login!=null) {
@@ -93,10 +86,17 @@ public class ListaReproduccionServlet extends HttpServlet {
 				 DtListaReproduccion[] listas=interfazVideos.listarLDRPublicasPorNombre("");
 				 request.setAttribute("listarListasReproduccion", listas);
 				 request.getRequestDispatcher("/WEB-INF/Lista Reproduccion/consultaListaReproduccion.jsp").forward(request, response);
-				
-				
 			};break;
-		
+			case "agregarVideoALista":{
+				session=request.getSession(false);
+	            if(session!=null && session.getAttribute("nombre_usuario")!=null) {
+	            	String usuario_logged = (String) session.getAttribute("nombre_usuario");
+	            	Integer id_video = Integer.parseInt(request.getParameter("id_video"));
+					String nombre_lista = request.getParameter("nombre_lista");
+					interfazUsuario.agregarVideoLista(usuario_logged, id_video, nombre_lista);
+	            }
+				break;
+			}
 		}
 		
 		response.getWriter().append("Served at: ").append(request.getContextPath());
