@@ -66,7 +66,7 @@
 	    	document.getElementById("dislike_button").addEventListener("click", no_me_gusta_script);
 	    	document.getElementById("seguir_button").addEventListener("click",seguir_script);
 	    	document.getElementById("response_button").addEventListener("click",comentar_video);
-	    	document.getElementById("listasUsuarioLogged").addEventListener("click",agregar_lista_script);
+	    	document.getElementById("listasUsuarioLogged").addEventListener("click",agregar_lista_script);//lalaland
 		}else{
 	    	document.getElementById("like_button").style.display = "none";
 	    	document.getElementById("dislike_button").style.display = "none";
