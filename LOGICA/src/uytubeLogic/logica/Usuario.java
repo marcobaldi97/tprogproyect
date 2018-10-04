@@ -226,5 +226,9 @@ public class Usuario {
 		
 		return canalPropio.infoLDRdeUsuario(priv);
 	}
+	
+	public DtListaReproduccion[] getListas() {
+		return canalPropio.getListas();
+	}
 
 }

@@ -158,10 +158,11 @@ public class UsuarioServlet extends HttpServlet {
 			String nomUsu=(String)request.getSession().getAttribute("nombre_usuario");
 			if(nomUsu==null) {
 			
-			}else
-				response.getWriter().append("<a href=\"newVideo?opcion=altaVideo\">nuevoVideo</a>");
-			
+			}else {
+				response.getWriter().append("<a href=\"newVideo?opcion=altaVideo\">Nuevo Video</a>");
+				response.getWriter().append("<a href=\"newPlaylist?action=nuevaLDR\">Nueva Lista</a>");
 			break;
+			}
 		}
 		case "follow":{
 			HttpSession session=request.getSession();

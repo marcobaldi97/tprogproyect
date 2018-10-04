@@ -90,12 +90,21 @@ public class ListaReproduccionServlet extends HttpServlet {
 					 request.setAttribute("listasPrivadasSesion", null);
 				 }	 
 				
-				 DtListaReproduccion[] listas=interfazVideos.listarLDRPublicasPorNombre("");
+				 DtListaReproduccion[] listas=interfazUsuario.listarLDRPublicasPorNombre("");
 				 request.setAttribute("listarListasReproduccion", listas);
 				 request.getRequestDispatcher("/WEB-INF/Lista Reproduccion/consultaListaReproduccion.jsp").forward(request, response);
 				
 				
 			};break;
+			
+			case "nuevaLDR":{
+				
+				if(session!=null && session.getAttribute("nombre_usuario")!=null) {
+					request.getRequestDispatcher("WEB-INF/Lista Reproduccion/CrearListaParticular.jsp").forward(request, response);
+				}else {
+					response.sendRedirect(request.getContextPath() + "/home");
+				}
+			}
 		
 		}
 		
@@ -107,7 +116,30 @@ public class ListaReproduccionServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		String action = request.getParameter("action");
+		Fabrica fabrica=Fabrica.getInstance();
+		IVideoCtrl interfazVideos = fabrica.getIVideoCtrl();
+		IUsuarioCtrl interfazUsuario = fabrica.getIUsuarioCtrl();
+		HttpSession session=request.getSession(false);
+		
+		switch(action) {
+		case "crearLDR":{
+			if(session!=null && session.getAttribute("nombre_usuario")!=null) {
+				System.out.println((String)session.getAttribute("nombre_usuario"));
+				System.out.println(request.getParameter("nombreLista"));
+				if(request.getParameter("grupoPrivacidad").equals("Publico")) {
+					interfazUsuario.nuevaListaParticular((String)session.getAttribute("nombre_usuario"), request.getParameter("nombreLista"), Privacidad.PUBLICO);
+					response.sendRedirect(request.getContextPath() + "/playlist?action=list");
+				}else {
+					interfazUsuario.nuevaListaParticular((String)session.getAttribute("nombre_usuario"), request.getParameter("nombreLista"), Privacidad.PRIVADO);
+					response.sendRedirect(request.getContextPath() + "/playlist?action=list");
+				}
+				System.out.println("creada la LDR");
+			}else {
+				response.sendRedirect(request.getContextPath() + "/home");
+			}
+		}
+		}
 	}
 
 }
