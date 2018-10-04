@@ -4,11 +4,15 @@
 <%@ page import = "uytubeLogic.logica.DtCategoria"%>
 <%@ page import = "uytubeLogic.logica.DtFecha"%>
 <%@ page import = "uytubeLogic.logica.DtCanal"%>
+<%@page import="uytubeLogic.logica.DtListaReproduccion"%>
 <%@ page import = "uytubeLogic.logica.DtUsuario"%>
 <%@ page import = "uytubeLogic.logica.Fabrica"%>
 <%@ page import = "uytubeLogic.logica.IUsuarioCtrl"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.text.DateFormat"%>
 <%@page import="java.util.Base64"%>
 <%@ page import = "java.util.Date"%>
+<%@page errorPage="error404.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -19,6 +23,7 @@
 	
     <title>Consulta Usuario</title>
 </head>
+
 <body>
 <% 
 	DtUsuario dataUsuario = (DtUsuario) request.getAttribute("dataUsuario");
@@ -97,12 +102,69 @@
             </div>
             <div class="tabdiv" id="tabdiv-1">
                 Videos del canal del usuario
-                (cuando selecciona un video, ir a consulta video)
+                <table id="TablaContenidos2">
+					<tr>
+					<th valign="top"> Nombre </th>
+					<th valign="top"> Descripcion </th>
+					<th valign="top"> </th>
+					</tr>
+                	</tr>
+						<%
+						DtVideo[] vid = (DtVideo[]) request.getAttribute("videos");
+						for (DtVideo entry : vid) {
+							String nombreV=entry.getNombre();
+							String descV=entry.getDescripcion();
+							String propietarioV = entry.getPropietario();
+							request.setAttribute("IDVideo", entry.getIDVideo().toString());
+							request.setAttribute(nombreV, nombreV);
+						%>
+					<tr class="videoRow">
+					<td id="NombreTD"><%=nombreV%></td>
+					<td id="DescripcionTD"><%=descV %></td>
+					<td>
+					<form action="watch" method="get"> 
+					<input type="hidden" name="opcion" value="ver">
+					<input type="hidden" name="ID" value="<%=entry.getIDVideo()%>">
+					<input type="submit" value="Ver Ahora"> </form> 
+					</td>
+					</tr>
+					<% } %>
+					</table>
+                          (cuando selecciona un video, ir a consulta video)
                 (si es del usurio logeado puede modificar sus datos)
             </div>
             <div class="tabdiv" id="tabdiv-2">
-                Listas de reproduccion
-              
+               Listas de reproduccion
+           
+				<table id="TablaContenidos">
+					<tr>
+					<th valign="top"> Nombre </th>
+					<th valign="top"> Descripcion </th>
+					<th valign="top"> </th>
+					</tr>
+						<%
+						if(request.getAttribute("listas")!=null){
+							DtListaReproduccion[] listas=(DtListaReproduccion[]) request.getAttribute("listas");
+							for(DtListaReproduccion entry: listas){%>
+						<tr class="listaRow">
+						
+						<td id="NombreTD"><%=entry.getNombre()%></td>
+						<td id="DescripcionTD"></td>
+						<td>
+						<form action="watch" method="get"> 
+						<input type="hidden" name="opcion" value="consulta">
+						<input type="submit" value="Ver Info"> </form> 
+						</td>
+						</tr>
+						
+						<%	}
+						}
+						
+						%>
+						
+					</table>
+				
+
               
                 (como consulta de lista)
                 (si es del usurio logeado puede modificar sus datos)
@@ -110,6 +172,8 @@
         </td>
     </tr>   
  </table>
+ 
+
  </div>
  </div>
  </div>
