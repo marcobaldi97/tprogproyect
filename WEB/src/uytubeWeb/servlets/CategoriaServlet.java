@@ -51,8 +51,9 @@ public class CategoriaServlet extends HttpServlet {
 				DtListaReproduccion[] listaReproduccion=interfazVideos.listarLDRPorCategoria(categoria);
 				request.setAttribute("videos", videos);
 				request.setAttribute("listas", listaReproduccion);
-				request.getRequestDispatcher("/WEB-INF/Categoria/consultaCategoria.jsp").forward(request, response);
-				
+				//una pequeña pruebita
+				//request.getRequestDispatcher("/WEB-INF/Categoria/consultaCategoria.jsp").forward(request, response);
+				request.getRequestDispatcher("WEB-INF/Busqueda.jsp").forward(request, response);
 			};break;
 			case "list":{
 				
