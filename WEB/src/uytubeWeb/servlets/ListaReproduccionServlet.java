@@ -86,8 +86,22 @@ public class ListaReproduccionServlet extends HttpServlet {
 				 DtListaReproduccion[] listas=interfazUsuario.listarLDRPublicasPorNombre("");
 				 request.setAttribute("listarListasReproduccion", listas);
 				 request.getRequestDispatcher("/WEB-INF/Lista Reproduccion/consultaListaReproduccion.jsp").forward(request, response);
+<<<<<<< WEB/src/uytubeWeb/servlets/ListaReproduccionServlet.java
 			};break;
 
+=======
+			};break;
+			
+			case "nuevaLDR":{
+				
+				if(session!=null && session.getAttribute("nombre_usuario")!=null) {
+					request.getRequestDispatcher("WEB-INF/Lista Reproduccion/CrearListaParticular.jsp").forward(request, response);
+				}else {
+					response.sendRedirect(request.getContextPath() + "/home");
+				}
+			}
+			
+>>>>>>> WEB/src/uytubeWeb/servlets/ListaReproduccionServlet.java
 			case "agregarVideoALista":{
 				session=request.getSession(false);
 	            if(session!=null && session.getAttribute("nombre_usuario")!=null) {
@@ -98,6 +112,7 @@ public class ListaReproduccionServlet extends HttpServlet {
 	            }
 				break;
 			}
+<<<<<<< WEB/src/uytubeWeb/servlets/ListaReproduccionServlet.java
 			
 			case "nuevaLDR":{
 				
@@ -108,6 +123,9 @@ public class ListaReproduccionServlet extends HttpServlet {
 				}
 			}
 		
+=======
+
+>>>>>>> WEB/src/uytubeWeb/servlets/ListaReproduccionServlet.java
 		}
 		
 		response.getWriter().append("Served at: ").append(request.getContextPath());
