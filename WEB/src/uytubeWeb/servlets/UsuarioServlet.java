@@ -167,8 +167,11 @@ public class UsuarioServlet extends HttpServlet {
 			if(nomUsu==null) {
 				response.getWriter().append("<a href='login?opcion=login'>Iniciar Sesion</a>   ");
 				response.getWriter().append("<a href='newUser?opcion=nuevoUsuario'>Nuevo Usuario</a>");
-			}else
+			}else {
 				response.getWriter().append("<a href='login?opcion=logout'>Cerrar Sesion</a>");
+				response.getWriter().append("<a href='profile?opcion=Perfil&nickname="+nomUsu+"'>Hola, "+nomUsu+"</a>");
+				
+			}
 			break;
 		}
 		case "checkLoginSidebar" :{
