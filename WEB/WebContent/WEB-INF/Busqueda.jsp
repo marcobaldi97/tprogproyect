@@ -1,3 +1,4 @@
+<%@page import="java.util.Locale"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.text.DateFormat"%>
 <%@page import="uytubeLogic.logica.DtListaReproduccion"%>
@@ -49,6 +50,8 @@ tr:nth-child(even) {background-color: #f2f2f2;}</style>
 	</select>
 	<%
 	DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+	
+	DateFormat goodDf = new SimpleDateFormat("EEEEE dd MMMMM yyyy",Locale.getDefault());
 	if (request.getAttribute("videos") != null) {
 %>
 <table id="TablaContenidos">
@@ -78,7 +81,7 @@ tr:nth-child(even) {background-color: #f2f2f2;}</style>
 	<td id="NombreTD"><%=nombreV%></td>
 	<td id="DescripcionTD"><%=descV %></td>
 	<td id="PropietarioTD"><%=propietarioV %></td>
-	<td id="FechaTD"><%=entry.getFechaPublicacion().getFecha().toString() %></td>
+	<td id="FechaTD"><%=goodDf.format(entry.getFechaPublicacion().getFecha()) %></td>
 	<%String fechaHidden=df.format(entry.getFechaPublicacion().getFecha()); %>
 	<td style="display:none;"><%=fechaHidden%></td>
 	
