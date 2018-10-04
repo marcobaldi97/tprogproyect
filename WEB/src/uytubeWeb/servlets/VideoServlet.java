@@ -154,11 +154,13 @@ public class VideoServlet extends HttpServlet {
 			DtUsuario usuario_propietario = usrController.listarDatosUsuario(dataVideo.getPropietario());
 			request.setAttribute("usuario_propietario", usuario_propietario);
 			DtCanal canal_propietario = usrController.mostrarInfoCanal(dataVideo.getPropietario());
-
 			request.setAttribute("canal_propietario",canal_propietario);
 			HttpSession session=request.getSession(false);
             if(session!=null && session.getAttribute("nombre_usuario")!=null) {
             	request.setAttribute("logged" ,true);
+            	String usuarioLogged = (String) session.getAttribute("nombre_usuario");
+            	String[] listasReproduccionUsuarioLogged = usrController.listarLDRdeUsuario(usuarioLogged);
+            	request.setAttribute("listasReproduccionUsuarioLogged", listasReproduccionUsuarioLogged);
             }else request.setAttribute("logged" ,false);
 			request.getRequestDispatcher("/WEB-INF/Video/VerVideo.jsp").forward(request, response);
 			break;

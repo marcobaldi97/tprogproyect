@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" href="error404.css">
+	<link rel="stylesheet" href="media/styles/error404.css">
 	<meta charset="ISO-8859-1">
 <title>Error 404</title>
 </head>
