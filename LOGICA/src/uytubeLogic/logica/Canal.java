@@ -85,8 +85,8 @@ public class Canal {
 		descripcion = desc;
 		privacidadCanal = privacidadE;
 		propietario = proprietary;
-		if (catE != null) {
-			CategoriaHandler manejadorCategoria = CategoriaHandler.getInstance();
+		CategoriaHandler manejadorCategoria = CategoriaHandler.getInstance();
+		if (catE != null && manejadorCategoria.isMember(catE)) {
 			cate = manejadorCategoria.find(catE);
 		} else {
 			SystemHandler manejadorSistema = SystemHandler.getInstance();
@@ -294,5 +294,15 @@ public class Canal {
 			}
 		}
 		return listaLDR.toArray(new DtListaReproduccion[0]);
+	}
+
+	public DtListaReproduccion[] getListas() {
+		DtListaReproduccion[] listasADevolver = new DtListaReproduccion[listasReproduccion.size()];
+		int iterador = 0;
+		for (Map.Entry<String, ListaReproduccion> entry: listasReproduccion.entrySet()) {
+				listasADevolver[iterador] = entry.getValue().toDt();
+				iterador++;
+		}
+		return listasADevolver;
 	}
 }
