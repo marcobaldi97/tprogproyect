@@ -161,8 +161,9 @@ public class UsuarioServlet extends HttpServlet {
 			}else {
 				response.getWriter().append("<a href=\"newVideo?opcion=altaVideo\">Nuevo Video</a>");
 				response.getWriter().append("<a href=\"newPlaylist?action=nuevaLDR\">Nueva Lista</a>");
-			break;
 			}
+			
+			break;
 		}
 		case "follow":{
 			HttpSession session=request.getSession();
