@@ -37,12 +37,17 @@ tr:nth-child(even) {background-color: #f2f2f2;}</style>
 </head>
 <body>
 
-
+<%if (request.getAttribute("videos") != null) {%>
 <button onclick="toggleVideos()">Ver/Ocultar Videos</button>
+<%}
+if (request.getAttribute("listas") != null) { %>
 <button onclick="toggleListas()">Ver/Ocultar Listas</button>
+<%}
+if (request.getAttribute("canales") != null) { %>
 <button onclick="toggleCanales()">Ver/Ocultar Canales</button>
+
+<%} %>
 <div class="main">	
-	
 	Ordenar por:
 	<select id="Ordenar" class="icon-menu" onchange="sortTable()">
 		<option value=1>Nombre</option>
@@ -132,7 +137,7 @@ tr:nth-child(even) {background-color: #f2f2f2;}</style>
 	}
 	%>
 	</tr>
-</table>)
+</table>
 
 </div>
 <script>
