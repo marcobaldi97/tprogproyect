@@ -222,9 +222,9 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 	}
 
 	@Override
-	public DtCanal[] listarCanalesPorNombre(String nombre) {
+	public DtCanal[] listarCanalesPublicosPorNombre(String nombre) {
 
-		return usuarioh.listarCanalesPorNombre(nombre);
+		return usuarioh.listarCanalesPublicosPorNombre(nombre);
 	}
 
 	@Override

@@ -682,7 +682,7 @@ public class UsuarioCtrlTest {
 		UCU.nuevoUsuario(nombreU2,"1234", "Gimena", "Rodriguez", "www.cosoarroba4",fecha , null, "canalListarCanalesPublicos2", "descripcion2", Privacidad.PUBLICO, null);
 		UCU.nuevoUsuario(nombreU3,"1234", "Gimena", "Rodriguez", "www.cosoarroba4",fecha , null, "canalListarCanalesPublicos3", "descripcion2", Privacidad.PRIVADO, null);
 
-		DtCanal[] canalesResultados = UCU.listarCanalesPorNombre("canalListarCanalesPublicos");
+		DtCanal[] canalesResultados = UCU.listarCanalesPublicosPorNombre("canalListarCanalesPublicos");
 		assertEquals(2,canalesResultados.length);
 		boolean existe1=false,existe2=false;
 		for(DtCanal entry:canalesResultados) {
