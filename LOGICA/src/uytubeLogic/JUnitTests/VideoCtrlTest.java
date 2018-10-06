@@ -283,6 +283,28 @@ public class VideoCtrlTest {
 		VideoCtrl VCU=VideoCtrl.getInstance();
 		assertEquals(false, VCU.existeCategoria("noExiste"));
 	}
-
+	
+	@Test
+	public void testListarVideosPublicosPorNombreEInfoVideoPorPrivacidad() {
+		UsuarioCtrl UCU=UsuarioCtrl.getInstance();
+		VideoCtrl VCU=VideoCtrl.getInstance();
+		DtFecha fecha=new DtFecha(new Date(0));
+		String nombreU="nombreLVPPN1";
+		String nombreU2="nombreLVPN2";
+		String nombreV1Publico="nombreVLVPPN1";
+		String nombreV2Privado="nombreVLVPPN2";
+		String nombreV3Publico="nombreVLVPPN3";
+		UCU.nuevoUsuario(nombreU,"1234", "Jose", "Ramirez", "www.cosoarroba3",fecha , null, "canal", "descripcion", Privacidad.PUBLICO, null);
+		UCU.nuevoUsuario(nombreU2,"1234", "Gimena", "Rodriguez", "www.cosoarroba4",fecha , null, "canal2", "descripcion2", Privacidad.PUBLICO, null);
+		UCU.aniadirVideo(nombreU, nombreV1Publico, "descrito1", 40, fecha, "url1", null, Privacidad.PUBLICO);
+		UCU.aniadirVideo(nombreU, nombreV2Privado, "descrito2", 30, fecha, "url2", null, Privacidad.PRIVADO);
+		UCU.aniadirVideo(nombreU2, nombreV3Publico, "descrito3", 40, fecha, "url3", null, Privacidad.PUBLICO);
+		DtVideo[] videosResultados=VCU.listarVideosPublicosPorNombre("nombreVLVPPN");
+		assertEquals(2,videosResultados.length);
+		assertEquals(nombreV1Publico,videosResultados[0].getNombre());
+		assertEquals(nombreV3Publico,videosResultados[1].getNombre());
+	}
+	
+	
 }
 

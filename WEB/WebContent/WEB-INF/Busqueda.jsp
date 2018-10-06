@@ -33,7 +33,7 @@ td {
 tr:nth-child(even) {background-color: #f2f2f2;}</style>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title><%=request.getAttribute("titulo") %></title>
-<div><%@include file="buscador.jsp" %></div>
+<%@include file="buscador.jsp" %>
 </head>
 <body>
 
@@ -109,7 +109,7 @@ if (request.getAttribute("canales") != null) { %>
 	<td id="NombreTD"><%=entry.getNombre()%></td>
 	<td id="DescripcionTD"></td>
 	<td id="PropietarioTD"><%=entry.getPropietario() %></td>
-	<td id="FechaTD"><%=entry.getFechaUltimoVideo().toString() %></td>
+	<td id="FechaTD"><%=goodDf.format(entry.getFechaUltimoVideo()) %></td>
 	<%String fechaHidden=df.format(entry.getFechaUltimoVideo()); %>
 	<td style="display:none;"><%=fechaHidden%></td>
 	
@@ -130,7 +130,7 @@ if (request.getAttribute("canales") != null) { %>
 		<td id="NombreTD"><%=entry.getNombre()%></td>
 		<td id="DescripcionTD"><%=entry.getDescripcion() %></td>
 		<td id="PropietarioTD"><%=entry.getPropietario() %></td>
-		<td id="FechaTD"><%=entry.getFechaUltimoVideo().toString() %></td>
+		<td id="FechaTD"><%=goodDf.format(entry.getFechaUltimoVideo()) %></td>
 		<%String fechaHidden=df.format(entry.getFechaUltimoVideo()); %>
 	<td style="display:none;"><%=fechaHidden%></td>
 	<%	}
