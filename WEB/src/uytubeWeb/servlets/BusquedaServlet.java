@@ -58,7 +58,7 @@ public class BusquedaServlet extends HttpServlet {
 		IUsuarioCtrl interfazUsuarios = fabrica.getIUsuarioCtrl();
 		DtVideo[] videos = interfazVideos.listarVideosPublicosPorNombre((String)request.getAttribute(busqueda));
 		DtCanal[] canales = interfazUsuarios.listarCanalesPorNombre((String)request.getAttribute(busqueda));
-		DtListaReproduccion[] listas = interfazVideos.listarLDRPublicasPorNombre((String)request.getAttribute(busqueda));
+		DtListaReproduccion[] listas = interfazUsuarios.listarLDRPublicasPorNombre((String)request.getAttribute(busqueda));
 		
 		HttpSession session=request.getSession(false);
 		if(session!=null) {
@@ -83,8 +83,7 @@ public class BusquedaServlet extends HttpServlet {
 		request.setAttribute(parametroCanales, canales);
 		request.setAttribute(parametroVideos, videos);
 		
-		DtVideo[] videoA=(DtVideo[]) request.getAttribute(parametroVideos);
-		
+		request.setAttribute("titulo", "Resultados de Busqueda");
 		request.getRequestDispatcher("/WEB-INF/Busqueda.jsp").forward(request, response);
 	}
 

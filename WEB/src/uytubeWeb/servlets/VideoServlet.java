@@ -38,6 +38,18 @@ public class VideoServlet extends HttpServlet {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	private boolean isInteger( String input )
+	{
+	   try
+	   {
+	      Integer.parseInt( input );
+	      return true;
+	   }
+	   catch( Exception e )
+	   {
+	      return false;
+	   }
+	}
 
 	private void creaUsrPrueba() {
 		Fabrica fabrica = Fabrica.getInstance();
@@ -61,16 +73,14 @@ public class VideoServlet extends HttpServlet {
 		return fechaDate;
 	}
 
-	private void crearVideo(String nomVideo, String duracion, String url, String fecha, String categoria,
+	private void crearVideo(String login,String nomVideo, String duracion, String url, String fecha, String categoria,
 			String descripcionV) {
 		System.out.println("estoy creando el video");
 		Fabrica fabrica = Fabrica.getInstance();
 		IUsuarioCtrl usrCtrl = fabrica.getIUsuarioCtrl();
-		IVideoCtrl ICV = fabrica.getIVideoCtrl();
-		creaUsrPrueba();
 		DtFecha fechaPublicacionV = new DtFecha(ParseFecha(fecha));
 		DtCategoria catV = new DtCategoria(categoria);
-		usrCtrl.aniadirVideo("horacio", nomVideo, descripcionV, (Integer.parseInt(duracion)), fechaPublicacionV, url,
+		usrCtrl.aniadirVideo(login, nomVideo, descripcionV, (Integer.parseInt(duracion)), fechaPublicacionV, url,
 				catV, Privacidad.PRIVADO);
 
 	}
@@ -154,11 +164,13 @@ public class VideoServlet extends HttpServlet {
 			DtUsuario usuario_propietario = usrController.listarDatosUsuario(dataVideo.getPropietario());
 			request.setAttribute("usuario_propietario", usuario_propietario);
 			DtCanal canal_propietario = usrController.mostrarInfoCanal(dataVideo.getPropietario());
-
 			request.setAttribute("canal_propietario",canal_propietario);
 			HttpSession session=request.getSession(false);
             if(session!=null && session.getAttribute("nombre_usuario")!=null) {
             	request.setAttribute("logged" ,true);
+            	String usuarioLogged = (String) session.getAttribute("nombre_usuario");
+            	String[] listasReproduccionUsuarioLogged = usrController.listarLDRdeUsuario(usuarioLogged);
+            	request.setAttribute("listasReproduccionUsuarioLogged", listasReproduccionUsuarioLogged);
             }else request.setAttribute("logged" ,false);
 			request.getRequestDispatcher("/WEB-INF/Video/VerVideo.jsp").forward(request, response);
 			break;
@@ -202,18 +214,25 @@ public class VideoServlet extends HttpServlet {
 		System.out.println(opc);
 		switch (opc) {
 		case "altaVideo":
+			
 			System.out.println("Quiero crear video");
-			String nombreVideo = request.getParameter("nombreVideo");
-			String duracionVideo = request.getParameter("duracionVideo");
-			String urlVideo = request.getParameter("urlVideo");
-			String fechaVideo = request.getParameter("fechaVideo");
-			String categoria = request.getParameter("categoria");
-			String descVideo = request.getParameter("descVideo");
-			if (nombreVideo != "" && duracionVideo != "" && urlVideo != "" && fechaVideo != "" && descVideo != "") {
-				crearVideo(nombreVideo, duracionVideo, urlVideo, fechaVideo, categoria, descVideo);
-				response.sendRedirect(request.getContextPath() + "/home");
+			HttpSession session=request.getSession(false);
+			if(session!=null && session.getAttribute("nombre_usuario")!=null) {
+				String login = (String)session.getAttribute("nombre_usuario");
+				String nombreVideo = request.getParameter("nombreVideo");
+				String duracionVideo = request.getParameter("duracionVideo");
+				String urlVideo = request.getParameter("urlVideo");
+				String fechaVideo = request.getParameter("fechaVideo");
+				String categoria = request.getParameter("categoria");
+				String descVideo = request.getParameter("descVideo");
+				if (nombreVideo != "" && duracionVideo != "" && isInteger(duracionVideo) && urlVideo != "" && fechaVideo != "" && descVideo != "") {
+					crearVideo(login,nombreVideo, duracionVideo, urlVideo, fechaVideo, categoria, descVideo);
+					response.sendRedirect(request.getContextPath() + "/home");
+				} else {
+					response.getWriter().append("Error, verifique los campos nuevamente");
+				}
 			} else {
-				response.getWriter().append("Error, verifique que los campos no esten vacíos");
+				response.sendRedirect(request.getContextPath() + "/home");
 			}
 			break;
 

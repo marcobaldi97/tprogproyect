@@ -1,3 +1,4 @@
+<%@page import="java.util.Locale"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.text.DateFormat"%>
 <%@page import="uytubeLogic.logica.DtListaReproduccion"%>
@@ -31,17 +32,22 @@ td {
 }
 tr:nth-child(even) {background-color: #f2f2f2;}</style>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Resultados De Busqueda</title>
+<title><%=request.getAttribute("titulo") %></title>
 <div><%@include file="buscador.jsp" %></div>
 </head>
 <body>
 
-
+<%if (request.getAttribute("videos") != null) {%>
 <button onclick="toggleVideos()">Ver/Ocultar Videos</button>
+<%}
+if (request.getAttribute("listas") != null) { %>
 <button onclick="toggleListas()">Ver/Ocultar Listas</button>
+<%}
+if (request.getAttribute("canales") != null) { %>
 <button onclick="toggleCanales()">Ver/Ocultar Canales</button>
+
+<%} %>
 <div class="main">	
-	
 	Ordenar por:
 	<select id="Ordenar" class="icon-menu" onchange="sortTable()">
 		<option value=1>Nombre</option>
@@ -49,6 +55,8 @@ tr:nth-child(even) {background-color: #f2f2f2;}</style>
 	</select>
 	<%
 	DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+	
+	DateFormat goodDf = new SimpleDateFormat("EEEEE dd MMMMM yyyy",Locale.getDefault());
 	if (request.getAttribute("videos") != null) {
 %>
 <table id="TablaContenidos">
@@ -78,7 +86,7 @@ tr:nth-child(even) {background-color: #f2f2f2;}</style>
 	<td id="NombreTD"><%=nombreV%></td>
 	<td id="DescripcionTD"><%=descV %></td>
 	<td id="PropietarioTD"><%=propietarioV %></td>
-	<td id="FechaTD"><%=entry.getFechaPublicacion().getFecha().toString() %></td>
+	<td id="FechaTD"><%=goodDf.format(entry.getFechaPublicacion().getFecha()) %></td>
 	<%String fechaHidden=df.format(entry.getFechaPublicacion().getFecha()); %>
 	<td style="display:none;"><%=fechaHidden%></td>
 	
@@ -92,8 +100,10 @@ tr:nth-child(even) {background-color: #f2f2f2;}</style>
 		for(DtListaReproduccion entry: listas){%>
 	<tr class="listaRow">
 	<td>Lista de Reproduccion
-	<form action="watch" method="get"> 
-	<input type="hidden" name="opcion" value="consulta">
+	<form action="playlist" method="get"> 
+	<input type="hidden" name="action" value="details">
+	<input type="hidden" name="nameList" value="<%=entry.getNombre() %>">
+	<input type="hidden" name="ownerList" value="<%=entry.getPropietario() %>">
 	<input type="submit" value="Ver Info"> </form> 
 	</td>
 	<td id="NombreTD"><%=entry.getNombre()%></td>
@@ -127,7 +137,7 @@ tr:nth-child(even) {background-color: #f2f2f2;}</style>
 	}
 	%>
 	</tr>
-</table>)
+</table>
 
 </div>
 <script>

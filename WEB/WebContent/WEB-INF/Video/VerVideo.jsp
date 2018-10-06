@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@page errorPage="../error404.jsp" %>
+<%@page errorPage="WEB-INF/error/error404.jsp" %>
 <%@ page import = "uytubeLogic.logica.DtVideo"%>
 <%@ page import = "uytubeLogic.logica.DtCategoria"%>
 <%@ page import = "uytubeLogic.logica.DtFecha"%>
@@ -47,8 +47,13 @@
 		urlFoto = "data:image/png;base64,"+ fotoString;
 	}	
 	String logged_state = "";
-	if((boolean)request.getAttribute("logged") == true) logged_state = "true";
+	String[] listasReproduccionUsuarioLogged = null;
+	if((boolean)request.getAttribute("logged") == true){
+		logged_state = "true";
+		listasReproduccionUsuarioLogged = (String[]) request.getAttribute("listasReproduccionUsuarioLogged");
+	}
 	else logged_state = "false";
+	
 	%>
     <meta charset="ISO-8859-1">
 	<link rel="stylesheet" href="media/styles/VerVideo.css">
@@ -61,16 +66,15 @@
 	    	document.getElementById("dislike_button").addEventListener("click", no_me_gusta_script);
 	    	document.getElementById("seguir_button").addEventListener("click",seguir_script);
 	    	document.getElementById("response_button").addEventListener("click",comentar_video);
+	    	document.getElementById("listasUsuarioLogged").addEventListener("click",agregar_lista_script);//lalaland
 		}else{
 	    	document.getElementById("like_button").style.display = "none";
 	    	document.getElementById("dislike_button").style.display = "none";
 	    	document.getElementById("seguir_button").style.display = "none";
 	    	document.getElementById("response_button").style.display = "none";
-	    	document.getElementById("agregar_lista_button").style.display = "none";
 	    	document.getElementById("tabla_para_comentar").style.display = "none";
 		}//si no está loggeado, no muestra estos elementos.
 	}
-
 	function me_gusta_script() {
 		console.log("acabo de dar like");
 		var xhttp = new XMLHttpRequest();
@@ -91,14 +95,22 @@
 	
 			}
 		};
-		String
-		operacion = "dislikeVideo?id_video="+<%=id_video%>+"&opcion=dislikeVideo";
+		var operacion = "dislikeVideo?id_video="+<%=id_video%>+"&opcion=dislikeVideo";
 		xhttp.open("GET", operacion, true);
 		xhttp.send();
 	}
 	
 	function agregar_lista_script() {
-		request.setAttribute();
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+	
+			}
+		};
+		var nombre_lista = document.getElementById("listasUsuarioLogged").value;
+		var operacion = "addVidPlaylist?id_video="+<%=id_video%>+"&action=agregarVideoALista&nombre_lista="+nombre_lista;
+		xhttp.open("GET", operacion, true);
+		xhttp.send();
 	}
 	
 	function seguir_script() {
@@ -158,7 +170,7 @@
 		</tr>
 		<tr>
 			<th colspan="3" class="categoria" width="80%">Categoria: <%=nombre_categoria%></th>
-			<th colspan="2" width="20%" class="left_separator"><button id="agregar_lista_button" name="add_lista_button" onclick="agregar_lista_script()">Agregar a lista...</button>
+			<th colspan="2" width="20%" class="left_separator"><%if(logged_state == "true") this.htmlListasComboBoxGenerator(out, listasReproduccionUsuarioLogged); %></th>
 		</tr>
 	</table>
 	<table style="width:100%" id = "tabla_para_comentar">
@@ -166,14 +178,24 @@
 			<th  class="texto_simple" id="nombre_autor">Comentar video:</th>
 		</tr>
 		<tr>
-			<th rowspan="2" width="20%" height="150px"><img style="width:100%" height="150px" id="logo" src=<%=url_logo_usuario_iniciado%> width="100px" height="70px"></img></th>
-			<th rowspan="2" width="80%" id="cell_comentar"><textarea class="comentario" id="comentario_a_comentar"></textarea></th>
+			<th rowspan="2" width="30%" height="150px"><img id="logo" src=<%=url_logo_usuario_iniciado%> width="100px" height="70px"></img></th>
+			<th rowspan="2" width="70%" id="cell_comentar"><textarea class="comentario" id="comentario_a_comentar"></textarea></th>
 		</tr>
 		<tr>
 			<th><button style="width:100%" id="response_button" name="response_button" value="Comentar">  Comentar  </button></th>
 		</tr>
 	</table>
-	<%!
+	<%!//funciones Java
+		private void htmlListasComboBoxGenerator(javax.servlet.jsp.JspWriter out, String[] listasRep) throws java.io.IOException{
+			if(listasRep.length != 0){
+				out.println("<select name=\"listasUsuarioLogged\" id=\"listasUsuarioLogged\">");
+				for(int index = 0; index <listasRep.length; index++){
+					out.println("<option value=\""+listasRep[index]+"\">"+listasRep[index]+"</option>");
+				}
+				out.println("</select>");
+				out.println("<button id=\"agregar_lista_button\" value=\"Agregar\">Agregar a lista</button>");	
+			}
+		}//esta función genera el código html para el boton combo box para agregar un video a una lista de reproduccion.
 		private void printComentarios(javax.servlet.jsp.JspWriter out, DtComentario[] comentarios) throws java.io.IOException{
 			for(int index = 0 ; index < comentarios.length; index++){
 				String autor_comentario = comentarios[index].getNickUsuario();

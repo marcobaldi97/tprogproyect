@@ -1,0 +1,28 @@
+@charset "ISO-8859-1";
+body{
+	background-repeat: no-repeat;
+	background-image: url("https://images.pexels.com/photos/1029622/pexels-photo-1029622.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+}
+.single_result{
+	border: 2px solid #c0c0c0;
+    border-radius: 5px;
+}
+.descripcion{
+	text-align:left;
+	font-family: arial;
+	font-size: 12px;
+}
+#nombre_autor{
+	text-align:left;
+	font-family: arial;
+	font-size: 14px;
+}
+#nombre_video{
+	text-align:left;
+	font-family: arial;
+	font-size: 14px;}
+#duracion{
+	text-align:left;
+	font-family: arial;
+	font-size: 14px;
+}

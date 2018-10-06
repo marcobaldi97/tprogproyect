@@ -1,4 +1,4 @@
-@CHARSET "ISO-8859-1";
+@CHARS@CHARSET "ISO-8859-1";
 .main-content{
 	 display: inline-block;
 	 background-color: #eee;
@@ -12,27 +12,29 @@ body {
 table.tabs {
     border-collapse: separate;
     border-spacing: 0;
-    background-color: transparent;
+    background-color: #eeeeee;
     font-size: 0.9em;
-    }
+
+}
+
 th.tabck {
-    border: gray solid 1px;
-    border-bottom: 0;
+    border: #000000 solid 1px;
+    border-bottom:0 ;
     border-radius: 0.5em 0.5em 0 0;
-    background-color: transparent;
     padding: 0.3em;
     text-align: center;
     cursor: pointer;
+    background-color: red;
     }
 th.tabcks {
     border: 0;
-    border-bottom: gray solid 1px;
+    border-bottom: black solid 1px;
     }
 th.tabcks:first-child {
-    border-left: gray solid 1px;
+    border-left: #060606 solid 1px;
     }
 th.tabcks:last-child {
-    border-right: gray solid 1px;
+    border-right: black solid 1px;
     }
 table.tabs tr:first-child th.tabcks {
     border-left: none;
@@ -44,7 +46,12 @@ table.tabs[data-filas] th.tabck {
 table.tabs td {
     border: gray solid 1px;
     border-top: 0;
-    }
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+ }
+
+
 /* El ancho y alto de los div.tabdiv se configuran
 en cada aplicación */
 div.tabdiv {
@@ -56,3 +63,4 @@ div.tabdiv {
     width: 100%;
     height: auto;
     }
+    

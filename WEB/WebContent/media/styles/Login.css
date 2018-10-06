@@ -1,0 +1,32 @@
+@charset "ISO-8859-1";
+
+.login button:hover {
+  background-color: #ff0000;
+  color: white;
+}
+
+
+.login button {
+  padding: 6px;
+  border: red;
+  margin-top: 8px;
+  margin-right: 16px;
+  font-size: 17px;
+}
+
+#textoAntes {
+	font-size: 21px;
+	font-weight: bold;
+}
+.login {
+	margin-top: 8px;
+  margin-right: 16px;
+  font-size: 17px;
+}
+
+.login input {
+  padding: 6px;
+  margin-top: 8px;
+  margin-right: 16px;
+  font-size: 17px;
+}
