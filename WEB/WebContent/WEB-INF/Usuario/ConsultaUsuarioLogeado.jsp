@@ -74,9 +74,47 @@
 		<tr>
 		<td>Seguidores: <%=seguidores.length %></td>
 		<td>Seguidos: <%=seguidos.length %></td>
+		
+		<td>
+			<%if((boolean)request.getAttribute("usrSigueAlOtro")){ 
+			System.out.print((boolean)request.getAttribute("usrSigueAlOtro")+ "HOLA");
+			%>
+				<button id="botonDejarSeguir" value="DejarSeguir" onclick="dejarSeguirUsr()">Dejar de Seguir</button>
+			<%}else{%>
+				<button id="botonSeguir" value="Seguir" onclick="seguirUsr()">Seguir</button>
+			<%} %>
+			
+			
+		</td>		
 		</tr>
 	</table>
 	</div>
+	<p id="disponible"></p>
+	<script >
+		function seguirUsr(){
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					window.alert("Siguiendo");
+					  document.getElementById("disponible").innerHTML = this.responseText;
+				}
+			};
+			xhttp.open("GET", "follow?usuario_a_seguir=<%=nick%>&opcion=follow",true);
+			xhttp.send();
+		
+		}
+		function dejarSeguirUsr(){
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					window.alert("Ya no lo sigo");
+					
+				}
+			};
+			xhttp.open("GET", "follow?usuario_a_no_seguir=<%=nick%>&opcion=unfollow",true);
+			xhttp.send();
+		}
+	</script>
  <table class="tabs" data-min="0" data-max="3" width="80%">
     <tr>
         <th class="tabcks">&nbsp;</th>
@@ -101,7 +139,7 @@
             	  (si es del usurio logeado puede modificar sus datos)
             </div>
             <div class="tabdiv" id="tabdiv-3">
-	        	Seguidores
+	           	Seguidores
 	        	<%
 				for(String seguidoresUsr: seguidores){
 				%>
@@ -121,7 +159,7 @@
 				<%
 				}
 	        	
-	        	%>   
+	        	%> 
             </div>
             <div class="tabdiv" id="tabdiv-1">
                 Videos del canal del usuario
