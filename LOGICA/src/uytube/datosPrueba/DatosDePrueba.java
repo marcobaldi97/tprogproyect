@@ -61,97 +61,97 @@ public class DatosDePrueba {
 		fechaNac = new DtFecha(fecha);
 		String HR="hrubio";
 		archivo = new File("src\\fotosDatosDePrueba\\hr.jpg");
-		ICU.nuevoUsuario(HR,"1234", "Horacio", "Rubino", "horacio.rubino@guambia.com.uy", fechaNac, imagenToByte(archivo),
+		ICU.nuevoUsuario(HR,"Rufus123", "Horacio", "Rubino", "horacio.rubino@guambia.com.uy", fechaNac, imagenToByte(archivo),
 				"Canal Horacio", "El canal Horacio es para publicar contenido divertido",Privacidad.PUBLICO, "Entretenimiento");
 		
 		fecha = asignarFecha("14,06,1972 00:00");
 		fechaNac = new DtFecha(fecha);
 		String MB ="mbusca";
 		archivo = new File("src\\fotosDatosDePrueba\\mb.jpg");
-		ICU.nuevoUsuario(MB,"1234", "Martin", "Buscaglia", "Martin.bus@agadu.org.uy", fechaNac, imagenToByte(archivo),
+		ICU.nuevoUsuario(MB,"Cookier234", "Martin", "Buscaglia", "Martin.bus@agadu.org.uy", fechaNac, imagenToByte(archivo),
 				"El bocha", "Mi canal para colgar cosas", Privacidad.PUBLICO, null);
 		
 		fecha = asignarFecha("07,01,1954 00:00");
 		fechaNac = new DtFecha(fecha);
 		String HG="hectorg";
-		ICU.nuevoUsuario(HG,"1234", "Hector", "Guido", "hector.gui@elgalpon.org.uy", fechaNac, null,
+		ICU.nuevoUsuario(HG,"Poncho345", "Hector", "Guido", "hector.gui@elgalpon.org.uy", fechaNac, null,
 				HG, "Canal HG", Privacidad.PUBLICO, null);
 		
 		fecha=asignarFecha("24,07,1971 00:00");
 		fechaNac = new DtFecha(fecha);
 		String TC ="tabarec";
 		archivo = new File("src\\fotosDatosDePrueba\\tc.jpg");
-		ICU.nuevoUsuario(TC,"1234", "Tabare", "Cardozo", "tabare.car@agadu.org.uy", fechaNac, imagenToByte(archivo),
+		ICU.nuevoUsuario(TC,"Ketchup1", "Tabare", "Cardozo", "tabare.car@agadu.org.uy", fechaNac, imagenToByte(archivo),
 				"Tabare", "Mi musica e ainda mais", Privacidad.PUBLICO, MUS);
 		
 		fecha = asignarFecha("01,01,1947 00:00");
 		fechaNac = new DtFecha(fecha);
 		String CS="cachilas";
 		archivo = new File("src\\fotosDatosDePrueba\\cs.jpg");
-		ICU.nuevoUsuario(CS,"1234", "Walder 'Cachila'", "Silva", "Cachila.sil@c1080.org.uy", fechaNac, imagenToByte(archivo),
+		ICU.nuevoUsuario(CS,"Sancho456", "Walder 'Cachila'", "Silva", "Cachila.sil@c1080.org.uy", fechaNac, imagenToByte(archivo),
 				"El Cachila", "Para juntar cosas", Privacidad.PRIVADO, null);
 		
 		fecha =asignarFecha("16,03,1967 00:00");
 		fechaNac = new DtFecha(fecha);
 		String JB="juliob";
-		ICU.nuevoUsuario(JB,"1234", "Julio", "Bocca", "juliobocca@sodre.com.uy", fechaNac, null,
+		ICU.nuevoUsuario(JB,"Salome56", "Julio", "Bocca", "juliobocca@sodre.com.uy", fechaNac, null,
 				JB, "Canal de JB", Privacidad.PUBLICO,null);
 		
 		fecha=asignarFecha("01,01,1975 00:00");
 		fechaNac = new DtFecha(fecha);
 		String DP="diegop";
-		ICU.nuevoUsuario(DP,"1234", "Diego", "Parodi", "diego@efectocine.com", fechaNac, null,
+		ICU.nuevoUsuario(DP,"Ruffo678", "Diego", "Parodi", "diego@efectocine.com", fechaNac, null,
 				DP, "El Canal de DP", Privacidad.PUBLICO,null);
 	
 		fecha=asignarFecha("25,04,1840 00:00");
 		fechaNac = new DtFecha(fecha);
 		String KH="kairoh";
 		archivo = new File("src\\fotosDatosDePrueba\\kh.jpg");
-		ICU.nuevoUsuario(KH,"1234", "Kairo", "Herrera", "kairoher@pilsenrock.com.uy", fechaNac, imagenToByte(archivo),
+		ICU.nuevoUsuario(KH,"Corbata15", "Kairo", "Herrera", "kairoher@pilsenrock.com.uy", fechaNac, imagenToByte(archivo),
 				"Kairo Musica", "Videos de grandes canciones de hoy y siempre", Privacidad.PUBLICO, MUS);
 		
 		fecha=asignarFecha("03,08,1940 00:00");
 		fechaNac = new DtFecha(fecha);
 		String RH="robinh";
-		ICU.nuevoUsuario(RH,"1234", "Robin", "Henderson", "robin.h@tinglesa.com.uy", fechaNac, null,
+		ICU.nuevoUsuario(RH,"Aquiles67", "Robin", "Henderson", "robin.h@tinglesa.com.uy", fechaNac, null,
 				RH, "Henderson", Privacidad.PUBLICO, null);
 		
 		fecha=asignarFecha("01,04,1960 00:00");
 		fechaNac = new DtFecha(fecha);
 		String MT="marcelot";
-		ICU.nuevoUsuario(MT,"1234", "Marcelo", "Tinelli", "marcelot@ideasdelsur.com.ar", fechaNac, null,
+		ICU.nuevoUsuario(MT,"Mancha890", "Marcelo", "Tinelli", "marcelot@ideasdelsur.com.ar", fechaNac, null,
 				"Tinelli total", "Todo lo que querias y mas!", Privacidad.PUBLICO , ENT);
 		
 		fecha=asignarFecha("17,07,1952 00:00");
 		fechaNac = new DtFecha(fecha);
 		String EN="novick";
-		ICU.nuevoUsuario(EN,"1234", "Edgardo", "Novick", "edgardo@novick.com.uy", fechaNac, null,
+		ICU.nuevoUsuario(EN,"Xenon987", "Edgardo", "Novick", "edgardo@novick.com.uy", fechaNac, null,
 				"Con la gente", "Preparando las elecciones", Privacidad.PUBLICO, null);
 		
 		fecha=asignarFecha("28,01,1950 00:00");
 		fechaNac = new DtFecha(fecha);
 		String SP="sergiop";
-		ICU.nuevoUsuario(SP,"1234", "Sergio", "Puglia", "puglia@alpanpan.com.uy", fechaNac, null,
+		ICU.nuevoUsuario(SP,"Sultan876", "Sergio", "Puglia", "puglia@alpanpan.com.uy", fechaNac, null,
 				"Puglia invita", "Programas del ciclo y videos de cocina mastercheef", Privacidad.PUBLICO, COM);
 		
 		fecha=asignarFecha("17,03,1976 00:00");
 		fechaNac = new DtFecha(fecha);
 		String AR="chino";
 		archivo = new File("src\\fotosDatosDePrueba\\ar.jpg");
-		ICU.nuevoUsuario(AR,"1234", "Alvaro", "Recoba", "chino@trico.org.uy", fechaNac, imagenToByte(archivo),
+		ICU.nuevoUsuario(AR,"Laika765", "Alvaro", "Recoba", "chino@trico.org.uy", fechaNac, imagenToByte(archivo),
 				"Chino Recoba", "Canal de goles con Nacional", Privacidad.PRIVADO, DEP);
 		
 		fecha=asignarFecha("14,02,1955 00:00");
 		fechaNac = new DtFecha(fecha);
 		String AP="tonyp";
 		archivo = new File("src\\fotosDatosDePrueba\\ap.jpg");
-        ICU.nuevoUsuario(AP,"1234", "Antonio", "Pacheco", "eltony@manya.org.uy", fechaNac, imagenToByte(archivo),
+        ICU.nuevoUsuario(AP,"Kitty543", "Antonio", "Pacheco", "eltony@manya.org.uy", fechaNac, imagenToByte(archivo),
 				"Tony Pacheco", "Todos los goles con Peñarol", Privacidad.PRIVADO, DEP);
 		
 		fecha=asignarFecha("09,08,1960 00:00");
 		fechaNac = new DtFecha(fecha);
 		String NJ="nicoJ";
-		ICU.nuevoUsuario(NJ,"1234", "Nicolas", "Jodal", "jodal@artech.com.uy", fechaNac, null,
+		ICU.nuevoUsuario(NJ,"Albino80", "Nicolas", "Jodal", "jodal@artech.com.uy", fechaNac, null,
 				"Desde Genexus", "Canal informacion C y T", Privacidad.PUBLICO, CYT);
 		
 		
@@ -252,6 +252,10 @@ public class DatosDePrueba {
 		idVideo = video.getIDVideo();
 		ICU.agregarVideoLista(TC,idVideo,LP2);
 		
+		video = ICU.obtenerInfoAdicVideo(JB,V11);
+		idVideo = video.getIDVideo();
+		ICU.agregarVideoLista(TC,idVideo,LP2);
+		
 		video = ICU.obtenerInfoAdicVideo(CS,V10);
 		idVideo = video.getIDVideo();
 		ICU.agregarVideoLista(TC,idVideo,LP2);
@@ -334,6 +338,10 @@ public class DatosDePrueba {
 		fecha=asignarFecha("23,10,2017 12:58");fechaVideo = new DtFecha(fecha);
 		ICV.nuevoComentario(dtVideo.getIDVideo(),KH,fechaVideo, "Un gusto cubrir eventos como este.");
 		
+		comentarioPadre=obtenerIdComentario(dtVideo.getIDVideo(),NJ, fechaVideo);
+		fecha = asignarFecha("11,09,2018 03:45");fechaVideo = new DtFecha(fecha); 
+		ICV.responderComentario(dtVideo.getIDVideo(),comentarioPadre, MT, fechaVideo, "Se viene la edicion 2018!!!");
+		
 		dtVideo =vh.member(V13,JB);
 		fecha=asignarFecha("14,11,2016 05:34");fechaVideo = new DtFecha(fecha);
 		ICV.nuevoComentario(dtVideo.getIDVideo(),KH,fechaVideo,"Peñarol peñarol!!!");
@@ -363,6 +371,10 @@ public class DatosDePrueba {
 		fecha = asignarFecha("15,09,2017 12:29");fechaVideo = new DtFecha(fecha); 
 		ICV.responderComentario(dtVideo.getIDVideo(),comentarioPadre,TC,fechaVideo, "Gracias Marce ;)");
 		
+		dtVideo =vh.member(V1,TC);
+		fecha=asignarFecha("15,09,2017 12:29");fechaVideo = new DtFecha(fecha);
+		ICV.nuevoComentario(dtVideo.getIDVideo(),TC,fechaVideo,"Mi preferido por lejos!!!");
+		
 		//ME GUSTA
 		video = ICU.obtenerInfoAdicVideo(HG,V7);
 		ICV.valorarVideo(video.getIDVideo(),SP, false); //falso = NO LE GUSTA
@@ -372,6 +384,9 @@ public class DatosDePrueba {
 		
 		video = ICU.obtenerInfoAdicVideo(JB,V11);
 		ICV.valorarVideo(video.getIDVideo(),SP, true);
+		
+		video = ICU.obtenerInfoAdicVideo(KH,V4);
+		ICV.valorarVideo(video.getIDVideo(),NJ, false);
 		
 		video = ICU.obtenerInfoAdicVideo(CS,V1);
 		ICV.valorarVideo(video.getIDVideo(),NJ, false);
@@ -386,6 +401,9 @@ public class DatosDePrueba {
 		ICV.valorarVideo(video.getIDVideo(),KH, true);
 		
 		video = ICU.obtenerInfoAdicVideo(CS,V1);
+		ICV.valorarVideo(video.getIDVideo(),MT, true);
+		
+		video = ICU.obtenerInfoAdicVideo(HG,V8);
 		ICV.valorarVideo(video.getIDVideo(),MT, true);
 		
 		video = ICU.obtenerInfoAdicVideo(KH,V4);
