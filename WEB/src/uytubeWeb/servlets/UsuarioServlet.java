@@ -49,6 +49,11 @@ public class UsuarioServlet extends HttpServlet {
 		IUsuarioCtrl interfaz_usuario = fabrica.getIUsuarioCtrl();
 		interfaz_usuario.seguirUsuario(nombre_usuario, usuario_a_seguir);
 	}
+	private void dejarUsuario(String nombre_usuario, String usuario_a_no_seguir) {
+		Fabrica fabrica = Fabrica.getInstance();
+		IUsuarioCtrl interfaz_usuario = fabrica.getIUsuarioCtrl();
+		interfaz_usuario.dejarUsuario(nombre_usuario, usuario_a_no_seguir);
+	}
 
   public static Date ParseFecha(String fecha)
     {
@@ -116,6 +121,15 @@ public class UsuarioServlet extends HttpServlet {
 		 	String usuario_a_seguir = (String) request.getParameter("usuario_a_seguir");
 		 	System.out.println("usuario: "+nombre_usuario+ " va a seguir a :"+usuario_a_seguir);
 		 	seguirUsuario(nombre_usuario, usuario_a_seguir);
+		 	response.getWriter().append("OK");
+			break;
+		}	
+		case "unfollow":{
+			HttpSession session=request.getSession();
+		 	String nombre_usuario = (String)session.getAttribute("nombre_usuario");
+		 	String usuario_a_no_seguir = (String) request.getParameter("usuario_a_no_seguir");
+		 	dejarUsuario(nombre_usuario, usuario_a_no_seguir);
+		 	response.getWriter().append("OK1");
 			break;
 		}	
 		case "nuevoUsuario":{
@@ -134,7 +148,7 @@ public class UsuarioServlet extends HttpServlet {
 			DtUsuario usuario = interfazUsuarios.listarDatosUsuario(nickname);
 			request.setAttribute("dataCanal", infoCanal);
 			request.setAttribute("dataUsuario", usuario);
-		
+			
 			DtListaReproduccion[] listas = interfazUsuarios.infoLDRdeUsuario(nickname, Privacidad.PRIVADO);
 		    DtVideo[] videos = interfazUsuarios.infoVideosCanal(nickname, Privacidad.PUBLICO);
 	        HttpSession session=request.getSession(false);
@@ -142,6 +156,15 @@ public class UsuarioServlet extends HttpServlet {
 	            String login=(String)session.getAttribute("nombre_usuario");
 	            if(login!=null) {
 	                System.out.println("hay un usuario logueado");
+	                String [] usrQueSigue = interfazUsuarios.listarUsuariosQueSigue(login);
+	                boolean loSigue = false;
+	                int i=0;
+	                while((i<usrQueSigue.length) && (loSigue=!true)){
+	                	if( usrQueSigue[i] == nickname) {loSigue=true;}
+	                	i++;
+	                }
+	                System.out.println(login+"sigue a"+nickname+"  "+loSigue);
+	                request.setAttribute("usrSigueAlOtro", loSigue);
 	                DtVideo[] videosPrivadosSesion=interfazUsuarios.infoVideosCanal(login, Privacidad.PRIVADO);
 	                DtListaReproduccion[] listasPrivadasSesion=interfazUsuarios.infoLDRdeUsuario(login, Privacidad.PRIVADO);
 	                List<DtVideo> videosAux= new ArrayList<DtVideo>(Arrays.asList(videos));
@@ -150,16 +173,23 @@ public class UsuarioServlet extends HttpServlet {
 	                List<DtListaReproduccion> listasAux = new ArrayList<DtListaReproduccion>(Arrays.asList(listas));
 	                listasAux.addAll(Arrays.asList(listasPrivadasSesion));
 	                listas=listasAux.toArray(new DtListaReproduccion[0]);
+	              
+	                String parametroListas="listas";
+	    	        String parametroVideos="videos";
+
+	    	        request.setAttribute(parametroListas, listas);
+	    	        request.setAttribute(parametroVideos, videos);
+	            	request.getRequestDispatcher("WEB-INF/Usuario/ConsultaUsuarioLogeado.jsp").forward(request, response);
 	            }
+	        }else{
+		        String parametroListas="listas";
+		        String parametroVideos="videos";
+	
+		        request.setAttribute(parametroListas, listas);
+		        request.setAttribute(parametroVideos, videos);
+	
+				request.getRequestDispatcher("WEB-INF/Usuario/ConsultaUsuario.jsp").forward(request, response);
 	        }
-	        String parametroListas="listas";
-	        String parametroVideos="videos";
-
-	        request.setAttribute(parametroListas, listas);
-	        request.setAttribute(parametroVideos, videos);
-
-			request.getRequestDispatcher("WEB-INF/Usuario/ConsultaUsuario.jsp").forward(request, response);
-			
 			break;
 		}
 		}
