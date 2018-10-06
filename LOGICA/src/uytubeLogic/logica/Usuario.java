@@ -47,7 +47,7 @@ public class Usuario {
 		return nickname;
 	}
 	
-	public String getPasswrod() {
+	public String getPassword() {
 		return pass;
 	}
 

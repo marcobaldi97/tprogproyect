@@ -10,8 +10,8 @@
 <body>
 <div class="vertical-menu">
   <a href="#" class="active">Bienvenido</a><br>
-  Categorias
   <div id="LoggedInInfo"></div>
+  Categorias
   <div id="categorias"></div>
   <form id="sideBar" action="list" method="get">
   <input type="hidden" name="action" value="list">
