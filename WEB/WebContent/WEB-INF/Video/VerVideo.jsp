@@ -53,7 +53,8 @@
 		listasReproduccionUsuarioLogged = (String[]) request.getAttribute("listasReproduccionUsuarioLogged");
 	}
 	else logged_state = "false";
-	
+	DtComentario[] comentarios = (DtComentario[]) request.getAttribute("comentarios");
+	int tamanio_comentarios = comentarios.length;
 	%>
     <meta charset="ISO-8859-1">
 	<link rel="stylesheet" href="media/styles/VerVideo.css">
@@ -67,7 +68,21 @@
 	    	document.getElementById("seguir_button").addEventListener("click",seguir_script);
 	    	document.getElementById("response_button").addEventListener("click",comentar_video);
 	    	document.getElementById("listasUsuarioLogged").addEventListener("click",agregar_lista_script);//lalaland
+	    	for(var index = 0;index < <%=tamanio_comentarios%>; index++){
+	    		var response_box = "response_box" + index;
+	    		document.getElementById(response_box).style.display = "none";
+	    		var response_button = "response_button" + index;
+	    		document.getElementById(response_button).addEventListener("click",toggle_response_box(index));
+	    		var submit_response_button = "submit_response_button" + index;
+	    		document.getElementById(submit_response_button).addEventListener("click",submit_response(index));
+	    	}
 		}else{
+	    	for(var index = 0;index < <%=tamanio_comentarios%>; index++){
+	    		var response_box = "response_box" + index;
+	    		document.getElementById(response_box).style.display = "none";
+	    		var response_button = "response_button" + index;
+	    		document.getElementById(response_button).style.display = "none";
+	    	}
 	    	document.getElementById("like_button").style.display = "none";
 	    	document.getElementById("dislike_button").style.display = "none";
 	    	document.getElementById("seguir_button").style.display = "none";
@@ -75,6 +90,29 @@
 	    	document.getElementById("tabla_para_comentar").style.display = "none";
 		}//si no está loggeado, no muestra estos elementos.
 	}
+	
+	function toggle_response_box(index){
+		var response_box = "response_box" + index;
+		document.getElementById(response_box).style.display = "block";
+		window.alert("presionado!");
+	}
+	
+	function submit_response(index){
+		var response_button = "response_button" + index;
+		var id_comentario = document.getElementById(response_button).value;
+		var comentario_a_comentar = "comentario_a_comentar" + index;
+		var contenido_comentario = document.getElementById(comentario_a_comentar).value;
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+			}
+		};
+		xhttp.open("GET", "responseComment?id_video="+<%=id_video%>+"&opcion=responderComentario&id_comentario="+id_comentario+"&contenido_comentario="+contenido_comentario,true);
+		xhttp.send();
+		var response_box = "response_box" + index;
+		document.getElementById(response_box).style.display = "none";
+	}
+	
 	function me_gusta_script() {
 		console.log("acabo de dar like");
 		var xhttp = new XMLHttpRequest();
@@ -156,7 +194,7 @@
 	<iframe style="width:100%" height="430px" id="frame" src="<%=url_video%>"></iframe><br>
 	<table style="width:100%">
 		<tr>
-			<th rowspan="2" width="10%"><img id="logo" src=<%=url_logo_autor%> width="100px" height="70px" onclick="ir_a_perfil(<%=propietario%>)"></img></th>
+			<th rowspan="2" width="10%"><img id="logo" src=<%=url_logo_autor%> width="100px" height="70px" ></img></th>
 			<th class="texto_simple" id="nombre_autor" width="30%"><%=nombre_canal%></th>
 			<th rowspan="2" class="right_left_separators"  id="fecha_publicacion" width="30%"><p class="texto_simple"><%=dia%>/<%=mes%>/<%=anio%></p></th>
 			<th rowspan="2" class="botones_like_dislike" width="30%">
@@ -209,14 +247,14 @@
 		   		out.println("<ul class=\"comment\">");
 		   		out.println("	<li><img id=\"logo\" src=\"https://i0.wp.com/blogthinkbig.com/wp-content/uploads/2018/04/3hfXV9eW-mAQfO4XNZrGX1OJPTm-FuEjVT_yxNH0cQM.jpg?resize=610%2C343\"></img> <p id=\"nombre_autor\">"+autor_comentario+" "+dia_comment+"/"+mes_comment+"/"+anio_comment+"</p></li>");
 				out.println("	<li><p class=\"descripcion\">"+descripcion_comentario+"</p></li>");
-				out.println("	<li><button style=\"width:30%\" id=\"response_button\" name=\"response_button\" value=\"Responder\">  Responder  </button></li>");
+				out.println("	<li><button style=\"width:30%\" id=\"response_button"+index+"\" name=\"response_button\" value=\""+comentarios[index].getIDComentario()+"\">  Responder  </button></li>");
+				out.println("	<li id=\"response_box"+index+"\"><img id=\"mini_logo\" src=\"\"></img><textarea class=\"comentario\" id=\"comentario_a_comentar"+index+"\"></textarea><button class=\"response_button\"  id=\"submit_response_button"+index+"\" name=\"response_button\" value=\"Responder\">  Responder  </button></li>");
 				if(hijos.length != 0)printComentarios(out,hijos);
 				out.println("</ul>");
 			}
 		}
 	%>
 	<%
-		DtComentario[] comentarios = (DtComentario[]) request.getAttribute("comentarios");
 		printComentarios(out,comentarios);
 	%>
 </body>
