@@ -31,7 +31,7 @@ import uytubeLogic.logica.SystemHandler.Privacidad;
 /**
  * Servlet implementation class UsuarioServlet
  */
-@WebServlet({"/login","/newUser","/profile","/modifyUser","/follow"})
+@WebServlet({"/login","/newUser","/profile","/modifyUser","/follow","/responseComment"})
 public class UsuarioServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private Object document;
@@ -160,6 +160,9 @@ public class UsuarioServlet extends HttpServlet {
 
 			request.getRequestDispatcher("WEB-INF/Usuario/ConsultaUsuario.jsp").forward(request, response);
 			
+			break;
+		}
+		case "responderComentario":{
 			break;
 		}
 		}
