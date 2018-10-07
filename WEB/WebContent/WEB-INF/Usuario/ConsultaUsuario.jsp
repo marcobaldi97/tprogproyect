@@ -98,7 +98,6 @@
          	Nombre:<%=nombre_canal %> <br>
             Descripcion:<%=descCanal %><br>
             Categoria:<%=categoriaCanal %><br>
-            	  (si es del usurio logeado puede modificar sus datos)
             </div>
             <div class="tabdiv" id="tabdiv-3">
 	        	Seguidores
@@ -153,8 +152,6 @@
 					</tr>
 					<% } %>
 					</table>
-                          (cuando selecciona un video, ir a consulta video)
-                (si es del usurio logeado puede modificar sus datos)
             </div>
             <div class="tabdiv" id="tabdiv-2">
                Listas de reproduccion
@@ -170,12 +167,15 @@
 							DtListaReproduccion[] listas=(DtListaReproduccion[]) request.getAttribute("listas");
 							for(DtListaReproduccion entry: listas){%>
 						<tr class="listaRow">
-						
+				
+						</td>
 						<td id="NombreTD"><%=entry.getNombre()%></td>
 						<td id="DescripcionTD"></td>
 						<td>
-						<form action="watch" method="get"> 
-						<input type="hidden" name="opcion" value="consulta">
+						<form action="playlist" method="get"> 
+						<input type="hidden" name="action" value="details">
+						<input type="hidden" name="nameList" value="<%=entry.getNombre() %>">
+						<input type="hidden" name="ownerList" value="<%=entry.getPropietario() %>">
 						<input type="submit" value="Ver Info"> </form> 
 						</td>
 						</tr>
@@ -186,12 +186,7 @@
 						%>
 						
 					</table>
-				
-
-              
-                (como consulta de lista)
-                (si es del usurio logeado puede modificar sus datos)
-            </div>
+	            </div>
         </td>
     </tr>   
  </table>

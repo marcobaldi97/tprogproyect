@@ -96,7 +96,7 @@
 			xhttp.onreadystatechange = function() {
 				if (this.readyState == 4 && this.status == 200) {
 					window.alert("Siguiendo");
-					  document.getElementById("disponible").innerHTML = this.responseText;
+		            window.location.reload(); 
 				}
 			};
 			xhttp.open("GET", "follow?usuario_a_seguir=<%=nick%>&opcion=follow",true);
@@ -107,7 +107,8 @@
 			var xhttp = new XMLHttpRequest();
 			xhttp.onreadystatechange = function() {
 				if (this.readyState == 4 && this.status == 200) {
-					window.alert("Ya no lo sigo");
+					window.alert("Ya no lo sigue");
+					window.location.reload(); 
 					
 				}
 			};
@@ -212,8 +213,10 @@
 						<td id="NombreTD"><%=entry.getNombre()%></td>
 						<td id="DescripcionTD"></td>
 						<td>
-						<form action="watch" method="get"> 
-						<input type="hidden" name="opcion" value="consulta">
+						<form action="playlist" method="get"> 
+						<input type="hidden" name="action" value="details">
+						<input type="hidden" name="nameList" value="<%=entry.getNombre() %>">
+						<input type="hidden" name="ownerList" value="<%=entry.getPropietario() %>">
 						<input type="submit" value="Ver Info"> </form> 
 						</td>
 						</tr>
