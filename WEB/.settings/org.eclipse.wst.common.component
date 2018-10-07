@@ -5,6 +5,9 @@
         <dependent-module archiveName="uyTubeLogic.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/uyTubeLogic/uyTubeLogic">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="uyTube.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/uyTube/uyTube">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="UyTubeWeb"/>
         <property name="java-output-path" value="/UyTubeWeb/build/classes"/>
     </wb-module>
