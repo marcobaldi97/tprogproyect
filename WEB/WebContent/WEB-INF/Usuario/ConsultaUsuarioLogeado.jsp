@@ -74,9 +74,47 @@
 		<tr>
 		<td>Seguidores: <%=seguidores.length %></td>
 		<td>Seguidos: <%=seguidos.length %></td>
+		
+		<td>
+			<%if((boolean)request.getAttribute("usrSigueAlOtro")){ 
+			%>
+				<button id="botonDejarSeguir" value="DejarSeguir" onclick="dejarSeguirUsr()">Dejar de Seguir</button>
+			<%}else{%>
+				<button id="botonSeguir" value="Seguir" onclick="seguirUsr()">Seguir</button>
+			<%} %>
+			
+			
+		</td>		
 		</tr>
 	</table>
 	</div>
+	<p id="disponible"></p>
+	<script >
+		function seguirUsr(){
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					window.alert("Siguiendo");
+		            window.location.reload(); 
+				}
+			};
+			xhttp.open("GET", "follow?usuario_a_seguir=<%=nick%>&opcion=follow",true);
+			xhttp.send();
+		
+		}
+		function dejarSeguirUsr(){
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					window.alert("Ya no lo sigue");
+					window.location.reload(); 
+					
+				}
+			};
+			xhttp.open("GET", "follow?usuario_a_no_seguir=<%=nick%>&opcion=unfollow",true);
+			xhttp.send();
+		}
+	</script>
  <table class="tabs" data-min="0" data-max="3" width="80%">
     <tr>
         <th class="tabcks">&nbsp;</th>
@@ -98,9 +136,10 @@
          	Nombre:<%=nombre_canal %> <br>
             Descripcion:<%=descCanal %><br>
             Categoria:<%=categoriaCanal %><br>
+            	  (si es del usurio logeado puede modificar sus datos)
             </div>
             <div class="tabdiv" id="tabdiv-3">
-	        	Seguidores
+	           	Seguidores
 	        	<%
 				for(String seguidoresUsr: seguidores){
 				%>
@@ -120,7 +159,7 @@
 				<%
 				}
 	        	
-	        	%>   
+	        	%> 
             </div>
             <div class="tabdiv" id="tabdiv-1">
                 Videos del canal del usuario
@@ -148,10 +187,21 @@
 					<input type="hidden" name="opcion" value="ver">
 					<input type="hidden" name="ID" value="<%=entry.getIDVideo()%>">
 					<input type="submit" value="Ver Ahora"> </form> 
+					 <%if((boolean)request.getAttribute("dueñoCanal")){ 
+						 System.out.print("ES DUEÑO DEL CANAL");
+					 %>
+					 
+						<form action="modifyVideo" method="post"> 
+						<input type="hidden" name="opcion" value="modificarVideo">
+						<input type="hidden" name="dtVideo" value="<%=entry%>">
+						<input type="submit" value="Modificar"> </form> 
+						<%}%>
+								
 					</td>
 					</tr>
 					<% } %>
 					</table>
+                    
             </div>
             <div class="tabdiv" id="tabdiv-2">
                Listas de reproduccion
@@ -167,8 +217,7 @@
 							DtListaReproduccion[] listas=(DtListaReproduccion[]) request.getAttribute("listas");
 							for(DtListaReproduccion entry: listas){%>
 						<tr class="listaRow">
-				
-						</td>
+						
 						<td id="NombreTD"><%=entry.getNombre()%></td>
 						<td id="DescripcionTD"></td>
 						<td>
@@ -177,6 +226,15 @@
 						<input type="hidden" name="nameList" value="<%=entry.getNombre() %>">
 						<input type="hidden" name="ownerList" value="<%=entry.getPropietario() %>">
 						<input type="submit" value="Ver Info"> </form> 
+						<%if((boolean)request.getAttribute("dueñoCanal")){ 
+						 System.out.print("ES DUEÑO DEL CANAL");
+						 %>
+					 
+						<form action="modifyPlaylist" method="post"> 
+						<input type="hidden" name="opcion" value="modificarLista">
+						<input type="hidden" name="dtLista" value="<%=entry%>">
+						<input type="submit" value="Modificar"> </form> 
+						<%}%>
 						</td>
 						</tr>
 						
@@ -186,7 +244,7 @@
 						%>
 						
 					</table>
-	            </div>
+	         </div>
         </td>
     </tr>   
  </table>

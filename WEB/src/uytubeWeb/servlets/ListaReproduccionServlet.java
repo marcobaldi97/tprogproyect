@@ -49,6 +49,49 @@ public class ListaReproduccionServlet extends HttpServlet {
 		
 		switch(action) 
 		{
+		
+			case "removeVideo":{
+				int id_video=(int)session.getAttribute("ID");
+				String nombreLista = (String) session.getAttribute("List");
+				
+				if(session!=null) {
+		            String login=(String)session.getAttribute("nombre_usuario");
+		            if(login!=null) {
+		            	interfazUsuario.eliminarVideoLista(login, id_video, nombreLista);
+		            	/*DtVideo[] videosLista=interfazUsuario.obtenerDtsVideosListaReproduccionUsuario(login, nombreLista);
+		            	DtListaReproduccion infoLista = interfazUsuario.infoAdicLDR(login, nombreLista);
+		            	request.setAttribute("videosLista", videosLista);
+		    			request.setAttribute("infoLista", infoLista);*/
+		    			request.getRequestDispatcher("/WEB-INF/Lista Reproduccion/modificarListaReproduccion.jsp").forward(request, response);	
+		            }
+				}
+				
+				
+			}break;
+			
+			case "modify":
+			{
+				if(session!=null) {
+		            String login=(String)session.getAttribute("nombre_usuario");
+		            if(login!=null) {
+						 request.setAttribute("nicknameLogin", login);
+		            }
+		     }
+			 else
+			 {
+				 request.setAttribute("nicknameLogin", null);
+
+			 } 	
+			String nombreLista = request.getParameter("nameList");
+			String propietarioLista = request.getParameter("ownerList");
+			DtVideo[] videosLista=interfazUsuario.obtenerDtsVideosListaReproduccionUsuario(propietarioLista, nombreLista);
+			DtListaReproduccion infoLista = interfazUsuario.infoAdicLDR(propietarioLista, nombreLista);
+			request.setAttribute("videosLista", videosLista);
+			request.setAttribute("infoLista", infoLista);
+			request.getRequestDispatcher("/WEB-INF/Lista Reproduccion/modificarListaReproduccion.jsp").forward(request, response);	
+				
+			}break;
+		
 			case "details":{
 				 if(session!=null) {
 			            String login=(String)session.getAttribute("nombre_usuario");
@@ -141,6 +184,10 @@ public class ListaReproduccionServlet extends HttpServlet {
 			}else {
 				response.sendRedirect(request.getContextPath() + "/home");
 			}
+		}
+		case "modificarLista":{
+			DtListaReproduccion dataLista = (DtListaReproduccion) request.getAttribute("dtLista");
+			break;
 		}
 		}
 	}

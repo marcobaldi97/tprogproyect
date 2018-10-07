@@ -63,7 +63,14 @@
 	<input type="hidden" name="action" value="details">
 	<input type="hidden" name="nameList" value="<%=entry.getNombre()%>">
 	<input type="hidden" name="ownerList" value="<%=entry.getPropietario() %>">
-	<input type="submit" value="Ver Info"> </form> 
+	<input type="submit" value="Ver Info">
+	</form>
+	<form action="modifyPlaylist" method="get"> 
+	<input type="hidden" name="action" value="modify">
+	<input type="hidden" name="nameList" value="<%=entry.getNombre()%>">
+	<input type="hidden" name="ownerList" value="<%=entry.getPropietario() %>">
+	<input type="submit" value="Modificar">
+	</form>
 	</td>
 	<td id="NombreTD"><%=entry.getNombre()%></td>
 	<td id="PropietarioTD"><%=entry.getPropietario() %></td>

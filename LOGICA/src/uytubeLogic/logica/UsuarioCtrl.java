@@ -222,9 +222,9 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 	}
 
 	@Override
-	public DtCanal[] listarCanalesPorNombre(String nombre) {
+	public DtCanal[] listarCanalesPublicosPorNombre(String nombre) {
 
-		return usuarioh.listarCanalesPorNombre(nombre);
+		return usuarioh.listarCanalesPublicosPorNombre(nombre);
 	}
 
 	@Override
@@ -235,6 +235,6 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 
 	public boolean verificarLogin(String nick,String pass) {
 		Usuario usuarioParticular = usuarioh.find(nick);
-		return(usuarioParticular!=null && usuarioParticular.getPasswrod().equals(pass));
+		return(usuarioParticular!=null && usuarioParticular.getPassword().equals(pass));
 	}
 }

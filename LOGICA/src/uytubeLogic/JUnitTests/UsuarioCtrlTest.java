@@ -6,6 +6,8 @@ import java.util.Date;
 
 import org.junit.Test;
 
+import com.sun.xml.internal.bind.v2.runtime.reflect.ListTransducedAccessorImpl;
+
 import uytubeLogic.logica.DtCanal;
 import uytubeLogic.logica.DtCategoria;
 import uytubeLogic.logica.DtFecha;
@@ -612,4 +614,86 @@ public class UsuarioCtrlTest {
 		assertEquals(true,existe2enData);
 		
 	}
+	
+	@Test
+	public void testListarLDRPublicasPorNombreYDtsPorPrivacidad() {
+		UsuarioCtrl UCU=UsuarioCtrl.getInstance();
+		DtFecha fecha=new DtFecha(new Date(0));
+		String nombreU="nombreLLPPN1";
+		String nombreU2="nombreLLPN2";
+		String nombreV1Publico="nombreVLLPPN1";
+		String nombreV2Privado="nombreVLLPPN2";
+		String nombreV3Publico="nombreVLLPPN3";
+		String nombreLPublica="nombreLLLPPN1";
+		String nombreLPrivada="nombreLLLPPN2";
+		String nombreLPDefecto="nombreLLLPPN3";
+		UCU.nuevoUsuario(nombreU,"1234", "Jose", "Ramirez", "www.cosoarroba3",fecha , null, "canal", "descripcion", Privacidad.PUBLICO, null);
+		UCU.nuevoUsuario(nombreU2,"1234", "Gimena", "Rodriguez", "www.cosoarroba4",fecha , null, "canal2", "descripcion2", Privacidad.PUBLICO, null);
+		UCU.aniadirVideo(nombreU, nombreV1Publico, "descrito1", 40, fecha, "url1", null, Privacidad.PUBLICO);
+		UCU.aniadirVideo(nombreU, nombreV2Privado, "descrito2", 30, fecha, "url2", null, Privacidad.PRIVADO);
+		UCU.aniadirVideo(nombreU2, nombreV3Publico, "descrito3", 40, fecha, "url3", null, Privacidad.PUBLICO);
+		UCU.nuevaListaParticular(nombreU, nombreLPrivada, Privacidad.PRIVADO);
+		UCU.nuevaListaParticular(nombreU, nombreLPublica, Privacidad.PUBLICO);
+		UCU.nuevaListaPorDefecto(nombreLPDefecto);
+		
+		DtListaReproduccion[] listasResultado1=UCU.listarLDRPublicasPorNombre("nombreLLLPPN");
+		assertEquals(1,listasResultado1.length);
+		assertTrue(listasResultado1[0].getNombre().equals(nombreLPublica));
+		DtListaReproduccion[] listasResultado2=UCU.infoLDRdeUsuario(nombreU, Privacidad.PUBLICO);
+		assertEquals(1,listasResultado2.length);
+		assertTrue(listasResultado2[0].getNombre().equals(nombreLPublica));
+		DtListaReproduccion[] listasResultado3=UCU.infoLDRdeUsuario(nombreU, Privacidad.PRIVADO);
+		assertTrue(listasResultado3.length>=2);
+		boolean existe1=false,existe2=false;
+		for(DtListaReproduccion entry:listasResultado3) {
+			if(entry.getNombre().equals(nombreLPDefecto))
+				existe1=true;
+			if(entry.getNombre().equals(nombreLPrivada))
+				existe2=true;
+		}
+		assertTrue(existe1);
+		assertTrue(existe2);
+		DtListaReproduccion[] listasResultado4=UCU.infoLDRdeUsuario(nombreU2, Privacidad.PUBLICO);
+		assertEquals(0,listasResultado4.length);
+		DtVideo[] videosResultado1=UCU.infoVideosCanal(nombreU, Privacidad.PRIVADO);
+		assertEquals(1,videosResultado1.length);
+		assertEquals(nombreV2Privado,videosResultado1[0].getNombre());
+		
+		DtVideo[] videosResultado2=UCU.infoVideosCanal(nombreU, Privacidad.PUBLICO);
+		assertEquals(1,videosResultado2.length);
+		assertEquals(nombreV1Publico,videosResultado2[0].getNombre());
+		
+		DtVideo[] videosResultado3=UCU.infoVideosCanal(nombreU2, Privacidad.PRIVADO);
+		assertEquals(0,videosResultado3.length);
+		
+		DtVideo[] videosResultado4=UCU.infoVideosCanal(nombreU2, Privacidad.PUBLICO);
+		assertEquals(1,videosResultado4.length);
+		assertEquals(nombreV3Publico,videosResultado4[0].getNombre());
+	}
+	
+	@Test
+	public void testListarCanalesPublicos() {
+		UsuarioCtrl UCU=UsuarioCtrl.getInstance();
+		DtFecha fecha=new DtFecha(new Date(0));
+		String nombreU="nombreLCP1";
+		String nombreU2="nombreLCP2";
+		String nombreU3="nombreLCP3";
+		UCU.nuevoUsuario(nombreU,"1234", "Jose", "Ramirez", "www.cosoarroba3",fecha , null, "canalListarCanalesPublicos1", "descripcion", Privacidad.PUBLICO, null);
+		UCU.nuevoUsuario(nombreU2,"1234", "Gimena", "Rodriguez", "www.cosoarroba4",fecha , null, "canalListarCanalesPublicos2", "descripcion2", Privacidad.PUBLICO, null);
+		UCU.nuevoUsuario(nombreU3,"1234", "Gimena", "Rodriguez", "www.cosoarroba4",fecha , null, "canalListarCanalesPublicos3", "descripcion2", Privacidad.PRIVADO, null);
+
+		DtCanal[] canalesResultados = UCU.listarCanalesPublicosPorNombre("canalListarCanalesPublicos");
+		assertEquals(2,canalesResultados.length);
+		boolean existe1=false,existe2=false;
+		for(DtCanal entry:canalesResultados) {
+			if(entry.getNombre().equals("canalListarCanalesPublicos1"))
+				existe1=true;
+			if(entry.getNombre().equals("canalListarCanalesPublicos2"))
+				existe2=true;
+		}
+		assertTrue(existe1);
+		assertTrue(existe2);
+	}
 }
+
+

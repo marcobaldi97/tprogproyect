@@ -49,9 +49,6 @@ public class Canal {
 		listasReproduccion.put(listaRep.getNombre(), listaRep);
 	}
 
-	public void removeListaReproduccion(ListaReproduccion listaRep) {
-		listasReproduccion.remove(listaRep.getNombre());
-	}
 
 	public ListaReproduccion findLista(String nombreLista) {
 		return listasReproduccion.get(nombreLista);
@@ -111,9 +108,6 @@ public class Canal {
 		videos.put(vVideo.getNombre(), vVideo);
 	}
 
-	public void removerVideo(Video vVideo) {
-		videos.remove(vVideo.getNombre());
-	}
 
 	public Video findVideo(String sNombre) {
 		return videos.get(sNombre);
