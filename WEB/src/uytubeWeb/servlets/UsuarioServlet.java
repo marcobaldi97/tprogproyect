@@ -121,16 +121,14 @@ public class UsuarioServlet extends HttpServlet {
 		 	String usuario_a_seguir = (String) request.getParameter("usuario_a_seguir");
 		 	System.out.println("usuario: "+nombre_usuario+ " va a seguir a :"+usuario_a_seguir);
 		 	seguirUsuario(nombre_usuario, usuario_a_seguir);
-		 	response.getWriter().append("OK");
-			break;
+		 	break;
 		}	
 		case "unfollow":{
 			HttpSession session=request.getSession();
 		 	String nombre_usuario = (String)session.getAttribute("nombre_usuario");
 		 	String usuario_a_no_seguir = (String) request.getParameter("usuario_a_no_seguir");
 		 	dejarUsuario(nombre_usuario, usuario_a_no_seguir);
-		 	response.getWriter().append("OK1");
-			break;
+		 	break;
 		}	
 		case "nuevoUsuario":{
 			System.out.println("nuevo usuario GET");
@@ -149,7 +147,7 @@ public class UsuarioServlet extends HttpServlet {
 			request.setAttribute("dataCanal", infoCanal);
 			request.setAttribute("dataUsuario", usuario);
 			
-			DtListaReproduccion[] listas = interfazUsuarios.infoLDRdeUsuario(nickname, Privacidad.PRIVADO);
+			DtListaReproduccion[] listas = interfazUsuarios.infoLDRdeUsuario(nickname, Privacidad.PUBLICO);
 		    DtVideo[] videos = interfazUsuarios.infoVideosCanal(nickname, Privacidad.PUBLICO);
 	        HttpSession session=request.getSession(false);
 	        if(session!=null) {
@@ -159,36 +157,39 @@ public class UsuarioServlet extends HttpServlet {
 	                String [] usrQueSigue = interfazUsuarios.listarUsuariosQueSigue(login);
 	                boolean loSigue = false;
 	                int i=0;
-	                while((i<usrQueSigue.length) && (loSigue=!true)){
-	                	if( usrQueSigue[i] == nickname) {loSigue=true;}
+	                while((i<usrQueSigue.length) && (loSigue==false)){
+	                    if( usrQueSigue[i].equals(nickname)) {loSigue=true;}
 	                	i++;
 	                }
-	                System.out.println(login+"sigue a"+nickname+"  "+loSigue);
+	                System.out.println(login+"sigue a?"+nickname+"  "+loSigue);
 	                request.setAttribute("usrSigueAlOtro", loSigue);
-	                DtVideo[] videosPrivadosSesion=interfazUsuarios.infoVideosCanal(login, Privacidad.PRIVADO);
-	                DtListaReproduccion[] listasPrivadasSesion=interfazUsuarios.infoLDRdeUsuario(login, Privacidad.PRIVADO);
-	                List<DtVideo> videosAux= new ArrayList<DtVideo>(Arrays.asList(videos));
-	                videosAux.addAll(Arrays.asList(videosPrivadosSesion));
-	                videos=videosAux.toArray(new DtVideo[0]);
-	                List<DtListaReproduccion> listasAux = new ArrayList<DtListaReproduccion>(Arrays.asList(listas));
-	                listasAux.addAll(Arrays.asList(listasPrivadasSesion));
-	                listas=listasAux.toArray(new DtListaReproduccion[0]);
-	              
-	                String parametroListas="listas";
-	    	        String parametroVideos="videos";
+	                if(login.equals(nickname)){
+		                DtVideo[] videosPrivadosSesion=interfazUsuarios.infoVideosCanal(login, Privacidad.PRIVADO); //videos privados del usuario logeado
+		                DtListaReproduccion[] listasPrivadasSesion=interfazUsuarios.infoLDRdeUsuario(login, Privacidad.PRIVADO); //listas privadas del usr log
+		                List<DtVideo> videosAux= new ArrayList<DtVideo>(Arrays.asList(videos));
+		                videosAux.addAll(Arrays.asList(videosPrivadosSesion));
+		                videos=videosAux.toArray(new DtVideo[0]);
+		                List<DtListaReproduccion> listasAux = new ArrayList<DtListaReproduccion>(Arrays.asList(listas));
+		                listasAux.addAll(Arrays.asList(listasPrivadasSesion));
+		                listas=listasAux.toArray(new DtListaReproduccion[0]);
+	                }
+	              }
+	        }
+	        String parametroListas="listas";
+	        String parametroVideos="videos";
 
-	    	        request.setAttribute(parametroListas, listas);
-	    	        request.setAttribute(parametroVideos, videos);
-	            	request.getRequestDispatcher("WEB-INF/Usuario/ConsultaUsuarioLogeado.jsp").forward(request, response);
-	            }
+	        request.setAttribute(parametroListas, listas);
+	        request.setAttribute(parametroVideos, videos);
+	    
+	        if(session!=null){
+	        	String login=(String)session.getAttribute("nombre_usuario");
+	       		if(login!=null) {
+	        	 	request.getRequestDispatcher("WEB-INF/Usuario/ConsultaUsuarioLogeado.jsp").forward(request, response);
+	       		}else{
+	       			request.getRequestDispatcher("WEB-INF/Usuario/ConsultaUsuario.jsp").forward(request, response);
+	       		}
 	        }else{
-		        String parametroListas="listas";
-		        String parametroVideos="videos";
-	
-		        request.setAttribute(parametroListas, listas);
-		        request.setAttribute(parametroVideos, videos);
-	
-				request.getRequestDispatcher("WEB-INF/Usuario/ConsultaUsuario.jsp").forward(request, response);
+	        	request.getRequestDispatcher("WEB-INF/Usuario/ConsultaUsuario.jsp").forward(request, response);
 	        }
 			break;
 		}
