@@ -4,7 +4,7 @@
 <html>
 
 <head>
-  <%@include file = "WEB-INF/cosasComunesDelHead.jsp" %>
+  <%@include file="WEB-INF/cosasComunesDelHead.jsp" %>
   <title>UyTube!</title>
 </head>
 

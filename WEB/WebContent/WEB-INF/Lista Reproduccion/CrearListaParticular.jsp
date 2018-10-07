@@ -1,12 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<%@ include file="../cosasComunesDelHead.jsp" %>
 <title>Crear Lista Particular</title>
 </head>
+
 <body>
+  <%@include file="../buscador.jsp" %>
+  <div class="main-container">
+    <%@include file="../sidebar.jsp" %>
+    <div class="main-content">
 	<form action="newPlaylist" method="post">
 	  Nombre de la lista<br>
 	  <input type="text" name="nombreLista"><br>
@@ -16,5 +22,7 @@
 	  <input type="hidden" name="action" value="crearLDR">
 	  <button type="submit">Crear</button>
 	  </form>
+    </div>
+  </div>
 </body>
 </html>
