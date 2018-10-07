@@ -164,6 +164,7 @@ public class UsuarioServlet extends HttpServlet {
 	                System.out.println(login+"sigue a?"+nickname+"  "+loSigue);
 	                request.setAttribute("usrSigueAlOtro", loSigue);
 	                if(login.equals(nickname)){
+	                	request.setAttribute("dueñoCanal", true);
 		                DtVideo[] videosPrivadosSesion=interfazUsuarios.infoVideosCanal(login, Privacidad.PRIVADO); //videos privados del usuario logeado
 		                DtListaReproduccion[] listasPrivadasSesion=interfazUsuarios.infoLDRdeUsuario(login, Privacidad.PRIVADO); //listas privadas del usr log
 		                List<DtVideo> videosAux= new ArrayList<DtVideo>(Arrays.asList(videos));
@@ -173,22 +174,24 @@ public class UsuarioServlet extends HttpServlet {
 		                listasAux.addAll(Arrays.asList(listasPrivadasSesion));
 		                listas=listasAux.toArray(new DtListaReproduccion[0]);
 	                }
-	              }
+	             }
 	        }
 	        String parametroListas="listas";
 	        String parametroVideos="videos";
 
 	        request.setAttribute(parametroListas, listas);
 	        request.setAttribute(parametroVideos, videos);
-	    
+	      
 	        if(session!=null){
 	        	String login=(String)session.getAttribute("nombre_usuario");
 	       		if(login!=null) {
 	        	 	request.getRequestDispatcher("WEB-INF/Usuario/ConsultaUsuarioLogeado.jsp").forward(request, response);
 	       		}else{
+	       			request.setAttribute("dueñoCanal", false);
 	       			request.getRequestDispatcher("WEB-INF/Usuario/ConsultaUsuario.jsp").forward(request, response);
 	       		}
 	        }else{
+	        	request.setAttribute("dueñoCanal", false);
 	        	request.getRequestDispatcher("WEB-INF/Usuario/ConsultaUsuario.jsp").forward(request, response);
 	        }
 			break;
