@@ -77,7 +77,6 @@
 		
 		<td>
 			<%if((boolean)request.getAttribute("usrSigueAlOtro")){ 
-			System.out.print((boolean)request.getAttribute("usrSigueAlOtro")+ "HOLA");
 			%>
 				<button id="botonDejarSeguir" value="DejarSeguir" onclick="dejarSeguirUsr()">Dejar de Seguir</button>
 			<%}else{%>
@@ -188,12 +187,21 @@
 					<input type="hidden" name="opcion" value="ver">
 					<input type="hidden" name="ID" value="<%=entry.getIDVideo()%>">
 					<input type="submit" value="Ver Ahora"> </form> 
+					 <%if((boolean)request.getAttribute("dueñoCanal")){ 
+						 System.out.print("ES DUEÑO DEL CANAL");
+					 %>
+					 
+						<form action="modifyVideo" method="post"> 
+						<input type="hidden" name="opcion" value="modificarVideo">
+						<input type="hidden" name="dtVideo" value="<%=entry%>">
+						<input type="submit" value="Modificar"> </form> 
+						<%}%>
+								
 					</td>
 					</tr>
 					<% } %>
 					</table>
-                          (cuando selecciona un video, ir a consulta video)
-                (si es del usurio logeado puede modificar sus datos)
+                    
             </div>
             <div class="tabdiv" id="tabdiv-2">
                Listas de reproduccion
@@ -218,6 +226,15 @@
 						<input type="hidden" name="nameList" value="<%=entry.getNombre() %>">
 						<input type="hidden" name="ownerList" value="<%=entry.getPropietario() %>">
 						<input type="submit" value="Ver Info"> </form> 
+						<%if((boolean)request.getAttribute("dueñoCanal")){ 
+						 System.out.print("ES DUEÑO DEL CANAL");
+						 %>
+					 
+						<form action="modifyPlaylist" method="post"> 
+						<input type="hidden" name="opcion" value="modificarLista">
+						<input type="hidden" name="dtLista" value="<%=entry%>">
+						<input type="submit" value="Modificar"> </form> 
+						<%}%>
 						</td>
 						</tr>
 						
@@ -227,12 +244,7 @@
 						%>
 						
 					</table>
-				
-
-              
-                (como consulta de lista)
-                (si es del usurio logeado puede modificar sus datos)
-            </div>
+	         </div>
         </td>
     </tr>   
  </table>

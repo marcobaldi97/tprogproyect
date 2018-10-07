@@ -185,6 +185,10 @@ public class ListaReproduccionServlet extends HttpServlet {
 				response.sendRedirect(request.getContextPath() + "/home");
 			}
 		}
+		case "modificarLista":{
+			DtListaReproduccion dataLista = (DtListaReproduccion) request.getAttribute("dtLista");
+			break;
+		}
 		}
 	}
 

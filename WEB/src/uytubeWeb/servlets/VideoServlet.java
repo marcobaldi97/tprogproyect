@@ -196,6 +196,12 @@ public class VideoServlet extends HttpServlet {
 
 			break;
 		}
+		case "modificarVideo":{
+			//aca modificar video
+			DtVideo dataVideo = (DtVideo) request.getAttribute("dtVideo");
+			
+			break;
+		}
 		default:
 			System.out.println("Error");
 			break;
