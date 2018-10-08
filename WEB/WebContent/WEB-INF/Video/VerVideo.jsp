@@ -54,7 +54,10 @@
 	}
 	else logged_state = "false";
 	DtComentario[] comentarios = (DtComentario[]) request.getAttribute("comentarios");
-	int tamanio_comentarios = comentarios.length;
+	Integer tamanio_comentarios = 0;
+	for(int i = 0; i < comentarios.length; i++){
+		tamanio_comentarios = tamanio_comentarios + comentarios[i].getTamanioArbol();
+	}
 	%>
 	<link rel="stylesheet" href="media/styles/VerVideo.css">
 	<title><%=titulo%></title>
