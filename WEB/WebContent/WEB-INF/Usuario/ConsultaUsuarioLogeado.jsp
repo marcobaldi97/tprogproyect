@@ -33,7 +33,7 @@
 	Date fechaNac = dataUsuario.getFechaNacimiento().getFecha();
 	int dia = fechaNac.getDay();
 	int mes = fechaNac.getMonth();
-	int anio = fechaNac.getYear();
+	int anio = fechaNac.getYear()  + 1900;
 	byte[] foto = dataUsuario.getFoto();
 	DtCanal dataCanal = (DtCanal) request.getAttribute("dataCanal");
 	String nombre_canal = dataCanal.getNombre();
