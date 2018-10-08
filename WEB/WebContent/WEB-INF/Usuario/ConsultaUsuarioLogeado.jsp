@@ -12,7 +12,7 @@
 <%@page import="java.text.DateFormat"%>
 <%@page import="java.util.Base64"%>
 <%@ page import = "java.util.Date"%>
-<%@page errorPage="../error/error404.jsp" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -169,8 +169,7 @@
 					<th valign="top"> Descripcion </th>
 					<th valign="top"> </th>
 					</tr>
-                	</tr>
-						<%
+                	<%
 						DtVideo[] vid = (DtVideo[]) request.getAttribute("videos");
 						for (DtVideo entry : vid) {
 							String nombreV=entry.getNombre();
@@ -187,7 +186,9 @@
 					<input type="hidden" name="opcion" value="ver">
 					<input type="hidden" name="ID" value="<%=entry.getIDVideo()%>">
 					<input type="submit" value="Ver Ahora"> </form> 
-					 <%if((boolean)request.getAttribute("dueñoCanal")){ 
+					
+					 <%
+					 if((boolean)request.getAttribute("dueñoCanal")){ 
 						 System.out.print("ES DUEÑO DEL CANAL");
 					 %>
 					 
@@ -213,7 +214,7 @@
 					<th valign="top"> </th>
 					</tr>
 						<%
-						if(request.getAttribute("listas")!=null){
+						//if(request.getAttribute("listas")!=null){
 							DtListaReproduccion[] listas=(DtListaReproduccion[]) request.getAttribute("listas");
 							for(DtListaReproduccion entry: listas){%>
 						<tr class="listaRow">
@@ -227,7 +228,7 @@
 						<input type="hidden" name="ownerList" value="<%=entry.getPropietario() %>">
 						<input type="submit" value="Ver Info"> </form> 
 						<%if((boolean)request.getAttribute("dueñoCanal")){ 
-						 System.out.print("ES DUEÑO DEL CANAL");
+						 //System.out.print("ES DUEÑO DEL CANAL");
 						 %>
 					 
 						<form action="modifyPlaylist" method="post"> 
@@ -238,7 +239,7 @@
 						</td>
 						</tr>
 						
-						<%	}
+						<%	//}
 						}
 						
 						%>
