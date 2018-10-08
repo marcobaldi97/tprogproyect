@@ -25,6 +25,7 @@ import uytubeLogic.logica.DtUsuario;
 import uytubeLogic.logica.DtVideo;
 import uytubeLogic.logica.Fabrica;
 import uytubeLogic.logica.IUsuarioCtrl;
+import uytubeLogic.logica.IVideoCtrl;
 import uytubeLogic.logica.SystemHandler.Privacidad;
 
 /**
