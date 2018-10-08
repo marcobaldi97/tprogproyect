@@ -26,7 +26,7 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 			tamanio=tamanio+entry.getTamanioArbol();
 		}
 		return tamanio;
-	}
+	}//Carmona: lo siento pero lo tengo que usar desde una JSP, entonces no me conviene que esté en el controlador. Att.: Marco
 
 	public Boolean memberListaReproduccionPropia(String nickU, String nombreLista) {
 		UsuarioHandler usuHandler = UsuarioHandler.getInstance();
