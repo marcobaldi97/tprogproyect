@@ -30,10 +30,21 @@ td {
     text-align: left;
     border-bottom: 1px solid #ddd;
 }
+.verAhora{
+	background-color: #ee0000;
+	border: none;
+	color: white;
+	padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
 tr:nth-child(even) {background-color: #f2f2f2;}</style>
+<%@include file="cosasComunesDelHead.jsp" %>
+<%@include file="buscador.jsp" %>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title><%=request.getAttribute("titulo") %></title>
-<%@include file="buscador.jsp" %>
 </head>
 <body>
 
@@ -56,7 +67,7 @@ if (request.getAttribute("canales") != null) { %>
 	<%
 	DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 	
-	DateFormat goodDf = new SimpleDateFormat("EEEEE dd MMMMM yyyy",Locale.getDefault());
+	DateFormat goodDf = new SimpleDateFormat("EEEEE dd 'de' MMMMM 'del' yyyy",Locale.getDefault());
 	if (request.getAttribute("videos") != null) {
 %>
 <table id="TablaContenidos">
@@ -81,7 +92,7 @@ if (request.getAttribute("canales") != null) { %>
 	<form action="watch" method="get"> 
 	<input type="hidden" name="opcion" value="ver">
 	<input type="hidden" name="ID" value="<%=entry.getIDVideo()%>">
-	<input type="submit" value="Ver Ahora"> </form> 
+	<input class="verAhora" type="submit" value="Ver Ahora"> </form> 
 	</td>
 	<td id="NombreTD"><%=nombreV%></td>
 	<td id="DescripcionTD"><%=descV %></td>
@@ -104,7 +115,7 @@ if (request.getAttribute("canales") != null) { %>
 	<input type="hidden" name="action" value="details">
 	<input type="hidden" name="nameList" value="<%=entry.getNombre() %>">
 	<input type="hidden" name="ownerList" value="<%=entry.getPropietario() %>">
-	<input type="submit" value="Ver Info"> </form> 
+	<input class="verAhora" type="submit" value="Ver Info"> </form> 
 	</td>
 	<td id="NombreTD"><%=entry.getNombre()%></td>
 	<td id="DescripcionTD"></td>
@@ -125,7 +136,7 @@ if (request.getAttribute("canales") != null) { %>
 	<form action="profile" method="get"> 
 	<input type="hidden" name="opcion" value="Perfil">
 	<input type="hidden" name="nickname" value="<%=entry.getPropietario()%>">
-	<input type="submit" value="Ver Canal"> </form> 
+	<input class="verAhora" type="submit" value="Ver Canal"> </form> 
 	</td>
 		<td id="NombreTD"><%=entry.getNombre()%></td>
 		<td id="DescripcionTD"><%=entry.getDescripcion() %></td>

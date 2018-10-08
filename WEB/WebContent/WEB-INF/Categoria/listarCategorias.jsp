@@ -19,7 +19,7 @@
                 String nombreCategoria = categoria.getNombre();
 	    %>
             <input type="hidden" name="action" value="consult" class="btn-link">
-            <button type="submit" name="type" value="<%= nombreC %>" class="btn-link">
+            <button type="submit" name="type" value="<%= nombreCategoria %>" class="btn-link">
                 <%= nombreCategoria %>
             </button><br>
         <%

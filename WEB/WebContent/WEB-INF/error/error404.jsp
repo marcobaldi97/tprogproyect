@@ -15,7 +15,7 @@
 			<t id="texto_aviso">
 			Intentaste entrar a una página que no existe.
 			Por suerte esto los servidores no mueren por esto. Puedes
-			<a href="/home">volver</a> al inicio.
+			<a href="home">volver</a> al inicio.
 			</t>
 		</tr>
 	</table>
