@@ -67,13 +67,6 @@
 	    	document.getElementById("seguir_button").addEventListener("click",seguir_script);
 	    	document.getElementById("response_button").addEventListener("click",comentar_video);
 	    	document.getElementById("listasUsuarioLogged").addEventListener("click",agregar_lista_script);
-	    	for(var index = 0;index < <%=tamanio_comentarios%>; index++){
-	    		var response_button = "response_button" + index;
-	    		document.getElementById(response_button).addEventListener("click",toggle_response_box(index));//parece no funcar
-	    		var submit_response_button = "submit_response_button" + index;
-	    		document.getElementById(submit_response_button).addEventListener("click",submit_response(index));//parece no funcar
-	    		console.log("response button con index: "+index+"está con evento");
-	    	}
 		}else{
 	    	for(var index = 0;index < <%=tamanio_comentarios%>; index++){
 	    		var response_box = "response_box" + index;
@@ -104,15 +97,16 @@
 		var id_comentario = document.getElementById(response_button).value;
 		var comentario_a_comentar = "comentario_a_comentar" + index;
 		var contenido_comentario = document.getElementById(comentario_a_comentar).value;
+		var response_box = "response_box" + index;
+		document.getElementById(response_box).style.display = "none";
 		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200) {
+				window.alert("comente");
 			}
 		};
-		xhttp.open("GET", "responseComment?id_video="+<%=id_video%>+"&opcion=responderComentario&id_comentario="+id_comentario+"&contenido_comentario="+contenido_comentario,true);
+		xhttp.open("GET", "responseComment?id_video="+<%=id_video%>+"&opcion=responderComentario&id_comentario="+id_comentario+"&contenido="+contenido_comentario,true);
 		xhttp.send();
-		var response_box = "response_box" + index;
-		document.getElementById(response_box).style.display = "none";
 	}
 
 	function me_gusta_script() {
@@ -235,29 +229,32 @@
 				out.println("</select>");
 				out.println("<button id=\"agregar_lista_button\" value=\"Agregar\">Agregar a lista</button>");
 			}
-		}//esta funciñn genera el cñdigo html para el boton combo box para agregar un video a una lista de reproduccion.
-		private void printComentarios(javax.servlet.jsp.JspWriter out, DtComentario[] comentarios) throws java.io.IOException{
-			for(int index = 0 ; index < comentarios.length; index++){
-				String autor_comentario = comentarios[index].getNickUsuario();
-				Date fecha_publicacion_comentario = comentarios[index].getFecha().getFecha();
+		}//esta funciñn genera el codigo html para el boton combo box para agregar un video a una lista de reproduccion.
+		private int printComentarios(javax.servlet.jsp.JspWriter out, DtComentario[] comentarios,int index) throws java.io.IOException{
+			for(int i = 0  ; i < comentarios.length; i++){
+				String autor_comentario = comentarios[i].getNickUsuario();
+				Date fecha_publicacion_comentario = comentarios[i].getFecha().getFecha();
 				int dia_comment, mes_comment, anio_comment;
 				dia_comment = fecha_publicacion_comentario.getDate();
 				mes_comment = fecha_publicacion_comentario.getMonth();
 				anio_comment = fecha_publicacion_comentario.getYear() + 1900;
-				String descripcion_comentario = comentarios[index].getTexto();
-				DtComentario[] hijos = comentarios[index].getRespuestas();
+				String descripcion_comentario = comentarios[i].getTexto();
+				DtComentario[] hijos = comentarios[i].getRespuestas();
 		   		out.println("<ul class=\"comment\">");
 		   		out.println("	<li><img id=\"logo\" src=\"https://i0.wp.com/blogthinkbig.com/wp-content/uploads/2018/04/3hfXV9eW-mAQfO4XNZrGX1OJPTm-FuEjVT_yxNH0cQM.jpg?resize=610%2C343\"></img> <p id=\"nombre_autor\">"+autor_comentario+" "+dia_comment+"/"+mes_comment+"/"+anio_comment+"</p></li>");
 				out.println("	<li><p class=\"descripcion\">"+descripcion_comentario+"</p></li>");
-				out.println("	<li><button style=\"width:30%\" id=\"response_button"+index+"\" name=\"response_button\" value=\""+comentarios[index].getIDComentario()+"\" onclick=\"toggle_response_box("+index+")\">  Responder  </button></li>");
+				out.println("	<li><button style=\"width:30%\" id=\"response_button"+index+"\" class=\"response_button_class\" name=\"response_button\" value=\""+comentarios[i].getIDComentario()+"\" onclick=\"toggle_response_box("+index+")\">  Responder  </button></li>");
 				out.println("	<li style=\"display:none;\" id=\"response_box"+index+"\"><img id=\"mini_logo\" src=\"\"></img><textarea class=\"comentario\" id=\"comentario_a_comentar"+index+"\"></textarea><button class=\"response_button\"  id=\"submit_response_button"+index+"\" name=\"response_button\" value=\"Responder\" onclick=\"submit_response("+index+")\">  Responder  </button></li>");
-				if(hijos.length != 0)printComentarios(out,hijos);
+				index++;
+				index = printComentarios(out,hijos,index);
 				out.println("</ul>");
 			}
+			return index;
 		}
 	%>
 	<%
-		printComentarios(out,comentarios);
+		int index = 0;
+		printComentarios(out,comentarios, index);
 	%>
 </body>
 </html>
