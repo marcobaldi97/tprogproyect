@@ -12,6 +12,17 @@ public class DtComentario {
 		return idComentario;
 	}
 
+	public Integer getTamanioArbol() {
+		if(respuestas.length==0) {
+			return 1;
+		}else {
+			Integer cantRespuestas=1;
+			for(DtComentario entry: this.respuestas) {
+				cantRespuestas=cantRespuestas+entry.getTamanioArbol();
+			}
+			return cantRespuestas;
+		}
+	}
 	public String getNickUsuario() {
 		return nickUsuario;
 	}

@@ -1,9 +1,5 @@
 package uytubeLogic.logica;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import uytubeLogic.logica.SystemHandler.Privacidad;
 
 public class UsuarioCtrl implements IUsuarioCtrl {
@@ -22,6 +18,14 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 	private UsuarioCtrl() {
 		usuarioh = UsuarioHandler.getInstance();
 		systemh = SystemHandler.getInstance();
+	}
+	
+	public Integer getTamanioArbol(DtComentario[] comments) {
+		Integer tamanio=0;
+		for(DtComentario entry :comments) {
+			tamanio=tamanio+entry.getTamanioArbol();
+		}
+		return tamanio;
 	}
 
 	public Boolean memberListaReproduccionPropia(String nickU, String nombreLista) {
