@@ -1,7 +1,5 @@
 package uytube.admin.listas;
 
-import java.awt.EventQueue;
-
 import javax.swing.JInternalFrame;
 
 import java.awt.GridLayout;
@@ -12,7 +10,6 @@ import javax.swing.SwingConstants;
 
 import uytube.admin.adminPrincipal;
 import uytube.admin.videos.consultar.ConsultarVideoInternalFrame;
-import uytube.admin.videos.modificar.ModificarVideoInternalFrame;
 import uytubeLogic.logica.DtListaReproduccion;
 import uytubeLogic.logica.DtVideo;
 import uytubeLogic.logica.IUsuarioCtrl;
@@ -23,8 +20,6 @@ import uytubeLogic.logica.SystemHandler.Privacidad;
 import javax.swing.JComboBox;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import javax.swing.ListModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;

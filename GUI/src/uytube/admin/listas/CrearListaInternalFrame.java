@@ -1,18 +1,13 @@
 package uytube.admin.listas;
 
-import java.awt.EventQueue;
-
 import javax.swing.JInternalFrame;
 
-import java.awt.FlowLayout;
 import java.awt.BorderLayout;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
-
 import java.awt.GridLayout;
 
 import javax.swing.JTextField;

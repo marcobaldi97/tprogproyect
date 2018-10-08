@@ -1,7 +1,5 @@
 package uytube.admin.usuarios;
 
-import java.awt.EventQueue;
-
 import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
@@ -20,11 +18,8 @@ import com.toedter.calendar.JDateChooser;
 import uytube.Imagen;
 import uytube.admin.adminPrincipal;
 import uytube.admin.listas.ConsultaListaInternalFrame;
-import uytube.admin.videos.ModificarVideo;
 import uytube.admin.videos.consultar.ConsultarVideoInternalFrame;
 import uytubeLogic.logica.DtCanal;
-import uytubeLogic.logica.DtCategoria;
-import uytubeLogic.logica.DtListaReproduccion;
 import uytubeLogic.logica.DtUsuario;
 import uytubeLogic.logica.DtVideo;
 import uytubeLogic.logica.Fabrica;
@@ -37,16 +32,11 @@ import javax.swing.UIManager;
 
 import java.awt.Color;
 
-import javax.swing.JTable;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
-
-import com.toedter.components.JLocaleChooser;
 
 import javax.swing.JList;
 import javax.swing.JOptionPane;

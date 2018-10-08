@@ -3,13 +3,8 @@ package uytube.admin.usuarios;
 import java.awt.EventQueue;
 
 import javax.swing.JInternalFrame;
-import java.awt.FlowLayout;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import java.awt.GridLayout;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import java.awt.BorderLayout;
 
 public class SeguirUsuarioInternalFrame extends JInternalFrame {
 

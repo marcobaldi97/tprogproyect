@@ -1,12 +1,8 @@
 package uytube.admin.usuarios;
 
-import java.awt.EventQueue;
-
 import uytube.Imagen;
 import uytube.admin.adminPrincipal;
 import uytube.admin.videos.ModificarVideo;
-import uytube.admin.videos.consultar.ConsultarVideoInternalFrame;
-import uytube.admin.videos.modificar.*;
 import uytubeLogic.logica.DtCanal;
 import uytubeLogic.logica.DtCategoria;
 import uytubeLogic.logica.DtFecha;
@@ -18,15 +14,7 @@ import uytubeLogic.logica.IVideoCtrl;
 import uytubeLogic.logica.SystemHandler.Privacidad;
 
 import javax.swing.JInternalFrame;
-import javax.swing.BoxLayout;
-
 import java.awt.FlowLayout;
-import java.awt.BorderLayout;
-
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-
 import java.awt.GridBagLayout;
 
 import javax.swing.JLabel;
@@ -41,28 +29,15 @@ import java.awt.Image;
 import javax.swing.JComboBox;
 import javax.swing.border.TitledBorder;
 
-import com.jgoodies.forms.layout.FormSpecs;
-
 import javax.swing.JButton;
 
-import java.awt.Insets;
-
 import javax.swing.JTextField;
-import javax.swing.JEditorPane;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
-import javax.swing.border.BevelBorder;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.ListSelectionModel;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
-import javax.swing.JTextPane;
 import javax.swing.UIManager;
 
 import java.awt.Color;
 
-import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDateChooser;
 
 import java.awt.event.ActionListener;

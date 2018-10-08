@@ -30,8 +30,6 @@ import java.awt.event.ActionEvent;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.util.Date;
 
 import org.eclipse.wb.swing.FocusTraversalOnArray;

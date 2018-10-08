@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 
 import java.util.Date;
 
-import junit.framework.Assert;
 import uytubeLogic.logica.Categoria;
 import uytubeLogic.logica.CategoriaHandler;
 import uytubeLogic.logica.DtCategoria;
@@ -15,10 +14,8 @@ import uytubeLogic.logica.DtListaReproduccion;
 import uytubeLogic.logica.DtPuntuacion;
 import uytubeLogic.logica.DtUsuario;
 import uytubeLogic.logica.DtVideo;
-import uytubeLogic.logica.ListaReproduccion;
 import uytubeLogic.logica.Particular;
 import uytubeLogic.logica.PorDefecto;
-import uytubeLogic.logica.Usuario;
 import uytubeLogic.logica.UsuarioCtrl;
 import uytubeLogic.logica.Video;
 import uytubeLogic.logica.VideoCtrl;
