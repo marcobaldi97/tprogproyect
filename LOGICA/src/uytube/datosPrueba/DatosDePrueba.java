@@ -51,7 +51,6 @@ public class DatosDePrueba {
 		//USUARIOS
 		//las categorias de los canales se las puse para completar datos
 		Date fecha;
-		String sFecha;
 		DtFecha fechaNac;
 		Integer duracion = 1;
 		File archivo;

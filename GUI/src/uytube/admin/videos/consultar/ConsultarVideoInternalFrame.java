@@ -47,8 +47,6 @@ public class ConsultarVideoInternalFrame extends JInternalFrame {
 	private final JPanel mainPanel = new JPanel();
 	private final JPanel videoDetailsPanel = new JPanel();
 
-	private DtVideo[] videos;
-	private boolean ready;
 	private DefaultListModel<String> videoListModel = new DefaultListModel<String>();
 	private DefaultListModel<String> UsuariosGListModel = new DefaultListModel<String>();
 	private DefaultListModel<String> UsuariosNoGListModel = new DefaultListModel<String>();
@@ -143,7 +141,6 @@ public class ConsultarVideoInternalFrame extends JInternalFrame {
 			@Override
 			public void valueChanged(ListSelectionEvent arg0) {
 				if (!arg0.getValueIsAdjusting()) {
-					ready=false;
 					if(!videoList.isSelectionEmpty()){
 						String nomVideo=videoList.getSelectedValue();
 						selectedVideo=ICU.obtenerInfoAdicVideo(authorNickname, nomVideo);
@@ -248,7 +245,6 @@ public class ConsultarVideoInternalFrame extends JInternalFrame {
 	    		videoListModel.addElement(vid);
 	    		
 	    	}
-	    	ready=true;
 	    }
 	}
 

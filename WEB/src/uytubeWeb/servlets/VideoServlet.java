@@ -51,17 +51,6 @@ public class VideoServlet extends HttpServlet {
 	   }
 	}
 
-	private void creaUsrPrueba() {
-		Fabrica fabrica = Fabrica.getInstance();
-		IUsuarioCtrl usrCtrl = fabrica.getIUsuarioCtrl();
-		Date fecha = ParseFecha("25/02/1962");
-		DtFecha fechaNac = new DtFecha(fecha);
-		String HR = "hrubio";
-		usrCtrl.nuevoUsuario("horacio", "1234", "Horacio", "Rubino", "horacio.rubino@guambia.com.uy", fechaNac, null,
-				"Canal Horacio", "El canal Horacio es para publicar contenido divertido", Privacidad.PUBLICO,
-				"Entretenimiento");
-	}
-
 	public static Date ParseFecha(String fecha) {
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 		Date fechaDate = null;

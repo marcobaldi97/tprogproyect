@@ -12,7 +12,6 @@ import uytubeLogic.logica.DtListaReproduccion;
 import uytubeLogic.logica.DtVideo;
 import uytubeLogic.logica.Fabrica;
 import uytubeLogic.logica.IUsuarioCtrl;
-import uytubeLogic.logica.IVideoCtrl;
 import uytubeLogic.logica.SystemHandler.Privacidad;
 
 /**
@@ -38,7 +37,6 @@ public class ListaReproduccionServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getParameter("action");
 		Fabrica fabrica=Fabrica.getInstance();
-		IVideoCtrl interfazVideos = fabrica.getIVideoCtrl();
 		IUsuarioCtrl interfazUsuario = fabrica.getIUsuarioCtrl();
 		HttpSession session=request.getSession(false);
 		
@@ -181,7 +179,7 @@ public class ListaReproduccionServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String action = request.getParameter("action");
 		Fabrica fabrica=Fabrica.getInstance();
-		IVideoCtrl interfazVideos = fabrica.getIVideoCtrl();
+		
 		IUsuarioCtrl interfazUsuario = fabrica.getIUsuarioCtrl();
 		HttpSession session=request.getSession(false);
 		

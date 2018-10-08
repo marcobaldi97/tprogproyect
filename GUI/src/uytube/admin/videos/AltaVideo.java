@@ -41,7 +41,6 @@ public class AltaVideo extends JInternalFrame {
 	private JTextField textFieldURL;
 	private JDateChooser dateChooserFecha;
 	private JTextArea textAreaDesc;
-	private JSpinner spinnerDuracion;
 	private JComboBox comboBoxNicknames;
 	private JComboBox comboBoxCategoria;
 
