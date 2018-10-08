@@ -196,6 +196,19 @@ public class UsuarioServlet extends HttpServlet {
 			break;
 		}
 		case "responderComentario":{
+			HttpSession session=request.getSession(false);
+            if(session!=null && session.getAttribute("nombre_usuario")!=null) {
+    			int id_video = Integer.parseInt(request.getParameter("id_video"));
+    			int id_comentario = Integer.parseInt(request.getParameter("id_comentario"));
+    			String contenido = request.getParameter("contenido");
+    			String comentador = (String)session.getAttribute("nombre_usuario");
+    			Fabrica fabricaControladores = Fabrica.getInstance();
+    			IVideoCtrl vidController = fabricaControladores.getIVideoCtrl();
+    			Date today = new Date();
+    			DtFecha fechaHoy = new DtFecha(today);
+    			vidController.responderComentario(id_video, id_comentario, comentador, fechaHoy, contenido);
+    			System.out.println(id_video+"||"+id_comentario+"||"+comentador+"||"+fechaHoy+"||"+contenido);
+            }
 			break;
 		}
 		}

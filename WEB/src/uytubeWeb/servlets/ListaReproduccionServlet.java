@@ -46,24 +46,46 @@ public class ListaReproduccionServlet extends HttpServlet {
 		{
 		
 			case "removeVideo":{
-				int id_video=(int)session.getAttribute("ID");
-				String nombreLista = (String) session.getAttribute("List");
+				String id_video= (String) request.getParameter("ID");
+				String nombreLista = (String) request.getParameter("List");
 				
 				if(session!=null) {
 		            String login=(String)session.getAttribute("nombre_usuario");
 		            if(login!=null) {
-		            	interfazUsuario.eliminarVideoLista(login, id_video, nombreLista);
-		            	/*DtVideo[] videosLista=interfazUsuario.obtenerDtsVideosListaReproduccionUsuario(login, nombreLista);
-		            	DtListaReproduccion infoLista = interfazUsuario.infoAdicLDR(login, nombreLista);
-		            	request.setAttribute("videosLista", videosLista);
-		    			request.setAttribute("infoLista", infoLista);*/
-		    			request.getRequestDispatcher("/WEB-INF/Lista Reproduccion/modificarListaReproduccion.jsp").forward(request, response);	
+		            	interfazUsuario.eliminarVideoLista(login, Integer.parseInt(id_video), nombreLista);
+		            	response.sendRedirect(request.getContextPath() + "/modifyPlaylist?action=modify&nameList="+nombreLista+"&ownerList="+login);		
 		            }
 				}
-				
-				
-			}break;
+				}break;
 			
+			case "Privacy":{
+				String privacidad= (String) request.getParameter("grupoPrivacidad");
+				String nombreLista = (String) request.getParameter("List");
+				Privacidad privacidad_lista;
+				if(privacidad.equals("Publico"))
+				{
+					privacidad_lista=Privacidad.PUBLICO;
+				}
+				else
+				{
+					privacidad_lista=Privacidad.PRIVADO;
+							
+				}	
+				
+				if(session!=null) {
+		            String login=(String)session.getAttribute("nombre_usuario");
+		            if(login!=null) {
+		            	System.out.println(login);
+		            	System.out.println(nombreLista);
+		            	System.out.println(privacidad);
+
+		            	interfazUsuario.cambiarPrivLDR(login, nombreLista, privacidad_lista);
+		            	response.sendRedirect(request.getContextPath() + "/home");		
+		            }
+				}
+				}break;	
+				
+				
 			case "modify":
 			{
 				if(session!=null) {

@@ -1,6 +1,7 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.text.DateFormat"%>
 <%@page import="uytubeLogic.logica.DtListaReproduccion"%>
+<%@page import="uytubeLogic.logica.ListaReproduccion.TipoLista"%>
 <%@ page import = "uytubeLogic.logica.DtVideo"%>
 <%@ page import = "uytubeLogic.logica.SystemHandler.Privacidad"%>
 <%@ page import = "uytubeLogic.logica.DtCanal"%>
@@ -15,7 +16,24 @@
 </head>
 <body>
 
+<% DtListaReproduccion infoLista = (DtListaReproduccion) request.getAttribute("infoLista"); 
+	if(infoLista.getTipoLista().equals(TipoLista.PARTICULAR)){
+%>
 
+<div class="main-content">
+	<form action="modifyPlaylist" method="get">
+	  Privacidad<br>
+	  <input type="radio" name="grupoPrivacidad" value="Publico" checked>Publico<br>
+	  <input type="radio" name="grupoPrivacidad" value="Privado">Privado<br>
+	  <input type="hidden" name="List" value="<%=	infoLista.getNombre()%>">
+	  <input type="hidden" name="action" value="Privacy">
+	  
+	  <button type="submit">Modificar</button>
+	  </form>
+</div>
+
+<%} %>
+<br>
 
 <table id="TablaContenidos">
 <tr>
@@ -25,7 +43,7 @@
 
 </tr>
 	<%
-	DtListaReproduccion infoLista = (DtListaReproduccion) request.getAttribute("infoLista");
+	
 	DtVideo[] vid = (DtVideo[]) request.getAttribute("videosLista");
 	
 		if((String) request.getAttribute("nicknameLogin")!=null){
@@ -44,7 +62,7 @@
 	<td>Videos Lista
 	<form action="removeVidPlaylist" method="get"> 
 	<input type="hidden" name="action" value="removeVideo">
-	<input type="hidden" name="ID" value="<%=entry.getIDVideo()%>">
+	<input type="hidden" name="ID" value="<%=  entry.getIDVideo()%>">
 	<input type="hidden" name="List" value="<%=	infoLista.getNombre()%>">
 	<input type="submit" value="Quitar Video"> </form> 
 	</td>
