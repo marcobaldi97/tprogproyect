@@ -37,7 +37,7 @@
 	String url_logo_autor = "https://i.ytimg.com/vi/5bHimOJb-Xw/hqdefault.jpg";
 	String url_logo_usuario_iniciado = "http://www.sddistribuciones.com//Portadas/GSCBSG90486_3.JPG";
 	String nombre_canal = canal_propietario.getNombre();
-	//estos son los datos que tienen que ver con el usuario propietario y el video en sï¿½.
+	//estos son los datos que tienen que ver con el usuario propietario y el video en sñ.
 	//Hasta la 111 es lo que hizo Maria.
 	byte[] fotoByte = info_propietario.getFoto();
 	String urlFoto = "";
@@ -56,7 +56,6 @@
 	DtComentario[] comentarios = (DtComentario[]) request.getAttribute("comentarios");
 	int tamanio_comentarios = comentarios.length;
 	%>
-    <%@include file="../cosasComunesDelHead.jsp" %>
 	<link rel="stylesheet" href="media/styles/VerVideo.css">
 	<title><%=titulo%></title>
 	<script type="text/javascript">
@@ -67,14 +66,13 @@
 	    	document.getElementById("dislike_button").addEventListener("click", no_me_gusta_script);
 	    	document.getElementById("seguir_button").addEventListener("click",seguir_script);
 	    	document.getElementById("response_button").addEventListener("click",comentar_video);
-	    	document.getElementById("listasUsuarioLogged").addEventListener("click",agregar_lista_script);//lalaland
+	    	document.getElementById("listasUsuarioLogged").addEventListener("click",agregar_lista_script);
 	    	for(var index = 0;index < <%=tamanio_comentarios%>; index++){
-	    		var response_box = "response_box" + index;
-	    		document.getElementById(response_box).style.display = "none";
 	    		var response_button = "response_button" + index;
-	    		document.getElementById(response_button).addEventListener("click",toggle_response_box(index));
+	    		document.getElementById(response_button).addEventListener("click",toggle_response_box(index));//parece no funcar
 	    		var submit_response_button = "submit_response_button" + index;
-	    		document.getElementById(submit_response_button).addEventListener("click",submit_response(index));
+	    		document.getElementById(submit_response_button).addEventListener("click",submit_response(index));//parece no funcar
+	    		console.log("response button con index: "+index+"está con evento");
 	    	}
 		}else{
 	    	for(var index = 0;index < <%=tamanio_comentarios%>; index++){
@@ -88,13 +86,17 @@
 	    	document.getElementById("seguir_button").style.display = "none";
 	    	document.getElementById("response_button").style.display = "none";
 	    	document.getElementById("tabla_para_comentar").style.display = "none";
-		}//si no estï¿½ loggeado, no muestra estos elementos.
+		}//si no estñ loggeado, no muestra estos elementos.
 	}
 
 	function toggle_response_box(index){
 		var response_box = "response_box" + index;
-		document.getElementById(response_box).style.display = "block";
-		window.alert("presionado!");
+	    var x = document.getElementById(response_box);
+	    if (x.style.display === "none") {
+	        x.style.display = "block";
+	    } else {
+	        x.style.display = "none";
+	    }
 	}
 
 	function submit_response(index){
@@ -123,7 +125,7 @@
 		};
 		xhttp.open("GET", "likeVideo?id_video="+<%=id_video%>+"&opcion=likeVideo",true);
 		xhttp.send();
-		console.log("ya envï¿½e la request");
+		console.log("ya envie la request");
 	}
 
 	function no_me_gusta_script() {
@@ -169,9 +171,9 @@
 		xhttp.send();
 	}
 
-	function ir_a_perfil(nombre_dueï¿½o_perfil){
+	function ir_a_perfil(nombre_dueño_perfil){
 		request.setParameter("opcion") = "Perfil";
-		request.setParameter("nombre_dueï¿½o_perfil") = nombre_dueï¿½o_perfil;
+		request.setParameter("nombre_dueño_perfil") = nombre_dueño_perfil;
 		request.getRequestDispatcher("/profile").forward(request, response);
 	}
 
@@ -233,7 +235,7 @@
 				out.println("</select>");
 				out.println("<button id=\"agregar_lista_button\" value=\"Agregar\">Agregar a lista</button>");
 			}
-		}//esta funciï¿½n genera el cï¿½digo html para el boton combo box para agregar un video a una lista de reproduccion.
+		}//esta funciñn genera el cñdigo html para el boton combo box para agregar un video a una lista de reproduccion.
 		private void printComentarios(javax.servlet.jsp.JspWriter out, DtComentario[] comentarios) throws java.io.IOException{
 			for(int index = 0 ; index < comentarios.length; index++){
 				String autor_comentario = comentarios[index].getNickUsuario();
@@ -247,8 +249,8 @@
 		   		out.println("<ul class=\"comment\">");
 		   		out.println("	<li><img id=\"logo\" src=\"https://i0.wp.com/blogthinkbig.com/wp-content/uploads/2018/04/3hfXV9eW-mAQfO4XNZrGX1OJPTm-FuEjVT_yxNH0cQM.jpg?resize=610%2C343\"></img> <p id=\"nombre_autor\">"+autor_comentario+" "+dia_comment+"/"+mes_comment+"/"+anio_comment+"</p></li>");
 				out.println("	<li><p class=\"descripcion\">"+descripcion_comentario+"</p></li>");
-				out.println("	<li><button style=\"width:30%\" id=\"response_button"+index+"\" name=\"response_button\" value=\""+comentarios[index].getIDComentario()+"\">  Responder  </button></li>");
-				out.println("	<li id=\"response_box"+index+"\"><img id=\"mini_logo\" src=\"\"></img><textarea class=\"comentario\" id=\"comentario_a_comentar"+index+"\"></textarea><button class=\"response_button\"  id=\"submit_response_button"+index+"\" name=\"response_button\" value=\"Responder\">  Responder  </button></li>");
+				out.println("	<li><button style=\"width:30%\" id=\"response_button"+index+"\" name=\"response_button\" value=\""+comentarios[index].getIDComentario()+"\" onclick=\"toggle_response_box("+index+")\">  Responder  </button></li>");
+				out.println("	<li style=\"display:none;\" id=\"response_box"+index+"\"><img id=\"mini_logo\" src=\"\"></img><textarea class=\"comentario\" id=\"comentario_a_comentar"+index+"\"></textarea><button class=\"response_button\"  id=\"submit_response_button"+index+"\" name=\"response_button\" value=\"Responder\" onclick=\"submit_response("+index+")\">  Responder  </button></li>");
 				if(hijos.length != 0)printComentarios(out,hijos);
 				out.println("</ul>");
 			}
