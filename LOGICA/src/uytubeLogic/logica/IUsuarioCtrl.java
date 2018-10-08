@@ -18,6 +18,8 @@ public interface IUsuarioCtrl {
 	public abstract void agregarVideoLista(String nickU, Integer id_video,
 			String nombreLDR);
 
+	public abstract Integer getTamanioArbol(DtComentario[] comments);
+	
 	public abstract void cambiarPrivLDR(String nickU, String nombreL,
 			Privacidad privE);
 
