@@ -10,7 +10,7 @@
 
   <form id="sideBar" action="playlist" method="get">
   <input type="hidden" name="action" value="list">
-  <button type="submit" value="categorias" class="btn-link" >Listas</button>
+  <button type="submit" value="categorias" class="btn-link" >Mis Listas</button>
   </form>
 
 </div>
