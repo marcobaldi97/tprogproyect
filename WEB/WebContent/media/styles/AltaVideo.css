@@ -3,7 +3,7 @@ body {
   background-color: #eee;
   text-align: center;
 }
-form {
+.AltaVideo.form {
   text-align: center;
   border: 1% solid #929eb2;
   background-color: #d7d9dd;
@@ -11,7 +11,7 @@ form {
   font-size: 16px;
 }
 
-input[type="submit"] {
+.AltaVideo.button {
   background-color: #cbf2ae;
   border: none;
   color: black;
@@ -21,17 +21,7 @@ input[type="submit"] {
   display: inline-block;
   font-size: 16px;
 }
-input[type="reset"] {
-  background-color: #cbf2ae;
-  border: none;
-  color: black;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-}
-input[type="file"] {
+.AltaVideo.input[type="file"] {
   background-color: #d7d9dd;
   border: none;
   color: black;
@@ -41,7 +31,7 @@ input[type="file"] {
   display: inline-block;
   font-size: 16px;
 }
-select {
+.AltaVideo.select {
   background-color: white;
   border: none;
   color: black;

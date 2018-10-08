@@ -20,19 +20,19 @@
         <div class="main-content">
             <form action="newVideo" method="post">
                 Nombre del Video:<br />
-                <input type="text" name="nombreVideo" /><br />
+                <input class="AltaVideo" type="text" name="nombreVideo" /><br />
                 Duracion:<br />
-                <input type="text" name="duracionVideo" /><br />
+                <input class="AltaVideo" type="text" name="duracionVideo" /><br />
                 URL:<br />
-                <input type="text" name="urlVideo" /><br />
+                <input class="AltaVideo" type="text" name="urlVideo" /><br />
                 Descripcion:<br />
-                <input type="text" name="descVideo" /><br />
+                <input class="AltaVideo" type="text" name="descVideo" /><br />
                 Fecha:<br />
-                <script type="text/javascript" src="fechaInput.js"></script>
-                <input type="text" id="datepicker" name="fechaVideo"><br />
+                <script class="AltaVideo" type="text/javascript" src="fechaInput.js"></script>
+                <input class="AltaVideo" type="text" id="datepicker" name="fechaVideo"><br />
                 Categoria:<br />
 
-                <select name="categoria">
+                <select class="AltaVideo" name="categoria">
                 	<option value="Sin Categoria">Sin Categoria</option>
                		<%
 					Fabrica fabrica = Fabrica.getInstance();
@@ -47,7 +47,7 @@
       				%>
                     <%=opciones %>
                 </select><br />
-                <button id="crearVideo" name="opcion" value="altaVideo">Crear</button>
+                <button class="AltaVideo"  name="opcion" value="altaVideo">Crear</button>
             </form>
         </div>
     </div>
