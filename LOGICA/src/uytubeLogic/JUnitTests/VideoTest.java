@@ -11,8 +11,6 @@ import uytubeLogic.logica.DtCategoria;
 import uytubeLogic.logica.DtComentario;
 import uytubeLogic.logica.DtFecha;
 import uytubeLogic.logica.DtPuntuacion;
-import uytubeLogic.logica.DtVideo;
-import uytubeLogic.logica.Puntuacion;
 import uytubeLogic.logica.SystemHandler;
 import uytubeLogic.logica.UsuarioCtrl;
 import uytubeLogic.logica.Video;

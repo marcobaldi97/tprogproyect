@@ -7,10 +7,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import uytubeLogic.logica.DtCategoria;
-import uytubeLogic.logica.Fabrica;
-import uytubeLogic.logica.IVideoCtrl;
-
 /**
  * Servlet implementation class HomeServlet
  */

@@ -1,15 +1,10 @@
 package uytube.admin.usuarios;
 
-import java.awt.EventQueue;
-
 import javax.swing.DefaultListModel;
 import javax.swing.JInternalFrame;
 import javax.swing.JList;
 
 import java.awt.BorderLayout;
-import javax.swing.ListSelectionModel;
-import javax.swing.border.EmptyBorder;
-
 import uytubeLogic.logica.IUsuarioCtrl;
 
 import javax.swing.JPanel;

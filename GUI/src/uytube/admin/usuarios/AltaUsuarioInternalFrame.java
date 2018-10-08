@@ -1,7 +1,5 @@
 package uytube.admin.usuarios;
 
-import java.awt.EventQueue;
-
 import javax.swing.JInternalFrame;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
@@ -21,11 +19,7 @@ import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
 import java.io.File;
-import java.util.Date;
-
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
@@ -40,7 +34,6 @@ import uytubeLogic.logica.IVideoCtrl;
 import uytubeLogic.logica.SystemHandler.Privacidad;
 
 import javax.swing.JScrollPane;
-import javax.swing.ScrollPaneConstants;
 
 
 public class AltaUsuarioInternalFrame extends JInternalFrame {

@@ -1,8 +1,5 @@
 package uytube.admin.categoria.alta;
 
-import java.awt.EventQueue;
-
-
 import javax.swing.JInternalFrame;
 import java.awt.FlowLayout;
 import javax.swing.JLabel;
@@ -16,19 +13,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 import java.awt.Component;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import javax.swing.SwingConstants;
 import javax.swing.BoxLayout;
-import java.awt.BorderLayout;
-import com.toedter.calendar.JCalendarBeanInfo;
-import com.jgoodies.forms.factories.DefaultComponentFactory;
-import com.toedter.components.JSpinField;
-
-import uytubeLogic.logica.IUsuarioCtrl;
 import uytubeLogic.logica.IVideoCtrl;
-
-import com.toedter.components.JLocaleChooser;
 
 public class AltaCategoria extends JInternalFrame {
 	private JTextField textField_1;

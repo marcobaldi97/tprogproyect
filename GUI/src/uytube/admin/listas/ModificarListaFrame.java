@@ -20,11 +20,9 @@ import java.awt.event.ActionEvent;
 
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 
-import uytubeLogic.logica.DtCategoria;
 import uytubeLogic.logica.DtListaReproduccion;
 import uytubeLogic.logica.IUsuarioCtrl;
 import uytubeLogic.logica.IVideoCtrl;
-import uytubeLogic.logica.Particular;
 import uytubeLogic.logica.SystemHandler.Privacidad;
 
 import java.awt.Component;

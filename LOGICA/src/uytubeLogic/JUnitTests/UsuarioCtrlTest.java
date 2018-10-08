@@ -6,22 +6,17 @@ import java.util.Date;
 
 import org.junit.Test;
 
-import com.sun.xml.internal.bind.v2.runtime.reflect.ListTransducedAccessorImpl;
-
 import uytubeLogic.logica.DtCanal;
 import uytubeLogic.logica.DtCategoria;
 import uytubeLogic.logica.DtFecha;
 import uytubeLogic.logica.DtListaReproduccion;
 import uytubeLogic.logica.DtUsuario;
 import uytubeLogic.logica.DtVideo;
-import uytubeLogic.logica.ListaReproduccion;
 import uytubeLogic.logica.SystemHandler;
 import uytubeLogic.logica.Usuario;
 import uytubeLogic.logica.UsuarioCtrl;
 import uytubeLogic.logica.UsuarioHandler;
-import uytubeLogic.logica.Video;
 import uytubeLogic.logica.VideoCtrl;
-import uytubeLogic.logica.VideoHandler;
 import uytubeLogic.logica.SystemHandler.Privacidad;
 
 public class UsuarioCtrlTest {

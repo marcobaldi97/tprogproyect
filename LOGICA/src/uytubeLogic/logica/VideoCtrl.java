@@ -1,10 +1,5 @@
 package uytubeLogic.logica;
 
-import java.util.Arrays;
-import java.util.List;
-
-import uytubeLogic.logica.SystemHandler.Privacidad;
-
 public class VideoCtrl implements IVideoCtrl {
 	private static VideoCtrl instance = null;
 

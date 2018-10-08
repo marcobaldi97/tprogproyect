@@ -1,52 +1,23 @@
 package uytube.admin.categoria.consulta;
 
-import java.awt.EventQueue;
-
 import javax.swing.JInternalFrame;
 import javax.swing.JComboBox;
-import java.awt.BorderLayout;
-import java.awt.List;
-import java.awt.Panel;
 import javax.swing.JLabel;
-import com.jgoodies.forms.factories.DefaultComponentFactory;
-import javax.swing.JSplitPane;
 import javax.swing.JPanel;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import javax.swing.BoxLayout;
 import java.awt.GridLayout;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
-
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
 
 import uytubeLogic.logica.DtCategoria;
 import uytubeLogic.logica.DtListaReproduccion;
 import uytubeLogic.logica.DtVideo;
-import uytubeLogic.logica.Fabrica;
 import uytubeLogic.logica.IVideoCtrl;
 
-import com.jgoodies.forms.layout.FormSpecs;
-import java.awt.FlowLayout;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JSeparator;
-import java.awt.Color;
-import java.awt.Component;
-import javax.swing.Box;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.event.InputMethodListener;
-import java.awt.event.InputMethodEvent;
-import java.awt.event.ItemListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
 import javax.swing.JScrollPane;
-import javax.swing.border.TitledBorder;
 
 public class ConsultaCategoriaJInternalFrame extends JInternalFrame {
 	private JTable table_LDR;

@@ -2,8 +2,6 @@ package uytube.admin.videos.consultar;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.nio.charset.MalformedInputException;
-
 import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
@@ -18,7 +16,6 @@ import javax.swing.JTextField;
 
 import uytube.admin.adminPrincipal;
 import uytube.admin.videos.ListarComentariosInternalFrame;
-import uytube.admin.videos.modificar.ModificarVideoInternalFrame;
 import uytubeLogic.logica.DtInfoVideo;
 import uytubeLogic.logica.DtUsuario;
 import uytubeLogic.logica.DtVideo;
@@ -28,7 +25,6 @@ import uytubeLogic.logica.IVideoCtrl;
 import uytubeLogic.logica.SystemHandler.Privacidad;
 
 import java.awt.GridLayout;
-import java.awt.FlowLayout;
 import java.awt.Component;
 
 import javax.swing.JTabbedPane;
@@ -39,7 +35,6 @@ import javax.swing.JComboBox;
 import java.awt.BorderLayout;
 
 import javax.swing.SwingConstants;
-import javax.swing.JRadioButton;
 
 public class ConsultarVideoInternalFrame extends JInternalFrame {
 	static final long serialVersionUID = 113423;

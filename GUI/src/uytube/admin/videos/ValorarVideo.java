@@ -6,36 +6,26 @@ import javax.swing.JInternalFrame;
 
 import java.awt.GridLayout;
 
-import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import java.awt.BorderLayout;
 
 import javax.swing.JComboBox;
-import javax.swing.SwingConstants;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 
-import java.awt.FlowLayout;
-
 import javax.swing.JButton;
 
-import java.awt.Component;
-
 import javax.swing.JRadioButton;
-import javax.swing.JSplitPane;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import javax.swing.event.ListSelectionListener;
 
-import uytubeLogic.logica.DtCanal;
-import uytubeLogic.logica.DtUsuario;
 import uytubeLogic.logica.DtVideo;
 import uytubeLogic.logica.Fabrica;
 import uytubeLogic.logica.IUsuarioCtrl;

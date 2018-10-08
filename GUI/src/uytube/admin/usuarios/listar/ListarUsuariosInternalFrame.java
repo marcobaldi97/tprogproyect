@@ -1,8 +1,6 @@
 package uytube.admin.usuarios.listar;
 
 import java.awt.Container;
-import java.awt.ScrollPane;
-
 import javax.swing.JInternalFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;

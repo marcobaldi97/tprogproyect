@@ -1,28 +1,19 @@
 package uytube.admin.listas;
 
 import java.awt.Component;
-import java.awt.EventQueue;
-
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.ListCellRenderer;
-import javax.swing.ListModel;
-
 import uytubeLogic.logica.DtVideo;
 import uytubeLogic.logica.IUsuarioCtrl;
-import uytubeLogic.logica.UsuarioCtrl;
 
 public class QuitarVideoListaInternalFrame extends JInternalFrame {
 	private IUsuarioCtrl controlUsr;

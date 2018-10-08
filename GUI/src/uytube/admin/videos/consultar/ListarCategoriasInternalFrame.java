@@ -9,7 +9,6 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import uytubeLogic.logica.DtCategoria;
-import uytubeLogic.logica.IUsuarioCtrl;
 import uytubeLogic.logica.IVideoCtrl;
 
 import javax.swing.JList;

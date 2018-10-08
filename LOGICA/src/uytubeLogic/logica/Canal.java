@@ -1,7 +1,5 @@
 package uytubeLogic.logica;
 
-import static org.junit.Assert.assertNotNull;
-
 import java.util.ArrayList;
 import java.util.Date;
 //prueba commit
