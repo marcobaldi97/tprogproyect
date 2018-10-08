@@ -371,7 +371,7 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 	private void openConsultarVideo(){
 	   //modificarUsuario modUsrIFrame = new modificarUsuario();
 		Fabrica fabrica = Fabrica.getInstance();
-		IVideoCtrl ICV = fabrica.getIVideoCtrl();
+		fabrica.getIVideoCtrl();
 		
 		String nomVideo = (String) comboBoxVideos.getSelectedItem();
 		String nickU = (String) comboBoxNick.getSelectedItem();

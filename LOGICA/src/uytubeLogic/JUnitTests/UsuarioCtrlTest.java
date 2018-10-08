@@ -371,7 +371,6 @@ public class UsuarioCtrlTest {
 	@Test
 	public void testAniadirVideo() {
 		UsuarioCtrl UCU=UsuarioCtrl.getInstance();
-		UsuarioHandler uh=UsuarioHandler.getInstance();
 		DtFecha fecha=new DtFecha(new Date(0));
 		String nombreU="nombreaniadirvideo";
 		String nombreV="nombreVaniadirVideo";
@@ -398,7 +397,6 @@ public class UsuarioCtrlTest {
 			if(categoria.getNombre()=="catego")
 				cate=categoria;
 		}
-		UsuarioHandler uh=UsuarioHandler.getInstance();
 		DtFecha fecha=new DtFecha(new Date(0));
 		DtFecha fecha2=new DtFecha(new Date(3));
 		String nombreU="nombreingresarNuevosDatosVideo";

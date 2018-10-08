@@ -44,7 +44,6 @@ public class VideoCtrlTest {
 	@Test
 	public void testListarLDRPorCategoriaExiste(){
 		VideoCtrl VCU=VideoCtrl.getInstance();
-		VideoHandler VHU=VideoHandler.getInstance();
 		CategoriaHandler CHU=CategoriaHandler.getInstance();
 		
 		Categoria categoriaE=new Categoria("nombreCategoriaListarLDRE");
@@ -230,6 +229,7 @@ public class VideoCtrlTest {
 		Video video2=new Video("nombre2","duenio2","descr2",20,fecha,"hola2.com",cate2,Privacidad.PRIVADO);
 		
 		categoriaE.addVideo(video2);
+		VCU.listarVideos();
 		DtVideo[] videosListados=VCU.listarVideos();
 		DtVideo videoActual1=VCU.infoAddVideo(video.getIDVideo());
 		DtVideo videoActual2=VCU.infoAddVideo(video2.getIDVideo());
