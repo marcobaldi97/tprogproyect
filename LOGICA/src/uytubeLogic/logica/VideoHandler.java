@@ -54,7 +54,7 @@ public class VideoHandler {
 	public DtVideo[] listarVideosPublicosPorNombre(String nombre) {
 		List<DtVideo> listaVideos = new ArrayList<DtVideo>();
 		for (Map.Entry<Integer, Video> entry : videos.entrySet()) {
-			if (entry.getValue().getPrivacidad() == Privacidad.PUBLICO && entry.getValue().getNombre().contains(nombre)) {
+			if (entry.getValue().getPrivacidad() == Privacidad.PUBLICO && entry.getValue().getNombre().toLowerCase().contains(nombre.toLowerCase())) {
 					listaVideos.add(new DtVideo(entry.getValue()));
 				}
 			}
