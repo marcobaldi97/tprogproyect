@@ -86,10 +86,17 @@ public class UsuarioServlet extends HttpServlet {
 		Privacidad priv;
 		if (privacidad=="PRIVADO"){ priv=Privacidad.PRIVADO;}
 		else{priv = Privacidad.PUBLICO;}
+		
+		try{
 		File file = new File(foto);
+		System.out.println(file);
 		usrCtrl.nuevoUsuario(nickname,contrasenia,nombre,apellido,email, dtFechaNac,imagenToByte(file),
 				nomCanal,descripcion,priv,categoria);
-		//FALTA INSERTAR FOTO y CONTROLAR CONTRASEï¿½A
+		}catch(NullPointerException e){
+			usrCtrl.nuevoUsuario(nickname,contrasenia,nombre,apellido,email, dtFechaNac,null,
+					nomCanal,descripcion,priv,categoria);
+		}
+		
 
 	}
 	/**
@@ -164,7 +171,7 @@ public class UsuarioServlet extends HttpServlet {
 	                System.out.println(login+"sigue a?"+nickname+"  "+loSigue);
 	                request.setAttribute("usrSigueAlOtro", loSigue);
 	                if(login.equals(nickname)){
-	                	//request.setAttribute("dueñoCanal", true);
+	                	//request.setAttribute("duenioCanal", true);
 		                DtVideo[] videosPrivadosSesion=interfazUsuarios.infoVideosCanal(login, Privacidad.PRIVADO); //videos privados del usuario logeado
 		                DtListaReproduccion[] listasPrivadasSesion=interfazUsuarios.infoLDRdeUsuario(login, Privacidad.PRIVADO); //listas privadas del usr log
 		                List<DtVideo> videosAux= new ArrayList<DtVideo>(Arrays.asList(videos));
@@ -181,12 +188,12 @@ public class UsuarioServlet extends HttpServlet {
 
 	        request.setAttribute(parametroListas, listas);
 	        request.setAttribute(parametroVideos, videos);
-	        request.setAttribute("dueñoCanal", false);
+	        request.setAttribute("duenioCanal", false);
 	        
 	        if(session!=null){
 	        	String login=(String)session.getAttribute("nombre_usuario");
 	       		if(login!=null) {
-	       			if(login.equals(nickname)){ request.setAttribute("dueñoCanal", true); }
+	       			if(login.equals(nickname)){ request.setAttribute("duenioCanal", true); }
 	        	 	request.getRequestDispatcher("WEB-INF/Usuario/ConsultaUsuarioLogeado.jsp").forward(request, response);
 	       		}else{
 	       		 	request.getRequestDispatcher("WEB-INF/Usuario/ConsultaUsuario.jsp").forward(request, response);
@@ -290,12 +297,12 @@ public class UsuarioServlet extends HttpServlet {
 		
 			
 			System.out.println((String)request.getParameter("nickname"));
+			System.out.println((String)request.getParameter("nombre"));
 			if(request.getParameter("nickname").isEmpty() || 
 					request.getParameter("email").isEmpty() 
 					||request.getParameter("nombre").isEmpty()
 					||request.getParameter("apellido").isEmpty()
-					||request.getParameter("fecha_nacimiento").isEmpty()
-					||request.getParameter("descripcion").isEmpty() ){
+					||request.getParameter("fecha_nacimiento").isEmpty() ){
 				response.getWriter().print("Hay campos sin completar"); 
 			}else{
 				boolean disponible=usuarioCtrl.verificarDispUsuario((String)request.getParameter("nickname"), (String)request.getParameter("email"));
@@ -313,7 +320,7 @@ public class UsuarioServlet extends HttpServlet {
 	    			DtUsuario usuario = usrCtrl.listarDatosUsuario((String)request.getParameter("nickname"));
 	    			request.setAttribute("dataCanal", infoCanal);
 	    			request.setAttribute("dataUsuario", usuario);
-	    			request.getRequestDispatcher("WEB-INF/Usuario/ConsultaUsuario.jsp").forward(request, response);
+	    			response.sendRedirect(request.getContextPath() + "/profile?opcion=Perfil&nickname="+request.getParameter("nickname"));
 	        	}else{
 	        		response.getWriter().print("Compruebe los datos"); 
 	        	}
