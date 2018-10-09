@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -17,6 +18,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
+
+import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import uytubeLogic.logica.DtCanal;
 import uytubeLogic.logica.DtFecha;
@@ -81,6 +86,7 @@ public class UsuarioServlet extends HttpServlet {
 	}
 	private void nuevoUsuario(String nickname,String pass, String email, String nombre, String apellido, String contrasenia, String contraseniaConfir, String fechaNac, String foto,String nomCanal, String descripcion, String privacidad, String categoria){
 		Fabrica fabrica = Fabrica.getInstance();
+		System.out.println("la foto es"+foto);
      	IUsuarioCtrl usrCtrl = fabrica.getIUsuarioCtrl();
    		DtFecha dtFechaNac = new DtFecha(ParseFecha(fechaNac));
 		Privacidad priv;
@@ -294,7 +300,9 @@ public class UsuarioServlet extends HttpServlet {
 			System.out.println((String)request.getParameter("nickname"));
 			Fabrica fabrica = Fabrica.getInstance();
 			IUsuarioCtrl usuarioCtrl = fabrica.getIUsuarioCtrl();
-		
+			String filename;
+		   // Part filePart = request.getPart("file"); // Retrieves <input type="file" name="file">
+		   // filename = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
 			
 			System.out.println((String)request.getParameter("nickname"));
 			System.out.println((String)request.getParameter("nombre"));
