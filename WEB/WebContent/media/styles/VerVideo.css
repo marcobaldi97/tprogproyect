@@ -20,7 +20,7 @@ li {
 .descripcion{
 	text-align: left; 
 }
-#titulo{
+.titulo{
 	font-family: arial;
 	font-size: 20px;
 }
@@ -131,7 +131,7 @@ textarea{
 	width : 90%;
 	height : 140px;
 }
-#logo{
+.logo{
     border-radius: 50%;
     border: 1px solid #000000;
     height: 75px;
@@ -183,4 +183,8 @@ textarea{
 }
 .response_button_class:hover{
 	background-color: #e8e6e8;
+}
+.comment_box{
+	height: 100px;
+	width: 60%;
 }
