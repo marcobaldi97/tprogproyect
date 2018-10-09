@@ -188,7 +188,7 @@
 					<input type="submit" value="Ver Ahora"> </form> 
 					
 					 <%
-					 if((boolean)request.getAttribute("dueñoCanal")){ 
+					 if((boolean)request.getAttribute("duenioCanal")){ 
 						 System.out.print("ES DUEÑO DEL CANAL");
 					 %>
 					 
@@ -227,7 +227,7 @@
 						<input type="hidden" name="nameList" value="<%=entry.getNombre() %>">
 						<input type="hidden" name="ownerList" value="<%=entry.getPropietario() %>">
 						<input type="submit" value="Ver Info"> </form> 
-						<%if((boolean)request.getAttribute("dueñoCanal")){ 
+						<%if((boolean)request.getAttribute("duenioCanal")){ 
 						 //System.out.print("ES DUEÑO DEL CANAL");
 						 %>
 					 

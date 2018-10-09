@@ -38,17 +38,7 @@
 	                xhttp.send();	                
 	            }
            		
-       	        function comprobarFormulario(frm){
-       	     	var xhttp2 = new XMLHttpRequest();
-                xhttp2.onreadystatechange = function () {
-                  if (this.readyState == 4 && this.status == 200) {
-                	  document.getElementById("error").innerHTML = this.responseText;
-                  }
-                }; 
-                xhttp2.open("POST", "newUser?opcion=nuevoUsuario&nickname="+document.getElementById("nickname").value+"&email="+document.getElementById("email").value+"&contrasenia="+ document.getElementById("contrasenia").value
-                		+"&contraseniaConfirmacion="+ document.getElementById("contraseniaConfirmacion").value, true);
-                xhttp2.send();
-               	 }
+       	       
        	     </script>
             Nombre:<br>
             <input type="text" name="nombre"><br>
@@ -90,7 +80,7 @@
                     <%=opciones %>
               </select><br />
 			 <p id="error"></p>
-            <button id="crearUsuario" name="opcion" value="nuevoUsuario" onclick="return comprobarFormulario()">Crear</button>
+            <button id="crearUsuario" name="opcion" value="nuevoUsuario">Crear</button>
         	
 
     	</form>
