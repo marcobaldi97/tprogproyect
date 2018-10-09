@@ -245,9 +245,8 @@
 				DtComentario[] hijos = comentarios[i].getRespuestas();
 		   		out.println("<ul class=\"comment\">");
 		   		out.println("	<li><img id=\"logo\" src=\"https://i0.wp.com/blogthinkbig.com/wp-content/uploads/2018/04/3hfXV9eW-mAQfO4XNZrGX1OJPTm-FuEjVT_yxNH0cQM.jpg?resize=610%2C343\"></img> <p id=\"nombre_autor\">"+autor_comentario+" "+dia_comment+"/"+mes_comment+"/"+anio_comment+"</p></li>");
-				out.println("	<li><p class=\"descripcion\">"+descripcion_comentario+"</p></li>");
-				out.println("	<li><button style=\"width:30%\" id=\"response_button"+index+"\" class=\"response_button_class\" name=\"response_button\" value=\""+comentarios[i].getIDComentario()+"\" onclick=\"toggle_response_box("+index+")\">  Responder  </button></li>");
-				out.println("	<li style=\"display:none;\" id=\"response_box"+index+"\"><img id=\"mini_logo\" src=\"\"></img><textarea class=\"comentario\" id=\"comentario_a_comentar"+index+"\"></textarea><button class=\"response_button\"  id=\"submit_response_button"+index+"\" name=\"response_button\" value=\"Responder\" onclick=\"submit_response("+index+")\">  Responder  </button></li>");
+				out.println("	<li><p class=\"descripcion\">"+descripcion_comentario+"</p><button style=\"width:30%\" id=\"response_button"+index+"\" class=\"response_button_class\" name=\"response_button\" value=\""+comentarios[i].getIDComentario()+"\" onclick=\"toggle_response_box("+index+")\">  Responder  </button></li>");
+				out.println("	<li style=\"display:none;\" id=\"response_box"+index+"\"><img id=\"mini_logo\" src=\"\"></img><textarea class=\"comentario\" id=\"comentario_a_comentar"+index+"\"></textarea><button class=\"response_button_class\"  id=\"submit_response_button"+index+"\" name=\"response_button\" value=\"Responder\" onclick=\"submit_response("+index+")\">  Responder  </button></li>");
 				index++;
 				index = printComentarios(out,hijos,index);
 				out.println("</ul>");
@@ -255,9 +254,11 @@
 			return index;
 		}
 	%>
+	<div class="comment_container">
 	<%
-		int index = 0;
+		int index = 0;		
 		printComentarios(out,comentarios, index);
 	%>
+	</div>
 </body>
 </html>
