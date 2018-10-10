@@ -12,7 +12,30 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>UyTube</title>
+<%@include file="../buscador.jsp" %>
+<%@include file="../cosasComunesDelHead.jsp" %>
+<style>table{
+	width: 100%;
+	table-layout: fixed;
+}
+th {
+	color: white;
+	padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    background-color: #ff0000;
+    color: white;
+    vertical-align: text-top;
+}
+td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+tr:nth-child(even) {background-color: #f2f2f2;}</style>
+<link rel="stylesheet" href="/media/styles/Busqueda.css">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Modificar Lista Reprodcuccion</title>
 </head>
 <body>
 

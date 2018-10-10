@@ -3,16 +3,7 @@
   <div id="LoggedInInfo"></div>
   Categorias
   <div id="categorias"></div>
-  <form id="sideBar" action="list" method="get">
-  <input type="hidden" name="action" value="list">
-  <button type="submit" value="categorias" class="btn-link" >Categorias</button>
-  </form>
-
-  <form id="sideBar" action="playlist" method="get">
-  <input type="hidden" name="action" value="list">
-  <button type="submit" value="categorias" class="btn-link" >Mis Listas</button>
-  </form>
-
+  
 </div>
 <script>
 
