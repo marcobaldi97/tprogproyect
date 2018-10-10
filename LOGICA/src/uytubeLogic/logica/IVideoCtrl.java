@@ -30,5 +30,5 @@ public interface IVideoCtrl {
 		
 	public abstract DtVideo[] listarVideosPublicosPorNombre(String nombre);
 
-
+	public abstract String getEstadoValoracion(Integer IDVideo, String nickUsuario);
 }

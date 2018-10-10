@@ -102,21 +102,7 @@ table{
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-}
-.select {
-	border: 1px solid #ccc;
-	width: 140px;
-	overflow: hidden;
-	background: #fff url("arrowdown.gif") no-repeat 90% center;
-}
-.select select {
-	padding: 5px 8px;
-	width: 130%;
-	border: none;
-	box-shadow: none;
-	background-color: transparent;
-	background-image: none;
-	appearance: none;
+    width: 50%;
 }
 #agregar_lista_button:hover{
 	background-color: #e8e6e8;
@@ -187,4 +173,32 @@ textarea{
 .comment_box{
 	height: 100px;
 	width: 60%;
+}
+.response_box{
+	height: 77px;
+	width: 60%;
+}
+.img_container{
+	height: 77px;
+	width: 77px;
+	padding: 2px 2px 2px 2px;
+}
+comentario_text_area{
+	height: 100%;
+	width: 100%;
+}
+.combo_box_listas {
+	border: 1px solid #ccc;
+	width: 50%;
+	height: 100%;
+	overflow: hidden;
+}
+.combo_box_listas select {
+	padding: 5px 8px;
+	width: 130%;
+	border: none;
+	box-shadow: none;
+	background-color: transparent;
+	background-image: none;
+	appearance: none;
 }
