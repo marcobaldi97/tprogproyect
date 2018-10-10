@@ -99,6 +99,27 @@ public class VideoCtrl implements IVideoCtrl {
 		VideoHandler VidHandler = VideoHandler.getInstance();
 		return VidHandler.listarVideosPublicosPorNombre(nombre);
 	}
+
+	@Override
+	public String getEstadoValoracion(Integer IDVideo, String nickUsuario) {
+		String status = "";
+		DtInfoVideo infoVideo = this.verDetallesVideoExt(IDVideo);
+    	DtUsuario[] usuariosLikes = infoVideo.getUsuariosGusta();
+    	DtUsuario[] usuariosDislikes = infoVideo.getUsuariosNoGusta();
+    	for(int index = 0; index < usuariosLikes.length; index++) {
+    		if(usuariosLikes[index].getNickname().equals(nickUsuario)) {
+    			status = "like";
+    		}
+    	}
+    	System.out.println("Este es el status hasta aqui:"+status);
+    	for (int index = 0; index < usuariosDislikes.length; index++) {
+    		if(usuariosDislikes[index].getNickname().equals(nickUsuario)) {
+    			status = "dislike";
+    		}
+    	}
+    	if(status == "") status = "neutral";
+		return status;
+	}
 	
 	
 	

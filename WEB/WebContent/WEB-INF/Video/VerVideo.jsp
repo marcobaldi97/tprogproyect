@@ -35,7 +35,6 @@
 	int anio = fecha_publicacion.getYear() + 1900;
 	//String url_logo_autor = obtenerURLdeImagen(info_propietario.getFoto());
 	String url_logo_autor = "https://i.ytimg.com/vi/5bHimOJb-Xw/hqdefault.jpg";
-	String url_logo_usuario_iniciado = "http://www.sddistribuciones.com//Portadas/GSCBSG90486_3.JPG";
 	String nombre_canal = canal_propietario.getNombre();
 	//estos son los datos que tienen que ver con el usuario propietario y el video en sñ.
 	//Hasta la 111 es lo que hizo Maria.
@@ -53,6 +52,20 @@
 		listasReproduccionUsuarioLogged = (String[]) request.getAttribute("listasReproduccionUsuarioLogged");
 	}
 	else logged_state = "false";
+	//carga del logo y otras cosas.
+	String url_logo_usuario_iniciado = "";
+	String like_state = "";
+	String follow_state = "";
+	if(logged_state == "true"){
+		url_logo_usuario_iniciado = "http://www.sddistribuciones.com//Portadas/GSCBSG90486_3.JPG";
+		like_state = (String)request.getAttribute("like_state");
+		follow_state = (String)request.getAttribute("follow_state");
+	}else{
+		url_logo_usuario_iniciado = "";
+		follow_state = "";
+		like_state = "";
+	}
+	//fin de la carga
 	DtComentario[] comentarios = (DtComentario[]) request.getAttribute("comentarios");
 	Integer tamanio_comentarios = 0;
 	for(int i = 0; i < comentarios.length; i++){
@@ -64,24 +77,18 @@
 	<script type="text/javascript">
 	window.onload=function(){
 		var logged = "<%=logged_state%>";
-		if(logged == "true"){
-	    	document.getElementById("like_button").addEventListener("click", me_gusta_script);
-	    	document.getElementById("dislike_button").addEventListener("click", no_me_gusta_script);
-	    	document.getElementById("seguir_button").addEventListener("click",seguir_script);
-	    	document.getElementById("response_button").addEventListener("click",comentar_video);
-	    	document.getElementById("listasUsuarioLogged").addEventListener("click",agregar_lista_script);
-		}else{
-	    	for(var index = 0;index < <%=tamanio_comentarios%>; index++){
-	    		var response_box = "response_box" + index;
-	    		document.getElementById(response_box).style.display = "none";
-	    		var response_button = "response_button" + index;
-	    		document.getElementById(response_button).style.display = "none";
+		if(logged === "true"){
+	    	document.getElementById('listasUsuarioLogged').addEventListener("click",agregar_lista_script);
+	    	var like_state = "<%=like_state%>";
+	    	var follow_state = "<%=follow_state%>";
+	    	if(like_state === "like"){
+	    		document.getElementById('like_button').disabled  = true;
+	    		document.getElementById('like_button').style.backgroundColor = "#f47121";
 	    	}
-	    	document.getElementById("like_button").style.display = "none";
-	    	document.getElementById("dislike_button").style.display = "none";
-	    	document.getElementById("seguir_button").style.display = "none";
-	    	document.getElementById("response_button").style.display = "none";
-	    	document.getElementById("tabla_para_comentar").style.display = "none";
+	    	else{
+	    		if(like_state === "dislike") document.getElementById('dislike_button').disabled  = true;
+	    	}
+	    	
 		}//si no estñ loggeado, no muestra estos elementos.
 	}
 
@@ -113,23 +120,19 @@
 	}
 
 	function me_gusta_script() {
-		console.log("acabo de dar like");
 		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200) {
-				window.alert("me gusta");
 			}
 		};
 		xhttp.open("GET", "likeVideo?id_video="+<%=id_video%>+"&opcion=likeVideo",true);
 		xhttp.send();
-		console.log("ya envie la request");
 	}
 
 	function no_me_gusta_script() {
 		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200) {
-
 			}
 		};
 		var operacion = "dislikeVideo?id_video="+<%=id_video%>+"&opcion=dislikeVideo";
@@ -197,10 +200,14 @@
 			<th class="texto_simple" id="nombre_autor" width="30%"><%=nombre_canal%></th>
 			<th rowspan="2" class="right_left_separators"  id="fecha_publicacion" width="30%"><p class="texto_simple"><%=dia%>/<%=mes%>/<%=anio%></p></th>
 			<th rowspan="2" class="botones_like_dislike" width="30%">
-				<button class="like_dislike_button" style="width:50%" id="like_button">  Me gusta  </button><button class="like_dislike_button" style="width:50%" id="dislike_button" name="opcion" value="dislikeVideo">No me gusta </button></th>
+				<%if(logged_state == "true"){ %>
+				<button class="like_dislike_button" style="width:50%" id="like_button" onclick = "me_gusta_script()">  Me gusta  </button><button class="like_dislike_button" style="width:50%" id="dislike_button" name="opcion" value="dislikeVideo" onclick="no_me_gusta_script()">No me gusta </button></th>
+				<%} %>		
 		</tr>
 		<tr>
-			<th><button id="seguir_button" name="boton_seguir" value="Seguir">Seguir</button></th>
+			<%if(logged_state == "true"){ %>
+			<th><button id="seguir_button" name="boton_seguir" value="Seguir" onclick="seguir_script()">Seguir</button></th>
+			<%}%>
 		</tr>
 		<tr>
 			<th  class="encapsulated_border" colspan="4" class="descripcion"><p align="left"><%=descripcion%></p></th>
@@ -210,6 +217,7 @@
 			<th colspan="2" width="20%" class="left_separator"><%if(logged_state == "true") this.htmlListasComboBoxGenerator(out, listasReproduccionUsuarioLogged); %></th>
 		</tr>
 	</table>
+	<%if(logged_state == "true"){ %>
 	<table style="width:100%" id = "tabla_para_comentar">
 		<tr>
 			<th  class="texto_simple" id="nombre_autor">Comentar video:</th>
@@ -219,21 +227,21 @@
 			<th rowspan="2" width="70%" id="cell_comentar"><textarea class="comentario" id="comentario_a_comentar"></textarea></th>
 		</tr>
 		<tr>
-			<th><button style="width:100%" id="response_button" name="response_button" value="Comentar">  Comentar  </button></th>
+			<th><button style="width:100%" id="response_button" name="response_button" value="Comentar" onclick="seguir_script()">  Comentar  </button></th>
 		</tr>
 	</table>
+	<%}%>
 	<%!//funciones Java
 		private void htmlListasComboBoxGenerator(javax.servlet.jsp.JspWriter out, String[] listasRep) throws java.io.IOException{
 			if(listasRep.length != 0){
-				out.println("<select name=\"listasUsuarioLogged\" id=\"listasUsuarioLogged\">");
+				out.println("<select class=\"combo_box_listas\" name=\"listasUsuarioLogged\" id=\"listasUsuarioLogged\">");
 				for(int index = 0; index <listasRep.length; index++){
 					out.println("<option value=\""+listasRep[index]+"\">"+listasRep[index]+"</option>");
 				}
-				out.println("</select>");
-				out.println("<button id=\"agregar_lista_button\" value=\"Agregar\">Agregar a lista</button>");
+				out.println("</select><button id=\"agregar_lista_button\" value=\"Agregar\" onclick=\"agregar_lista_script()\">Agregar a lista</button>");
 			}
 		}//esta funciñn genera el codigo html para el boton combo box para agregar un video a una lista de reproduccion.
-		private int printComentarios(javax.servlet.jsp.JspWriter out, DtComentario[] comentarios,int index) throws java.io.IOException{
+		private int printComentarios(javax.servlet.jsp.JspWriter out, DtComentario[] comentarios,int index, String url_logo_usuario_iniciado, String logged_state) throws java.io.IOException{
 			for(int i = 0  ; i < comentarios.length; i++){
 				String autor_comentario = comentarios[i].getNickUsuario();
 				Date fecha_publicacion_comentario = comentarios[i].getFecha().getFecha();
@@ -243,12 +251,6 @@
 				anio_comment = fecha_publicacion_comentario.getYear() + 1900;
 				String descripcion_comentario = comentarios[i].getTexto();
 				DtComentario[] hijos = comentarios[i].getRespuestas();
-				/* opcion1 NO BORRAR
-		   		out.println("<ul class=\"comment\">");
-		   		out.println("	<li><img class=\"logo\" src=\"https://i0.wp.com/blogthinkbig.com/wp-content/uploads/2018/04/3hfXV9eW-mAQfO4XNZrGX1OJPTm-FuEjVT_yxNH0cQM.jpg?resize=610%2C343\"></img> <p id=\"nombre_autor\">"+autor_comentario+" "+dia_comment+"/"+mes_comment+"/"+anio_comment+"</p></li>");
-				out.println("	<li><p class=\"descripcion\">"+descripcion_comentario+"</p><button style=\"width:30%\" id=\"response_button"+index+"\" class=\"response_button_class\" name=\"response_button\" value=\""+comentarios[i].getIDComentario()+"\" onclick=\"toggle_response_box("+index+")\">  Responder  </button></li>");
-				out.println("	<li style=\"display:none;\" id=\"response_box"+index+"\"><img id=\"mini_logo\" src=\"\"></img><textarea class=\"comentario\" id=\"comentario_a_comentar"+index+"\"></textarea><button class=\"response_button_class\"  id=\"submit_response_button"+index+"\" name=\"response_button\" value=\"Responder\" onclick=\"submit_response("+index+")\">  Responder  </button></li>");
-				*/
 		   		out.println("<ul class=\"comment\">");
 				out.println("<li>");
 				out.println("<table class=\"comment_box\">");
@@ -261,12 +263,23 @@
 				out.println("            <td colspan=\"2\"><p class=\"descripcion\">"+descripcion_comentario+"</p></td>");
 				out.println("        </tr>");
 				out.println("        <tr>");
-				out.println("            <td colspan=\"2\"><button style=\"width:30%\" id=\"response_button"+index+"\" class=\"response_button_class\" name=\"response_button\" value=\""+comentarios[i].getIDComentario()+"\" onclick=\"toggle_response_box("+index+")\">  Responder  </button></td>");
+				if(logged_state == "true"){
+					out.println("            <td colspan=\"2\"><button style=\"width:100%\" id=\"response_button"+index+"\" class=\"response_button_class\" name=\"response_button\" value=\""+comentarios[i].getIDComentario()+"\" onclick=\"toggle_response_box("+index+")\">  Responder  </button></td>");	
+				}
 				out.println("        </tr>");
 				out.println("    </table>");
+				if(logged_state == "true"){
+					out.println("<table class=\"response_box\" id=\"response_box"+index+"\">");
+					out.println("		 <tr>");
+					out.println("		 	 <td class=\"img_container\"><img id=\"mini_logo\" class=\"logo\" src=\""+url_logo_usuario_iniciado+"\"></img></td>");
+					out.println("		 	 <td><textarea class=\"comentario_text_area\" id=\"comentario_a_comentar"+index+"\"></textarea></td>");
+					out.println("		 	 <td><button class=\"response_button_class\"  id=\"submit_response_button"+index+"\" name=\"response_button\" value=\"Responder\" onclick=\"submit_response("+index+")\">  Responder  </button></td>");
+					out.println("		 </tr>");
+					out.println("    </table>");
+				}
 				out.println("</li>");
 				index++;
-				index = printComentarios(out,hijos,index);
+				index = printComentarios(out,hijos,index,url_logo_usuario_iniciado,logged_state);
 				out.println("</ul>");
 				
 			}
@@ -276,7 +289,7 @@
 	<div class="comment_container">
 	<%
 		int index = 0;		
-		printComentarios(out,comentarios, index);
+		printComentarios(out,comentarios, index, url_logo_usuario_iniciado,logged_state);
 	%>
 	</div>
 </body>

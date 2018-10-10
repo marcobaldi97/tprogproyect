@@ -16,6 +16,7 @@ import uytubeLogic.logica.DtCanal;
 import uytubeLogic.logica.DtCategoria;
 import uytubeLogic.logica.DtComentario;
 import uytubeLogic.logica.DtFecha;
+import uytubeLogic.logica.DtInfoVideo;
 import uytubeLogic.logica.DtUsuario;
 import uytubeLogic.logica.DtVideo;
 import uytubeLogic.logica.Fabrica;
@@ -74,11 +75,6 @@ public class VideoServlet extends HttpServlet {
 
 	}
 
-	private void valorarVideo(int id_video, String nombre_usuario, boolean like) {
-		Fabrica fabrica = Fabrica.getInstance();
-		IVideoCtrl interfaz_video = fabrica.getIVideoCtrl();
-		interfaz_video.valorarVideo(id_video, nombre_usuario, like);
-	}
 
 	private void seguirUsuario(String nombre_usuario, String propietario) {
 		Fabrica fabrica = Fabrica.getInstance();
@@ -118,12 +114,13 @@ public class VideoServlet extends HttpServlet {
 			break;
 		case "likeVideo": {
 			System.out.println("Quiero darle me gusta a un video");
-
 			HttpSession session=request.getSession(false);
             if(session!=null && session.getAttribute("nombre_usuario")!=null) {
-    		 	Integer id_video =Integer.parseInt(request.getParameter("id_video"));
+    		 	Integer id_video = Integer.parseInt(request.getParameter("id_video"));
     		 	String nombre_usuario = (String)session.getAttribute("nombre_usuario");
-    		 	valorarVideo(id_video,nombre_usuario,true);
+    			Fabrica fabrica = Fabrica.getInstance();
+    			IVideoCtrl interfaz_video = fabrica.getIVideoCtrl();
+    			interfaz_video.valorarVideo(id_video, nombre_usuario, true);
     		 	System.out.println("usuario "+nombre_usuario+" id_video:" +id_video);//esto es para ver si no manda nada null.
     		 	System.out.println("le di me gusta");
             }
@@ -135,7 +132,9 @@ public class VideoServlet extends HttpServlet {
             if(session!=null && session.getAttribute("nombre_usuario")!=null) {
     		 	Integer id_video = Integer.parseInt(request.getParameter("id_video"));
     		 	String nombre_usuario = (String)session.getAttribute("nombre_usuario");
-    		 	valorarVideo(id_video,nombre_usuario,false);
+    			Fabrica fabrica = Fabrica.getInstance();
+    			IVideoCtrl interfaz_video = fabrica.getIVideoCtrl();
+    			interfaz_video.valorarVideo(id_video, nombre_usuario, false);
     		 	System.out.println("usuario "+nombre_usuario+" id_video:" +id_video);
     		 	System.out.println("le di no me gusta");
             }
@@ -160,7 +159,21 @@ public class VideoServlet extends HttpServlet {
             	String usuarioLogged = (String) session.getAttribute("nombre_usuario");
             	String[] listasReproduccionUsuarioLogged = usrController.listarLDRdeUsuario(usuarioLogged);
             	request.setAttribute("listasReproduccionUsuarioLogged", listasReproduccionUsuarioLogged);
-            }else request.setAttribute("logged" ,false);
+            	Integer IDVideo = Integer.parseInt(request.getParameter("ID"));
+            	request.setAttribute("like_state", vidController.getEstadoValoracion(IDVideo, usuarioLogged));
+            	//calificacion de estado de valoración.
+            	String[] usuariosSeguidores = usrController.listarUsuariosQueLeSigue(dataVideo.getPropietario());
+            	boolean flagFollow = false;
+            	for(int i = 0;i<usuariosSeguidores.length;i++){
+            		if(usuariosSeguidores[i] == usuarioLogged) flagFollow = true;
+            	}
+            	if(flagFollow == true) 
+            		request.setAttribute("follow_state", "true");
+            	else request.setAttribute("follow_state", "false");
+            	//calificacion de estado de seguir.
+            }else{
+            	request.setAttribute("logged" ,false);
+            }
 			request.getRequestDispatcher("/WEB-INF/Video/VerVideo.jsp").forward(request, response);
 			break;
 		}
