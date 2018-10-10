@@ -188,12 +188,12 @@
 </script>
 </head>
 <body >
-	<p id="titulo"><%=titulo%></p><br>
+	<p class="titulo" id="titulo"><%=titulo%></p><br>
 
 	<iframe style="width:100%" height="430px" id="frame" src="<%=url_video%>"></iframe><br>
 	<table style="width:100%">
 		<tr>
-			<th rowspan="2" width="10%"><img id="logo" src=<%=url_logo_autor%> width="100px" height="70px" ></img></th>
+			<th rowspan="2" width="10%"><img class="logo" src=<%=url_logo_autor%> width="100px" height="70px" ></img></th>
 			<th class="texto_simple" id="nombre_autor" width="30%"><%=nombre_canal%></th>
 			<th rowspan="2" class="right_left_separators"  id="fecha_publicacion" width="30%"><p class="texto_simple"><%=dia%>/<%=mes%>/<%=anio%></p></th>
 			<th rowspan="2" class="botones_like_dislike" width="30%">
@@ -215,7 +215,7 @@
 			<th  class="texto_simple" id="nombre_autor">Comentar video:</th>
 		</tr>
 		<tr>
-			<th rowspan="2" width="30%" height="150px"><img id="logo" src=<%=url_logo_usuario_iniciado%> width="100px" height="70px"></img></th>
+			<th rowspan="2" width="30%" height="150px"><img class="logo" src=<%=url_logo_usuario_iniciado%> width="100px" height="70px"></img></th>
 			<th rowspan="2" width="70%" id="cell_comentar"><textarea class="comentario" id="comentario_a_comentar"></textarea></th>
 		</tr>
 		<tr>
@@ -243,21 +243,41 @@
 				anio_comment = fecha_publicacion_comentario.getYear() + 1900;
 				String descripcion_comentario = comentarios[i].getTexto();
 				DtComentario[] hijos = comentarios[i].getRespuestas();
+				/* opcion1 NO BORRAR
 		   		out.println("<ul class=\"comment\">");
-		   		out.println("	<li><img id=\"logo\" src=\"https://i0.wp.com/blogthinkbig.com/wp-content/uploads/2018/04/3hfXV9eW-mAQfO4XNZrGX1OJPTm-FuEjVT_yxNH0cQM.jpg?resize=610%2C343\"></img> <p id=\"nombre_autor\">"+autor_comentario+" "+dia_comment+"/"+mes_comment+"/"+anio_comment+"</p></li>");
-				out.println("	<li><p class=\"descripcion\">"+descripcion_comentario+"</p></li>");
-				out.println("	<li><button style=\"width:30%\" id=\"response_button"+index+"\" class=\"response_button_class\" name=\"response_button\" value=\""+comentarios[i].getIDComentario()+"\" onclick=\"toggle_response_box("+index+")\">  Responder  </button></li>");
-				out.println("	<li style=\"display:none;\" id=\"response_box"+index+"\"><img id=\"mini_logo\" src=\"\"></img><textarea class=\"comentario\" id=\"comentario_a_comentar"+index+"\"></textarea><button class=\"response_button\"  id=\"submit_response_button"+index+"\" name=\"response_button\" value=\"Responder\" onclick=\"submit_response("+index+")\">  Responder  </button></li>");
+		   		out.println("	<li><img class=\"logo\" src=\"https://i0.wp.com/blogthinkbig.com/wp-content/uploads/2018/04/3hfXV9eW-mAQfO4XNZrGX1OJPTm-FuEjVT_yxNH0cQM.jpg?resize=610%2C343\"></img> <p id=\"nombre_autor\">"+autor_comentario+" "+dia_comment+"/"+mes_comment+"/"+anio_comment+"</p></li>");
+				out.println("	<li><p class=\"descripcion\">"+descripcion_comentario+"</p><button style=\"width:30%\" id=\"response_button"+index+"\" class=\"response_button_class\" name=\"response_button\" value=\""+comentarios[i].getIDComentario()+"\" onclick=\"toggle_response_box("+index+")\">  Responder  </button></li>");
+				out.println("	<li style=\"display:none;\" id=\"response_box"+index+"\"><img id=\"mini_logo\" src=\"\"></img><textarea class=\"comentario\" id=\"comentario_a_comentar"+index+"\"></textarea><button class=\"response_button_class\"  id=\"submit_response_button"+index+"\" name=\"response_button\" value=\"Responder\" onclick=\"submit_response("+index+")\">  Responder  </button></li>");
+				*/
+		   		out.println("<ul class=\"comment\">");
+				out.println("<li>");
+				out.println("<table class=\"comment_box\">");
+				out.println("        <tr>");
+				out.println("            <td rowspan=\"3\" class=\"img_container\"><img class=\"logo\" src=\"https://i0.wp.com/blogthinkbig.com/wp-content/uploads/2018/04/3hfXV9eW-mAQfO4XNZrGX1OJPTm-FuEjVT_yxNH0cQM.jpg?resize=610%2C343\"></img></td>");
+				out.println("            <td style=\"width: 50%\"><p class=\"texto_simple\">"+autor_comentario+"</p></td>");
+				out.println("            <td style=\"width: 50%\"><p class=\"texto_simple\">"+dia_comment+"/"+mes_comment+"/"+anio_comment+"</p></td>");
+				out.println("        </tr>");
+				out.println("        <tr>");
+				out.println("            <td colspan=\"2\"><p class=\"descripcion\">"+descripcion_comentario+"</p></td>");
+				out.println("        </tr>");
+				out.println("        <tr>");
+				out.println("            <td colspan=\"2\"><button style=\"width:30%\" id=\"response_button"+index+"\" class=\"response_button_class\" name=\"response_button\" value=\""+comentarios[i].getIDComentario()+"\" onclick=\"toggle_response_box("+index+")\">  Responder  </button></td>");
+				out.println("        </tr>");
+				out.println("    </table>");
+				out.println("</li>");
 				index++;
 				index = printComentarios(out,hijos,index);
 				out.println("</ul>");
+				
 			}
 			return index;
 		}
 	%>
+	<div class="comment_container">
 	<%
-		int index = 0;
+		int index = 0;		
 		printComentarios(out,comentarios, index);
 	%>
+	</div>
 </body>
 </html>
