@@ -8,11 +8,33 @@
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>UyTube</title>
+<%@include file="../buscador.jsp" %>
+<%@include file="../cosasComunesDelHead.jsp" %>
+<style>table{
+	width: 100%;
+	table-layout: fixed;
+}
+th {
+	color: white;
+	padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    background-color: #ff0000;
+    color: white;
+    vertical-align: text-top;
+}
+td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+tr:nth-child(even) {background-color: #f2f2f2;}</style>
+<link rel="stylesheet" href="/media/styles/Busqueda.css">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Detalles Lista Reprodcuccion</title>
 </head>
 <body>
 
@@ -21,7 +43,7 @@
 %>
 
 <p>Nombre: <%=infoLista.getNombre()%></p>
-
+<p>Privacidad: <%=infoLista.getPrivado().name()%> </p>
 
 <p>Categorias:
 <%

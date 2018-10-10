@@ -231,10 +231,12 @@
 						 //System.out.print("ES DUEÑO DEL CANAL");
 						 %>
 					 
-						<form action="modifyPlaylist" method="post"> 
-						<input type="hidden" name="opcion" value="modificarLista">
-						<input type="hidden" name="dtLista" value="<%=entry%>">
-						<input type="submit" value="Modificar"> </form> 
+						<form action="modifyPlaylist" method="get"> 
+						<input type="hidden" name="action" value="modify">
+						<input type="hidden" name="nameList" value="<%=entry.getNombre()%>">
+						<input type="hidden" name="ownerList" value="<%=entry.getPropietario() %>">
+						<input type="submit" value="Modificar">
+						</form>
 						<%}%>
 						</td>
 						</tr>

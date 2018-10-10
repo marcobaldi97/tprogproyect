@@ -13,6 +13,7 @@
 <html>
 <head>
 <%@include file="../buscador.jsp" %>
+
 <style>table{
 	width: 100%;
 	table-layout: fixed;
