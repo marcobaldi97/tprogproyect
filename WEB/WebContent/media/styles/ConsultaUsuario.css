@@ -1,4 +1,4 @@
-@CHARS@CHARSET "ISO-8859-1";
+@CHARS@CHARSET "UTF-8";
 .main-content{
 	 display: inline-block;
 	 background-color: #eee;
@@ -53,7 +53,7 @@ table.tabs td {
 
 
 /* El ancho y alto de los div.tabdiv se configuran
-en cada aplicación */
+en cada aplicaciï¿½n */
 div.tabdiv {
 	background-color: #eee;
     border: 0;

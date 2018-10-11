@@ -4,7 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Paths;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -18,10 +19,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
-
-import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
-import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import uytubeLogic.logica.DtCanal;
 import uytubeLogic.logica.DtFecha;
@@ -39,7 +36,6 @@ import uytubeLogic.logica.SystemHandler.Privacidad;
 @WebServlet({"/login","/newUser","/profile","/modifyUser","/follow","/responseComment"})
 public class UsuarioServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private Object document;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -149,6 +145,8 @@ public class UsuarioServlet extends HttpServlet {
 			break;
 		}
 		case "Perfil":{
+			
+			//String nickname = URLDecoder.decode((String)request.getParameter("nickname"),"UTF-8");
 			String nickname = (String)request.getParameter("nickname");
 			Fabrica fabrica=Fabrica.getInstance();
 			IUsuarioCtrl interfazUsuarios = fabrica.getIUsuarioCtrl();
@@ -210,7 +208,8 @@ public class UsuarioServlet extends HttpServlet {
 			break;
 		}
 		case "responderComentario":{
-			HttpSession session=request.getSession(false);
+			HttpSession session=request.getSession(false);{
+			}
             if(session!=null && session.getAttribute("nombre_usuario")!=null) {
     			int id_video = Integer.parseInt(request.getParameter("id_video"));
     			int id_comentario = Integer.parseInt(request.getParameter("id_comentario"));
@@ -256,13 +255,15 @@ public class UsuarioServlet extends HttpServlet {
 			break;
 		}
 		case "checkLogin" :{
+			
 			String nomUsu=(String)request.getSession().getAttribute("nombre_usuario");
+			System.out.println("el usuario logueado es " + nomUsu);
 			if(nomUsu==null) {
 				response.getWriter().append("<a href='login?opcion=login'>Iniciar Sesion</a>   ");
 				response.getWriter().append("<a href='newUser?opcion=nuevoUsuario'>Nuevo Usuario</a>");
 			}else {
 				response.getWriter().append("<a href='login?opcion=logout'>Cerrar Sesion</a>");
-				response.getWriter().append("<a href='profile?opcion=Perfil&nickname="+nomUsu+"'>Hola, "+nomUsu+"</a>");
+				response.getWriter().append("<a href='profile?opcion=Perfil&nickname="+URLEncoder.encode(nomUsu,"UTF-8")+"'>Hola, "+nomUsu+"</a>");
 				
 			}
 			break;
@@ -287,10 +288,11 @@ public class UsuarioServlet extends HttpServlet {
 			break;
 		}
 		case "checkDispUsr":{
-			System.out.println((String)request.getParameter("nickname"));
+			String nick = URLDecoder.decode(request.getParameter("nickname"), "UTF-8");
+			System.out.println(nick);
 			Fabrica fabrica = Fabrica.getInstance();
 			IUsuarioCtrl usuarioCtrl = fabrica.getIUsuarioCtrl();
-			boolean disponible=usuarioCtrl.verificarDispUsuario((String)request.getParameter("nickname"), (String)request.getParameter("email"));
+			boolean disponible=usuarioCtrl.verificarDispUsuario(nick, (String)request.getParameter("email"));
     		if(!disponible){
     			response.getWriter().print("el nick y/o email estan ocupados"); 
     	  	}
@@ -328,7 +330,9 @@ public class UsuarioServlet extends HttpServlet {
 	    			DtUsuario usuario = usrCtrl.listarDatosUsuario((String)request.getParameter("nickname"));
 	    			request.setAttribute("dataCanal", infoCanal);
 	    			request.setAttribute("dataUsuario", usuario);
-	    			response.sendRedirect(request.getContextPath() + "/profile?opcion=Perfil&nickname="+request.getParameter("nickname"));
+	    			String nickAEnviar = request.getParameter("nickname");
+	    			System.out.println("el nick ah re loco "+nickAEnviar);
+	    			response.sendRedirect(request.getContextPath() + "/profile?opcion=Perfil&nickname="+URLEncoder.encode(nickAEnviar,"UTF-8"));
 	        	}else{
 	        		response.getWriter().print("Compruebe los datos"); 
 	        	}

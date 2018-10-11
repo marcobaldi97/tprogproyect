@@ -1,6 +1,11 @@
 package uytubeWeb.servlets;
 
 import java.io.IOException;
+import java.net.URLDecoder;
+import java.nio.charset.Charset;
+import java.nio.charset.CharsetDecoder;
+import java.nio.charset.CharsetEncoder;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -39,6 +44,8 @@ public class ListaReproduccionServlet extends HttpServlet {
 		Fabrica fabrica=Fabrica.getInstance();
 		IUsuarioCtrl interfazUsuario = fabrica.getIUsuarioCtrl();
 		HttpSession session=request.getSession(false);
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 		
 		switch(action) 
 		{
@@ -179,20 +186,22 @@ public class ListaReproduccionServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String action = request.getParameter("action");
 		Fabrica fabrica=Fabrica.getInstance();
-		
 		IUsuarioCtrl interfazUsuario = fabrica.getIUsuarioCtrl();
 		HttpSession session=request.getSession(false);
 		
 		switch(action) {
 		case "crearLDR":{
+			
 			if(session!=null && session.getAttribute("nombre_usuario")!=null) {
 				System.out.println((String)session.getAttribute("nombre_usuario"));
 				System.out.println(request.getParameter("nombreLista"));
+				String encodedLista = new String(request.getParameter("nombreLista").getBytes("ISO-8859-1"), "UTF-8");
 				if(request.getParameter("grupoPrivacidad").equals("Publico")) {
-					interfazUsuario.nuevaListaParticular((String)session.getAttribute("nombre_usuario"), request.getParameter("nombreLista"), Privacidad.PUBLICO);
+					System.out.println("cree una listirijilla " + encodedLista);
+					interfazUsuario.nuevaListaParticular((String)session.getAttribute("nombre_usuario"), encodedLista, Privacidad.PUBLICO);
 					response.sendRedirect(request.getContextPath() + "/playlist?action=list");
 				}else {
-					interfazUsuario.nuevaListaParticular((String)session.getAttribute("nombre_usuario"), request.getParameter("nombreLista"), Privacidad.PRIVADO);
+					interfazUsuario.nuevaListaParticular((String)session.getAttribute("nombre_usuario"), encodedLista, Privacidad.PRIVADO);
 					response.sendRedirect(request.getContextPath() + "/playlist?action=list");
 				}
 				System.out.println("creada la LDR");

@@ -161,7 +161,7 @@ public class VideoServlet extends HttpServlet {
             	request.setAttribute("listasReproduccionUsuarioLogged", listasReproduccionUsuarioLogged);
             	Integer IDVideo = Integer.parseInt(request.getParameter("ID"));
             	request.setAttribute("like_state", vidController.getEstadoValoracion(IDVideo, usuarioLogged));
-            	//calificacion de estado de valoración.
+            	//calificacion de estado de valoraciï¿½n.
             	String[] usuariosSeguidores = usrController.listarUsuariosQueLeSigue(dataVideo.getPropietario());
             	boolean flagFollow = false;
             	for(int i = 0;i<usuariosSeguidores.length;i++){
@@ -227,12 +227,12 @@ public class VideoServlet extends HttpServlet {
 			HttpSession session=request.getSession(false);
 			if(session!=null && session.getAttribute("nombre_usuario")!=null) {
 				String login = (String)session.getAttribute("nombre_usuario");
-				String nombreVideo = request.getParameter("nombreVideo");
-				String duracionVideo = request.getParameter("duracionVideo");
+				String nombreVideo = new String(request.getParameter("nombreVideo").getBytes("ISO-8859-1"), "UTF-8");
+				String duracionVideo = new String(request.getParameter("duracionVideo").getBytes("ISO-8859-1"), "UTF-8");
 				String urlVideo = request.getParameter("urlVideo");
 				String fechaVideo = request.getParameter("fechaVideo");
-				String categoria = request.getParameter("categoria");
-				String descVideo = request.getParameter("descVideo");
+				String categoria = new String(request.getParameter("categoria").getBytes("ISO-8859-1"), "UTF-8");
+				String descVideo = new String(request.getParameter("descVideo").getBytes("ISO-8859-1"), "UTF-8");
 				if (nombreVideo != "" && duracionVideo != "" && isInteger(duracionVideo) && urlVideo != "" && fechaVideo != "" && descVideo != "") {
 					crearVideo(login,nombreVideo, duracionVideo, urlVideo, fechaVideo, categoria, descVideo);
 					response.sendRedirect(request.getContextPath() + "/home");

@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,12 +29,14 @@
 	                xhttp.onreadystatechange = function () {
 	                  if (this.readyState == 4 && this.status == 200) {
 	                	                	 
-	                	//  if(mensaje=="")alert(this.responseText,"¡ALERTA!");
+	                	//  if(mensaje=="")alert(this.responseText,"Â¡ALERTA!");
 	                	document.getElementById("disponible").innerHTML = this.responseText;
 	                	
 	                  }
 	                };
-	                xhttp.open("POST", "newUser?opcion=checkDispUsr&nickname="+document.getElementById("nickname").value+"&email="+document.getElementById("email").value, true);
+	                var nickname = document.getElementById("nickname").value;
+	                var encodedNick= encodeURIComponent(nickname);
+	                xhttp.open("POST", "newUser?opcion=checkDispUsr&nickname="+encodedNick+"&email="+document.getElementById("email").value, true);
 	                xhttp.send();	                
 	            }
            		
@@ -44,10 +46,10 @@
             <input type="text" name="nombre"><br>
             Apellido:<br>
             <input type="text" name="apellido"><br>
-            Contraseña:<br>
+            ContraseÃ±a:<br>
             
             <input type="password" id="contrasenia" name="contrasenia"><br>
-            Confirmar Contraseña:<br>
+            Confirmar ContraseÃ±a:<br>
             <input type="password" id="contraseniaConfirmacion" name="contraseniaConfirmacion"><br>
 			<a id=correctaPass></a>
             

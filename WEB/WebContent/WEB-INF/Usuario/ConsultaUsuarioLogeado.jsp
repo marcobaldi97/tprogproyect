@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
     <%@ page import = "uytubeLogic.logica.DtVideo"%>
 <%@ page import = "uytubeLogic.logica.DtCategoria"%>
 <%@ page import = "uytubeLogic.logica.DtFecha"%>
@@ -16,7 +16,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<%@include file = "../cosasComunesDelHead.jsp" %>
 	<link rel="stylesheet" type="text/css" href="media/styles/ConsultaUsuario.css"/>
 	<script type="text/javascript" src="scriptPestanias.js">activarTab()</script>
@@ -39,7 +39,7 @@
 	String nombre_canal = dataCanal.getNombre();
 	String descCanal= dataCanal.getDescripcion();
 	String categoriaCanal=dataCanal.getCategoria().getNombre();
-	   //estos son los datos que tienen que ver con el usuario propietario y el video en sí.
+	   //estos son los datos que tienen que ver con el usuario propietario y el video en sÃ­.
 	   byte[] fotoByte = dataUsuario.getFoto();
 		String urlFoto = "";
 		if(fotoByte != null){
@@ -189,7 +189,7 @@
 					
 					 <%
 					 if((boolean)request.getAttribute("duenioCanal")){ 
-						 System.out.print("ES DUEÑO DEL CANAL");
+						 System.out.print("ES DUEÃ‘O DEL CANAL");
 					 %>
 					 
 						<form action="modifyVideo" method="post"> 
@@ -228,7 +228,7 @@
 						<input type="hidden" name="ownerList" value="<%=entry.getPropietario() %>">
 						<input type="submit" value="Ver Info"> </form> 
 						<%if((boolean)request.getAttribute("duenioCanal")){ 
-						 //System.out.print("ES DUEÑO DEL CANAL");
+						 //System.out.print("ES DUEÃ‘O DEL CANAL");
 						 %>
 					 
 						<form action="modifyPlaylist" method="get"> 
