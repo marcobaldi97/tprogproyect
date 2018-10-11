@@ -28,7 +28,7 @@ import uytubeLogic.logica.SystemHandler.Privacidad;
  * Servlet implementation class VideoServlet
  */
 @WebServlet(name = "VideoServlet", urlPatterns = { "/watch", "/newVideo", "/modifyVideo", "/likeVideo", "/dislikeVideo",
-		"/newComment", "/newResponse" })
+		"/newComment", "/newResponse", "/leaveFollow" })
 public class VideoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -80,6 +80,13 @@ public class VideoServlet extends HttpServlet {
 		Fabrica fabrica = Fabrica.getInstance();
 		IUsuarioCtrl usrCtrl = fabrica.getIUsuarioCtrl();
 		usrCtrl.seguirUsuario(nombre_usuario, propietario);
+	}
+	
+	private void dejarDeSeguirUsuario(String nombre_usuario, String propietario) {
+		Fabrica fabrica = Fabrica.getInstance();
+		IUsuarioCtrl usrCtrl = fabrica.getIUsuarioCtrl();
+		System.out.println("el usuario es :"+nombre_usuario+" y el propietario es : "+propietario);
+		usrCtrl.dejarUsuario(nombre_usuario, propietario);;
 	}
 
 	private void comentarVideo(int id_video, String comentador, String contenido) {
@@ -165,7 +172,7 @@ public class VideoServlet extends HttpServlet {
             	String[] usuariosSeguidores = usrController.listarUsuariosQueLeSigue(dataVideo.getPropietario());
             	boolean flagFollow = false;
             	for(int i = 0;i<usuariosSeguidores.length;i++){
-            		if(usuariosSeguidores[i] == usuarioLogged) flagFollow = true;
+            		if(usuariosSeguidores[i].equals(usuarioLogged)) flagFollow = true;
             	}
             	if(flagFollow == true) 
             		request.setAttribute("follow_state", "true");
@@ -180,9 +187,16 @@ public class VideoServlet extends HttpServlet {
 		case "follow": {
 			System.out.println("Quiero seguir a un usuario");
 			HttpSession session = request.getSession();
-			String propietario = request.getParameter("propietario");
+			String propietario = request.getParameter("usuario_a_seguir");
 			String nombre_usuario = (String) session.getAttribute("nombre_usuario");
 			seguirUsuario(nombre_usuario, propietario);
+			break;
+		}case "leaveFollow": {
+			System.out.println("Quiero dejar de seguir a un usuario");
+			HttpSession session = request.getSession();
+			String propietario = request.getParameter("usuario_a_seguir");
+			String nombre_usuario = (String) session.getAttribute("nombre_usuario");
+			dejarDeSeguirUsuario(nombre_usuario, propietario);
 			break;
 		}
 		case "comment": {
