@@ -6,12 +6,12 @@
 <%@ page import = "uytubeLogic.logica.SystemHandler.Privacidad"%>
 <%@ page import = "uytubeLogic.logica.DtCanal"%>
 <%@ page import = "uytubeLogic.logica.DtCategoria"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <%@include file="../buscador.jsp" %>
 <%@include file="../cosasComunesDelHead.jsp" %>
 <style>table{
@@ -34,7 +34,7 @@ td {
 }
 tr:nth-child(even) {background-color: #f2f2f2;}</style>
 <link rel="stylesheet" href="/media/styles/Busqueda.css">
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Modificar Lista Reprodcuccion</title>
 </head>
 <body>

@@ -4,8 +4,8 @@
 <%@page import="uytubeLogic.logica.DtListaReproduccion"%>
 <%@ page import = "uytubeLogic.logica.DtVideo"%>
 <%@ page import = "uytubeLogic.logica.DtCanal"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@page errorPage="error404.jsp" %>
 
 
@@ -43,7 +43,7 @@ td {
 tr:nth-child(even) {background-color: #f2f2f2;}</style>
 <%@include file="cosasComunesDelHead.jsp" %>
 <%@include file="buscador.jsp" %>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title><%=request.getAttribute("titulo") %></title>
 </head>
 <body>
@@ -76,7 +76,7 @@ if (request.getAttribute("canales") != null) { %>
 <th valign="top"> Nombre </th>
 <th valign="top"> Descripcion </th>
 <th valign="top"> Propietario </th>
-<th valign="top"> Fecha publicación </th>
+<th valign="top"> Fecha publicaciÃ³n </th>
 </tr>
 	<%
 		DtVideo[] vid = (DtVideo[]) request.getAttribute("videos");

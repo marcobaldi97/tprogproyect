@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@page errorPage="WEB-INF/error/error404.jsp" %>
 <%@ page import = "uytubeLogic.logica.DtVideo"%>
 <%@ page import = "uytubeLogic.logica.DtCategoria"%>
@@ -36,7 +36,7 @@
 	//String url_logo_autor = obtenerURLdeImagen(info_propietario.getFoto());
 	String url_logo_autor = "https://i.ytimg.com/vi/5bHimOJb-Xw/hqdefault.jpg";
 	String nombre_canal = canal_propietario.getNombre();
-	//estos son los datos que tienen que ver con el usuario propietario y el video en sñ.
+	//estos son los datos que tienen que ver con el usuario propietario y el video en sÃ±.
 	//Hasta la 111 es lo que hizo Maria.
 	byte[] fotoByte = info_propietario.getFoto();
 	String urlFoto = "";
@@ -89,7 +89,7 @@
 	    		if(like_state === "dislike") document.getElementById('dislike_button').disabled  = true;
 	    	}
 	    	
-		}//si no estñ loggeado, no muestra estos elementos.
+		}//si no estÃ± loggeado, no muestra estos elementos.
 	}
 
 	function toggle_response_box(index){
@@ -171,9 +171,9 @@
 		xhttp.send();
 	}
 
-	function ir_a_perfil(nombre_dueño_perfil){
+	function ir_a_perfil(nombre_dueÃ±o_perfil){
 		request.setParameter("opcion") = "Perfil";
-		request.setParameter("nombre_dueño_perfil") = nombre_dueño_perfil;
+		request.setParameter("nombre_dueÃ±o_perfil") = nombre_dueÃ±o_perfil;
 		request.getRequestDispatcher("/profile").forward(request, response);
 	}
 
@@ -240,7 +240,7 @@
 				}
 				out.println("</select><button id=\"agregar_lista_button\" value=\"Agregar\" onclick=\"agregar_lista_script()\">Agregar a lista</button>");
 			}
-		}//esta funciñn genera el codigo html para el boton combo box para agregar un video a una lista de reproduccion.
+		}//esta funciÃ±n genera el codigo html para el boton combo box para agregar un video a una lista de reproduccion.
 		private int printComentarios(javax.servlet.jsp.JspWriter out, DtComentario[] comentarios,int index, String url_logo_usuario_iniciado, String logged_state) throws java.io.IOException{
 			for(int i = 0  ; i < comentarios.length; i++){
 				String autor_comentario = comentarios[i].getNickUsuario();
