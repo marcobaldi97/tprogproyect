@@ -63,11 +63,11 @@
             Descripcion:<br>
             <input type="textarea" name="descripcion"><br>
             Defina su privacidad:<br>
-            <input type="radio" name="privacidad" value="PRIVADO">Privado
+            <input type="radio" name="privacidad" value="PRIVADO"  checked="checked" >Privado
             <input type="radio" name="privacidad" value="PUBLICO">Publico<br>
             Categoria(opcional)<br>
             <select name="categoria">
-         		   
+         		   <option value="Sin Categoria">Sin Categoria</option>
                		<%
 					Fabrica fabrica = Fabrica.getInstance();
 					IVideoCtrl videoCtr = fabrica.getIVideoCtrl();

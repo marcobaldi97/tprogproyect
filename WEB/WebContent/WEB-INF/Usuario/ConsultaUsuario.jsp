@@ -168,7 +168,7 @@
 							for(DtListaReproduccion entry: listas){%>
 						<tr class="listaRow">
 				
-						</td>
+						<td>
 						<td id="NombreTD"><%=entry.getNombre()%></td>
 						<td id="DescripcionTD"></td>
 						<td>
@@ -176,7 +176,9 @@
 						<input type="hidden" name="action" value="details">
 						<input type="hidden" name="nameList" value="<%=entry.getNombre() %>">
 						<input type="hidden" name="ownerList" value="<%=entry.getPropietario() %>">
-						<input type="submit" value="Ver Info"> </form> 
+						
+						<input type="submit" value="Ver Info"> 
+						</form>
 						</td>
 						</tr>
 						
@@ -184,6 +186,7 @@
 						}
 						
 						%>
+						
 						
 					</table>
 	            </div>
