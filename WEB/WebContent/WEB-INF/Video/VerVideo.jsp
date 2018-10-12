@@ -79,9 +79,6 @@
 	<script type="text/javascript">
 	window.onload=function(){
 		var logged = "<%=logged_state%>";
-		if(logged === "true"){
-	    	document.getElementById('listasUsuarioLogged').addEventListener("click",agregar_lista_script);  	
-		}//si no estñ loggeado, no muestra estos elementos.
 	}
 
 	function toggle_response_box(index){
@@ -143,6 +140,7 @@
 		var nombre_lista = document.getElementById("listasUsuarioLogged").value;
 		var operacion = "addVidPlaylist?id_video="+<%=id_video%>+"&action=agregarVideoALista&nombre_lista="+nombre_lista;
 		xhttp.open("GET", operacion, true);
+		console.log("el nombre de la lista a agregar es: "+nombre_lista);
 		xhttp.send();
 		location.reload(true);
 	}
