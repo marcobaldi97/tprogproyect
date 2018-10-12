@@ -43,10 +43,12 @@ public class Usuario {
 		apellido = apellidoU;
 		email = emailU;
 		fechaNacimiento = fechaNacU;
-		if (fotoU.length == 0){
+		if(fotoU !=null){
+			if (fotoU.length == 0){
 			//agregarle foto por defecto
 			File archivo = new File("LOGICA/src/usuarioPorDefecto.png");
 			foto = imagenToByte(archivo);
+			}
 		}else{
 			foto = fotoU;
 		}
