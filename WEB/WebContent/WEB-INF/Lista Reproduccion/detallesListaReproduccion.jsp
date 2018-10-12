@@ -34,7 +34,7 @@ td {
 tr:nth-child(even) {background-color: #f2f2f2;}</style>
 <link rel="stylesheet" href="/media/styles/Busqueda.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Detalles Lista Reprodcuccion</title>
+<title>Detalles Lista Reproduccion</title>
 </head>
 <body>
 

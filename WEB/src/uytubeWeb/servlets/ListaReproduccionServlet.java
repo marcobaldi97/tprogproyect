@@ -126,10 +126,13 @@ public class ListaReproduccionServlet extends HttpServlet {
 					 request.setAttribute("nicknameLogin", null);
 
 				 } 	
-				String nombreLista = request.getParameter("nameList");
+				
+				//String nombreLista = request.getParameter("nameList");
+				String encodedLista = new String(request.getParameter("nameList").getBytes("ISO-8859-1"), "UTF-8");
+				System.out.println("NOMBRE LISTA" + encodedLista);
 				String propietarioLista = request.getParameter("ownerList");
-				DtVideo[] videosLista=interfazUsuario.obtenerDtsVideosListaReproduccionUsuario(propietarioLista, nombreLista);
-				DtListaReproduccion infoLista = interfazUsuario.infoAdicLDR(propietarioLista, nombreLista);
+				DtVideo[] videosLista=interfazUsuario.obtenerDtsVideosListaReproduccionUsuario(propietarioLista, encodedLista);
+				DtListaReproduccion infoLista = interfazUsuario.infoAdicLDR(propietarioLista, encodedLista);
 				request.setAttribute("videosLista", videosLista);
 				request.setAttribute("infoLista", infoLista);
 				request.getRequestDispatcher("/WEB-INF/Lista Reproduccion/detallesListaReproduccion.jsp").forward(request, response);	
@@ -159,8 +162,8 @@ public class ListaReproduccionServlet extends HttpServlet {
 	            if(session!=null && session.getAttribute("nombre_usuario")!=null) {
 	            	String usuario_logged = (String) session.getAttribute("nombre_usuario");
 	            	Integer id_video = Integer.parseInt(request.getParameter("id_video"));
-					String nombre_lista = request.getParameter("nombre_lista");
-					interfazUsuario.agregarVideoLista(usuario_logged, id_video, nombre_lista);
+					String encodedLista = new String(request.getParameter("nombreLista").getBytes("ISO-8859-1"), "UTF-8");
+					interfazUsuario.agregarVideoLista(usuario_logged, id_video, encodedLista);
 	            }
 				break;
 			}
@@ -191,18 +194,19 @@ public class ListaReproduccionServlet extends HttpServlet {
 		
 		switch(action) {
 		case "crearLDR":{
-			
+			String nombreUsuario=(String)session.getAttribute("nombre_usuario");
 			if(session!=null && session.getAttribute("nombre_usuario")!=null) {
 				System.out.println((String)session.getAttribute("nombre_usuario"));
 				System.out.println(request.getParameter("nombreLista"));
 				String encodedLista = new String(request.getParameter("nombreLista").getBytes("ISO-8859-1"), "UTF-8");
 				if(request.getParameter("grupoPrivacidad").equals("Publico")) {
 					System.out.println("cree una listirijilla " + encodedLista);
-					interfazUsuario.nuevaListaParticular((String)session.getAttribute("nombre_usuario"), encodedLista, Privacidad.PUBLICO);
-					response.sendRedirect(request.getContextPath() + "/playlist?action=list");
+					interfazUsuario.nuevaListaParticular(nombreUsuario, encodedLista, Privacidad.PUBLICO);
+					response.sendRedirect(request.getContextPath() + "/playlist?action=details&ownerList="+nombreUsuario+"&nameList="+ request.getParameter("nombreLista"));
+					
 				}else {
 					interfazUsuario.nuevaListaParticular((String)session.getAttribute("nombre_usuario"), encodedLista, Privacidad.PRIVADO);
-					response.sendRedirect(request.getContextPath() + "/playlist?action=list");
+					response.sendRedirect(request.getContextPath() + "/playlist?action=details&ownerList="+nombreUsuario+"&nameList="+request.getParameter("nombreLista"));
 				}
 				System.out.println("creada la LDR");
 			}else {

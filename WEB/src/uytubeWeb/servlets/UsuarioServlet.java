@@ -1,13 +1,9 @@
 package uytubeWeb.servlets;
 
-import java.io.File;
-import java.io.FileInputStream;
+
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -98,14 +94,13 @@ public class UsuarioServlet extends HttpServlet {
 		 	break;
 		}	
 		case "Perfil":{
-			
-			//String nickname = URLDecoder.decode((String)request.getParameter("nickname"),"UTF-8");
+		
 			String nickname = (String)request.getParameter("nickname");
 			Fabrica fabrica=Fabrica.getInstance();
 			IUsuarioCtrl interfazUsuarios = fabrica.getIUsuarioCtrl();
 			
 			
-			System.out.println("estoy yendo a consultar a " + nickname);
+			System.out.println("estoy yendo a consultar a " + nickname );
 			DtCanal infoCanal = interfazUsuarios.mostrarInfoCanal(nickname);
 			DtUsuario usuario = interfazUsuarios.listarDatosUsuario(nickname);
 			request.setAttribute("dataCanal", infoCanal);

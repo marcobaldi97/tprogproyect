@@ -20,7 +20,7 @@
 
 <table id="TablaContenidos">
 <tr>
-<th valign="top"> Tipo </th>
+<th valign="top"> Videos </th>
 <th valign="top"> Nombre </th>
 <th valign="top"> Propietario </th>
 

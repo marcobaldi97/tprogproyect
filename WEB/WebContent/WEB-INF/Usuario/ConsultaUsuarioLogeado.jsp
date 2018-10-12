@@ -237,7 +237,9 @@
 						<input type="hidden" name="ownerList" value="<%=entry.getPropietario() %>">
 						<input type="submit" value="Modificar">
 						</form>
+													
 						<%}%>
+							
 						</td>
 						</tr>
 						
@@ -245,6 +247,7 @@
 						}
 						
 						%>
+						
 						
 					</table>
 	         </div>
