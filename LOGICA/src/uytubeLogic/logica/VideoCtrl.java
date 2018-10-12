@@ -111,7 +111,6 @@ public class VideoCtrl implements IVideoCtrl {
     			status = "like";
     		}
     	}
-    	System.out.println("Este es el status hasta aqui:"+status);
     	for (int index = 0; index < usuariosDislikes.length; index++) {
     		if(usuariosDislikes[index].getNickname().equals(nickUsuario)) {
     			status = "dislike";

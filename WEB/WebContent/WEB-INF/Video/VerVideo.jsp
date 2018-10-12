@@ -33,6 +33,8 @@
 	int dia = fecha_publicacion.getDate();
 	int mes =  fecha_publicacion.getMonth();
 	int anio = fecha_publicacion.getYear() + 1900;
+	int cantLikes = (int) request.getAttribute("cantLikes");//acordarse de cambiar estos dos.
+	int cantDislikes = (int) request.getAttribute("cantDislikes");;
 	//String url_logo_autor = obtenerURLdeImagen(info_propietario.getFoto());
 	String url_logo_autor = "https://i.ytimg.com/vi/5bHimOJb-Xw/hqdefault.jpg";
 	String nombre_canal = canal_propietario.getNombre();
@@ -78,17 +80,7 @@
 	window.onload=function(){
 		var logged = "<%=logged_state%>";
 		if(logged === "true"){
-	    	document.getElementById('listasUsuarioLogged').addEventListener("click",agregar_lista_script);
-	    	var like_state = "<%=like_state%>";
-	    	var follow_state = "<%=follow_state%>";
-	    	if(like_state === "like"){
-	    		document.getElementById('like_button').disabled  = true;
-	    		document.getElementById('like_button').style.backgroundColor = "#f47121";
-	    	}
-	    	else{
-	    		if(like_state === "dislike") document.getElementById('dislike_button').disabled  = true;
-	    	}
-	    	
+	    	document.getElementById('listasUsuarioLogged').addEventListener("click",agregar_lista_script);  	
 		}//si no estñ loggeado, no muestra estos elementos.
 	}
 
@@ -96,7 +88,7 @@
 		var response_box = "response_box" + index;
 	    var x = document.getElementById(response_box);
 	    if (x.style.display === "none") {
-	        x.style.display = "block";
+	        x.style.display = "inline-table";
 	    } else {
 	        x.style.display = "none";
 	    }
@@ -112,11 +104,11 @@
 		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200) {
-				window.alert("comente");
 			}
 		};
 		xhttp.open("GET", "responseComment?id_video="+<%=id_video%>+"&opcion=responderComentario&id_comentario="+id_comentario+"&contenido="+contenido_comentario,true);
 		xhttp.send();
+		location.reload(true);
 	}
 
 	function me_gusta_script() {
@@ -127,6 +119,7 @@
 		};
 		xhttp.open("GET", "likeVideo?id_video="+<%=id_video%>+"&opcion=likeVideo",true);
 		xhttp.send();
+		location.reload(true);
 	}
 
 	function no_me_gusta_script() {
@@ -138,25 +131,34 @@
 		var operacion = "dislikeVideo?id_video="+<%=id_video%>+"&opcion=dislikeVideo";
 		xhttp.open("GET", operacion, true);
 		xhttp.send();
+		location.reload(true);
 	}
 
 	function agregar_lista_script() {
 		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200) {
-
 			}
 		};
 		var nombre_lista = document.getElementById("listasUsuarioLogged").value;
 		var operacion = "addVidPlaylist?id_video="+<%=id_video%>+"&action=agregarVideoALista&nombre_lista="+nombre_lista;
 		xhttp.open("GET", operacion, true);
 		xhttp.send();
+		location.reload(true);
 	}
 
 	function seguir_script() {
 		var xhttp = new XMLHttpRequest();
 		xhttp.open("GET", "follow?usuario_a_seguir=<%=propietario%>&opcion=follow", true);
 		xhttp.send();
+		location.reload(true);
+	}
+	
+	function dejar_seguir_script(){
+		var xhttp = new XMLHttpRequest();
+		xhttp.open("GET", "leaveFollow?usuario_a_seguir=<%=propietario%>&opcion=leaveFollow", true);
+		xhttp.send();
+		location.reload(true);
 	}
 
 	function comentar_video() {
@@ -169,25 +171,14 @@
 		var contenido = document.getElementById("comentario_a_comentar").value;
 		xhttp.open("GET", "newComment?id_video=<%=id_video%>&opcion=comment&contenido=" + contenido, true);
 		xhttp.send();
+		location.reload(true);
 	}
 
-	function ir_a_perfil(nombre_dueño_perfil){
-		request.setParameter("opcion") = "Perfil";
-		request.setParameter("nombre_dueño_perfil") = nombre_dueño_perfil;
+	function ir_a_perfil(){
+		request.setAttribute("opcion","Perfil");
+		request.setAttribute("nombre_dueño_perfil",<%=propietario%>);
 		request.getRequestDispatcher("/profile").forward(request, response);
 	}
-
-	function youtube_parser(url){
-		var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
-		var match = url.match(regExp);
-		if (match&&match[7].length==11){
-		    var b=match[7];
-		    alert("https://www.youtube.com/embed/"+b);
-		}else{
-		    alert("Url incorrecta");
-		}
-	}
-
 </script>
 </head>
 <body >
@@ -197,17 +188,32 @@
 	<table style="width:100%">
 		<tr>
 			<th rowspan="2" width="10%"><img class="logo" src=<%=url_logo_autor%> width="100px" height="70px" ></img></th>
-			<th class="texto_simple" id="nombre_autor" width="30%"><%=nombre_canal%></th>
+			<th class="texto_simple" id="nombre_autor" width="30%"><a onclick="ir_a_perfil()"><%=nombre_canal%></a></th>
 			<th rowspan="2" class="right_left_separators"  id="fecha_publicacion" width="30%"><p class="texto_simple"><%=dia%>/<%=mes%>/<%=anio%></p></th>
-			<th rowspan="2" class="botones_like_dislike" width="30%">
-				<%if(logged_state == "true"){ %>
+			<th rowspan="1" class="botones_like_dislike" width="30%">
+				<%if(logged_state.equals("true")){
+					System.out.println("Este es el estado actual: "+like_state);
+					if(like_state.equals("neutral")){%>
 				<button class="like_dislike_button" style="width:50%" id="like_button" onclick = "me_gusta_script()">  Me gusta  </button><button class="like_dislike_button" style="width:50%" id="dislike_button" name="opcion" value="dislikeVideo" onclick="no_me_gusta_script()">No me gusta </button></th>
-				<%} %>		
+				<%	}if(like_state.equals("like")){%>
+				<button class="like_dislike_button" style="width:100%" id="dislike_button" name="opcion" value="dislikeVideo" onclick="no_me_gusta_script()">No me gusta </button></th>
+				<%	}if(like_state.equals("dislike")){%>
+				<button class="like_dislike_button" style="width:100%" id="like_button" onclick = "me_gusta_script()">  Me gusta  </button></th>
+				<%	}	
+				}	%>		
 		</tr>
 		<tr>
-			<%if(logged_state == "true"){ %>
+			<%
+			if(logged_state == "true"){
+				System.out.println(follow_state);
+				if(follow_state == "false"){%>
 			<th><button id="seguir_button" name="boton_seguir" value="Seguir" onclick="seguir_script()">Seguir</button></th>
-			<%}%>
+			<%	}else{%>
+			<th><button id="seguir_button" name="boton_seguir" value="Seguir" onclick="dejar_seguir_script()">Dejar de seguir</button></th>
+			<%	}//final del else
+			}//final del if
+			%>
+			<th><p class="texto_simple">Likes:<%=cantLikes%> Dislikes:<%=cantDislikes%></p></th>
 		</tr>
 		<tr>
 			<th  class="encapsulated_border" colspan="4" class="descripcion"><p align="left"><%=descripcion%></p></th>
@@ -227,7 +233,7 @@
 			<th rowspan="2" width="70%" id="cell_comentar"><textarea class="comentario" id="comentario_a_comentar"></textarea></th>
 		</tr>
 		<tr>
-			<th><button style="width:100%" id="response_button" name="response_button" value="Comentar" onclick="seguir_script()">  Comentar  </button></th>
+			<th><button style="width:100%" id="response_button" name="response_button" value="Comentar" onclick="comentar_video()">  Comentar  </button></th>
 		</tr>
 	</table>
 	<%}%>
@@ -269,7 +275,7 @@
 				out.println("        </tr>");
 				out.println("    </table>");
 				if(logged_state == "true"){
-					out.println("<table class=\"response_box\" id=\"response_box"+index+"\">");
+					out.println("<table style=\"display:none;\" class=\"response_box\" id=\"response_box"+index+"\">");
 					out.println("		 <tr>");
 					out.println("		 	 <td class=\"img_container\"><img id=\"mini_logo\" class=\"logo\" src=\""+url_logo_usuario_iniciado+"\"></img></td>");
 					out.println("		 	 <td><textarea class=\"comentario_text_area\" id=\"comentario_a_comentar"+index+"\"></textarea></td>");
