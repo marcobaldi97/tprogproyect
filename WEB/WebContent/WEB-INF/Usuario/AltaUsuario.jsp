@@ -17,7 +17,7 @@
     <div class="main-container">
     <%@include file="../sidebar.jsp" %>
     <div class="main-content">
-    	<form class="alta-usuario-form" action="newUser" method ="post">
+    	<form class="alta-usuario-form" action="newUser" method ="POST" enctype="multipart/form-data" >
             Nickname:<br>
             <input type="text" name="nickname" id="nickname" onblur="comprobarDisponibilidadUsr()" ><br>
             Correo electronico:<br>
@@ -82,7 +82,7 @@
                     <%=opciones %>
               </select><br />
 			 <p id="error"></p>
-            <button id="crearUsuario" name="opcion" value="nuevoUsuario">Crear</button>
+            <button type="submit">Crear</button>
         	
 
     	</form>

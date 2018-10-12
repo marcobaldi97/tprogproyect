@@ -33,7 +33,7 @@ import uytubeLogic.logica.SystemHandler.Privacidad;
 /**
  * Servlet implementation class UsuarioServlet
  */
-@WebServlet({"/login","/newUser","/profile","/modifyUser","/follow","/responseComment"})
+@WebServlet({"/login","/profile","/modifyUser","/follow","/responseComment"})
 public class UsuarioServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -56,51 +56,9 @@ public class UsuarioServlet extends HttpServlet {
 		interfaz_usuario.dejarUsuario(nombre_usuario, usuario_a_no_seguir);
 	}
 
-  public static Date ParseFecha(String fecha)
-    {
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-        Date fechaDate = null;
-        try {
-            fechaDate = formato.parse(fecha);
-        } 
-        catch (ParseException ex) 
-        {
-            System.out.println(ex);
-        }
-        return fechaDate;
-    }
-  public static byte[] imagenToByte(File archivo){
-		 //imagen a byte[]
-		try{
-			byte[] imgFoto = new byte[(int) archivo.length()]; 
-			InputStream inte = new FileInputStream(archivo);
-			inte.read(imgFoto);
-			return imgFoto;
-		}catch(Exception e){
-			System.out.println(e.getMessage());}
-		return null;
-	}
-	private void nuevoUsuario(String nickname,String pass, String email, String nombre, String apellido, String contrasenia, String contraseniaConfir, String fechaNac, String foto,String nomCanal, String descripcion, String privacidad, String categoria){
-		Fabrica fabrica = Fabrica.getInstance();
-		System.out.println("la foto es"+foto);
-     	IUsuarioCtrl usrCtrl = fabrica.getIUsuarioCtrl();
-   		DtFecha dtFechaNac = new DtFecha(ParseFecha(fechaNac));
-		Privacidad priv;
-		if (privacidad=="PRIVADO"){ priv=Privacidad.PRIVADO;}
-		else{priv = Privacidad.PUBLICO;}
-		
-		try{
-		File file = new File(foto);
-		System.out.println(file);
-		usrCtrl.nuevoUsuario(nickname,contrasenia,nombre,apellido,email, dtFechaNac,imagenToByte(file),
-				nomCanal,descripcion,priv,categoria);
-		}catch(NullPointerException e){
-			usrCtrl.nuevoUsuario(nickname,contrasenia,nombre,apellido,email, dtFechaNac,null,
-					nomCanal,descripcion,priv,categoria);
-		}
-		
-
-	}
+  
+ 
+	
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -139,11 +97,6 @@ public class UsuarioServlet extends HttpServlet {
 		 	dejarUsuario(nombre_usuario, usuario_a_no_seguir);
 		 	break;
 		}	
-		case "nuevoUsuario":{
-			System.out.println("nuevo usuario GET");
-			request.getRequestDispatcher("WEB-INF/Usuario/AltaUsuario.jsp").forward(request, response);
-			break;
-		}
 		case "Perfil":{
 			
 			//String nickname = URLDecoder.decode((String)request.getParameter("nickname"),"UTF-8");
@@ -299,44 +252,7 @@ public class UsuarioServlet extends HttpServlet {
 		break;	
 		}
 		case "nuevoUsuario":{
-			System.out.println((String)request.getParameter("nickname"));
-			Fabrica fabrica = Fabrica.getInstance();
-			IUsuarioCtrl usuarioCtrl = fabrica.getIUsuarioCtrl();
-			String filename;
-		   // Part filePart = request.getPart("file"); // Retrieves <input type="file" name="file">
-		   // filename = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
 			
-			System.out.println((String)request.getParameter("nickname"));
-			System.out.println((String)request.getParameter("nombre"));
-			if(request.getParameter("nickname").isEmpty() || 
-					request.getParameter("email").isEmpty() 
-					||request.getParameter("nombre").isEmpty()
-					||request.getParameter("apellido").isEmpty()
-					||request.getParameter("fecha_nacimiento").isEmpty() ){
-				response.getWriter().print("Hay campos sin completar"); 
-			}else{
-				boolean disponible=usuarioCtrl.verificarDispUsuario((String)request.getParameter("nickname"), (String)request.getParameter("email"));
-				String pas1 = (String)request.getParameter("contrasenia");
-				String pas2 = (String)request.getParameter("contraseniaConfirmacion");
-				boolean passIguales = pas1.equals(pas2);
-				if(disponible && passIguales){
-	    			nuevoUsuario((String)request.getParameter("nickname"),(String)request.getParameter("contrasenia"),(String)request.getParameter("email"),(String) request.getParameter("nombre"),
-	    					(String)request.getParameter("apellido"),(String)request.getParameter("contrasenia"),(String)request.getParameter("contraseniaConfirmacion"),
-	    					(String)request.getParameter("fecha_nacimiento"),(String)request.getParameter("filename"),(String)request.getParameter("nombre_canal"),
-	    					(String)request.getParameter("descripcion"),(String)request.getParameter("privacidad"),(String)request.getParameter("categoria"));
-	    		
-	    	     	IUsuarioCtrl usrCtrl = fabrica.getIUsuarioCtrl();
-	    	       	DtCanal infoCanal = usrCtrl.mostrarInfoCanal((String)request.getParameter("nickname"));
-	    			DtUsuario usuario = usrCtrl.listarDatosUsuario((String)request.getParameter("nickname"));
-	    			request.setAttribute("dataCanal", infoCanal);
-	    			request.setAttribute("dataUsuario", usuario);
-	    			String nickAEnviar = request.getParameter("nickname");
-	    			System.out.println("el nick ah re loco "+nickAEnviar);
-	    			response.sendRedirect(request.getContextPath() + "/profile?opcion=Perfil&nickname="+URLEncoder.encode(nickAEnviar,"UTF-8"));
-	        	}else{
-	        		response.getWriter().print("Compruebe los datos"); 
-	        	}
-			}
 			break;
 			
 		}
