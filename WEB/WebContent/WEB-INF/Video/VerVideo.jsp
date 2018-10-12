@@ -78,17 +78,7 @@
 	window.onload=function(){
 		var logged = "<%=logged_state%>";
 		if(logged === "true"){
-	    	document.getElementById('listasUsuarioLogged').addEventListener("click",agregar_lista_script);
-	    	var like_state = "<%=like_state%>";
-	    	var follow_state = "<%=follow_state%>";
-	    	if(like_state === "like"){
-	    		document.getElementById('like_button').disabled  = true;
-	    		document.getElementById('like_button').style.backgroundColor = "#f47121";
-	    	}
-	    	else{
-	    		if(like_state === "dislike") document.getElementById('dislike_button').disabled  = true;
-	    	}
-	    	
+	    	document.getElementById('listasUsuarioLogged').addEventListener("click",agregar_lista_script);  	
 		}//si no estñ loggeado, no muestra estos elementos.
 	}
 
@@ -146,7 +136,6 @@
 		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200) {
-
 			}
 		};
 		var nombre_lista = document.getElementById("listasUsuarioLogged").value;
@@ -200,9 +189,16 @@
 			<th class="texto_simple" id="nombre_autor" width="30%"><%=nombre_canal%></th>
 			<th rowspan="2" class="right_left_separators"  id="fecha_publicacion" width="30%"><p class="texto_simple"><%=dia%>/<%=mes%>/<%=anio%></p></th>
 			<th rowspan="2" class="botones_like_dislike" width="30%">
-				<%if(logged_state == "true"){ %>
+				<%if(logged_state.equals("true")){
+					System.out.println("Este es el estado actual: "+like_state);
+					if(like_state.equals("neutral")){%>
 				<button class="like_dislike_button" style="width:50%" id="like_button" onclick = "me_gusta_script()">  Me gusta  </button><button class="like_dislike_button" style="width:50%" id="dislike_button" name="opcion" value="dislikeVideo" onclick="no_me_gusta_script()">No me gusta </button></th>
-				<%} %>		
+				<%	}if(like_state.equals("like")){%>
+				<button class="like_dislike_button" style="width:100%" id="dislike_button" name="opcion" value="dislikeVideo" onclick="no_me_gusta_script()">No me gusta </button></th>
+				<%	}if(like_state.equals("dislike")){%>
+				<button class="like_dislike_button" style="width:100%" id="like_button" onclick = "me_gusta_script()">  Me gusta  </button></th>
+				<%	}	
+				}	%>		
 		</tr>
 		<tr>
 			<%
