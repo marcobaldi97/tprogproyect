@@ -122,14 +122,7 @@ public class AltaUsuarioServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		Fabrica fabrica = Fabrica.getInstance();
 		IUsuarioCtrl usuarioCtrl = fabrica.getIUsuarioCtrl();
-		// Part filePart = request.getPart("file"); // Retrieves <input type="file"
-		// name="file">
-		// filename =
-		// Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE
-		// fix.
-		// Create a factory for disk-based file items
 		DiskFileItemFactory factory = new DiskFileItemFactory();
-
 		// Configure a repository (to ensure a secure temp location is used)
 		ServletContext servletContext = this.getServletConfig().getServletContext();
 		File repository = (File) servletContext.getAttribute("javax.servlet.context.tempdir");
@@ -154,46 +147,46 @@ public class AltaUsuarioServlet extends HttpServlet {
 				String nombreParam = item.getFieldName();
 				switch (nombreParam) {
 					case "nickname": {
-						nickname = item.getString();
+						nickname = new String(item.getString().getBytes("ISO-8859-1"), "UTF-8");
 						break;
 					}
 					case "nombre": {
-						nombre = item.getString();
+						nombre = new String(item.getString().getBytes("ISO-8859-1"), "UTF-8");
 						break;
 					}
 					case "apellido": {
-						apellido = item.getString();
+						apellido = new String(item.getString().getBytes("ISO-8859-1"), "UTF-8");
 						break;
 					}
 					case "contrasenia": {
-						contrasenia = item.getString();
+						contrasenia = new String(item.getString().getBytes("ISO-8859-1"), "UTF-8");
 						break;
 					}
 					case "contraseniaConfirmacion": {
-						contraseniaConfirmacion = item.getString();
+						contraseniaConfirmacion = new String(item.getString().getBytes("ISO-8859-1"), "UTF-8");
 						break;
 					}
 					case "email": {
-						email = item.getString();
+						email = new String(item.getString().getBytes("ISO-8859-1"), "UTF-8");
 						break;
 					}
 					case "fecha_nacimiento": {
-						fecha_nacimiento = item.getString();
+						fecha_nacimiento = new String(item.getString().getBytes("ISO-8859-1"), "UTF-8");
 						break;
 					}
 					case "nombre_canal": {
-						nombre_canal = item.getString();
+						nombre_canal = new String(item.getString().getBytes("ISO-8859-1"), "UTF-8");
 						break;
 					}
 					case "descripcion": {
-						descripcion = item.getString();
+						descripcion = new String(item.getString().getBytes("ISO-8859-1"), "UTF-8");
 						break;
 					}
 					case "privacidad":{
-						privacidad = item.getString();
+						privacidad = new String(item.getString().getBytes("ISO-8859-1"), "UTF-8");
 					}
 					case "categoria":{
-						categoria = item.getString();
+						categoria = new String(item.getString().getBytes("ISO-8859-1"), "UTF-8");
 						break;
 					}
 				}
@@ -201,7 +194,7 @@ public class AltaUsuarioServlet extends HttpServlet {
 				foto = item.get();
 			}
 		}
-		System.out.println("estoy aca y " + nickname + " es lo que encontré");
+		System.out.println("estoy aca y " + nickname + " es lo que encontre");
 		System.out.println("el archivo tiene ruta " + filename);
 		
 		  if (nickname.isEmpty() || email.isEmpty() || nombre.isEmpty() || apellido.isEmpty() || fecha_nacimiento.isEmpty()) {
