@@ -76,10 +76,10 @@
 		<td>Seguidos: <%=seguidos.length %></td>
 		
 		<td>
-			<%if((boolean)request.getAttribute("usrSigueAlOtro")){ 
+			<%if(((boolean)request.getAttribute("usrSigueAlOtro")) && (!(boolean)request.getAttribute("duenioCanal"))){ 
 			%>
 				<button id="botonDejarSeguir" value="DejarSeguir" onclick="dejarSeguirUsr()">Dejar de Seguir</button>
-			<%}else{%>
+			<%}else if(!(boolean)request.getAttribute("duenioCanal")){%>
 				<button id="botonSeguir" value="Seguir" onclick="seguirUsr()">Seguir</button>
 			<%} %>
 			
