@@ -160,6 +160,9 @@ public class VideoServlet extends HttpServlet {
 			request.setAttribute("usuario_propietario", usuario_propietario);
 			DtCanal canal_propietario = usrController.mostrarInfoCanal(dataVideo.getPropietario());
 			request.setAttribute("canal_propietario",canal_propietario);
+			DtInfoVideo infoVideo = vidController.verDetallesVideoExt(Integer.parseInt(request.getParameter("ID")));
+			request.setAttribute("cantLikes",infoVideo.getUsuariosGusta().length);
+			request.setAttribute("cantDislikes",infoVideo.getUsuariosNoGusta().length);
 			HttpSession session=request.getSession(false);
             if(session!=null && session.getAttribute("nombre_usuario")!=null) {
             	request.setAttribute("logged" ,true);
