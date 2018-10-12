@@ -7,6 +7,7 @@ public class DtComentario {
 	private String nickUsuario;
 	private boolean esPadre;
 	private DtComentario[] respuestas;
+	private byte[] fotoDuenio;
 
 	public Integer getIDComentario() {
 		return idComentario;
@@ -42,6 +43,10 @@ public class DtComentario {
 	public DtComentario[] getRespuestas() {
 		return respuestas;
 	}
+	
+	public byte[] getFotoUsuarioComentador() {
+		return fotoDuenio;
+	}
 
 	public DtComentario(Comentario comment) {
 		nickUsuario = comment.getUsuario().getNickname();
@@ -50,6 +55,7 @@ public class DtComentario {
 		fecha = comment.getFecha();
 		esPadre = comment.getEsPadre();
 		respuestas = comment.getDtRespuestas();
+		fotoDuenio = comment.getUsuario().getFoto();
 	}
 
 	public boolean equals(DtComentario dataTipo) {
