@@ -147,13 +147,30 @@ public class VideoCtrlTest {
 		VCU.valorarVideo(dtVideo.getIDVideo(), noGustaVideo1, false);
 		Video videoSubido=VHU.find(dtVideo.getIDVideo());
 		DtPuntuacion[] puntuaciones=videoSubido.getPuntuaciones();
-		assertEquals(true, puntuaciones[0].getNickname()==gustaVideo1);
-		assertEquals(true, puntuaciones[0].getValoracion()==true);
-		assertEquals(true, puntuaciones[1].getNickname()==noGustaVideo1);
-		assertEquals(true, puntuaciones[1].getValoracion()==false);
+		boolean u1true=false;
+		boolean u2false=false;
+		boolean u1false=false;
+		for(DtPuntuacion entry:puntuaciones) {
+			if(entry.getNickname().equals(gustaVideo1)&&entry.getValoracion()==true)
+				u1true=true;
+			if(entry.getNickname().equals(noGustaVideo1)&&entry.getValoracion()==false)
+				u2false=true;
+		}
+		assertTrue(u1true);
+		assertTrue(u2false);
 		VCU.valorarVideo(dtVideo.getIDVideo(), gustaVideo1, false);
 		puntuaciones=videoSubido.getPuntuaciones();
-		assertEquals(true, puntuaciones[0].getValoracion()==false);
+		u2false=false;
+		for(DtPuntuacion entry:puntuaciones) {
+			if(entry.getNickname().equals(gustaVideo1)&&entry.getValoracion()==false)
+				u1false=true;
+			if(entry.getNickname().equals(noGustaVideo1)&&entry.getValoracion()==false)
+				u2false=true;
+		}
+		assertTrue(u1false);
+		assertTrue(u2false);
+		
+		
 	}
 
 	@Test

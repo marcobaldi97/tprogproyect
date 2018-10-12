@@ -20,7 +20,7 @@ public class Video {
 	private Privacidad privacidad;
 	private Map<Integer, Comentario> comentarios;
 	private List<ListaReproduccion> listas;
-	private List<Puntuacion> puntuaciones;
+	private Map<String,Puntuacion> puntuaciones;
 
 	public Video(String nombreVideo, String propietario, String descripcionV, int duracionV, DtFecha fechapubli,
 			String url, DtCategoria categ, Privacidad privacidadVideo) {
@@ -43,7 +43,7 @@ public class Video {
 			cat = SysHandler.getSinCat();
 		privacidad = privacidadVideo;
 		comentarios = new HashMap<Integer, Comentario>();
-		puntuaciones = new ArrayList<Puntuacion>();
+		puntuaciones = new HashMap<String,Puntuacion>();
 		vidHandler.addVideo(this);
 
 	}
@@ -165,16 +165,17 @@ public class Video {
 
 	public DtPuntuacion[] getPuntuaciones() {
 		DtPuntuacion[] puntajes = new DtPuntuacion[puntuaciones.size()];
-		for (int i = 0; i < puntuaciones.size(); i++) {
-			Puntuacion puntuacionVideo = puntuaciones.get(i);
-			puntajes[i] = new DtPuntuacion(puntuacionVideo);
+		int iterador=0;
+		for (Map.Entry<String, Puntuacion> entry : puntuaciones.entrySet()) {
+			puntajes[iterador]=new DtPuntuacion(entry.getValue());
+			iterador++;
 		}
 		return puntajes;
 
 	}
 
 	public void addPuntuacion(Puntuacion puntuacionVideo) {
-		puntuaciones.add(puntuacionVideo);
+		puntuaciones.put(puntuacionVideo.getNickPuntuador(), puntuacionVideo);
 	}
 
 	public DtVideo verDetallesVideo() {
@@ -183,17 +184,12 @@ public class Video {
 	}
 
 	public void valorarVideo(String nickU, boolean valoracion) {
-		int i = 0;
-		while (i < puntuaciones.size() && puntuaciones.get(i).getNickPuntuador() != nickU) {
-			i++;
-		}
-		if (i < puntuaciones.size()) {
-			puntuaciones.get(i).setValoracion(valoracion);
-		} else {
+		if(puntuaciones.containsKey(nickU)) {
+			puntuaciones.get(nickU).setValoracion(valoracion);
+		}else {
 			Puntuacion puntuacionVideo = new Puntuacion(nickU, valoracion);
 			addPuntuacion(puntuacionVideo);
 		}
-
 	}
 
 	public DtListaReproduccion[] getListas() {
@@ -208,15 +204,15 @@ public class Video {
 
 	public DtUsuario[] getUsuariosPuntuadores(boolean valoracion) {
 		int puntSize = 0;
-		for (Puntuacion puntuacionVideo : puntuaciones) {
-			if (puntuacionVideo.getValoracion() == valoracion)
+		for (Map.Entry<String, Puntuacion> puntuacionVideo : puntuaciones.entrySet()) {
+			if (puntuacionVideo.getValue().getValoracion() == valoracion)
 				puntSize++;
 		}
 		DtUsuario[] usu = new DtUsuario[puntSize];
 		int i = 0;
-		for (Puntuacion puntuacionVideo : puntuaciones) {
-			if (puntuacionVideo.getValoracion() == valoracion) {
-				usu[i] = new DtUsuario(puntuacionVideo.getUsuario());
+		for (Map.Entry<String, Puntuacion> puntuacionVideo : puntuaciones.entrySet()) {
+			if (puntuacionVideo.getValue().getValoracion() == valoracion) {
+				usu[i] = new DtUsuario(puntuacionVideo.getValue().getUsuario());
 				i++;
 			}
 
