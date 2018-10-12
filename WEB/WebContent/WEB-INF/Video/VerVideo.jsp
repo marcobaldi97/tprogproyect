@@ -33,6 +33,8 @@
 	int dia = fecha_publicacion.getDate();
 	int mes =  fecha_publicacion.getMonth();
 	int anio = fecha_publicacion.getYear() + 1900;
+	int cantLikes = (int) request.getAttribute("cantLikes");//acordarse de cambiar estos dos.
+	int cantDislikes = (int) request.getAttribute("cantDislikes");;
 	//String url_logo_autor = obtenerURLdeImagen(info_propietario.getFoto());
 	String url_logo_autor = "https://i.ytimg.com/vi/5bHimOJb-Xw/hqdefault.jpg";
 	String nombre_canal = canal_propietario.getNombre();
@@ -172,9 +174,9 @@
 		location.reload(true);
 	}
 
-	function ir_a_perfil(nombre_dueño_perfil){
-		request.setParameter("opcion") = "Perfil";
-		request.setParameter("nombre_dueño_perfil") = nombre_dueño_perfil;
+	function ir_a_perfil(){
+		request.setAttribute("opcion","Perfil");
+		request.setAttribute("nombre_dueño_perfil",<%=propietario%>);
 		request.getRequestDispatcher("/profile").forward(request, response);
 	}
 </script>
@@ -186,9 +188,9 @@
 	<table style="width:100%">
 		<tr>
 			<th rowspan="2" width="10%"><img class="logo" src=<%=url_logo_autor%> width="100px" height="70px" ></img></th>
-			<th class="texto_simple" id="nombre_autor" width="30%"><%=nombre_canal%></th>
+			<th class="texto_simple" id="nombre_autor" width="30%"><a onclick="ir_a_perfil()"><%=nombre_canal%></a></th>
 			<th rowspan="2" class="right_left_separators"  id="fecha_publicacion" width="30%"><p class="texto_simple"><%=dia%>/<%=mes%>/<%=anio%></p></th>
-			<th rowspan="2" class="botones_like_dislike" width="30%">
+			<th rowspan="1" class="botones_like_dislike" width="30%">
 				<%if(logged_state.equals("true")){
 					System.out.println("Este es el estado actual: "+like_state);
 					if(like_state.equals("neutral")){%>
@@ -211,6 +213,7 @@
 			<%	}//final del else
 			}//final del if
 			%>
+			<th><p class="texto_simple">Likes:<%=cantLikes%> Dislikes:<%=cantDislikes%></p></th>
 		</tr>
 		<tr>
 			<th  class="encapsulated_border" colspan="4" class="descripcion"><p align="left"><%=descripcion%></p></th>
