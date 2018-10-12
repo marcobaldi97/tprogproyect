@@ -1,9 +1,13 @@
 package uytubeLogic.logica;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
 import uytubeLogic.logica.SystemHandler.Privacidad;
+
 
 public class Usuario {
 	private String nickname;
@@ -16,7 +20,19 @@ public class Usuario {
 	private Canal canalPropio;
 	private Map<String, Usuario> usuariosQueSigue;
 	private Map<String, Usuario> usuariosQueLeSiguen;
-
+	
+	public static byte[] imagenToByte(File archivo){
+		 //imagen a byte[]
+		try{
+			byte[] imgFoto = new byte[(int) archivo.length()]; 
+			InputStream inte = new FileInputStream(archivo);
+			inte.read(imgFoto);
+			return imgFoto;
+		}catch(Exception e){
+			System.out.println(e.getMessage());}
+		return null;
+	}
+	
 	public Usuario(String nickU, String passU,String nombreU, String apellidoU,
 			String emailU, DtFecha fechaNacU, byte[] fotoU, String nombreCanal,
 			String descripcionCanal, Privacidad privacidadCanal, String catCanal) {
@@ -27,7 +43,14 @@ public class Usuario {
 		apellido = apellidoU;
 		email = emailU;
 		fechaNacimiento = fechaNacU;
-		foto = fotoU;
+		if (fotoU.length == 0){
+			//agregarle foto por defecto
+			File archivo = new File("LOGICA/src/usuarioPorDefecto.png");
+			foto = imagenToByte(archivo);
+		}else{
+			foto = fotoU;
+		}
+		
 		usuariosQueSigue = new HashMap<String, Usuario>();
 		usuariosQueLeSiguen = new HashMap<String, Usuario>();
 		this.createCanal(nombreCanal, nickU, descripcionCanal, privacidadCanal,
