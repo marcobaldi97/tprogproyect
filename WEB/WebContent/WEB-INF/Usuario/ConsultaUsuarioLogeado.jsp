@@ -64,27 +64,28 @@
 	<div id="usrDatos">
 	<table width="80%" id="usrDatosTable">
 		<tr>
-		<td><img id="logo" src=<%=urlFoto%> width="100px" height="70px"></img><br></td>
-		<td>
-			<h3> <%=nick%> </h3> <br>
-			<%=descCanal%>
-		</td>
-		
+			<td>
+				<img class="logo" src=<%=urlFoto%> width="100px" height="70px"></img>
+			</td>
+			<td>
+				<h3> <%=nick%> </h3> <br>
+				<%=descCanal%>
+			</td>
 		</tr>
 		<tr>
-		<td>Seguidores: <%=seguidores.length %></td>
-		<td>Seguidos: <%=seguidos.length %></td>
-		
-		<td>
-			<%if(((boolean)request.getAttribute("usrSigueAlOtro")) && (!(boolean)request.getAttribute("duenioCanal"))){ 
-			%>
-				<button id="botonDejarSeguir" value="DejarSeguir" onclick="dejarSeguirUsr()">Dejar de Seguir</button>
-			<%}else if(!(boolean)request.getAttribute("duenioCanal")){%>
-				<button id="botonSeguir" value="Seguir" onclick="seguirUsr()">Seguir</button>
-			<%} %>
+			<td>Seguidores: <%=seguidores.length %></td>
+			<td>Seguidos: <%=seguidos.length %></td>
 			
-			
-		</td>		
+			<td>
+				<%if(((boolean)request.getAttribute("usrSigueAlOtro")) && (!(boolean)request.getAttribute("duenioCanal"))){ 
+				%>
+					<button id="botonDejarSeguir" value="DejarSeguir" onclick="dejarSeguirUsr()">Dejar de Seguir</button>
+				<%}else if(!(boolean)request.getAttribute("duenioCanal")){%>
+					<button id="botonSeguir" value="Seguir" onclick="seguirUsr()">Seguir</button>
+				<%} %>
+				
+				
+			</td>		
 		</tr>
 	</table>
 	</div>
@@ -128,18 +129,17 @@
     <tr class="filadiv">
         <td colspan="6" id="tab-0">
             <div class="tabdiv" id="tabdiv-0">
-            <h3>Datos Usuario</h3><br>
-            Nombre: <%=nombre%><br>
-            Apellido:<%=apellido%><br>
-            Fecha Nacimiento:<%=dia %>/<%=mes%>/<%=anio%><br>
-            <h3>Datos Canal</h3><br>
-         	Nombre:<%=nombre_canal %> <br>
-            Descripcion:<%=descCanal %><br>
-            Categoria:<%=categoriaCanal %><br>
-            	  (si es del usurio logeado puede modificar sus datos)
+	            <h3>Datos Usuario</h3><br>
+	            Nombre: <%=nombre%><br>
+	            Apellido:<%=apellido%><br>
+	            Fecha Nacimiento:<%=dia %>/<%=mes%>/<%=anio%><br>
+	            <h3>Datos Canal</h3><br>
+	         	Nombre:<%=nombre_canal %> <br>
+	            Descripcion:<%=descCanal %><br>
+	            Categoria:<%=categoriaCanal %><br>
             </div>
             <div class="tabdiv" id="tabdiv-3">
-	           	Seguidores
+	           	<h3>Seguidores</h3>
 	        	<%
 				for(String seguidoresUsr: seguidores){
 				%>
@@ -150,24 +150,22 @@
 				<%
 				}	        	
 	        	%>   
-	        	Seguidos
+	        	<h3>Seguidos</h3>
 	        	<%for(String seguidosUsr: seguidos){
 				%>
 					 <ul>
 						<li><a href="profile?opcion=Perfil&nickname=<%=seguidosUsr%>"><%=seguidosUsr%> </a></li>
 					</ul>
 				<%
-				}
-	        	
+				}	        	
 	        	%> 
             </div>
             <div class="tabdiv" id="tabdiv-1">
-                Videos del canal del usuario
-                <table id="TablaContenidos2">
+               <table class="TablaContenidos">
 					<tr>
-					<th valign="top"> Nombre </th>
-					<th valign="top"> Descripcion </th>
-					<th valign="top"> </th>
+						<th valign="top"> Nombre </th>
+						<th valign="top"> Descripcion </th>
+						<th valign="top"> </th>
 					</tr>
                 	<%
 						DtVideo[] vid = (DtVideo[]) request.getAttribute("videos");
@@ -177,75 +175,64 @@
 							String propietarioV = entry.getPropietario();
 							request.setAttribute("IDVideo", entry.getIDVideo().toString());
 							request.setAttribute(nombreV, nombreV);
-						%>
+					%>
 					<tr class="videoRow">
-					<td id="NombreTD"><%=nombreV%></td>
-					<td id="DescripcionTD"><%=descV %></td>
-					<td>
-					<form action="watch" method="get"> 
-					<input type="hidden" name="opcion" value="ver">
-					<input type="hidden" name="ID" value="<%=entry.getIDVideo()%>">
-					<input type="submit" value="Ver Ahora"> </form> 
-					
-					 <%
-					 if((boolean)request.getAttribute("duenioCanal")){ 
-						 System.out.print("ES DUEÑO DEL CANAL");
-					 %>
-					 
-						<form action="modifyVideo" method="post"> 
-						<input type="hidden" name="opcion" value="modificarVideo">
-						<input type="hidden" name="dtVideo" value="<%=entry%>">
-						<input type="submit" value="Modificar"> </form> 
-						<%}%>
-								
-					</td>
+						<td id="NombreTD"><%=nombreV%></td>
+						<td id="DescripcionTD"><%=descV %></td>
+						<td>
+							<form action="watch" method="get"> 
+							<input type="hidden" name="opcion" value="ver">
+							<input type="hidden" name="ID" value="<%=entry.getIDVideo()%>">
+							<input type="submit" value="Ver Ahora"> </form> 
+							
+							 <%
+							 if((boolean)request.getAttribute("duenioCanal")){ 
+								 System.out.print("ES DUEÑO DEL CANAL");
+							 %>
+							 
+								<form action="modifyVideo" method="post"> 
+								<input type="hidden" name="opcion" value="modificarVideo">
+								<input type="hidden" name="dtVideo" value="<%=entry%>">
+								<input type="submit" value="Modificar"> </form> 
+							<%}%>
+						</td>
 					</tr>
 					<% } %>
-					</table>
-                    
+				</table>                    
             </div>
             <div class="tabdiv" id="tabdiv-2">
-               Listas de reproduccion
-           
-				<table id="TablaContenidos">
+             	<table class="TablaContenidos">
 					<tr>
 					<th valign="top"> Nombre </th>
-					<th valign="top"> Descripcion </th>
 					<th valign="top"> </th>
 					</tr>
-						<%
-						//if(request.getAttribute("listas")!=null){
-							DtListaReproduccion[] listas=(DtListaReproduccion[]) request.getAttribute("listas");
-							for(DtListaReproduccion entry: listas){%>
+					<%
+					DtListaReproduccion[] listas=(DtListaReproduccion[]) request.getAttribute("listas");
+					for(DtListaReproduccion entry: listas){%>
 						<tr class="listaRow">
-						
 						<td id="NombreTD"><%=entry.getNombre()%></td>
-						<td id="DescripcionTD"></td>
 						<td>
-						<form action="playlist" method="get"> 
-						<input type="hidden" name="action" value="details">
-						<input type="hidden" name="nameList" value="<%=entry.getNombre() %>">
-						<input type="hidden" name="ownerList" value="<%=entry.getPropietario() %>">
-						<input type="submit" value="Ver Info"> </form> 
-						<%if((boolean)request.getAttribute("duenioCanal")){ 
-						 //System.out.print("ES DUEÑO DEL CANAL");
-						 %>
-					 
-						<form action="modifyPlaylist" method="get"> 
-						<input type="hidden" name="action" value="modify">
-						<input type="hidden" name="nameList" value="<%=entry.getNombre()%>">
-						<input type="hidden" name="ownerList" value="<%=entry.getPropietario() %>">
-						<input type="submit" value="Modificar">
-						</form>
-													
-						<%}%>
-							
+							<form action="playlist" method="get"> 
+							<input type="hidden" name="action" value="details">
+							<input type="hidden" name="nameList" value="<%=entry.getNombre() %>">
+							<input type="hidden" name="ownerList" value="<%=entry.getPropietario() %>">
+							<input type="submit" value="Ver Info"> 
+							</form> 
+							<%if((boolean)request.getAttribute("duenioCanal")){ 
+							 //System.out.print("ES DUEÑO DEL CANAL");
+							 %>
+							 	<form action="modifyPlaylist" method="get"> 
+								<input type="hidden" name="action" value="modify">
+								<input type="hidden" name="nameList" value="<%=entry.getNombre()%>">
+								<input type="hidden" name="ownerList" value="<%=entry.getPropietario() %>">
+								<input type="submit" value="Modificar">
+								</form>
+							<%}%>
 						</td>
 						</tr>
 						
-						<%	//}
+						<%
 						}
-						
 						%>
 						
 						

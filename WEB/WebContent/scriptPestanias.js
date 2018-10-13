@@ -45,7 +45,7 @@ function activarTab(unTab) {
                         tabck.style.borderBottomColor = "rgb(235, 235, 225)";
                     } else {
                         tabdiv.style.display = "none";
-                        tabck.style.color = "black";
+                        tabck.style.color = "white";
                         tabck.style.borderBottomColor = "gray";
                     }
                 }
