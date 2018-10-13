@@ -181,6 +181,8 @@ public class VideoServlet extends HttpServlet {
             		request.setAttribute("follow_state", "true");
             	else request.setAttribute("follow_state", "false");
             	//calificacion de estado de seguir.
+            	DtUsuario usuarioLoggedData = usrController.listarDatosUsuario(usuarioLogged);
+            	request.setAttribute("dataUsuario", usuarioLoggedData);
             }else{
             	request.setAttribute("logged" ,false);
             }
