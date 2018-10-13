@@ -36,17 +36,18 @@
 	int cantLikes = (int) request.getAttribute("cantLikes");//acordarse de cambiar estos dos.
 	int cantDislikes = (int) request.getAttribute("cantDislikes");;
 	//String url_logo_autor = obtenerURLdeImagen(info_propietario.getFoto());
-	String url_logo_autor = "https://i.ytimg.com/vi/5bHimOJb-Xw/hqdefault.jpg";
+	String url_logo_autor = "";
+	byte[] fotoComentador = info_propietario.getFoto();
+	String urlFotoComentador = "";
+	String fotoString = "";
+	if(fotoComentador != null){
+		Base64.Encoder encoder = Base64.getEncoder();
+		fotoString = encoder.encodeToString(fotoComentador);
+		url_logo_autor = "data:image/png;base64,"+ fotoString;
+	}
 	String nombre_canal = canal_propietario.getNombre();
 	//estos son los datos que tienen que ver con el usuario propietario y el video en sñ.
 	//Hasta la 111 es lo que hizo Maria.
-	byte[] fotoByte = info_propietario.getFoto();
-	String urlFoto = "";
-	if(fotoByte != null){
-		Base64.Encoder encoder = Base64.getEncoder();
-		String fotoString = encoder.encodeToString(fotoByte);
-		urlFoto = "data:image/png;base64,"+ fotoString;
-	}
 	String logged_state = "";
 	String[] listasReproduccionUsuarioLogged = null;
 	if((boolean)request.getAttribute("logged") == true){
@@ -59,7 +60,15 @@
 	String like_state = "";
 	String follow_state = "";
 	if(logged_state == "true"){
+		DtUsuario dataUsuario = (DtUsuario) request.getAttribute("dataUsuario");
 		url_logo_usuario_iniciado = "http://www.sddistribuciones.com//Portadas/GSCBSG90486_3.JPG";
+		byte[] fotoByteUsuarioLogged = dataUsuario.getFoto();
+		System.out.println("Es lo siguiente un null? :"+fotoByteUsuarioLogged+"y el nombre está bien?: "+dataUsuario.getNickname());
+		if(fotoByteUsuarioLogged != null){
+			Base64.Encoder encoder = Base64.getEncoder();
+			fotoString = encoder.encodeToString(fotoByteUsuarioLogged);
+			url_logo_usuario_iniciado = "data:image/png;base64,"+ fotoString;
+		}
 		like_state = (String)request.getAttribute("like_state");
 		follow_state = (String)request.getAttribute("follow_state");
 	}else{
@@ -180,6 +189,10 @@
 </script>
 </head>
 <body >
+	<%@include file="../buscador.jsp" %>
+    <div class="main-container">
+    <%@include file="../sidebar.jsp" %>
+    <div class="main-content">
 	<p class="titulo" id="titulo"><%=titulo%></p><br>
 
 	<iframe style="width:100%" height="430px" id="frame" src="<%=url_video%>"></iframe><br>
@@ -255,11 +268,18 @@
 				anio_comment = fecha_publicacion_comentario.getYear() + 1900;
 				String descripcion_comentario = comentarios[i].getTexto();
 				DtComentario[] hijos = comentarios[i].getRespuestas();
+				byte[] fotoComentador = comentarios[i].getFotoUsuarioComentador();
+				String urlFotoComentador = "";
+				if(fotoComentador != null){
+					Base64.Encoder encoder = Base64.getEncoder();
+					String fotoString = encoder.encodeToString(fotoComentador);
+					urlFotoComentador = "data:image/png;base64,"+ fotoString;
+				}
 		   		out.println("<ul class=\"comment\">");
 				out.println("<li>");
 				out.println("<table class=\"comment_box\">");
 				out.println("        <tr>");
-				out.println("            <td rowspan=\"3\" class=\"img_container\"><img class=\"logo\" src=\"https://i0.wp.com/blogthinkbig.com/wp-content/uploads/2018/04/3hfXV9eW-mAQfO4XNZrGX1OJPTm-FuEjVT_yxNH0cQM.jpg?resize=610%2C343\"></img></td>");
+				out.println("            <td rowspan=\"3\" class=\"img_container\"><img class=\"logo\" src=\""+urlFotoComentador+"\"></img></td>");
 				out.println("            <td style=\"width: 50%\"><p class=\"texto_simple\">"+autor_comentario+"</p></td>");
 				out.println("            <td style=\"width: 50%\"><p class=\"texto_simple\">"+dia_comment+"/"+mes_comment+"/"+anio_comment+"</p></td>");
 				out.println("        </tr>");
@@ -296,5 +316,7 @@
 		printComentarios(out,comentarios, index, url_logo_usuario_iniciado,logged_state);
 	%>
 	</div>
+	        </div>
+    </div>
 </body>
 </html>
