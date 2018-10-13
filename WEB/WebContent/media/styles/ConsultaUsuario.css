@@ -1,10 +1,8 @@
 @CHARS@CHARSET "UTF-8";
 .main-content{
 	 display: inline-block;
-	 background-color: #eee;
 }
 body {
-  background-color: #eee;
   text-align: center;
   text-decoration: none;  
 } 
@@ -12,10 +10,9 @@ body {
 table.tabs {
     border-collapse: separate;
     border-spacing: 0;
-    background-color: #eeeeee;
-    font-size: 0.9em;
-
-}
+ 	font-size: 0.9em;
+ 	width:100%
+ }
 
 th.tabck {
     border: #000000 solid 1px;
@@ -24,17 +21,18 @@ th.tabck {
     padding: 0.3em;
     text-align: center;
     cursor: pointer;
+     color:white;
     background-color: red;
     }
 th.tabcks {
     border: 0;
     border-bottom: black solid 1px;
-    }
+}
 th.tabcks:first-child {
-    border-left: #060606 solid 1px;
+    border-left: none;
     }
 th.tabcks:last-child {
-    border-right: black solid 1px;
+    border-right: none;
     }
 table.tabs tr:first-child th.tabcks {
     border-left: none;
@@ -44,23 +42,44 @@ table.tabs[data-filas] th.tabck {
     box-shadow: 0 -0.15em 0.1em 0 white;
     }
 table.tabs td {
-    border: gray solid 1px;
-    border-top: 0;
+    border: none;
     padding: 15px;
     text-align: left;
-    border-bottom: 1px solid #ddd;
+
  }
 
 
-/* El ancho y alto de los div.tabdiv se configuran
-en cada aplicaci�n */
 div.tabdiv {
-	background-color: #eee;
+	
     border: 0;
     padding: 0.5em;
     overflow: auto;
     display: none;
     width: 100%;
     height: auto;
-    }
+     text-align: left;
+ }
+   
+.logo{
+    border-radius: 50%;
+    border: 1px solid #000000;
+    height: 75px;
+    width: 75px;
+}
+table.TablaContenidos{
+	border: 2px solid #c0c0c0;
+    border-radius: 5px;
+    width:80%;
+}
+table.TablaContenidos th, table.TablaContenidos td{
+	border: 5px;
+    width:50%;
+    text-align: center;
+    border: 2px solid #c0c0c0;
+    border-collapse:collapse;
+    padding: 5px;
+}
+
+
+
     

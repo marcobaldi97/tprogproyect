@@ -16,7 +16,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 	<%@include file = "../cosasComunesDelHead.jsp" %>
 	<link rel="stylesheet" type="text/css" href="media/styles/ConsultaUsuario.css"/>
 	<script type="text/javascript" src="scriptPestanias.js">activarTab()</script>
@@ -64,7 +64,9 @@
 	<div id="usrDatos">
 	<table width="80%" id="usrDatosTable">
 		<tr>
-		<td><img id="logo" src=<%=urlFoto%> width="100px" height="70px"></img><br></td>
+		<td>
+			<img class="logo" src=<%=urlFoto%> width="100px" height="70px"></img>
+		</td>
 		<td>
 			<h3> <%=nick%> </h3> <br>
 			<%=descCanal%>
@@ -100,7 +102,7 @@
             Categoria:<%=categoriaCanal %><br>
             </div>
             <div class="tabdiv" id="tabdiv-3">
-	        	Seguidores
+	        	<h3>Seguidores</h3>
 	        	<%
 				for(String seguidoresUsr: seguidores){
 				%>
@@ -111,7 +113,7 @@
 				<%
 				}	        	
 	        	%>   
-	        	Seguidos
+	        	<h3>Seguidos</h3>
 	        	<%for(String seguidosUsr: seguidos){
 				%>
 					 <ul>
@@ -123,8 +125,8 @@
 	        	%>   
             </div>
             <div class="tabdiv" id="tabdiv-1">
-                Videos del canal del usuario
-                <table id="TablaContenidos2">
+     
+                <table class="TablaContenidos">
 					<tr>
 					<th valign="top"> Nombre </th>
 					<th valign="top"> Descripcion </th>
@@ -154,33 +156,29 @@
 					</table>
             </div>
             <div class="tabdiv" id="tabdiv-2">
-               Listas de reproduccion
+            
            
-				<table id="TablaContenidos">
+				<table class="TablaContenidos">
 					<tr>
 					<th valign="top"> Nombre </th>
-					<th valign="top"> Descripcion </th>
 					<th valign="top"> </th>
 					</tr>
 						<%
 						if(request.getAttribute("listas")!=null){
 							DtListaReproduccion[] listas=(DtListaReproduccion[]) request.getAttribute("listas");
 							for(DtListaReproduccion entry: listas){%>
-						<tr class="listaRow">
-				
-						<td>
+					<tr class="listaRow">
 						<td id="NombreTD"><%=entry.getNombre()%></td>
-						<td id="DescripcionTD"></td>
 						<td>
-						<form action="playlist" method="get"> 
-						<input type="hidden" name="action" value="details">
-						<input type="hidden" name="nameList" value="<%=entry.getNombre() %>">
-						<input type="hidden" name="ownerList" value="<%=entry.getPropietario() %>">
-						
-						<input type="submit" value="Ver Info"> 
-						</form>
+							<form action="playlist" method="get"> 
+							<input type="hidden" name="action" value="details">
+							<input type="hidden" name="nameList" value="<%=entry.getNombre() %>">
+							<input type="hidden" name="ownerList" value="<%=entry.getPropietario() %>">
+							
+							<input type="submit" value="Ver Info"> 
+							</form>
 						</td>
-						</tr>
+					</tr>
 						
 						<%	}
 						}
