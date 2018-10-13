@@ -162,7 +162,8 @@ public class ListaReproduccionServlet extends HttpServlet {
 	            if(session!=null && session.getAttribute("nombre_usuario")!=null) {
 	            	String usuario_logged = (String) session.getAttribute("nombre_usuario");
 	            	Integer id_video = Integer.parseInt(request.getParameter("id_video"));
-					String encodedLista = new String(request.getParameter("nombreLista").getBytes("ISO-8859-1"), "UTF-8");
+					String encodedLista = new String(request.getParameter("nombre_lista").getBytes("ISO-8859-1"), "UTF-8");
+					System.out.println("el nombre de la lista es: "+encodedLista);
 					interfazUsuario.agregarVideoLista(usuario_logged, id_video, encodedLista);
 	            }
 				break;
