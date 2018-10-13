@@ -57,7 +57,7 @@ table{
 	background-color: #e1f8d1;
 }
 #dislike_button{
-	background-color: #f14141;
+	background-color: #FF0000;
     border: none;
     color: black;
     padding: 15px 32px;
@@ -80,7 +80,7 @@ table{
 .categoria{
 	font-family: arial;
 	font-size: 14px;
-	color: #d0cdd1;
+	color: #EEEEEE;
 	text-align: left;
 }
 #nombre_autor{
@@ -94,7 +94,7 @@ table{
 	
 }
 #agregar_lista_button{
-	background-color: #d0cdd1;
+	background-color: #EEEEEE;
     border: none;
     color: black;
     padding: 15px 32px;
@@ -105,7 +105,7 @@ table{
     width: 50%;
 }
 #agregar_lista_button:hover{
-	background-color: #e8e6e8;
+	background-color: #e5e5e5;
 }
 #comentario_a_comentar{
 	text_align: left;
@@ -124,7 +124,7 @@ textarea{
     width: 75px;
 }
 #seguir_button{
-	background-color: #f14141;
+	background-color: #FF0000;
     border: none;
     color: black;
     padding: 15px 32px;
@@ -138,7 +138,7 @@ textarea{
 	background-color: #f57e7e;
 }
 #response_button{
-	background-color: #d0cdd1;
+	background-color: #EEEEEE;
     border: none;
     color: black;
     padding: 15px 32px;
@@ -148,7 +148,7 @@ textarea{
     font-size: 16px;
 }
 #response_button:hover{
-	background-color: #e8e6e8;
+	background-color: #e5e5e5;
 }
 #logo_container{
 	padding: 2px 2px 2px 2px;
@@ -158,7 +158,7 @@ textarea{
 	margin-left:5em;
 }
 .response_button_class{
-	background-color: #d0cdd1;
+	background-color: #EEEEEE;
     border: none;
     color: black;
     padding: 15px 32px;
@@ -168,7 +168,7 @@ textarea{
     font-size: 16px;
 }
 .response_button_class:hover{
-	background-color: #e8e6e8;
+	background-color: #e5e5e5;
 }
 .comment_box{
 	height: 100px;
@@ -201,4 +201,8 @@ comentario_text_area{
 	background-color: transparent;
 	background-image: none;
 	appearance: none;
+}
+.followers_box{
+	border: 2px solid #c0c0c0;
+    border-radius: 5px;
 }
