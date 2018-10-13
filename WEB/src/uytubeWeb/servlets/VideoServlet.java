@@ -96,6 +96,14 @@ public class VideoServlet extends HttpServlet {
 		DtFecha fecha = new DtFecha(fecha_actual);
 		interfaz_video.nuevoComentario(id_video, comentador, fecha, contenido);
 	}
+	
+	private String[] conseguirNicknamesUsuariosDelDtUsuario(DtUsuario[] dataUsuario) {
+		String[] listaADevolver = new String[dataUsuario.length];
+		for(int index = 0; index < dataUsuario.length; index++){
+			listaADevolver[index] = dataUsuario[index].getNickname();
+		}
+		return listaADevolver;
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -163,6 +171,10 @@ public class VideoServlet extends HttpServlet {
 			DtInfoVideo infoVideo = vidController.verDetallesVideoExt(Integer.parseInt(request.getParameter("ID")));
 			request.setAttribute("cantLikes",infoVideo.getUsuariosGusta().length);
 			request.setAttribute("cantDislikes",infoVideo.getUsuariosNoGusta().length);
+			String[] listaLikes = conseguirNicknamesUsuariosDelDtUsuario(infoVideo.getUsuariosGusta());
+			String[] listaDislikes = conseguirNicknamesUsuariosDelDtUsuario(infoVideo.getUsuariosNoGusta());
+			request.setAttribute("listaLikes", listaLikes);
+			request.setAttribute("listaDislikes", listaDislikes);
 			HttpSession session=request.getSession(false);
             if(session!=null && session.getAttribute("nombre_usuario")!=null) {
             	request.setAttribute("logged" ,true);
@@ -228,7 +240,6 @@ public class VideoServlet extends HttpServlet {
 			break;
 		}
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)

@@ -99,6 +99,15 @@
 	        x.style.display = "none";
 	    }
 	}
+	
+	function toggle_followers_box(){
+		var x = document.getElementById("followers_box");
+	    if (x.style.display === "none") {
+	        x.style.display = "block";
+	    } else {
+	        x.style.display = "none";
+	    }
+	}
 
 	function submit_response(index){
 		var response_button = "response_button" + index;
@@ -312,6 +321,39 @@
 	%>
 	<div class="comment_container">
 	<%
+		if(logged_state.equals("true")){
+			DtUsuario dataUsuario2 = (DtUsuario) request.getAttribute("dataUsuario");
+			String nombre_user_loggeado = dataUsuario2.getNickname();
+			if(propietario.equals(nombre_user_loggeado)){
+				String[] listaLikes = (String[]) request.getAttribute("listaLikes");
+				String[] listaDislikes = (String[]) request.getAttribute("listaDislikes");
+	%>		
+			<button style="" class="response_button_class" onclick="toggle_followers_box()">Lista usuarios likes/dislikes</button>
+			<div style="display: none;" class="followers_box" id="followers_box">
+			<p class="texto_simple">Usuarios que dieron like:</p>
+			<ul>
+	<%
+			for(int index = 0; index < listaLikes.length;index++) {
+	%>
+				<li><a href="profile?opcion=Perfil&nickname=<%=listaLikes[index]%>"><%=listaLikes[index]%> </a></li>
+	<%			
+			}//imprimo los usuarios likes
+	%>			
+			</ul>
+			<p class="texto_simple">Usuarios que dieron dislike:</p>
+			<ul>
+	<%
+			for(int index = 0; index < listaDislikes.length;index++) {
+	%>
+				<li><a href="profile?opcion=Perfil&nickname=<%=listaDislikes[index]%>"><%=listaDislikes[index]%> </a></li>
+	<%			
+			}//imprimo los usuarios dislikes
+	%>			
+			</ul>
+			</div>
+	<%			
+			}
+		}//esto va a ser para que el propietario pueda ver los usuarios que le dieron like o dislike a su video.
 		int index = 0;		
 		printComentarios(out,comentarios, index, url_logo_usuario_iniciado,logged_state);
 	%>
