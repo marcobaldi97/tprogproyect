@@ -34,6 +34,7 @@ import uytubeLogic.logica.IVideoCtrl;
 import uytubeLogic.logica.SystemHandler.Privacidad;
 
 import javax.swing.JScrollPane;
+import javax.swing.JPasswordField;
 
 
 public class AltaUsuarioInternalFrame extends JInternalFrame {
@@ -48,6 +49,7 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 	private JDateChooser dateChooser;
 	private JComboBox comboBoxCat;
 	private File archivo;
+	private JPasswordField txtFieldContrasenia;
 	
 	 public static void infoBox(String infoMessage, String titleBar){
 	        JOptionPane.showMessageDialog(null, infoMessage, "" + titleBar, JOptionPane.INFORMATION_MESSAGE);
@@ -78,6 +80,13 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 		textFieldNick = new JTextField();
 		datosUsuario.add(textFieldNick);
 		textFieldNick.setColumns(10);
+		
+		JLabel lblContrasea = new JLabel("Contraseña:");
+		datosUsuario.add(lblContrasea);
+		
+		txtFieldContrasenia = new JPasswordField();
+		datosUsuario.add(txtFieldContrasenia);
+		txtFieldContrasenia.setColumns(10);
 		
 		JLabel lblEmail = new JLabel("Email");
 		datosUsuario.add(lblEmail);
@@ -179,10 +188,11 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				//CREAR USUARIO
 				//obtener datos
-				String  nick, nom, ape, email, nomCanal,descCanal, catE;
+				String  nick, contrasenia, nom, ape, email, nomCanal,descCanal, catE;
 				Privacidad privacidad;
 				DtFecha nac;
 				nick = textFieldNick.getText();
+				contrasenia = txtFieldContrasenia.getText();
 				email = textFieldEmail.getText(); 
 				
 				nom = textFieldNombre.getText();
@@ -202,7 +212,7 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 				if(disponible && verificarCampos()){
 					if(textFieldNombreC.getText().isEmpty()){nomCanal=nick; }
 					if(comboBoxCat.getSelectedItem()=="" || comboBoxCat.getSelectedIndex()==-1){catE=null;}
-					controlUsr.nuevoUsuario(nick,"1234",nom, ape, email, nac, Imagen.imagenToByte(archivo),nomCanal,descCanal,privacidad, catE) ;
+					controlUsr.nuevoUsuario(nick, contrasenia,nom, ape, email, nac, Imagen.imagenToByte(archivo),nomCanal,descCanal,privacidad, catE) ;
 					infoBox("Usuario creado con exito", "Alta Usuario");
 					setVisible(false);
 					dispose();
@@ -250,6 +260,7 @@ public class AltaUsuarioInternalFrame extends JInternalFrame {
 	}
 	private void limpiar(){
 		textFieldNick.setText("");
+		txtFieldContrasenia.setText("");
 		textFieldEmail.setText("");
 		textFieldNombre.setText("");
 		txtApellido.setText("");
