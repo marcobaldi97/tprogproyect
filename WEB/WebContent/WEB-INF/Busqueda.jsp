@@ -67,7 +67,7 @@ if (request.getAttribute("canales") != null) { %>
 	<%
 	DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 	
-	DateFormat goodDf = new SimpleDateFormat("EEEEE dd 'de' MMMMM 'del' yyyy",Locale.getDefault());
+	DateFormat goodDf = new SimpleDateFormat("EEEEE dd 'de' MMMMM 'del' yyyy",Locale.forLanguageTag("es-ES"));
 	if (request.getAttribute("videos") != null) {
 %>
 <table id="TablaContenidos">

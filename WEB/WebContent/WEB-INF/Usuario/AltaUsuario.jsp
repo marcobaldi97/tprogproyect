@@ -36,7 +36,7 @@
 	                };
 	                var nickname = document.getElementById("nickname").value;
 	                var encodedNick= encodeURIComponent(nickname);
-	                xhttp.open("POST", "newUser?opcion=checkDispUsr&nickname="+encodedNick+"&email="+document.getElementById("email").value, true);
+	                xhttp.open("POST", "login?opcion=checkDispUsr&nickname="+encodedNick+"&email="+document.getElementById("email").value, true);
 	                xhttp.send();	                
 	            }
            		
