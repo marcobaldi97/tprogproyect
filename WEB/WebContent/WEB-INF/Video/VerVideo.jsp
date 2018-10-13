@@ -225,12 +225,20 @@
 		<tr>
 			<%
 			if(logged_state == "true"){
-				System.out.println(follow_state);
-				if(follow_state == "false"){%>
-			<th><button id="seguir_button" name="boton_seguir" value="Seguir" onclick="seguir_script()">Seguir</button></th>
-			<%	}else{%>
-			<th><button id="seguir_button" name="boton_seguir" value="Seguir" onclick="dejar_seguir_script()">Dejar de seguir</button></th>
-			<%	}//final del else
+				DtUsuario dataUsuario2 = (DtUsuario) request.getAttribute("dataUsuario");
+				String nombre_user_loggeado = dataUsuario2.getNickname();
+				if(!propietario.equals(nombre_user_loggeado)){
+					System.out.println(follow_state);
+					if(follow_state == "false"){%>
+				<th><button id="seguir_button" name="boton_seguir" value="Seguir" onclick="seguir_script()">Seguir</button></th>
+				<%	}else{%>
+				<th><button id="seguir_button" name="boton_seguir" value="Seguir" onclick="dejar_seguir_script()">Dejar de seguir</button></th>
+				<%	}//final del else	
+				}else{
+				%>
+				<th></th>
+				<%	
+				}
 			}//final del if
 			%>
 			<th><p class="texto_simple">Likes:<%=cantLikes%> Dislikes:<%=cantDislikes%></p></th>
