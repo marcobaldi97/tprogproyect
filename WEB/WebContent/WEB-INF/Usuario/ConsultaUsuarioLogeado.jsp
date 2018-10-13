@@ -31,8 +31,8 @@
 	String nombre = dataUsuario.getNombre();
 	String apellido = dataUsuario.getApellido();
 	Date fechaNac = dataUsuario.getFechaNacimiento().getFecha();
-	int dia = fechaNac.getDay();
-	int mes = fechaNac.getMonth();
+	int dia = fechaNac.getDate();
+	int mes = fechaNac.getMonth()+1;
 	int anio = fechaNac.getYear()  + 1900;
 	byte[] foto = dataUsuario.getFoto();
 	DtCanal dataCanal = (DtCanal) request.getAttribute("dataCanal");
