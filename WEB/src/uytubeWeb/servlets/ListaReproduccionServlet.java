@@ -41,6 +41,7 @@ public class ListaReproduccionServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setCharacterEncoding("UTF-8");
 		String action = request.getParameter("action");
 		Fabrica fabrica=Fabrica.getInstance();
 		IUsuarioCtrl interfazUsuario = fabrica.getIUsuarioCtrl();
@@ -194,6 +195,7 @@ public class ListaReproduccionServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setCharacterEncoding("UTF-8");
 		// TODO Auto-generated method stub
 		String action = request.getParameter("action");
 		Fabrica fabrica=Fabrica.getInstance();

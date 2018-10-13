@@ -104,6 +104,7 @@ public class AltaUsuarioServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		response.setCharacterEncoding("UTF-8");
 		// TODO Auto-generated method stub
 		System.out.println("nuevo usuario GET");
 		request.getRequestDispatcher("WEB-INF/Usuario/AltaUsuario.jsp").forward(request, response);
@@ -115,6 +116,7 @@ public class AltaUsuarioServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		response.setCharacterEncoding("UTF-8");
 		System.out.println("altaUsuario POST");
 		if (request.getContentType() != null && request.getContentType().toLowerCase().indexOf("multipart/form-data") > -1 ) {
 			System.out.println("ah re loco es multiparte");

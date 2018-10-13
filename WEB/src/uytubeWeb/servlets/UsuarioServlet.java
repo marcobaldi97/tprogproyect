@@ -59,6 +59,7 @@ public class UsuarioServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setCharacterEncoding("UTF-8");
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		String opcion = (String) request.getParameter("opcion");
@@ -179,6 +180,8 @@ public class UsuarioServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setCharacterEncoding("UTF-8");
+		
 		// TODO Auto-generated method stub
 		
 		String opcion = (String) request.getParameter("opcion");
@@ -190,10 +193,13 @@ public class UsuarioServlet extends HttpServlet {
 			System.out.println("estoy probando con:");
 			System.out.println(request.getParameter("nickInicio"));
 			System.out.println(request.getParameter("passInicio"));
-			if(UsuarioController.verificarLogin(request.getParameter("nickInicio"), request.getParameter("passInicio"))) {
+			String encodedNick = new String(request.getParameter("nickInicio").getBytes("ISO-8859-1"), "UTF-8");
+			String encodedPass = new String(request.getParameter("passInicio").getBytes("ISO-8859-1"), "UTF-8");
+			System.out.println("o mejor con: "+encodedNick+" "+encodedPass+"?");
+			if(UsuarioController.verificarLogin(encodedNick, encodedPass)) {
 				System.out.println("existe el usuario con esa contrase�a");
 				HttpSession sesion= request.getSession(true);
-				sesion.setAttribute("nombre_usuario", request.getParameter("nickInicio"));
+				sesion.setAttribute("nombre_usuario", encodedNick);
 				response.sendRedirect(request.getContextPath() + "/home");
 			}else {
 				System.out.println("no existe el usuario con esa contrase�a");
