@@ -31,7 +31,7 @@
 	DtFecha fechaPublicacion = dataVideo.getFechaPublicacion();
 	Date fecha_publicacion = fechaPublicacion.getFecha();
 	int dia = fecha_publicacion.getDate();
-	int mes =  fecha_publicacion.getMonth();
+	int mes =  fecha_publicacion.getMonth() + 1;
 	int anio = fecha_publicacion.getYear() + 1900;
 	int cantLikes = (int) request.getAttribute("cantLikes");//acordarse de cambiar estos dos.
 	int cantDislikes = (int) request.getAttribute("cantDislikes");;
@@ -281,7 +281,7 @@
 				Date fecha_publicacion_comentario = comentarios[i].getFecha().getFecha();
 				int dia_comment, mes_comment, anio_comment;
 				dia_comment = fecha_publicacion_comentario.getDate();
-				mes_comment = fecha_publicacion_comentario.getMonth();
+				mes_comment = fecha_publicacion_comentario.getMonth() + 1;
 				anio_comment = fecha_publicacion_comentario.getYear() + 1900;
 				String descripcion_comentario = comentarios[i].getTexto();
 				DtComentario[] hijos = comentarios[i].getRespuestas();

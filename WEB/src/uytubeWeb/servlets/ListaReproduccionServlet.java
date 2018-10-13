@@ -2,6 +2,7 @@ package uytubeWeb.servlets;
 
 import java.io.IOException;
 import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
 import java.nio.charset.CharsetEncoder;
@@ -40,6 +41,7 @@ public class ListaReproduccionServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setCharacterEncoding("UTF-8");
 		String action = request.getParameter("action");
 		Fabrica fabrica=Fabrica.getInstance();
 		IUsuarioCtrl interfazUsuario = fabrica.getIUsuarioCtrl();
@@ -129,10 +131,16 @@ public class ListaReproduccionServlet extends HttpServlet {
 				
 				//String nombreLista = request.getParameter("nameList");
 				String encodedLista = new String(request.getParameter("nameList").getBytes("ISO-8859-1"), "UTF-8");
-				System.out.println("NOMBRE LISTA" + encodedLista);
+				String encodedOwner = new String(request.getParameter("ownerList").getBytes("ISO-8859-1"), "UTF-8");
 				String propietarioLista = request.getParameter("ownerList");
-				DtVideo[] videosLista=interfazUsuario.obtenerDtsVideosListaReproduccionUsuario(propietarioLista, encodedLista);
-				DtListaReproduccion infoLista = interfazUsuario.infoAdicLDR(propietarioLista, encodedLista);
+				String nombreLista = request.getParameter("nameList");
+				String URLdecodedLista = URLDecoder.decode(nombreLista, "UTF-8");
+				String URLdecodedOwner = URLDecoder.decode(propietarioLista, "UTF-8");
+				System.out.println("NOMBRE LISTA" + nombreLista+ " " +encodedLista+ " " +URLdecodedLista);
+				System.out.println("NOMBRE DUEÑO" + propietarioLista+ " " +encodedOwner+ " " +URLdecodedOwner);
+				
+				DtVideo[] videosLista=interfazUsuario.obtenerDtsVideosListaReproduccionUsuario(propietarioLista, nombreLista);
+				DtListaReproduccion infoLista = interfazUsuario.infoAdicLDR(propietarioLista, nombreLista);
 				request.setAttribute("videosLista", videosLista);
 				request.setAttribute("infoLista", infoLista);
 				request.getRequestDispatcher("/WEB-INF/Lista Reproduccion/detallesListaReproduccion.jsp").forward(request, response);	
@@ -151,7 +159,7 @@ public class ListaReproduccionServlet extends HttpServlet {
 					 request.setAttribute("listasPrivadasSesion", null);
 				 }	 
 				
-				 DtListaReproduccion[] listas=interfazUsuario.listarLDRPublicasPorNombre("");
+				 DtListaReproduccion[] listas=interfazUsuario.listarLDRPublicasPorNombre("newUser");
 				 request.setAttribute("listarListasReproduccion", listas);
 				 request.getRequestDispatcher("/WEB-INF/Lista Reproduccion/consultaListaReproduccion.jsp").forward(request, response);
 
@@ -187,6 +195,7 @@ public class ListaReproduccionServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setCharacterEncoding("UTF-8");
 		// TODO Auto-generated method stub
 		String action = request.getParameter("action");
 		Fabrica fabrica=Fabrica.getInstance();
@@ -197,17 +206,17 @@ public class ListaReproduccionServlet extends HttpServlet {
 		case "crearLDR":{
 			String nombreUsuario=(String)session.getAttribute("nombre_usuario");
 			if(session!=null && session.getAttribute("nombre_usuario")!=null) {
-				System.out.println((String)session.getAttribute("nombre_usuario"));
+				System.out.println(nombreUsuario);
 				System.out.println(request.getParameter("nombreLista"));
 				String encodedLista = new String(request.getParameter("nombreLista").getBytes("ISO-8859-1"), "UTF-8");
 				if(request.getParameter("grupoPrivacidad").equals("Publico")) {
 					System.out.println("cree una listirijilla " + encodedLista);
 					interfazUsuario.nuevaListaParticular(nombreUsuario, encodedLista, Privacidad.PUBLICO);
-					response.sendRedirect(request.getContextPath() + "/playlist?action=details&ownerList="+nombreUsuario+"&nameList="+ request.getParameter("nombreLista"));
+					response.sendRedirect(request.getContextPath() + "/playlist?action=details&ownerList="+URLEncoder.encode(nombreUsuario,"UTF-8")+"&nameList="+ URLEncoder.encode(encodedLista,"UTF-8"));
 					
 				}else {
-					interfazUsuario.nuevaListaParticular((String)session.getAttribute("nombre_usuario"), encodedLista, Privacidad.PRIVADO);
-					response.sendRedirect(request.getContextPath() + "/playlist?action=details&ownerList="+nombreUsuario+"&nameList="+request.getParameter("nombreLista"));
+					interfazUsuario.nuevaListaParticular(nombreUsuario, encodedLista, Privacidad.PRIVADO);
+					response.sendRedirect(request.getContextPath() + "/playlist?action=details&ownerList="+nombreUsuario+"&nameList="+encodedLista);
 				}
 				System.out.println("creada la LDR");
 			}else {

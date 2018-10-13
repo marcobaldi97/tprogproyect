@@ -54,15 +54,15 @@ public class VideoHandler {
 	public DtVideo[] listarVideosPublicosPorNombre(String nombre) {
 		List<DtVideo> listaVideos = new ArrayList<DtVideo>();
 		for (Map.Entry<Integer, Video> entry : videos.entrySet()) {
-			if (entry.getValue().getPrivacidad() == Privacidad.PUBLICO && entry.getValue().getNombre().toLowerCase().contains(nombre.toLowerCase())) {
-					listaVideos.add(new DtVideo(entry.getValue()));
-				}
+			if (entry.getValue().getPrivacidad() == Privacidad.PUBLICO
+					&& (entry.getValue().getNombre().toLowerCase().contains(nombre.toLowerCase())
+							|| entry.getValue().getDescripcion().toLowerCase().contains(nombre.toLowerCase()))) {
+				listaVideos.add(new DtVideo(entry.getValue()));
 			}
-		DtVideo[] resultadosBusqueda=listaVideos.toArray(new DtVideo[0]);
+		}
+		DtVideo[] resultadosBusqueda = listaVideos.toArray(new DtVideo[0]);
 		return resultadosBusqueda;
 	}
-
-	
 
 	public DtVideo member(String nomVideo, String nick) {
 		DtVideo infoVideo = null;

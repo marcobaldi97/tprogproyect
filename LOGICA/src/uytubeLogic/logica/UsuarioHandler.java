@@ -57,21 +57,25 @@ public class UsuarioHandler {
 	}
 
 	public DtCanal[] listarCanalesPublicosPorNombre(String nombre) {
-		List<DtCanal> listaUsuarios=new ArrayList<DtCanal>();
-		for(Map.Entry<String, Usuario> entry : usuarios.entrySet()) {
-			if(entry.getValue().mostrarInfoCanal().getPrivacidad()==Privacidad.PUBLICO && entry.getValue().mostrarInfoCanal().getNombre().toLowerCase().contains(nombre.toLowerCase()))
+		List<DtCanal> listaUsuarios = new ArrayList<DtCanal>();
+		for (Map.Entry<String, Usuario> entry : usuarios.entrySet()) {
+			if (entry.getValue().mostrarInfoCanal().getPrivacidad() == Privacidad.PUBLICO
+					&& (entry.getValue().mostrarInfoCanal().getNombre().toLowerCase().contains(nombre.toLowerCase())
+							||entry.getValue().mostrarInfoCanal().getDescripcion().toLowerCase().contains(nombre.toLowerCase())))
 				listaUsuarios.add(entry.getValue().mostrarInfoCanal());
 		}
-		DtCanal[] resultadosBusqueda=listaUsuarios.toArray(new DtCanal[0]);
+		DtCanal[] resultadosBusqueda = listaUsuarios.toArray(new DtCanal[0]);
 		return resultadosBusqueda;
 	}
-	
+
 	public DtListaReproduccion[] listarLDRPublicasPorNombre(String nombre) {
 		List<DtListaReproduccion> listaLDR = new ArrayList<DtListaReproduccion>();
 		for (Map.Entry<String, Usuario> entry : usuarios.entrySet()) {
 			DtListaReproduccion[] listasEnVideo = entry.getValue().getListas();
 			for (DtListaReproduccion lista : listasEnVideo) {
-				if (lista.getPrivado() == Privacidad.PUBLICO && lista.getNombre().toLowerCase().contains(nombre.toLowerCase()) && !listaLDR.contains(lista)) {
+				if (lista.getPrivado() == Privacidad.PUBLICO
+						&& lista.getNombre().toLowerCase().contains(nombre.toLowerCase())
+						&& !listaLDR.contains(lista)) {
 					listaLDR.add(lista);
 				}
 			}
@@ -85,7 +89,5 @@ public class UsuarioHandler {
 			instancia = new UsuarioHandler();
 		return instancia;
 	}
-
-	
 
 }

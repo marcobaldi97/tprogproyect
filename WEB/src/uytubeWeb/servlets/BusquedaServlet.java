@@ -60,7 +60,7 @@ public class BusquedaServlet extends HttpServlet {
 		DtListaReproduccion[] listas = interfazUsuarios.listarLDRPublicasPorNombre((String)request.getAttribute(busqueda));
 		
 		HttpSession session=request.getSession(false);
-		if(session!=null) {
+		/*if(session!=null) {
 			String login=(String)session.getAttribute("nombre_usuario");
 			if(login!=null) {
 				System.out.println("hay un usuario logueado");
@@ -73,7 +73,7 @@ public class BusquedaServlet extends HttpServlet {
 				listasAux.addAll(Arrays.asList(listasPrivadasSesion));
 				listas=listasAux.toArray(new DtListaReproduccion[0]);
 			}
-		}
+		}*/
 		String parametroListas="listas";
 		String parametroCanales="canales";
 		String parametroVideos="videos";
