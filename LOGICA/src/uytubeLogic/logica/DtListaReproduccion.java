@@ -56,12 +56,13 @@ public class DtListaReproduccion {
 	}
 
 	public boolean equals(Object o) {
-		if(o instanceof DtListaReproduccion) {
-			DtListaReproduccion other= (DtListaReproduccion) o;
+		if (o instanceof DtListaReproduccion) {
+			DtListaReproduccion other = (DtListaReproduccion) o;
 			return nombre == other.getNombre() && propietario == other.getPropietario();
 		}
 		return false;
 	}
+
 	public boolean equals(DtListaReproduccion other) {
 		return nombre == other.getNombre() && propietario == other.getPropietario();
 	}

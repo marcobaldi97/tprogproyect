@@ -36,15 +36,13 @@ public class VideoCtrl implements IVideoCtrl {
 		return videoEspecifico.getComentarios();
 	}
 
-	public void nuevoComentario(Integer IDVideo, String nickU, DtFecha fecha,
-			String contenido) {
+	public void nuevoComentario(Integer IDVideo, String nickU, DtFecha fecha, String contenido) {
 		VideoHandler VidHandler = VideoHandler.getInstance();
 		Video videoEspecifico = VidHandler.find(IDVideo);
 		videoEspecifico.nuevoComentario(nickU, fecha, contenido);
 	}
 
-	public void responderComentario(Integer IDVideo, Integer IDCR,
-			String nickU, DtFecha fecha, String contenido) {
+	public void responderComentario(Integer IDVideo, Integer IDCR, String nickU, DtFecha fecha, String contenido) {
 		VideoHandler VidHandler = VideoHandler.getInstance();
 		Video videoEspecifico = VidHandler.find(IDVideo);
 		videoEspecifico.responderComentario(IDCR, nickU, fecha, contenido);
@@ -91,9 +89,6 @@ public class VideoCtrl implements IVideoCtrl {
 		return CatHandler.isMember(nombreCat);
 	}
 
-	
-	
-
 	@Override
 	public DtVideo[] listarVideosPublicosPorNombre(String nombre) {
 		VideoHandler VidHandler = VideoHandler.getInstance();
@@ -104,23 +99,21 @@ public class VideoCtrl implements IVideoCtrl {
 	public String getEstadoValoracion(Integer IDVideo, String nickUsuario) {
 		String status = "";
 		DtInfoVideo infoVideo = this.verDetallesVideoExt(IDVideo);
-    	DtUsuario[] usuariosLikes = infoVideo.getUsuariosGusta();
-    	DtUsuario[] usuariosDislikes = infoVideo.getUsuariosNoGusta();
-    	for(int index = 0; index < usuariosLikes.length; index++) {
-    		if(usuariosLikes[index].getNickname().equals(nickUsuario)) {
-    			status = "like";
-    		}
-    	}
-    	for (int index = 0; index < usuariosDislikes.length; index++) {
-    		if(usuariosDislikes[index].getNickname().equals(nickUsuario)) {
-    			status = "dislike";
-    		}
-    	}
-    	if(status == "") status = "neutral";
+		DtUsuario[] usuariosLikes = infoVideo.getUsuariosGusta();
+		DtUsuario[] usuariosDislikes = infoVideo.getUsuariosNoGusta();
+		for (int index = 0; index < usuariosLikes.length; index++) {
+			if (usuariosLikes[index].getNickname().equals(nickUsuario)) {
+				status = "like";
+			}
+		}
+		for (int index = 0; index < usuariosDislikes.length; index++) {
+			if (usuariosDislikes[index].getNickname().equals(nickUsuario)) {
+				status = "dislike";
+			}
+		}
+		if (status == "")
+			status = "neutral";
 		return status;
 	}
-	
-	
-	
-	
+
 }

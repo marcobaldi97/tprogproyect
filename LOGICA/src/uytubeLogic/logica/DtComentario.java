@@ -14,16 +14,17 @@ public class DtComentario {
 	}
 
 	public Integer getTamanioArbol() {
-		if(respuestas.length==0) {
+		if (respuestas.length == 0) {
 			return 1;
-		}else {
-			Integer cantRespuestas=1;
-			for(DtComentario entry: this.respuestas) {
-				cantRespuestas=cantRespuestas+entry.getTamanioArbol();
+		} else {
+			Integer cantRespuestas = 1;
+			for (DtComentario entry : this.respuestas) {
+				cantRespuestas = cantRespuestas + entry.getTamanioArbol();
 			}
 			return cantRespuestas;
 		}
 	}
+
 	public String getNickUsuario() {
 		return nickUsuario;
 	}
@@ -43,7 +44,7 @@ public class DtComentario {
 	public DtComentario[] getRespuestas() {
 		return respuestas;
 	}
-	
+
 	public byte[] getFotoUsuarioComentador() {
 		return fotoDuenio;
 	}
@@ -59,10 +60,8 @@ public class DtComentario {
 	}
 
 	public boolean equals(DtComentario dataTipo) {
-		return (idComentario == dataTipo.idComentario)
-				&& (texto == dataTipo.getTexto())
-				&& (fecha.equals(dataTipo.getFecha())
-						&& (esPadre == dataTipo.getEsPadre()) && (nickUsuario == dataTipo
-						.getNickUsuario()));
+		return (idComentario == dataTipo.idComentario) && (texto == dataTipo.getTexto())
+				&& (fecha.equals(dataTipo.getFecha()) && (esPadre == dataTipo.getEsPadre())
+						&& (nickUsuario == dataTipo.getNickUsuario()));
 	}
 }

@@ -19,14 +19,15 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 		usuarioh = UsuarioHandler.getInstance();
 		systemh = SystemHandler.getInstance();
 	}
-	
+
 	public Integer getTamanioArbol(DtComentario[] comments) {
-		Integer tamanio=0;
-		for(DtComentario entry :comments) {
-			tamanio=tamanio+entry.getTamanioArbol();
+		Integer tamanio = 0;
+		for (DtComentario entry : comments) {
+			tamanio = tamanio + entry.getTamanioArbol();
 		}
 		return tamanio;
-	}//Carmona: lo siento pero lo tengo que usar desde una JSP, entonces no me conviene que esté en el controlador. Att.: Marco
+	}// Carmona: lo siento pero lo tengo que usar desde una JSP, entonces no me
+		// conviene que esté en el controlador. Att.: Marco
 
 	public Boolean memberListaReproduccionPropia(String nickU, String nombreLista) {
 		UsuarioHandler usuHandler = UsuarioHandler.getInstance();
@@ -51,7 +52,7 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 
 	public DtVideo[] infoVideosCanal(String filtro, String nickU, Privacidad priv) {
 		Usuario usuarioParticular = usuarioh.find(nickU);
-		return usuarioParticular.infoVideosCanal(filtro,priv);
+		return usuarioParticular.infoVideosCanal(filtro, priv);
 	}
 
 	public boolean nuevaListaPorDefecto(String nombreL) {
@@ -126,14 +127,14 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 	public void aniadirVideo(String nickU, String nombreV, String descripcionV, Integer duracionV,
 			DtFecha fechaPublicacion, String url, DtCategoria catE, Privacidad privacidadV) {
 		Usuario usuarioParticular = usuarioh.find(nickU);
-		System.out.println("la url es "+url);
-		if(url.contains("https://www.youtube.com/watch?v=")) {
+		System.out.println("la url es " + url);
+		if (url.contains("https://www.youtube.com/watch?v=")) {
 			System.out.println("contiene el watch");
-			url=url.replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/");
-			System.out.println("ahora es " +url);
-		}else if(url.contains("https://youtu.be/")) {
+			url = url.replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/");
+			System.out.println("ahora es " + url);
+		} else if (url.contains("https://youtu.be/")) {
 			System.out.println("contiene el punto");
-			url=url.replace("https://youtu.be/" ,"https://www.youtube.com/embed/");
+			url = url.replace("https://youtu.be/", "https://www.youtube.com/embed/");
 			System.out.println("ahora es " + url);
 		}
 		usuarioParticular.aniadirVideo(nombreV, nickU, descripcionV, duracionV, fechaPublicacion, url, catE,
@@ -152,10 +153,10 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 		return !flag;
 	}// true si estÃ¡ disponible, false si ya estÃ¡ ocupado
 
-	public void nuevoUsuario(String nickU, String pass,String nombreUsuario, String apellidoU, String emailU,
+	public void nuevoUsuario(String nickU, String pass, String nombreUsuario, String apellidoU, String emailU,
 			DtFecha fechaNacimientoU, byte[] fotoU, String nombreCanal, String descripcionCanal,
 			Privacidad privacidadCanal, String categoriaCanal) {
-		Usuario usuarioParticular = new Usuario(nickU, pass,nombreUsuario, apellidoU, emailU, fechaNacimientoU, fotoU,
+		Usuario usuarioParticular = new Usuario(nickU, pass, nombreUsuario, apellidoU, emailU, fechaNacimientoU, fotoU,
 				nombreCanal, descripcionCanal, privacidadCanal, categoriaCanal);
 		usuarioh.aniadirUsuario(usuarioParticular);
 	}
@@ -220,8 +221,9 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 		Usuario usuarioParticular = usuarioh.find(nickname);
 		return usuarioParticular.listarLDRParticularesdeUsuario();
 	}
+
 	public DtListaReproduccion[] listarLDRPublicasPorNombre(String nombre) {
-		
+
 		return usuarioh.listarLDRPublicasPorNombre(nombre);
 	}
 
@@ -234,11 +236,11 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 	@Override
 	public DtListaReproduccion[] infoLDRdeUsuario(String filtro, String nickU, Privacidad priv) {
 		Usuario usuarioParticular = usuarioh.find(nickU);
-		return usuarioParticular.infoLDRdeUsuario(filtro,priv);
+		return usuarioParticular.infoLDRdeUsuario(filtro, priv);
 	}
 
-	public boolean verificarLogin(String nick,String pass) {
+	public boolean verificarLogin(String nick, String pass) {
 		Usuario usuarioParticular = usuarioh.find(nick);
-		return(usuarioParticular!=null && usuarioParticular.getPassword().equals(pass));
+		return (usuarioParticular != null) && (usuarioParticular.getPassword().equals(pass));
 	}
 }

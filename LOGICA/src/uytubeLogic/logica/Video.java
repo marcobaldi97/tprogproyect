@@ -1,6 +1,5 @@
 package uytubeLogic.logica;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -20,7 +19,7 @@ public class Video {
 	private Privacidad privacidad;
 	private Map<Integer, Comentario> comentarios;
 	private List<ListaReproduccion> listas;
-	private Map<String,Puntuacion> puntuaciones;
+	private Map<String, Puntuacion> puntuaciones;
 
 	public Video(String nombreVideo, String propietario, String descripcionV, int duracionV, DtFecha fechapubli,
 			String url, DtCategoria categ, Privacidad privacidadVideo) {
@@ -43,7 +42,7 @@ public class Video {
 			cat = SysHandler.getSinCat();
 		privacidad = privacidadVideo;
 		comentarios = new HashMap<Integer, Comentario>();
-		puntuaciones = new HashMap<String,Puntuacion>();
+		puntuaciones = new HashMap<String, Puntuacion>();
 		vidHandler.addVideo(this);
 
 	}
@@ -165,9 +164,9 @@ public class Video {
 
 	public DtPuntuacion[] getPuntuaciones() {
 		DtPuntuacion[] puntajes = new DtPuntuacion[puntuaciones.size()];
-		int iterador=0;
+		int iterador = 0;
 		for (Map.Entry<String, Puntuacion> entry : puntuaciones.entrySet()) {
-			puntajes[iterador]=new DtPuntuacion(entry.getValue());
+			puntajes[iterador] = new DtPuntuacion(entry.getValue());
 			iterador++;
 		}
 		return puntajes;
@@ -184,9 +183,9 @@ public class Video {
 	}
 
 	public void valorarVideo(String nickU, boolean valoracion) {
-		if(puntuaciones.containsKey(nickU)) {
+		if (puntuaciones.containsKey(nickU)) {
 			puntuaciones.get(nickU).setValoracion(valoracion);
-		}else {
+		} else {
 			Puntuacion puntuacionVideo = new Puntuacion(nickU, valoracion);
 			addPuntuacion(puntuacionVideo);
 		}
@@ -196,8 +195,8 @@ public class Video {
 		DtListaReproduccion[] listasADevolver = new DtListaReproduccion[listas.size()];
 		int iterador = 0;
 		for (ListaReproduccion lista : listas) {
-				listasADevolver[iterador] = lista.toDt();
-				iterador++;
+			listasADevolver[iterador] = lista.toDt();
+			iterador++;
 		}
 		return listasADevolver;
 	}

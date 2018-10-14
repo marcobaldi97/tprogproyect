@@ -262,8 +262,8 @@ public class Canal {
 	}
 
 	public DtVideo[] infoVideosCanal(String filtro, Privacidad priv) {
-		if(filtro==null)
-			filtro="";
+		if (filtro == null)
+			filtro = "";
 		List<DtVideo> listaVideos = new ArrayList<DtVideo>();
 		for (Map.Entry<String, Video> entry : videos.entrySet()) {
 			if (entry.getValue().getPrivacidad() == priv
@@ -275,8 +275,8 @@ public class Canal {
 	}
 
 	public DtListaReproduccion[] infoLDRdeUsuario(String filtro, Privacidad priv) {
-		if(filtro==null)
-			filtro="";
+		if (filtro == null)
+			filtro = "";
 		List<DtListaReproduccion> listaLDR = new ArrayList<DtListaReproduccion>();
 		for (Map.Entry<String, ListaReproduccion> entry : listasReproduccion.entrySet()) {
 			if (entry.getValue() instanceof Particular) {
