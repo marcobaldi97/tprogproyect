@@ -49,9 +49,9 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 		return usuarioParticular.listarVideosCanal();
 	}
 
-	public DtVideo[] infoVideosCanal(String nickU, Privacidad priv) {
+	public DtVideo[] infoVideosCanal(String filtro, String nickU, Privacidad priv) {
 		Usuario usuarioParticular = usuarioh.find(nickU);
-		return usuarioParticular.infoVideosCanal(priv);
+		return usuarioParticular.infoVideosCanal(filtro,priv);
 	}
 
 	public boolean nuevaListaPorDefecto(String nombreL) {
@@ -232,9 +232,9 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 	}
 
 	@Override
-	public DtListaReproduccion[] infoLDRdeUsuario(String nickU, Privacidad priv) {
+	public DtListaReproduccion[] infoLDRdeUsuario(String filtro, String nickU, Privacidad priv) {
 		Usuario usuarioParticular = usuarioh.find(nickU);
-		return usuarioParticular.infoLDRdeUsuario(priv);
+		return usuarioParticular.infoLDRdeUsuario(filtro,priv);
 	}
 
 	public boolean verificarLogin(String nick,String pass) {

@@ -149,7 +149,7 @@ public class ListaReproduccionServlet extends HttpServlet {
 				 if(session!=null) {
 			            String login=(String)session.getAttribute("nombre_usuario");
 			            if(login!=null) {
-			            	DtListaReproduccion[] listasPrivadasSesion=interfazUsuario.infoLDRdeUsuario(login, Privacidad.PRIVADO);
+			            	DtListaReproduccion[] listasPrivadasSesion=interfazUsuario.infoLDRdeUsuario(null, login, Privacidad.PRIVADO);
 							 request.setAttribute("listasPrivadasSesion", listasPrivadasSesion);
 
 			            }

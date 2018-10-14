@@ -107,8 +107,8 @@ public class UsuarioServlet extends HttpServlet {
 			request.setAttribute("dataCanal", infoCanal);
 			request.setAttribute("dataUsuario", usuario);
 			
-			DtListaReproduccion[] listas = interfazUsuarios.infoLDRdeUsuario(nickname, Privacidad.PUBLICO);
-		    DtVideo[] videos = interfazUsuarios.infoVideosCanal(nickname, Privacidad.PUBLICO);
+			DtListaReproduccion[] listas = interfazUsuarios.infoLDRdeUsuario(null, nickname, Privacidad.PUBLICO);
+		    DtVideo[] videos = interfazUsuarios.infoVideosCanal(null, nickname, Privacidad.PUBLICO);
 	        HttpSession session=request.getSession(false);
 	        if(session!=null) {
 	            String login=(String)session.getAttribute("nombre_usuario");
@@ -125,8 +125,8 @@ public class UsuarioServlet extends HttpServlet {
 	                request.setAttribute("usrSigueAlOtro", loSigue);
 	                if(login.equals(nickname)){
 	                	//request.setAttribute("duenioCanal", true);
-		                DtVideo[] videosPrivadosSesion=interfazUsuarios.infoVideosCanal(login, Privacidad.PRIVADO); //videos privados del usuario logeado
-		                DtListaReproduccion[] listasPrivadasSesion=interfazUsuarios.infoLDRdeUsuario(login, Privacidad.PRIVADO); //listas privadas del usr log
+		                DtVideo[] videosPrivadosSesion=interfazUsuarios.infoVideosCanal(null, login, Privacidad.PRIVADO); //videos privados del usuario logeado
+		                DtListaReproduccion[] listasPrivadasSesion=interfazUsuarios.infoLDRdeUsuario(null, login, Privacidad.PRIVADO); //listas privadas del usr log
 		                List<DtVideo> videosAux= new ArrayList<DtVideo>(Arrays.asList(videos));
 		                videosAux.addAll(Arrays.asList(videosPrivadosSesion));
 		                videos=videosAux.toArray(new DtVideo[0]);

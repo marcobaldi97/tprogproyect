@@ -241,13 +241,12 @@ public class Usuario {
 		return canalPropio.listarLDRParticularesdeUsuario();
 	}
 
-	public DtVideo[] infoVideosCanal(Privacidad priv) {
-		return canalPropio.infoVideosCanal(priv);
+	public DtVideo[] infoVideosCanal(String filtro,Privacidad priv) {
+		return canalPropio.infoVideosCanal(filtro,priv);
 	}
 
-	public DtListaReproduccion[] infoLDRdeUsuario(Privacidad priv) {
-		
-		return canalPropio.infoLDRdeUsuario(priv);
+	public DtListaReproduccion[] infoLDRdeUsuario(String filtro, Privacidad priv) {
+		return canalPropio.infoLDRdeUsuario(filtro,priv);
 	}
 	
 	public DtListaReproduccion[] getListas() {

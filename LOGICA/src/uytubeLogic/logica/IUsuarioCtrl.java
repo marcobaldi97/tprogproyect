@@ -89,9 +89,9 @@ public interface IUsuarioCtrl {
 	
 	public abstract DtCanal[] listarCanalesPublicosPorNombre(String nombre);
 
-	public abstract DtVideo[] infoVideosCanal(String nickU, Privacidad priv);
+	public abstract DtVideo[] infoVideosCanal(String filtro, String nickU, Privacidad priv);
 	
-	public abstract DtListaReproduccion[] infoLDRdeUsuario(String nickU,Privacidad priv);
+	public abstract DtListaReproduccion[] infoLDRdeUsuario(String filtro,String nickU, Privacidad priv);
 	
 	public abstract DtListaReproduccion[] listarLDRPublicasPorNombre(String nombre);
 	

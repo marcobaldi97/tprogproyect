@@ -632,10 +632,10 @@ public class UsuarioCtrlTest {
 		DtListaReproduccion[] listasResultado1=UCU.listarLDRPublicasPorNombre("nombreLLLPPN");
 		assertEquals(1,listasResultado1.length);
 		assertTrue(listasResultado1[0].getNombre().equals(nombreLPublica));
-		DtListaReproduccion[] listasResultado2=UCU.infoLDRdeUsuario(nombreU, Privacidad.PUBLICO);
+		DtListaReproduccion[] listasResultado2=UCU.infoLDRdeUsuario(null, nombreU, Privacidad.PUBLICO);
 		assertEquals(1,listasResultado2.length);
 		assertTrue(listasResultado2[0].getNombre().equals(nombreLPublica));
-		DtListaReproduccion[] listasResultado3=UCU.infoLDRdeUsuario(nombreU, Privacidad.PRIVADO);
+		DtListaReproduccion[] listasResultado3=UCU.infoLDRdeUsuario(null, nombreU, Privacidad.PRIVADO);
 		assertTrue(listasResultado3.length>=2);
 		boolean existe1=false,existe2=false;
 		for(DtListaReproduccion entry:listasResultado3) {
@@ -646,20 +646,20 @@ public class UsuarioCtrlTest {
 		}
 		assertTrue(existe1);
 		assertTrue(existe2);
-		DtListaReproduccion[] listasResultado4=UCU.infoLDRdeUsuario(nombreU2, Privacidad.PUBLICO);
+		DtListaReproduccion[] listasResultado4=UCU.infoLDRdeUsuario(null, nombreU2, Privacidad.PUBLICO);
 		assertEquals(0,listasResultado4.length);
-		DtVideo[] videosResultado1=UCU.infoVideosCanal(nombreU, Privacidad.PRIVADO);
+		DtVideo[] videosResultado1=UCU.infoVideosCanal(null, nombreU, Privacidad.PRIVADO);
 		assertEquals(1,videosResultado1.length);
 		assertEquals(nombreV2Privado,videosResultado1[0].getNombre());
 		
-		DtVideo[] videosResultado2=UCU.infoVideosCanal(nombreU, Privacidad.PUBLICO);
+		DtVideo[] videosResultado2=UCU.infoVideosCanal(null, nombreU, Privacidad.PUBLICO);
 		assertEquals(1,videosResultado2.length);
 		assertEquals(nombreV1Publico,videosResultado2[0].getNombre());
 		
-		DtVideo[] videosResultado3=UCU.infoVideosCanal(nombreU2, Privacidad.PRIVADO);
+		DtVideo[] videosResultado3=UCU.infoVideosCanal(null, nombreU2, Privacidad.PRIVADO);
 		assertEquals(0,videosResultado3.length);
 		
-		DtVideo[] videosResultado4=UCU.infoVideosCanal(nombreU2, Privacidad.PUBLICO);
+		DtVideo[] videosResultado4=UCU.infoVideosCanal(null, nombreU2, Privacidad.PUBLICO);
 		assertEquals(1,videosResultado4.length);
 		assertEquals(nombreV3Publico,videosResultado4[0].getNombre());
 	}

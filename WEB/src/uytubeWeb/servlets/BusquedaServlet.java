@@ -41,6 +41,7 @@ public class BusquedaServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		response.setCharacterEncoding("UTF-8");
 		// TODO Auto-generated method stub
 		String busqueda="busqueda";
 		String defaultBusqueda="";
@@ -60,12 +61,12 @@ public class BusquedaServlet extends HttpServlet {
 		DtListaReproduccion[] listas = interfazUsuarios.listarLDRPublicasPorNombre((String)request.getAttribute(busqueda));
 		
 		HttpSession session=request.getSession(false);
-		/*if(session!=null) {
+		if(session!=null) {
 			String login=(String)session.getAttribute("nombre_usuario");
 			if(login!=null) {
 				System.out.println("hay un usuario logueado");
-				DtVideo[] videosPrivadosSesion=interfazUsuarios.infoVideosCanal(login, Privacidad.PRIVADO);
-				DtListaReproduccion[] listasPrivadasSesion=interfazUsuarios.infoLDRdeUsuario(login, Privacidad.PRIVADO);
+				DtVideo[] videosPrivadosSesion=interfazUsuarios.infoVideosCanal((String)request.getAttribute(busqueda),login, Privacidad.PRIVADO);
+				DtListaReproduccion[] listasPrivadasSesion=interfazUsuarios.infoLDRdeUsuario((String)request.getAttribute(busqueda),login, Privacidad.PRIVADO);
 				List<DtVideo> videosAux= new ArrayList<DtVideo>(Arrays.asList(videos));
 				videosAux.addAll(Arrays.asList(videosPrivadosSesion));
 				videos=videosAux.toArray(new DtVideo[0]);
@@ -73,7 +74,7 @@ public class BusquedaServlet extends HttpServlet {
 				listasAux.addAll(Arrays.asList(listasPrivadasSesion));
 				listas=listasAux.toArray(new DtListaReproduccion[0]);
 			}
-		}*/
+		}
 		String parametroListas="listas";
 		String parametroCanales="canales";
 		String parametroVideos="videos";

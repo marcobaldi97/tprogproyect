@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@page errorPage="WEB-INF/error/error404.jsp" %>
+<%@page errorPage="../error/error404.jsp" %>
 <%@ page import = "uytubeLogic.logica.DtVideo"%>
 <%@ page import = "uytubeLogic.logica.DtCategoria"%>
 <%@ page import = "uytubeLogic.logica.DtFecha"%>
@@ -9,6 +9,7 @@
 <%@ page import = "uytubeLogic.logica.DtUsuario"%>
 <%@ page import = "uytubeLogic.logica.DtCanal"%>
 <%@ page import = "uytubeLogic.logica.Fabrica"%>
+
 <%@ page import = "uytubeLogic.logica.IUsuarioCtrl"%>
 <%@ page import = "uytubeLogic.logica.IVideoCtrl"%>
 <%@ page import = "javax.servlet.http.HttpSession"%>
@@ -17,6 +18,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<%@include file="../cosasComunesDelHead.jsp" %>
 	<%
 	DtVideo dataVideo = (DtVideo) request.getAttribute("dataVideo");
 	String titulo = dataVideo.getNombre();

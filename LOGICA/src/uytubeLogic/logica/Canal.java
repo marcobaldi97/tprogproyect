@@ -26,6 +26,7 @@ public class Canal {
 	public String getPropietario() {
 		return propietario;
 	}
+
 	public String getDescripcion() {
 		return descripcion;
 	}
@@ -46,7 +47,6 @@ public class Canal {
 	public void addListaReproduccion(PorDefecto listaRep) {
 		listasReproduccion.put(listaRep.getNombre(), listaRep);
 	}
-
 
 	public ListaReproduccion findLista(String nombreLista) {
 		return listasReproduccion.get(nombreLista);
@@ -105,7 +105,6 @@ public class Canal {
 	public void addVideo(Video vVideo) {
 		videos.put(vVideo.getNombre(), vVideo);
 	}
-
 
 	public Video findVideo(String sNombre) {
 		return videos.get(sNombre);
@@ -262,25 +261,32 @@ public class Canal {
 		return LastFecha;
 	}
 
-	public DtVideo[] infoVideosCanal(Privacidad priv) {
-		List<DtVideo> listaVideos=new ArrayList<DtVideo>();
+	public DtVideo[] infoVideosCanal(String filtro, Privacidad priv) {
+		if(filtro==null)
+			filtro="";
+		List<DtVideo> listaVideos = new ArrayList<DtVideo>();
 		for (Map.Entry<String, Video> entry : videos.entrySet()) {
-			if (entry.getValue().getPrivacidad()==priv)
+			if (entry.getValue().getPrivacidad() == priv
+					&& (entry.getValue().getNombre().toLowerCase().contains(filtro.toLowerCase())
+							|| entry.getValue().getDescripcion().toLowerCase().contains(filtro.toLowerCase())))
 				listaVideos.add(new DtVideo(entry.getValue()));
 		}
 		return listaVideos.toArray(new DtVideo[0]);
 	}
 
-	public DtListaReproduccion[] infoLDRdeUsuario(Privacidad priv) {
-		List<DtListaReproduccion> listaLDR=new ArrayList<DtListaReproduccion>();
-		for (Map.Entry<String, ListaReproduccion> entry:listasReproduccion.entrySet()) {
+	public DtListaReproduccion[] infoLDRdeUsuario(String filtro, Privacidad priv) {
+		if(filtro==null)
+			filtro="";
+		List<DtListaReproduccion> listaLDR = new ArrayList<DtListaReproduccion>();
+		for (Map.Entry<String, ListaReproduccion> entry : listasReproduccion.entrySet()) {
 			if (entry.getValue() instanceof Particular) {
-				Particular listaP=(Particular)entry.getValue();
-				if (listaP.getPrivado()==priv)
+				Particular listaP = (Particular) entry.getValue();
+				if (listaP.getPrivado() == priv && listaP.getNombre().toLowerCase().contains(filtro.toLowerCase()))
 					listaLDR.add(new DtListaReproduccion(listaP));
-			}else {
-				PorDefecto listaPD=(PorDefecto)entry.getValue();
-				if(priv==Privacidad.PRIVADO) {//las por defecto son SIEMPRE privadas
+			} else {
+				PorDefecto listaPD = (PorDefecto) entry.getValue();
+				// las por defecto son SIEMPRE privadas
+				if (priv == Privacidad.PRIVADO && listaPD.getNombre().toLowerCase().contains(filtro.toLowerCase())) {
 					listaLDR.add(new DtListaReproduccion(listaPD));
 				}
 			}
@@ -291,9 +297,9 @@ public class Canal {
 	public DtListaReproduccion[] getListas() {
 		DtListaReproduccion[] listasADevolver = new DtListaReproduccion[listasReproduccion.size()];
 		int iterador = 0;
-		for (Map.Entry<String, ListaReproduccion> entry: listasReproduccion.entrySet()) {
-				listasADevolver[iterador] = entry.getValue().toDt();
-				iterador++;
+		for (Map.Entry<String, ListaReproduccion> entry : listasReproduccion.entrySet()) {
+			listasADevolver[iterador] = entry.getValue().toDt();
+			iterador++;
 		}
 		return listasADevolver;
 	}
