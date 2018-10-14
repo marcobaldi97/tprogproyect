@@ -1,6 +1,6 @@
 package uytubeLogic.JUnitTests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.Date;
 
@@ -15,11 +15,11 @@ import uytubeLogic.logica.SystemHandler.Privacidad;
 public class ComentarioTest {
 
 	@Test
-	public void ComentarioFunciones() {
+	public void comentarioFunciones() {
 		String nombreU = "nombreComentario";
 		UsuarioCtrl UCU = UsuarioCtrl.getInstance();
 		DtFecha fecha = new DtFecha(new Date(2));
-		UCU.nuevoUsuario(nombreU,"1234", "pedrito", "gimenez", "email.com", fecha, null, "nombrecito", "descripcion",
+		UCU.nuevoUsuario(nombreU, "1234", "pedrito", "gimenez", "email.com", fecha, null, "nombrecito", "descripcion",
 				Privacidad.PUBLICO, null);
 		Comentario coment = new Comentario(1, "texto", fecha, true, nombreU);
 		assertEquals(nombreU, coment.getUsuario().getNickname());
