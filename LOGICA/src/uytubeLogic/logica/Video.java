@@ -29,7 +29,10 @@ public class Video {
 		idVideo = vidHandler.getNewID();
 		nombre = nombreVideo;
 		setPropietario(propietario);
-		descripcion = descripcionV;
+		if(descripcionV!=null)
+			descripcion = descripcionV;
+		else
+			descripcion = "";
 		duracion = duracionV;
 		fechaPublicacion = fechapubli;
 		urlVideo = url;
