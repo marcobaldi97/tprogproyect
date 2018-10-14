@@ -232,7 +232,7 @@ public class VideoServlet extends HttpServlet {
 		case "modificarVideo":{
 			//aca modificar video
 			DtVideo dataVideo = (DtVideo) request.getAttribute("dtVideo");
-			
+			response.getWriter().append("no esta hecho aun");
 			break;
 		}
 		default:
@@ -273,6 +273,12 @@ public class VideoServlet extends HttpServlet {
 				response.sendRedirect(request.getContextPath() + "/home");
 			}
 			break;
+		case "modificarVideo":{
+			//aca modificar video
+			DtVideo dataVideo = (DtVideo) request.getAttribute("dtVideo");
+			response.getWriter().append("no esta hecho aun");
+			break;
+		}
 
 		default:
 			System.out.println("Error");
