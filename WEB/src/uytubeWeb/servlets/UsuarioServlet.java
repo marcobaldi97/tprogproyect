@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import uytubeLogic.logica.DtCanal;
+import uytubeLogic.logica.DtCategoria;
 import uytubeLogic.logica.DtFecha;
 import uytubeLogic.logica.DtListaReproduccion;
 import uytubeLogic.logica.DtUsuario;
@@ -107,6 +108,15 @@ public class UsuarioServlet extends HttpServlet {
 			request.setAttribute("dataCanal", infoCanal);
 			request.setAttribute("dataUsuario", usuario);
 			
+		 	IUsuarioCtrl usrCtr = fabrica.getIUsuarioCtrl();
+	    	String [] seguidores = usrCtr.listarUsuariosQueLeSigue(nickname);
+	    	String [] seguidos = usrCtr.listarUsuariosQueSigue(nickname);	    	
+	    	String[] listasReproduccion = usrCtr.listarLDRdeUsuario(nickname);
+	      
+	    	request.setAttribute("dataSeguidores", seguidores);
+	    	request.setAttribute("dataSeguidos",seguidos);
+	    	request.setAttribute("dataListasReproduccion",listasReproduccion);
+			
 			DtListaReproduccion[] listas = interfazUsuarios.infoLDRdeUsuario(null, nickname, Privacidad.PUBLICO);
 		    DtVideo[] videos = interfazUsuarios.infoVideosCanal(null, nickname, Privacidad.PUBLICO);
 	        HttpSession session=request.getSession(false);
@@ -138,7 +148,9 @@ public class UsuarioServlet extends HttpServlet {
 	        }
 	        String parametroListas="listas";
 	        String parametroVideos="videos";
-
+	    	
+	   
+	    	
 	        request.setAttribute(parametroListas, listas);
 	        request.setAttribute(parametroVideos, videos);
 	        request.setAttribute("duenioCanal", false);
@@ -253,7 +265,7 @@ public class UsuarioServlet extends HttpServlet {
 		break;	
 		}
 		case "nuevoUsuario":{
-			
+
 			break;
 			
 		}
