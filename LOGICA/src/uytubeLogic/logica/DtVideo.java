@@ -10,7 +10,7 @@ public class DtVideo {
 	private int duracionSS;
 	private DtFecha fechaPublicacion;
 	private String url;
-	private DtCategoria cat;
+	private DtCategoria categoria;
 	private Privacidad privacidad;
 
 	public DtVideo(Video videoBase) {
@@ -21,56 +21,109 @@ public class DtVideo {
 		duracionSS = videoBase.getDuracion();
 		fechaPublicacion = videoBase.getFechaPublicacion();
 		url = videoBase.getURL();
-		cat = videoBase.getCategoria();
+		categoria = videoBase.getCategoria();
 		privacidad = videoBase.getPrivacidad();
 	}
 
-	public Integer getIDVideo() {
+	
+	public boolean equals(DtVideo other) {
+		return (nombre == other.getNombre())
+				&& (descripcion == other.getDescripcion())
+				&& (duracionSS == other.getDuracionSS())
+				&& (fechaPublicacion == other.getFechaPublicacion())
+				&& (url == other.getUrl()) && (categoria.equals(getCategoria()))
+				&& (privacidad == other.getPrivacidad());
+	}
+
+
+	public Integer getiDVideo() {
 		return iDVideo;
 	}
+
+
+	public void setiDVideo(Integer iDVideo) {
+		this.iDVideo = iDVideo;
+	}
+
 
 	public String getNombre() {
 		return nombre;
 	}
 
-	public String getDescripcion() {
-		return descripcion;
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
-	public int getDuracion() {
-		return duracionSS;
-	}
-
-	public DtFecha getFechaPublicacion() {
-		return fechaPublicacion;
-	}
-
-	public String getUrl() {
-		return url;
-	}
-
-	public DtCategoria getCategoria() {
-		return cat;
-	}
-
-	public Privacidad getPrivacidad() {
-		return privacidad;
-	}
-
-	public boolean equals(DtVideo other) {
-		return (nombre == other.getNombre())
-				&& (descripcion == other.getDescripcion())
-				&& (duracionSS == other.getDuracion())
-				&& (fechaPublicacion == other.getFechaPublicacion())
-				&& (url == other.getUrl()) && (cat.equals(getCategoria()))
-				&& (privacidad == other.getPrivacidad());
-	}
 
 	public String getPropietario() {
 		return propietario;
 	}
 
+
 	public void setPropietario(String propietario) {
 		this.propietario = propietario;
 	}
+
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+
+	public int getDuracionSS() {
+		return duracionSS;
+	}
+
+
+	public void setDuracionSS(int duracionSS) {
+		this.duracionSS = duracionSS;
+	}
+
+
+	public DtFecha getFechaPublicacion() {
+		return fechaPublicacion;
+	}
+
+
+	public void setFechaPublicacion(DtFecha fechaPublicacion) {
+		this.fechaPublicacion = fechaPublicacion;
+	}
+
+
+	public String getUrl() {
+		return url;
+	}
+
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	
+
+	public DtCategoria getCategoria() {
+		return categoria;
+	}
+
+
+	public void setCategoria(DtCategoria categoria) {
+		this.categoria = categoria;
+	}
+
+
+	public Privacidad getPrivacidad() {
+		return privacidad;
+	}
+
+
+	public void setPrivacidad(Privacidad privacidad) {
+		this.privacidad = privacidad;
+	}
+	
+
 }

@@ -17,6 +17,30 @@ public class DtUsuario {
 		foto = usuarioBase.getFoto();
 	}
 
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setFechaNacimiento(DtFecha fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
+	}
+
+	public void setFoto(byte[] foto) {
+		this.foto = foto;
+	}
+
 	// OBS: no compara fotos
 	public boolean equals(DtUsuario other) {
 		return (nickname == other.getNickname())

@@ -232,79 +232,79 @@ public class DatosDePrueba {
 	//	int idVideo = video.getIDVideo();
 		//ICU.agregarVideoLista(nicknameUsuario, idVideo, nombreListaReproduccion);
 		DtVideo video = ICU.obtenerInfoAdicVideo(KH,V3);
-		int idVideo = video.getIDVideo();
+		int idVideo = video.getiDVideo();
 		ICU.agregarVideoLista(KH,idVideo,LP1);
 		
 		video = ICU.obtenerInfoAdicVideo(KH,V4);
-		idVideo = video.getIDVideo();
+		idVideo = video.getiDVideo();
 		ICU.agregarVideoLista(KH,idVideo,LP1);
 		
 		video = ICU.obtenerInfoAdicVideo(JB,V5);
-		idVideo = video.getIDVideo();
+		idVideo = video.getiDVideo();
 		ICU.agregarVideoLista(KH,idVideo,LP1);
 		
 		video = ICU.obtenerInfoAdicVideo(TC,V1);
-		idVideo = video.getIDVideo();
+		idVideo = video.getiDVideo();
 		ICU.agregarVideoLista(TC,idVideo,LP2);
 		
 		video = ICU.obtenerInfoAdicVideo(TC,V2);
-		idVideo = video.getIDVideo();
+		idVideo = video.getiDVideo();
 		ICU.agregarVideoLista(TC,idVideo,LP2);
 		
 		video = ICU.obtenerInfoAdicVideo(JB,V11);
-		idVideo = video.getIDVideo();
+		idVideo = video.getiDVideo();
 		ICU.agregarVideoLista(TC,idVideo,LP2);
 		
 		video = ICU.obtenerInfoAdicVideo(CS,V10);
-		idVideo = video.getIDVideo();
+		idVideo = video.getiDVideo();
 		ICU.agregarVideoLista(TC,idVideo,LP2);
 		
 		video = ICU.obtenerInfoAdicVideo(HG,V6);
-		idVideo = video.getIDVideo();
+		idVideo = video.getiDVideo();
 		ICU.agregarVideoLista(HG,idVideo,LP3);
 		
 		video = ICU.obtenerInfoAdicVideo(HG,V7);
-		idVideo = video.getIDVideo();
+		idVideo = video.getiDVideo();
 		ICU.agregarVideoLista(HG,idVideo,LP3);
 		
 		video = ICU.obtenerInfoAdicVideo(HG,V8);
-		idVideo = video.getIDVideo();
+		idVideo = video.getiDVideo();
 		ICU.agregarVideoLista(HG,idVideo,LP3);
 		
 		video = ICU.obtenerInfoAdicVideo(CS,V1);
-		idVideo = video.getIDVideo();
+		idVideo = video.getiDVideo();
 		ICU.agregarVideoLista(CS,idVideo,LP4);
 		
 		video = ICU.obtenerInfoAdicVideo(CS,V2);
-		idVideo = video.getIDVideo();
+		idVideo = video.getiDVideo();
 		ICU.agregarVideoLista(CS,idVideo,LP4);
 		
 		video = ICU.obtenerInfoAdicVideo(CS,V9);
-		idVideo = video.getIDVideo();
+		idVideo = video.getiDVideo();
 		ICU.agregarVideoLista(CS,idVideo,LP4);
 		
 		video = ICU.obtenerInfoAdicVideo(CS,V10);
-		idVideo = video.getIDVideo();
+		idVideo = video.getiDVideo();
 		ICU.agregarVideoLista(CS,idVideo,LP4);
 		
 		video = ICU.obtenerInfoAdicVideo(JB,V13);
-		idVideo = video.getIDVideo();
+		idVideo = video.getiDVideo();
 		ICU.agregarVideoLista(CS,idVideo,LP4);
 		
 		video = ICU.obtenerInfoAdicVideo(HG,V8);
-		idVideo = video.getIDVideo();
+		idVideo = video.getiDVideo();
 		ICU.agregarVideoLista(NJ,idVideo,LP5);
 		
 		video = ICU.obtenerInfoAdicVideo(NJ,V16);
-		idVideo = video.getIDVideo();
+		idVideo = video.getiDVideo();
 		ICU.agregarVideoLista(NJ,idVideo,LP5);
 
 		video = ICU.obtenerInfoAdicVideo(JB,V11);
-		idVideo = video.getIDVideo();
+		idVideo = video.getiDVideo();
 		ICU.agregarVideoLista(JB,idVideo,LP6);
 
 		video = ICU.obtenerInfoAdicVideo(JB,V13);
-		idVideo = video.getIDVideo();
+		idVideo = video.getiDVideo();
 		ICU.agregarVideoLista(JB,idVideo,LP6);
 
 		//LISTAS POR DEFECTO
@@ -319,94 +319,94 @@ public class DatosDePrueba {
 		DtVideo dtVideo =vh.member(V7,HG); //propietario del video HG	
 		
 		fecha=asignarFecha("5,12,2017 14:35"); DtFecha fechaVideo = new DtFecha(fecha); 
-		ICV.nuevoComentario(dtVideo.getIDVideo(),NJ, fechaVideo,"Fue un gran evento" );
+		ICV.nuevoComentario(dtVideo.getiDVideo(),NJ, fechaVideo,"Fue un gran evento" );
 			
-		comentarioPadre=obtenerIdComentario(dtVideo.getIDVideo(),NJ, fechaVideo);
+		comentarioPadre=obtenerIdComentario(dtVideo.getiDVideo(),NJ, fechaVideo);
 		fecha = asignarFecha("8,12,2017 01:47");fechaVideo = new DtFecha(fecha); 
-		ICV.responderComentario(dtVideo.getIDVideo(),comentarioPadre, HR, fechaVideo, "Para el proximo aniversario ofrezco vamo con Los Momo");
+		ICV.responderComentario(dtVideo.getiDVideo(),comentarioPadre, HR, fechaVideo, "Para el proximo aniversario ofrezco vamo con Los Momo");
 		
-		comentarioPadre=obtenerIdComentario(dtVideo.getIDVideo(),HR, fechaVideo);
+		comentarioPadre=obtenerIdComentario(dtVideo.getiDVideo(),HR, fechaVideo);
 		fecha = asignarFecha("10,12,2017 17:09");fechaVideo = new DtFecha(fecha); 
-		ICV.responderComentario(dtVideo.getIDVideo(),comentarioPadre, TC, fechaVideo, "Yo ofrezco a la banda tb");
+		ICV.responderComentario(dtVideo.getiDVideo(),comentarioPadre, TC, fechaVideo, "Yo ofrezco a la banda tb");
 		
 		dtVideo =vh.member(V6,HG);
 		fecha=asignarFecha("07,09,2017 04:56");fechaVideo = new DtFecha(fecha); 
-		ICV.nuevoComentario(dtVideo.getIDVideo(), NJ, fechaVideo, "Felicitaciones FING");
+		ICV.nuevoComentario(dtVideo.getiDVideo(), NJ, fechaVideo, "Felicitaciones FING");
 		
 		dtVideo =vh.member(V8,HG);
 		fecha=asignarFecha("23,10,2017 12:58");fechaVideo = new DtFecha(fecha);
-		ICV.nuevoComentario(dtVideo.getIDVideo(),KH,fechaVideo, "Un gusto cubrir eventos como este.");
+		ICV.nuevoComentario(dtVideo.getiDVideo(),KH,fechaVideo, "Un gusto cubrir eventos como este.");
 		
-		comentarioPadre=obtenerIdComentario(dtVideo.getIDVideo(),NJ, fechaVideo);
+		comentarioPadre=obtenerIdComentario(dtVideo.getiDVideo(),NJ, fechaVideo);
 		fecha = asignarFecha("11,09,2018 03:45");fechaVideo = new DtFecha(fecha); 
-		ICV.responderComentario(dtVideo.getIDVideo(),comentarioPadre, MT, fechaVideo, "Se viene la edicion 2018!!!");
+		ICV.responderComentario(dtVideo.getiDVideo(),comentarioPadre, MT, fechaVideo, "Se viene la edicion 2018!!!");
 		
 		dtVideo =vh.member(V13,JB);
 		fecha=asignarFecha("14,11,2016 05:34");fechaVideo = new DtFecha(fecha);
-		ICV.nuevoComentario(dtVideo.getIDVideo(),KH,fechaVideo,"Peñarol peñarol!!!");
+		ICV.nuevoComentario(dtVideo.getiDVideo(),KH,fechaVideo,"Peñarol peñarol!!!");
 		
 		dtVideo =vh.member(V3,KH);
 		fecha=asignarFecha("30,10,2017 02:17");fechaVideo = new DtFecha(fecha);
-		ICV.nuevoComentario(dtVideo.getIDVideo(),MT,fechaVideo,"Rock and Rollll");
+		ICV.nuevoComentario(dtVideo.getiDVideo(),MT,fechaVideo,"Rock and Rollll");
 		dtVideo =vh.member(V3,JB);
 		fecha=asignarFecha("30,10,2017 02:17");fechaVideo = new DtFecha(fecha);
-		ICV.nuevoComentario(dtVideo.getIDVideo(),MT,fechaVideo,"Rock and Rollll");
+		ICV.nuevoComentario(dtVideo.getiDVideo(),MT,fechaVideo,"Rock and Rollll");
 		
 		dtVideo =vh.member(V4,KH);
 		fecha=asignarFecha("25,08,2018 18:00");fechaVideo = new DtFecha(fecha);
-		ICV.nuevoComentario(dtVideo.getIDVideo(),MT,fechaVideo,"Anoche exploto!!!");
+		ICV.nuevoComentario(dtVideo.getiDVideo(),MT,fechaVideo,"Anoche exploto!!!");
 		
 		dtVideo =vh.member(V1,CS);
 		fecha=asignarFecha("11,09,2017 03:45");fechaVideo = new DtFecha(fecha);
-		ICV.nuevoComentario(dtVideo.getIDVideo(),MT,fechaVideo,"Me encanta este tema");
-		comentarioPadre=obtenerIdComentario(dtVideo.getIDVideo(),MT, fechaVideo);
+		ICV.nuevoComentario(dtVideo.getiDVideo(),MT,fechaVideo,"Me encanta este tema");
+		comentarioPadre=obtenerIdComentario(dtVideo.getiDVideo(),MT, fechaVideo);
 		fecha = asignarFecha("15,09,2017 12:29");fechaVideo = new DtFecha(fecha); 
-		ICV.responderComentario(dtVideo.getIDVideo(),comentarioPadre,TC,fechaVideo, "Gracias Marce ;)");
+		ICV.responderComentario(dtVideo.getiDVideo(),comentarioPadre,TC,fechaVideo, "Gracias Marce ;)");
 		
 		dtVideo =vh.member(V1,TC);
 		fecha=asignarFecha("11,09,2017 03:45");fechaVideo = new DtFecha(fecha);
-		ICV.nuevoComentario(dtVideo.getIDVideo(),MT,fechaVideo,"Me encanta este tema");
-		comentarioPadre=obtenerIdComentario(dtVideo.getIDVideo(),MT, fechaVideo);
+		ICV.nuevoComentario(dtVideo.getiDVideo(),MT,fechaVideo,"Me encanta este tema");
+		comentarioPadre=obtenerIdComentario(dtVideo.getiDVideo(),MT, fechaVideo);
 		fecha = asignarFecha("15,09,2017 12:29");fechaVideo = new DtFecha(fecha); 
-		ICV.responderComentario(dtVideo.getIDVideo(),comentarioPadre,TC,fechaVideo, "Gracias Marce ;)");
+		ICV.responderComentario(dtVideo.getiDVideo(),comentarioPadre,TC,fechaVideo, "Gracias Marce ;)");
 		
 		dtVideo =vh.member(V1,TC);
 		fecha=asignarFecha("15,09,2017 12:29");fechaVideo = new DtFecha(fecha);
-		ICV.nuevoComentario(dtVideo.getIDVideo(),TC,fechaVideo,"Mi preferido por lejos!!!");
+		ICV.nuevoComentario(dtVideo.getiDVideo(),TC,fechaVideo,"Mi preferido por lejos!!!");
 		
 		//ME GUSTA
 		video = ICU.obtenerInfoAdicVideo(HG,V7);
-		ICV.valorarVideo(video.getIDVideo(),SP, false); //falso = NO LE GUSTA
+		ICV.valorarVideo(video.getiDVideo(),SP, false); //falso = NO LE GUSTA
 		
 		video = ICU.obtenerInfoAdicVideo(HG,V8);
-		ICV.valorarVideo(video.getIDVideo(),SP, true);
+		ICV.valorarVideo(video.getiDVideo(),SP, true);
 		
 		video = ICU.obtenerInfoAdicVideo(JB,V11);
-		ICV.valorarVideo(video.getIDVideo(),SP, true);
+		ICV.valorarVideo(video.getiDVideo(),SP, true);
 		
 		video = ICU.obtenerInfoAdicVideo(KH,V4);
-		ICV.valorarVideo(video.getIDVideo(),NJ, false);
+		ICV.valorarVideo(video.getiDVideo(),NJ, false);
 		
 		video = ICU.obtenerInfoAdicVideo(CS,V1);
-		ICV.valorarVideo(video.getIDVideo(),NJ, false);
+		ICV.valorarVideo(video.getiDVideo(),NJ, false);
 		
 		video = ICU.obtenerInfoAdicVideo(HG,V7);
-		ICV.valorarVideo(video.getIDVideo(),NJ, true);
+		ICV.valorarVideo(video.getiDVideo(),NJ, true);
 		
 		video = ICU.obtenerInfoAdicVideo(HG,V7);
-		ICV.valorarVideo(video.getIDVideo(),KH, true);
+		ICV.valorarVideo(video.getiDVideo(),KH, true);
 		
 		video = ICU.obtenerInfoAdicVideo(JB,V13);
-		ICV.valorarVideo(video.getIDVideo(),KH, true);
+		ICV.valorarVideo(video.getiDVideo(),KH, true);
 		
 		video = ICU.obtenerInfoAdicVideo(CS,V1);
-		ICV.valorarVideo(video.getIDVideo(),MT, true);
+		ICV.valorarVideo(video.getiDVideo(),MT, true);
 		
 		video = ICU.obtenerInfoAdicVideo(HG,V8);
-		ICV.valorarVideo(video.getIDVideo(),MT, true);
+		ICV.valorarVideo(video.getiDVideo(),MT, true);
 		
 		video = ICU.obtenerInfoAdicVideo(KH,V4);
-		ICV.valorarVideo(video.getIDVideo(),MT, true);
+		ICV.valorarVideo(video.getiDVideo(),MT, true);
 		
 	}
 	private Date asignarFecha(String fechaConHora){
@@ -429,7 +429,7 @@ public class DatosDePrueba {
 		int i=0; int idComentario=-1;
 		while(i<coments.length){
 			if(coments[i].getFecha()==fechaComen && coments[i].getNickUsuario()==nick){
-				return coments[i].getIDComentario();
+				return coments[i].getIdComentario();
 			}
 			comentsHijos = coments[i].getRespuestas();
 			idComentario = buscarComentario(comentsHijos,nick, fechaComen);

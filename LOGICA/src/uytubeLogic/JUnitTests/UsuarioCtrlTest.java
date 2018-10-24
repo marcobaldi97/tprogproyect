@@ -204,7 +204,7 @@ public class UsuarioCtrlTest {
 		UCU.aniadirVideo(nombreU, nombreV, "descripcion", 20, fecha, "www.hola.tv", null, Privacidad.PUBLICO);
 		UCU.nuevaListaParticular(nombreU, nombreL, Privacidad.PUBLICO);
 		DtVideo dt = UCU.obtenerInfoAdicVideo(nombreU, nombreV);
-		Integer IDVideo = dt.getIDVideo();
+		Integer IDVideo = dt.getiDVideo();
 		UCU.agregarVideoLista(nombreU, IDVideo, nombreL);
 		Usuario u = uh.find(nombreU);
 		String[] videosEnLDR = u.listarVideosPorLDR(nombreL);
@@ -420,7 +420,7 @@ public class UsuarioCtrlTest {
 		DtVideo dtVid = UCU.obtenerInfoAdicVideo(nombreU, nombreV);
 		assertEquals(true, dtVid.getNombre() == nombreV);
 		assertEquals(true, dtVid.getDescripcion() == "descripcion");
-		assertEquals(true, dtVid.getDuracion() == 20);
+		assertEquals(true, dtVid.getDuracionSS() == 20);
 		assertEquals(true, dtVid.getFechaPublicacion() == fecha);
 		assertEquals(true, dtVid.getUrl() == "www.hola.tv");
 		assertEquals(true, dtVid.getCategoria().equals(new DtCategoria(sh.getSinCat())));
@@ -431,7 +431,7 @@ public class UsuarioCtrlTest {
 		dtVid = UCU.obtenerInfoAdicVideo(nombreU, nombreV);
 		assertEquals(true, dtVid.getNombre() == nombreV);
 		assertEquals(true, dtVid.getDescripcion() == "nuevaDescr");
-		assertEquals(true, dtVid.getDuracion() == 30);
+		assertEquals(true, dtVid.getDuracionSS() == 30);
 		assertEquals(true, dtVid.getFechaPublicacion() == fecha2);
 		assertEquals(true, dtVid.getUrl() == "holanuevo.tv");
 		assertEquals(true, dtVid.getCategoria().equals(cate));
@@ -505,7 +505,7 @@ public class UsuarioCtrlTest {
 		assertEquals(true, dtActual.equals(dtActual2));
 		assertEquals(true, dtActual.getNombre() == "canal");
 		assertEquals(true, dtActual.getDescripcion() == "descripcion");
-		assertEquals(true, dtActual.getPrivacidad() == Privacidad.PUBLICO);
+		assertEquals(true, dtActual.getPrivado() == Privacidad.PUBLICO);
 		assertEquals(true, dtActual.getCategoria().equals(new DtCategoria(sh.getSinCat())));
 	}
 
@@ -521,7 +521,7 @@ public class UsuarioCtrlTest {
 		DtCanal dtActual = UCU.mostrarInfoCanal(nombreU);
 		assertEquals("canal", dtActual.getNombre());
 		assertEquals("descripcion", dtActual.getDescripcion());
-		assertEquals(Privacidad.PRIVADO, dtActual.getPrivacidad());
+		assertEquals(Privacidad.PRIVADO, dtActual.getPrivado());
 		assertEquals(true, dtActual.getCategoria().equals(new DtCategoria(sh.getSinCat())));
 		String nombreCat = "nuevaCat";
 		VCU.crearCategoria(nombreCat);
@@ -529,13 +529,13 @@ public class UsuarioCtrlTest {
 		dtActual = UCU.mostrarInfoCanal(nombreU);
 		assertEquals("nomCanal", dtActual.getNombre());
 		assertEquals("nuevaDesc", dtActual.getDescripcion());
-		assertEquals(Privacidad.PRIVADO, dtActual.getPrivacidad());
+		assertEquals(Privacidad.PRIVADO, dtActual.getPrivado());
 		assertEquals(nombreCat, dtActual.getCategoria().getNombre());
 		UCU.modificarDatosCanal(nombreU, "nomCanal2", "nuevaDesc2", Privacidad.PUBLICO, null);
 		dtActual = UCU.mostrarInfoCanal(nombreU);
 		assertEquals("nomCanal2", dtActual.getNombre());
 		assertEquals("nuevaDesc2", dtActual.getDescripcion());
-		assertEquals(Privacidad.PUBLICO, dtActual.getPrivacidad());
+		assertEquals(Privacidad.PUBLICO, dtActual.getPrivado());
 		assertEquals(true, dtActual.getCategoria().equals(new DtCategoria(sh.getSinCat())));
 		DtCanal dtActual2 = UCU.mostrarInfoCanal(nombreU);
 		assertEquals(true, dtActual.equals(dtActual2));
@@ -555,7 +555,7 @@ public class UsuarioCtrlTest {
 		assertEquals(true, video.getNombre() == nombreV);
 		assertEquals(true, video.getCategoria().equals(new DtCategoria(sh.getSinCat())));
 		assertEquals(true, video.getDescripcion() == "descrito");
-		assertEquals(true, video.getDuracion() == 40);
+		assertEquals(true, video.getDuracionSS() == 40);
 		assertEquals(true, video.getFechaPublicacion().equals(fecha));
 		assertEquals(true, video.getPrivacidad() == Privacidad.PUBLICO);
 
@@ -594,12 +594,12 @@ public class UsuarioCtrlTest {
 		assertEquals(false, UCU.memberVideoLista(nombreU, 1, nombreL));
 		assertEquals(true, listadoVideosLDR.length == 0);
 		assertEquals(true, infoVideosLDR.length == 0);
-		UCU.agregarVideoLista(nombreU, video1.getIDVideo(), nombreL);
-		UCU.agregarVideoLista(nombreU, video2.getIDVideo(), nombreL);
+		UCU.agregarVideoLista(nombreU, video1.getiDVideo(), nombreL);
+		UCU.agregarVideoLista(nombreU, video2.getiDVideo(), nombreL);
 		listadoVideosLDR = UCU.listarVideosListaReproduccionUsuario(nombreU, nombreL);
 		infoVideosLDR = UCU.obtenerDtsVideosListaReproduccionUsuario(nombreU, nombreL);
-		assertEquals(true, UCU.memberVideoLista(nombreU, infoVideosLDR[0].getIDVideo(), nombreL));
-		assertEquals(true, UCU.memberVideoLista(nombreU, infoVideosLDR[1].getIDVideo(), nombreL));
+		assertEquals(true, UCU.memberVideoLista(nombreU, infoVideosLDR[0].getiDVideo(), nombreL));
+		assertEquals(true, UCU.memberVideoLista(nombreU, infoVideosLDR[1].getiDVideo(), nombreL));
 		assertEquals(true, listadoVideosLDR.length == 2);
 		assertEquals(true, infoVideosLDR.length == 2);
 		boolean existe1enListado = false;

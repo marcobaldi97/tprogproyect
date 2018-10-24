@@ -16,4 +16,12 @@ public class DtPuntuacion {
 		valoracion = puntuacionBase.getValoracion();
 		nickname = puntuacionBase.getNickPuntuador();
 	}
+
+	public void setValoracion(boolean valoracion) {
+		this.valoracion = valoracion;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
 }

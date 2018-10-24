@@ -59,7 +59,7 @@ public class UsuarioHandler {
 	public DtCanal[] listarCanalesPublicosPorNombre(String nombre) {
 		List<DtCanal> listaUsuarios = new ArrayList<DtCanal>();
 		for (Map.Entry<String, Usuario> entry : usuarios.entrySet()) {
-			if (entry.getValue().mostrarInfoCanal().getPrivacidad() == Privacidad.PUBLICO
+			if (entry.getValue().mostrarInfoCanal().getPrivado() == Privacidad.PUBLICO
 					&& (entry.getValue().mostrarInfoCanal().getNombre().toLowerCase().contains(nombre.toLowerCase())
 							||entry.getValue().mostrarInfoCanal().getDescripcion().toLowerCase().contains(nombre.toLowerCase())))
 				listaUsuarios.add(entry.getValue().mostrarInfoCanal());

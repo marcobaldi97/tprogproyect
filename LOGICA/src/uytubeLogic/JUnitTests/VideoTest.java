@@ -67,12 +67,12 @@ public class VideoTest {
 		boolean existe1 = false;
 		boolean existe2 = false;
 		for (DtComentario comentarioParticular : comentarios) {
-			if (comentarioParticular.getEsPadre() == true && comentarioParticular.getNickUsuario() == nombreU
+			if (comentarioParticular.isEsPadre() == true && comentarioParticular.getNickUsuario() == nombreU
 					&& comentarioParticular.getRespuestas().length == 0
 					&& comentarioParticular.getTexto() == "contenidoComentario") {
 				existe1 = true;
 			}
-			if (comentarioParticular.getEsPadre() == true && comentarioParticular.getNickUsuario() == nombreU
+			if (comentarioParticular.isEsPadre() == true && comentarioParticular.getNickUsuario() == nombreU
 					&& comentarioParticular.getRespuestas().length == 0
 					&& comentarioParticular.getTexto() == "contenidoComentario2") {
 				existe2 = true;
@@ -95,13 +95,13 @@ public class VideoTest {
 		video.nuevoComentario(nombreU, fecha, "contenidoComentario");
 		DtComentario[] comentarios = video.getComentarios();
 
-		video.responderComentario(comentarios[0].getIDComentario(), nombreU, fecha, "contenidoComentario2");
+		video.responderComentario(comentarios[0].getIdComentario(), nombreU, fecha, "contenidoComentario2");
 		comentarios = video.getComentarios();
 		assertEquals(1, comentarios.length);
 		boolean existe1 = false;
 		boolean existe2 = false;
 		for (DtComentario comentarioParticular : comentarios) {
-			if (comentarioParticular.getEsPadre() == true && comentarioParticular.getNickUsuario() == nombreU
+			if (comentarioParticular.isEsPadre() == true && comentarioParticular.getNickUsuario() == nombreU
 					&& comentarioParticular.getRespuestas().length == 1
 					&& comentarioParticular.getTexto() == "contenidoComentario") {
 				existe1 = true;
@@ -109,7 +109,7 @@ public class VideoTest {
 			DtComentario[] respuestas = comentarioParticular.getRespuestas();
 			if (respuestas.length > 0) {
 				DtComentario respuestaParticular = respuestas[0];
-				if (respuestaParticular.getEsPadre() == false && respuestaParticular.getNickUsuario() == nombreU
+				if (respuestaParticular.isEsPadre() == false && respuestaParticular.getNickUsuario() == nombreU
 						&& respuestaParticular.getRespuestas().length == 0
 						&& respuestaParticular.getTexto() == "contenidoComentario2") {
 					existe2 = true;
