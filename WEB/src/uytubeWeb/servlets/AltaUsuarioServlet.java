@@ -28,10 +28,12 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletRequestContext;
 
 import uytubeLogic.logica.DtCanal;
+import uytubeLogic.logica.DtCategoria;
 import uytubeLogic.logica.DtFecha;
 import uytubeLogic.logica.DtUsuario;
 import uytubeLogic.logica.Fabrica;
 import uytubeLogic.logica.IUsuarioCtrl;
+import uytubeLogic.logica.IVideoCtrl;
 import uytubeLogic.logica.SystemHandler.Privacidad;
 
 /**
@@ -107,6 +109,10 @@ public class AltaUsuarioServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		// TODO Auto-generated method stub
 		System.out.println("nuevo usuario GET");
+		Fabrica fabrica = Fabrica.getInstance();
+		IVideoCtrl videoCtr = fabrica.getIVideoCtrl();
+ 		DtCategoria[] cat = videoCtr.listarCategorias();
+ 		request.setAttribute("listadoCat", cat);
 		request.getRequestDispatcher("WEB-INF/Usuario/AltaUsuario.jsp").forward(request, response);
 	}
 

@@ -6,8 +6,6 @@
 <%@ page import = "uytubeLogic.logica.DtCanal"%>
 <%@page import="uytubeLogic.logica.DtListaReproduccion"%>
 <%@ page import = "uytubeLogic.logica.DtUsuario"%>
-<%@ page import = "uytubeLogic.logica.Fabrica"%>
-<%@ page import = "uytubeLogic.logica.IUsuarioCtrl"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.text.DateFormat"%>
 <%@page import="java.util.Base64"%>
@@ -47,13 +45,10 @@
 			String fotoString = encoder.encodeToString(fotoByte);
 			urlFoto = "data:image/png;base64,"+ fotoString;
 		}
-	Fabrica fabrica = Fabrica.getInstance();
-	IUsuarioCtrl usrCtr = fabrica.getIUsuarioCtrl();
-	String [] seguidores = usrCtr.listarUsuariosQueLeSigue(nick);
-	String [] seguidos = usrCtr.listarUsuariosQueSigue(nick);
-	
-	String[] listasReproduccion = usrCtr.listarLDRdeUsuario(nick);
-	
+
+	String [] seguidores = (String[])request.getAttribute("dataSeguidores");
+	String [] seguidos = (String[])request.getAttribute("dataSeguidos");
+	String[] listasReproduccion = (String[])request.getAttribute("dataListasReproduccion");
 	%>
 
 <%@include file="../buscador.jsp" %>
