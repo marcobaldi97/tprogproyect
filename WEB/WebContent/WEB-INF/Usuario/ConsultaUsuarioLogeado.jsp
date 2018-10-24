@@ -173,7 +173,7 @@
 							String nombreV=entry.getNombre();
 							String descV=entry.getDescripcion();
 							String propietarioV = entry.getPropietario();
-							request.setAttribute("IDVideo", entry.getIDVideo().toString());
+							request.setAttribute("IDVideo", entry.getiDVideo().toString());
 							request.setAttribute(nombreV, nombreV);
 					%>
 					<tr class="videoRow">
@@ -182,7 +182,7 @@
 						<td>
 							<form action="watch" method="get"> 
 							<input type="hidden" name="opcion" value="ver">
-							<input type="hidden" name="ID" value="<%=entry.getIDVideo()%>">
+							<input type="hidden" name="ID" value="<%=entry.getiDVideo()%>">
 							<input type="submit" value="Ver Ahora"> </form> 
 							
 							 <%

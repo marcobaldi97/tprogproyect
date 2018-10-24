@@ -22,7 +22,7 @@
 	<%
 	DtVideo dataVideo = (DtVideo) request.getAttribute("dataVideo");
 	String titulo = dataVideo.getNombre();
-	String id_video = dataVideo.getIDVideo().toString();
+	String id_video = dataVideo.getiDVideo().toString();
 	DtUsuario info_propietario = (DtUsuario) request.getAttribute("usuario_propietario");
 	DtCanal canal_propietario = (DtCanal) request.getAttribute("canal_propietario");
 	String url_video = dataVideo.getUrl();
@@ -287,7 +287,7 @@
 				anio_comment = fecha_publicacion_comentario.getYear() + 1900;
 				String descripcion_comentario = comentarios[i].getTexto();
 				DtComentario[] hijos = comentarios[i].getRespuestas();
-				byte[] fotoComentador = comentarios[i].getFotoUsuarioComentador();
+				byte[] fotoComentador = comentarios[i].getFotoDuenio();
 				String urlFotoComentador = "";
 				if(fotoComentador != null){
 					Base64.Encoder encoder = Base64.getEncoder();
@@ -307,7 +307,7 @@
 				out.println("        </tr>");
 				out.println("        <tr>");
 				if(logged_state == "true"){
-					out.println("            <td colspan=\"2\"><button style=\"width:100%\" id=\"response_button"+index+"\" class=\"response_button_class\" name=\"response_button\" value=\""+comentarios[i].getIDComentario()+"\" onclick=\"toggle_response_box("+index+")\">  Responder  </button></td>");	
+					out.println("            <td colspan=\"2\"><button style=\"width:100%\" id=\"response_button"+index+"\" class=\"response_button_class\" name=\"response_button\" value=\""+comentarios[i].getIdComentario()+"\" onclick=\"toggle_response_box("+index+")\">  Responder  </button></td>");	
 				}
 				out.println("        </tr>");
 				out.println("    </table>");
