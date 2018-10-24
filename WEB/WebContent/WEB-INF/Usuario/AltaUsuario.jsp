@@ -4,9 +4,6 @@
 <html>
 <head>
   <%@ page import = "uytubeLogic.logica.DtCategoria"%>
-  <%@ page import = "uytubeLogic.logica.Fabrica"%>
-  <%@ page import = "uytubeLogic.logica.IVideoCtrl"%>
-  <%@ page import = "uytubeLogic.logica.IUsuarioCtrl"%>
   <%@include file = "../cosasComunesDelHead.jsp" %>
 	<link rel="stylesheet" href="media/styles/AltaUsuario.css">
 	<title>Alta Usuario</title>
@@ -69,9 +66,7 @@
             <select name="categoria">
          		   <option value="Sin Categoria">Sin Categoria</option>
                		<%
-					Fabrica fabrica = Fabrica.getInstance();
-					IVideoCtrl videoCtr = fabrica.getIVideoCtrl();
-			 		DtCategoria[] cat = videoCtr.listarCategorias();
+					DtCategoria[] cat = (DtCategoria[]) request.getAttribute("listadoCat");
 			     	String opciones="";
 			       	for (int i=0;i<cat.length;i++)
 			       	{

@@ -8,8 +8,6 @@
     <link rel="stylesheet" href="media/styles/AltaVideo.css">
 
     <%@ page import = "uytubeLogic.logica.DtCategoria"%>
-    <%@ page import = "uytubeLogic.logica.Fabrica"%>
-    <%@ page import = "uytubeLogic.logica.IVideoCtrl"%>
     <title>Alta Video</title>
 </head>
 
@@ -35,9 +33,7 @@
                 <select class="AltaVideo" name="categoria">
                 	<option value="Sin Categoria">Sin Categoria</option>
                		<%
-					Fabrica fabrica = Fabrica.getInstance();
-					IVideoCtrl videoCtr = fabrica.getIVideoCtrl();
-			 		DtCategoria[] cat = videoCtr.listarCategorias();
+               		DtCategoria[] cat = (DtCategoria[]) request.getAttribute("listadoCat");
 			     	String opciones="";
 			       	for (int i=0;i<cat.length;i++)
 			       	{

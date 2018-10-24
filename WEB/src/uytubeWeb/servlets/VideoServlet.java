@@ -118,10 +118,15 @@ public class VideoServlet extends HttpServlet {
 		System.out.println(opc);
 		switch (opc) {
 		case "altaVideo":{
+			Fabrica fabrica = Fabrica.getInstance();
+			IVideoCtrl videoCtr;
 			HttpSession session=request.getSession(false);
-			if(session!=null && session.getAttribute("nombre_usuario")!=null)
+			if(session!=null && session.getAttribute("nombre_usuario")!=null){
+				videoCtr = fabrica.getIVideoCtrl();
+				DtCategoria[] cat = videoCtr.listarCategorias();
+				request.setAttribute("listadoCat", cat);
 				request.getRequestDispatcher("WEB-INF/Video/AltaVideo.jsp").forward(request, response);
-			else
+			}else
 				response.sendRedirect(request.getContextPath() + "/home");
 			break;
 		}
