@@ -18,6 +18,10 @@ public class DtCategoria {
 			return false;
 	}
 
+	public DtCategoria() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public String getNombre() {
 		return nombre;
 	}

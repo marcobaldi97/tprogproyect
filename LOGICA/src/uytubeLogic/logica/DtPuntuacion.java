@@ -17,6 +17,10 @@ public class DtPuntuacion {
 		nickname = puntuacionBase.getNickPuntuador();
 	}
 
+	public DtPuntuacion() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public void setValoracion(boolean valoracion) {
 		this.valoracion = valoracion;
 	}

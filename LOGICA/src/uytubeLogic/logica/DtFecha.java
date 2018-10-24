@@ -17,4 +17,8 @@ public class DtFecha {
 		return fecha;
 	}
 
+	public DtFecha() {
+		// TODO Auto-generated constructor stub
+	}
+
 }

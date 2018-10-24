@@ -119,6 +119,12 @@ public class DtComentario {
 		fotoDuenio = comment.getUsuario().getFoto();
 	}
 
+	public DtComentario() {
+		// TODO Auto-generated constructor stub
+	}
+
+
+
 	public boolean equals(DtComentario dataTipo) {
 		return (idComentario == dataTipo.idComentario) && (texto == dataTipo.getTexto())
 				&& (fecha.equals(dataTipo.getFecha()) && (esPadre == dataTipo.isEsPadre())

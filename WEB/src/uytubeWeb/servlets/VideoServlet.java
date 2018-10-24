@@ -167,7 +167,7 @@ public class VideoServlet extends HttpServlet {
 			IUsuarioCtrl usrController = fabricaControladores.getIUsuarioCtrl();
 			DtVideo dataVideo = vidController.infoAddVideo(Integer.parseInt(request.getParameter("ID")));
 			request.setAttribute("dataVideo", dataVideo);
-			DtComentario[] comentarios = vidController.listarComentarios(dataVideo.getIDVideo());
+			DtComentario[] comentarios = vidController.listarComentarios(dataVideo.getiDVideo());
 			request.setAttribute("comentarios", comentarios);
 			DtUsuario usuario_propietario = usrController.listarDatosUsuario(dataVideo.getPropietario());
 			request.setAttribute("usuario_propietario", usuario_propietario);

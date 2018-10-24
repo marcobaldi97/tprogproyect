@@ -12,6 +12,11 @@ public class DtInfoVideo {
 	}
 
 
+	public DtInfoVideo() {
+		// TODO Auto-generated constructor stub
+	}
+
+
 	public void setInfoVideo(DtVideo infoVideo) {
 		this.infoVideo = infoVideo;
 	}

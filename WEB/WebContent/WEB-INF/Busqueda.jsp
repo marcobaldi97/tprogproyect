@@ -84,14 +84,14 @@ if (request.getAttribute("canales") != null) { %>
 			String nombreV=entry.getNombre();
 			String descV=entry.getDescripcion();
 			String propietarioV = entry.getPropietario();
-			request.setAttribute("IDVideo", entry.getIDVideo().toString());
+			request.setAttribute("IDVideo", entry.getiDVideo().toString());
 			request.setAttribute(nombreV, nombreV);
 	%>
 	<tr class="videoRow">
 	<td>Video
 	<form action="watch" method="get"> 
 	<input type="hidden" name="opcion" value="ver">
-	<input type="hidden" name="ID" value="<%=entry.getIDVideo()%>">
+	<input type="hidden" name="ID" value="<%=entry.getiDVideo()%>">
 	<input class="verAhora" type="submit" value="Ver Ahora"> </form> 
 	</td>
 	<td id="NombreTD"><%=nombreV%></td>
@@ -120,8 +120,8 @@ if (request.getAttribute("canales") != null) { %>
 	<td id="NombreTD"><%=entry.getNombre()%></td>
 	<td id="DescripcionTD"></td>
 	<td id="PropietarioTD"><%=entry.getPropietario() %></td>
-	<td id="FechaTD"><%=goodDf.format(entry.getFechaUltimoVideo()) %></td>
-	<%String fechaHidden=df.format(entry.getFechaUltimoVideo()); %>
+	<td id="FechaTD"><%=goodDf.format(entry.getUltimoVideo()) %></td>
+	<%String fechaHidden=df.format(entry.getUltimoVideo()); %>
 	<td style="display:none;"><%=fechaHidden%></td>
 	
 	</tr>
@@ -141,8 +141,8 @@ if (request.getAttribute("canales") != null) { %>
 		<td id="NombreTD"><%=entry.getNombre()%></td>
 		<td id="DescripcionTD"><%=entry.getDescripcion() %></td>
 		<td id="PropietarioTD"><%=entry.getPropietario() %></td>
-		<td id="FechaTD"><%=goodDf.format(entry.getFechaUltimoVideo()) %></td>
-		<%String fechaHidden=df.format(entry.getFechaUltimoVideo()); %>
+		<td id="FechaTD"><%=goodDf.format(entry.getUltimoVideo()) %></td>
+		<%String fechaHidden=df.format(entry.getUltimoVideo()); %>
 	<td style="display:none;"><%=fechaHidden%></td>
 	<%	}
 	}

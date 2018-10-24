@@ -53,7 +53,7 @@ tr:nth-child(even) {background-color: #f2f2f2;}</style>
 			String nombreV=entry.getNombre();
 			String descV=entry.getDescripcion();
 			String propietarioV = entry.getPropietario();
-			request.setAttribute("IDVideo", entry.getIDVideo().toString());
+			request.setAttribute("IDVideo", entry.getiDVideo().toString());
 			request.setAttribute(nombreV, nombreV);
 			if(entry.getPrivacidad().equals(Privacidad.PUBLICO)){
 	%>
@@ -61,7 +61,7 @@ tr:nth-child(even) {background-color: #f2f2f2;}</style>
 	<td>Video
 	<form action="watch" method="get"> 
 	<input type="hidden" name="opcion" value="ver">
-	<input type="hidden" name="ID" value="<%=entry.getIDVideo()%>">
+	<input type="hidden" name="ID" value="<%=entry.getiDVideo()%>">
 	<input type="submit" value="Ver Ahora"> </form> 
 	</td>
 	<td id="NombreTD"><%=nombreV%></td>

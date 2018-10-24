@@ -32,6 +32,10 @@ public class DtListaReproduccion {
 	}
 
 
+	public DtListaReproduccion() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public DtListaReproduccion(String nombreL) {
 		nombre = nombreL;
 	}
