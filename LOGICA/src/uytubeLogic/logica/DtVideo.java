@@ -41,6 +41,11 @@ public class DtVideo {
 	}
 
 
+	public DtVideo() {
+		// TODO Auto-generated constructor stub
+	}
+
+
 	public void setiDVideo(Integer iDVideo) {
 		this.iDVideo = iDVideo;
 	}

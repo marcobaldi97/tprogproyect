@@ -22,6 +22,11 @@ public class DtCanal {
 	}
 
 
+	public DtCanal() {
+		// TODO Auto-generated constructor stub
+	}
+
+
 	public String getNombre() {
 		return nombre;
 	}

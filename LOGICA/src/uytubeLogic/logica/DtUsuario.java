@@ -16,6 +16,10 @@ public class DtUsuario {
 		fechaNacimiento = usuarioBase.getFechaNac();
 		foto = usuarioBase.getFoto();
 	}
+	
+	public DtUsuario() {
+		// TODO Auto-generated constructor stub
+	}
 
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
