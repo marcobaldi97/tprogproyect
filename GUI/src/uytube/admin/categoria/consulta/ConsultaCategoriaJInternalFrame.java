@@ -122,8 +122,8 @@ public class ConsultaCategoriaJInternalFrame extends JInternalFrame {
 					modelo_video.setRowCount(0);
 					modelo_ldr.setRowCount(0);
 
-					DtVideo [] listarvideos= iCV.listarVideosPorCategoria(comboBox.getSelectedItem().toString());
-					DtListaReproduccion [] listarLDR= iCV.listarLDRPorCategoria(comboBox.getSelectedItem().toString());
+					DtVideo [] listarvideos= iCV.listarVideosPorCategoria(comboBox.getSelectedItem().toString(), null, null);
+					DtListaReproduccion [] listarLDR= iCV.listarLDRPorCategoria(comboBox.getSelectedItem().toString(), null, null);
 					
 					if(listarvideos.length>0) 
 					{

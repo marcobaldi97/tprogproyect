@@ -1,9 +1,11 @@
 package uytubeLogic.logica;
 
-public interface IVideoCtrl {
-	public abstract DtListaReproduccion[] listarLDRPorCategoria(String cat);
+import uytubeLogic.logica.SystemHandler.Privacidad;
 
-	public abstract DtVideo[] listarVideosPorCategoria(String cat);
+public interface IVideoCtrl {
+	public abstract DtListaReproduccion[] listarLDRPorCategoria(String cat, Privacidad priv, String nomU);
+
+	public abstract DtVideo[] listarVideosPorCategoria(String cat, Privacidad priv, String nomU);
 
 	public abstract DtComentario[] listarComentarios(Integer IDVideo);
 
