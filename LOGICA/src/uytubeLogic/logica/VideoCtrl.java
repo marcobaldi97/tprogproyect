@@ -1,5 +1,7 @@
 package uytubeLogic.logica;
 
+import uytubeLogic.logica.SystemHandler.Privacidad;
+
 public class VideoCtrl implements IVideoCtrl {
 	private static VideoCtrl instance = null;
 
@@ -12,20 +14,20 @@ public class VideoCtrl implements IVideoCtrl {
 		return instance;
 	}
 
-	public DtListaReproduccion[] listarLDRPorCategoria(String cat) {
+	public DtListaReproduccion[] listarLDRPorCategoria(String cat, Privacidad priv, String nomU) {
 		CategoriaHandler CatHandler = CategoriaHandler.getInstance();
 		if (CatHandler.isMember(cat)) {
 			Categoria cate = CatHandler.find(cat);
-			return cate.listarLDR();
+			return cate.listarLDR(priv,nomU);
 		} else
 			return null;
 	}
 
-	public DtVideo[] listarVideosPorCategoria(String cat) {
+	public DtVideo[] listarVideosPorCategoria(String cat, Privacidad priv, String nomU) {
 		CategoriaHandler CatHandler = CategoriaHandler.getInstance();
 		if (CatHandler.isMember(cat)) {
 			Categoria cate = CatHandler.find(cat);
-			return cate.listarVideos();
+			return cate.listarVideos(priv,nomU);
 		} else
 			return null;
 	}
