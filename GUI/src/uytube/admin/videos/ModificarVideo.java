@@ -52,7 +52,7 @@ public class ModificarVideo extends JInternalFrame {
 		textFieldURL.setText(datosVideo.getUrl());
 		textAreaDesc.setText(datosVideo.getDescripcion());
 		comboBoxCategoria.setSelectedItem(datosVideo.getCategoria().getNombre());
-		spinnerDuracion.setValue(datosVideo.getDuracion());
+		spinnerDuracion.setValue(datosVideo.getDuracionSS());
 		if (datosVideo.getPrivacidad() == Privacidad.PRIVADO)
 			comboBoxPrivacidad.setSelectedItem("Privado");
 		else

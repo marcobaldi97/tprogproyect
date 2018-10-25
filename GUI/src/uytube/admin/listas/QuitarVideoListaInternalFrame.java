@@ -115,7 +115,7 @@ public class QuitarVideoListaInternalFrame extends JInternalFrame {
 				final DtVideo video = (DtVideo) comboBoxVideo.getSelectedItem();
 				final String nombreLista = (String) comboBoxLista.getSelectedItem();
 
-				controlUsr.eliminarVideoLista(nickname, video.getIDVideo(), nombreLista);
+				controlUsr.eliminarVideoLista(nickname, video.getiDVideo(), nombreLista);
 				infoBox("Video quitado correctamente", "Quitar video de lista");
 				dispose();
 			}

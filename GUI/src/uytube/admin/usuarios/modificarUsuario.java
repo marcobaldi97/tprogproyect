@@ -513,7 +513,7 @@ public class modificarUsuario extends JInternalFrame {
 		dateChooser.setDate(usr.getFechaNacimiento().getFecha());
 		
 		textFieldNomCanal.setText(usrCanal.getNombre());
-		if (usrCanal.getPrivacidad()==Privacidad.PRIVADO){
+		if (usrCanal.getPrivado()==Privacidad.PRIVADO){
 			rdbtnPrivadoCanal.setSelected(true);
 		}else{
 			rdbtnPublicoCanal.setSelected(true);

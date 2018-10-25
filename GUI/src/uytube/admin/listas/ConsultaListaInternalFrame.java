@@ -196,7 +196,7 @@ public class ConsultaListaInternalFrame extends JInternalFrame {
 						if(dtLista.getPrivado() == Privacidad.PRIVADO) {
 							textFieldPrivacidadLista.setText("Privada");
 						}else textFieldPrivacidadLista.setText("Publica");
-						if(dtLista.getTipoLista() ==TipoLista.PARTICULAR){
+						if(dtLista.getTipoL() ==TipoLista.PARTICULAR){
 							lblTextfieldtipolista.setText("Particular");
 						}else{
 							lblTextfieldtipolista.setText("Por Defecto");

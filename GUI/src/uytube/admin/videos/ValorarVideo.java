@@ -111,7 +111,7 @@ public class ValorarVideo extends JInternalFrame {
 				if (!arg0.getValueIsAdjusting()&&!listVideos.isSelectionEmpty()) {
 					nomVideo=listVideos.getSelectedValue();
 					DtVideo vid=ICU.obtenerInfoAdicVideo(nickUsuario, nomVideo);
-					IDVideo=vid.getIDVideo();
+					IDVideo=vid.getiDVideo();
 					comboBoxN2.setEnabled(true);
 				}
 			}
