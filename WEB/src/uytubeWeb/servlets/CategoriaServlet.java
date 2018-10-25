@@ -6,12 +6,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import uytubeLogic.logica.DtCategoria;
 import uytubeLogic.logica.DtListaReproduccion;
 import uytubeLogic.logica.DtVideo;
 import uytubeLogic.logica.Fabrica;
 import uytubeLogic.logica.IVideoCtrl;
+import uytubeLogic.logica.SystemHandler.Privacidad;
 
 /**
  * Servlet implementation class CategoriaServlet
@@ -46,12 +48,21 @@ public class CategoriaServlet extends HttpServlet {
 			case "consult":{
 				String categoria = request.getParameter("type");
 				System.out.println(categoria);
-				DtVideo[] videos=interfazVideos.listarVideosPorCategoria(categoria);
-				DtListaReproduccion[] listaReproduccion=interfazVideos.listarLDRPorCategoria(categoria);
-				request.setAttribute("videos", videos);
-				request.setAttribute("listas", listaReproduccion);
-				//una pequeña pruebita
-				//request.getRequestDispatcher("/WEB-INF/Categoria/consultaCategoria.jsp").forward(request, response);
+				HttpSession session=request.getSession(false);
+				if(session!=null) {
+					String login=(String)session.getAttribute("nombre_usuario");
+					if(login!=null) {
+						DtVideo[] videos=interfazVideos.listarVideosPorCategoria(categoria, Privacidad.PUBLICO, login);
+						DtListaReproduccion[] listaReproduccion=interfazVideos.listarLDRPorCategoria(categoria, Privacidad.PUBLICO, login);
+						request.setAttribute("videos", videos);
+						request.setAttribute("listas", listaReproduccion);
+					}else{
+						DtVideo[] videos=interfazVideos.listarVideosPorCategoria(categoria, Privacidad.PUBLICO, "");
+						DtListaReproduccion[] listaReproduccion=interfazVideos.listarLDRPorCategoria(categoria, Privacidad.PUBLICO, "");
+						request.setAttribute("videos", videos);
+						request.setAttribute("listas", listaReproduccion);
+					}
+				}
 				request.setAttribute("titulo", "Consulta de Categoria");
 				request.getRequestDispatcher("WEB-INF/Busqueda.jsp").forward(request, response);
 			};break;

@@ -39,7 +39,7 @@ public class VideoCtrlTest {
 	@Test
 	public void testListarLDRPorCategoriaNoExiste() {
 		VideoCtrl VCU = VideoCtrl.getInstance();
-		DtListaReproduccion[] listaActual = VCU.listarLDRPorCategoria("noExisteLDRNE");
+		DtListaReproduccion[] listaActual = VCU.listarLDRPorCategoria("noExisteLDRNE", null, null);
 		assertEquals(null, listaActual);
 
 	}
@@ -55,7 +55,7 @@ public class VideoCtrlTest {
 		Particular lr2 = new Particular("nombLista2ListarLDRE", "duenio2ListarLDRE", Privacidad.PUBLICO);
 		categoriaE.aniadirLDR(lr1);
 		categoriaE.aniadirLDR(lr2);
-		DtListaReproduccion[] listasActual = VCU.listarLDRPorCategoria("nombreCategoriaListarLDRE");
+		DtListaReproduccion[] listasActual = VCU.listarLDRPorCategoria("nombreCategoriaListarLDRE", null, null);
 		DtListaReproduccion listaActual1 = listasActual[0];
 		DtListaReproduccion listaActual2 = listasActual[1];
 		DtListaReproduccion dtLista1 = new DtListaReproduccion(lr1);
@@ -68,7 +68,7 @@ public class VideoCtrlTest {
 	@Test
 	public void testListarVideosPorCategoriaNoExiste() {
 		VideoCtrl VCU = VideoCtrl.getInstance();
-		DtVideo[] listaActual = VCU.listarVideosPorCategoria("noExisteLVNE");
+		DtVideo[] listaActual = VCU.listarVideosPorCategoria("noExisteLVNE", null, null);
 		assertEquals(null, listaActual);
 	}
 
@@ -91,7 +91,7 @@ public class VideoCtrlTest {
 		categoriaE.addVideo(video);
 		categoriaE.addVideo(video2);
 
-		DtVideo[] videosActual = VCU.listarVideosPorCategoria("nombreCategoriaListarVE");
+		DtVideo[] videosActual = VCU.listarVideosPorCategoria("nombreCategoriaListarVE", null, null);
 		DtVideo videoActual1 = videosActual[0];
 		DtVideo videoActual2 = videosActual[1];
 		DtVideo video1Dt = new DtVideo(video);
