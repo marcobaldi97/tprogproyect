@@ -114,7 +114,7 @@ public class ListarComentariosInternalFrame extends JInternalFrame {
 		Fabrica fabrica = Fabrica.getInstance();
 	    IUsuarioCtrl ICU = fabrica.getIUsuarioCtrl();
 		DtVideo dtVideo = ICU.obtenerInfoAdicVideo(nickU,nomVideo);
-		return dtVideo.getIDVideo();
+		return dtVideo.getiDVideo();
 	}
 
 }

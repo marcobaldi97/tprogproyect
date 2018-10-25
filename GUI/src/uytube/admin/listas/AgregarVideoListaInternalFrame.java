@@ -184,7 +184,7 @@ public class AgregarVideoListaInternalFrame extends JInternalFrame {
 				String nombreVideo =(String) comboBoxVideos.getSelectedItem();
 				String nombreListaReproduccion = (String) comboBoxListas.getSelectedItem();
 				DtVideo video = iCU.obtenerInfoAdicVideo(nicknameAutor, nombreVideo);
-				int idVideo = video.getIDVideo();
+				int idVideo = video.getiDVideo();
 				if(!iCU.memberVideoLista(nicknameUsuario,idVideo,nombreListaReproduccion)) 
 				{
 					iCU.agregarVideoLista(nicknameUsuario, idVideo, nombreListaReproduccion);

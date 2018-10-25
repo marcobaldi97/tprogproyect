@@ -317,7 +317,7 @@ public class ConsultaUsuarioInternalFrame extends JInternalFrame {
 		dateChooser.setDate(usr.getFechaNacimiento().getFecha());
 		
 		textFieldNomCanal.setText(usrCanal.getNombre());
-		if (usrCanal.getPrivacidad()==Privacidad.PRIVADO){
+		if (usrCanal.getPrivado()==Privacidad.PRIVADO){
 			textFieldPrivacidad.setText("Privado");
 		}else {
 			textFieldPrivacidad.setText("Publico");

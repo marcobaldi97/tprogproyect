@@ -144,7 +144,7 @@ public class ConsultarVideoInternalFrame extends JInternalFrame {
 					if(!videoList.isSelectionEmpty()){
 						String nomVideo=videoList.getSelectedValue();
 						selectedVideo=ICU.obtenerInfoAdicVideo(authorNickname, nomVideo);
-						infoVideo=VCU.verDetallesVideoExt(selectedVideo.getIDVideo());
+						infoVideo=VCU.verDetallesVideoExt(selectedVideo.getiDVideo());
 						handleVideoSelect(infoVideo);
 						
 					}
@@ -255,8 +255,8 @@ public class ConsultarVideoInternalFrame extends JInternalFrame {
 		videoDescriptionTextField.setText(this.selectedVideo.getDescripcion());
 		videoURLTextField.setText(this.selectedVideo.getUrl());
 		txtCategoria.setText(this.selectedVideo.getCategoria().getNombre());
-		Integer duracionMM=this.selectedVideo.getDuracion()/60;
-		Integer duracionSS=this.selectedVideo.getDuracion()%60;
+		Integer duracionMM=this.selectedVideo.getDuracionSS()/60;
+		Integer duracionSS=this.selectedVideo.getDuracionSS()%60;
 		videoDuracionTextField.setText(Integer.toString(duracionMM)+":"+Integer.toString(duracionSS));//arreglar la duracion para que la muestre en minutos
 		if(this.selectedVideo.getPrivacidad()==Privacidad.PRIVADO) {
 		privacidadTextField.setText("Privado");
