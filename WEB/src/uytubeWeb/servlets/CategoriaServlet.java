@@ -14,6 +14,7 @@ import uytubeLogic.logica.DtVideo;
 import uytubeLogic.logica.Fabrica;
 import uytubeLogic.logica.IVideoCtrl;
 import uytubeLogic.logica.SystemHandler.Privacidad;
+import uytubeLogica.publicar.DtCategoriaArray;
 
 /**
  * Servlet implementation class CategoriaServlet
@@ -67,8 +68,9 @@ public class CategoriaServlet extends HttpServlet {
 				request.getRequestDispatcher("WEB-INF/Busqueda.jsp").forward(request, response);
 			};break;
 			case "list":{
-				
-				 DtCategoria[] categorias=interfazVideos.listarCategorias();
+				 uytubeLogica.publicar.WebServicesService service = new uytubeLogica.publicar.WebServicesService();
+			     uytubeLogica.publicar.WebServices port = service.getWebServicesPort();			    
+				 DtCategoriaArray categorias= port.listarCategorias();
 				 request.setAttribute("listarCategorias", categorias);
 				 request.getRequestDispatcher("/WEB-INF/Categoria/listarCategorias.jsp").forward(request, response);
 				
