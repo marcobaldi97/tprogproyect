@@ -221,7 +221,7 @@ public class UsuarioServlet extends HttpServlet {
 			break;
 		}
 		case "checkLogin" :{
-			
+			 
 			String nomUsu=(String)request.getSession().getAttribute("nombre_usuario");
 			System.out.println("el usuario logueado es " + nomUsu);
 			if(nomUsu==null) {
@@ -236,6 +236,9 @@ public class UsuarioServlet extends HttpServlet {
 		}
 		case "checkLoginSidebar" :{
 			System.out.println("estoy en chekloginsidebar");
+			 uytubeLogica.publicar.WebServicesService service = new uytubeLogica.publicar.WebServicesService();
+		      uytubeLogica.publicar.WebServices port = service.getWebServicesPort();
+		      port.operacionPrueba();
 			String nomUsu=(String)request.getSession().getAttribute("nombre_usuario");
 			if(nomUsu==null) {
 			

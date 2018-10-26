@@ -24,4 +24,7 @@ public class WebServices {
     public Endpoint getEndpoint() {
             return endpoint;
     }
+    @WebMethod
+    public void operacionPrueba(){
+    	System.out.println("LLAMADO A FUNC DEL WEB SERVICE");    }
 }
