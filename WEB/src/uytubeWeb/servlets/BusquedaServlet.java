@@ -12,13 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import uytubeLogic.logica.DtCanal;
-import uytubeLogic.logica.DtListaReproduccion;
-import uytubeLogic.logica.DtVideo;
-import uytubeLogic.logica.Fabrica;
-import uytubeLogic.logica.IUsuarioCtrl;
-import uytubeLogic.logica.IVideoCtrl;
-import uytubeLogic.logica.SystemHandler.Privacidad;
+import uytubeLogica.publicar.DtCanal;
+import uytubeLogica.publicar.DtListaReproduccion;
+import uytubeLogica.publicar.DtVideo;
+import uytubeLogica.publicar.Privacidad;
+
+
 
 /**
  * Servlet implementation class BusquedaServlet
@@ -52,21 +51,19 @@ public class BusquedaServlet extends HttpServlet {
 		else {
 			request.setAttribute(busqueda, request.getParameter(busqueda));
 		}
-		
-		Fabrica fabrica = Fabrica.getInstance();
-		IVideoCtrl interfazVideos = fabrica.getIVideoCtrl();
-		IUsuarioCtrl interfazUsuarios = fabrica.getIUsuarioCtrl();
-		DtVideo[] videos = interfazVideos.listarVideosPublicosPorNombre((String)request.getAttribute(busqueda));
-		DtCanal[] canales = interfazUsuarios.listarCanalesPublicosPorNombre((String)request.getAttribute(busqueda));
-		DtListaReproduccion[] listas = interfazUsuarios.listarLDRPublicasPorNombre((String)request.getAttribute(busqueda));
+		uytubeLogica.publicar.WebServicesService service = new uytubeLogica.publicar.WebServicesService();
+	    uytubeLogica.publicar.WebServices port = service.getWebServicesPort();
+		DtVideo[] videos = port.listarVideosPublicosPorNombre((String)request.getAttribute(busqueda)).getItem().toArray(new DtVideo[0]);
+		DtCanal[] canales = port.listarCanalesPublicosPorNombre((String)request.getAttribute(busqueda)).getItem().toArray(new DtCanal[0]);
+		DtListaReproduccion[] listas = port.listarLDRPublicasPorNombre((String)request.getAttribute(busqueda)).getItem().toArray(new DtListaReproduccion[0]);
 		
 		HttpSession session=request.getSession(false);
 		if(session!=null) {
 			String login=(String)session.getAttribute("nombre_usuario");
 			if(login!=null) {
 				System.out.println("hay un usuario logueado");
-				DtVideo[] videosPrivadosSesion=interfazUsuarios.infoVideosCanal((String)request.getAttribute(busqueda),login, Privacidad.PRIVADO);
-				DtListaReproduccion[] listasPrivadasSesion=interfazUsuarios.infoLDRdeUsuario((String)request.getAttribute(busqueda),login, Privacidad.PRIVADO);
+				DtVideo[] videosPrivadosSesion=port.infoVideosCanal((String)request.getAttribute(busqueda),login, Privacidad.PRIVADO).getItem().toArray(new DtVideo[0]);
+				DtListaReproduccion[] listasPrivadasSesion=port.infoLDRdeUsuario((String)request.getAttribute(busqueda),login, Privacidad.PRIVADO).getItem().toArray(new DtListaReproduccion[0]);
 				List<DtVideo> videosAux= new ArrayList<DtVideo>(Arrays.asList(videos));
 				videosAux.addAll(Arrays.asList(videosPrivadosSesion));
 				videos=videosAux.toArray(new DtVideo[0]);
