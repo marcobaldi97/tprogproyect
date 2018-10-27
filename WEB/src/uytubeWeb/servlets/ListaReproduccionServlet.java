@@ -20,6 +20,7 @@ import uytubeLogic.logica.Fabrica;
 import uytubeLogic.logica.IUsuarioCtrl;
 import uytubeLogic.logica.SystemHandler.Privacidad;
 
+
 /**
  * Servlet implementation class ListaReproduccionServlet
  */
@@ -49,6 +50,9 @@ public class ListaReproduccionServlet extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
+		
+		uytubeLogica.publicar.WebServicesService service = new uytubeLogica.publicar.WebServicesService();
+	    uytubeLogica.publicar.WebServices port = service.getWebServicesPort();
 
 		switch (action) {
 
@@ -136,9 +140,8 @@ public class ListaReproduccionServlet extends HttpServlet {
 			System.out.println("NOMBRE LISTA" + nombreLista + " " + encodedLista + " " + URLdecodedLista);
 			System.out.println("NOMBRE DUEÑO" + propietarioLista + " " + encodedOwner + " " + URLdecodedOwner);
 
-			DtVideo[] videosLista = interfazUsuario.obtenerDtsVideosListaReproduccionUsuario(propietarioLista,
-					nombreLista);
-			DtListaReproduccion infoLista = interfazUsuario.infoAdicLDR(propietarioLista, nombreLista);
+			uytubeLogica.publicar.DtVideo[] videosLista = port.listarVideoListaReproduccion(propietarioLista, nombreLista).getItem().toArray(new uytubeLogica.publicar.DtVideo[0]);
+			uytubeLogica.publicar.DtListaReproduccion infoLista = port.infoListaReproduccion(propietarioLista, nombreLista);
 			request.setAttribute("videosLista", videosLista);
 			request.setAttribute("infoLista", infoLista);
 			request.getRequestDispatcher("/WEB-INF/Lista Reproduccion/detallesListaReproduccion.jsp").forward(request,

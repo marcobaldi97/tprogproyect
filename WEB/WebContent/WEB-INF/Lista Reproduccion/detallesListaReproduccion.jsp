@@ -1,7 +1,7 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.text.DateFormat"%>
-<%@page import="uytubeLogic.logica.DtListaReproduccion"%>
-<%@ page import = "uytubeLogic.logica.DtVideo"%>
+
+<%@ page import = "uytubeLogica.publicar.*"%>
 <%@ page import = "uytubeLogic.logica.SystemHandler.Privacidad"%>
 <%@ page import = "uytubeLogic.logica.DtCanal"%>
 <%@ page import = "uytubeLogic.logica.DtCategoria"%>
@@ -39,7 +39,7 @@ tr:nth-child(even) {background-color: #f2f2f2;}</style>
 <body>
 
 <%
-	DtListaReproduccion infoLista = (DtListaReproduccion) request.getAttribute("infoLista");
+uytubeLogica.publicar.DtListaReproduccion infoLista = (uytubeLogica.publicar.DtListaReproduccion) request.getAttribute("infoLista");
 %>
 
 <p>Nombre: <%=infoLista.getNombre()%></p>
@@ -47,7 +47,7 @@ tr:nth-child(even) {background-color: #f2f2f2;}</style>
 
 <p>Categorias:
 <%
-	for(DtCategoria entry: infoLista.getCategoriasLDR())
+	for(uytubeLogica.publicar.DtCategoria entry: infoLista.getCategoriasLDR())
 	{
 %>
 
@@ -64,12 +64,12 @@ tr:nth-child(even) {background-color: #f2f2f2;}</style>
 
 </tr>
 	<%
-		DtVideo[] vid = (DtVideo[]) request.getAttribute("videosLista");
-		for (DtVideo entry : vid) {
+	uytubeLogica.publicar.DtVideo[] vid = (uytubeLogica.publicar.DtVideo[]) request.getAttribute("videosLista");
+		for (uytubeLogica.publicar.DtVideo entry : vid) {
 			String nombreV=entry.getNombre();
 			String descV=entry.getDescripcion();
 			String propietarioV = entry.getPropietario();
-			request.setAttribute("IDVideo", entry.getiDVideo().toString());
+			request.setAttribute("IDVideo", entry.getIDVideo().toString());
 			request.setAttribute(nombreV, nombreV);
 			if(entry.getPrivacidad().equals(Privacidad.PUBLICO)){
 	%>
@@ -77,7 +77,7 @@ tr:nth-child(even) {background-color: #f2f2f2;}</style>
 	<td>Video
 	<form action="watch" method="get"> 
 	<input type="hidden" name="opcion" value="ver">
-	<input type="hidden" name="ID" value="<%=entry.getiDVideo()%>">
+	<input type="hidden" name="ID" value="<%=entry.getIDVideo()%>">
 	<input type="submit" value="Ver Ahora"> </form> 
 	</td>
 	<td id="NombreTD"><%=nombreV%></td>
@@ -95,7 +95,7 @@ tr:nth-child(even) {background-color: #f2f2f2;}</style>
 			String nombreV=entry.getNombre();
 			String descV=entry.getDescripcion();
 			String propietarioV = entry.getPropietario();
-			request.setAttribute("IDVideo", entry.getiDVideo().toString());
+			request.setAttribute("IDVideo", entry.getIDVideo().toString());
 			request.setAttribute(nombreV, nombreV);
 			System.out.println(nickname);
 			System.out.println(entry.getPropietario());
@@ -105,7 +105,7 @@ tr:nth-child(even) {background-color: #f2f2f2;}</style>
 	<td>Video Privado
 	<form action="watch" method="get"> 
 	<input type="hidden" name="opcion" value="ver">
-	<input type="hidden" name="ID" value="<%=entry.getiDVideo()%>">
+	<input type="hidden" name="ID" value="<%=entry.getIDVideo()%>">
 	<input type="submit" value="Ver Ahora"> </form> 
 	</td>
 	<td id="NombreTD"><%=nombreV%></td>

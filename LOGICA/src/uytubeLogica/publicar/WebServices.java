@@ -48,6 +48,23 @@ public class WebServices {
     	IVideoCtrl IVI = fab.getIVideoCtrl();
     	return IVI.listarCategorias();
     }
+    
+    @WebMethod
+    public DtVideo[] listarVideoListaReproduccion(String propietario, String nombreLista) {
+    	Fabrica fabrica=Fabrica.getInstance();
+    	IUsuarioCtrl usuarioCtrl=fabrica.getIUsuarioCtrl();
+    	DtVideo[] videosLista=usuarioCtrl.obtenerDtsVideosListaReproduccionUsuario(propietario, nombreLista);
+    	return videosLista;
+    }
+    
+    @WebMethod
+    public DtListaReproduccion infoListaReproduccion(String propietario, String nombreLista) {
+    	Fabrica fabrica=Fabrica.getInstance();
+    	IUsuarioCtrl usuarioCtrl=fabrica.getIUsuarioCtrl();
+    	DtListaReproduccion infoLista=usuarioCtrl.infoAdicLDR(propietario, nombreLista);
+    	return infoLista;
+    }   
+    
     @WebMethod
     public DtVideo[] listarVideosPorCategoria(String nomCategoria,Privacidad priv, String login) {
     	Fabrica fab=Fabrica.getInstance();
