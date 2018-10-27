@@ -10,7 +10,10 @@ import javax.xml.ws.Endpoint;
 
 import uytube.datosPrueba.DatosDePrueba;
 import uytubeLogic.logica.DtCategoria;
+import uytubeLogic.logica.DtListaReproduccion;
+import uytubeLogic.logica.DtVideo;
 import uytubeLogic.logica.Fabrica;
+import uytubeLogic.logica.IUsuarioCtrl;
 import uytubeLogic.logica.IVideoCtrl;
 
 @WebService
@@ -43,4 +46,21 @@ public class WebServices {
     	IVideoCtrl IVI = fab.getIVideoCtrl();
     	return IVI.listarCategorias();
     }
+    
+    @WebMethod
+    public DtVideo[] listarVideoListaReproduccion(String propietario, String nombreLista) {
+    	Fabrica fabrica=Fabrica.getInstance();
+    	IUsuarioCtrl usuarioCtrl=fabrica.getIUsuarioCtrl();
+    	DtVideo[] videosLista=usuarioCtrl.obtenerDtsVideosListaReproduccionUsuario(propietario, nombreLista);
+    	return videosLista;
+    }
+    
+    @WebMethod
+    public DtListaReproduccion infoListaReproduccion(String propietario, String nombreLista) {
+    	Fabrica fabrica=Fabrica.getInstance();
+    	IUsuarioCtrl usuarioCtrl=fabrica.getIUsuarioCtrl();
+    	DtListaReproduccion infoLista=usuarioCtrl.infoAdicLDR(propietario, nombreLista);
+    	return infoLista;
+    }   
+    
 }
