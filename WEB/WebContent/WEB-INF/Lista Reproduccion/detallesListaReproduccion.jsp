@@ -71,7 +71,7 @@ uytubeLogica.publicar.DtListaReproduccion infoLista = (uytubeLogica.publicar.DtL
 			String propietarioV = entry.getPropietario();
 			request.setAttribute("IDVideo", entry.getIDVideo().toString());
 			request.setAttribute(nombreV, nombreV);
-			if(entry.getPrivacidad().equals(Privacidad.PUBLICO)){
+			if(entry.getPrivacidad().equals(uytubeLogica.publicar.Privacidad.PUBLICO)){
 	%>
 	<tr>
 	<td>Video
@@ -99,7 +99,7 @@ uytubeLogica.publicar.DtListaReproduccion infoLista = (uytubeLogica.publicar.DtL
 			request.setAttribute(nombreV, nombreV);
 			System.out.println(nickname);
 			System.out.println(entry.getPropietario());
-			if(entry.getPrivacidad().equals(Privacidad.PRIVADO) && entry.getPropietario().equals(nickname)){
+			if(entry.getPrivacidad().equals(uytubeLogica.publicar.Privacidad.PRIVADO) && entry.getPropietario().equals(nickname)){
 	%>
 	<tr>
 	<td>Video Privado
