@@ -1,17 +1,19 @@
 <%@page import="java.util.Locale"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.text.DateFormat"%>
-<%@page import="uytubeLogic.logica.DtListaReproduccion"%>
-<%@ page import = "uytubeLogic.logica.DtVideo"%>
-<%@ page import = "uytubeLogic.logica.DtCanal"%>
+<%@page import="uytubeLogica.publicar.DtListaReproduccion"%>
+<%@ page import = "uytubeLogica.publicar.DtVideo"%>
+<%@ page import = "uytubeLogica.publicar.DtCanal"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@page errorPage="error404.jsp" %>
+    <%@page errorPage="../error/error404.jsp" %>
+
 
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<%@include file="cosasComunesDelHead.jsp" %>
 <style>table{
 	width: 100%;
 	table-layout: fixed;
@@ -41,7 +43,7 @@ td {
     font-size: 16px;
 }
 tr:nth-child(even) {background-color: #f2f2f2;}</style>
-<%@include file="cosasComunesDelHead.jsp" %>
+
 <%@include file="buscador.jsp" %>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title><%=request.getAttribute("titulo") %></title>
@@ -84,21 +86,21 @@ if (request.getAttribute("canales") != null) { %>
 			String nombreV=entry.getNombre();
 			String descV=entry.getDescripcion();
 			String propietarioV = entry.getPropietario();
-			request.setAttribute("IDVideo", entry.getiDVideo().toString());
+			request.setAttribute("IDVideo", entry.getIDVideo().toString());
 			request.setAttribute(nombreV, nombreV);
 	%>
 	<tr class="videoRow">
 	<td>Video
 	<form action="watch" method="get"> 
 	<input type="hidden" name="opcion" value="ver">
-	<input type="hidden" name="ID" value="<%=entry.getiDVideo()%>">
+	<input type="hidden" name="ID" value="<%=entry.getIDVideo()%>">
 	<input class="verAhora" type="submit" value="Ver Ahora"> </form> 
 	</td>
 	<td id="NombreTD"><%=nombreV%></td>
 	<td id="DescripcionTD"><%=descV %></td>
 	<td id="PropietarioTD"><%=propietarioV %></td>
-	<td id="FechaTD"><%=goodDf.format(entry.getFechaPublicacion().getFecha()) %></td>
-	<%String fechaHidden=df.format(entry.getFechaPublicacion().getFecha()); %>
+	<td id="FechaTD"><%=goodDf.format(entry.getFechaPublicacion().getFecha().toGregorianCalendar().getTime()) %></td>
+	<%String fechaHidden=df.format(entry.getFechaPublicacion().getFecha().toGregorianCalendar().getTime()); %>
 	<td style="display:none;"><%=fechaHidden%></td>
 	
 	</tr>
@@ -120,8 +122,8 @@ if (request.getAttribute("canales") != null) { %>
 	<td id="NombreTD"><%=entry.getNombre()%></td>
 	<td id="DescripcionTD"></td>
 	<td id="PropietarioTD"><%=entry.getPropietario() %></td>
-	<td id="FechaTD"><%=goodDf.format(entry.getUltimoVideo()) %></td>
-	<%String fechaHidden=df.format(entry.getUltimoVideo()); %>
+	<td id="FechaTD"><%=goodDf.format(entry.getUltimoVideo().toGregorianCalendar().getTime()) %></td>
+	<%String fechaHidden=df.format(entry.getUltimoVideo().toGregorianCalendar().getTime()); %>
 	<td style="display:none;"><%=fechaHidden%></td>
 	
 	</tr>
@@ -141,8 +143,8 @@ if (request.getAttribute("canales") != null) { %>
 		<td id="NombreTD"><%=entry.getNombre()%></td>
 		<td id="DescripcionTD"><%=entry.getDescripcion() %></td>
 		<td id="PropietarioTD"><%=entry.getPropietario() %></td>
-		<td id="FechaTD"><%=goodDf.format(entry.getUltimoVideo()) %></td>
-		<%String fechaHidden=df.format(entry.getUltimoVideo()); %>
+		<td id="FechaTD"><%=goodDf.format(entry.getUltimoVideo().toGregorianCalendar().getTime()) %></td>
+		<%String fechaHidden=df.format(entry.getUltimoVideo().toGregorianCalendar().getTime()); %>
 	<td style="display:none;"><%=fechaHidden%></td>
 	<%	}
 	}
