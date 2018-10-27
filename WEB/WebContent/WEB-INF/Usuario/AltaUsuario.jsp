@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <%@ page import = "uytubeLogic.logica.DtCategoria"%>
+  <%@ page import = "uytubeLogica.publicar.DtCategoria"%>
   <%@include file = "../cosasComunesDelHead.jsp" %>
 	<link rel="stylesheet" href="media/styles/AltaUsuario.css">
 	<title>Alta Usuario</title>
