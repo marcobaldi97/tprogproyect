@@ -28,6 +28,9 @@ public class DatosPruebaServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		uytubeLogica.publicar.WebServicesService service = new uytubeLogica.publicar.WebServicesService();
+	    uytubeLogica.publicar.WebServices port = service.getWebServicesPort();
+	    port.cargarDatos();
 		DatosDePrueba data=new DatosDePrueba();
 		data.cargarDatosDePrueba();
 		response.getWriter().append("Datos Cargados ");

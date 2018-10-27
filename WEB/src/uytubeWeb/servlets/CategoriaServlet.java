@@ -14,7 +14,6 @@ import uytubeLogic.logica.DtVideo;
 import uytubeLogic.logica.Fabrica;
 import uytubeLogic.logica.IVideoCtrl;
 import uytubeLogic.logica.SystemHandler.Privacidad;
-import uytubeLogica.publicar.DtCategoriaArray;
 
 /**
  * Servlet implementation class CategoriaServlet
@@ -35,7 +34,8 @@ public class CategoriaServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		uytubeLogica.publicar.WebServicesService service = new uytubeLogica.publicar.WebServicesService();
+	    uytubeLogica.publicar.WebServices port = service.getWebServicesPort();
 		
 		String action = request.getParameter("action");
 		Fabrica fabrica=Fabrica.getInstance();
@@ -67,21 +67,13 @@ public class CategoriaServlet extends HttpServlet {
 				request.setAttribute("titulo", "Consulta de Categoria");
 				request.getRequestDispatcher("WEB-INF/Busqueda.jsp").forward(request, response);
 			};break;
-			case "list":{
-				 uytubeLogica.publicar.WebServicesService service = new uytubeLogica.publicar.WebServicesService();
-			     uytubeLogica.publicar.WebServices port = service.getWebServicesPort();			    
-				 DtCategoriaArray categorias= port.listarCategorias();
-				 request.setAttribute("listarCategorias", categorias);
-				 request.getRequestDispatcher("/WEB-INF/Categoria/listarCategorias.jsp").forward(request, response);
-				
-				
-			};break;
 			
 			case "listarEmbed":{
 				System.out.println("estoy aqui aqui para quereerte");
-				DtCategoria[] categorias = interfazVideos.listarCategorias();
+				//DtCategoria[] categorias = interfazVideos.listarCategorias();
+				uytubeLogica.publicar.DtCategoria[] categoriasWS= port.listarCategorias().getItem().toArray(new uytubeLogica.publicar.DtCategoria[0]);
 				response.getWriter().append("<ul>");
-				for(DtCategoria entry:categorias) {
+				for(uytubeLogica.publicar.DtCategoria entry:categoriasWS) {
 					response.getWriter().append("<li><a href='consult?action=consult&type="+entry.getNombre()+"'>"+entry.getNombre()+"</a> </li>");
 				}
 				response.getWriter().append("</ul>");
