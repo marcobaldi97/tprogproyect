@@ -2,10 +2,10 @@
 <%@page import="java.text.DateFormat"%>
 <%@page import="uytubeLogic.logica.DtListaReproduccion"%>
 <%@page import="uytubeLogic.logica.ListaReproduccion.TipoLista"%>
-<%@ page import = "uytubeLogic.logica.DtVideo"%>
-<%@ page import = "uytubeLogic.logica.SystemHandler.Privacidad"%>
-<%@ page import = "uytubeLogic.logica.DtCanal"%>
-<%@ page import = "uytubeLogic.logica.DtCategoria"%>
+<%@ page import = "uytubeLogica.publicar.DtVideo"%>
+<%@ page import = "uytubeLogica.publicar.Privacidad"%>
+<%@ page import = "uytubeLogica.publicar.DtCanal"%>
+<%@ page import = "uytubeLogica.publicar.DtCategoria"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -75,7 +75,7 @@ tr:nth-child(even) {background-color: #f2f2f2;}</style>
 			String nombreV=entry.getNombre();
 			String descV=entry.getDescripcion();
 			String propietarioV = entry.getPropietario();
-			request.setAttribute("IDVideo", entry.getiDVideo().toString());
+			request.setAttribute("IDVideo", entry.getIDVideo().toString());
 			request.setAttribute(nombreV, nombreV);
 			System.out.println(nickname);
 			System.out.println(entry.getPropietario());
@@ -85,7 +85,7 @@ tr:nth-child(even) {background-color: #f2f2f2;}</style>
 	<td>Videos Lista
 	<form action="removeVidPlaylist" method="get"> 
 	<input type="hidden" name="action" value="removeVideo">
-	<input type="hidden" name="ID" value="<%=  entry.getiDVideo()%>">
+	<input type="hidden" name="ID" value="<%=  entry.getIDVideo()%>">
 	<input type="hidden" name="List" value="<%=	infoLista.getNombre()%>">
 	<input type="submit" value="Quitar Video"> </form> 
 	</td>

@@ -1,14 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page errorPage="../error/error404.jsp" %>
-<%@ page import = "uytubeLogic.logica.DtVideo"%>
-<%@ page import = "uytubeLogic.logica.DtCategoria"%>
-<%@ page import = "uytubeLogic.logica.DtFecha"%>
-<%@ page import = "uytubeLogic.logica.DtUsuario"%>
-<%@ page import = "uytubeLogic.logica.DtComentario"%>
-<%@ page import = "uytubeLogic.logica.DtUsuario"%>
-<%@ page import = "uytubeLogic.logica.DtCanal"%>
-<%@ page import = "uytubeLogic.logica.Fabrica"%>
+<%@ page import = "uytubeLogica.publicar.DtVideo"%>
+<%@ page import = "uytubeLogica.publicar.DtCategoria"%>
+<%@ page import = "uytubeLogica.publicar.DtFecha"%>
+<%@ page import = "uytubeLogica.publicar.DtUsuario"%>
+<%@ page import = "uytubeLogica.publicar.DtComentario"%>
+<%@ page import = "uytubeLogica.publicar.DtCanal"%>
 
 <%@ page import = "uytubeLogic.logica.IUsuarioCtrl"%>
 <%@ page import = "uytubeLogic.logica.IVideoCtrl"%>
@@ -22,7 +20,7 @@
 	<%
 	DtVideo dataVideo = (DtVideo) request.getAttribute("dataVideo");
 	String titulo = dataVideo.getNombre();
-	String id_video = dataVideo.getiDVideo().toString();
+	String id_video = dataVideo.getIDVideo().toString();
 	DtUsuario info_propietario = (DtUsuario) request.getAttribute("usuario_propietario");
 	DtCanal canal_propietario = (DtCanal) request.getAttribute("canal_propietario");
 	String url_video = dataVideo.getUrl();
@@ -31,7 +29,7 @@
 	DtCategoria categoria = dataVideo.getCategoria();
 	String nombre_categoria = categoria.getNombre();
 	DtFecha fechaPublicacion = dataVideo.getFechaPublicacion();
-	Date fecha_publicacion = fechaPublicacion.getFecha();
+	Date fecha_publicacion = fechaPublicacion.getFecha().toGregorianCalendar().getTime();
 	int dia = fecha_publicacion.getDate();
 	int mes =  fecha_publicacion.getMonth() + 1;
 	int anio = fecha_publicacion.getYear() + 1900;
@@ -80,10 +78,6 @@
 	}
 	//fin de la carga
 	DtComentario[] comentarios = (DtComentario[]) request.getAttribute("comentarios");
-	Integer tamanio_comentarios = 0;
-	for(int i = 0; i < comentarios.length; i++){
-		tamanio_comentarios = tamanio_comentarios + comentarios[i].getTamanioArbol();
-	}
 	%>
 	<link rel="stylesheet" href="media/styles/VerVideo.css">
 	<title><%=titulo%></title>
@@ -280,13 +274,13 @@
 		private int printComentarios(javax.servlet.jsp.JspWriter out, DtComentario[] comentarios,int index, String url_logo_usuario_iniciado, String logged_state) throws java.io.IOException{
 			for(int i = 0  ; i < comentarios.length; i++){
 				String autor_comentario = comentarios[i].getNickUsuario();
-				Date fecha_publicacion_comentario = comentarios[i].getFecha().getFecha();
+				Date fecha_publicacion_comentario = comentarios[i].getFecha().getFecha().toGregorianCalendar().getTime();
 				int dia_comment, mes_comment, anio_comment;
 				dia_comment = fecha_publicacion_comentario.getDate();
 				mes_comment = fecha_publicacion_comentario.getMonth() + 1;
 				anio_comment = fecha_publicacion_comentario.getYear() + 1900;
 				String descripcion_comentario = comentarios[i].getTexto();
-				DtComentario[] hijos = comentarios[i].getRespuestas();
+				DtComentario[] hijos = comentarios[i].getRespuestas().toArray(new DtComentario[0]);
 				byte[] fotoComentador = comentarios[i].getFotoDuenio();
 				String urlFotoComentador = "";
 				if(fotoComentador != null){
