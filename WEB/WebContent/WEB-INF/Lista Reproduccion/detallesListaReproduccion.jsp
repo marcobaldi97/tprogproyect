@@ -2,9 +2,10 @@
 <%@page import="java.text.DateFormat"%>
 
 <%@ page import = "uytubeLogica.publicar.*"%>
-<%@ page import = "uytubeLogic.logica.SystemHandler.Privacidad"%>
-<%@ page import = "uytubeLogic.logica.DtCanal"%>
-<%@ page import = "uytubeLogic.logica.DtCategoria"%>
+<%@ page import = "uytubeLogica.publicar.Privacidad"%>
+<%@ page import = "uytubeLogica.publicar.DtCanal"%>
+<%@ page import = "uytubeLogica.publicar.DtCategoria"%>
+<%@ page import = "uytubeLogica.publicar.DtVideo"%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -39,7 +40,7 @@ tr:nth-child(even) {background-color: #f2f2f2;}</style>
 <body>
 
 <%
-uytubeLogica.publicar.DtListaReproduccion infoLista = (uytubeLogica.publicar.DtListaReproduccion) request.getAttribute("infoLista");
+DtListaReproduccion infoLista = (DtListaReproduccion) request.getAttribute("infoLista");
 %>
 
 <p>Nombre: <%=infoLista.getNombre()%></p>
@@ -47,7 +48,7 @@ uytubeLogica.publicar.DtListaReproduccion infoLista = (uytubeLogica.publicar.DtL
 
 <p>Categorias:
 <%
-	for(uytubeLogica.publicar.DtCategoria entry: infoLista.getCategoriasLDR())
+	for(DtCategoria entry: infoLista.getCategoriasLDR())
 	{
 %>
 
@@ -64,14 +65,14 @@ uytubeLogica.publicar.DtListaReproduccion infoLista = (uytubeLogica.publicar.DtL
 
 </tr>
 	<%
-	uytubeLogica.publicar.DtVideo[] vid = (uytubeLogica.publicar.DtVideo[]) request.getAttribute("videosLista");
-		for (uytubeLogica.publicar.DtVideo entry : vid) {
+	DtVideo[] vid = (DtVideo[]) request.getAttribute("videosLista");
+		for (DtVideo entry : vid) {
 			String nombreV=entry.getNombre();
 			String descV=entry.getDescripcion();
 			String propietarioV = entry.getPropietario();
 			request.setAttribute("IDVideo", entry.getIDVideo().toString());
 			request.setAttribute(nombreV, nombreV);
-			if(entry.getPrivacidad().equals(uytubeLogica.publicar.Privacidad.PUBLICO)){
+			if(entry.getPrivacidad().equals(Privacidad.PUBLICO)){
 	%>
 	<tr>
 	<td>Video
@@ -99,7 +100,7 @@ uytubeLogica.publicar.DtListaReproduccion infoLista = (uytubeLogica.publicar.DtL
 			request.setAttribute(nombreV, nombreV);
 			System.out.println(nickname);
 			System.out.println(entry.getPropietario());
-			if(entry.getPrivacidad().equals(uytubeLogica.publicar.Privacidad.PRIVADO) && entry.getPropietario().equals(nickname)){
+			if(entry.getPrivacidad().equals(Privacidad.PRIVADO) && entry.getPropietario().equals(nickname)){
 	%>
 	<tr>
 	<td>Video Privado

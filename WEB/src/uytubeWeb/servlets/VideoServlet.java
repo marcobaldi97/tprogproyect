@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,18 +12,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 
-import uytubeLogic.logica.DtCanal;
-import uytubeLogic.logica.DtCategoria;
-import uytubeLogic.logica.DtComentario;
-import uytubeLogic.logica.DtFecha;
-import uytubeLogic.logica.DtInfoVideo;
-import uytubeLogic.logica.DtUsuario;
-import uytubeLogic.logica.DtVideo;
-import uytubeLogic.logica.Fabrica;
-import uytubeLogic.logica.IUsuarioCtrl;
-import uytubeLogic.logica.IVideoCtrl;
-import uytubeLogic.logica.SystemHandler.Privacidad;
+import uytubeLogica.publicar.DtCanal;
+import uytubeLogica.publicar.DtCategoria;
+import uytubeLogica.publicar.DtComentario;
+import uytubeLogica.publicar.DtFecha;
+import uytubeLogica.publicar.DtInfoVideo;
+import uytubeLogica.publicar.DtUsuario;
+import uytubeLogica.publicar.DtVideo;
+import uytubeLogica.publicar.Privacidad;
 
 /**
  * Servlet implementation class VideoServlet
@@ -65,36 +66,59 @@ public class VideoServlet extends HttpServlet {
 
 	private void crearVideo(String login,String nomVideo, String duracion, String url, String fecha, String categoria,
 			String descripcionV) {
+		uytubeLogica.publicar.WebServicesService service = new uytubeLogica.publicar.WebServicesService();
+	    uytubeLogica.publicar.WebServices port = service.getWebServicesPort();
 		System.out.println("estoy creando el video");
-		Fabrica fabrica = Fabrica.getInstance();
-		IUsuarioCtrl usrCtrl = fabrica.getIUsuarioCtrl();
-		DtFecha fechaPublicacionV = new DtFecha(ParseFecha(fecha));
-		DtCategoria catV = new DtCategoria(categoria);
-		usrCtrl.aniadirVideo(login, nomVideo, descripcionV, (Integer.parseInt(duracion)), fechaPublicacionV, url,
+		DtFecha fechaPublicacionV = new DtFecha();
+        Date laDate = ParseFecha(fecha);
+        GregorianCalendar gcal = new GregorianCalendar();
+        gcal.setTime(laDate);
+        XMLGregorianCalendar xgcal = null;
+        try {
+            xgcal = DatatypeFactory.newInstance().newXMLGregorianCalendar(gcal);
+        } catch (DatatypeConfigurationException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+        fechaPublicacionV.setFecha(xgcal);
+		DtCategoria catV = new DtCategoria();
+		catV.setNombre(categoria);
+		port.aniadirVideo(login, nomVideo, descripcionV, (Integer.parseInt(duracion)), fechaPublicacionV, url,
 				catV, Privacidad.PRIVADO);
 
 	}
 
 
 	private void seguirUsuario(String nombre_usuario, String propietario) {
-		Fabrica fabrica = Fabrica.getInstance();
-		IUsuarioCtrl usrCtrl = fabrica.getIUsuarioCtrl();
-		usrCtrl.seguirUsuario(nombre_usuario, propietario);
+		uytubeLogica.publicar.WebServicesService service = new uytubeLogica.publicar.WebServicesService();
+	    uytubeLogica.publicar.WebServices port = service.getWebServicesPort();
+		port.seguirUsuario(nombre_usuario, propietario);
 	}
 	
 	private void dejarDeSeguirUsuario(String nombre_usuario, String propietario) {
-		Fabrica fabrica = Fabrica.getInstance();
-		IUsuarioCtrl usrCtrl = fabrica.getIUsuarioCtrl();
+		uytubeLogica.publicar.WebServicesService service = new uytubeLogica.publicar.WebServicesService();
+	    uytubeLogica.publicar.WebServices port = service.getWebServicesPort();
 		System.out.println("el usuario es :"+nombre_usuario+" y el propietario es : "+propietario);
-		usrCtrl.dejarUsuario(nombre_usuario, propietario);;
+		port.dejarUsuario(nombre_usuario, propietario);;
 	}
 
 	private void comentarVideo(int id_video, String comentador, String contenido) {
-		Fabrica fabrica = Fabrica.getInstance();
-		IVideoCtrl interfaz_video = fabrica.getIVideoCtrl();
+		uytubeLogica.publicar.WebServicesService service = new uytubeLogica.publicar.WebServicesService();
+	    uytubeLogica.publicar.WebServices port = service.getWebServicesPort();
 		Date fecha_actual = new Date();
-		DtFecha fecha = new DtFecha(fecha_actual);
-		interfaz_video.nuevoComentario(id_video, comentador, fecha, contenido);
+		DtFecha fecha = new DtFecha();
+        Date laDate = fecha_actual;
+        GregorianCalendar gcal = new GregorianCalendar();
+        gcal.setTime(laDate);
+        XMLGregorianCalendar xgcal = null;
+        try {
+            xgcal = DatatypeFactory.newInstance().newXMLGregorianCalendar(gcal);
+        } catch (DatatypeConfigurationException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+        fecha.setFecha(xgcal);
+		port.nuevoComentario(id_video, comentador, fecha, contenido);
 	}
 	
 	private String[] conseguirNicknamesUsuariosDelDtUsuario(DtUsuario[] dataUsuario) {
@@ -111,6 +135,8 @@ public class VideoServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		uytubeLogica.publicar.WebServicesService service = new uytubeLogica.publicar.WebServicesService();
+	    uytubeLogica.publicar.WebServices port = service.getWebServicesPort();
 		// TODO Auto-generated method stub
 		// response.getWriter().append("Served at: ").append(request.getContextPath());
 		System.out.println("estoy en videoServlet GET");
@@ -118,12 +144,9 @@ public class VideoServlet extends HttpServlet {
 		System.out.println(opc);
 		switch (opc) {
 		case "altaVideo":{
-			Fabrica fabrica = Fabrica.getInstance();
-			IVideoCtrl videoCtr;
 			HttpSession session=request.getSession(false);
 			if(session!=null && session.getAttribute("nombre_usuario")!=null){
-				videoCtr = fabrica.getIVideoCtrl();
-				DtCategoria[] cat = videoCtr.listarCategorias();
+				DtCategoria[] cat = port.listarCategorias().getItem().toArray(new DtCategoria[0]);
 				request.setAttribute("listadoCat", cat);
 				request.getRequestDispatcher("WEB-INF/Video/AltaVideo.jsp").forward(request, response);
 			}else
@@ -138,9 +161,7 @@ public class VideoServlet extends HttpServlet {
             if(session!=null && session.getAttribute("nombre_usuario")!=null) {
     		 	Integer id_video = Integer.parseInt(request.getParameter("id_video"));
     		 	String nombre_usuario = (String)session.getAttribute("nombre_usuario");
-    			Fabrica fabrica = Fabrica.getInstance();
-    			IVideoCtrl interfaz_video = fabrica.getIVideoCtrl();
-    			interfaz_video.valorarVideo(id_video, nombre_usuario, true);
+    			port.valorarVideo(id_video, nombre_usuario, true);
     		 	System.out.println("usuario "+nombre_usuario+" id_video:" +id_video);//esto es para ver si no manda nada null.
     		 	System.out.println("le di me gusta");
             }
@@ -152,9 +173,7 @@ public class VideoServlet extends HttpServlet {
             if(session!=null && session.getAttribute("nombre_usuario")!=null) {
     		 	Integer id_video = Integer.parseInt(request.getParameter("id_video"));
     		 	String nombre_usuario = (String)session.getAttribute("nombre_usuario");
-    			Fabrica fabrica = Fabrica.getInstance();
-    			IVideoCtrl interfaz_video = fabrica.getIVideoCtrl();
-    			interfaz_video.valorarVideo(id_video, nombre_usuario, false);
+    			port.valorarVideo(id_video, nombre_usuario, false);
     		 	System.out.println("usuario "+nombre_usuario+" id_video:" +id_video);
     		 	System.out.println("le di no me gusta");
             }
@@ -162,34 +181,31 @@ public class VideoServlet extends HttpServlet {
 		}
 		case "ver": {
 			System.out.println("Quiero ver un video");
-			Fabrica fabricaControladores = Fabrica.getInstance();
-			IVideoCtrl vidController = fabricaControladores.getIVideoCtrl();
-			IUsuarioCtrl usrController = fabricaControladores.getIUsuarioCtrl();
-			DtVideo dataVideo = vidController.infoAddVideo(Integer.parseInt(request.getParameter("ID")));
+			DtVideo dataVideo = port.infoAddVideo(Integer.parseInt(request.getParameter("ID")));
 			request.setAttribute("dataVideo", dataVideo);
-			DtComentario[] comentarios = vidController.listarComentarios(dataVideo.getiDVideo());
+			DtComentario[] comentarios = port.listarComentarios(dataVideo.getIDVideo()).getItem().toArray(new DtComentario[0]);
 			request.setAttribute("comentarios", comentarios);
-			DtUsuario usuario_propietario = usrController.listarDatosUsuario(dataVideo.getPropietario());
+			DtUsuario usuario_propietario = port.listarDatosUsuario(dataVideo.getPropietario());
 			request.setAttribute("usuario_propietario", usuario_propietario);
-			DtCanal canal_propietario = usrController.mostrarInfoCanal(dataVideo.getPropietario());
+			DtCanal canal_propietario = port.mostrarInfoCanal(dataVideo.getPropietario());
 			request.setAttribute("canal_propietario",canal_propietario);
-			DtInfoVideo infoVideo = vidController.verDetallesVideoExt(Integer.parseInt(request.getParameter("ID")));
-			request.setAttribute("cantLikes",infoVideo.getUsuariosGusta().length);
-			request.setAttribute("cantDislikes",infoVideo.getUsuariosNoGusta().length);
-			String[] listaLikes = conseguirNicknamesUsuariosDelDtUsuario(infoVideo.getUsuariosGusta());
-			String[] listaDislikes = conseguirNicknamesUsuariosDelDtUsuario(infoVideo.getUsuariosNoGusta());
+			DtInfoVideo infoVideo = port.verDetallesVideoExt(Integer.parseInt(request.getParameter("ID")));
+			request.setAttribute("cantLikes",infoVideo.getUsuariosGusta().size());
+			request.setAttribute("cantDislikes",infoVideo.getUsuariosNoGusta().size());
+			String[] listaLikes = conseguirNicknamesUsuariosDelDtUsuario(infoVideo.getUsuariosGusta().toArray(new DtUsuario[0]));
+			String[] listaDislikes = conseguirNicknamesUsuariosDelDtUsuario(infoVideo.getUsuariosNoGusta().toArray(new DtUsuario[0]));
 			request.setAttribute("listaLikes", listaLikes);
 			request.setAttribute("listaDislikes", listaDislikes);
 			HttpSession session=request.getSession(false);
             if(session!=null && session.getAttribute("nombre_usuario")!=null) {
             	request.setAttribute("logged" ,true);
             	String usuarioLogged = (String) session.getAttribute("nombre_usuario");
-            	String[] listasReproduccionUsuarioLogged = usrController.listarLDRdeUsuario(usuarioLogged);
+            	String[] listasReproduccionUsuarioLogged = port.listarLDRdeUsuario(usuarioLogged).getItem().toArray(new String[0]);
             	request.setAttribute("listasReproduccionUsuarioLogged", listasReproduccionUsuarioLogged);
             	Integer IDVideo = Integer.parseInt(request.getParameter("ID"));
-            	request.setAttribute("like_state", vidController.getEstadoValoracion(IDVideo, usuarioLogged));
+            	request.setAttribute("like_state", port.getEstadoValoracion(IDVideo, usuarioLogged));
             	//calificacion de estado de valoraci�n.
-            	String[] usuariosSeguidores = usrController.listarUsuariosQueLeSigue(dataVideo.getPropietario());
+            	String[] usuariosSeguidores = port.listarUsuariosQueLeSigue(dataVideo.getPropietario()).getItem().toArray(new String[0]);
             	boolean flagFollow = false;
             	for(int i = 0;i<usuariosSeguidores.length;i++){
             		if(usuariosSeguidores[i].equals(usuarioLogged)) flagFollow = true;
@@ -198,7 +214,7 @@ public class VideoServlet extends HttpServlet {
             		request.setAttribute("follow_state", "true");
             	else request.setAttribute("follow_state", "false");
             	//calificacion de estado de seguir.
-            	DtUsuario usuarioLoggedData = usrController.listarDatosUsuario(usuarioLogged);
+            	DtUsuario usuarioLoggedData = port.listarDatosUsuario(usuarioLogged);
             	request.setAttribute("dataUsuario", usuarioLoggedData);
             }else{
             	request.setAttribute("logged" ,false);
@@ -251,6 +267,8 @@ public class VideoServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		uytubeLogica.publicar.WebServicesService service = new uytubeLogica.publicar.WebServicesService();
+	    uytubeLogica.publicar.WebServices port = service.getWebServicesPort();
 		// TODO Auto-generated method stub
 		System.out.println("estoy en videoServlet POST");
 		String opc = request.getParameter("opcion");

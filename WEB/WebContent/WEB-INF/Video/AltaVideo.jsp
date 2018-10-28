@@ -7,7 +7,7 @@
     <%@include file = "../cosasComunesDelHead.jsp" %>
     <link rel="stylesheet" href="media/styles/AltaVideo.css">
 
-    <%@ page import = "uytubeLogic.logica.DtCategoria"%>
+    <%@ page import = "uytubeLogica.publicar.DtCategoria"%>
     <title>Alta Video</title>
 </head>
 
