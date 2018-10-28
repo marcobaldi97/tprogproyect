@@ -1,9 +1,9 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.text.DateFormat"%>
 <%@page import="uytubeLogic.logica.DtListaReproduccion"%>
-<%@ page import = "uytubeLogic.logica.DtVideo"%>
-<%@ page import = "uytubeLogic.logica.SystemHandler.Privacidad"%>
-<%@ page import = "uytubeLogic.logica.DtCanal"%>
+<%@ page import = "uytubeLogica.publicar.DtVideo"%>
+<%@ page import = "uytubeLogica.publicar.Privacidad"%>
+<%@ page import = "uytubeLogica.publicar.DtCanal"%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
