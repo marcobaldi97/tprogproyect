@@ -11,7 +11,9 @@ import javax.xml.ws.Endpoint;
 import uytube.datosPrueba.DatosDePrueba;
 import uytubeLogic.logica.DtCanal;
 import uytubeLogic.logica.DtCategoria;
+import uytubeLogic.logica.DtFecha;
 import uytubeLogic.logica.DtListaReproduccion;
+import uytubeLogic.logica.DtUsuario;
 import uytubeLogic.logica.DtVideo;
 import uytubeLogic.logica.Fabrica;
 import uytubeLogic.logica.IUsuarioCtrl;
@@ -113,4 +115,83 @@ public class WebServices {
     	IUsuarioCtrl IUI = fab.getIUsuarioCtrl();
     	return IUI.infoLDRdeUsuario(filtro, login, priv);
     }
+    
+    @WebMethod
+    public DtCanal mostrarInfoCanal(String nickname) {
+    	Fabrica fab=Fabrica.getInstance();
+    	IUsuarioCtrl IUI = fab.getIUsuarioCtrl();
+    	return IUI.mostrarInfoCanal(nickname);
+    }
+    
+    @WebMethod
+    public DtUsuario listarDatosUsuario(String nickname) {
+    	Fabrica fab=Fabrica.getInstance();
+    	IUsuarioCtrl IUI = fab.getIUsuarioCtrl();
+    	return IUI.listarDatosUsuario(nickname);
+    }
+    
+    @WebMethod
+    public String[] listarUsuariosQueLeSigue(String nickname) {
+    	Fabrica fab=Fabrica.getInstance();
+    	IUsuarioCtrl IUI = fab.getIUsuarioCtrl();
+    	return IUI.listarUsuariosQueLeSigue(nickname);
+    }
+    
+    @WebMethod
+    public String[] listarUsuariosQueSigue(String nickname) {
+    	Fabrica fab=Fabrica.getInstance();
+    	IUsuarioCtrl IUI = fab.getIUsuarioCtrl();
+    	return IUI.listarUsuariosQueSigue(nickname);
+    }
+    
+    @WebMethod
+    public String[] listarLDRdeUsuario(String nickname) {
+    	Fabrica fab=Fabrica.getInstance();
+    	IUsuarioCtrl IUI = fab.getIUsuarioCtrl();
+    	return IUI.listarLDRdeUsuario(nickname);
+    }
+    @WebMethod
+    public void responderComentario(Integer id_video, Integer id_comentario, String comentador, DtFecha fechaHoy, String contenido) {
+    	Fabrica fab=Fabrica.getInstance();
+    	IVideoCtrl IVI = fab.getIVideoCtrl();
+    	IVI.responderComentario(id_video, id_comentario, comentador, fechaHoy, contenido);
+    }
+    
+    @WebMethod
+    public boolean verificarLogin(String nick, String pass) {
+    	Fabrica fab=Fabrica.getInstance();
+    	IUsuarioCtrl IUI = fab.getIUsuarioCtrl();
+    	return IUI.verificarLogin(nick, pass);
+    }
+    
+    @WebMethod
+    public void seguirUsuario(String nombre_usuario, String usuario_a_seguir) {
+    	Fabrica fab=Fabrica.getInstance();
+    	IUsuarioCtrl IUI = fab.getIUsuarioCtrl();
+    	IUI.seguirUsuario(nombre_usuario, usuario_a_seguir);
+    }
+    
+    @WebMethod
+    public void dejarUsuario(String nombre_usuario, String usuario_a_no_seguir) {
+    	Fabrica fab=Fabrica.getInstance();
+    	IUsuarioCtrl IUI = fab.getIUsuarioCtrl();
+    	IUI.dejarUsuario(nombre_usuario, usuario_a_no_seguir);
+    }
+    
+    @WebMethod
+    public boolean verificarDispUsuario(String nick, String email) {
+    	Fabrica fab=Fabrica.getInstance();
+    	IUsuarioCtrl IUI = fab.getIUsuarioCtrl();
+    	return IUI.verificarDispUsuario(nick, email);
+    }
+    
+    @WebMethod
+    public void nuevoUsuario(String nickname,String contrasenia,String nombre,String apellido,String email,DtFecha dtFechaNac,byte[] foto,String nomCanal,
+			String descripcion, Privacidad priv,String categoria) {
+    	Fabrica fab=Fabrica.getInstance();
+    	IUsuarioCtrl IUI = fab.getIUsuarioCtrl();
+    	IUI.nuevoUsuario(nickname, contrasenia, nombre, apellido, email, dtFechaNac, foto, nomCanal,
+    			descripcion, priv, categoria);
+    }
+    
 }

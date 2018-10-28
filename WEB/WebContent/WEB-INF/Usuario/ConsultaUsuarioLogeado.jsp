@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page import = "uytubeLogic.logica.DtVideo"%>
-<%@ page import = "uytubeLogic.logica.DtCategoria"%>
-<%@ page import = "uytubeLogic.logica.DtFecha"%>
-<%@ page import = "uytubeLogic.logica.DtCanal"%>
-<%@page import="uytubeLogic.logica.DtListaReproduccion"%>
-<%@ page import = "uytubeLogic.logica.DtUsuario"%>
+    <%@ page import = "uytubeLogica.publicar.DtVideo"%>
+<%@ page import = "uytubeLogica.publicar.DtCategoria"%>
+<%@ page import = "uytubeLogica.publicar.DtFecha"%>
+<%@ page import = "uytubeLogica.publicar.DtCanal"%>
+<%@page import="uytubeLogica.publicar.DtListaReproduccion"%>
+<%@ page import = "uytubeLogica.publicar.DtUsuario"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.text.DateFormat"%>
 <%@page import="java.util.Base64"%>
@@ -28,7 +28,7 @@
 	String nick = dataUsuario.getNickname();
 	String nombre = dataUsuario.getNombre();
 	String apellido = dataUsuario.getApellido();
-	Date fechaNac = dataUsuario.getFechaNacimiento().getFecha();
+	Date fechaNac = dataUsuario.getFechaNacimiento().getFecha().toGregorianCalendar().getTime();
 	int dia = fechaNac.getDate();
 	int mes = fechaNac.getMonth()+1;
 	int anio = fechaNac.getYear()  + 1900;
@@ -169,7 +169,7 @@
 							String nombreV=entry.getNombre();
 							String descV=entry.getDescripcion();
 							String propietarioV = entry.getPropietario();
-							request.setAttribute("IDVideo", entry.getiDVideo().toString());
+							request.setAttribute("IDVideo", entry.getIDVideo().toString());
 							request.setAttribute(nombreV, nombreV);
 					%>
 					<tr class="videoRow">
@@ -178,7 +178,7 @@
 						<td>
 							<form action="watch" method="get"> 
 							<input type="hidden" name="opcion" value="ver">
-							<input type="hidden" name="ID" value="<%=entry.getiDVideo()%>">
+							<input type="hidden" name="ID" value="<%=entry.getIDVideo()%>">
 							<input type="submit" value="Ver Ahora"> </form> 
 							
 							 <%

@@ -7,6 +7,7 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -15,17 +16,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 
-import uytubeLogic.logica.DtCanal;
-import uytubeLogic.logica.DtCategoria;
-import uytubeLogic.logica.DtFecha;
-import uytubeLogic.logica.DtListaReproduccion;
-import uytubeLogic.logica.DtUsuario;
-import uytubeLogic.logica.DtVideo;
-import uytubeLogic.logica.Fabrica;
-import uytubeLogic.logica.IUsuarioCtrl;
-import uytubeLogic.logica.IVideoCtrl;
-import uytubeLogic.logica.SystemHandler.Privacidad;
+import uytubeLogica.publicar.DtCanal;
+import uytubeLogica.publicar.DtFecha;
+import uytubeLogica.publicar.DtListaReproduccion;
+import uytubeLogica.publicar.DtUsuario;
+import uytubeLogica.publicar.DtVideo;
+import uytubeLogica.publicar.Privacidad;
+
+
 
 /**
  * Servlet implementation class UsuarioServlet
@@ -43,14 +45,14 @@ public class UsuarioServlet extends HttpServlet {
     }
 
 	private void seguirUsuario(String nombre_usuario, String usuario_a_seguir) {
-		Fabrica fabrica = Fabrica.getInstance();
-		IUsuarioCtrl interfaz_usuario = fabrica.getIUsuarioCtrl();
-		interfaz_usuario.seguirUsuario(nombre_usuario, usuario_a_seguir);
+		uytubeLogica.publicar.WebServicesService service = new uytubeLogica.publicar.WebServicesService();
+	    uytubeLogica.publicar.WebServices port = service.getWebServicesPort();
+		port.seguirUsuario(nombre_usuario, usuario_a_seguir);
 	}
 	private void dejarUsuario(String nombre_usuario, String usuario_a_no_seguir) {
-		Fabrica fabrica = Fabrica.getInstance();
-		IUsuarioCtrl interfaz_usuario = fabrica.getIUsuarioCtrl();
-		interfaz_usuario.dejarUsuario(nombre_usuario, usuario_a_no_seguir);
+		uytubeLogica.publicar.WebServicesService service = new uytubeLogica.publicar.WebServicesService();
+	    uytubeLogica.publicar.WebServices port = service.getWebServicesPort();
+	    port.dejarUsuario(nombre_usuario, usuario_a_no_seguir);
 	}
 
   
@@ -60,6 +62,8 @@ public class UsuarioServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		uytubeLogica.publicar.WebServicesService service = new uytubeLogica.publicar.WebServicesService();
+	    uytubeLogica.publicar.WebServices port = service.getWebServicesPort();
 		response.setCharacterEncoding("UTF-8");
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
@@ -97,34 +101,31 @@ public class UsuarioServlet extends HttpServlet {
 		}	
 		case "Perfil":{
 		
-			String nickname = (String)request.getParameter("nickname");
-			Fabrica fabrica=Fabrica.getInstance();
-			IUsuarioCtrl interfazUsuarios = fabrica.getIUsuarioCtrl();
-			
+			String nickname = (String)request.getParameter("nickname");			
 			
 			System.out.println("estoy yendo a consultar a " + nickname );
-			DtCanal infoCanal = interfazUsuarios.mostrarInfoCanal(nickname);
-			DtUsuario usuario = interfazUsuarios.listarDatosUsuario(nickname);
+			DtCanal infoCanal = port.mostrarInfoCanal(nickname);
+			DtUsuario usuario = port.listarDatosUsuario(nickname);
 			request.setAttribute("dataCanal", infoCanal);
 			request.setAttribute("dataUsuario", usuario);
 			
-		 	IUsuarioCtrl usrCtr = fabrica.getIUsuarioCtrl();
-	    	String [] seguidores = usrCtr.listarUsuariosQueLeSigue(nickname);
-	    	String [] seguidos = usrCtr.listarUsuariosQueSigue(nickname);	    	
-	    	String[] listasReproduccion = usrCtr.listarLDRdeUsuario(nickname);
+		 	
+	    	String [] seguidores = port.listarUsuariosQueLeSigue(nickname).getItem().toArray(new String[0]);
+	    	String [] seguidos = port.listarUsuariosQueSigue(nickname).getItem().toArray(new String[0]);	    	
+	    	String[] listasReproduccion = port.listarLDRdeUsuario(nickname).getItem().toArray(new String[0]);
 	      
 	    	request.setAttribute("dataSeguidores", seguidores);
 	    	request.setAttribute("dataSeguidos",seguidos);
 	    	request.setAttribute("dataListasReproduccion",listasReproduccion);
 			
-			DtListaReproduccion[] listas = interfazUsuarios.infoLDRdeUsuario(null, nickname, Privacidad.PUBLICO);
-		    DtVideo[] videos = interfazUsuarios.infoVideosCanal(null, nickname, Privacidad.PUBLICO);
+			DtListaReproduccion[] listas = port.infoLDRdeUsuario("", nickname, Privacidad.PUBLICO).getItem().toArray(new DtListaReproduccion[0]);
+		    DtVideo[] videos = port.infoVideosCanal("", nickname, Privacidad.PUBLICO).getItem().toArray(new DtVideo[0]);
 	        HttpSession session=request.getSession(false);
 	        if(session!=null) {
 	            String login=(String)session.getAttribute("nombre_usuario");
 	            if(login!=null) {
 	                System.out.println("hay un usuario logueado");
-	                String [] usrQueSigue = interfazUsuarios.listarUsuariosQueSigue(login);
+	                String [] usrQueSigue = port.listarUsuariosQueSigue(login).getItem().toArray(new String[0]);
 	                boolean loSigue = false;
 	                int i=0;
 	                while((i<usrQueSigue.length) && (loSigue==false)){
@@ -135,8 +136,8 @@ public class UsuarioServlet extends HttpServlet {
 	                request.setAttribute("usrSigueAlOtro", loSigue);
 	                if(login.equals(nickname)){
 	                	//request.setAttribute("duenioCanal", true);
-		                DtVideo[] videosPrivadosSesion=interfazUsuarios.infoVideosCanal(null, login, Privacidad.PRIVADO); //videos privados del usuario logeado
-		                DtListaReproduccion[] listasPrivadasSesion=interfazUsuarios.infoLDRdeUsuario(null, login, Privacidad.PRIVADO); //listas privadas del usr log
+		                DtVideo[] videosPrivadosSesion=port.infoVideosCanal("", login, Privacidad.PRIVADO).getItem().toArray(new DtVideo[0]); //videos privados del usuario logeado
+		                DtListaReproduccion[] listasPrivadasSesion=port.infoLDRdeUsuario("", login, Privacidad.PRIVADO).getItem().toArray(new DtListaReproduccion[0]); //listas privadas del usr log
 		                List<DtVideo> videosAux= new ArrayList<DtVideo>(Arrays.asList(videos));
 		                videosAux.addAll(Arrays.asList(videosPrivadosSesion));
 		                videos=videosAux.toArray(new DtVideo[0]);
@@ -176,11 +177,20 @@ public class UsuarioServlet extends HttpServlet {
     			int id_comentario = Integer.parseInt(request.getParameter("id_comentario"));
     			String contenido = request.getParameter("contenido");
     			String comentador = (String)session.getAttribute("nombre_usuario");
-    			Fabrica fabricaControladores = Fabrica.getInstance();
-    			IVideoCtrl vidController = fabricaControladores.getIVideoCtrl();
     			Date today = new Date();
-    			DtFecha fechaHoy = new DtFecha(today);
-    			vidController.responderComentario(id_video, id_comentario, comentador, fechaHoy, contenido);
+    			DtFecha fechaHoy = new DtFecha();
+    			GregorianCalendar gcal = new GregorianCalendar();
+    			gcal.setTime(today);
+    		    XMLGregorianCalendar xgcal = null;
+				try {
+					xgcal = DatatypeFactory.newInstance().newXMLGregorianCalendar(gcal);
+				} catch (DatatypeConfigurationException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+    			fechaHoy.setFecha(xgcal);
+    			
+    			port.responderComentario(id_video, id_comentario, comentador, fechaHoy, contenido);
     			System.out.println(id_video+"||"+id_comentario+"||"+comentador+"||"+fechaHoy+"||"+contenido);
             }
 			break;
@@ -193,22 +203,21 @@ public class UsuarioServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setCharacterEncoding("UTF-8");
-		
+		uytubeLogica.publicar.WebServicesService service = new uytubeLogica.publicar.WebServicesService();
+	    uytubeLogica.publicar.WebServices port = service.getWebServicesPort();
 		// TODO Auto-generated method stub
 		
 		String opcion = (String) request.getParameter("opcion");
 		System.out.println(opcion);
 		switch (opcion) {
 		case "login" :{
-			Fabrica fabrica=Fabrica.getInstance();
-			IUsuarioCtrl UsuarioController = fabrica.getIUsuarioCtrl();
 			System.out.println("estoy probando con:");
 			System.out.println(request.getParameter("nickInicio"));
 			System.out.println(request.getParameter("passInicio"));
 			String encodedNick = new String(request.getParameter("nickInicio").getBytes("ISO-8859-1"), "UTF-8");
 			String encodedPass = new String(request.getParameter("passInicio").getBytes("ISO-8859-1"), "UTF-8");
 			System.out.println("o mejor con: "+encodedNick+" "+encodedPass+"?");
-			if(UsuarioController.verificarLogin(encodedNick, encodedPass)) {
+			if(port.verificarLogin(encodedNick, encodedPass)) {
 				System.out.println("existe el usuario con esa contrase�a");
 				HttpSession sesion= request.getSession(true);
 				sesion.setAttribute("nombre_usuario", encodedNick);
@@ -236,8 +245,6 @@ public class UsuarioServlet extends HttpServlet {
 		}
 		case "checkLoginSidebar" :{
 			System.out.println("estoy en chekloginsidebar");
-			 uytubeLogica.publicar.WebServicesService service = new uytubeLogica.publicar.WebServicesService();
-		      uytubeLogica.publicar.WebServices port = service.getWebServicesPort();
 		      port.operacionPrueba();
 			String nomUsu=(String)request.getSession().getAttribute("nombre_usuario");
 			if(nomUsu==null) {
@@ -259,9 +266,7 @@ public class UsuarioServlet extends HttpServlet {
 		case "checkDispUsr":{
 			String nick = URLDecoder.decode(request.getParameter("nickname"), "UTF-8");
 			System.out.println(nick);
-			Fabrica fabrica = Fabrica.getInstance();
-			IUsuarioCtrl usuarioCtrl = fabrica.getIUsuarioCtrl();
-			boolean disponible=usuarioCtrl.verificarDispUsuario(nick, (String)request.getParameter("email"));
+			boolean disponible=port.verificarDispUsuario(nick, (String)request.getParameter("email"));
     		if(!disponible){
     			response.getWriter().print("el nick y/o email estan ocupados"); 
     	  	}
