@@ -17,8 +17,9 @@ public class Canal {
 	private Categoria cate;
 	private Map<String, Video> videos;
 	private Map<String, ListaReproduccion> listasReproduccion;
+	private Map<Integer,DtVideoHistorial> favoritoHistorico;
 	private String propietario;
-
+	//carmona puto
 	public String getNombre() {
 		return nombre;
 	}
@@ -89,6 +90,7 @@ public class Canal {
 		}
 		videos = new HashMap<String, Video>();
 		listasReproduccion = new HashMap<String, ListaReproduccion>();
+		favoritoHistorico = new HashMap<Integer, DtVideoHistorial>();
 		SystemHandler manejadorSistema = SystemHandler.getInstance();
 		DtListaReproduccion[] listasDefault = manejadorSistema.obtenerListasReproduccion();
 		for (int index = 0; index < listasDefault.length; index++) {
@@ -303,4 +305,30 @@ public class Canal {
 		}
 		return listasADevolver;
 	}
+
+	public void agregarVisita(int id_video) 
+	{
+		if(favoritoHistorico.containsKey(id_video))
+		{
+			DtVideoHistorial videoHistorial=favoritoHistorico.get(id_video);
+			videoHistorial.actualizar();
+		}
+		else
+		{
+			VideoHandler manejadorVideo = VideoHandler.getInstance();
+			Video videoActual = manejadorVideo.find(id_video);
+			DtVideo dtVideoActual = new DtVideo(videoActual);
+			DtVideoHistorial nuevoVideoHistorial = new DtVideoHistorial(dtVideoActual);
+			favoritoHistorico.put(id_video, nuevoVideoHistorial);
+		}
+		
+		
+	}
+	
+	public DtVideoHistorial[] getFavoritoHistorico()
+	{
+		return (DtVideoHistorial[]) favoritoHistorico.values().toArray(new DtVideoHistorial[0]);
+	}
+				
 }
+
