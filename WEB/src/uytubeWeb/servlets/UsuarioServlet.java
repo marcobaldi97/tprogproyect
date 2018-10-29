@@ -32,7 +32,7 @@ import uytubeLogica.publicar.Privacidad;
 /**
  * Servlet implementation class UsuarioServlet
  */
-@WebServlet({"/login","/profile","/modifyUser","/follow","/responseComment"})
+@WebServlet({"/history","/login","/profile","/modifyUser","/follow","/responseComment"})
 public class UsuarioServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -250,6 +250,7 @@ public class UsuarioServlet extends HttpServlet {
 			if(nomUsu==null) {
 			
 			}else {
+				response.getWriter().append("<a href=\"history?opcion=historial\">Historial</a>");
 				response.getWriter().append("<a href=\"newVideo?opcion=altaVideo\">Nuevo Video</a>");
 				response.getWriter().append("<a href=\"newPlaylist?action=nuevaLDR\">Nueva Lista</a>");
 			}
