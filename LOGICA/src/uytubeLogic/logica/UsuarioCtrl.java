@@ -244,4 +244,17 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 		return usuarioParticular != null && usuarioParticular.getPassword().equals(pass);
 
 	}
+
+	@Override
+	public void agregarVisita(int id_video, String nick) {
+		Usuario usuarioParticular = usuarioh.find(nick);
+		usuarioParticular.agregarVisita(id_video);
+	}
+
+	@Override
+	public DtVideoHistorial[] listarVideoHistorial(String nick) {
+		Usuario usuarioParticular = usuarioh.find(nick);
+		return usuarioParticular.listarVideoHistorial();
+		
+	}
 }

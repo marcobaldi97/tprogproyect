@@ -239,4 +239,13 @@ public class Usuario {
 		return canalPropio.getListas();
 	}
 
+	public void agregarVisita(int id_video) {
+		canalPropio.agregarVisita(id_video);
+		
+	}
+
+	public DtVideoHistorial[] listarVideoHistorial() {
+		return canalPropio.getFavoritoHistorico();
+	}
+
 }
