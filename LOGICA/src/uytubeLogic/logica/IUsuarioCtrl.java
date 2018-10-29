@@ -82,5 +82,6 @@ public interface IUsuarioCtrl {
 	public abstract DtListaReproduccion[] listarLDRPublicasPorNombre(String nombre);
 
 	public abstract boolean verificarLogin(String nick, String pass);
-
+	
+	public abstract void removerUsuario(String nick);
 }

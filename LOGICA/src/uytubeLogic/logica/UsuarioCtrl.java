@@ -27,7 +27,7 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 		}
 		return tamanio;
 	}// Carmona: lo siento pero lo tengo que usar desde una JSP, entonces no me
-		// conviene que esté en el controlador. Att.: Marco
+		// conviene que estï¿½ en el controlador. Att.: Marco
 
 	public Boolean memberListaReproduccionPropia(String nickU, String nombreLista) {
 		UsuarioHandler usuHandler = UsuarioHandler.getInstance();
@@ -243,5 +243,28 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 		Usuario usuarioParticular = usuarioh.find(nick);
 		return usuarioParticular != null && usuarioParticular.getPassword().equals(pass);
 
+	}
+
+	@Override
+	public void removerUsuario(String nick) {
+		// TODO Auto-generated method stub
+		Usuario usrEliminar = usuarioh.find(nick);
+		//dejar de seguir a usr
+		String [] seguidos = listarUsuariosQueSigue(nick);
+		for(String entry: seguidos){	dejarUsuario(nick, entry);		}
+		String [] seguidores = listarUsuariosQueLeSigue(nick);
+		for(String entry: seguidores){	dejarUsuario(entry,nick);	}
+		//quitar videos listas de rep
+		String[] listas = listarLDRdeUsuario(nick);
+		//eliminarVideoLista(String nickU, Integer id_video, String nombreLDR)
+		//String[] listarLDRParticularesdeUsuario(String nickname)
+		//comentarios de sus videos
+		//comentarios en otros videos
+		//quitar videos canal
+		String[] videosCanal = listarVideosCanal(nick);
+		System.out.println("Voy a eliminar a un usr");
+		//valoraciones a videos (mg)
+		usuarioh.removerUsuario(usrEliminar);
+		
 	}
 }

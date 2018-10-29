@@ -33,7 +33,7 @@ public class WebServices {
 
 	@WebMethod(exclude = true)
 	public void publicar() {
-		endpoint = Endpoint.publish("http://localhost:9128/webservices", this);
+		endpoint = Endpoint.publish("http://localhost:9130/webservices", this);
 	} // VERIFICAR PUERTO
 
 	@WebMethod(exclude = true)
@@ -295,5 +295,12 @@ public class WebServices {
 		Fabrica fab = Fabrica.getInstance();
 		IUsuarioCtrl IUI = fab.getIUsuarioCtrl();
 		IUI.nuevaListaParticular(login, nombreLista, priv);
+	}
+	
+	@WebMethod
+	public void removerUsuario(String nick){
+		Fabrica fab = Fabrica.getInstance();
+		IUsuarioCtrl IUI = fab.getIUsuarioCtrl();
+		IUI.removerUsuario(nick);
 	}
 }
