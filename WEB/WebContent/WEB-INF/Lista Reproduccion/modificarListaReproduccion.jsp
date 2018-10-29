@@ -79,7 +79,7 @@ tr:nth-child(even) {background-color: #f2f2f2;}</style>
 			request.setAttribute(nombreV, nombreV);
 			System.out.println(nickname);
 			System.out.println(entry.getPropietario());
-			
+			//comentario
 	%>
 	<tr>
 	<td>Videos Lista
