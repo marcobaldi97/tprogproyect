@@ -1,17 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page errorPage="../error/error404.jsp" %>
-<%@ page import = "uytubeLogic.logica.DtVideo"%>
-<%@ page import = "uytubeLogic.logica.DtCategoria"%>
-<%@ page import = "uytubeLogic.logica.DtFecha"%>
-<%@ page import = "uytubeLogic.logica.DtUsuario"%>
-<%@ page import = "uytubeLogic.logica.DtComentario"%>
-<%@ page import = "uytubeLogic.logica.DtUsuario"%>
-<%@ page import = "uytubeLogic.logica.DtCanal"%>
-<%@ page import = "uytubeLogic.logica.Fabrica"%>
+<%@ page import = "uytubeLogica.publicar.DtVideo"%>
+<%@ page import = "uytubeLogica.publicar.DtCategoria"%>
+<%@ page import = "uytubeLogica.publicar.DtFecha"%>
+<%@ page import = "uytubeLogica.publicar.DtUsuario"%>
+<%@ page import = "uytubeLogica.publicar.DtComentario"%>
+<%@ page import = "uytubeLogica.publicar.DtUsuario"%>
+<%@ page import = "uytubeLogica.publicar.DtCanal"%>
 
-<%@ page import = "uytubeLogic.logica.IUsuarioCtrl"%>
-<%@ page import = "uytubeLogic.logica.IVideoCtrl"%>
 <%@ page import = "javax.servlet.http.HttpSession"%>
 <%@page import="java.util.Base64"%>
 <%@ page import = "java.util.Date"%>
@@ -22,7 +19,7 @@
 	<%
 	DtVideo dataVideo = (DtVideo) request.getAttribute("dataVideo");
 	String titulo = dataVideo.getNombre();
-	String id_video = dataVideo.getiDVideo().toString();
+	String id_video = dataVideo.getIDVideo().toString();
 	DtUsuario info_propietario = (DtUsuario) request.getAttribute("usuario_propietario");
 	DtCanal canal_propietario = (DtCanal) request.getAttribute("canal_propietario");
 	String url_video = dataVideo.getUrl();
@@ -31,7 +28,7 @@
 	DtCategoria categoria = dataVideo.getCategoria();
 	String nombre_categoria = categoria.getNombre();
 	DtFecha fechaPublicacion = dataVideo.getFechaPublicacion();
-	Date fecha_publicacion = fechaPublicacion.getFecha();
+	Date fecha_publicacion = fechaPublicacion.getFecha().toGregorianCalendar().getTime();
 	int dia = fecha_publicacion.getDate();
 	int mes =  fecha_publicacion.getMonth() + 1;
 	int anio = fecha_publicacion.getYear() + 1900;
@@ -80,12 +77,9 @@
 	}
 	//fin de la carga
 	DtComentario[] comentarios = (DtComentario[]) request.getAttribute("comentarios");
-	Integer tamanio_comentarios = 0;
-	for(int i = 0; i < comentarios.length; i++){
-		tamanio_comentarios = tamanio_comentarios + comentarios[i].getTamanioArbol();
-	}
 	%>
-	<link rel="stylesheet" href="media/styles/cssBootstrap/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="media/styles/VerVideo.css">
 	<title><%=titulo%></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1"><%//Para mobile. %>
 		<script type="text/javascript">
@@ -97,7 +91,7 @@
 		var response_box = "response_box" + index;
 	    var x = document.getElementById(response_box);
 	    if (x.style.display === "none") {
-	        x.style.display = "inline-table";
+	        x.style.display = "block";
 	    } else {
 	        x.style.display = "none";
 	    }
@@ -203,77 +197,79 @@
 <body>
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-sm-12"><iframe id="frame" src="<%=url_video%>"></iframe></div>
+		<div class="col-sm-12 iframe-container"><iframe width="560" height="315" id="frame" src="<%=url_video%>"></iframe></div>
 	</div>
-	<div class="row">
-		<div class="col-sm-12"><h2id="titulo"><%=titulo%></h2></div>
-	</div>
-	<div class="row">
-		<div class="col-sm-2">
-			<img class="logo" src=<%=url_logo_autor%> width="100px" height="70px" ></img>
+	<div class="container-fluid" style="border:4px solid #EEEEEE" id="video_data_container">
+		<div class="row">
+			<div class="col-sm-12"><h2 id="titulo"><%=titulo%></h2></div>
 		</div>
-		<div class="col-sm-2">
-			<a onclick="ir_a_perfil()"><%=nombre_canal%></a>
+		<div class="row">
+			<div class="col-sm-2">
+				<img class="logo" src=<%=url_logo_autor%> width="100px" height="70px" ></img>
+			</div>
+			<div class="col-sm-2">
+				<a onclick="ir_a_perfil()"><%=nombre_canal%></a>
+			</div>
+			<div class="col-sm-2">
+				<p class="texto_simple"><%=dia%>/<%=mes%>/<%=anio%></p>
+			</div>
+			<div class="col-sm-6"><p class="texto_simple">
+				<h3>Likes:<%=cantLikes%> Dislikes:<%=cantDislikes%></h3>
+			</div>
 		</div>
-		<div class="col-sm-2">
-			<p class="texto_simple"><%=dia%>/<%=mes%>/<%=anio%></p>
+		<div class="row">
+			<div class="col-sm-12">
+				<blockquote>
+					<p align="left"><%=descripcion%></p>
+				</blockquote>
+			</div>
 		</div>
-		<div class="col-sm-6"><p class="texto_simple">
-			<h3>Likes:<%=cantLikes%> Dislikes:<%=cantDislikes%></h3>
+		<div class="row">
+			<div class="col-sm-8">
+				<h3>
+					<small>Categoria: <%=nombre_categoria%></small>
+				</h3>
+			</div>
+			<div class="col-sm-4">
+				<%if(logged_state == "true") this.htmlListasComboBoxGenerator(out, listasReproduccionUsuarioLogged); %>
+			</div>
 		</div>
-	</div>
-	<div class="row">
-		<div class="col-sm-12">
-			<blockquote>
-				<p align="left"><%=descripcion%></p>
-			</blockquote>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-sm-8">
-			<h3>
-				<small>Categoria: <%=nombre_categoria%></small>
-			</h3>
-		</div>
-		<div class="col-sm-4">
-			<%if(logged_state == "true") this.htmlListasComboBoxGenerator(out, listasReproduccionUsuarioLogged); %>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-sm-12">
-			<%
-			if(logged_state == "true"){
-				DtUsuario dataUsuario2 = (DtUsuario) request.getAttribute("dataUsuario");
-				String nombre_user_loggeado = dataUsuario2.getNickname();
-				if(!propietario.equals(nombre_user_loggeado)){
-					System.out.println(follow_state);
-					if(follow_state == "false"){%>
-				<button id="seguir_button" name="boton_seguir" value="Seguir" onclick="seguir_script()">Seguir</button>
-				<%	}else{%>
-				<button id="seguir_button" name="boton_seguir" value="Seguir" onclick="dejar_seguir_script()">Dejar de seguir</button>
-				<%	}//final del else	
-				}else{
+		<div class="row">
+			<div class="col-sm-12">
+				<%
+				if(logged_state == "true"){
+					DtUsuario dataUsuario2 = (DtUsuario) request.getAttribute("dataUsuario");
+					String nombre_user_loggeado = dataUsuario2.getNickname();
+					if(!propietario.equals(nombre_user_loggeado)){
+						System.out.println(follow_state);
+						if(follow_state == "false"){%>
+					<button id="seguir_button" name="boton_seguir" value="Seguir" onclick="seguir_script()">Seguir</button>
+					<%	}else{%>
+					<button id="seguir_button" name="boton_seguir" value="Seguir" onclick="dejar_seguir_script()">Dejar de seguir</button>
+					<%	}//final del else	
+					}else{
+					%>
+					
+					<%	
+					}
+				}//final del if
 				%>
-				
-				<%	
-				}
-			}//final del if
-			%>
+			</div>
 		</div>
-	</div>
-	<div class="row">
-		<div class="col-sm-12">
-			<%
-				if(logged_state.equals("true")){
-					System.out.println("Este es el estado actual: "+like_state);
-					if(like_state.equals("neutral")){%>
-					<button class="like_dislike_button" style="width:50%" id="like_button" onclick = "me_gusta_script()">  Me gusta  </button><button class="like_dislike_button" style="width:50%" id="dislike_button" name="opcion" value="dislikeVideo" onclick="no_me_gusta_script()">No me gusta </button></th>
-				<%	}if(like_state.equals("like")){%>
-				<button class="like_dislike_button" style="width:100%" id="dislike_button" name="opcion" value="dislikeVideo" onclick="no_me_gusta_script()">No me gusta </button></th>
-				<%	}if(like_state.equals("dislike")){%>
-				<button class="like_dislike_button" style="width:100%" id="like_button" onclick = "me_gusta_script()">  Me gusta  </button></th>
-				<%	}	
-				}	%>	
+		<div class="row">
+			<div class="col-sm-12">
+				<%
+					if(logged_state.equals("true")){
+						System.out.println("Este es el estado actual: "+like_state);
+						if(like_state.equals("neutral")){%>
+						<button class="like_dislike_button" style="width:50%" id="like_button" onclick = "me_gusta_script()">  Me gusta  </button><button class="like_dislike_button" style="width:50%" id="dislike_button" name="opcion" value="dislikeVideo" onclick="no_me_gusta_script()">No me gusta </button></th>
+					<%	}if(like_state.equals("like")){%>
+					<button class="like_dislike_button" style="width:100%" id="dislike_button" name="opcion" value="dislikeVideo" onclick="no_me_gusta_script()">No me gusta </button></th>
+					<%	}if(like_state.equals("dislike")){%>
+					<button class="like_dislike_button" style="width:100%" id="like_button" onclick = "me_gusta_script()">  Me gusta  </button></th>
+					<%	}	
+					}	%>	
+			</div>
 		</div>
 	</div>
 	<div class="row">
@@ -343,13 +339,13 @@
 		private int printComentarios(javax.servlet.jsp.JspWriter out, DtComentario[] comentarios,int index, String url_logo_usuario_iniciado, String logged_state) throws java.io.IOException{
 			for(int i = 0  ; i < comentarios.length; i++){
 				String autor_comentario = comentarios[i].getNickUsuario();
-				Date fecha_publicacion_comentario = comentarios[i].getFecha().getFecha();
+				Date fecha_publicacion_comentario = comentarios[i].getFecha().getFecha().toGregorianCalendar().getTime();
 				int dia_comment, mes_comment, anio_comment;
 				dia_comment = fecha_publicacion_comentario.getDate();
 				mes_comment = fecha_publicacion_comentario.getMonth() + 1;
 				anio_comment = fecha_publicacion_comentario.getYear() + 1900;
 				String descripcion_comentario = comentarios[i].getTexto();
-				DtComentario[] hijos = comentarios[i].getRespuestas();
+				DtComentario[] hijos = comentarios[i].getRespuestas().toArray(new DtComentario[0]);;
 				byte[] fotoComentador = comentarios[i].getFotoDuenio();
 				String urlFotoComentador = "";
 				if(fotoComentador != null){
@@ -380,7 +376,7 @@
 				}
 				out.println("        </div>");
 				if(logged_state == "true"){
-					out.println("<div style=\"display:none\" id=\"response_box\">");
+					out.println("<div class=\"container-fluid\" style=\"display:none\" id=\"response_box"+index+"\">");
 					out.println("	<div class=\"row\">");
 					out.println("		<div class=\"col-xs-2\"><img id=\"mini_logo\" class=\"logo\" src=\""+url_logo_usuario_iniciado+"\"></img></div>");
 					out.println("		<div class=\"col-xs-8\"><textarea style=\"height:100px\" class=\"form-control comentario_text_area\" id=\"comentario_a_comentar"+index+"\"></textarea></div>");
@@ -388,7 +384,7 @@
 					out.println("	</div>");
 					out.println("	<div class=\"row\">");
 					out.println("		<div class=\"col-xs-10\"></div>");
-					out.println("		<div class=\"col-xs-2 response_button_class\"  id=\"submit_response_button"+index+"\" name=\"response_button\" value=\"Responder\" onclick=\"submit_response("+index+")\"><button>  Responder  </button></div>");
+					out.println("		<div class=\"col-xs-2\"><button class=\"response_button_class\"  id=\"submit_response_button"+index+"\" name=\"response_button\" value=\"Responder\" onclick=\"submit_response("+index+")\">  Responder  </button></div>");
 					out.println("	</div>");
 					out.println("</div>");
 				}
@@ -401,5 +397,46 @@
 			return index;
 		}
 	%>
+		<div class="comment_container">
+	<%
+		if(logged_state.equals("true")){
+			DtUsuario dataUsuario2 = (DtUsuario) request.getAttribute("dataUsuario");
+			String nombre_user_loggeado = dataUsuario2.getNickname();
+			if(propietario.equals(nombre_user_loggeado)){
+				String[] listaLikes = (String[]) request.getAttribute("listaLikes");
+				String[] listaDislikes = (String[]) request.getAttribute("listaDislikes");
+	%>		
+			<button style="" class="response_button_class" onclick="toggle_followers_box()">Lista usuarios likes/dislikes</button>
+			<div style="display: none;" class="followers_box" id="followers_box">
+			<p class="texto_simple">Usuarios que dieron like:</p>
+			<ul>
+	<%
+			for(int index = 0; index < listaLikes.length;index++) {
+	%>
+				<li><a href="profile?opcion=Perfil&nickname=<%=listaLikes[index]%>"><%=listaLikes[index]%> </a></li>
+	<%			
+			}//imprimo los usuarios likes
+	%>			
+			</ul>
+			<p class="texto_simple">Usuarios que dieron dislike:</p>
+			<ul>
+	<%
+			for(int index = 0; index < listaDislikes.length;index++) {
+	%>
+				<li><a href="profile?opcion=Perfil&nickname=<%=listaDislikes[index]%>"><%=listaDislikes[index]%> </a></li>
+	<%			
+			}//imprimo los usuarios dislikes
+	%>			
+			</ul>
+			</div>
+	<%			
+			}
+		}//esto va a ser para que el propietario pueda ver los usuarios que le dieron like o dislike a su video.
+		int index = 0;		
+		printComentarios(out,comentarios, index, url_logo_usuario_iniciado,logged_state);
+	%>
+	</div>
+	        </div>
+    </div>
 </body>
 </html>
