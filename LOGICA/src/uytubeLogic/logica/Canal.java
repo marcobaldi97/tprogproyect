@@ -1,6 +1,7 @@
 package uytubeLogic.logica;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 //prueba commit
 import java.util.HashMap;
@@ -327,7 +328,15 @@ public class Canal {
 	
 	public DtVideoHistorial[] getFavoritoHistorico()
 	{
-		return (DtVideoHistorial[]) favoritoHistorico.values().toArray(new DtVideoHistorial[0]);
+		List <DtVideoHistorial> favHis= new ArrayList<DtVideoHistorial>();
+
+		for (Map.Entry<Integer,DtVideoHistorial> entry : favoritoHistorico.entrySet()) {
+			favHis.add(new DtVideoHistorial(entry.getValue().getVideo()));
+		}
+		Collections.sort(favHis);
+		DtVideoHistorial[] res = favHis.toArray(new DtVideoHistorial[0]);
+		return res;
+		
 	}
 				
 }
