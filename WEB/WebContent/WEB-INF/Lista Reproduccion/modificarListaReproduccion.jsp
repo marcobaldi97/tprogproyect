@@ -1,7 +1,7 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.text.DateFormat"%>
-<%@page import="uytubeLogic.logica.DtListaReproduccion"%>
-<%@page import="uytubeLogic.logica.ListaReproduccion.TipoLista"%>
+<%@page import="uytubeLogica.publicar.DtListaReproduccion"%>
+<%@page import="uytubeLogica.publicar.TipoLista"%>
 <%@ page import = "uytubeLogica.publicar.DtVideo"%>
 <%@ page import = "uytubeLogica.publicar.Privacidad"%>
 <%@ page import = "uytubeLogica.publicar.DtCanal"%>
