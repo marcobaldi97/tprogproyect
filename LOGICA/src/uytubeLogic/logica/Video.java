@@ -1,9 +1,12 @@
 package uytubeLogic.logica;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
 
 import uytubeLogic.logica.SystemHandler.Privacidad;
 
@@ -131,7 +134,6 @@ public class Video {
 	}
 
 	public DtComentario[] getComentarios() {
-		Integer contador = 0;
 		Integer tamanio = 0;
 
 		for (Map.Entry<Integer, Comentario> entry : comentarios.entrySet()) {
@@ -139,13 +141,16 @@ public class Video {
 				tamanio++;
 			}
 		}
-		DtComentario[] res = new DtComentario[tamanio];
-		for (Map.Entry<Integer, Comentario> entry : comentarios.entrySet()) {
+		List<DtComentario> comentarios = new ArrayList<DtComentario>();
+		for (Map.Entry<Integer, Comentario> entry : this.comentarios.entrySet()) {
 			if (entry.getValue().getEsPadre()) {
-				res[contador] = new DtComentario(entry.getValue());
-				contador++;
+				comentarios.add(new DtComentario(entry.getValue()));
 			}
 		}
+		java.util.Collections.sort(comentarios);
+		
+		DtComentario[] res = comentarios.toArray(new DtComentario[0]);
+		
 		return res;
 	}
 

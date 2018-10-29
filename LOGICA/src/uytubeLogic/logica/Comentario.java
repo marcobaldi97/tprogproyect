@@ -1,6 +1,9 @@
 package uytubeLogic.logica;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Comentario {
@@ -11,8 +14,8 @@ public class Comentario {
 	private Map<Integer, Comentario> respuestas;
 	private Usuario usuarioComentador;
 
-	public Comentario(Integer idComentario, String text, DtFecha fech,
-			boolean privacity, String nombreUsuarioComentador) {
+	public Comentario(Integer idComentario, String text, DtFecha fech, boolean privacity,
+			String nombreUsuarioComentador) {
 		iDComentario = idComentario;
 		texto = text;
 		fecha = fech;
@@ -48,13 +51,13 @@ public class Comentario {
 	}
 
 	public DtComentario[] getDtRespuestas() {
-		DtComentario[] res = new DtComentario[respuestas.size()];
-		int contador = 0;
+		List <DtComentario> comments= new ArrayList<DtComentario>();
 
 		for (Map.Entry<Integer, Comentario> entry : respuestas.entrySet()) {
-			res[contador] = new DtComentario(entry.getValue());
-			contador++;
+			comments.add(new DtComentario(entry.getValue()));
 		}
+		Collections.sort(comments);
+		DtComentario[] res = comments.toArray(new DtComentario[0]);
 		return res;
 	}
 
