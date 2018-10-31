@@ -195,6 +195,16 @@ public class UsuarioServlet extends HttpServlet {
             }
 			break;
 		}
+		case "darBaja":{
+			HttpSession session=request.getSession(false);
+			System.out.println("Voy a dar de baja a " + (String)session.getAttribute("nombre_usuario"));
+		    port.bajaUsuario((String)session.getAttribute("nombre_usuario"));
+		    //cerrar la sesion
+			request.getSession(false).removeAttribute("nombre_usuario");
+			request.getSession().invalidate();
+		    response.sendRedirect(request.getContextPath() + "/home");
+		break;
+		}
 		}
 	}
 	
@@ -238,6 +248,7 @@ public class UsuarioServlet extends HttpServlet {
 				response.getWriter().append("<a href='newUser?opcion=nuevoUsuario'>Nuevo Usuario</a>");
 			}else {
 				response.getWriter().append("<a href='login?opcion=logout'>Cerrar Sesion</a>");
+				response.getWriter().append("<a href='profile?opcion=darBaja'>Dar de Baja</a>");
 				response.getWriter().append("<a href='profile?opcion=Perfil&nickname="+URLEncoder.encode(nomUsu,"UTF-8")+"'>Hola, "+nomUsu+"</a>");
 				
 			}

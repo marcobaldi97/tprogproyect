@@ -303,4 +303,10 @@ public class Canal {
 		}
 		return listasADevolver;
 	}
+	public void eliminarVideoCanal(String videoNombre){
+		Video videoEliminar = findVideo(videoNombre);
+		videos.remove(videoEliminar);
+		VideoHandler vidH = VideoHandler.getInstance();
+		vidH.removerVideo(videoEliminar);
+	}
 }

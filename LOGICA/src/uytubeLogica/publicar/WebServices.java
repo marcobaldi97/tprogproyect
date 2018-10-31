@@ -299,6 +299,13 @@ public class WebServices {
 	}
 	
 	@WebMethod
+	public void bajaUsuario(String nick){
+		Fabrica fab = Fabrica.getInstance();
+		IUsuarioCtrl IUI = fab.getIUsuarioCtrl();
+		IUI.bajaUsuario(nick);
+	}
+	
+    @WebMethod
 	public void agregarVisita(int id_video, String nick){
 		Fabrica fab = Fabrica.getInstance();
 		IUsuarioCtrl IUI = fab.getIUsuarioCtrl();
@@ -315,4 +322,5 @@ public class WebServices {
 	
 	
 	
+>>>>>>> LOGICA/src/uytubeLogica/publicar/WebServices.java
 }
