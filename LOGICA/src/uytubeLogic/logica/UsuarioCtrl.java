@@ -27,7 +27,7 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 		}
 		return tamanio;
 	}// Carmona: lo siento pero lo tengo que usar desde una JSP, entonces no me
-		// conviene que esté en el controlador. Att.: Marco
+		// conviene que estï¿½ en el controlador. Att.: Marco
 
 	public Boolean memberListaReproduccionPropia(String nickU, String nombreLista) {
 		UsuarioHandler usuHandler = UsuarioHandler.getInstance();
@@ -246,15 +246,45 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 	}
 
 	@Override
-	public void agregarVisita(int id_video, String nick) {
-		Usuario usuarioParticular = usuarioh.find(nick);
-		usuarioParticular.agregarVisita(id_video);
-	}
 
-	@Override
+	public void bajaUsuario(String nick) {
+		Usuario usrEliminar = usuarioh.find(nick);
+		//dejar de seguir a usr
+		String [] seguidos = listarUsuariosQueSigue(nick);
+		for(String entry: seguidos){	dejarUsuario(nick, entry);		}
+		String [] seguidores = listarUsuariosQueLeSigue(nick);
+		for(String entry: seguidores){	dejarUsuario(entry,nick);	}
+		//quitar videos listas de rep
+		String[] listas = listarLDRdeUsuario(nick);
+		DtVideo[] videoLista;
+		for(String nomLista: listas){
+			videoLista = obtenerDtsVideosListaReproduccionUsuario(nick,nomLista);
+			for(DtVideo dtVideo: videoLista){
+				eliminarVideoLista(nick,dtVideo.getiDVideo(),nomLista);
+			}
+			//eliminar lista de rep??
+		}
+		
+		//borrar comentarios en otros videos y valoraciones
+		
+		//quitar videos canal
+		String[] videosCanal = listarVideosCanal(nick);
+		for(String nomVideo:videosCanal){
+			//borrar comentarios de sus videos?	
+			System.out.println("eliminando video.."+nomVideo);
+			usrEliminar.eliminarVideo(nomVideo); //borra video del canal y handler
+		}
+		usuarioh.removerUsuario(usrEliminar);
+	}
+	
+
 	public DtVideoHistorial[] listarVideoHistorial(String nick) {
 		Usuario usuarioParticular = usuarioh.find(nick);
 		return usuarioParticular.listarVideoHistorial();
-		
+
+	}
+	public void agregarVisita(int id_video, String nick) {
+		Usuario usuarioParticular = usuarioh.find(nick);
+		usuarioParticular.agregarVisita(id_video);
 	}
 }

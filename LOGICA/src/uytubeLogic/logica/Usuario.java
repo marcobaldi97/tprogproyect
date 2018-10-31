@@ -239,6 +239,10 @@ public class Usuario {
 		return canalPropio.getListas();
 	}
 
+	public void eliminarVideo(String videoNombre){
+		canalPropio.eliminarVideoCanal(videoNombre);
+	}
+
 	public void agregarVisita(int id_video) {
 		canalPropio.agregarVisita(id_video);
 		

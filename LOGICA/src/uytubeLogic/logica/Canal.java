@@ -307,6 +307,7 @@ public class Canal {
 		return listasADevolver;
 	}
 
+
 	public void agregarVisita(int id_video) 
 	{
 		if(favoritoHistorico.containsKey(id_video))
@@ -339,5 +340,13 @@ public class Canal {
 		
 	}
 				
+
+	public void eliminarVideoCanal(String videoNombre){
+		Video videoEliminar = findVideo(videoNombre);
+		videos.remove(videoEliminar);
+		VideoHandler vidH = VideoHandler.getInstance();
+		vidH.removerVideo(videoEliminar);
+	}
+
 }
 
