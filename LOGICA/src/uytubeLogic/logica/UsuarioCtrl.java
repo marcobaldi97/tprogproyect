@@ -283,7 +283,7 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 		return usuarioParticular.listarVideoHistorial();
 
 	}
-	public void agregarVisita(int id_video, String nick) {
+	public void agregarVisita(Integer id_video, String nick) {
 		Usuario usuarioParticular = usuarioh.find(nick);
 		usuarioParticular.agregarVisita(id_video);
 	}

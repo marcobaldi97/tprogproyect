@@ -85,7 +85,7 @@ public interface IUsuarioCtrl {
 
 	public abstract void bajaUsuario(String nick);
 
-	public abstract void agregarVisita(int id_video, String nick);
+	public abstract void agregarVisita(Integer id_video, String nick);
 	
 	public abstract DtVideoHistorial[] listarVideoHistorial(String nick);
 

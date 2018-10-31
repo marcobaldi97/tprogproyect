@@ -1,5 +1,6 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.text.DateFormat"%>
+<%@page import="java.util.Locale"%>
 <%@ page import = "uytubeLogica.publicar.*"%>
 <%@ page import = "uytubeLogica.publicar.Privacidad"%>
 <%@ page import = "uytubeLogica.publicar.DtCanal"%>
@@ -45,12 +46,14 @@ tr:nth-child(even) {background-color: #f2f2f2;}</style>
 	<tr>
 	<th valign="top"> Videos </th>
 	<th valign="top"> Nombre </th>
+	<th valign="top"> Propietario </th>
 	<th valign="top"> Cantidad de Visitas </th>
 	<th valign="top"> Ultima Visita </th>
 	</tr>
 	
 	<%
 		DtVideoHistorial[] listas = (DtVideoHistorial[]) request.getAttribute("historial");
+		DateFormat goodDf = new SimpleDateFormat("EEEEE dd 'de' MMMMM 'del' yyyy",Locale.forLanguageTag("es-ES"));
 		for(DtVideoHistorial entry: listas){
 			
 	%>
@@ -65,7 +68,7 @@ tr:nth-child(even) {background-color: #f2f2f2;}</style>
 	<td id="Nombre"><%=entry.getVideo().getNombre()%></td>
 	<td id="Propietario"><%=entry.getVideo().getPropietario()%></td>
 	<td id="Cantidad de visitas"><%= entry.getCantidadVisita()%></td>
-	<td id="Ultima visita"><%= entry.getUltimaVisita().getFecha().toGregorianCalendar().getTime() %></td>
+	<td id="Ultima visita"><%= goodDf.format(entry.getUltimaVisita().getFecha().toGregorianCalendar().getTime())%></td>
 	</tr>
 	
 	<%	}
