@@ -116,40 +116,41 @@
 		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200) {
+				location.reload(true);
 			}
 		};
 		xhttp.open("GET", "responseComment?id_video="+<%=id_video%>+"&opcion=responderComentario&id_comentario="+id_comentario+"&contenido="+contenido_comentario,true);
 		xhttp.send();
-		location.reload(true);
 	}
 
 	function me_gusta_script() {
 		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200) {
+				location.reload(true);
 			}
 		};
 		xhttp.open("GET", "likeVideo?id_video="+<%=id_video%>+"&opcion=likeVideo",true);
 		xhttp.send();
-		location.reload(true);
 	}
 
 	function no_me_gusta_script() {
 		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200) {
+				location.reload(true);
 			}
 		};
 		var operacion = "dislikeVideo?id_video="+<%=id_video%>+"&opcion=dislikeVideo";
 		xhttp.open("GET", operacion, true);
 		xhttp.send();
-		location.reload(true);
 	}
 
 	function agregar_lista_script() {
 		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200) {
+				location.reload(true);
 			}
 		};
 		var nombre_lista = document.getElementById("listasUsuarioLogged").value;
@@ -157,21 +158,28 @@
 		xhttp.open("GET", operacion, true);
 		console.log("el nombre de la lista a agregar es: "+nombre_lista);
 		xhttp.send();
-		location.reload(true);
 	}
 
 	function seguir_script() {
 		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				location.reload(true);
+			}
+		};
 		xhttp.open("GET", "follow?usuario_a_seguir=<%=propietario%>&opcion=follow", true);
 		xhttp.send();
-		location.reload(true);
 	}
 	
 	function dejar_seguir_script(){
 		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				location.reload(true);
+			}
+		};
 		xhttp.open("GET", "leaveFollow?usuario_a_seguir=<%=propietario%>&opcion=leaveFollow", true);
 		xhttp.send();
-		location.reload(true);
 	}
 
 	function comentar_video() {
@@ -179,12 +187,12 @@
 		xhttp.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200) {
 				document.getElementById("demo").innerHTML = this.responseText;
+				location.reload(true);
 			}
 		};
 		var contenido = document.getElementById("comentario_a_comentar").value;
 		xhttp.open("GET", "newComment?id_video=<%=id_video%>&opcion=comment&contenido=" + contenido, true);
 		xhttp.send();
-		location.reload(true);
 	}
 
 	function ir_a_perfil(){
@@ -368,11 +376,11 @@
 				out.println("				<div class=\"col-xs-10\"><blockquote><h3>"+descripcion_comentario+"</h3></blockquote></div>");
 				out.println("			</div>");
 				out.println("			<div class=\"row\">");
-				out.println("				<div class=\"col-xs-10\"></div>");
+				out.println("				<div class=\"col-xs-2\"></div>");
 				if(logged_state == "true"){
-					out.println("           <div class=\"col-xs-2\"><button style=\"width:100%\" id=\"response_button"+index+"\" class=\"response_button_class\" name=\"response_button\" value=\""+comentarios[i].getIdComentario()+"\" onclick=\"toggle_response_box("+index+")\"> Responder...</button></div>");	
+					out.println("           <div class=\"col-xs-10\"><button style=\"width:100%\" id=\"response_button"+index+"\" class=\"response_button_class\" name=\"response_button\" value=\""+comentarios[i].getIdComentario()+"\" onclick=\"toggle_response_box("+index+")\"> Responder...</button></div>");	
 				}else{
-					out.println("			<div class=\"col-xs-2\"></div>");
+					out.println("			<div class=\"col-xs-10\"></div>");
 				}
 				out.println("        </div>");
 				if(logged_state == "true"){
