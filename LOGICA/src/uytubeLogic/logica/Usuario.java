@@ -238,7 +238,18 @@ public class Usuario {
 	public DtListaReproduccion[] getListas() {
 		return canalPropio.getListas();
 	}
+
 	public void eliminarVideo(String videoNombre){
 		canalPropio.eliminarVideoCanal(videoNombre);
 	}
+
+	public void agregarVisita(int id_video) {
+		canalPropio.agregarVisita(id_video);
+		
+	}
+
+	public DtVideoHistorial[] listarVideoHistorial() {
+		return canalPropio.getFavoritoHistorico();
+	}
+
 }

@@ -246,6 +246,7 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 	}
 
 	@Override
+
 	public void bajaUsuario(String nick) {
 		Usuario usrEliminar = usuarioh.find(nick);
 		//dejar de seguir a usr
@@ -274,6 +275,16 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 			usrEliminar.eliminarVideo(nomVideo); //borra video del canal y handler
 		}
 		usuarioh.removerUsuario(usrEliminar);
-		
+	}
+	
+
+	public DtVideoHistorial[] listarVideoHistorial(String nick) {
+		Usuario usuarioParticular = usuarioh.find(nick);
+		return usuarioParticular.listarVideoHistorial();
+
+	}
+	public void agregarVisita(int id_video, String nick) {
+		Usuario usuarioParticular = usuarioh.find(nick);
+		usuarioParticular.agregarVisita(id_video);
 	}
 }

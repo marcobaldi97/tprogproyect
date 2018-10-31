@@ -17,6 +17,7 @@ import uytubeLogic.logica.DtInfoVideo;
 import uytubeLogic.logica.DtListaReproduccion;
 import uytubeLogic.logica.DtUsuario;
 import uytubeLogic.logica.DtVideo;
+import uytubeLogic.logica.DtVideoHistorial;
 import uytubeLogic.logica.Fabrica;
 import uytubeLogic.logica.IUsuarioCtrl;
 import uytubeLogic.logica.IVideoCtrl;
@@ -303,4 +304,23 @@ public class WebServices {
 		IUsuarioCtrl IUI = fab.getIUsuarioCtrl();
 		IUI.bajaUsuario(nick);
 	}
+	
+    @WebMethod
+	public void agregarVisita(int id_video, String nick){
+		Fabrica fab = Fabrica.getInstance();
+		IUsuarioCtrl IUI = fab.getIUsuarioCtrl();
+		IUI.agregarVisita(id_video, nick);
+	}
+	
+	@WebMethod
+	public DtVideoHistorial[] listarVideoHistorial(String nick) 
+	{
+		Fabrica fab = Fabrica.getInstance();
+		IUsuarioCtrl IUI = fab.getIUsuarioCtrl();
+		return IUI.listarVideoHistorial(nick);
+	}
+	
+	
+	
+>>>>>>> LOGICA/src/uytubeLogica/publicar/WebServices.java
 }

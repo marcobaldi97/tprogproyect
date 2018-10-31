@@ -82,6 +82,11 @@ public interface IUsuarioCtrl {
 	public abstract DtListaReproduccion[] listarLDRPublicasPorNombre(String nombre);
 
 	public abstract boolean verificarLogin(String nick, String pass);
-	
+
 	public abstract void bajaUsuario(String nick);
+
+	public abstract void agregarVisita(int id_video, String nick);
+	
+	public abstract DtVideoHistorial[] listarVideoHistorial(String nick);
+
 }

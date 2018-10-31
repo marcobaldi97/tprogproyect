@@ -1,6 +1,6 @@
 package uytubeLogic.logica;
 
-public class DtComentario {
+public class DtComentario implements Comparable<DtComentario>{
 	private Integer idComentario;
 	private String texto;
 	private DtFecha fecha;
@@ -130,4 +130,12 @@ public class DtComentario {
 				&& (fecha.equals(dataTipo.getFecha()) && (esPadre == dataTipo.isEsPadre())
 						&& (nickUsuario == dataTipo.getNickUsuario()));
 	}
+	@Override
+	public int compareTo(DtComentario other) {
+		if (this.getIdComentario() == null || other.getIdComentario() == null) {
+		      return 0;
+		    }
+		return this.getIdComentario().compareTo(other.getIdComentario());
+	}
+	
 }
