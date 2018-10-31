@@ -112,6 +112,8 @@ public class ListaReproduccionServlet extends HttpServlet {
 
 		}
 			break;
+			
+		
 
 		case "details": {
 			if (session != null) {
