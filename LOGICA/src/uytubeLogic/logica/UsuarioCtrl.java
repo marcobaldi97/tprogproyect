@@ -246,8 +246,7 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 	}
 
 	@Override
-	public void removerUsuario(String nick) {
-		// TODO Auto-generated method stub
+	public void bajaUsuario(String nick) {
 		Usuario usrEliminar = usuarioh.find(nick);
 		//dejar de seguir a usr
 		String [] seguidos = listarUsuariosQueSigue(nick);
@@ -256,14 +255,24 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 		for(String entry: seguidores){	dejarUsuario(entry,nick);	}
 		//quitar videos listas de rep
 		String[] listas = listarLDRdeUsuario(nick);
-		//eliminarVideoLista(String nickU, Integer id_video, String nombreLDR)
-		//String[] listarLDRParticularesdeUsuario(String nickname)
-		//comentarios de sus videos
-		//comentarios en otros videos
+		DtVideo[] videoLista;
+		for(String nomLista: listas){
+			videoLista = obtenerDtsVideosListaReproduccionUsuario(nick,nomLista);
+			for(DtVideo dtVideo: videoLista){
+				eliminarVideoLista(nick,dtVideo.getiDVideo(),nomLista);
+			}
+			//eliminar lista de rep??
+		}
+		
+		//borrar comentarios en otros videos y valoraciones
+		
 		//quitar videos canal
 		String[] videosCanal = listarVideosCanal(nick);
-		System.out.println("Voy a eliminar a un usr");
-		//valoraciones a videos (mg)
+		for(String nomVideo:videosCanal){
+			//borrar comentarios de sus videos?	
+			System.out.println("eliminando video.."+nomVideo);
+			usrEliminar.eliminarVideo(nomVideo); //borra video del canal y handler
+		}
 		usuarioh.removerUsuario(usrEliminar);
 		
 	}

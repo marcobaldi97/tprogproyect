@@ -83,5 +83,5 @@ public interface IUsuarioCtrl {
 
 	public abstract boolean verificarLogin(String nick, String pass);
 	
-	public abstract void removerUsuario(String nick);
+	public abstract void bajaUsuario(String nick);
 }

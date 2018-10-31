@@ -238,5 +238,7 @@ public class Usuario {
 	public DtListaReproduccion[] getListas() {
 		return canalPropio.getListas();
 	}
-
+	public void eliminarVideo(String videoNombre){
+		canalPropio.eliminarVideoCanal(videoNombre);
+	}
 }

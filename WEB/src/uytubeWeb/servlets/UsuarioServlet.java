@@ -197,8 +197,12 @@ public class UsuarioServlet extends HttpServlet {
 		}
 		case "darBaja":{
 			HttpSession session=request.getSession(false);
-		    //port.removerUsuario((String)session.getAttribute("nombre_usuario"));
-			response.getWriter().print("Me quiero dar de baja!"); 
+			System.out.println("Voy a dar de baja a " + (String)session.getAttribute("nombre_usuario"));
+		    port.bajaUsuario((String)session.getAttribute("nombre_usuario"));
+		    //cerrar la sesion
+			request.getSession(false).removeAttribute("nombre_usuario");
+			request.getSession().invalidate();
+		    response.sendRedirect(request.getContextPath() + "/home");
 		break;
 		}
 		}
