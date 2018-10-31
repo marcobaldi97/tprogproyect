@@ -319,8 +319,4 @@ public class WebServices {
 		IUsuarioCtrl IUI = fab.getIUsuarioCtrl();
 		return IUI.listarVideoHistorial(nick);
 	}
-	
-	
-	
->>>>>>> LOGICA/src/uytubeLogica/publicar/WebServices.java
 }
