@@ -216,6 +216,7 @@ public class VideoServlet extends HttpServlet {
             	//calificacion de estado de seguir.
             	DtUsuario usuarioLoggedData = port.listarDatosUsuario(usuarioLogged);
             	request.setAttribute("dataUsuario", usuarioLoggedData);
+            	port.agregarVisita(IDVideo, usuarioLogged);
             }else{
             	request.setAttribute("logged" ,false);
             }

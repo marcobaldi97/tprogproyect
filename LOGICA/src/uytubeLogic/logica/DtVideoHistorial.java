@@ -29,13 +29,15 @@ public class DtVideoHistorial implements Comparable<DtVideoHistorial> {
 		this.video = video;
 	}
 
+	public void setCantidadVisita(Integer cantidadVisita) {
+		this.cantidadVisita = cantidadVisita;
+	}
+
+
 	public Integer getCantidadVisita() {
 		return cantidadVisita;
 	}
 
-	public void setCantidadVisita(int cantidadVisita) {
-		this.cantidadVisita = cantidadVisita;
-	}
 
 	public DtFecha getUltimaVisita() {
 		return ultimaVisita;

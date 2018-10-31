@@ -25,6 +25,7 @@ import uytubeLogica.publicar.DtFecha;
 import uytubeLogica.publicar.DtListaReproduccion;
 import uytubeLogica.publicar.DtUsuario;
 import uytubeLogica.publicar.DtVideo;
+import uytubeLogica.publicar.DtVideoHistorial;
 import uytubeLogica.publicar.Privacidad;
 
 
@@ -99,6 +100,31 @@ public class UsuarioServlet extends HttpServlet {
 		 	dejarUsuario(nombre_usuario, usuario_a_no_seguir);
 		 	break;
 		}	
+		
+		case "historial":{
+			HttpSession session=request.getSession();
+			if(session!=null)
+			{
+                String login=(String)session.getAttribute("nombre_usuario");
+                if(login!=null)
+                {
+                	DtVideoHistorial[] historial=port.listarVideoHistorial(login).getItem().toArray(new DtVideoHistorial[0]);
+                	request.setAttribute("historial", historial);
+                	request.getRequestDispatcher("WEB-INF/Lista Reproduccion/historialVisitas.jsp").forward(request, response);
+                }
+                else
+                {
+                	response.sendRedirect(request.getContextPath() + "/home");
+                }
+                	
+             }
+             else
+             {
+                response.sendRedirect(request.getContextPath() + "/home");
+             }
+			break;	
+		}
+		
 		case "Perfil":{
 		
 			String nickname = (String)request.getParameter("nickname");			
