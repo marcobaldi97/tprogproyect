@@ -308,15 +308,17 @@ public class Canal {
 	}
 
 
-	public void agregarVisita(int id_video) 
+	public void agregarVisita(Integer id_video) 
 	{
 		if(favoritoHistorico.containsKey(id_video))
 		{
 			DtVideoHistorial videoHistorial=favoritoHistorico.get(id_video);
 			videoHistorial.actualizar();
+			System.out.println("estoy actualizando");
 		}
 		else
 		{
+			System.out.println("no estoy actualizando");
 			VideoHandler manejadorVideo = VideoHandler.getInstance();
 			Video videoActual = manejadorVideo.find(id_video);
 			DtVideo dtVideoActual = new DtVideo(videoActual);
@@ -332,9 +334,9 @@ public class Canal {
 		List <DtVideoHistorial> favHis= new ArrayList<DtVideoHistorial>();
 
 		for (Map.Entry<Integer,DtVideoHistorial> entry : favoritoHistorico.entrySet()) {
-			favHis.add(new DtVideoHistorial(entry.getValue().getVideo()));
+			favHis.add(new DtVideoHistorial(entry.getValue()));
 		}
-		Collections.sort(favHis);
+		Collections.sort(favHis,Collections.reverseOrder());
 		DtVideoHistorial[] res = favHis.toArray(new DtVideoHistorial[0]);
 		return res;
 		

@@ -306,7 +306,7 @@ public class WebServices {
 	}
 	
     @WebMethod
-	public void agregarVisita(int id_video, String nick){
+	public void agregarVisita(Integer id_video, String nick){
 		Fabrica fab = Fabrica.getInstance();
 		IUsuarioCtrl IUI = fab.getIUsuarioCtrl();
 		IUI.agregarVisita(id_video, nick);

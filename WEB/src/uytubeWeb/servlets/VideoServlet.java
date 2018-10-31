@@ -203,6 +203,7 @@ public class VideoServlet extends HttpServlet {
             	String[] listasReproduccionUsuarioLogged = port.listarLDRdeUsuario(usuarioLogged).getItem().toArray(new String[0]);
             	request.setAttribute("listasReproduccionUsuarioLogged", listasReproduccionUsuarioLogged);
             	Integer IDVideo = Integer.parseInt(request.getParameter("ID"));
+            	port.agregarVisita(IDVideo, usuarioLogged);
             	request.setAttribute("like_state", port.getEstadoValoracion(IDVideo, usuarioLogged));
             	//calificacion de estado de valoraci�n.
             	String[] usuariosSeguidores = port.listarUsuariosQueLeSigue(dataVideo.getPropietario()).getItem().toArray(new String[0]);
@@ -216,7 +217,7 @@ public class VideoServlet extends HttpServlet {
             	//calificacion de estado de seguir.
             	DtUsuario usuarioLoggedData = port.listarDatosUsuario(usuarioLogged);
             	request.setAttribute("dataUsuario", usuarioLoggedData);
-            	port.agregarVisita(IDVideo, usuarioLogged);
+            	
             }else{
             	request.setAttribute("logged" ,false);
             }

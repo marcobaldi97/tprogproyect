@@ -243,7 +243,7 @@ public class Usuario {
 		canalPropio.eliminarVideoCanal(videoNombre);
 	}
 
-	public void agregarVisita(int id_video) {
+	public void agregarVisita(Integer id_video) {
 		canalPropio.agregarVisita(id_video);
 		
 	}

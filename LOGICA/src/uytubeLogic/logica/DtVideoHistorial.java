@@ -21,6 +21,15 @@ public class DtVideoHistorial implements Comparable<DtVideoHistorial> {
 
 	
 
+	public DtVideoHistorial(DtVideoHistorial other) {
+		super();
+		this.video = other.getVideo();
+		this.cantidadVisita = other.getCantidadVisita();
+		this.ultimaVisita = other.getUltimaVisita();
+	}
+
+
+
 	public DtVideo getVideo() {
 		return video;
 	}
