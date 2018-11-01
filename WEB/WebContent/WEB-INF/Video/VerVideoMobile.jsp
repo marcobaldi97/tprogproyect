@@ -213,13 +213,13 @@
 		</div>
 		<div class="row">
 			<div class="col-sm-2">
-				<img class="logo" src=<%=url_logo_autor%> width="100px" height="70px" ></img>
+				<img class="img-responsive img-circle" src=<%=url_logo_autor%> width="100px" height="70px" ></img>
 			</div>
 			<div class="col-sm-2">
-				<a onclick="ir_a_perfil()"><%=nombre_canal%></a>
+				<h4><%=nombre_canal%></h4>
 			</div>
 			<div class="col-sm-2">
-				<p class="texto_simple"><%=dia%>/<%=mes%>/<%=anio%></p>
+				<h4><%=dia%>/<%=mes%>/<%=anio%></h4>
 			</div>
 			<div class="col-sm-6"><p class="texto_simple">
 				<h3>Likes:<%=cantLikes%> Dislikes:<%=cantDislikes%></h3>
@@ -319,20 +319,25 @@
 				%>
 		</div>
 	</div>
-	<div class="container-fluid" id="tabla_para_comentar">
-		<div class="row">
-			<div class="col-sm-2">
-				<img class="logo" src=<%=url_logo_usuario_iniciado%> width="100px" height="70px"></img>
+	<%if(logged_state == "true"){%>
+		<div class="container-fluid" id="tabla_para_comentar">
+			<div class="row">
+				<div class="col-sm-2">
+					<img style="width:100;" class="img-responsive img-circle" src=<%=url_logo_usuario_iniciado%> width="100px" height="70px"></img>
+				</div>
+				<div class="col-sm-10">
+					<textarea style="width:100%;" class="comentario" id="comentario_a_comentar"></textarea>
+				</div>
 			</div>
-			<div class="col-sm-8">
-				<textarea style="width:100%" class="comentario" id="comentario_a_comentar"></textarea>
-			</div>
-			<div class="col-sm-2">
-				<button style="width:100%" id="response_button" name="response_button" value="Comentar" onclick="comentar_video()">  Comentar  </button>
+			<div class="row">
+				<div class="col-sm-2">
+				</div>
+				<div class="col-sm-10">
+					<button style="width:100%" id="response_button" name="response_button" value="Comentar" onclick="comentar_video()">  Comentar  </button>
+				</div>
 			</div>
 		</div>
-	</div>
-	
+	<%}%>
 </div>
 	<%!//funciones Java
 		private void htmlListasComboBoxGenerator(javax.servlet.jsp.JspWriter out, String[] listasRep) throws java.io.IOException{
@@ -372,7 +377,7 @@
 				out.println("				<div class=\"col-xs-6\"></div>");
 				out.println("		</div>");
 				out.println("			<div class=\"row\">");
-				out.println("					<div class=\"col-xs-2\"><img class=\"logo\" src=\""+urlFotoComentador+"\"></img></div>");
+				out.println("					<div class=\"col-xs-2\"><img class=\"img-responsive img-circle\" src=\""+urlFotoComentador+"\"></img></div>");
 				out.println("				<div class=\"col-xs-10\"><blockquote><h3>"+descripcion_comentario+"</h3></blockquote></div>");
 				out.println("			</div>");
 				out.println("			<div class=\"row\">");
@@ -386,7 +391,7 @@
 				if(logged_state == "true"){
 					out.println("<div class=\"container-fluid\" style=\"display:none\" id=\"response_box"+index+"\">");
 					out.println("	<div class=\"row\">");
-					out.println("		<div class=\"col-xs-2\"><img id=\"mini_logo\" class=\"logo\" src=\""+url_logo_usuario_iniciado+"\"></img></div>");
+					out.println("		<div class=\"col-xs-2\"><img id=\"mini_logo\" class=\"img-responsive img-circle\" src=\""+url_logo_usuario_iniciado+"\"></img></div>");
 					out.println("		<div class=\"col-xs-8\"><textarea style=\"height:100px\" class=\"form-control comentario_text_area\" id=\"comentario_a_comentar"+index+"\"></textarea></div>");
 					out.println("		<div class=\"col-xs-2\"></div>");
 					out.println("	</div>");
