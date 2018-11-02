@@ -19,9 +19,15 @@
 	font-weight: bold;
 }
 .login {
-	margin-top: 8px;
+  margin-top: 8px;
   margin-right: 16px;
   font-size: 17px;
+  background-color:transparent !important;
+  border:none !important;
+}
+
+input{
+  background-color:transparent !important;	
 }
 
 .login input {
@@ -29,4 +35,9 @@
   margin-top: 8px;
   margin-right: 16px;
   font-size: 17px;
+}
+
+.loli{
+	background-image:url("https://pm1.narvii.com/6055/0e27a16edcefff187ef421dea6f2a7c302edc5fd_hq.jpg");
+	 background-repeat: no-repeat
 }
