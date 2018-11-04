@@ -7,27 +7,31 @@
 <head>
     <%@include file = "../cosasComunesDelHead.jsp" %>
     <link rel="stylesheet" href="media/styles/Login.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <title>Inicio de Sesion</title>
 </head>
 
-<body>
+<body class="loli">
     <%@include file="../buscador.jsp" %>
-    <div class="main-container">
-        <%@include file="../sidebar.jsp" %>
-        <div class="main-content">
-
-            <p id="textoAntes">Por favor ingrese sus datos para el inicio de sesión:</p><br>
-            <div class="login">
-                <form action="login" method="post">
-                    Nickname: <input type="text" name="nickInicio"><br>
-                    Contraseña:<input type="password" name="passInicio"><br>
+    <div class="container-fluid">
+    	<div class="row">
+    		<div class="col-xs-12">
+				<h2>Por favor ingrese sus datos para el inicio de sesión:</h2>
+			</div>		
+    	</div>
+    	<div class="row">
+    		<div class="col-xs-12 login">
+    			<form action="login" method="post">
+                    <h3>Nickname:</h3><input type="text" name="nickInicio"><br>
+                    <h3>Contraseña:</h3><input type="password" name="passInicio"><br>
                     <button type="submit">Iniciar Sesión</button>
                     <input type="hidden" name="opcion" value="login">
                 </form>
-            </div>
-            <% if(request.getAttribute("error")!=null) out.println((String)request.getAttribute("error"));%>
-        </div>
+    		</div>
+    	</div>
+    	<div class="row">
+    		<div class="col-xs-12"><h3><% if(request.getAttribute("error")!=null) out.println((String)request.getAttribute("error"));%></h3></div>
+    	</div>
     </div>
 </body>
-
 </html>

@@ -323,7 +323,8 @@
 		<div class="container-fluid" id="tabla_para_comentar">
 			<div class="row">
 				<div class="col-sm-2">
-					<img style="width:100;" class="img-responsive img-circle" src=<%=url_logo_usuario_iniciado%> width="100px" height="70px"></img>
+					
+					<div  class="ratio img-responsive img-circle" style="background-image: url(<%=url_logo_usuario_iniciado%>);"></div>
 				</div>
 				<div class="col-sm-10">
 					<textarea style="width:100%;" class="comentario" id="comentario_a_comentar"></textarea>
@@ -372,8 +373,7 @@
 				out.println("		<div class=\"container\">");
 				out.println("			<div class=\"row\">");
 				out.println("				<div class=\"col-xs-2\"></div>");
-				out.println("				<div class=\"col-xs-2\"><h4>"+autor_comentario+"</h4></div>");
-				out.println("				<div class=\"col-xs-2\"><h4>"+dia_comment+"/"+mes_comment+"/"+anio_comment+"<h4></div>");
+				out.println("				<div class=\"col-xs-4\"><h4>"+autor_comentario+" "+dia_comment+"/"+mes_comment+"/"+anio_comment+"</h4></div>");
 				out.println("				<div class=\"col-xs-6\"></div>");
 				out.println("		</div>");
 				out.println("			<div class=\"row\">");
