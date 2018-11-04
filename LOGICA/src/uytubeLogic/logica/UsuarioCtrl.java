@@ -295,4 +295,9 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 		Usuario usuarioParticular = usuarioh.find(nick);
 		usuarioParticular.agregarVisita(id_video);
 	}
+
+	public uyTubePersistencia.Usuario persistirUsuario(String nickname) {
+		Usuario usuarioParticular = usuarioh.find(nickname);
+		return usuarioParticular.persistir();
+	}
 }

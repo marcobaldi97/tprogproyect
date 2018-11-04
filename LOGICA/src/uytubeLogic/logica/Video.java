@@ -240,4 +240,9 @@ public class Video {
 		this.propietario = propietario;
 	}
 
+	public uyTubePersistencia.Video persistir() {
+		uyTubePersistencia.Video videoP = new uyTubePersistencia.Video(this);
+		return videoP;
+	}
+
 }

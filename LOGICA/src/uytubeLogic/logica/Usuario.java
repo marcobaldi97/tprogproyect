@@ -252,4 +252,14 @@ public class Usuario {
 		return canalPropio.getFavoritoHistorico();
 	}
 
+	public uyTubePersistencia.Usuario persistir() {
+		uyTubePersistencia.Usuario UsuarioP = new uyTubePersistencia.Usuario(this);
+		
+		uyTubePersistencia.Canal CanalP = canalPropio.persistir();
+		UsuarioP.setCanalPropio(CanalP);
+		return UsuarioP;
+		// TODO Auto-generated method stub
+		
+	}
+
 }

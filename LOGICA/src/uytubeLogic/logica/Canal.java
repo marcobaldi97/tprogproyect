@@ -350,5 +350,14 @@ public class Canal {
 		vidH.removerVideo(videoEliminar);
 	}
 
+	public uyTubePersistencia.Canal persistir() {
+		uyTubePersistencia.Canal CanalP = new uyTubePersistencia.Canal(this);
+		Map<Integer, uyTubePersistencia.Video> videosP = new HashMap<Integer, uyTubePersistencia.Video>();
+		for (final Map.Entry<String, Video> entry : videos.entrySet()) {
+			videosP.put(entry.getValue().getIDVideo(), entry.getValue().persistir());
+		}
+		return CanalP;
+	}
+
 }
 
