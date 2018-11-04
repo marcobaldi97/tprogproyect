@@ -74,7 +74,7 @@ public class UsuarioServlet extends HttpServlet {
 		break;
 		case "login" :{
 				System.out.println("me voy pal login");
-				request.getRequestDispatcher("WEB-INF/Usuario/Login.jsp").forward(request, response);
+				request.getRequestDispatcher("WEB-INF/Usuario/LoginMobile.jsp").forward(request, response);
 			
 			break;
 		}
@@ -270,12 +270,12 @@ public class UsuarioServlet extends HttpServlet {
 			String nomUsu=(String)request.getSession().getAttribute("nombre_usuario");
 			System.out.println("el usuario logueado es " + nomUsu);
 			if(nomUsu==null) {
-				response.getWriter().append("<a href='login?opcion=login'>Iniciar Sesion</a>   ");
-				response.getWriter().append("<a href='newUser?opcion=nuevoUsuario'>Nuevo Usuario</a>");
+				response.getWriter().append("<li><a href='login?opcion=login'>Iniciar Sesion</a></li>   ");
+				response.getWriter().append("<li><a href='newUser?opcion=nuevoUsuario'>Nuevo Usuario</a></li>");
 			}else {
-				response.getWriter().append("<a href='login?opcion=logout'>Cerrar Sesion</a>");
-				response.getWriter().append("<a href='profile?opcion=darBaja'>Dar de Baja</a>");
-				response.getWriter().append("<a href='profile?opcion=Perfil&nickname="+URLEncoder.encode(nomUsu,"UTF-8")+"'>Hola, "+nomUsu+"</a>");
+				response.getWriter().append("<li><a href='login?opcion=logout'>Cerrar Sesion</a></li>");
+				response.getWriter().append("<li><a href='profile?opcion=darBaja'>Dar de Baja</a></li>");
+				response.getWriter().append("<li><a href='profile?opcion=Perfil&nickname="+URLEncoder.encode(nomUsu,"UTF-8")+"'>Hola, "+nomUsu+"</a></li>");
 				
 			}
 			break;
