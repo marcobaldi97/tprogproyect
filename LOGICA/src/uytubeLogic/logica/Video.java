@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
 
@@ -243,6 +244,23 @@ public class Video {
 	public uyTubePersistencia.Video persistir() {
 		uyTubePersistencia.Video videoP = new uyTubePersistencia.Video(this);
 		return videoP;
+	}
+
+	public void eliminarComentarios(Usuario usrEliminar) {
+		for(Entry<Integer, Comentario> coment : comentarios.entrySet()){
+			if(coment.getValue().getUsuario()==usrEliminar){
+				coment.getValue().eliminarHijos();
+				comentarios.remove(coment.getKey());
+			}
+			
+		}
+	}
+
+	public void eliminarPuntuacion(Usuario usrEliminar) {
+		if(puntuaciones.containsKey(usrEliminar)){
+			puntuaciones.remove(usrEliminar);
+		}
+		
 	}
 
 }

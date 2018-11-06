@@ -61,4 +61,10 @@ public class Comentario {
 		return res;
 	}
 
+	public void eliminarHijos() {
+		for (Map.Entry<Integer, Comentario> entry : respuestas.entrySet()) {
+			respuestas.remove(entry.getKey());
+		}
+	}
+
 }

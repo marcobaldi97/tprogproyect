@@ -267,13 +267,7 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 		
 		//borrar comentarios en otros videos y valoraciones
 		VideoHandler videoH = VideoHandler.getInstance();
-		DtVideo[] allVideos = videoH.listarVideos();
-		
-		for(DtVideo video:allVideos){
-			//comentarios
-			//valoraciones
-			
-		}
+		videoH.eliminarComentariosYValoraciones(usrEliminar);
 		
 		//quitar videos canal
 		String[] videosCanal = listarVideosCanal(nick);
