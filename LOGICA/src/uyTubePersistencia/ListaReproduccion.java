@@ -14,6 +14,7 @@ import javax.persistence.ManyToMany;
 import uytubeLogic.logica.ListaReproduccion.TipoLista;
 import uytubeLogic.logica.Particular;
 import uytubeLogic.logica.PorDefecto;
+import uytubeLogic.logica.Video;
 import uytubeLogic.logica.SystemHandler.Privacidad;
 
 
@@ -32,7 +33,7 @@ public class ListaReproduccion implements Serializable{
 	private Privacidad privado;
 	@ManyToMany(cascade=CascadeType.PERSIST)
 	@JoinTable(name="Lista_video")
-	private Map<Integer, Video> videos;
+	private Map<Integer, uyTubePersistencia.Video> videos;
 	
 	public ListaReproduccion() {
 	}
@@ -74,10 +75,10 @@ public class ListaReproduccion implements Serializable{
 	public void setPrivado(Privacidad privado) {
 		this.privado = privado;
 	}
-	public Map<Integer, Video> getVideos() {
+	public Map<Integer, uyTubePersistencia.Video> getVideos() {
 		return videos;
 	}
-	public void setVideos(Map<Integer, Video> videos) {
+	public void setVideos(Map<Integer, uyTubePersistencia.Video> videos) {
 		this.videos = videos;
 	}
 	public static long getSerialversionuid() {

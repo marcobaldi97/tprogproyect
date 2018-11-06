@@ -120,7 +120,13 @@ public abstract class ListaReproduccion {
 
 	public abstract uyTubePersistencia.ListaReproduccion persistir();
 
-	
+	public Map<Integer, Video> getVideos() {
+		return videos;
+	}
+
+	public void setVideos(Map<Integer, Video> videos) {
+		this.videos = videos;
+	}
 
 
 

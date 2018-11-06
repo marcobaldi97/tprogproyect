@@ -1,5 +1,8 @@
 package uytubeLogic.logica;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import uytubeLogic.logica.SystemHandler.Privacidad;
 
 public class Particular extends ListaReproduccion {
@@ -59,7 +62,13 @@ public class Particular extends ListaReproduccion {
 	@Override
 	public uyTubePersistencia.ListaReproduccion persistir() {
 		uyTubePersistencia.ListaReproduccion particularP = new uyTubePersistencia.ListaReproduccion(this);
+		Map<Integer, uyTubePersistencia.Video> videosListaP = new HashMap<Integer, uyTubePersistencia.Video>();
+		for (final Map.Entry<Integer, Video> entry : this.getVideos().entrySet()) {
+			videosListaP.put(entry.getValue().getIDVideo(), entry.getValue().persistir());
+		}
+		particularP.setVideos(videosListaP);
 		return particularP;
 	}
+	
 
 }
