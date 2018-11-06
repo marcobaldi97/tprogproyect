@@ -352,10 +352,19 @@ public class Canal {
 
 	public uyTubePersistencia.Canal persistir() {
 		uyTubePersistencia.Canal CanalP = new uyTubePersistencia.Canal(this);
-		Map<Integer, uyTubePersistencia.Video> videosP = new HashMap<Integer, uyTubePersistencia.Video>();
+		
+		Map<String, uyTubePersistencia.Video> videosP = new HashMap<String, uyTubePersistencia.Video>();
 		for (final Map.Entry<String, Video> entry : videos.entrySet()) {
-			videosP.put(entry.getValue().getIDVideo(), entry.getValue().persistir());
+			videosP.put(entry.getValue().getNombre(), entry.getValue().persistir());
 		}
+		CanalP.setVideos(videosP);
+		
+		Map<String, uyTubePersistencia.ListaReproduccion> listasReproduccionP = new HashMap<String, uyTubePersistencia.ListaReproduccion>();
+		for (final Map.Entry<String, ListaReproduccion> entry : listasReproduccion.entrySet()) {
+			listasReproduccionP.put(entry.getValue().getNombre(), entry.getValue().persistir());
+		}
+		
+		
 		return CanalP;
 	}
 

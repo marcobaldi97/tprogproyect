@@ -31,4 +31,10 @@ public class PorDefecto extends ListaReproduccion {
 		return new DtListaReproduccion(this);
 	}
 
+	@Override
+	public uyTubePersistencia.ListaReproduccion persistir() {
+		uyTubePersistencia.ListaReproduccion defectoP = new uyTubePersistencia.ListaReproduccion(this);
+		return defectoP;
+	}
+
 }

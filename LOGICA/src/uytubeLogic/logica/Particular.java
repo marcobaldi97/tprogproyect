@@ -56,4 +56,10 @@ public class Particular extends ListaReproduccion {
 		return new DtListaReproduccion(this);
 	}
 
+	@Override
+	public uyTubePersistencia.ListaReproduccion persistir() {
+		uyTubePersistencia.ListaReproduccion particularP = new uyTubePersistencia.ListaReproduccion(this);
+		return particularP;
+	}
+
 }

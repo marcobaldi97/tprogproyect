@@ -118,4 +118,10 @@ public abstract class ListaReproduccion {
 	
 	public abstract DtListaReproduccion toDt();
 
+	public abstract uyTubePersistencia.ListaReproduccion persistir();
+
+	
+
+
+
 }

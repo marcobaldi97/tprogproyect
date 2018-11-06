@@ -12,6 +12,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 import uytubeLogic.logica.ListaReproduccion.TipoLista;
+import uytubeLogic.logica.Particular;
+import uytubeLogic.logica.PorDefecto;
 import uytubeLogic.logica.SystemHandler.Privacidad;
 
 
@@ -31,6 +33,23 @@ public class ListaReproduccion implements Serializable{
 	@ManyToMany(cascade=CascadeType.PERSIST)
 	@JoinTable(name="Lista_video")
 	private Map<Integer, Video> videos;
+	
+	public ListaReproduccion() {
+	}
+	
+	public ListaReproduccion(Particular particular) {
+		nombre=particular.getNombre();
+		tipo=TipoLista.PARTICULAR;
+		privado=particular.getPrivado();
+		//ke hago con los bideos camona aiuda
+	}
+	public ListaReproduccion(PorDefecto porDefecto) {
+		nombre=porDefecto.getNombre();
+		tipo=TipoLista.PORDEFECTO;
+		privado=Privacidad.PRIVADO;
+		//ke hago con los bideos camona aiuda
+	}
+
 	public Integer getIdListaRep() {
 		return idListaRep;
 	}
