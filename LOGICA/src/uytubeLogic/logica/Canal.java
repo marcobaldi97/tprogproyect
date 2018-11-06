@@ -363,6 +363,7 @@ public class Canal {
 		for (final Map.Entry<String, ListaReproduccion> entry : listasReproduccion.entrySet()) {
 			listasReproduccionP.put(entry.getValue().getNombre(), entry.getValue().persistir());
 		}
+		CanalP.setListasReproduccion(listasReproduccionP);
 		
 		
 		return CanalP;
