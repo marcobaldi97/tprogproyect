@@ -205,45 +205,45 @@
 <body>
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-sm-12 iframe-container"><iframe width="560" height="315" id="frame" src="<%=url_video%>"></iframe></div>
+		<div class="col-xs-12 iframe-container"><iframe width="560" height="315" id="frame" src="<%=url_video%>"></iframe></div>
 	</div>
 	<div class="container-fluid" style="border:4px solid #EEEEEE" id="video_data_container">
 		<div class="row">
-			<div class="col-sm-12"><h2 id="titulo"><%=titulo%></h2></div>
+			<div class="col-xs-12"><h2 id="titulo"><%=titulo%></h2></div>
 		</div>
 		<div class="row">
-			<div class="col-sm-2">
-				<img class="img-responsive img-circle" src=<%=url_logo_autor%> width="100px" height="70px" ></img>
+			<div class="col-xs-2">
+				<div  class="ratio img-responsive" style="border-radius : 50% ; background-image: url(<%=url_logo_autor%>);"></div>
 			</div>
-			<div class="col-sm-2">
+			<div class="col-xs-2">
 				<h4><%=nombre_canal%></h4>
 			</div>
-			<div class="col-sm-2">
+			<div class="col-xs-2">
 				<h4><%=dia%>/<%=mes%>/<%=anio%></h4>
 			</div>
-			<div class="col-sm-6"><p class="texto_simple">
+			<div class="col-xs-6"><p class="texto_simple">
 				<h3>Likes:<%=cantLikes%> Dislikes:<%=cantDislikes%></h3>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-sm-12">
+			<div class="col-xs-12">
 				<blockquote>
 					<p align="left"><%=descripcion%></p>
 				</blockquote>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-sm-8">
+			<div class="col-xs-6">
 				<h3>
 					<small>Categoria: <%=nombre_categoria%></small>
 				</h3>
 			</div>
-			<div class="col-sm-4">
+			<div class="col-xs-6">
 				<%if(logged_state == "true") this.htmlListasComboBoxGenerator(out, listasReproduccionUsuarioLogged); %>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-sm-12">
+			<div class="col-xs-12">
 				<%
 				if(logged_state == "true"){
 					DtUsuario dataUsuario2 = (DtUsuario) request.getAttribute("dataUsuario");
@@ -265,7 +265,7 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-sm-12">
+			<div class="col-xs-12">
 				<%
 					if(logged_state.equals("true")){
 						System.out.println("Este es el estado actual: "+like_state);
@@ -280,60 +280,21 @@
 			</div>
 		</div>
 	</div>
-	<div class="row">
-		<div class="col-sm-12">
-				<%
-					if(logged_state.equals("true")){
-						DtUsuario dataUsuario2 = (DtUsuario) request.getAttribute("dataUsuario");
-						String nombre_user_loggeado = dataUsuario2.getNickname();
-						if(propietario.equals(nombre_user_loggeado)){
-							String[] listaLikes = (String[]) request.getAttribute("listaLikes");
-							String[] listaDislikes = (String[]) request.getAttribute("listaDislikes");
-				%>		
-						<button style="" class="response_button_class" onclick="toggle_followers_box()">Lista usuarios likes/dislikes</button>
-						<div style="display: none;" class="followers_box" id="followers_box">
-						<p class="texto_simple">Usuarios que dieron like:</p>
-						<ul>
-				<%
-						for(int index = 0; index < listaLikes.length;index++) {
-				%>
-							<li><a href="profile?opcion=Perfil&nickname=<%=listaLikes[index]%>"><%=listaLikes[index]%> </a></li>
-				<%			
-						}//imprimo los usuarios likes
-				%>			
-						</ul>
-						<p class="texto_simple">Usuarios que dieron dislike:</p>
-						<ul>
-				<%
-						for(int index = 0; index < listaDislikes.length;index++) {
-				%>
-							<li><a href="profile?opcion=Perfil&nickname=<%=listaDislikes[index]%>"><%=listaDislikes[index]%> </a></li>
-				<%			
-						}//imprimo los usuarios dislikes
-				%>			
-						</ul>
-						</div>
-				<%			
-						}
-					}//esto va a ser para que el propietario pueda ver los usuarios que le dieron like o dislike a su video.
-				%>
-		</div>
-	</div>
+
 	<%if(logged_state == "true"){%>
 		<div class="container-fluid" id="tabla_para_comentar">
 			<div class="row">
-				<div class="col-sm-2">
-					
-					<div  class="ratio img-responsive img-circle" style="background-image: url(<%=url_logo_usuario_iniciado%>);"></div>
+				<div class="col-xs-4">
+					<div  class="ratio img-responsive" style="border-radius : 50% ; background-image: url(<%=url_logo_usuario_iniciado%>);"></div>
 				</div>
-				<div class="col-sm-10">
+				<div class="col-xs-8">
 					<textarea style="width:100%;" class="comentario" id="comentario_a_comentar"></textarea>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-sm-2">
+				<div class="col-xs-4">
 				</div>
-				<div class="col-sm-10">
+				<div class="col-xs-8">
 					<button style="width:100%" id="response_button" name="response_button" value="Comentar" onclick="comentar_video()">  Comentar  </button>
 				</div>
 			</div>
@@ -377,27 +338,26 @@
 				out.println("				<div class=\"col-xs-6\"></div>");
 				out.println("		</div>");
 				out.println("			<div class=\"row\">");
-				out.println("					<div class=\"col-xs-2\"><img class=\"img-responsive img-circle\" src=\""+urlFotoComentador+"\"></img></div>");
-				out.println("				<div class=\"col-xs-10\"><blockquote><h3>"+descripcion_comentario+"</h3></blockquote></div>");
+				out.println("					<div class=\"col-xs-4\"><div  class=\"ratio img-responsive\" style=\"border-radius : 50% ; background-image: url("+urlFotoComentador+");\"></div></div>");
+				out.println("				<div class=\"col-xs-8\"><blockquote><h3>"+descripcion_comentario+"</h3></blockquote></div>");
 				out.println("			</div>");
 				out.println("			<div class=\"row\">");
-				out.println("				<div class=\"col-xs-2\"></div>");
+				out.println("				<div class=\"col-xs-4\"></div>");
 				if(logged_state == "true"){
-					out.println("           <div class=\"col-xs-10\"><button style=\"width:100%\" id=\"response_button"+index+"\" class=\"response_button_class\" name=\"response_button\" value=\""+comentarios[i].getIdComentario()+"\" onclick=\"toggle_response_box("+index+")\"> Responder...</button></div>");	
+					out.println("           <div class=\"col-xs-8\"><button style=\"width:100%\" id=\"response_button"+index+"\" class=\"response_button_class\" name=\"response_button\" value=\""+comentarios[i].getIdComentario()+"\" onclick=\"toggle_response_box("+index+")\"> Responder...</button></div>");	
 				}else{
-					out.println("			<div class=\"col-xs-10\"></div>");
+					out.println("			<div class=\"col-xs-8\"></div>");
 				}
 				out.println("        </div>");
 				if(logged_state == "true"){
 					out.println("<div class=\"container-fluid\" style=\"display:none\" id=\"response_box"+index+"\">");
 					out.println("	<div class=\"row\">");
-					out.println("		<div class=\"col-xs-2\"><img id=\"mini_logo\" class=\"img-responsive img-circle\" src=\""+url_logo_usuario_iniciado+"\"></img></div>");
+					out.println("		<div class=\"col-xs-4\"><div  class=\"ratio img-responsive\" style=\"border-radius : 50% ; background-image: url("+url_logo_usuario_iniciado+");\"></div></div>");
 					out.println("		<div class=\"col-xs-8\"><textarea style=\"height:100px\" class=\"form-control comentario_text_area\" id=\"comentario_a_comentar"+index+"\"></textarea></div>");
-					out.println("		<div class=\"col-xs-2\"></div>");
 					out.println("	</div>");
 					out.println("	<div class=\"row\">");
-					out.println("		<div class=\"col-xs-10\"></div>");
-					out.println("		<div class=\"col-xs-2\"><button class=\"response_button_class\"  id=\"submit_response_button"+index+"\" name=\"response_button\" value=\"Responder\" onclick=\"submit_response("+index+")\">  Responder  </button></div>");
+					out.println("		<div class=\"col-xs-4\"></div>");
+					out.println("		<div class=\"col-xs-8\"><button class=\"response_button_class\"  id=\"submit_response_button"+index+"\" name=\"response_button\" value=\"Responder\" onclick=\"submit_response("+index+")\">  Responder  </button></div>");
 					out.println("	</div>");
 					out.println("</div>");
 				}
@@ -410,7 +370,8 @@
 			return index;
 		}
 	%>
-		<div class="comment_container">
+		<div class="comment_container" style="width : 100%;">
+		<h1>Comentarios:</h1>
 	<%
 		if(logged_state.equals("true")){
 			DtUsuario dataUsuario2 = (DtUsuario) request.getAttribute("dataUsuario");
