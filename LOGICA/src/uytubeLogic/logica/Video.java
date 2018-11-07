@@ -247,17 +247,18 @@ public class Video {
 	}
 
 	public void eliminarComentarios(Usuario usrEliminar) {
-		Map<Integer, Comentario> comentariosAeliminarHijos = new HashMap<Integer, Comentario>();
+	//	Map<Integer, Comentario> comentariosAeliminarHijos = new HashMap<Integer, Comentario>();
 		for(Entry<Integer, Comentario> coment : comentarios.entrySet()){
 			if(coment.getValue().getUsuario()==usrEliminar){
-				comentariosAeliminarHijos.put(coment.getKey(),coment.getValue());
+				//comentariosAeliminarHijos.put(coment.getKey(),coment.getValue());
 				comentarios.remove(coment.getKey());
+				System.out.println("Elimine comentario");
 			}			
 		}
 		
-		for(Entry<Integer, Comentario> entry :	comentariosAeliminarHijos.entrySet()){
+		/*for(Entry<Integer, Comentario> entry :	comentariosAeliminarHijos.entrySet()){
 			entry.getValue().eliminarHijos();			
-		}
+		}*/
 	}
 
 	public void eliminarPuntuacion(Usuario usrEliminar) {

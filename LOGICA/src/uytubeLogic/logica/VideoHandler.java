@@ -75,6 +75,7 @@ public class VideoHandler {
 
 	public void eliminarComentariosYValoraciones(Usuario usrEliminar) {
 		DtComentario[] comentarios;
+		System.out.println("Voy a eliminar puntuaciones y comentarios");
 		for(Entry<Integer, Video> video: videos.entrySet()){
 			//valoraciones(puntuaciones)
 			video.getValue().eliminarPuntuacion(usrEliminar);
