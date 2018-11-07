@@ -247,12 +247,16 @@ public class Video {
 	}
 
 	public void eliminarComentarios(Usuario usrEliminar) {
+		Map<Integer, Comentario> comentariosAeliminarHijos = new HashMap<Integer, Comentario>();
 		for(Entry<Integer, Comentario> coment : comentarios.entrySet()){
 			if(coment.getValue().getUsuario()==usrEliminar){
-				coment.getValue().eliminarHijos();
+				comentariosAeliminarHijos.put(coment.getKey(),coment.getValue());
 				comentarios.remove(coment.getKey());
-			}
-			
+			}			
+		}
+		
+		for(Entry<Integer, Comentario> entry :	comentariosAeliminarHijos.entrySet()){
+			entry.getValue().eliminarHijos();			
 		}
 	}
 
