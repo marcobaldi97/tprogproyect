@@ -11,9 +11,9 @@ import uytube.datosPrueba.DatosDePrueba;
 import uytubeLogic.logica.Fabrica;
 import uytubeLogic.logica.IUsuarioCtrl;
 
-public class Main {
+public class Test {
 
-	public static void main(String[] args) {
+	public static void test() {
 		
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("UyTubeJPA");
 		EntityManager em = emf.createEntityManager();
