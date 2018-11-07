@@ -22,7 +22,7 @@ public class Video implements Serializable{
 	private String nombre;
 	private String descripcion;
 	private int duracion;
-	private DtFecha fechaPublicacion;
+	private String Fecha;
 	private String urlVideo;
 	private Privacidad privacidad;
 	public Video() {
@@ -33,9 +33,15 @@ public class Video implements Serializable{
 		this.setDescripcion(video.getDescripcion());
 		this.setNombre(video.getNombre());
 		this.setDuracion(video.getDuracion());
-		this.setFechaPublicacion(new DtFecha(video.getFechaPublicacion().getFecha()));
+		this.setFecha(video.getFechaPublicacion().getFecha().toString());
 		this.setPrivacidad(video.getPrivacidad());
 		this.setUrlVideo(video.getURL());
+	}
+	public String getFecha() {
+		return Fecha;
+	}
+	public void setFecha(String fecha) {
+		Fecha = fecha;
 	}
 	public Integer getIdVideo() {
 		return idVideo;
@@ -60,12 +66,6 @@ public class Video implements Serializable{
 	}
 	public void setDuracion(int duracion) {
 		this.duracion = duracion;
-	}
-	public DtFecha getFechaPublicacion() {
-		return fechaPublicacion;
-	}
-	public void setFechaPublicacion(DtFecha fechaPublicacion) {
-		this.fechaPublicacion = fechaPublicacion;
 	}
 	public String getUrlVideo() {
 		return urlVideo;

@@ -38,10 +38,6 @@ public class PorDefecto extends ListaReproduccion {
 	public uyTubePersistencia.ListaReproduccion persistir() {
 		uyTubePersistencia.ListaReproduccion defectoP = new uyTubePersistencia.ListaReproduccion(this);
 		Map<Integer, uyTubePersistencia.Video> videosListaP = new HashMap<Integer, uyTubePersistencia.Video>();
-		for (final Map.Entry<Integer, Video> entry : this.getVideos().entrySet()) {
-			videosListaP.put(entry.getValue().getIDVideo(), entry.getValue().persistir());
-		}
-		defectoP.setVideos(videosListaP);
 		return defectoP;
 	}
 

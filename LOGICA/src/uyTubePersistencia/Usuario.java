@@ -28,7 +28,7 @@ public class Usuario implements Serializable{
 	private String nombre;
 	private String apellido;
 	private String email;
-	private DtFecha fechaNacimiento;
+	private String fechaNacimiento;
 	private byte[] foto;
 	@OneToOne (cascade=CascadeType.PERSIST)
 	@JoinColumn(name="Canal")
@@ -42,7 +42,7 @@ public class Usuario implements Serializable{
 		this.setNombre(usuario.getNombre());
 		this.setApellido(usuario.getApellido());
 		this.setEmail(usuario.getEmail());
-		this.setFechaNacimiento(new DtFecha(usuario.getFechaNac().getFecha()));
+		this.setFechaNacimiento(usuario.getFechaNac().getFecha().toString());
 		this.setFoto(usuario.getFoto());
 		this.setPass(usuario.getPassword());
 	}
@@ -85,10 +85,10 @@ public class Usuario implements Serializable{
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public DtFecha getFechaNacimiento() {
+	public String getFechaNacimiento() {
 		return fechaNacimiento;
 	}
-	public void setFechaNacimiento(DtFecha fechaNacimiento) {
+	public void setFechaNacimiento(String fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 	public byte[] getFoto() {

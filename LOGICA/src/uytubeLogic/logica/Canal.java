@@ -1,12 +1,14 @@
 package uytubeLogic.logica;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 //prueba commit
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import uytubeLogic.logica.SystemHandler.Privacidad;
 
@@ -355,14 +357,31 @@ public class Canal {
 		
 		Map<String, uyTubePersistencia.Video> videosP = new HashMap<String, uyTubePersistencia.Video>();
 		for (final Map.Entry<String, Video> entry : videos.entrySet()) {
-			videosP.put(entry.getValue().getNombre(), entry.getValue().persistir());
+			List <DtListaReproduccion> listasEnVid = Arrays.asList(entry.getValue().getListas());
+			boolean videoEnListaPropia=false;
+			for(DtListaReproduccion lista:listasEnVid) {
+				if(lista.getPropietario().equals(this.getPropietario())) {
+					videoEnListaPropia=true;
+				}
+			}
+			if(!videoEnListaPropia)
+				videosP.put(entry.getValue().getNombre(), entry.getValue().persistir());
 		}
 		CanalP.setVideos(videosP);
 		
 		Map<String, uyTubePersistencia.ListaReproduccion> listasReproduccionP = new HashMap<String, uyTubePersistencia.ListaReproduccion>();
 		for (final Map.Entry<String, ListaReproduccion> entry : listasReproduccion.entrySet()) {
-			listasReproduccionP.put(entry.getValue().getNombre(), entry.getValue().persistir());
+			listasReproduccionP.put(entry.getValue().getNombre(), entry.getValue().persistir()); //agrego al map la lista persistida
+			Map<Integer, uyTubePersistencia.Video> videosPenLista = new HashMap<Integer, uyTubePersistencia.Video>(); 
+			for(Entry<Integer, Video> entryV: entry.getValue().getVideos().entrySet()) { //para cada video dentro de la lista real
+				if(entryV.getValue().getPropietario().equals(this.getPropietario())){  //si el video es del canal
+					uyTubePersistencia.Video vidPersistidoEnLista = entryV.getValue().persistir(); //persistir
+					videosPenLista.put(vidPersistidoEnLista.getIdVideo(), vidPersistidoEnLista); //aniadir al map de los videos de la lista
+				}
+			}
+			listasReproduccionP.get(entry.getValue().getNombre()).setVideos(videosPenLista);  //agregarle todos los videos a la lista persistida
 		}
+		
 		CanalP.setListasReproduccion(listasReproduccionP);
 		
 		
