@@ -294,6 +294,16 @@ public class UsuarioServlet extends HttpServlet {
 			
 			break;
 		}
+		case "checkLoginBootstrap":{
+			HttpSession session=request.getSession();
+			if(session!=null && session.getAttribute("nombre_usuario")!=null) {
+			 	String nombre_usuario = (String)session.getAttribute("nombre_usuario");
+			 	response.getWriter().write("logged");
+			}else {
+				response.getWriter().write("not logged");;
+			}
+			break;
+		}
 		case "follow":{
 			HttpSession session=request.getSession();
 		 	String nombre_usuario = (String)session.getAttribute("nombre_usuario");
