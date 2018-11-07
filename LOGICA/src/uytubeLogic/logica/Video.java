@@ -263,6 +263,7 @@ public class Video {
 	public void eliminarPuntuacion(Usuario usrEliminar) {
 		if(puntuaciones.containsKey(usrEliminar)){
 			puntuaciones.remove(usrEliminar);
+			System.out.println("Elimine una puntuacion del video"+nombre);
 		}
 		
 	}

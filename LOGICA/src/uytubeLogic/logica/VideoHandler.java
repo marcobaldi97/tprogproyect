@@ -80,7 +80,6 @@ public class VideoHandler {
 			video.getValue().eliminarPuntuacion(usrEliminar);
 			//comentarios
 			video.getValue().eliminarComentarios(usrEliminar);
-			
 		}
 		
 	}
