@@ -23,6 +23,7 @@ import uytube.admin.usuarios.AltaUsuarioInternalFrame;
 import uytube.admin.usuarios.ConsultaUsuarioInternalFrame;
 import uytube.admin.usuarios.ListarUsuariosInternalFrame;
 import uytube.admin.usuarios.modificarUsuario;
+import uytube.admin.usuarios.verUsuariosEliminados;
 import uytube.admin.videos.AltaVideo;
 import uytube.admin.videos.ModificarVideo;
 import uytube.admin.videos.ValorarVideo;
@@ -52,7 +53,7 @@ public class adminPrincipal extends JFrame {
 	private ConsultaListaInternalFrame consultaListaFrame;
 	private ListarCategoriasInternalFrame listarCategoriasFrame;
 	private ModificarListaFrame modificarListaFrame;
-
+	private verUsuariosEliminados verUsrEliminadosFrame;
 	private IUsuarioCtrl ICU;
 	private IVideoCtrl ICV;
 
@@ -277,6 +278,17 @@ public class adminPrincipal extends JFrame {
 			}
 		});
 		mnCategorias.add(mntmListar_1);
+		
+		JMenu mnUsuariosEliminados = new JMenu("Usuarios Eliminados");
+		mnUsuariosEliminados.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				verUsrEliminadosFrame = new verUsuariosEliminados();
+				contentPane.setLayout(null);
+				contentPane.add(verUsrEliminadosFrame);
+				verUsrEliminadosFrame.setVisible(true);
+			}
+		});
+		menuBar.add(mnUsuariosEliminados);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
