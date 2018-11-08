@@ -272,7 +272,7 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 		String[] videosCanal = listarVideosCanal(nick);
 
 		for(String nomVideo:videosCanal){
-			//borrar comentarios de sus videos?	
+	//		borrar comentarios de sus videos?	
 			System.out.println("eliminando video.."+nomVideo);
 			usrEliminar.eliminarVideo(nomVideo); //borra video del canal y handler
 		}

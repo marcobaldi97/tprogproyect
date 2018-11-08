@@ -253,17 +253,10 @@ public class Video {
 		while(it.hasNext()){
 			Integer key = it.next();
 			if(comentarios.get(key).getUsuario()==usrEliminar){
-				//comentariosAeliminarHijos.put(coment.getKey(),coment.getValue());
 				it.remove();
 				System.out.println("Elimine comentario!!");
 			}		
 		}
-					
-		
-		
-		/*for(Entry<Integer, Comentario> entry :	comentariosAeliminarHijos.entrySet()){
-			entry.getValue().eliminarHijos();			
-		}*/
 	}
 
 	public void eliminarPuntuacion(Usuario usrEliminar) {

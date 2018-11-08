@@ -133,8 +133,9 @@ public abstract class ListaReproduccion {
 	public void eliminarVideos() {
 		Iterator<Integer> it = videos.keySet().iterator();
 		while (it.hasNext()) {
-		//    Integer key = it.next();
-		    it.remove();
+		   it.next();
+		   it.remove();
+		   // videos.remove(key);
 		 }
 	}
 
