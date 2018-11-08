@@ -1,5 +1,7 @@
 package uytubeLogic.logica;
 
+import org.hsqldb.lib.Iterator;
+
 import uytubeLogic.logica.SystemHandler.Privacidad;
 
 public class UsuarioCtrl implements IUsuarioCtrl {
@@ -254,14 +256,11 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 		for(String entry: seguidos){	dejarUsuario(nick, entry);		}
 		String [] seguidores = listarUsuariosQueLeSigue(nick);
 		for(String entry: seguidores){	dejarUsuario(entry,nick);	}
+		
 		//quitar videos listas de rep
 		String[] listas = listarLDRdeUsuario(nick);
-		DtVideo[] videoLista;
 		for(String nomLista: listas){
-			videoLista = obtenerDtsVideosListaReproduccionUsuario(nick,nomLista);
-			for(DtVideo dtVideo: videoLista){
-				eliminarVideoLista(nick,dtVideo.getiDVideo(),nomLista);
-			}
+			usrEliminar.eliminarTodosVideoLista(nomLista);			
 			//eliminar lista de rep??
 		}
 		
@@ -271,6 +270,7 @@ public class UsuarioCtrl implements IUsuarioCtrl {
 		
 		//quitar videos canal
 		String[] videosCanal = listarVideosCanal(nick);
+
 		for(String nomVideo:videosCanal){
 			//borrar comentarios de sus videos?	
 			System.out.println("eliminando video.."+nomVideo);

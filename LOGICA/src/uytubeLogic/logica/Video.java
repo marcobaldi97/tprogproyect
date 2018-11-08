@@ -2,6 +2,7 @@ package uytubeLogic.logica;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -247,14 +248,18 @@ public class Video {
 	}
 
 	public void eliminarComentarios(Usuario usrEliminar) {
-	//	Map<Integer, Comentario> comentariosAeliminarHijos = new HashMap<Integer, Comentario>();
-		for(Entry<Integer, Comentario> coment : comentarios.entrySet()){
-			if(coment.getValue().getUsuario()==usrEliminar){
+		
+		Iterator <Integer> it = comentarios.keySet().iterator();
+		while(it.hasNext()){
+			Integer key = it.next();
+			if(comentarios.get(key).getUsuario()==usrEliminar){
 				//comentariosAeliminarHijos.put(coment.getKey(),coment.getValue());
-				comentarios.remove(coment.getKey());
-				System.out.println("Elimine comentario");
-			}			
+				it.remove();
+				System.out.println("Elimine comentario!!");
+			}		
 		}
+					
+		
 		
 		/*for(Entry<Integer, Comentario> entry :	comentariosAeliminarHijos.entrySet()){
 			entry.getValue().eliminarHijos();			

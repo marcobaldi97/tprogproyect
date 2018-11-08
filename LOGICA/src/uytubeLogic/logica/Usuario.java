@@ -262,4 +262,9 @@ public class Usuario {
 		
 	}
 
+	public void eliminarTodosVideoLista(String nomLista) {
+		canalPropio.eliminarTodosVideoLista(nomLista);
+		
+	}
+
 }
