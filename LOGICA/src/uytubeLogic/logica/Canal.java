@@ -388,5 +388,11 @@ public class Canal {
 		return CanalP;
 	}
 
+	public void eliminarTodosVideoLista(String nomLista) {
+		if(listasReproduccion.containsKey(nomLista)){
+			listasReproduccion.get(nomLista).eliminarVideos();
+		}
+	}
+
 }
 
