@@ -76,12 +76,29 @@ public class BusquedaServlet extends HttpServlet {
 		String parametroCanales="canales";
 		String parametroVideos="videos";
 		
+		
+		
 		request.setAttribute(parametroListas, listas);
 		request.setAttribute(parametroCanales, canales);
-		request.setAttribute(parametroVideos, videos);
 		
-		request.setAttribute("titulo", "Resultados de Busqueda");
-		request.getRequestDispatcher("/WEB-INF/Busqueda.jsp").forward(request, response);
+		
+		
+		
+		if(request.getHeader("User-Agent").indexOf("Mobile") != -1) {
+			
+			for(DtVideo video: videos) 
+			{
+				video.setUrl("https://img.youtube.com/vi/"+video.getUrl().substring(30)+"/hqdefault.jpg");
+				System.out.println(video.getUrl());
+			}
+			request.setAttribute(parametroVideos, videos);
+			request.getRequestDispatcher("/WEB-INF/BusquedaMobile.jsp").forward(request, response);
+          } else {
+        	  request.setAttribute(parametroVideos, videos);
+        	  request.setAttribute("titulo", "Resultados de Busqueda");
+      		request.getRequestDispatcher("/WEB-INF/Busqueda.jsp").forward(request, response);
+          }
+		
 	}
 
 	/**
