@@ -169,7 +169,27 @@ public class ListaReproduccionServlet extends HttpServlet {
 		}
 			;
 			break;
+		case "listMobile": {
+			if (session != null) {
+				String login = (String) session.getAttribute("nombre_usuario");
+				if (login != null) {
+					DtListaReproduccion[] listasPrivadasSesion = port.infoLDRdeUsuario("", login,
+							Privacidad.PRIVADO).getItem().toArray(new DtListaReproduccion[0]);
+					request.setAttribute("listasPrivadasSesion", listasPrivadasSesion);
 
+				}
+			} else {
+				request.setAttribute("listasPrivadasSesion", null);
+			}
+
+			DtListaReproduccion[] listas = port.listarLDRPublicasPorNombre("newUser").getItem().toArray(new DtListaReproduccion[0]);
+			request.setAttribute("listarListasReproduccion", listas);
+			request.getRequestDispatcher("/WEB-INF/Lista Reproduccion/listarListasReproduccionMobile.jsp").forward(request,
+					response);
+
+		}
+			;
+			break;
 		case "agregarVideoALista": {
 			session = request.getSession(false);
 			if (session != null && session.getAttribute("nombre_usuario") != null) {

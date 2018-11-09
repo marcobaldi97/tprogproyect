@@ -233,12 +233,12 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-xs-6">
+			<div class="col-xs-3">
 				<h3>
 					<small>Categoria: <%=nombre_categoria%></small>
 				</h3>
 			</div>
-			<div class="col-xs-6">
+			<div class="col-xs-9">
 				<%if(logged_state == "true") this.htmlListasComboBoxGenerator(out, listasReproduccionUsuarioLogged); %>
 			</div>
 		</div>
