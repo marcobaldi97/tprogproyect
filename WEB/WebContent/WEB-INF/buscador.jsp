@@ -1,10 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <head>
-   
-	<%@include file = "cosasComunesDelHead.jsp" %>
-	</head>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
+<head>
+ 	<%@include file = "cosasComunesDelHead.jsp" %>
+ 	<%
+ 	String nombreUsuario = "";
+ 	if (session != null && session.getAttribute("nombre_usuario") != null){
+ 		nombreUsuario = (String) session.getAttribute("nombre_usuario");
+ 	}
+ 	%>
+</head>
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -20,27 +23,21 @@
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-      </ul>
-      <form class="navbar-form navbar-left" action="search" method="get">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Buscar...">
-        </div>
-        <button type="submit" class="btn btn-default">Buscar</button>
-      </form>
-      <ul class="nav navbar-nav navbar-right" id="loginlogout">
+	  	<form class="navbar-form navbar-left" action="search" method="get">
+	    	<div class="form-group">
+	    		<input type="text" class="form-control" placeholder="Buscar...">
+	    	</div>
+	  		<button type="submit" class="btn btn-default">Buscar</button>
+	  	</form>
+      <ul class="nav navbar-nav navbar-right">
+      	<%if (session != null && session.getAttribute("nombre_usuario") != null){%>
+	    <li><a href='login?opcion=logout'>Cerrar Sesion</a></li>
+		<li><a href='profile?opcion=Perfil&nickname="+URLEncoder.encode(nomUsu,"UTF-8")+"'>Hola, <%=nombreUsuario%></a></li>
+		<%}else{%>
+		<li><a href='login?opcion=login'>Iniciar Sesion</a></li>
+		<li><a href='newUser?opcion=nuevoUsuario'>Nuevo Usuario</a></li>
+		<%}%>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
-
-<script>
-      var xhttp = new XMLHttpRequest();
-      xhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-          document.getElementById("loginlogout").innerHTML = this.responseText;
-        }
-      };
-      xhttp.open("POST", "login?opcion=checkLogin", true);
-      xhttp.send();
-</script>

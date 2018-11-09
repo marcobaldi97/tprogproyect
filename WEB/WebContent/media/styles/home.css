@@ -4,6 +4,7 @@
   justify-content: center;
   min-width: 200px; /* Set a width if you like */
   margin: auto;
+  background-color: #eee;
 }
 
 .vertical-menu a {

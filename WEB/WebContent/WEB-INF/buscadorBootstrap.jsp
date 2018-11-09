@@ -23,21 +23,20 @@
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-      </ul>
-      <form class="navbar-form navbar-left" action="search" method="get">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Buscar...">
-        </div>
-        <button type="submit" class="btn btn-default">Buscar</button>
-      </form>
-      <ul class="nav navbar-nav navbar-right" id="loginlogout">
+	  	<form class="navbar-form navbar-left" action="search" method="get">
+	    	<div class="form-group">
+	    		<input type="text" class="form-control" placeholder="Buscar Video...">
+	    	</div>
+	  		<button type="submit" class="btn btn-default">Buscar</button>
+	  	</form>
+      <ul class="nav navbar-nav navbar-right">
       	<%if (session != null && session.getAttribute("nombre_usuario") != null){%>
-	    	<li><a href='login?opcion=logout'>Cerrar Sesion</a></li>
-			<li><a href='profile?opcion=Perfil&nickname="+URLEncoder.encode(nomUsu,"UTF-8")+"'>Hola, <%=nombreUsuario%></a></li>
+      	<li>
+      	<li><a href='playlist?action=listMobile'>Ver Listas</a></li>
+	    <li><a href='login?opcion=logout'>Cerrar Sesion</a></li>
 		<%}else{%>
-			<li><a href='login?opcion=login'>Iniciar Sesion</a></li>
-			<li><a href='newUser?opcion=nuevoUsuario'>Nuevo Usuario</a></li>
+		<li><a href='login?opcion=login'>Iniciar Sesion</a></li>
+		<li><a href='newUser?opcion=nuevoUsuario'>Nuevo Usuario</a></li>
 		<%}%>
       </ul>
     </div><!-- /.navbar-collapse -->

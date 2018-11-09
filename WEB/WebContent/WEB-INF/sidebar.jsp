@@ -1,9 +1,10 @@
-<div class="vertical-menu">
-  <a href="#" class="active">Bienvenido</a><br>
+<div class="vertical-menu" style="width : 20%">
+  <a href="#" class="active"><h3>Bienvenido</h3></a><br>
   <div id="LoggedInInfo"></div>
-  Categorias
+  <h3>Categorias</h3>
+  <h4>
   <div id="categorias"></div>
-  
+  </h4>
 </div>
 <script>
 

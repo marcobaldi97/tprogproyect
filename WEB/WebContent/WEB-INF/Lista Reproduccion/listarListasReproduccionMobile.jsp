@@ -17,8 +17,8 @@
 </head>
 <body>
 <%
-if(request.getAttribute("listas") != null){
-	DtListaReproduccion[] listas = (DtListaReproduccion[]) request.getAttribute("listas");
+if(request.getAttribute("listarListasReproduccion") != null){
+	DtListaReproduccion[] listas = (DtListaReproduccion[]) request.getAttribute("listarListasReproduccion");
 }
 %>
 <div class="container-fluid" style="width : 100%;">
@@ -26,8 +26,8 @@ if(request.getAttribute("listas") != null){
 		<div class="col-xs-12"><h1>Listas reproducción</h1></div>
 	</div>
 	<div style="padding-left : 5%; padding-right : 5%; width : 100%;" class="container-fluid">
-		<%if(request.getAttribute("listas") != null){
-			DtListaReproduccion[] listas = (DtListaReproduccion[]) request.getAttribute("listas");
+		<%if(request.getAttribute("listarListasReproduccion") != null){
+			DtListaReproduccion[] listas = (DtListaReproduccion[]) request.getAttribute("listarListasReproduccion");
 			for(int index = 0; index < listas.length ; index++){
 				String nombreLista = listas[index].getNombre();
 				String[] nombresCategorias = new String[listas[index].getCategoriasLDR().size()];
@@ -59,8 +59,5 @@ if(request.getAttribute("listas") != null){
 		}//carga las listas %>
 	</div>
 </div>
-<script type="text/javascript">
-
-</script>
 </body>
 </html>
