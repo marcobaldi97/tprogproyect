@@ -15,7 +15,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-left" href="home"><img style="height: 60px;" src="media/images/Logo.png" alt="uyTube"></img></a>
+      <a class="navbar-left" href="casa"><img style="height: 60px;" src="media/images/Logo.png" alt="uyTube"></img></a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
