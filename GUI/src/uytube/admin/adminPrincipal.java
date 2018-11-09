@@ -33,6 +33,7 @@ import uytube.datosPrueba.DatosDePrueba;
 import uytubeLogic.logica.Fabrica;
 import uytubeLogic.logica.IUsuarioCtrl;
 import uytubeLogic.logica.IVideoCtrl;
+import uytubeLogica.publicar.WebServices;
 
 public class adminPrincipal extends JFrame {
 
@@ -82,6 +83,8 @@ public class adminPrincipal extends JFrame {
 		ICU = fabrica.getIUsuarioCtrl();
 		ICV = fabrica.getIVideoCtrl();
 		DatosDePrueba dP = new DatosDePrueba();
+		uytubeLogica.publicar.WebServices webServices= new uytubeLogica.publicar.WebServices();
+		webServices.publicar();
 		dP.cargarDatosDePrueba();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
