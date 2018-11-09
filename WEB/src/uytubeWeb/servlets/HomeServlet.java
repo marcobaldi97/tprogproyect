@@ -27,7 +27,7 @@ public class HomeServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if(request.getHeader("User-Agent").indexOf("Mobile") != -1) {
-            System.out.println("Estoy en mobile");
+			request.getRequestDispatcher("homeMobile.jsp").forward(request, response);
           } else {
             request.getRequestDispatcher("home.jsp").forward(request, response);
           }
