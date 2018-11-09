@@ -16,6 +16,10 @@
       <form action="cargarDatosPrueba">
         <button type="button" onclick="test()">Cargar Datos de Prueba</button>
       </form>
+      
+    
+      
+      
       <p id="Datos"></p>
     </div>
   </div>
