@@ -39,6 +39,8 @@ public class CategoriaServlet extends HttpServlet {
 		 
 		System.out.println("estoy en categoria servlet GET");
 		
+	
+		
 		
 		switch(action) 
 		{

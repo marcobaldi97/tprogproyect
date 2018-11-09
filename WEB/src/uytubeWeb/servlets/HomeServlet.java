@@ -26,8 +26,11 @@ public class HomeServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		request.getRequestDispatcher("home.jsp").forward(request, response);
+		if(request.getHeader("User-Agent").indexOf("Mobile") != -1) {
+            System.out.println("Estoy en mobile");
+          } else {
+            request.getRequestDispatcher("home.jsp").forward(request, response);
+          }
 	}
 
 	/**
