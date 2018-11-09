@@ -16,6 +16,7 @@
 <title>Listas Reproducción</title>
 </head>
 <body>
+  <%@include file="../buscadorBootstrap.jsp" %>
 <%
 if(request.getAttribute("listarListasReproduccion") != null){
 	DtListaReproduccion[] listas = (DtListaReproduccion[]) request.getAttribute("listarListasReproduccion");
@@ -27,36 +28,69 @@ if(request.getAttribute("listarListasReproduccion") != null){
 	</div>
 	<div style="padding-left : 5%; padding-right : 5%; width : 100%;" class="container-fluid">
 		<%if(request.getAttribute("listarListasReproduccion") != null){
-			DtListaReproduccion[] listas = (DtListaReproduccion[]) request.getAttribute("listarListasReproduccion");
-			for(int index = 0; index < listas.length ; index++){
-				String nombreLista = listas[index].getNombre();
-				String[] nombresCategorias = new String[listas[index].getCategoriasLDR().size()];
-				List<DtCategoria> listaDtcategoria = listas[index].getCategoriasLDR();
+			DtListaReproduccion[] listas=(DtListaReproduccion[]) request.getAttribute("listarListasReproduccion");
+			for(DtListaReproduccion entry: listas){
+				String nombreLista = entry.getNombre();
+				String[] nombresCategorias = new String[entry.getCategoriasLDR().size()];
 				Integer jota = 0;
-				for (Iterator<DtCategoria> iter = listaDtcategoria.iterator(); iter.hasNext(); ) {
-					DtCategoria element = iter.next();
-					nombresCategorias[jota] = element.getNombre();
+				for (DtCategoria entryCategorias: entry.getCategoriasLDR()) {
+					nombresCategorias[jota] = entryCategorias.getNombre();
 					jota++;
 				}
 				String categoriasAnexadas = "";
 				for (int i = 0; i < nombresCategorias.length; i++){
-					categoriasAnexadas =  categoriasAnexadas +", "+ nombresCategorias[i];
+					categoriasAnexadas =  categoriasAnexadas +" "+ nombresCategorias[i];
 				}
 		%>
 		<div class="row">
-			<div class="col-xs-2"><h3><%=nombreLista%></h3></div>
-			<div class="col-xs-7"><h3>Categorias: <%=categoriasAnexadas%></h3></div>
-			<div class="col-xs-3">
+			<div class="col-xs-12"><h3><%=nombreLista%></h3></div>
+		</div>
+		<div class="row">
+			<div class="col-xs-8"><h3>Categorias: <%=categoriasAnexadas%></h3></div>
+			<div class="col-xs-4">
 					<form action="playlist" method="get"> 
 						<input type="hidden" name="action" value="details">
 						<input type="hidden" name="nameList" value="<%=nombreLista%>">
-						<input type="hidden" name="ownerList" value="<%=listas[index].getPropietario() %>">
-						<input class="verAhora btn btn-danger" type="submit" value="Ver Info"> 
+						<input type="hidden" name="ownerList" value="<%=entry.getPropietario() %>">
+						<input style="width : 100%" class="verAhora btn btn-danger" type="submit" value="Ver Info"> 
 					</form> 
 			</div>
 		</div>
-		<%	}
-		}//carga las listas %>
+		<%	}//for para recorrer la lista
+		}else{%>
+		<%}//carga las listas 
+		if((DtListaReproduccion[]) request.getAttribute("listasPrivadasSesion")!=null){
+			DtListaReproduccion[] listasPrivadas=(DtListaReproduccion[]) request.getAttribute("listasPrivadasSesion");
+			for(DtListaReproduccion entry: listasPrivadas){
+				String nombreLista = entry.getNombre();
+				String[] nombresCategorias = new String[entry.getCategoriasLDR().size()];
+				Integer jota = 0;
+				for (DtCategoria entryCategorias: entry.getCategoriasLDR()) {
+					nombresCategorias[jota] = entryCategorias.getNombre();
+					jota++;
+				}
+				String categoriasAnexadas = "";
+				for (int i = 0; i < nombresCategorias.length; i++){
+					categoriasAnexadas =  categoriasAnexadas +" "+ nombresCategorias[i];
+				}
+		%>
+		<div class="row">
+			<div class="col-xs-12"><h3><%=nombreLista%></h3></div>
+		</div>
+		<div class="row">
+			<div class="col-xs-8"><h3>Categorias: <%=categoriasAnexadas%></h3></div>
+			<div class="col-xs-4">
+					<form action="playlist" method="get"> 
+						<input type="hidden" name="action" value="details">
+						<input type="hidden" name="nameList" value="<%=nombreLista%>">
+						<input type="hidden" name="ownerList" value="<%=entry.getPropietario() %>">
+						<input class="verAhora btn btn-danger" type="submit" value="Ver Info"> 
+					</form> 
+			</div> 
+		</div>
+		<%	}//for para recorrer la lista
+		}%>
+		
 	</div>
 </div>
 </body>
