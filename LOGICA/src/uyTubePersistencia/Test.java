@@ -7,7 +7,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import javax.util.Pair;
 import uytube.datosPrueba.DatosDePrueba;
 import uytubeLogic.logica.Fabrica;
 import uytubeLogic.logica.IUsuarioCtrl;
