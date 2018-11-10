@@ -1,5 +1,8 @@
 package uytubeLogic.logica;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class PorDefecto extends ListaReproduccion {
 
 	public PorDefecto(String nombreLista, String propietarioLista) {
@@ -29,6 +32,13 @@ public class PorDefecto extends ListaReproduccion {
 	@Override
 	public DtListaReproduccion toDt() {
 		return new DtListaReproduccion(this);
+	}
+
+	@Override
+	public uyTubePersistencia.ListaReproduccion persistir() {
+		uyTubePersistencia.ListaReproduccion defectoP = new uyTubePersistencia.ListaReproduccion(this);
+		Map<Integer, uyTubePersistencia.Video> videosListaP = new HashMap<Integer, uyTubePersistencia.Video>();
+		return defectoP;
 	}
 
 }

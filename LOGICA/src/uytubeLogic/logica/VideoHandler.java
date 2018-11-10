@@ -73,4 +73,16 @@ public class VideoHandler {
 		return infoVideo;
 	}
 
+	public void eliminarComentariosYValoraciones(Usuario usrEliminar) {
+		DtComentario[] comentarios;
+		System.out.println("Voy a eliminar puntuaciones y comentarios");
+		for(Entry<Integer, Video> video: videos.entrySet()){
+			//valoraciones(puntuaciones)
+			video.getValue().eliminarPuntuacion(usrEliminar);
+			//comentarios
+			video.getValue().eliminarComentarios(usrEliminar);
+		}
+		
+	}
+
 }

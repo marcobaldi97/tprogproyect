@@ -88,5 +88,7 @@ public interface IUsuarioCtrl {
 	public abstract void agregarVisita(Integer id_video, String nick);
 	
 	public abstract DtVideoHistorial[] listarVideoHistorial(String nick);
+	
+	public abstract uyTubePersistencia.Usuario persistirUsuario(String nickname);
 
 }

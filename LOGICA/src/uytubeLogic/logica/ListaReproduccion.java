@@ -2,7 +2,9 @@ package uytubeLogic.logica;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 
 public abstract class ListaReproduccion {
 	private String nombre;
@@ -117,5 +119,26 @@ public abstract class ListaReproduccion {
 	}
 	
 	public abstract DtListaReproduccion toDt();
+
+	public abstract uyTubePersistencia.ListaReproduccion persistir();
+
+	public Map<Integer, Video> getVideos() {
+		return videos;
+	}
+
+	public void setVideos(Map<Integer, Video> videos) {
+		this.videos = videos;
+	}
+
+	public void eliminarVideos() {
+		Iterator<Integer> it = videos.keySet().iterator();
+		while (it.hasNext()) {
+		   it.next();
+		   it.remove();
+		   // videos.remove(key);
+		 }
+	}
+
+
 
 }
