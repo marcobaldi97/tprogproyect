@@ -14,6 +14,21 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<%@include file="../cosasComunesDelHead.jsp" %>
 <title>Listas Reproducción</title>
+<style type="text/css">
+.verInfoButton{
+    background-color: #cbf2ae;
+    border: none;
+    color: black;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+}
+.verInfoButton:hover{
+	background-color: #e1f8d1;
+}
+</style>
 </head>
 <body>
   <%@include file="../buscadorBootstrap.jsp" %>
@@ -22,7 +37,7 @@ if(request.getAttribute("listarListasReproduccion") != null){
 	DtListaReproduccion[] listas = (DtListaReproduccion[]) request.getAttribute("listarListasReproduccion");
 }
 %>
-<div class="container-fluid" style="width : 100%;">
+<div class="container-fluid" style="width : 100%; padding ; 5px 5px 5px 5px">
 	<div class="row">
 		<div class="col-xs-12"><h1>Listas reproducción</h1></div>
 	</div>
@@ -43,7 +58,8 @@ if(request.getAttribute("listarListasReproduccion") != null){
 				}
 		%>
 		<div class="row">
-			<div class="col-xs-12"><h3><%=nombreLista%></h3></div>
+			<div class="col-xs-8"><h3><%=nombreLista%></h3></div>
+			<div class="col-xs-4"><h3>Pública</h3></div>
 		</div>
 		<div class="row">
 			<div class="col-xs-8"><h3>Categorias: <%=categoriasAnexadas%></h3></div>
@@ -52,7 +68,7 @@ if(request.getAttribute("listarListasReproduccion") != null){
 						<input type="hidden" name="action" value="details">
 						<input type="hidden" name="nameList" value="<%=nombreLista%>">
 						<input type="hidden" name="ownerList" value="<%=entry.getPropietario() %>">
-						<input style="width : 100%" class="verAhora btn btn-danger" type="submit" value="Ver Info"> 
+						<input class="verAhora verInfoButton" type="submit" value="Ver Info"> 
 					</form> 
 			</div>
 		</div>
@@ -75,7 +91,8 @@ if(request.getAttribute("listarListasReproduccion") != null){
 				}
 		%>
 		<div class="row">
-			<div class="col-xs-12"><h3><%=nombreLista%></h3></div>
+			<div class="col-xs-8"><h3><%=nombreLista%></h3></div>
+			<div class="col-xs-4"><h3>Privada</h3></div>
 		</div>
 		<div class="row">
 			<div class="col-xs-8"><h3>Categorias: <%=categoriasAnexadas%></h3></div>
@@ -84,9 +101,9 @@ if(request.getAttribute("listarListasReproduccion") != null){
 						<input type="hidden" name="action" value="details">
 						<input type="hidden" name="nameList" value="<%=nombreLista%>">
 						<input type="hidden" name="ownerList" value="<%=entry.getPropietario() %>">
-						<input class="verAhora btn btn-danger" type="submit" value="Ver Info"> 
+						<input class="verAhora verInfoButton" type="submit" value="Ver Info"> 
 					</form> 
-			</div> 
+			</div>
 		</div>
 		<%	}//for para recorrer la lista
 		}%>
