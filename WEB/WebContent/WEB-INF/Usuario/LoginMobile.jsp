@@ -7,12 +7,11 @@
 <head>
     <%@include file = "../cosasComunesDelHead.jsp" %>
     <link rel="stylesheet" href="media/styles/Login.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <title>Inicio de Sesion</title>
 </head>
 
-<body>
-    <%@include file="../buscador.jsp" %>
+<body class="login loli">
+    <%@include file="../buscadorBootstrap.jsp" %>
     <div class="container-fluid">
     	<div class="row">
     		<div class="col-xs-12">
