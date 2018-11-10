@@ -2,7 +2,9 @@ package uyTubePersistencia;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -19,15 +21,14 @@ public class PersistenciaCtrl {
 		return usuarios.toArray(new Usuario[0]);
 	}
 	
-	public Pair<Integer,String>[] listarUsuariosPersistidos() {
+	public Map<Integer,String> listarUsuariosPersistidos() {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("UyTubeJPA");
 		EntityManager em = emf.createEntityManager();
 		List<Usuario> usuarios= em.createQuery("Select u from Usuario u").getResultList();
-		List<Pair<Integer,String>> nicknames = new ArrayList<Pair<Integer,String>>();
+		Map<Integer,String> pares = new HashMap<Integer,String>();
 		for(Usuario usuarioParticular:usuarios) {
-			nicknames.add(new Pair<Integer,String>(usuarioParticular.getIdUsuario(),usuarioParticular.getNickname()));
+			pares.put(usuarioParticular.getIdUsuario(), usuarioParticular.getNickname());
 		}
-		Pair<Integer,String>[] pares=nicknames.toArray(new Pair[0]);
 		return pares;
 		
 	}

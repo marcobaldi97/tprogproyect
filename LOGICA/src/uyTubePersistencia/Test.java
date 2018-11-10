@@ -40,7 +40,7 @@ public class Test {
 		}
 		PersistenciaCtrl p = new PersistenciaCtrl();
 		Usuario[] users = p.getUsuariosPersistidos();
-		Pair<Integer, String>[] users2=p.listarUsuariosPersistidos();
+		Map<Integer, String> users2=p.listarUsuariosPersistidos();
 		for (Usuario found : users) {
 	//		Usuario found = em.find(Usuario.class, 7);
 			if (found != null) {
@@ -68,7 +68,7 @@ public class Test {
 			}
 		}
 		System.out.println("SEGUNDO LISTADO");
-		for(Pair<Integer, String> entry:users2) {
+		for(Map.Entry<Integer, String> entry : users2.entrySet()) {
 			System.out.println(entry.getKey()+":"+entry.getValue());
 		}
 	}
