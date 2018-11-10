@@ -13,15 +13,25 @@
 <head>
   <%@include file="cosasComunesDelHead.jsp" %>
   <title>UyTube!</title>
+  	  
+  	  <script type="text/javascript">
+	  	function clickimg(index){
+			$('#imagenVideo'+index).click(function(){
+			$('#verVideo'+index).click()
+			})
+	  	}
+	</script>	
 </head>
 
 <body>
-  <%@include file="buscadorBootstrap.jsp" %>
 
+<%@include file="buscadorBootstrap.jsp" %>
+	  
 	  <div class="container-fluid">
 		  <%
 			  if (request.getAttribute("videos") != null) {
 			  DtVideo[] videos = (DtVideo[]) request.getAttribute("videos");
+			  int index=0;
 			  for (DtVideo entry : videos) {
 		  %>
 		 <div class="container">
@@ -30,15 +40,24 @@
 		        <h3> <%=entry.getNombre()%> <small> -<%=entry.getPropietario()%>-</small></h3>
 		        </div>
 		        <div class="col-sm-12">
-		        <img src="<%=entry.getUrl()%>" class="img-thumbnail" alt="...">
+		        <form action="watch" method="get"> 
+					<input type="hidden" name="opcion" value="ver">
+					<input type="hidden" name="ID" value="<%=entry.getIDVideo()%>">
+					<input id="verVideo<%=index %>" class="verAhora" type="submit" value="Ver Ahora" style="display: none;"> 
+					<img id="imagenVideo<%=index %>" src="<%=entry.getUrl()%>" class="img-thumbnail" alt="..." onclick="clickimg(<%=index %>)" >
+				</form> 
 		        </div>
 		    </div>
-		</div>
+		 </div>
 	       
 	  </div>
-	  <%}}%>
- 
- 
+
+	  
+	  <%
+	  index++;}
+			  }%>
 </body>
 
+
 </html>
+

@@ -221,7 +221,16 @@ public class VideoServlet extends HttpServlet {
             }else{
             	request.setAttribute("logged" ,false);
             }
-			request.getRequestDispatcher("/WEB-INF/Video/VerVideo.jsp").forward(request, response);
+            if(request.getHeader("User-Agent").indexOf("Mobile") != -1) 
+            {
+            	request.getRequestDispatcher("/WEB-INF/Video/VerVideoMobile.jsp").forward(request, response);
+            } 
+            else 
+            {
+            	request.getRequestDispatcher("/WEB-INF/Video/VerVideo.jsp").forward(request, response);
+            }
+            
+			
 			break;
 		}
 		case "follow": {
