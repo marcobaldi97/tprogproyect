@@ -147,6 +147,9 @@ public class VideoServlet extends HttpServlet {
 			HttpSession session=request.getSession(false);
 			if(session!=null && session.getAttribute("nombre_usuario")!=null){
 				DtCategoria[] cat = port.listarCategorias().getItem().toArray(new DtCategoria[0]);
+				for(DtCategoria entry:cat) {
+					entry.setNombre(entry.getNombre().replace(" ", "||"));
+				}
 				request.setAttribute("listadoCat", cat);
 				request.getRequestDispatcher("WEB-INF/Video/AltaVideo.jsp").forward(request, response);
 			}else
@@ -295,7 +298,9 @@ public class VideoServlet extends HttpServlet {
 				String duracionVideo = new String(request.getParameter("duracionVideo").getBytes("ISO-8859-1"), "UTF-8");
 				String urlVideo = request.getParameter("urlVideo");
 				String fechaVideo = request.getParameter("fechaVideo");
-				String categoria = new String(request.getParameter("categoria").getBytes("ISO-8859-1"), "UTF-8");
+				String categoria = new String(request.getParameter("categoria").getBytes("ISO-8859-1"), "UTF-8").replace("||", " ");
+				System.out.println("hola pepito "+categoria);
+				System.out.println("hola pepote "+request.getParameter("categoria"));
 				String descVideo = new String(request.getParameter("descVideo").getBytes("ISO-8859-1"), "UTF-8");
 				if (nombreVideo != "" && duracionVideo != "" && isInteger(duracionVideo) && urlVideo != "" && fechaVideo != "" && descVideo != "") {
 					crearVideo(login,nombreVideo, duracionVideo, urlVideo, fechaVideo, categoria, descVideo);
