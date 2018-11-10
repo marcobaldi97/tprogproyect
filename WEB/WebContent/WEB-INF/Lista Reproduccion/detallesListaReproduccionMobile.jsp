@@ -15,13 +15,21 @@
 <%@include file="../cosasComunesDelHead.jsp"%>
 </head>
 <body>
+	<script type="text/javascript">
+	  	function clickimg(index){
+			$('#imagenVideo'+index).click(function(){
+			$('#verVideo'+index).click()
+			})
+	  	}
+	</script>
+
 	<%
 		DtListaReproduccion infoLista = (DtListaReproduccion) request.getAttribute("infoLista");
 	%>
 	<div class="container">
 		<div class="container" id="nombreLista">
 			<div class="row">
-				<div class="col-xs-12" style="font-size:10vw">
+				<div class="col-xs-12" style="font-size: 10vw">
 					<%=infoLista.getNombre()%>
 				</div>
 			</div>
@@ -29,28 +37,79 @@
 		<div class="container-fluid" id="categorias">
 			<div class="row">
 
-				<div class="col-xs-8" ><h4 style="float:left">Categorias:</h4></div>
+				<div class="col-xs-8">
+					<h4 style="float: left">Categorias:</h4>
+				</div>
 			</div>
 
 			<div class="row">
-					<%
-						for (DtCategoria cat : infoLista.getCategoriasLDR()) {
-					%>
+				<%
+					for (DtCategoria cat : infoLista.getCategoriasLDR()) {
+				%>
 
-						
-							<div class="col-xs-4" style="border:1px solid black; font-size:3.8vw" >
-								<div >
-								<%=cat.getNombre()%>
-								</div>
-							</div>
-						
-					<%
-						}
-					%>
-				
+
+				<div class="col-xs-4"
+					style="border: 1px solid black; font-size: 3.8vw">
+					<div>
+						<%=cat.getNombre()%>
+					</div>
+				</div>
+
+				<%
+					}
+				%>
+
 			</div>
 
 		</div>
+		<div class="container-fluid">
+		<div style="height: 10px">
+			<div class="row" style="height:100%">
+				<div class="col-xs-8">
+					<h4 style="float: left">Videos:</h4>
+				</div>
+			
+				<%
+					DtVideo[] videos = (DtVideo[]) request.getAttribute("videosLista");
+					int index = 0;
+					for (DtVideo entry : videos) {
+				%>
+				
+					<div class="h-25 d-inline-block">
+					<div class="col-xs-6">
+						<form action="watch" method="get">
+							<input type="hidden" name="opcion" value="ver"> <input
+								type="hidden" name="ID" value="<%=entry.getIDVideo()%>">
+							<input id="verVideo<%=index%>" class="verAhora" type="submit"
+								value="Ver Ahora" style="display: none;"> <img
+								id="imagenVideo<%=index%>" src="<%=entry.getUrl()%>"
+								class="img-thumbnail" alt="..." onclick="clickimg(<%=index%>)">
+						</form>
+						<div class="text-truncate" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+						<%=entry.getNombre()%>
+ 						</div>
+ 						<div class="text-truncate" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+						<%=entry.getPropietario()%>
+ 						</div>
+ 						
+						
+
+						
+					</div>
+					</div>
+				
+				
+				<%
+			index++;
+			}
+		%>
+		</div>
+			</div>
+
+		</div>
+
+
+		
 	</div>
 
 </body>

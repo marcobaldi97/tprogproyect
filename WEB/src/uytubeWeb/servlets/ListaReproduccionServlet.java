@@ -141,10 +141,20 @@ public class ListaReproduccionServlet extends HttpServlet {
 					.toArray(new uytubeLogica.publicar.DtVideo[0]);
 			uytubeLogica.publicar.DtListaReproduccion infoLista = port.infoListaReproduccion(propietarioLista,
 					nombreLista);
-			request.setAttribute("videosLista", videosLista);
 			request.setAttribute("infoLista", infoLista);
-			request.getRequestDispatcher("/WEB-INF/Lista Reproduccion/detallesListaReproduccionMobile.jsp").forward(request,
-					response);
+			if(request.getHeader("User-Agent").indexOf("Mobile") != -1) {
+				
+				for(DtVideo video: videosLista) 
+				{
+					video.setUrl("https://img.youtube.com/vi/"+video.getUrl().substring(30)+"/hqdefault.jpg");
+					System.out.println(video.getUrl());
+				}
+				request.setAttribute("videosLista", videosLista);
+				request.getRequestDispatcher("/WEB-INF/Lista Reproduccion/detallesListaReproduccionMobile.jsp").forward(request, response);
+	          } else {
+	        	  request.setAttribute("videosLista", videosLista);
+	      		request.getRequestDispatcher("/WEB-INF/Lista Reproduccion/detallesListaReproduccion.jsp").forward(request, response);
+	          }
 		}
 			;
 			break;
