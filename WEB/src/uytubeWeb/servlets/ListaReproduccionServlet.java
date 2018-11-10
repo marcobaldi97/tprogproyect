@@ -143,7 +143,7 @@ public class ListaReproduccionServlet extends HttpServlet {
 					nombreLista);
 			request.setAttribute("videosLista", videosLista);
 			request.setAttribute("infoLista", infoLista);
-			request.getRequestDispatcher("/WEB-INF/Lista Reproduccion/detallesListaReproduccion.jsp").forward(request,
+			request.getRequestDispatcher("/WEB-INF/Lista Reproduccion/detallesListaReproduccionMobile.jsp").forward(request,
 					response);
 		}
 			;

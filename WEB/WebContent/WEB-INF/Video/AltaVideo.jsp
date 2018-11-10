@@ -35,9 +35,9 @@
                		<%
                		DtCategoria[] cat = (DtCategoria[]) request.getAttribute("listadoCat");
 			     	String opciones="";
-			       	for (int i=0;i<cat.length;i++)
+			       	for (DtCategoria entry: cat)
 			       	{
-			       	 opciones=opciones+"<option value="+cat[i].getNombre()+">"+cat[i].getNombre()+"</option>";
+			       	 opciones=opciones+"<option value="+entry.getNombre()+">"+entry.getNombre().replace("||", " ")+"</option>";
 			
 		 	     	}
       				%>
