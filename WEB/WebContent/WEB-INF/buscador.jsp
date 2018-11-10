@@ -41,3 +41,4 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+<div style="padding-bottom : 70px"></div>
