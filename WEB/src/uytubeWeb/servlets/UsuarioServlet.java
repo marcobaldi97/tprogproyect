@@ -82,7 +82,7 @@ public class UsuarioServlet extends HttpServlet {
 			System.out.println("estoy cerrando sesion");
 			request.getSession(false).removeAttribute("nombre_usuario");
 			request.getSession().invalidate();
-			response.sendRedirect(request.getContextPath() + "/home");
+			response.sendRedirect(request.getContextPath() + "/casa");
 			break;
 		}
 		case "follow":{
@@ -114,13 +114,13 @@ public class UsuarioServlet extends HttpServlet {
                 }
                 else
                 {
-                	response.sendRedirect(request.getContextPath() + "/home");
+                	response.sendRedirect(request.getContextPath() + "/casa");
                 }
                 	
              }
              else
              {
-                response.sendRedirect(request.getContextPath() + "/home");
+                response.sendRedirect(request.getContextPath() + "/casa");
              }
 			break;	
 		}
@@ -228,7 +228,7 @@ public class UsuarioServlet extends HttpServlet {
 		    //cerrar la sesion
 			request.getSession(false).removeAttribute("nombre_usuario");
 			request.getSession().invalidate();
-		    response.sendRedirect(request.getContextPath() + "/home");
+		    response.sendRedirect(request.getContextPath() + "/casa");
 		break;
 		}
 		}
@@ -257,7 +257,7 @@ public class UsuarioServlet extends HttpServlet {
 				System.out.println("existe el usuario con esa contrase�a");
 				HttpSession sesion= request.getSession(true);
 				sesion.setAttribute("nombre_usuario", encodedNick);
-				response.sendRedirect(request.getContextPath() + "/home");
+				response.sendRedirect(request.getContextPath() + "/casa");
 			}else {
 				System.out.println("no existe el usuario con esa contrase�a");
 				request.setAttribute("error", "Se produjo un error en el ingreso de datos");
