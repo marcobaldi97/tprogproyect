@@ -89,7 +89,8 @@ public class adminPrincipal extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		setExtendedState(MAXIMIZED_BOTH);
-
+		
+		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 
@@ -139,6 +140,17 @@ public class adminPrincipal extends JFrame {
 			}
 		});
 		mnNewMenu.add(mntmListar);
+		
+		JMenuItem Eliminados = new JMenuItem("Eliminados");
+		Eliminados.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				verUsrEliminadosFrame= new verUsuariosEliminados();
+				contentPane.setLayout(null);
+				contentPane.add(verUsrEliminadosFrame);
+				verUsrEliminadosFrame.setVisible(true);
+			}
+		});
+		mnNewMenu.add(Eliminados);
 
 		JMenu mnVideos = new JMenu("Videos");
 		menuBar.add(mnVideos);
@@ -281,17 +293,6 @@ public class adminPrincipal extends JFrame {
 			}
 		});
 		mnCategorias.add(mntmListar_1);
-		
-		JMenu mnUsuariosEliminados = new JMenu("Usuarios Eliminados");
-		mnUsuariosEliminados.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				verUsrEliminadosFrame = new verUsuariosEliminados();
-				contentPane.setLayout(null);
-				contentPane.add(verUsrEliminadosFrame);
-				verUsrEliminadosFrame.setVisible(true);
-			}
-		});
-		menuBar.add(mnUsuariosEliminados);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
