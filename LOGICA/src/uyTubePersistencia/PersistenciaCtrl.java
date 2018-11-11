@@ -11,8 +11,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.swing.event.ListSelectionEvent;
 
-import javafx.util.Pair;
-
 public class PersistenciaCtrl {
 	public Usuario[] getUsuariosPersistidos() {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("UyTubeJPA");

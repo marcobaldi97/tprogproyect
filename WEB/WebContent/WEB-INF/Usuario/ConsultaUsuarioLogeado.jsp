@@ -79,7 +79,11 @@
 				<%}else if(!(boolean)request.getAttribute("duenioCanal")){%>
 					<button id="botonSeguir" value="Seguir" onclick="seguirUsr()">Seguir</button>
 				<%} %>
-				
+				<%if((boolean)request.getAttribute("duenioCanal")){ %>
+					<form action="profile" method="get"> 
+						<input type="submit" value="darBaja">		
+					</form>
+				<%} %>
 				
 			</td>		
 		</tr>
