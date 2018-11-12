@@ -85,7 +85,7 @@ public class ListaReproduccionServlet extends HttpServlet {
 					System.out.println(privacidad);
 
 					port.cambiarPrivLDR(login, nombreLista, privacidad_lista);
-					response.sendRedirect(request.getContextPath() + "/home");
+					response.sendRedirect(request.getContextPath() + "/casa");
 				}
 			}
 		}
@@ -192,7 +192,7 @@ public class ListaReproduccionServlet extends HttpServlet {
 				request.setAttribute("listasPrivadasSesion", null);
 			}
 
-			DtListaReproduccion[] listas = port.listarLDRPublicasPorNombre("newUser").getItem().toArray(new DtListaReproduccion[0]);
+			DtListaReproduccion[] listas = port.listarLDRPublicasPorNombre("").getItem().toArray(new DtListaReproduccion[0]);
 			request.setAttribute("listarListasReproduccion", listas);
 			request.getRequestDispatcher("/WEB-INF/Lista Reproduccion/listarListasReproduccionMobile.jsp").forward(request,
 					response);
@@ -218,7 +218,7 @@ public class ListaReproduccionServlet extends HttpServlet {
 				request.getRequestDispatcher("WEB-INF/Lista Reproduccion/CrearListaParticular.jsp").forward(request,
 						response);
 			} else {
-				response.sendRedirect(request.getContextPath() + "/home");
+				response.sendRedirect(request.getContextPath() + "/casa");
 			}
 		}
 		}
@@ -267,7 +267,7 @@ public class ListaReproduccionServlet extends HttpServlet {
 				}
 				System.out.println("creada la LDR");
 			} else {
-				response.sendRedirect(request.getContextPath() + "/home");
+				response.sendRedirect(request.getContextPath() + "/casa");
 			}
 		}
 			break;

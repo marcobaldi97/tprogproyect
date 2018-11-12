@@ -54,10 +54,15 @@ public abstract class ListaReproduccion {
 	public void refrescarCategorias() {
 		for (Map.Entry<Integer, Video> entry : videos.entrySet()) {
 			Categoria categoria = entry.getValue().getObjetoCategoria();
-			categoria.aniadirLDR(this);
+			System.out.println("cate "+categoria.getNombre());
+			System.out.println("igual? "+categoria.getNombre().equals(SystemHandler.getInstance().getSinCat().getNombre()));
+				
+			if(!categoria.getNombre().equals(SystemHandler.getInstance().getSinCat().getNombre())) {
+				categoria.aniadirLDR(this);
 
 			categorias.put(categoria.getNombre(), entry.getValue()
 					.getObjetoCategoria());
+			}
 		}
 
 	}

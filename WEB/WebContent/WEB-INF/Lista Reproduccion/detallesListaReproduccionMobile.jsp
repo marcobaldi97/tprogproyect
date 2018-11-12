@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Detalles de Lista</title>
 <%@include file="../buscador.jsp"%>
 <%@include file="../cosasComunesDelHead.jsp"%>
 </head>
