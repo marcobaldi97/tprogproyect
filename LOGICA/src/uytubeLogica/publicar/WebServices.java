@@ -332,4 +332,11 @@ public class WebServices {
 		IUsuarioCtrl IUI = fab.getIUsuarioCtrl();
 		return IUI.listarVideoHistorial(nick);
 	}
+	
+	@WebMethod
+	public boolean memberVideo(Integer idVid) {
+		Fabrica fab = Fabrica.getInstance();
+		IVideoCtrl IVI = fab.getIVideoCtrl();
+		return IVI.memberVideo(idVid);
+	}
 }
