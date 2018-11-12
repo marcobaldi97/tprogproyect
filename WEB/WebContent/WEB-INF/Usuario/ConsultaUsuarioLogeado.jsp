@@ -80,8 +80,9 @@
 					<button id="botonSeguir" value="Seguir" onclick="seguirUsr()">Seguir</button>
 				<%} %>
 				<%if((boolean)request.getAttribute("duenioCanal")){ %>
-					<form action="profile" method="get"> 
-						<input type="submit" value="darBaja">		
+					<form action="deleteUser" method="get"> 
+						  <input type="hidden" name="opcion" value="darBaja">
+						   <button type="submit">Baja</button>
 					</form>
 				<%} %>
 				
