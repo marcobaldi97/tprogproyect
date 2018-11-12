@@ -16,17 +16,18 @@
 <title>Listas Reproducción</title>
 <style type="text/css">
 .verInfoButton{
-    background-color: #cbf2ae;
+    background-color: #eee;
     border: none;
-    color: black;
-    padding: 15px 32px;
+    color: #777;
     text-align: center;
     text-decoration: none;
+    tex
     display: inline-block;
     font-size: 18px;
 }
 .verInfoButton:hover{
-	background-color: #e1f8d1;
+	background-color: #eee;
+	color: black;
 }
 </style>
 </head>
@@ -39,30 +40,19 @@ if(request.getAttribute("listarListasReproduccion") != null){
 %>
 <div class="container-fluid" style="width : 100%; padding ; 5px 5px 5px 5px">
 	<div class="row">
-		<div class="col-xs-12"><h1>Listas reproducción</h1></div>
+		<div class="col-xs-12"><h2>Listas reproducción</h2></div>
 	</div>
+	<ul class="list-group list-group-flush">
 	<div style="padding-left : 5%; padding-right : 5%; width : 100%;" class="container-fluid">
 		<%if(request.getAttribute("listarListasReproduccion") != null){
 			DtListaReproduccion[] listas=(DtListaReproduccion[]) request.getAttribute("listarListasReproduccion");
 			for(DtListaReproduccion entry: listas){
 				String nombreLista = entry.getNombre();
 				String[] nombresCategorias = new String[entry.getCategoriasLDR().size()];
-				Integer jota = 0;
-				for (DtCategoria entryCategorias: entry.getCategoriasLDR()) {
-					nombresCategorias[jota] = entryCategorias.getNombre();
-					jota++;
-				}
-				String categoriasAnexadas = "";
-				for (int i = 0; i < nombresCategorias.length; i++){
-					categoriasAnexadas =  categoriasAnexadas +" "+ nombresCategorias[i];
-				}
 		%>
+		<li class="list-group-item">
 		<div class="row">
-			<div class="col-xs-8"><h3><%=nombreLista%></h3></div>
-			<div class="col-xs-4"><h3>Pública</h3></div>
-		</div>
-		<div class="row">
-			<div class="col-xs-8"><h3>Categorias: <%=categoriasAnexadas%></h3></div>
+			<div class="col-xs-8"><%=nombreLista%></div>
 			<div class="col-xs-4">
 					<form action="playlist" method="get"> 
 						<input type="hidden" name="action" value="details">
@@ -72,6 +62,7 @@ if(request.getAttribute("listarListasReproduccion") != null){
 					</form> 
 			</div>
 		</div>
+		</li>
 		<%	}//for para recorrer la lista
 		}else{%>
 		<%}//carga las listas 
@@ -80,22 +71,10 @@ if(request.getAttribute("listarListasReproduccion") != null){
 			for(DtListaReproduccion entry: listasPrivadas){
 				String nombreLista = entry.getNombre();
 				String[] nombresCategorias = new String[entry.getCategoriasLDR().size()];
-				Integer jota = 0;
-				for (DtCategoria entryCategorias: entry.getCategoriasLDR()) {
-					nombresCategorias[jota] = entryCategorias.getNombre();
-					jota++;
-				}
-				String categoriasAnexadas = "";
-				for (int i = 0; i < nombresCategorias.length; i++){
-					categoriasAnexadas =  categoriasAnexadas +" "+ nombresCategorias[i];
-				}
 		%>
+		<li class="list-group-item">
 		<div class="row">
-			<div class="col-xs-8"><h3><%=nombreLista%></h3></div>
-			<div class="col-xs-4"><h3>Privada</h3></div>
-		</div>
-		<div class="row">
-			<div class="col-xs-8"><h3>Categorias: <%=categoriasAnexadas%></h3></div>
+			<div class="col-xs-8"><%=nombreLista%></div>
 			<div class="col-xs-4">
 					<form action="playlist" method="get"> 
 						<input type="hidden" name="action" value="details">
@@ -105,10 +84,11 @@ if(request.getAttribute("listarListasReproduccion") != null){
 					</form> 
 			</div>
 		</div>
+		</li>
 		<%	}//for para recorrer la lista
 		}%>
-		
 	</div>
+	</ul>
 </div>
 </body>
 </html>
