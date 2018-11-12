@@ -151,8 +151,11 @@ public class VideoServlet extends HttpServlet {
 				request.getRequestDispatcher("WEB-INF/Video/AltaVideo.jsp").forward(request, response);
 <<<<<<< WEB/src/uytubeWeb/servlets/VideoServlet.java
 			}else
+<<<<<<< WEB/src/uytubeWeb/servlets/VideoServlet.java
+=======
 =======
 			} else
+>>>>>>> WEB/src/uytubeWeb/servlets/VideoServlet.java
 >>>>>>> WEB/src/uytubeWeb/servlets/VideoServlet.java
 				response.sendRedirect(request.getContextPath() + "/casa");
 			break;

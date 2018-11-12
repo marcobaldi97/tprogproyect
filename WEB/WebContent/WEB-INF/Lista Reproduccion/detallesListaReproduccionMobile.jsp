@@ -25,12 +25,13 @@
 
 	<%
 		DtListaReproduccion infoLista = (DtListaReproduccion) request.getAttribute("infoLista");
+	
 	%>
 	<div class="container">
 		<div class="container" id="nombreLista">
 			<div class="row">
 				<div class="col-xs-12" style="font-size: 10vw">
-					<%=infoLista.getNombre()%>
+					<h3> <%=infoLista.getNombre()%> <small> -<%=infoLista.getPrivado().toString()%>-</small></h3>
 				</div>
 			</div>
 		</div>
@@ -89,7 +90,7 @@
 						<%=entry.getNombre()%>
  						</div>
  						<div class="text-truncate" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-						<%=entry.getPropietario()%>
+						<small>By <%=entry.getPropietario()%></small>
  						</div>
  						
 						

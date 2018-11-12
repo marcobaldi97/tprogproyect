@@ -50,12 +50,13 @@
 		    </div>
 		 </div>
 	       
-	  </div>
+	
 
 	  
 	  <%
 	  index++;}
 			  }%>
+	  </div>
 </body>
 
 

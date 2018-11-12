@@ -16,6 +16,7 @@
 <html>
 <head>
 <%@include file="../cosasComunesDelHead.jsp" %>
+ <%@include file="../buscadorBootstrap.jsp" %>
 	<%
 	DtVideo dataVideo = (DtVideo) request.getAttribute("dataVideo");
 	String titulo = dataVideo.getNombre();
