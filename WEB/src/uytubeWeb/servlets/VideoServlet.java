@@ -153,7 +153,7 @@ public class VideoServlet extends HttpServlet {
 				request.setAttribute("listadoCat", cat);
 				request.getRequestDispatcher("WEB-INF/Video/AltaVideo.jsp").forward(request, response);
 			}else
-				response.sendRedirect(request.getContextPath() + "/home");
+				response.sendRedirect(request.getContextPath() + "/casa");
 			break;
 		}
 		case "null":
