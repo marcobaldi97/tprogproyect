@@ -33,7 +33,7 @@ import uytubeLogica.publicar.Privacidad;
 /**
  * Servlet implementation class UsuarioServlet
  */
-@WebServlet({"/history","/login","/profile","/modifyUser","/follow","/responseComment"})
+@WebServlet({"/history","/login","/profile","/modifyUser","/follow","/responseComment","/deleteUser"})
 public class UsuarioServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

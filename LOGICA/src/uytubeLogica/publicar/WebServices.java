@@ -6,6 +6,9 @@ import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
 import javax.jws.soap.SOAPBinding.ParameterStyle;
 import javax.jws.soap.SOAPBinding.Style;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.xml.ws.Endpoint;
 
 import uytube.datosPrueba.DatosDePrueba;
@@ -302,7 +305,17 @@ public class WebServices {
 	public void bajaUsuario(String nick){
 		Fabrica fab = Fabrica.getInstance();
 		IUsuarioCtrl IUI = fab.getIUsuarioCtrl();
+		
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("UyTubeJPA");
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		uyTubePersistencia.Usuario usuarioPersistir= IUI.persistirUsuario(nick);
+		em.persist(usuarioPersistir);
+		em.flush();
+		em.getTransaction().commit();
+
 		IUI.bajaUsuario(nick);
+		
 	}
 	
     @WebMethod
