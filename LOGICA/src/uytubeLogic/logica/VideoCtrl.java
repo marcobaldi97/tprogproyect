@@ -65,7 +65,10 @@ public class VideoCtrl implements IVideoCtrl {
 	public DtVideo infoAddVideo(Integer IDVideo) {
 		VideoHandler VidHandler = VideoHandler.getInstance();
 		Video videoEspecifico = VidHandler.find(IDVideo);
-		return videoEspecifico.verDetallesVideo();
+		if(videoEspecifico!=null)
+			return videoEspecifico.verDetallesVideo();
+		else
+			return null;
 	}
 
 	public DtVideo[] listarVideos() {
@@ -117,5 +120,12 @@ public class VideoCtrl implements IVideoCtrl {
 			status = "neutral";
 		return status;
 	}
+
+	public boolean memberVideo(Integer idVideo) {
+		VideoHandler VidHandler = VideoHandler.getInstance();
+		return VidHandler.find(idVideo)!=null;
+	}
+	
+	
 
 }
