@@ -153,7 +153,7 @@ public class VideoServlet extends HttpServlet {
 				request.setAttribute("listadoCat", cat);
 				request.getRequestDispatcher("WEB-INF/Video/AltaVideo.jsp").forward(request, response);
 			}else
-				response.sendRedirect(request.getContextPath() + "/home");
+				response.sendRedirect(request.getContextPath() + "/casa");
 			break;
 		}
 		case "null":
@@ -304,12 +304,12 @@ public class VideoServlet extends HttpServlet {
 				String descVideo = new String(request.getParameter("descVideo").getBytes("ISO-8859-1"), "UTF-8");
 				if (nombreVideo != "" && duracionVideo != "" && isInteger(duracionVideo) && urlVideo != "" && fechaVideo != "" && descVideo != "") {
 					crearVideo(login,nombreVideo, duracionVideo, urlVideo, fechaVideo, categoria, descVideo);
-					response.sendRedirect(request.getContextPath() + "/home");
+					response.sendRedirect(request.getContextPath() + "/casa");
 				} else {
 					response.getWriter().append("Error, verifique los campos nuevamente");
 				}
 			} else {
-				response.sendRedirect(request.getContextPath() + "/home");
+				response.sendRedirect(request.getContextPath() + "/casa");
 			}
 			break;
 		case "modificarVideo":{
