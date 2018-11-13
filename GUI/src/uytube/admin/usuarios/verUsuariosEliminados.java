@@ -17,6 +17,8 @@ import uyTubePersistencia.ListaReproduccion;
 import uyTubePersistencia.PersistenciaCtrl;
 import uyTubePersistencia.Usuario;
 import uyTubePersistencia.Video;
+import uytube.admin.adminPrincipal;
+import uytube.admin.listas.ConsultaListaInternalFrame;
 import uytubeLogic.logica.Puntuacion;
 
 import javax.swing.JTable;
@@ -44,7 +46,11 @@ public class verUsuariosEliminados extends JInternalFrame {
 	private JPanel panel;
 	private JPanel panel_1;
 	private JPanel panel_2;
-
+	private JButton btnVerInfoLista;
+	private JPanel panel_3;
+	private JPanel panel_4;
+	private JButton btnVerInfoVideo;
+	private Map<String, ListaReproduccion> userL;
 	/**
 	 * Launch the application.
 	 */
@@ -113,6 +119,7 @@ public class verUsuariosEliminados extends JInternalFrame {
 	};
 	
 	public verUsuariosEliminados() {
+		setTitle("Usuarios Eliminados");
 		setClosable(true);
 		setResizable(true);
 		setIconifiable(true);
@@ -162,19 +169,45 @@ public class verUsuariosEliminados extends JInternalFrame {
 		panel_1.add(tableCanal);
 		tableCanal.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
-		lblListas = new JLabel("Listas");
-		getContentPane().add(lblListas);
+		panel_3 = new JPanel();
+		getContentPane().add(panel_3);
+		panel_3.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		JLabel lblVideos = new JLabel("Videos");
-		getContentPane().add(lblVideos);
+		lblListas = new JLabel("Listas");
+		panel_3.add(lblListas);
 		
 		tableListas = new JTable(ModeloListas());
+		panel_3.add(tableListas);
 		tableListas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		getContentPane().add(tableListas);
+		
+		btnVerInfoLista = new JButton("Ver Info Lista");
+		btnVerInfoLista.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(tableListas.getSelectedRow()>=0){
+					DefaultTableModel tm = (DefaultTableModel) tableListas.getModel();
+					Integer  idLista= (Integer) tm.getValueAt(tableListas.getSelectedRow(),1);
+					ListaReproduccion listaR = userL.get(idLista);
+					VerInfoListaEliminada listaIFrame = new VerInfoListaEliminada(listaR);
+					adminPrincipal.getFrames()[0].setLayout(null);
+					adminPrincipal.getFrames()[0].add(listaIFrame);
+					listaIFrame.show();
+				}
+			}
+		});
+		panel_3.add(btnVerInfoLista);
+		
+		panel_4 = new JPanel();
+		getContentPane().add(panel_4);
+		
+		JLabel lblVideos = new JLabel("Videos");
+		panel_4.add(lblVideos);
+		
+		btnVerInfoVideo = new JButton("Ver Info Video");
+		panel_4.add(btnVerInfoVideo);
 		
 		tableVideos = new JTable(ModeloVideos());
+		panel_4.add(tableVideos);
 		tableVideos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		getContentPane().add(tableVideos);
 		cargarUsuarios();
 
 	}
@@ -212,7 +245,7 @@ public class verUsuariosEliminados extends JInternalFrame {
 			modeloTablaCanal.setRowCount(0);
 			modeloTablaCanal.addRow(new Object[]{userC.getIdCanal(),userC.getNombre(),userC.getDescripcion(),userC.getPrivacidadCanal()});
 			//cargar listas y videos
-			Map<String, ListaReproduccion> userL = userC.getListasReproduccion();
+			userL = userC.getListasReproduccion();
 			Map<String, Video> userV = userC.getVideos();
 			DefaultTableModel modeloListas= (DefaultTableModel) tableListas.getModel();
 			modeloListas.setRowCount(0);
