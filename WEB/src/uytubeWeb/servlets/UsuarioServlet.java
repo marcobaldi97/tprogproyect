@@ -78,6 +78,9 @@ public class UsuarioServlet extends HttpServlet {
 			
 			break;
 		}
+		
+		
+		
 		case "logout" :{
 			System.out.println("estoy cerrando sesion");
 			request.getSession(false).removeAttribute("nombre_usuario");
@@ -294,6 +297,38 @@ public class UsuarioServlet extends HttpServlet {
 			
 			break;
 		}
+		
+		case "chequearNickname":{
+			 String nicknameCandidato= (String) request.getParameter("nickname");
+			 boolean existe=port.verificarDispUsuario(nicknameCandidato, " ");
+			 if(!existe)
+			 {
+				 response.getWriter().append("<img style=\"height : 25px; width: 25px\" src=\"media/images/cruz_roja.png\">");
+			 }
+			 else
+			 {
+				 response.getWriter().append("<img style=\"height : 25px; width: 25px\" src=\"media/images/tic_verde.png\">");
+			 }	 
+			
+			 break;
+		}
+		
+		case "chequearEmail":{
+			 String emailCandidato= (String) request.getParameter("email");
+			 boolean existe=port.verificarDispUsuario(" ", emailCandidato);
+			 System.out.println(emailCandidato);
+			 if(!existe)
+			 {
+				 response.getWriter().append("<img style=\"height : 25px; width: 25px\" src=\"media/images/cruz_roja.png\">");
+			 }
+			 else
+			 {
+				 response.getWriter().append("<img style=\"height : 25px; width: 25px\" src=\"media/images/tic_verde.png\">");
+			 }	 
+			
+			 break;
+		}
+		
 		case "checkLoginBootstrap":{
 			HttpSession session=request.getSession();
 			if(session!=null && session.getAttribute("nombre_usuario")!=null) {

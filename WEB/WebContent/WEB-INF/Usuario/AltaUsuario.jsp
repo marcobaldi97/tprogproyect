@@ -16,29 +16,13 @@
     <div class="main-content">
     	<form class="alta-usuario-form" action="newUser" method ="POST" enctype="multipart/form-data" >
             Nickname:<br>
-            <input type="text" name="nickname" id="nickname" onblur="comprobarDisponibilidadUsr()" ><br>
+            <input type="text" name="nickname" id="nickname" onfocus="chequear()">
+            <div id="status">
+            </div>
             Correo electronico:<br>
-            <input type="email" name="email" id="email" onblur="comprobarDisponibilidadUsr()"><br>
-            <p id="disponible"></p>
-            <script>
-           		 function comprobarDisponibilidadUsr() {
-           			var xhttp = new XMLHttpRequest();
-	                xhttp.onreadystatechange = function () {
-	                  if (this.readyState == 4 && this.status == 200) {
-	                	                	 
-	                	//  if(mensaje=="")alert(this.responseText,"¡ALERTA!");
-	                	document.getElementById("disponible").innerHTML = this.responseText;
-	                	
-	                  }
-	                };
-	                var nickname = document.getElementById("nickname").value;
-	                var encodedNick= encodeURIComponent(nickname);
-	                xhttp.open("POST", "login?opcion=checkDispUsr&nickname="+encodedNick+"&email="+document.getElementById("email").value, true);
-	                xhttp.send();	                
-	            }
-           		
-       	       
-       	     </script>
+            <input type="email" name="email" id="email" onfocus="chequear()"><br>
+            <div id="statusEmail">
+            </div>
             Nombre:<br>
             <input type="text" name="nombre"><br>
             Apellido:<br>
@@ -83,6 +67,56 @@
     	</form>
     </div>
     </div>
+
+
+<script type="text/javascript">
+function chequear()
+{
+$('#nickname').keyup(function()
+		{
+			var nickname = $('#nickname').val();
+			$('#status').html('<img style="height : 25px; width: 25px" src="media/images/cargando.gif">');
+			
+			if(nickname!='')
+			{
+				var xhttp = new XMLHttpRequest();
+			      xhttp.onreadystatechange = function () {
+			        if (this.readyState == 4 && this.status == 200) {
+			          document.getElementById("status").innerHTML = this.responseText;
+			        }
+			      };
+			      xhttp.open("POST", "profile?opcion=chequearNickname&nickname="+nickname, true);
+			      xhttp.send();
+			}
+			else
+			{
+				$('#status').html('');
+			}
+		})
+		
+$('#email').keyup(function()
+		{
+			var email = $('#email').val();
+			$('#statusEmail').html('<img style="height : 25px; width: 25px" src="media/images/cargando.gif">');
+			
+			if(email!='')
+			{
+				var xhttp = new XMLHttpRequest();
+			      xhttp.onreadystatechange = function () {
+			        if (this.readyState == 4 && this.status == 200) {
+			          document.getElementById("statusEmail").innerHTML = this.responseText;
+			        }
+			      };
+			      xhttp.open("POST", "profile?opcion=chequearEmail&email="+email, true);
+			      xhttp.send();
+			}
+			else
+			{
+				$('#statusEmail').html('');
+			}
+		})		
+}
+</script>
 
 </body>
 </html>
