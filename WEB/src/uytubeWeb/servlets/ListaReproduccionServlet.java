@@ -21,10 +21,10 @@ import uytubeLogica.publicar.Privacidad;
 /**
  * Servlet implementation class ListaReproduccionServlet
  */
-@WebServlet({ "/playlist", "/addVidPlaylist", "/removeVidPlaylist", "/modifyPlaylist", "/newPlaylist" })
+
 
 public class ListaReproduccionServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 6L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()

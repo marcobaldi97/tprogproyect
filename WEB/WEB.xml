@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- WARNING: Eclipse auto-generated file.
+              Any modifications will be overwritten.
+              To include a user specific buildfile here, simply create one in the same
+              directory with the processing instruction <?eclipse.ant.import?>
+              as the first entry and export the buildfile again. -->
+<project basedir="." default="build" name="UyTubeWeb">
+	<property environment="env" />
+	<property name="debuglevel" value="source,lines,vars" />
+	<property name="target" value="1.8" />
+	<property name="source" value="1.8" />
+
+	<property name="project-name" value="${ant.project.name}" />
+	<property name="builder" value="Grupo03" />
+
+	<property name="war-file-name" value="${project-name}.war" />
+	<property name="source-directory" value="src" />
+	<property name="classes-directory" value="build/classes" />
+	<property name="web-directory" value="WebContent" />
+	<property name="web-xml-file" value="WebContent/web.xml" />
+	<tstamp prefix="build-info">
+		<format property="current-date" pattern="d-MMMM-yyyy" locale="en" />
+		<format property="current-time" pattern="hh:mm:ss a z" locale="en" />
+	</tstamp>
+	<property name="build-directory" value="build" />
+
+
+	<path id="Web App Libraries.libraryclasspath">
+		<pathelement location="../../../../../uyTubeLogic" />
+		<pathelement location="../../../../../uyTube" />
+	</path>
+	<path id="EAR Libraries.libraryclasspath" />
+	<path id="Apache Tomcat v8.5 [Apache Tomcat v8.5].libraryclasspath">
+		<pathelement location="../../../../../Program Files/Apache Software Foundation/Tomcat 8.5/lib/annotations-api.jar" />
+		<pathelement location="../../../../../Program Files/Apache Software Foundation/Tomcat 8.5/lib/catalina-ant.jar" />
+		<pathelement location="../../../../../Program Files/Apache Software Foundation/Tomcat 8.5/lib/catalina-ha.jar" />
+		<pathelement location="../../../../../Program Files/Apache Software Foundation/Tomcat 8.5/lib/catalina-storeconfig.jar" />
+		<pathelement location="../../../../../Program Files/Apache Software Foundation/Tomcat 8.5/lib/catalina-tribes.jar" />
+		<pathelement location="../../../../../Program Files/Apache Software Foundation/Tomcat 8.5/lib/catalina.jar" />
+		<pathelement location="../../../../../Program Files/Apache Software Foundation/Tomcat 8.5/lib/ecj-4.6.3.jar" />
+		<pathelement location="../../../../../Program Files/Apache Software Foundation/Tomcat 8.5/lib/el-api.jar" />
+		<pathelement location="../../../../../Program Files/Apache Software Foundation/Tomcat 8.5/lib/jasper-el.jar" />
+		<pathelement location="../../../../../Program Files/Apache Software Foundation/Tomcat 8.5/lib/jasper.jar" />
+		<pathelement location="../../../../../Program Files/Apache Software Foundation/Tomcat 8.5/lib/jaspic-api.jar" />
+		<pathelement location="../../../../../Program Files/Apache Software Foundation/Tomcat 8.5/lib/jsp-api.jar" />
+		<pathelement location="../../../../../Program Files/Apache Software Foundation/Tomcat 8.5/lib/servlet-api.jar" />
+		<pathelement location="../../../../../Program Files/Apache Software Foundation/Tomcat 8.5/lib/tomcat-api.jar" />
+		<pathelement location="../../../../../Program Files/Apache Software Foundation/Tomcat 8.5/lib/tomcat-coyote.jar" />
+		<pathelement location="../../../../../Program Files/Apache Software Foundation/Tomcat 8.5/lib/tomcat-dbcp.jar" />
+		<pathelement location="../../../../../Program Files/Apache Software Foundation/Tomcat 8.5/lib/tomcat-i18n-es.jar" />
+		<pathelement location="../../../../../Program Files/Apache Software Foundation/Tomcat 8.5/lib/tomcat-i18n-fr.jar" />
+		<pathelement location="../../../../../Program Files/Apache Software Foundation/Tomcat 8.5/lib/tomcat-i18n-ja.jar" />
+		<pathelement location="../../../../../Program Files/Apache Software Foundation/Tomcat 8.5/lib/tomcat-i18n-ru.jar" />
+		<pathelement location="../../../../../Program Files/Apache Software Foundation/Tomcat 8.5/lib/tomcat-jdbc.jar" />
+		<pathelement location="../../../../../Program Files/Apache Software Foundation/Tomcat 8.5/lib/tomcat-jni.jar" />
+		<pathelement location="../../../../../Program Files/Apache Software Foundation/Tomcat 8.5/lib/tomcat-util-scan.jar" />
+		<pathelement location="../../../../../Program Files/Apache Software Foundation/Tomcat 8.5/lib/tomcat-util.jar" />
+		<pathelement location="../../../../../Program Files/Apache Software Foundation/Tomcat 8.5/lib/tomcat-websocket.jar" />
+		<pathelement location="../../../../../Program Files/Apache Software Foundation/Tomcat 8.5/lib/websocket-api.jar" />
+	</path>
+	<path id="Apache CXF Library [3.2.6].libraryclasspath">
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/activemq-broker-5.14.5.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/activemq-client-5.14.5.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/activemq-openwire-legacy-5.14.5.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/antlr-2.7.7.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/asm-5.2.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/bcprov-jdk15on-1.60.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/commons-codec-1.11.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/commons-collections-3.2.2.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/commons-lang3-3.7.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/commons-text-1.2.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cryptacular-1.1.1.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-core-3.2.6.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-manifest.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-rt-bindings-coloc-3.2.6.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-rt-bindings-corba-3.2.6.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-rt-bindings-soap-3.2.6.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-rt-bindings-xml-3.2.6.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-rt-databinding-aegis-3.2.6.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-rt-databinding-jaxb-3.2.6.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-rt-features-clustering-3.2.6.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-rt-frontend-jaxrs-3.2.6.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-rt-frontend-jaxws-3.2.6.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-rt-frontend-js-3.2.6.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-rt-frontend-simple-3.2.6.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-rt-javascript-3.2.6.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-rt-management-3.2.6.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-rt-rs-client-3.2.6.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-rt-rs-extension-providers-3.2.6.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-rt-rs-extension-search-3.2.6.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-rt-rs-json-basic-3.2.6.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-rt-rs-security-cors-3.2.6.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-rt-rs-security-jose-3.2.6.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-rt-rs-security-jose-jaxrs-3.2.6.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-rt-rs-security-oauth-3.2.6.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-rt-rs-security-oauth2-3.2.6.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-rt-rs-security-sso-saml-3.2.6.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-rt-rs-security-xml-3.2.6.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-rt-rs-service-description-3.2.6.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-rt-rs-sse-3.2.6.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-rt-security-3.2.6.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-rt-security-saml-3.2.6.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-rt-transports-http-3.2.6.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-rt-transports-http-hc-3.2.6.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-rt-transports-http-jetty-3.2.6.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-rt-transports-http-netty-client-3.2.6.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-rt-transports-http-netty-server-3.2.6.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-rt-transports-jms-3.2.6.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-rt-transports-local-3.2.6.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-rt-transports-udp-3.2.6.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-rt-ws-addr-3.2.6.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-rt-ws-mex-3.2.6.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-rt-ws-policy-3.2.6.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-rt-ws-rm-3.2.6.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-rt-ws-security-3.2.6.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-rt-wsdl-3.2.6.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-services-sts-core-3.2.6.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-services-ws-discovery-api-3.2.6.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-services-ws-discovery-service-3.2.6.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-services-wsn-api-3.2.6.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-services-wsn-core-3.2.6.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-tools-common-3.2.6.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-tools-corba-3.2.6.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-tools-java2ws-3.2.6.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-tools-misctools-3.2.6.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-tools-validator-3.2.6.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-tools-wadlto-jaxrs-3.2.6.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-tools-wsdlto-core-3.2.6.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-tools-wsdlto-databinding-jaxb-3.2.6.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-tools-wsdlto-frontend-javascript-3.2.6.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-tools-wsdlto-frontend-jaxws-3.2.6.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-xjc-boolean-3.2.2.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-xjc-bug671-3.2.2.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-xjc-dv-3.2.2.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-xjc-javadoc-3.2.2.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-xjc-runtime-3.2.2.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/cxf-xjc-ts-3.2.2.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/ehcache-2.10.5.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/FastInfoset-1.2.13.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/geronimo-j2ee-management_1.1_spec-1.0.1.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/geronimo-javamail_1.4_mail-1.8.4.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/geronimo-jms_1.1_spec-1.1.1.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/geronimo-jta_1.1_spec-1.1.1.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/guava-19.0.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/hawtbuf-1.11.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/httpasyncclient-4.1.4.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/httpclient-4.5.6.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/httpcore-4.4.9.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/httpcore-nio-4.4.9.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/jasypt-1.9.2.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/java-support-7.3.0.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/javax.annotation-api-1.3.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/javax.servlet-api-3.1.0.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/javax.ws.rs-api-2.1.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/jaxb-core-2.2.11.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/jaxb-impl-2.2.11.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/jaxb-xjc-2.2.11.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/jcl-over-slf4j-1.7.25.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/jettison-1.4.0.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/jetty-continuation-9.4.11.v20180605.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/jetty-http-9.4.11.v20180605.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/jetty-io-9.4.11.v20180605.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/jetty-security-9.4.11.v20180605.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/jetty-server-9.4.11.v20180605.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/jetty-util-9.4.11.v20180605.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/joda-time-2.9.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/js-1.7R2.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/metrics-core-3.2.6.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/mina-core-2.0.19.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/neethi-3.1.1.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/oauth-20100527.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/oauth-provider-20100527.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/opensaml-core-3.3.0.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/opensaml-profile-api-3.3.0.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/opensaml-saml-api-3.3.0.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/opensaml-saml-impl-3.3.0.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/opensaml-security-api-3.3.0.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/opensaml-security-impl-3.3.0.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/opensaml-soap-api-3.3.0.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/opensaml-xacml-api-3.3.0.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/opensaml-xacml-impl-3.3.0.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/opensaml-xacml-saml-api-3.3.0.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/opensaml-xacml-saml-impl-3.3.0.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/opensaml-xmlsec-api-3.3.0.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/opensaml-xmlsec-impl-3.3.0.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/slf4j-api-1.7.25.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/slf4j-jdk14-1.7.25.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/spring-aop-4.3.18.RELEASE.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/spring-beans-4.3.18.RELEASE.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/spring-context-4.3.18.RELEASE.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/spring-core-4.3.18.RELEASE.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/spring-expression-4.3.18.RELEASE.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/spring-web-4.3.18.RELEASE.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/stax2-api-4.1.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/velocity-engine-core-2.0.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/woodstox-core-5.1.0.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/wsdl4j-1.6.3.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/wss4j-bindings-2.2.2.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/wss4j-policy-2.2.2.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/wss4j-ws-security-common-2.2.2.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/wss4j-ws-security-dom-2.2.2.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/wss4j-ws-security-policy-stax-2.2.2.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/wss4j-ws-security-stax-2.2.2.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/xml-resolver-1.2.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/xmlschema-core-2.2.3.jar" />
+		<pathelement location="../../../../../eclipses/apache-cxf-3.2.6/lib/xmlsec-2.1.2.jar" />
+	</path>
+	<path id="UyTubeWeb.classpath">
+		<pathelement location="build/classes" />
+		<path refid="Web App Libraries.libraryclasspath" />
+		<path refid="EAR Libraries.libraryclasspath" />
+		<path refid="Apache Tomcat v8.5 [Apache Tomcat v8.5].libraryclasspath" />
+		<path refid="Apache CXF Library [3.2.6].libraryclasspath" />
+	</path>
+	<target name="init">
+		<mkdir dir="build/classes" />
+		<copy includeemptydirs="false" todir="build/classes">
+			<fileset dir="src">
+				<exclude name="**/*.launch" />
+				<exclude name="**/*.java" />
+			</fileset>
+		</copy>
+	</target>
+	<target name="clean">
+		<delete dir="build/classes" />
+	</target>
+	<target depends="clean" name="cleanall" />
+	<target depends="build-subprojects,build-project" name="build" />
+	<target name="build-subprojects" />
+	<target depends="init" name="build-project">
+		<echo message="${ant.project.name}: ${ant.file}" />
+		<javac debug="true" debuglevel="${debuglevel}" destdir="build/classes" includeantruntime="false" source="${source}" target="${target}">
+			<src path="src" />
+			<classpath refid="UyTubeWeb.classpath" />
+		</javac>
+	</target>
+
+
+	<target name="war" depends="build">
+		<mkdir dir="${build-directory}" />
+		<delete file="${build-directory}/${war-file-name}" />
+		<war destfile="${build-directory}/${war-file-name}" webxml="${web-xml-file}">
+			<classes dir="${classes-directory}" />
+			<fileset dir="${web-directory}">
+				<!-- Need to exclude it since webxml is an attribute of the war tag above -->
+				<exclude name="WebContent/web.xml" />
+			</fileset>
+			<path>
+				<path refid="UyTubeWeb.classpath" />
+			</path>
+			
+
+		</war>
+	</target>
+	<target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects" />
+</project>

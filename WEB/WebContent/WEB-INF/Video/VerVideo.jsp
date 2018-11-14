@@ -8,8 +8,7 @@
 <%@ page import = "uytubeLogica.publicar.DtComentario"%>
 <%@ page import = "uytubeLogica.publicar.DtCanal"%>
 
-<%@ page import = "uytubeLogic.logica.IUsuarioCtrl"%>
-<%@ page import = "uytubeLogic.logica.IVideoCtrl"%>
+
 <%@ page import = "javax.servlet.http.HttpSession"%>
 <%@page import="java.util.Base64"%>
 <%@ page import = "java.util.Date"%>

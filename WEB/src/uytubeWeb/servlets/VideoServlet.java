@@ -28,10 +28,9 @@ import uytubeLogica.publicar.Privacidad;
 /**
  * Servlet implementation class VideoServlet
  */
-@WebServlet(name = "VideoServlet", urlPatterns = { "/watch", "/newVideo", "/modifyVideo", "/likeVideo", "/dislikeVideo",
-		"/newComment", "/newResponse", "/leaveFollow" })
+
 public class VideoServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 99L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()

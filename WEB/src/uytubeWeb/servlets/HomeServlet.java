@@ -10,9 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class HomeServlet
  */
-@WebServlet("/casa")
+
 public class HomeServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2L;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -26,6 +26,7 @@ public class HomeServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("im home");
 		if(request.getHeader("User-Agent").indexOf("Mobile") != -1) {
 			request.getRequestDispatcher("homeMobile.jsp").forward(request, response);
           } else {
