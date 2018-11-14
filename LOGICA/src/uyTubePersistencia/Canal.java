@@ -4,12 +4,15 @@ import java.io.Serializable;
 import java.util.Map;
 
 import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.MapKeyColumn;
 import javax.persistence.OneToMany;
 
 
@@ -28,10 +31,12 @@ public class Canal implements Serializable{
 	private String descripcion;
 	private Privacidad privacidadCanal;
 	@OneToMany(cascade=CascadeType.PERSIST)
+	@MapKeyColumn(name="ID_VIDEOS_CANAL", table="Canal_video")
 	@JoinTable(name="Canal_video")
 	
 	private Map<String, Video> videos;
 	@OneToMany(cascade=CascadeType.PERSIST)
+	@MapKeyColumn(name="ID_LISTAS_REP_CANAL",table="Canal_lista")
 	@JoinTable(name="Canal_lista")
 	private Map<String, ListaReproduccion> listasReproduccion;
 	public Canal() {
