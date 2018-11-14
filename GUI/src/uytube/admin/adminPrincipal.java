@@ -34,6 +34,7 @@ import uytubeLogic.logica.Fabrica;
 import uytubeLogic.logica.IUsuarioCtrl;
 import uytubeLogic.logica.IVideoCtrl;
 import uytubeLogica.publicar.WebServices;
+import javax.swing.JButton;
 
 public class adminPrincipal extends JFrame {
 
@@ -82,10 +83,7 @@ public class adminPrincipal extends JFrame {
 		Fabrica fabrica = Fabrica.getInstance();
 		ICU = fabrica.getIUsuarioCtrl();
 		ICV = fabrica.getIVideoCtrl();
-		DatosDePrueba dP = new DatosDePrueba();
-		uytubeLogica.publicar.WebServices webServices= new uytubeLogica.publicar.WebServices();
-		webServices.publicar();
-		dP.cargarDatosDePrueba();
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		setExtendedState(MAXIMIZED_BOTH);
@@ -293,6 +291,17 @@ public class adminPrincipal extends JFrame {
 			}
 		});
 		mnCategorias.add(mntmListar_1);
+		
+		JButton btnCargarDatosPrueba = new JButton("Cargar Datos Prueba");
+		btnCargarDatosPrueba.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				DatosDePrueba dP = new DatosDePrueba();
+				uytubeLogica.publicar.WebServices webServices= new uytubeLogica.publicar.WebServices();
+				webServices.publicar();
+				dP.cargarDatosDePrueba();
+			}
+		});
+		menuBar.add(btnCargarDatosPrueba);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
