@@ -30,9 +30,6 @@ import java.awt.GridLayout;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
 import javax.swing.JPanel;
 
 public class verUsuariosEliminados extends JInternalFrame {
@@ -44,13 +41,14 @@ public class verUsuariosEliminados extends JInternalFrame {
 	private JTable tableListas;
 	private JTable tableVideos;
 	private JPanel panel;
-	private JPanel panel_1;
 	private JPanel panel_2;
 	private JButton btnVerInfoLista;
 	private JPanel panel_3;
 	private JPanel panel_4;
 	private JButton btnVerInfoVideo;
 	private Map<String, ListaReproduccion> userL;
+	private Map<String, Video> userV;
+	private JPanel panel_1;
 	/**
 	 * Launch the application.
 	 */
@@ -124,11 +122,12 @@ public class verUsuariosEliminados extends JInternalFrame {
 		setResizable(true);
 		setIconifiable(true);
 		setMaximizable(true);
-		setBounds(100, 100, 450, 300);
-		getContentPane().setLayout(new GridLayout(0, 1, 0, 0));
+		setBounds(100, 100, 431, 300);
+		getContentPane().setLayout(new GridLayout(0, 1, 5, 5));
 		
 		panel_2 = new JPanel();
 		getContentPane().add(panel_2);
+		panel_2.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		JLabel lblUsuarios = new JLabel("Usuarios");
 		panel_2.add(lblUsuarios);
@@ -144,10 +143,14 @@ public class verUsuariosEliminados extends JInternalFrame {
 				
 			}
 		});
+		tableUsuarios.setAutoscrolls(true);
 		
+	//	scrollPane_1 = new JScrollPane(tableUsuarios);
+		//scrollPane_1.setBounds(10,60,780,500);
+	//	panel_2.add(scrollPane_1);
 		panel = new JPanel();
 		getContentPane().add(panel);
-		panel.setLayout(new GridLayout(0, 1, 0, 0));
+		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 	
 		
@@ -160,8 +163,8 @@ public class verUsuariosEliminados extends JInternalFrame {
 		
 		panel_1 = new JPanel();
 		getContentPane().add(panel_1);
-		panel_1.setLayout(new GridLayout(0, 1, 0, 0));
 		
+	
 		lblDatosCanal = new JLabel("Datos Canal");
 		panel_1.add(lblDatosCanal);
 		
@@ -185,7 +188,7 @@ public class verUsuariosEliminados extends JInternalFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				if(tableListas.getSelectedRow()>=0){
 					DefaultTableModel tm = (DefaultTableModel) tableListas.getModel();
-					Integer  idLista= (Integer) tm.getValueAt(tableListas.getSelectedRow(),1);
+					String idLista= (String) tm.getValueAt(tableListas.getSelectedRow(),1);
 					ListaReproduccion listaR = userL.get(idLista);
 					VerInfoListaEliminada listaIFrame = new VerInfoListaEliminada(listaR);
 					adminPrincipal.getFrames()[0].setLayout(null);
@@ -198,16 +201,31 @@ public class verUsuariosEliminados extends JInternalFrame {
 		
 		panel_4 = new JPanel();
 		getContentPane().add(panel_4);
+		panel_4.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		JLabel lblVideos = new JLabel("Videos");
 		panel_4.add(lblVideos);
 		
-		btnVerInfoVideo = new JButton("Ver Info Video");
-		panel_4.add(btnVerInfoVideo);
-		
 		tableVideos = new JTable(ModeloVideos());
 		panel_4.add(tableVideos);
 		tableVideos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
+		btnVerInfoVideo = new JButton("Ver Info Video");
+		btnVerInfoVideo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(tableVideos.getSelectedRow()>=0){
+					DefaultTableModel tm = (DefaultTableModel) tableVideos.getModel();
+					String idVideo= (String) tm.getValueAt(tableVideos.getSelectedRow(),1);
+					Video videoE = userV.get(idVideo);
+					
+					VerInfoVideoEliminado videoIFrame = new VerInfoVideoEliminado(videoE);
+					adminPrincipal.getFrames()[0].setLayout(null);
+					adminPrincipal.getFrames()[0].add(videoIFrame);
+					videoIFrame.show();
+				}
+			}
+		});
+		panel_4.add(btnVerInfoVideo);
 		cargarUsuarios();
 
 	}
@@ -246,16 +264,16 @@ public class verUsuariosEliminados extends JInternalFrame {
 			modeloTablaCanal.addRow(new Object[]{userC.getIdCanal(),userC.getNombre(),userC.getDescripcion(),userC.getPrivacidadCanal()});
 			//cargar listas y videos
 			userL = userC.getListasReproduccion();
-			Map<String, Video> userV = userC.getVideos();
+			userV = userC.getVideos();
 			DefaultTableModel modeloListas= (DefaultTableModel) tableListas.getModel();
 			modeloListas.setRowCount(0);
 			DefaultTableModel modeloVideos= (DefaultTableModel) tableVideos.getModel();
 			modeloVideos.setRowCount(0);
 			for (Entry<String, ListaReproduccion> entry : userL.entrySet()) {
 				modeloListas.addRow(new Object[]{entry.getValue().getIdListaRep(),entry.getValue().getNombre()});
-				for (Entry<Integer, Video> entryV : entry.getValue().getVideos().entrySet()) {
+			/*	for (Entry<Integer, Video> entryV : entry.getValue().getVideos().entrySet()) {
 					modeloVideos.addRow(new Object[]{entryV.getValue().getIdVideo(),entryV.getValue().getNombre()});
-				}
+				}*/
 			}
 			for (Entry<String, Video> entryV : userV.entrySet()) {
 				modeloVideos.addRow(new Object[]{entryV.getValue().getIdVideo(),entryV.getValue().getNombre()});			
