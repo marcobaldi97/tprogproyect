@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.MapKeyColumn;
 
 import uytubeLogic.logica.ListaReproduccion.TipoLista;
 import uytubeLogic.logica.Particular;
@@ -32,6 +33,7 @@ public class ListaReproduccion implements Serializable{
 	private TipoLista tipo;
 	private Privacidad privado;
 	@ManyToMany(cascade=CascadeType.PERSIST)
+	@MapKeyColumn(name="ID_VIDEOS_LISTA", table="Lista_video")
 	@JoinTable(name="Lista_video")
 	private Map<Integer, uyTubePersistencia.Video> videos;
 	
