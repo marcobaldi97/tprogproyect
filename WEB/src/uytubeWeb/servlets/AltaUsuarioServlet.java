@@ -5,7 +5,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URLEncoder;
-import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -20,7 +19,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
@@ -40,7 +38,7 @@ import uytubeLogica.publicar.Privacidad;
 /**
  * Servlet implementation class AltaUsuarioServlet
  */
-@WebServlet("/newUser")
+
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 1024 * 1024 * 5, maxRequestSize = 1024 * 1024 * 5 * 5)
 public class AltaUsuarioServlet extends HttpServlet {
 	public static Date ParseFecha(String fecha) {
@@ -103,7 +101,7 @@ public class AltaUsuarioServlet extends HttpServlet {
 
 	}
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 0L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()

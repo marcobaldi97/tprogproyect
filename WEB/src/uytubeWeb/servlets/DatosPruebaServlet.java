@@ -7,14 +7,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import uytube.datosPrueba.DatosDePrueba;
-
 /**
  * Servlet implementation class DatosPruebaServlet
  */
-@WebServlet("/cargarDatos")
+
 public class DatosPruebaServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 5L;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -31,8 +29,6 @@ public class DatosPruebaServlet extends HttpServlet {
 		uytubeLogica.publicar.WebServicesService service = new uytubeLogica.publicar.WebServicesService();
 	    uytubeLogica.publicar.WebServices port = service.getWebServicesPort();
 	    port.cargarDatos();
-		DatosDePrueba data=new DatosDePrueba();
-		data.cargarDatosDePrueba();
 		response.getWriter().append("Datos Cargados ");
 	}
 
