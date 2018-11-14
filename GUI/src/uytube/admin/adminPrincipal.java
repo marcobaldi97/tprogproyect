@@ -80,6 +80,7 @@ public class adminPrincipal extends JFrame {
 	 * Create the frame.
 	 */
 	public adminPrincipal() {
+		setTitle("UyTube Admin");
 		Fabrica fabrica = Fabrica.getInstance();
 		ICU = fabrica.getIUsuarioCtrl();
 		ICV = fabrica.getIVideoCtrl();
