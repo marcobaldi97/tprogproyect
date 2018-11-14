@@ -16,9 +16,7 @@
   	  
   	  <script type="text/javascript">
 	  	function clickimg(index){
-			$('#imagenVideo'+index).click(function(){
 			$('#verVideo'+index).click()
-			})
 	  	}
 	</script>	
 </head>

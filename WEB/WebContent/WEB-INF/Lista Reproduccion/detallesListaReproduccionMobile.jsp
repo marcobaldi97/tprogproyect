@@ -11,15 +11,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Detalles de Lista</title>
-<%@include file="../buscador.jsp"%>
+<%@include file="../buscadorBootstrap.jsp"%>
 <%@include file="../cosasComunesDelHead.jsp"%>
 </head>
 <body>
 	<script type="text/javascript">
 	  	function clickimg(index){
-			$('#imagenVideo'+index).click(function(){
 			$('#verVideo'+index).click()
-			})
 	  	}
 	</script>
 
