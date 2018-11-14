@@ -36,6 +36,7 @@ public class UsuarioHandler {
 	}
 
 	public boolean memberEmail(String emailUsuario) {
+		System.out.println(emailUsuario);
 		Boolean existe = false;
 		for (Map.Entry<String, Usuario> entry : usuarios.entrySet()) {
 			if (emailUsuario == entry.getValue().getEmail())

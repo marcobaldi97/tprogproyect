@@ -72,7 +72,7 @@ public class DatosDePrueba {
 		
 		fecha = asignarFecha("07,01,1954 00:00");
 		fechaNac = new DtFecha(fecha);
-		String HG="hectorg";
+		String HG="hectorg";								 
 		ICU.nuevoUsuario(HG,"Poncho345", "Hector", "Guido", "hector.gui@elgalpon.org.uy", fechaNac, null,
 				HG, "Canal HG", Privacidad.PUBLICO, null);
 		
