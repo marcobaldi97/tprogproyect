@@ -16,11 +16,11 @@
     <div class="main-content">
     	<form class="alta-usuario-form" action="newUser" method ="POST" enctype="multipart/form-data" >
             Nickname:<br>
-            <input type="text" name="nickname" id="nickname" onfocus="chequear()">
-            <div id="status">
+            <input type="text" name="nickname" id="nickname" onfocus="chequearNickname()">
+            <div id="statusNickname">
             </div>
             Correo electronico:<br>
-            <input type="email" name="email" id="email" onfocus="chequear()"><br>
+            <input type="email" name="email" id="email" onfocus="chequearEmail()"><br>
             <div id="statusEmail">
             </div>
             Nombre:<br>
@@ -70,19 +70,19 @@
 
 
 <script type="text/javascript">
-function chequear()
+function chequearNickname()
 {
 $('#nickname').keyup(function()
 		{
 			var nickname = $('#nickname').val();
-			$('#status').html('<img style="height : 25px; width: 25px" src="media/images/cargando.gif">');
+			$('#statusNickname').html('<img style="height : 25px; width: 25px" src="media/images/cargando.gif">');
 			
 			if(nickname!='')
 			{
 				var xhttp = new XMLHttpRequest();
 			      xhttp.onreadystatechange = function () {
 			        if (this.readyState == 4 && this.status == 200) {
-			          document.getElementById("status").innerHTML = this.responseText;
+			          document.getElementById("statusNickname").innerHTML = this.responseText;
 			        }
 			      };
 			      xhttp.open("POST", "profile?opcion=chequearNickname&nickname="+nickname, true);
@@ -90,10 +90,13 @@ $('#nickname').keyup(function()
 			}
 			else
 			{
-				$('#status').html('');
+				$('#statusNickname').html('');
 			}
-		})
-		
+		})	
+}
+
+function chequearEmail()
+{
 $('#email').keyup(function()
 		{
 			var email = $('#email').val();
@@ -114,8 +117,11 @@ $('#email').keyup(function()
 			{
 				$('#statusEmail').html('');
 			}
-		})		
+		})	
 }
+
+
+
 </script>
 
 </body>

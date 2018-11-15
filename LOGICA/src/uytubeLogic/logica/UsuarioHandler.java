@@ -36,10 +36,12 @@ public class UsuarioHandler {
 	}
 
 	public boolean memberEmail(String emailUsuario) {
-		System.out.println(emailUsuario);
 		Boolean existe = false;
+		System.out.println("******Email logica:********"+ emailUsuario);
 		for (Map.Entry<String, Usuario> entry : usuarios.entrySet()) {
-			if (emailUsuario == entry.getValue().getEmail())
+			System.out.println("Email en el sistema");
+			System.out.println(entry.getValue().getEmail());
+			if (emailUsuario.equals(entry.getValue().getEmail()))
 				existe = true;
 		}
 		return existe;

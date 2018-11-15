@@ -315,8 +315,9 @@ public class UsuarioServlet extends HttpServlet {
 		
 		case "chequearEmail":{
 			 String emailCandidato= (String) request.getParameter("email");
-			 boolean existe=port.verificarDispUsuario(" ", emailCandidato);
-			 System.out.println(emailCandidato);
+			 System.out.println("servlet: "+emailCandidato);
+			 boolean existe=port.verificarDispUsuario("", emailCandidato);
+			 
 			 if(!existe)
 			 {
 				 response.getWriter().append("<img style=\"height : 25px; width: 25px\" src=\"media/images/cruz_roja.png\">");
