@@ -1,5 +1,7 @@
 package uytubeLogica.publicar;
 
+import java.io.IOException;
+
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
@@ -24,6 +26,7 @@ import uytubeLogic.logica.DtVideoHistorial;
 import uytubeLogic.logica.Fabrica;
 import uytubeLogic.logica.IUsuarioCtrl;
 import uytubeLogic.logica.IVideoCtrl;
+import uytubeLogic.logica.PropertiesCtrl;
 import uytubeLogic.logica.SystemHandler.Privacidad;
 
 @WebService
@@ -37,7 +40,15 @@ public class WebServices {
 
 	@WebMethod(exclude = true)
 	public void publicar() {
-		endpoint = Endpoint.publish("http://localhost:9128/webservices", this);
+		PropertiesCtrl prop = PropertiesCtrl.getInstance();
+		try {
+			System.out.println("la property hostwsdl es:  "+prop.getProperty("hostWSDL"));
+			endpoint = Endpoint.publish(prop.getProperty("hostWSDL"), this);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	} // VERIFICAR PUERTO
 
 	@WebMethod(exclude = true)
@@ -53,7 +64,12 @@ public class WebServices {
 	@WebMethod
 	public void cargarDatos() {
 		DatosDePrueba dp = new DatosDePrueba();
-		dp.cargarDatosDePrueba();
+		try {
+			dp.cargarDatosDePrueba();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@WebMethod

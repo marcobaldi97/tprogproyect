@@ -2,6 +2,7 @@ package uytubeLogic.logica;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
@@ -42,9 +43,18 @@ public class Usuario {
 		apellido = apellidoU;
 		email = emailU;
 		fechaNacimiento = fechaNacU;
+		PropertiesCtrl prop = PropertiesCtrl.getInstance();
+		String ubicacionFoto = null;
+		try {
+			ubicacionFoto =System.getProperty("user.home")+"/Desktop/"+prop.getProperty("fotos");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		if (fotoU == null || (fotoU != null && fotoU.length == 0)) {
 			// agregarle foto por defecto
-			File archivo = new File("LOGICA/src/usuarioPorDefecto.png");
+			File archivo = new File(ubicacionFoto+"/usuarioPorDefecto.png");
 			foto = imagenToByte(archivo);
 		} else {
 			foto = fotoU;

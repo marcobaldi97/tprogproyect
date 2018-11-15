@@ -41,11 +41,9 @@ import com.toedter.calendar.JDateChooser;
 
 public class verUsuariosEliminados extends JInternalFrame {
 	private JTable tableUsuarios;
-	private JTable tableDatosUsr;
 	private JLabel lblListas;
 	private JTable tableListas;
 	private JTable tableVideos;
-	private JPanel panel;
 	private JPanel panel_2;
 	private JButton btnVerInfoLista;
 	private JPanel panel_3;
@@ -148,7 +146,7 @@ public class verUsuariosEliminados extends JInternalFrame {
 		setIconifiable(true);
 		setMaximizable(true);
 		setBounds(100, 100, 529, 640);
-		getContentPane().setLayout(new GridLayout(0, 2, 5, 5));
+		getContentPane().setLayout(new GridLayout(0, 1, 5, 5));
 		
 		panel_2 = new JPanel();
 		getContentPane().add(panel_2);
@@ -217,22 +215,6 @@ public class verUsuariosEliminados extends JInternalFrame {
 		textFieldFechanac.setEditable(false);
 		panel_1.add(textFieldFechanac);
 		textFieldFechanac.setColumns(10);
-		
-	//	scrollPane_1 = new JScrollPane(tableUsuarios);
-		//scrollPane_1.setBounds(10,60,780,500);
-	//	panel_2.add(scrollPane_1);
-		panel = new JPanel();
-		getContentPane().add(panel);
-		panel.setLayout(new GridLayout(0, 1, 5, 5));
-		
-	
-		
-		JLabel lblDatosUsuario = new JLabel("Datos Usuario");
-		panel.add(lblDatosUsuario);
-		
-		tableDatosUsr = new JTable(ModeloUsuarioDatos());
-		panel.add(tableDatosUsr);
-		tableDatosUsr.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
 		panel_5 = new JPanel();
 		panel_5.setBorder(new TitledBorder(null, "Datos canal", TitledBorder.LEADING, TitledBorder.TOP, null, null));

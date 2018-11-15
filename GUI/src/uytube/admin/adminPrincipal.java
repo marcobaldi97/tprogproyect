@@ -10,6 +10,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 
 import uytube.admin.categoria.alta.AltaCategoria;
@@ -297,9 +298,12 @@ public class adminPrincipal extends JFrame {
 		btnCargarDatosPrueba.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				DatosDePrueba dP = new DatosDePrueba();
-				uytubeLogica.publicar.WebServices webServices= new uytubeLogica.publicar.WebServices();
-				webServices.publicar();
-				dP.cargarDatosDePrueba();
+				try {
+					dP.cargarDatosDePrueba();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 		menuBar.add(btnCargarDatosPrueba);

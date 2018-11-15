@@ -2,6 +2,7 @@ package uytube.datosPrueba;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -14,6 +15,7 @@ import uytubeLogic.logica.DtVideo;
 import uytubeLogic.logica.Fabrica;
 import uytubeLogic.logica.IUsuarioCtrl;
 import uytubeLogic.logica.IVideoCtrl;
+import uytubeLogic.logica.PropertiesCtrl;
 import uytubeLogic.logica.VideoHandler;
 import uytubeLogic.logica.SystemHandler.Privacidad;
 
@@ -32,8 +34,11 @@ public class DatosDePrueba {
 			System.out.println(e.getMessage());}
 		return null;
 	}
-	public void cargarDatosDePrueba(){
-			
+	public void cargarDatosDePrueba() throws IOException{
+		PropertiesCtrl prop = PropertiesCtrl.getInstance();
+		System.out.println("la property foto es: "+prop.getProperty("fotos"));
+		String ubicacionFoto=System.getProperty("user.home")+"/Desktop/"+prop.getProperty("fotos");
+	
 		//CATEGORIAS
 		String MUS="Musica";ICV.crearCategoria(MUS);
 		String DEP="Deporte";ICV.crearCategoria(DEP);
@@ -59,14 +64,14 @@ public class DatosDePrueba {
 		fecha = asignarFecha("25,02,1962 00:00");
 		fechaNac = new DtFecha(fecha);
 		String HR="hrubio";
-		archivo = new File("LOGICA/src/fotosDatosDePrueba/hr.jpg");
+		archivo = new File(ubicacionFoto+"/hr.jpg");
 		ICU.nuevoUsuario(HR,"Rufus123", "Horacio", "Rubino", "horacio.rubino@guambia.com.uy", fechaNac, imagenToByte(archivo),
 				"Canal Horacio", "El canal Horacio es para publicar contenido divertido",Privacidad.PUBLICO, "Entretenimiento");
 		
 		fecha = asignarFecha("14,06,1972 00:00");
 		fechaNac = new DtFecha(fecha);
 		String MB ="mbusca";
-		archivo = new File("LOGICA/src/fotosDatosDePrueba/mb.jpg");
+		archivo = new File(ubicacionFoto+"/mb.jpg");
 		ICU.nuevoUsuario(MB,"Cookier234", "Martin", "Buscaglia", "Martin.bus@agadu.org.uy", fechaNac, imagenToByte(archivo),
 				"El bocha", "Mi canal para colgar cosas", Privacidad.PUBLICO, null);
 		
@@ -79,14 +84,14 @@ public class DatosDePrueba {
 		fecha=asignarFecha("24,07,1971 00:00");
 		fechaNac = new DtFecha(fecha);
 		String TC ="tabarec";
-		archivo = new File("LOGICA/src/fotosDatosDePrueba/tc.jpg");
+		archivo = new File(ubicacionFoto+"/tc.jpg");
 		ICU.nuevoUsuario(TC,"Ketchup1", "Tabare", "Cardozo", "tabare.car@agadu.org.uy", fechaNac, imagenToByte(archivo),
 				"Tabare", "Mi musica e ainda mais", Privacidad.PUBLICO, MUS);
 		
 		fecha = asignarFecha("01,01,1947 00:00");
 		fechaNac = new DtFecha(fecha);
 		String CS="cachilas";
-		archivo = new File("LOGICA/src/fotosDatosDePrueba/cs.jpg");
+		archivo = new File(ubicacionFoto+"/cs.jpg");
 		ICU.nuevoUsuario(CS,"Sancho456", "Walder 'Cachila'", "Silva", "Cachila.sil@c1080.org.uy", fechaNac, imagenToByte(archivo),
 				"El Cachila", "Para juntar cosas", Privacidad.PRIVADO, null);
 		
@@ -105,7 +110,7 @@ public class DatosDePrueba {
 		fecha=asignarFecha("25,04,1840 00:00");
 		fechaNac = new DtFecha(fecha);
 		String KH="kairoh";
-		archivo = new File("LOGICA/src/fotosDatosDePrueba/kh.jpg");
+		archivo = new File(ubicacionFoto+"/kh.jpg");
 		ICU.nuevoUsuario(KH,"Corbata15", "Kairo", "Herrera", "kairoher@pilsenrock.com.uy", fechaNac, imagenToByte(archivo),
 				"Kairo Musica", "Videos de grandes canciones de hoy y siempre", Privacidad.PUBLICO, MUS);
 		
@@ -136,14 +141,14 @@ public class DatosDePrueba {
 		fecha=asignarFecha("17,03,1976 00:00");
 		fechaNac = new DtFecha(fecha);
 		String AR="chino";
-		archivo = new File("LOGICA/src/fotosDatosDePrueba/ar.jpg");
+		archivo = new File(ubicacionFoto+"/ar.jpg");
 		ICU.nuevoUsuario(AR,"Laika765", "Alvaro", "Recoba", "chino@trico.org.uy", fechaNac, imagenToByte(archivo),
 				"Chino Recoba", "Canal de goles con Nacional", Privacidad.PRIVADO, DEP);
 		
 		fecha=asignarFecha("14,02,1955 00:00");
 		fechaNac = new DtFecha(fecha);
 		String AP="tonyp";
-		archivo = new File("LOGICA/src/fotosDatosDePrueba/ap.jpg");
+		archivo = new File(ubicacionFoto+"/ap.jpg");
         ICU.nuevoUsuario(AP,"Kitty543", "Antonio", "Pacheco", "eltony@manya.org.uy", fechaNac, imagenToByte(archivo),
 				"Tony Pacheco", "Todos los goles con Peñarol", Privacidad.PRIVADO, DEP);
 		
