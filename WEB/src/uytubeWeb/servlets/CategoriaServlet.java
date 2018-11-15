@@ -16,7 +16,7 @@ import uytubeLogica.publicar.Privacidad;
 /**
  * Servlet implementation class CategoriaServlet
  */
-
+@WebServlet(name="Categorias",urlPatterns={"/consult","/list"})
 public class CategoriaServlet extends HttpServlet {
 	private static final long serialVersionUID = 4L;
        

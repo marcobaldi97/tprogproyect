@@ -28,6 +28,8 @@ import uytubeLogica.publicar.Privacidad;
 /**
  * Servlet implementation class VideoServlet
  */
+@WebServlet(name = "VideoServlet", urlPatterns = { "/watch", "/newVideo", "/modifyVideo", "/likeVideo", "/dislikeVideo",
+		"/newComment", "/newResponse", "/leaveFollow" })
 
 public class VideoServlet extends HttpServlet {
 	private static final long serialVersionUID = 99L;
@@ -149,10 +151,6 @@ public class VideoServlet extends HttpServlet {
 				request.setAttribute("listadoCat", cat);
 				request.getRequestDispatcher("WEB-INF/Video/AltaVideo.jsp").forward(request, response);
 			}else
-<<<<<<< WEB/src/uytubeWeb/servlets/VideoServlet.java
-=======
-
->>>>>>> WEB/src/uytubeWeb/servlets/VideoServlet.java
 				response.sendRedirect(request.getContextPath() + "/casa");
 			break;
 		}
@@ -317,15 +315,12 @@ public class VideoServlet extends HttpServlet {
 				System.out.println("hola pepito " + categoria);
 				System.out.println("hola pepote " + request.getParameter("categoria"));
 				String descVideo = new String(request.getParameter("descVideo").getBytes("ISO-8859-1"), "UTF-8");
-<<<<<<< WEB/src/uytubeWeb/servlets/VideoServlet.java
-				if (nombreVideo != "" && duracionVideo != "" && isInteger(duracionVideo) && urlVideo != "" && fechaVideo != "" && descVideo != "") {
-					crearVideo(login,nombreVideo, duracionVideo, urlVideo, fechaVideo, categoria, descVideo);
-=======
+
 
 				if (nombreVideo != "" && duracionVideo != "" && isInteger(duracionVideo) && urlVideo != ""
 						&& fechaVideo != "" && descVideo != "") {
 					crearVideo(login, nombreVideo, duracionVideo, urlVideo, fechaVideo, categoria, descVideo);
->>>>>>> WEB/src/uytubeWeb/servlets/VideoServlet.java
+
 					response.sendRedirect(request.getContextPath() + "/casa");
 				} else {
 					response.getWriter().append("Error, verifique los campos nuevamente");
