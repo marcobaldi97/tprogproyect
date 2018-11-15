@@ -413,6 +413,36 @@ public class DatosDePrueba {
 		video = ICU.obtenerInfoAdicVideo(KH,V4);
 		ICV.valorarVideo(video.getiDVideo(),MT, true);
 		
+		//historial
+		video = ICU.obtenerInfoAdicVideo(TC, V1);
+		ICU.agregarVisita(video.getiDVideo(),TC);
+		ICU.agregarVisita(video.getiDVideo(),CS);
+	
+		video = ICU.obtenerInfoAdicVideo(TC, V2);
+		ICU.agregarVisita(video.getiDVideo(),TC);
+		ICU.agregarVisita(video.getiDVideo(),CS);
+		
+		video = ICU.obtenerInfoAdicVideo(CS,V2);
+		ICU.agregarVisita(video.getiDVideo(),TC);
+		ICU.agregarVisita(video.getiDVideo(),CS);
+		
+		video = ICU.obtenerInfoAdicVideo(KH,V3);
+		historial(MB, video.getiDVideo(), 5);
+		historial(CS, video.getiDVideo(), 20);
+		historial(JB, video.getiDVideo(), 1);
+		historial(DP, video.getiDVideo(), 2);
+		historial(KH, video.getiDVideo(), 8);
+		
+		video = ICU.obtenerInfoAdicVideo(KH,V4);
+		historial(KH, video.getiDVideo(), 6);
+		historial(NJ, video.getiDVideo(), 8);
+		
+		
+	}
+	private void historial(String nick, int idV, int cantVeces){
+		for(int i=cantVeces; i>0;i--){
+			ICU.agregarVisita(idV,nick);
+		}
 	}
 	private Date asignarFecha(String fechaConHora){
 		SimpleDateFormat sdf = new SimpleDateFormat("dd,MM,yyyy HH:mm");
