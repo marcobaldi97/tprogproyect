@@ -1,5 +1,6 @@
 package uyTubePersistencia;
 
+import java.io.IOException;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -18,7 +19,12 @@ public class Test {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("UyTubeJPA");
 		EntityManager em = emf.createEntityManager();
 		DatosDePrueba pepe = new DatosDePrueba();
-		pepe.cargarDatosDePrueba();
+		try {
+			pepe.cargarDatosDePrueba();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		em.getTransaction().begin();
 
