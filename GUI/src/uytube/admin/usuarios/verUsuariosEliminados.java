@@ -20,6 +20,7 @@ import uyTubePersistencia.Video;
 import uytube.admin.adminPrincipal;
 import uytube.admin.listas.ConsultaListaInternalFrame;
 import uytubeLogic.logica.Puntuacion;
+import uytubeLogic.logica.SystemHandler.Privacidad;
 
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -31,12 +32,16 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.JTextPane;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.JComboBox;
+import com.toedter.calendar.JDateChooser;
 
 public class verUsuariosEliminados extends JInternalFrame {
-	private JTable tableCanal;
 	private JTable tableUsuarios;
 	private JTable tableDatosUsr;
-	private JLabel lblDatosCanal;
 	private JLabel lblListas;
 	private JTable tableListas;
 	private JTable tableVideos;
@@ -48,7 +53,27 @@ public class verUsuariosEliminados extends JInternalFrame {
 	private JButton btnVerInfoVideo;
 	private Map<String, ListaReproduccion> userL;
 	private Map<String, Video> userV;
+	private JPanel panel_5;
+	private JLabel label_8;
+	private JTextField textFieldNombreC;
+	private JLabel label_9;
+	private JTextField textFieldPrivacidad;
+	private JLabel label_10;
+	private JScrollPane scrollPane;
 	private JPanel panel_1;
+	private JLabel label_5;
+	private JLabel label_6;
+	private JLabel label_7;
+	private JTextField textFieldNombre;
+	private JLabel label_11;
+	private JTextField textFieldApellido;
+	private JLabel label_12;
+	private JTextField textFieldNick;
+	private JTextField textFieldEmail;
+	private JTextField textFieldFechanac;
+	private JLabel lblId;
+	private JTextField textFieldIdCanal;
+	private JTextPane textPane;
 	/**
 	 * Launch the application.
 	 */
@@ -122,8 +147,8 @@ public class verUsuariosEliminados extends JInternalFrame {
 		setResizable(true);
 		setIconifiable(true);
 		setMaximizable(true);
-		setBounds(100, 100, 431, 300);
-		getContentPane().setLayout(new GridLayout(0, 1, 5, 5));
+		setBounds(100, 100, 529, 640);
+		getContentPane().setLayout(new GridLayout(0, 2, 5, 5));
 		
 		panel_2 = new JPanel();
 		getContentPane().add(panel_2);
@@ -145,12 +170,60 @@ public class verUsuariosEliminados extends JInternalFrame {
 		});
 		tableUsuarios.setAutoscrolls(true);
 		
+		panel_1 = new JPanel();
+		panel_1.setBorder(new TitledBorder(null, "Datos usuario", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		getContentPane().add(panel_1);
+		panel_1.setLayout(new GridLayout(0, 2, 2, 1));
+		
+		label_5 = new JLabel("Nickname");
+		panel_1.add(label_5);
+		
+		textFieldNick = new JTextField();
+		textFieldNick.setEditable(false);
+		textFieldNick.setColumns(10);
+		panel_1.add(textFieldNick);
+		
+		label_6 = new JLabel("Email");
+		panel_1.add(label_6);
+		
+		textFieldEmail = new JTextField();
+		textFieldEmail.setText("");
+		textFieldEmail.setEditable(false);
+		textFieldEmail.setColumns(10);
+		panel_1.add(textFieldEmail);
+		
+		label_7 = new JLabel("Nombre");
+		panel_1.add(label_7);
+		
+		textFieldNombre = new JTextField();
+		textFieldNombre.setText("");
+		textFieldNombre.setEditable(false);
+		textFieldNombre.setColumns(10);
+		panel_1.add(textFieldNombre);
+		
+		label_11 = new JLabel("Apellido");
+		panel_1.add(label_11);
+		
+		textFieldApellido = new JTextField();
+		textFieldApellido.setText("");
+		textFieldApellido.setEditable(false);
+		textFieldApellido.setColumns(10);
+		panel_1.add(textFieldApellido);
+		
+		label_12 = new JLabel("Fecha Nac.");
+		panel_1.add(label_12);
+		
+		textFieldFechanac = new JTextField();
+		textFieldFechanac.setEditable(false);
+		panel_1.add(textFieldFechanac);
+		textFieldFechanac.setColumns(10);
+		
 	//	scrollPane_1 = new JScrollPane(tableUsuarios);
 		//scrollPane_1.setBounds(10,60,780,500);
 	//	panel_2.add(scrollPane_1);
 		panel = new JPanel();
 		getContentPane().add(panel);
-		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		panel.setLayout(new GridLayout(0, 1, 5, 5));
 		
 	
 		
@@ -161,16 +234,48 @@ public class verUsuariosEliminados extends JInternalFrame {
 		panel.add(tableDatosUsr);
 		tableDatosUsr.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
-		panel_1 = new JPanel();
-		getContentPane().add(panel_1);
+		panel_5 = new JPanel();
+		panel_5.setBorder(new TitledBorder(null, "Datos canal", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		getContentPane().add(panel_5);
+		panel_5.setLayout(new GridLayout(0, 2, 2, 5));
 		
-	
-		lblDatosCanal = new JLabel("Datos Canal");
-		panel_1.add(lblDatosCanal);
+		lblId = new JLabel("ID");
+		panel_5.add(lblId);
 		
-		tableCanal = new JTable(ModeloCanal());
-		panel_1.add(tableCanal);
-		tableCanal.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		textFieldIdCanal = new JTextField();
+		textFieldIdCanal.setEditable(false);
+		panel_5.add(textFieldIdCanal);
+		textFieldIdCanal.setColumns(10);
+		
+		label_8 = new JLabel("Nombre");
+		panel_5.add(label_8);
+		
+		textFieldNombreC = new JTextField();
+		textFieldNombreC.setText("");
+		textFieldNombreC.setEditable(false);
+		textFieldNombreC.setColumns(10);
+		panel_5.add(textFieldNombreC);
+		
+		label_9 = new JLabel("Privacidad");
+		panel_5.add(label_9);
+		
+		textFieldPrivacidad = new JTextField();
+		textFieldPrivacidad.setText((String) null);
+		textFieldPrivacidad.setEditable(false);
+		textFieldPrivacidad.setColumns(10);
+		panel_5.add(textFieldPrivacidad);
+		
+		label_10 = new JLabel("Descripición");
+		panel_5.add(label_10);
+		
+		scrollPane = new JScrollPane();
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		panel_5.add(scrollPane);
+		
+		textPane = new JTextPane();
+		textPane.setText("");
+		textPane.setEditable(false);
+		scrollPane.setViewportView(textPane);
 		
 		panel_3 = new JPanel();
 		getContentPane().add(panel_3);
@@ -218,10 +323,10 @@ public class verUsuariosEliminados extends JInternalFrame {
 					String idVideo= (String) tm.getValueAt(tableVideos.getSelectedRow(),1);
 					Video videoE = userV.get(idVideo);
 					
-					VerInfoVideoEliminado videoIFrame = new VerInfoVideoEliminado(videoE);
-					adminPrincipal.getFrames()[0].setLayout(null);
-					adminPrincipal.getFrames()[0].add(videoIFrame);
-					videoIFrame.show();
+				//	VerInfoVideoEliminado videoIFrame = new VerInfoVideoEliminado(videoE);
+				//	adminPrincipal.getFrames()[0].setLayout(null);
+				//	adminPrincipal.getFrames()[0].add(videoIFrame);
+				//	videoIFrame.show();
 				}
 			}
 		});
@@ -246,37 +351,47 @@ public class verUsuariosEliminados extends JInternalFrame {
 		System.out.println("Quiero mostrar datos user");
 		if(tableUsuarios.getSelectedRow()>=0){
 			PersistenciaCtrl p = new PersistenciaCtrl();
+			
 			DefaultTableModel tm = (DefaultTableModel) tableUsuarios.getModel();
 			Integer dato= (Integer) tm.getValueAt(tableUsuarios.getSelectedRow(),0);
+			
 			Usuario user = p.getInfoUsuario(dato);
-			Canal userC = user.getCanalPropio();
-			//limpiar tablas
-			limpiarTabla(tableCanal);
-			limpiarTabla(tableDatosUsr);
-			//cargar tabla
-			DefaultTableModel modeloTabla= (DefaultTableModel) tableDatosUsr.getModel();
-			modeloTabla.setRowCount(0);
-			modeloTabla.addRow(new Object[]{user.getNickname(),user.getEmail(),user.getNombre(),user.getApellido(),
-					user.getFechaNacimiento()});
-		
-			DefaultTableModel modeloTablaCanal=(DefaultTableModel) tableCanal.getModel();
-			modeloTablaCanal.setRowCount(0);
-			modeloTablaCanal.addRow(new Object[]{userC.getIdCanal(),userC.getNombre(),userC.getDescripcion(),userC.getPrivacidadCanal()});
-			//cargar listas y videos
-			userL = userC.getListasReproduccion();
-			userV = userC.getVideos();
-			DefaultTableModel modeloListas= (DefaultTableModel) tableListas.getModel();
-			modeloListas.setRowCount(0);
-			DefaultTableModel modeloVideos= (DefaultTableModel) tableVideos.getModel();
-			modeloVideos.setRowCount(0);
-			for (Entry<String, ListaReproduccion> entry : userL.entrySet()) {
-				modeloListas.addRow(new Object[]{entry.getValue().getIdListaRep(),entry.getValue().getNombre()});
-			/*	for (Entry<Integer, Video> entryV : entry.getValue().getVideos().entrySet()) {
-					modeloVideos.addRow(new Object[]{entryV.getValue().getIdVideo(),entryV.getValue().getNombre()});
-				}*/
-			}
-			for (Entry<String, Video> entryV : userV.entrySet()) {
-				modeloVideos.addRow(new Object[]{entryV.getValue().getIdVideo(),entryV.getValue().getNombre()});			
+			if(user!= null){
+				Canal userC = user.getCanalPropio();
+			
+				//cargar datos usr
+				textFieldApellido.setText(user.getApellido());
+				textFieldEmail.setText(user.getEmail());
+				textFieldFechanac.setText(user.getFechaNacimiento());
+				textFieldNick.setText(user.getNickname());
+				textFieldNombre.setText(user.getNombre());
+				
+				//cargar datos canal
+				textFieldNombreC.setText(userC.getNombre());
+				textFieldIdCanal.setText(Integer.toString(userC.getIdCanal()));
+				if(userC.getPrivacidadCanal() == Privacidad.PRIVADO){
+					textFieldPrivacidad.setText("Privado");
+				}else{
+					textFieldPrivacidad.setText("Publico");
+				}
+				textPane.setText(userC.getDescripcion());
+			
+				//cargar listas y videos
+				userL = userC.getListasReproduccion();
+				userV = userC.getVideos();
+				DefaultTableModel modeloListas= (DefaultTableModel) tableListas.getModel();
+				modeloListas.setRowCount(0);
+				DefaultTableModel modeloVideos= (DefaultTableModel) tableVideos.getModel();
+				modeloVideos.setRowCount(0);
+				for (Entry<String, ListaReproduccion> entry : userL.entrySet()) {
+					modeloListas.addRow(new Object[]{entry.getValue().getIdListaRep(),entry.getValue().getNombre()});
+				/*	for (Entry<Integer, Video> entryV : entry.getValue().getVideos().entrySet()) {
+						modeloVideos.addRow(new Object[]{entryV.getValue().getIdVideo(),entryV.getValue().getNombre()});
+					}*/
+				}
+				for (Entry<String, Video> entryV : userV.entrySet()) {
+					modeloVideos.addRow(new Object[]{entryV.getValue().getIdVideo(),entryV.getValue().getNombre()});			
+				}
 			}
 		}
 	}

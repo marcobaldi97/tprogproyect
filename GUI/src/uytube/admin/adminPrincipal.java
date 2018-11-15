@@ -303,6 +303,15 @@ public class adminPrincipal extends JFrame {
 			}
 		});
 		menuBar.add(btnCargarDatosPrueba);
+		
+		JButton btnPublicarWsdl = new JButton("Publicar WSDL");
+		btnPublicarWsdl.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				uytubeLogica.publicar.WebServices webServices= new uytubeLogica.publicar.WebServices();
+				webServices.publicar();
+			}
+		});
+		menuBar.add(btnPublicarWsdl);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
