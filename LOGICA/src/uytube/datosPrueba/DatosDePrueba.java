@@ -427,19 +427,84 @@ public class DatosDePrueba {
 		ICU.agregarVisita(video.getiDVideo(),CS);
 		
 		video = ICU.obtenerInfoAdicVideo(KH,V3);
-		historial(MB, video.getiDVideo(), 5);
-		historial(CS, video.getiDVideo(), 20);
-		historial(JB, video.getiDVideo(), 1);
-		historial(DP, video.getiDVideo(), 2);
-		historial(KH, video.getiDVideo(), 8);
+		agregarVisitasAlHistorial(MB, video.getiDVideo(), 5);
+		agregarVisitasAlHistorial(CS, video.getiDVideo(), 20);
+		agregarVisitasAlHistorial(JB, video.getiDVideo(), 1);
+		agregarVisitasAlHistorial(DP, video.getiDVideo(), 2);
+		agregarVisitasAlHistorial(KH, video.getiDVideo(), 8);
 		
 		video = ICU.obtenerInfoAdicVideo(KH,V4);
-		historial(KH, video.getiDVideo(), 6);
-		historial(NJ, video.getiDVideo(), 8);
+		agregarVisitasAlHistorial(KH, video.getiDVideo(), 6);
+		agregarVisitasAlHistorial(NJ, video.getiDVideo(), 8);
+		
+		video = ICU.obtenerInfoAdicVideo(JB, V5);
+		agregarVisitasAlHistorial(MB, video.getiDVideo(), 4);
+		agregarVisitasAlHistorial(JB, video.getiDVideo(), 1);
+		agregarVisitasAlHistorial(DP, video.getiDVideo(), 1);
+		agregarVisitasAlHistorial(KH, video.getiDVideo(), 2);
+		
+		video = ICU.obtenerInfoAdicVideo(KH, V5);
+		agregarVisitasAlHistorial(MB, video.getiDVideo(), 4);
+		agregarVisitasAlHistorial(JB, video.getiDVideo(), 1);
+		agregarVisitasAlHistorial(DP, video.getiDVideo(), 1);
+		agregarVisitasAlHistorial(KH, video.getiDVideo(), 2);
+		
+		video = ICU.obtenerInfoAdicVideo(HG, V6);
+		agregarVisitasAlHistorial(HR, video.getiDVideo(), 2);
+		agregarVisitasAlHistorial(MB, video.getiDVideo(), 1);
+		agregarVisitasAlHistorial(HG, video.getiDVideo(), 1);
+		agregarVisitasAlHistorial(SP, video.getiDVideo(), 5);
+		agregarVisitasAlHistorial(AP, video.getiDVideo(), 1);
+		
+		video = ICU.obtenerInfoAdicVideo(HG, V7);
+		agregarVisitasAlHistorial(MB, video.getiDVideo(), 1);
+		agregarVisitasAlHistorial(HG, video.getiDVideo(), 1);
+		agregarVisitasAlHistorial(SP, video.getiDVideo(), 1);
+		agregarVisitasAlHistorial(AR, video.getiDVideo(), 1);
+		agregarVisitasAlHistorial(NJ, video.getiDVideo(), 3);
+		
+		video = ICU.obtenerInfoAdicVideo(HG, V8);
+		agregarVisitasAlHistorial(MB, video.getiDVideo(), 1);
+		agregarVisitasAlHistorial(HG, video.getiDVideo(), 1);
+		agregarVisitasAlHistorial(SP, video.getiDVideo(), 1);
+		agregarVisitasAlHistorial(NJ, video.getiDVideo(), 21);
+		
+		video = ICU.obtenerInfoAdicVideo(CS, V9);
+		agregarVisitasAlHistorial(CS, video.getiDVideo(), 1);
+		
+		video = ICU.obtenerInfoAdicVideo(CS, V10);
+		agregarVisitasAlHistorial(CS, video.getiDVideo(), 2);
+		agregarVisitasAlHistorial(KH, video.getiDVideo(), 1);
+		
+		video = ICU.obtenerInfoAdicVideo(JB, V11);
+		agregarVisitasAlHistorial(HR, video.getiDVideo(), 4);
+		agregarVisitasAlHistorial(MB, video.getiDVideo(), 3);
+		agregarVisitasAlHistorial(HG, video.getiDVideo(), 10);
+		agregarVisitasAlHistorial(CS, video.getiDVideo(), 5);
+		agregarVisitasAlHistorial(JB, video.getiDVideo(), 2);
+		agregarVisitasAlHistorial(SP, video.getiDVideo(), 2);
+		
+		video = ICU.obtenerInfoAdicVideo(TC, V12);
+		agregarVisitasAlHistorial(TC, video.getiDVideo(), 1);
+		
+		video = ICU.obtenerInfoAdicVideo(AP, V12);
+		agregarVisitasAlHistorial(TC, video.getiDVideo(), 1);
+		
+		video = ICU.obtenerInfoAdicVideo(JB, V13);
+		agregarVisitasAlHistorial(JB, video.getiDVideo(), 2);
+		
+		video = ICU.obtenerInfoAdicVideo(AR, V14);
+		
+		video = ICU.obtenerInfoAdicVideo(NJ, V15);
+		agregarVisitasAlHistorial(NJ, video.getiDVideo(), 10);
+		
+		video = ICU.obtenerInfoAdicVideo(NJ, V16);
+		agregarVisitasAlHistorial(NJ, video.getiDVideo(), 4);
+		
 		
 		
 	}
-	private void historial(String nick, int idV, int cantVeces){
+	private void agregarVisitasAlHistorial(String nick, int idV, int cantVeces){
 		for(int i=cantVeces; i>0;i--){
 			ICU.agregarVisita(idV,nick);
 		}
