@@ -38,7 +38,7 @@ import uytubeLogica.publicar.Privacidad;
 /**
  * Servlet implementation class AltaUsuarioServlet
  */
-
+@WebServlet("/newUser")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 1024 * 1024 * 5, maxRequestSize = 1024 * 1024 * 5 * 5)
 public class AltaUsuarioServlet extends HttpServlet {
 	public static Date ParseFecha(String fecha) {

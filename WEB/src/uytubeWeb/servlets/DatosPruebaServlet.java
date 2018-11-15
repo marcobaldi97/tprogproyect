@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class DatosPruebaServlet
  */
 
+@WebServlet("/cargarDatos")
 public class DatosPruebaServlet extends HttpServlet {
 	private static final long serialVersionUID = 5L;
        

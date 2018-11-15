@@ -28,6 +28,8 @@ import uytubeLogica.publicar.Privacidad;
 /**
  * Servlet implementation class VideoServlet
  */
+@WebServlet(name = "VideoServlet", urlPatterns = { "/watch", "/newVideo", "/modifyVideo", "/likeVideo", "/dislikeVideo",
+		"/newComment", "/newResponse", "/leaveFollow" })
 
 public class VideoServlet extends HttpServlet {
 	private static final long serialVersionUID = 99L;
@@ -149,7 +151,6 @@ public class VideoServlet extends HttpServlet {
 				request.setAttribute("listadoCat", cat);
 				request.getRequestDispatcher("WEB-INF/Video/AltaVideo.jsp").forward(request, response);
 			}else
-
 				response.sendRedirect(request.getContextPath() + "/casa");
 			break;
 		}
@@ -319,6 +320,7 @@ public class VideoServlet extends HttpServlet {
 				if (nombreVideo != "" && duracionVideo != "" && isInteger(duracionVideo) && urlVideo != ""
 						&& fechaVideo != "" && descVideo != "") {
 					crearVideo(login, nombreVideo, duracionVideo, urlVideo, fechaVideo, categoria, descVideo);
+
 					response.sendRedirect(request.getContextPath() + "/casa");
 				} else {
 					response.getWriter().append("Error, verifique los campos nuevamente");

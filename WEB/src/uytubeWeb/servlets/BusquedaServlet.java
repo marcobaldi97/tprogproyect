@@ -22,7 +22,7 @@ import uytubeLogica.publicar.Privacidad;
 /**
  * Servlet implementation class BusquedaServlet
  */
-
+@WebServlet("/search")
 public class BusquedaServlet extends HttpServlet {
 	private static final long serialVersionUID = 3L;
 
