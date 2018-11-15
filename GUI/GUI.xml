@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="create_run_jar" name="Create Runnable Jar for Project UyTubeGUI">
+    <!--this file was created by Eclipse Runnable JAR Export Wizard-->
+    <!--ANT 1.7 is required                                        -->
+    <!--define folder properties-->
+    <property name="dir.buildfile" value="."/>
+    <property name="dir.workspace" value="/ens/home01/i/ignacio.carmona/workspace"/>
+    <property name="dir.jarfile" value="${dir.buildfile}"/>
+    <target name="create_run_jar">
+        <jar destfile="${dir.jarfile}/GUI.jar" filesetmanifest="mergewithoutmain">
+            <manifest>
+                <attribute name="Main-Class" value="uytube.admin.adminPrincipal"/>
+                <attribute name="Class-Path" value="."/>
+            </manifest>
+            <fileset dir="${dir.jarfile}/defensa/tpgr03/GUI/bin"/>
+            <fileset dir="${dir.jarfile}/defensa/tpgr03/LOGICA/bin"/>
+            <zipfileset excludes="META-INF/*.SF" src="/usr/share/java/junit.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="/usr/share/java/hamcrest/core.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.jarfile}/gatotom/apache-tomcat-8.5.34/lib/annotations-api.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.jarfile}/gatotom/apache-tomcat-8.5.34/lib/catalina-ant.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.jarfile}/gatotom/apache-tomcat-8.5.34/lib/catalina-ha.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.jarfile}/gatotom/apache-tomcat-8.5.34/lib/catalina-storeconfig.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.jarfile}/gatotom/apache-tomcat-8.5.34/lib/catalina-tribes.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.jarfile}/gatotom/apache-tomcat-8.5.34/lib/catalina.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.jarfile}/gatotom/apache-tomcat-8.5.34/lib/ecj-4.6.3.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.jarfile}/gatotom/apache-tomcat-8.5.34/lib/el-api.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.jarfile}/gatotom/apache-tomcat-8.5.34/lib/jasper-el.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.jarfile}/gatotom/apache-tomcat-8.5.34/lib/jasper.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.jarfile}/gatotom/apache-tomcat-8.5.34/lib/jaspic-api.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.jarfile}/gatotom/apache-tomcat-8.5.34/lib/jsp-api.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.jarfile}/gatotom/apache-tomcat-8.5.34/lib/servlet-api.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.jarfile}/gatotom/apache-tomcat-8.5.34/lib/tomcat-api.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.jarfile}/gatotom/apache-tomcat-8.5.34/lib/tomcat-coyote.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.jarfile}/gatotom/apache-tomcat-8.5.34/lib/tomcat-dbcp.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.jarfile}/gatotom/apache-tomcat-8.5.34/lib/tomcat-i18n-es.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.jarfile}/gatotom/apache-tomcat-8.5.34/lib/tomcat-i18n-fr.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.jarfile}/gatotom/apache-tomcat-8.5.34/lib/tomcat-i18n-ja.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.jarfile}/gatotom/apache-tomcat-8.5.34/lib/tomcat-i18n-ru.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.jarfile}/gatotom/apache-tomcat-8.5.34/lib/tomcat-jdbc.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.jarfile}/gatotom/apache-tomcat-8.5.34/lib/tomcat-jni.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.jarfile}/gatotom/apache-tomcat-8.5.34/lib/tomcat-util-scan.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.jarfile}/gatotom/apache-tomcat-8.5.34/lib/tomcat-util.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.jarfile}/gatotom/apache-tomcat-8.5.34/lib/tomcat-websocket.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.jarfile}/gatotom/apache-tomcat-8.5.34/lib/websocket-api.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.jarfile}/defensa/tpgr03/LOGICA/lib/eclipselink.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.jarfile}/defensa/tpgr03/LOGICA/lib/hsqldb.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.jarfile}/defensa/tpgr03/LOGICA/lib/javax.persistence_2.1.0.v201304241213.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.jarfile}/defensa/tpgr03/LOGICA/lib/javax.persistence.source_2.1.0.v201304241213.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.jarfile}/defensa/tpgr03/GUI/jcalendar-1.4.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.jarfile}/defensa/tpgr03/GUI/jgoodies-common-1.8.0-sources.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.jarfile}/defensa/tpgr03/GUI/jgoodies-common-1.8.0.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.jarfile}/defensa/tpgr03/GUI/jgoodies-forms-1.8.0-sources.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.jarfile}/defensa/tpgr03/GUI/jgoodies-forms-1.8.0.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.jarfile}/defensa/tpgr03/GUI/miglayout15-swing.jar"/>
+        </jar>
+    </target>
+</project>
