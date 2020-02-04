@@ -24,9 +24,9 @@ import uytubeLogic.logica.DtUsuario;
 import uytubeLogic.logica.DtVideo;
 import uytubeLogic.logica.DtVideoHistorial;
 import uytubeLogic.logica.Fabrica;
-import uytubeLogic.logica.IUsuarioCtrl;
-import uytubeLogic.logica.IVideoCtrl;
-import uytubeLogic.logica.PropertiesCtrl;
+import uytubeLogic.logica.IUsuarioCtrl;//is this necessary?
+import uytubeLogic.logica.IVideoCtrl;//is this necessary?
+import uytubeLogic.logica.PropertiesCtrl;//wtf is this
 import uytubeLogic.logica.SystemHandler.Privacidad;
 
 @WebService

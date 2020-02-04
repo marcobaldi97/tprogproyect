@@ -44,6 +44,10 @@
 		<servlet-name>VideoServlet</servlet-name>
 		<servlet-class>uytubeWeb.servlets.VideoServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>CompartirServlet</servlet-name>
+		<servlet-class>uytubeWeb.servlets.CompartirServlet</servlet-class>
+	</servlet>
 	<servlet-mapping>
         <servlet-name>ListaReproduccionServlet</servlet-name>
         <url-pattern>/addVidPlaylist</url-pattern>
@@ -143,6 +147,10 @@
     <servlet-mapping>
         <servlet-name>VideoServlet</servlet-name>
         <url-pattern>/watch</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VideoServlet</servlet-name>
+        <url-pattern>/v/</url-pattern>
     </servlet-mapping>
     
 	

@@ -193,7 +193,7 @@ var x = document.getElementsByClassName("canalRow");
 }
 function sortTable() {
 	var selected = document.getElementById("Ordenar").value;
-  var table, rows, switching, i, x, y, shouldSwitch;
+  	var table, rows, switching, i, x, y, shouldSwitch;
   table = document.getElementById("TablaContenidos");
   switching = true;
   /* Make a loop that will continue until
